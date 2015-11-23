@@ -12,6 +12,9 @@ public class CalculateServiceTest {
 		CalculateService cal = new CalculateService();
 		int sum = cal.sum(2, 3);
 		assertEquals(5, sum);
+		int mut = cal.mut(2, 3);
+		cal.mut(2, 3);
+		assertEquals(6, mut);
 	}
 
 }

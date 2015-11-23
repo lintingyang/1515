@@ -6,5 +6,8 @@ public class CalculateService {
 	public int sum(int a, int b) {
 		return a+b;
 	}
+	public int mut(int a ,int b){
+		return a*b;
+	}
 
 }
