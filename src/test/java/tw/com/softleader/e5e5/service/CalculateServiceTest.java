@@ -12,9 +12,17 @@ public class CalculateServiceTest {
 		CalculateService cal = new CalculateService();
 		int sum = cal.sum(2, 3);
 		assertEquals(5, sum);
+		
+	}
+	
+	@Test
+	public void testMut() {
+		CalculateService cal = new CalculateService();
 		int mut = cal.mut(2, 3);
 		cal.mut(2, 3);
 		assertEquals(6, mut);
 	}
+	
+	
 
 }
