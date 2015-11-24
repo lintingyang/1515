@@ -22,7 +22,12 @@ public class CalculateServiceTest {
 		cal.mut(2, 3);
 		assertEquals(6, mut);
 	}
-	
+	@Test
+	public void tesSub() {
+		CalculateService cal = new CalculateService();
+		int sub = cal.sub(8, 3);
+		assertEquals(5, sub);
+	}
 	
 
 }
