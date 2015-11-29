@@ -23,10 +23,16 @@ public class CalculateServiceTest {
 		assertEquals(6, mut);
 	}
 	@Test
-	public void tesSub() {
+	public void testSub() {
 		CalculateService cal = new CalculateService();
 		int sub = cal.sub(8, 3);
 		assertEquals(5, sub);
+	}
+	@Test
+	public void testDiv(){
+		CalculateService cal = new CalculateService();
+		int div = cal.div(6, 3);
+		assertEquals(2, div);
 	}
 	
 
