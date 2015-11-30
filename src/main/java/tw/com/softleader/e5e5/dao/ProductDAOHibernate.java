@@ -1,21 +1,16 @@
 package tw.com.softleader.e5e5.dao;
 
-import java.util.Date;
 import java.util.List;
-
-import javax.transaction.Transaction;
 
 import org.hibernate.Session;
 
 import model.hibernate.HibernateUtil;
-import tw.com.softleader.e5e5.dao.ProductDao;
+import tw.com.softleader.e5e5.dao.ProductDAO;
 import tw.com.softleader.e5e5.entity.Product;
 
-
-
-public class ProductDaoHibernate implements ProductDao {
+public class ProductDAOHibernate implements ProductDAO {
 	private Session session;
-	public ProductDaoHibernate(Session session){
+	public ProductDAOHibernate(Session session){
 		super();
 		this.session = session;
 	}
@@ -60,7 +55,6 @@ public class ProductDaoHibernate implements ProductDao {
 		}
 		return 0;
 	}
-	
 
 	@Override
 	public boolean delete(int productId) {
@@ -81,12 +75,13 @@ public class ProductDaoHibernate implements ProductDao {
 	public List<Product> select() {
 		return (List<Product>) getSession().createQuery("from Product").list();
 	}
+	
 	public static void main(String[] args){
 		try{
 			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 			session.beginTransaction();
 			
-			ProductDao dao = new ProductDaoHibernate(session);
+			ProductDAO dao = new ProductDAOHibernate(session);
 			//insert
 //			Product in  = new Product();
 //			in.setCategory("BBBB");
@@ -97,22 +92,22 @@ public class ProductDaoHibernate implements ProductDao {
 			
 			//update
 //			Product up  = new Product();
-//			up.setProductId(7);
+//			up.setProductId(12);
 //			up.setCategory("uuuuuuuuu");
 //			up.setUserId(3);
 //			up.setProductName("uuuuuuuuuu");
 //			int update = dao.update(up);
 //			System.out.println(update);
 			
-//			//delete
-//			boolean delete = dao.delete(8);
+			//delete
+//			boolean delete = dao.delete(12);
 //			System.out.println(delete);
-//			
-//			//select
-//			Product sel = dao.select(1);
-//			System.out.println(sel);
-//			
-//			//selectList
+			
+			//select
+			Product sel = dao.select(1);
+			System.out.println(sel);
+			
+			//selectList
 			List<Product> list = dao.select();
 			System.out.println(list);
 			
