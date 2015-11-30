@@ -24,6 +24,7 @@
 		<mapping class="tw.com.softleader.e5e5.entity.Exchange"/> 
 		<mapping class="tw.com.softleader.e5e5.entity.ReportVio"/> 
 		<mapping class="tw.com.softleader.e5e5.entity.boardCategories" />
+		<mapping class="tw.com.softleader.e5e5.entity.Product"/>
 <!--
 		<mapping resource="model/DeptBean.hbm.xml"/>
         <mapping resource="model/EmpBean.hbm.xml"/>
