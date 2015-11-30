@@ -1,12 +1,11 @@
-package e517.dao;
+package tw.com.softleader.e5e5.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
 
-import e517.bean.ReportVio;
-import e517.hibernate.HibernateUtil;
+import model.hibernate.HibernateUtil;
+import tw.com.softleader.e5e5.entity.ReportVio;
 
 public class ReportVioDAOHibernate  {
 
@@ -18,14 +17,14 @@ public class ReportVioDAOHibernate  {
 		return session;
 	}
 	
-	public static void main(String[] args){
-		try {
-			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-			session.beginTransaction();
-			
-			ReportVioDAOHibernate dao = new ReportVioDAOHibernate(session);
-			ReportVio bean = dao.select(1);
-			System.out.println(" ****this is select = "+bean);
+//	public static void main(String[] args){
+//		try {
+//			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//			session.beginTransaction();
+//			
+//			ReportVioDAOHibernate dao = new ReportVioDAOHibernate(session);
+//			ReportVio bean = dao.select(1);
+//			System.out.println(" ****this is select = "+bean);
 //			
 //			List<ProductBean> list = dao.select();
 //			System.out.println("*****this is select all =" + list);
@@ -43,13 +42,13 @@ public class ReportVioDAOHibernate  {
 			
 //			boolean delete = dao.delete(60);
 //			System.out.println("*********this is delete = " + delete);
-			
-			session.getTransaction().commit();
-		} finally {
-			HibernateUtil.closeSessionFactory();
-		}
-		
-	}//end of main
+//			
+//			session.getTransaction().commit();
+//		} finally {
+//			HibernateUtil.closeSessionFactory();
+//		}
+//		
+//	}//end of main
 	
 	public ReportVio select(int ReportVioId) {
 		return (ReportVio) getSession().get(ReportVio.class, ReportVioId);

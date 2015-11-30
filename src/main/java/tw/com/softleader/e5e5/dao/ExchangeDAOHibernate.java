@@ -1,15 +1,13 @@
-package e517.dao;
+package tw.com.softleader.e5e5.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
 
-import e517.bean.Exchange;
-import e517.bean.ExchangeDAO;
-import e517.hibernate.HibernateUtil;
+import model.hibernate.HibernateUtil;
+import tw.com.softleader.e5e5.entity.Exchange;
 
-public class ExchangeDAOHibernate implements ExchangeDAO {
+public class ExchangeDAOHibernate {
 
 	private Session session;
 	public ExchangeDAOHibernate(Session session) {
@@ -19,38 +17,38 @@ public class ExchangeDAOHibernate implements ExchangeDAO {
 		return session;
 	}
 	
-	public static void main(String[] args){
-		try {
-			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-			session.beginTransaction();
-			
-			ExchangeDAO dao = new ExchangeDAOHibernate(session);
+//	public static void main(String[] args){
+//		try {
+//			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//			session.beginTransaction();
+//			
+//			ExchangeDAOHibernate dao = new ExchangeDAOHibernate(session);
 //			ExchangeBean bean = dao.select(1);
 //			System.out.println(" ****this is select = "+bean);
 //			
 //			List<ProductBean> list = dao.select();
 //			System.out.println("*****this is select all =" + list);
 			
-			Exchange bean = new Exchange();
-			bean.setExchangeId(1);
-			bean.setExgTime(new java.util.Date());
-			bean.setProductAId(2);
-			bean.setProductBId(6);
+//			Exchange bean = new Exchange();
+//			bean.setExchangeId(1);
+//			bean.setExgTime(new java.util.Date());
+//			bean.setProductAId(2);
+//			bean.setProductBId(6);
 //			int i = dao.insert(bean);
 //			System.out.println("*****this is insert"+ i);
-			
-			int update = dao.update(bean);
-			System.out.println("*****this is insert"+update);
-			
+//			
+//			int update = dao.update(bean);
+//			System.out.println("*****this is insert"+update);
+//			
 //			boolean delete = dao.delete(60);
 //			System.out.println("*********this is delete = " + delete);
 			
-			session.getTransaction().commit();
-		} finally {
-			HibernateUtil.closeSessionFactory();
-		}
-		
-	}//end of main
+//			session.getTransaction().commit();
+//		} finally {
+//			HibernateUtil.closeSessionFactory();
+//		}
+//		
+//	}//end of main
 	
 	public Exchange select(int exchangeId) {
 		return (Exchange) getSession().get(Exchange.class, exchangeId);

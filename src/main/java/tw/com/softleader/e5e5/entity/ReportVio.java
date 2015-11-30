@@ -1,4 +1,4 @@
-package e517.bean;
+package tw.com.softleader.e5e5.entity;
 
 import java.util.Date;
 import javax.persistence.Column;

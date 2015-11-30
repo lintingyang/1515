@@ -1,4 +1,4 @@
-package e517.bean;
+package tw.com.softleader.e5e5.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 import org.hibernate.Session;
 
-import e517.hibernate.HibernateUtil;
+import model.hibernate.HibernateUtil;
 
 @Entity
 @Table(name="exchange")
