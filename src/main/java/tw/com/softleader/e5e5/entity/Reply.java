@@ -4,9 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-public class Replies {
+@Table(name="Replies")
+public class Reply {
 	@Id
 	private Integer replyId;
 	private java.util.Date dateCreated;
