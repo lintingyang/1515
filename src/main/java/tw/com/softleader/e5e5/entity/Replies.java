@@ -6,7 +6,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class replies {
+public class Replies {
 	@Id
 	private Integer replyId;
 	private java.util.Date dateCreated;

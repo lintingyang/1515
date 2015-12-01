@@ -10,11 +10,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-public class boards {
+@Table(name="Board")
+public class Board {
 	@Id
-	private Integer boardId;
+	private Integer id;
 	private java.util.Date dateCreated;
 	private String boardName;
 	private byte[] boardPic;
@@ -24,25 +26,25 @@ public class boards {
 	private char isCream;
 	@ManyToOne
 	@JoinColumn(name = "categoryId")
-	private boardCategories categoryId;
+	private BoardCategories categoryId;
 	@ManyToOne
 	@JoinColumn(name = "lastThreadId")
-	private threads lastThreadId;
+	private Threads lastThreadId;
 	@ManyToOne
 	@JoinColumn(name = "lastReplayId")
-	private replies lastReplayId;
+	private Replies lastReplayId;
 
 //	@ManyToMany(cascade = CascadeType.ALL)
 //	@JoinTable(name = "userOwner", joinColumns = { @JoinColumn(name = "boardId") }, inverseJoinColumns = {
 //			@JoinColumn(name = "userId") })
 //	private Set<users> administrators = new HashSet<users>();
 
-	public Integer getBoardId() {
-		return boardId;
+	public Integer getid() {
+		return id;
 	}
 
-	public void setBoardId(Integer boardId) {
-		this.boardId = boardId;
+	public void setid(Integer id) {
+		this.id = id;
 	}
 
 	public java.util.Date getDateCreated() {
@@ -101,27 +103,27 @@ public class boards {
 		this.isCream = isCream;
 	}
 
-	public boardCategories getCategoryId() {
+	public BoardCategories getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(boardCategories categoryId) {
+	public void setCategoryId(BoardCategories categoryId) {
 		this.categoryId = categoryId;
 	}
 
-	public threads getLastThreadId() {
+	public Threads getLastThreadId() {
 		return lastThreadId;
 	}
 
-	public void setLastThreadId(threads lastThreadId) {
+	public void setLastThreadId(Threads lastThreadId) {
 		this.lastThreadId = lastThreadId;
 	}
 
-	public replies getLastReplayId() {
+	public Replies getLastReplayId() {
 		return lastReplayId;
 	}
 
-	public void setLastReplayId(replies lastReplayId) {
+	public void setLastReplayId(Replies lastReplayId) {
 		this.lastReplayId = lastReplayId;
 	}
 
