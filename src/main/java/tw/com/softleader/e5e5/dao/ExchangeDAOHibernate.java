@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import model.hibernate.HibernateUtil;
 import tw.com.softleader.e5e5.entity.Exchange;
 
 public class ExchangeDAOHibernate {
@@ -50,12 +49,12 @@ public class ExchangeDAOHibernate {
 //		
 //	}//end of main
 	
-	public Exchange select(int exchangeId) {
-		return (Exchange) getSession().get(Exchange.class, exchangeId);
+	public Exchange select(int id) {
+		return (Exchange) getSession().get(Exchange.class, id);
 	}
 
 	public List<Exchange> select() {
-		List<Exchange> list = getSession().createQuery("from Exchange").list();
+		List<Exchange> list = getSession().createQuery("from exchange").list();
 		return list;
 	}
 
@@ -68,9 +67,9 @@ public class ExchangeDAOHibernate {
 	}
 
 	public int update(Exchange bean) {
-		Exchange sel = (Exchange) getSession().load(Exchange.class, bean.getExchangeId());
+		Exchange sel = (Exchange) getSession().load(Exchange.class, bean.getId());
 		if (sel != null){
-			sel.setExgTime(bean.getExgTime());
+			sel.setTime(bean.getTime());
 			sel.setProductAId(bean.getProductAId());
 			sel.setProductBId(bean.getProductBId());
 			return 1;

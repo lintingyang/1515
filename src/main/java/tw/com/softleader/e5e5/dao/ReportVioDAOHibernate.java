@@ -68,11 +68,11 @@ public class ReportVioDAOHibernate  {
 	}
 
 	public int update(ReportVio bean) {
-		ReportVio sel = (ReportVio) getSession().load(ReportVio.class, bean.getReportVioId());
+		ReportVio sel = (ReportVio) getSession().load(ReportVio.class, bean.getId());
 		if (sel != null){
 			sel.setArticle(bean.getArticle());
 			sel.setIsPassed(bean.getIsPassed());
-			sel.setRepoTime(bean.getRepoTime());
+			sel.setTime(bean.getTime());
 			sel.setReporterId(bean.getReporterId());
 			sel.setThreadId(bean.getThreadId());
 			sel.setProductId(bean.getProductId());
