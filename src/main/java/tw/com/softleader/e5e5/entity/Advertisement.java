@@ -2,6 +2,7 @@ package tw.com.softleader.e5e5.entity;
 
 import java.util.Arrays;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +18,8 @@ import model.hibernate.HibernateUtil;
 public class Advertisement {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int advertisementId;
+	@Column(name="advertisementId")
+	private int id;
 	private String link;
 	private String artical;
 	private byte[] pic;
@@ -25,15 +27,15 @@ public class Advertisement {
 	
 	@Override
 	public String toString() {
-		return "Advertisement [advertisementId=" + advertisementId + ", link=" + link + ", artical=" + artical
+		return "Advertisement [advertisementId=" + id + ", link=" + link + ", artical=" + artical
 				+ ", pic=" + Arrays.toString(pic) + "]";
 	}
 	
 	public int getAdvertisementId() {
-		return advertisementId;
+		return id;
 	}
 	public void setAdvertisementId(int advertisementId) {
-		this.advertisementId = advertisementId;
+		this.id = advertisementId;
 	}
 	public String getLink() {
 		return link;

@@ -1,5 +1,6 @@
 package tw.com.softleader.e5e5.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,30 +13,32 @@ import model.hibernate.HibernateUtil;
 
 @Entity
 @Table(name="admins")
-public class Admins {
+public class Administrator {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	int adminId;
-	String pwd;
+	@Column(name="adminid")
+	int Id;
+	@Column(name="pwd")
+	String password;
 	String name;
 	String auth;
 	 
 	
 	@Override
 	public String toString() {
-		return "admins [adminId=" + adminId + ", pwd=" + pwd + ", name=" + name + ", auth=" + auth + "]";
+		return "admins [adminId=" + Id + ", pwd=" + password + ", name=" + name + ", auth=" + auth + "]";
 	}
 	public int getAdminId() {
-		return adminId;
+		return Id;
 	}
 	public void setAdminId(int adminId) {
-		this.adminId = adminId;
+		this.Id = adminId;
 	}
 	public String getPwd() {
-		return pwd;
+		return password;
 	}
 	public void setPwd(String pwd) {
-		this.pwd = pwd;
+		this.password = pwd;
 	}
 	public String getName() {
 		return name;
@@ -54,7 +57,7 @@ public class Admins {
 			Session session =  HibernateUtil.getSessionFactory().getCurrentSession();
 			session.beginTransaction();
 			
-			Admins admin = (Admins) session.load(Admins.class, 2);
+			Administrator admin = (Administrator) session.load(Administrator.class, 2);
 			System.out.println(admin);
 			
 			

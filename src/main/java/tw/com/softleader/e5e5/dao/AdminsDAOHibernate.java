@@ -6,7 +6,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import model.hibernate.HibernateUtil;
-import tw.com.softleader.e5e5.entity.Admins;
+import tw.com.softleader.e5e5.entity.Administrator;
 
 public class AdminsDAOHibernate{
 	//main方法建立session
@@ -19,19 +19,19 @@ public class AdminsDAOHibernate{
 	}
 	
 	public List selectAll(){
-		Query query = getSession().createQuery("from Admins");
-		List<Admins> list = query.list();
+		Query query = getSession().createQuery("from Administrator");
+		List<Administrator> list = query.list();
 		return list;
 	}
 	
-	public Admins select(int id){
-		Admins bean =(Admins)getSession().get(Admins.class, id);
+	public Administrator select(int id){
+		Administrator bean =(Administrator)getSession().get(Administrator.class, id);
 		return bean;
 	}
-	public int update(String pwd,String auth,String name,int id){
-		Admins bean =(Admins)getSession().get(Admins.class, id);
+	public int update(String password,String auth,String name,int id){
+		Administrator bean =(Administrator)getSession().get(Administrator.class, id);
 		if(bean!=null){
-			bean.setPwd(pwd);
+			bean.setPwd(password);
 			bean.setAuth(auth);
 			bean.setName(name);
 			return 1;
@@ -42,7 +42,7 @@ public class AdminsDAOHibernate{
 	public int insert(String pwd,String auth,String name){
 		
 		try {
-			Admins bean = new Admins();
+			Administrator bean = new Administrator();
 			bean.setAuth(auth);
 			bean.setName(name);
 			bean.setPwd(pwd);
@@ -54,7 +54,7 @@ public class AdminsDAOHibernate{
 		return 1;
 	}
 	public int delete(int id){
-		Admins bean = (Admins)getSession().get(Admins.class,id);
+		Administrator bean = (Administrator)getSession().get(Administrator.class,id);
 		getSession().delete(bean);
 		return 0;
 	}
