@@ -4,6 +4,8 @@ import org.apache.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import tw.com.softleader.e5e5.service.CalculateService;
+
 @SpringBootApplication
 public class E5e5App {
 	
@@ -17,6 +19,9 @@ public class E5e5App {
 		log.info("Hello Info");
 		log.debug("Hello Debug");
 		
+		int result = new CalculateService().sum(3, 5);
+		
+		log.info("result="+result);
 		
 	}
 
