@@ -5,9 +5,9 @@ import java.util.List;
 import org.hibernate.Session;
 
 import model.hibernate.HibernateUtil;
-import tw.com.softleader.e5e5.entity.BoardCategories;
+import tw.com.softleader.e5e5.entity.BoardCategory;
 	
-public class BoardCategoriesDAO {
+public class BoardCategoryDAO {
 	private Session session = null;
 	
 	public static void main(String[] args){
@@ -16,7 +16,7 @@ public class BoardCategoriesDAO {
 			session.beginTransaction();
 			
 			//select1
-			BoardCategoriesDAO dao = new BoardCategoriesDAO(session);
+			BoardCategoryDAO dao = new BoardCategoryDAO(session);
 //			boardCategories bean = dao.select(1);
 //			System.out.println(bean);
 			
@@ -47,7 +47,7 @@ public class BoardCategoriesDAO {
 		}
 	}
 
-	public BoardCategoriesDAO(Session session) {
+	public BoardCategoryDAO(Session session) {
 		this.session = session;
 	}
 
@@ -55,15 +55,15 @@ public class BoardCategoriesDAO {
 		return session;
 	}
 
-	public BoardCategories select(int categoryId) {
-		return (BoardCategories) this.getSession().get(BoardCategories.class, categoryId);
+	public BoardCategory select(int categoryId) {
+		return (BoardCategory) this.getSession().get(BoardCategory.class, categoryId);
 	}
 
-	public List<BoardCategories> select() {
+	public List<BoardCategory> select() {
 		return this.getSession().createQuery("from boardCategories").list();
 	}
 
-	public int insert(BoardCategories bean) {
+	public int insert(BoardCategory bean) {
 //		boardCategories temp = (boardCategories) this.getSession().get(boardCategories.class, bean.getCategoryId());
 		if (bean != null) {
 			this.getSession().save(bean);
@@ -73,7 +73,7 @@ public class BoardCategoriesDAO {
 	}
 
 	public int update( String name, java.util.Date dateCreated,int CategoryId) {
-		BoardCategories result = (BoardCategories) this.getSession().get(BoardCategories.class, CategoryId);
+		BoardCategory result = (BoardCategory) this.getSession().get(BoardCategory.class, CategoryId);
 		if(result == null){
 			result.setName(name);
 			result.setDateCreated(dateCreated);
@@ -82,7 +82,7 @@ public class BoardCategoriesDAO {
 		return -1;
 	}
 	public boolean delete(int CategoryId){
-		BoardCategories bean = (BoardCategories) this.getSession().get(BoardCategories.class, CategoryId);
+		BoardCategory bean = (BoardCategory) this.getSession().get(BoardCategory.class, CategoryId);
 		if(bean != null){
 			this.getSession().delete(bean);
 			return true;

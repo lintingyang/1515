@@ -6,10 +6,10 @@ import org.hibernate.Session;
 
 import tw.com.softleader.e5e5.entity.Board;
 
-public class BoardsDAO {
+public class BoardDAO {
 	private Session session = null;
 
-	public BoardsDAO(Session session) {
+	public BoardDAO(Session session) {
 		this.session = session;
 	}
 
