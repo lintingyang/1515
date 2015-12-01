@@ -8,34 +8,60 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="BoardCategories")
+@Table(name="board_category")
 public class BoardCategory {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer	id;
+	
+	@Column(name="name")
+	private String name;
+	
+	@Column(name="description")
+	private String description;
+	
+	
+	@Column(name="created_date")
+	private java.util.Date createdDate;
 
 	@Override
 	public String toString() {
-		return categoryId+","+name+","+dateCreated;
+		return "BoardCategory [id=" + id + ", name=" + name + ", description=" + description + ", createdDate=" + createdDate + "]";
 	}
-	public Integer getCategoryId() {
-		return categoryId;
+
+	public Integer getId() {
+		return id;
 	}
-	public void setCategoryId(int categradlegoryId) {
-		this.categoryId = categoryId;
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public java.util.Date getDateCreated() {
-		return dateCreated;
+
+	public java.util.Date getCreatedDate() {
+		return createdDate;
 	}
-	public void setDateCreated(java.util.Date dateCreated) {
-		this.dateCreated = dateCreated;
+
+	public void setCreatedDate(java.util.Date createdDate) {
+		this.createdDate = createdDate;
 	}
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer	categoryId;
-	private String name;
-	private java.util.Date dateCreated;
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+
+	
 }
