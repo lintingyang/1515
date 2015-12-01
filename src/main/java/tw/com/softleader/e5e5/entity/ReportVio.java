@@ -17,10 +17,10 @@ import javax.persistence.TemporalType;
 @Table(name = "reportVio", schema = "dbo", catalog = "EEIT82DB")
 public class ReportVio implements java.io.Serializable {
 
-	private int reportVioId;
+	private int id;
 	private String article;
 	private Character isPassed;
-	private Date repoTime;
+	private Date time;
 	private Integer reporterId;
 	private Integer threadId;
 	private Integer productId;
@@ -29,16 +29,16 @@ public class ReportVio implements java.io.Serializable {
 	public ReportVio() {
 	}
 
-	public ReportVio(int reportVioId) {
-		this.reportVioId = reportVioId;
+	public ReportVio(int id) {
+		this.id = id;
 	}
 
-	public ReportVio(int reportVioId, String article, Character isPassed, Date repoTime, Integer reporterId,
+	public ReportVio(int id, String article, Character isPassed, Date time, Integer reporterId,
 			Integer threadId, Integer productId, Integer adminId) {
-		this.reportVioId = reportVioId;
+		this.id = id;
 		this.article = article;
 		this.isPassed = isPassed;
-		this.repoTime = repoTime;
+		this.time = time;
 		this.reporterId = reporterId;
 		this.threadId = threadId;
 		this.productId = productId;
@@ -47,13 +47,13 @@ public class ReportVio implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "reportVioId", unique = true, nullable = false)
-	public int getReportVioId() {
-		return this.reportVioId;
+	@Column(name = "id", unique = true, nullable = false)
+	public int getId() {
+		return this.id;
 	}
 
-	public void setReportVioId(int reportVioId) {
-		this.reportVioId = reportVioId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	@Column(name = "article", length = 200)
@@ -75,13 +75,13 @@ public class ReportVio implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "repoTime", length = 23)
-	public Date getRepoTime() {
-		return this.repoTime;
+	@Column(name = "time", length = 23)
+	public Date getTime() {
+		return this.time;
 	}
 
-	public void setRepoTime(Date repoTime) {
-		this.repoTime = repoTime;
+	public void setTime(Date time) {
+		this.time = time;
 	}
 
 	@Column(name = "reporterId")
@@ -122,7 +122,7 @@ public class ReportVio implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "[reportVio=" + reportVioId + " ," + article + ", " + isPassed + ", " + repoTime + ", " +
+		return "[reportVio=" + id + " ," + article + ", " + isPassed + ", " + time + ", " +
 				reporterId + "]";
 	}
 	
