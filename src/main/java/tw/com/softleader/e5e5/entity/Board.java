@@ -10,11 +10,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-public class Boards {
+@Table(name="Board")
+public class Board {
 	@Id
-	private Integer boardId;
+	private Integer id;
 	private java.util.Date dateCreated;
 	private String boardName;
 	private byte[] boardPic;
@@ -37,12 +39,12 @@ public class Boards {
 //			@JoinColumn(name = "userId") })
 //	private Set<users> administrators = new HashSet<users>();
 
-	public Integer getBoardId() {
-		return boardId;
+	public Integer getid() {
+		return id;
 	}
 
-	public void setBoardId(Integer boardId) {
-		this.boardId = boardId;
+	public void setid(Integer id) {
+		this.id = id;
 	}
 
 	public java.util.Date getDateCreated() {

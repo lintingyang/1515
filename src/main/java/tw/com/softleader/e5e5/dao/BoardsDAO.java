@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import tw.com.softleader.e5e5.entity.Boards;
+import tw.com.softleader.e5e5.entity.Board;
 
 public class BoardsDAO {
 	private Session session = null;
@@ -17,16 +17,16 @@ public class BoardsDAO {
 		return session;
 	}
 
-	public Boards select(int boardId) {
-		return (Boards) this.getSession().get(Boards.class, boardId);
+	public Board select(int boardId) {
+		return (Board) this.getSession().get(Board.class, boardId);
 	}
 
-	public List<Boards> select() {
+	public List<Board> select() {
 		return this.getSession().createQuery("from boards").list();
 	}
 
-	public int insert(Boards bean) {
-		Boards temp = (Boards) this.getSession().get(Boards.class, bean.getBoardId());
+	public int insert(Board bean) {
+		Board temp = (Board) this.getSession().get(Board.class, bean.getid());
 		if (temp == null) {
 			this.getSession().save(bean);
 			return 1;
@@ -36,7 +36,7 @@ public class BoardsDAO {
 	
 	public int update(java.util.Date dateCreated , String boardName,byte[] boardPic,
 			String bDescription,Integer threadCount,Integer replayCount,char isCream,Integer boardId){
-		Boards result = (Boards) this.getSession().get(Boards.class, boardId);
+		Board result = (Board) this.getSession().get(Board.class, boardId);
 		if (result!=null){
 			result.setDateCreated(dateCreated);
 			result.setBoardName(boardName);
@@ -50,7 +50,7 @@ public class BoardsDAO {
 	}
 	
 	public boolean delete(Integer boardId){
-		Boards bean = (Boards) this.getSession().get(Boards.class, boardId);
+		Board bean = (Board) this.getSession().get(Board.class, boardId);
 		if(bean != null){
 			this.getSession().delete(bean);
 			return true;
