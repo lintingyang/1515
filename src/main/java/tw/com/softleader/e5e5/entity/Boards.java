@@ -12,7 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class boards {
+public class Boards {
 	@Id
 	private Integer boardId;
 	private java.util.Date dateCreated;
@@ -24,13 +24,13 @@ public class boards {
 	private char isCream;
 	@ManyToOne
 	@JoinColumn(name = "categoryId")
-	private boardCategories categoryId;
+	private BoardCategories categoryId;
 	@ManyToOne
 	@JoinColumn(name = "lastThreadId")
-	private threads lastThreadId;
+	private Threads lastThreadId;
 	@ManyToOne
 	@JoinColumn(name = "lastReplayId")
-	private replies lastReplayId;
+	private Replies lastReplayId;
 
 //	@ManyToMany(cascade = CascadeType.ALL)
 //	@JoinTable(name = "userOwner", joinColumns = { @JoinColumn(name = "boardId") }, inverseJoinColumns = {
@@ -101,27 +101,27 @@ public class boards {
 		this.isCream = isCream;
 	}
 
-	public boardCategories getCategoryId() {
+	public BoardCategories getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(boardCategories categoryId) {
+	public void setCategoryId(BoardCategories categoryId) {
 		this.categoryId = categoryId;
 	}
 
-	public threads getLastThreadId() {
+	public Threads getLastThreadId() {
 		return lastThreadId;
 	}
 
-	public void setLastThreadId(threads lastThreadId) {
+	public void setLastThreadId(Threads lastThreadId) {
 		this.lastThreadId = lastThreadId;
 	}
 
-	public replies getLastReplayId() {
+	public Replies getLastReplayId() {
 		return lastReplayId;
 	}
 
-	public void setLastReplayId(replies lastReplayId) {
+	public void setLastReplayId(Replies lastReplayId) {
 		this.lastReplayId = lastReplayId;
 	}
 

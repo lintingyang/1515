@@ -8,7 +8,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class threads {
+public class Threads {
 	@Id
 	private Integer threadId;
 	private String title;

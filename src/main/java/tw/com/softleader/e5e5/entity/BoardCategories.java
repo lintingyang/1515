@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-public class boardCategories {
+public class BoardCategories {
 
 	@Override
 	public String toString() {
