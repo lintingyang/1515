@@ -1,14 +1,9 @@
 package tw.com.softleader.e5e5.dao;
 
-import static org.junit.Assert.*;
-
-import java.util.Date;
+import static org.junit.Assert.assertEquals;
 
 import org.hibernate.Session;
 import org.junit.Test;
-
-import model.hibernate.HibernateUtil;
-import tw.com.softleader.e5e5.entity.Broadcast;
 
 public class BroadcastDAOHibernateTest {
 
