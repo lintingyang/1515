@@ -67,41 +67,41 @@ public class UserBanListDAOHibernate{
 	
 	
 	
-	public static void main(String[] args) {
-		try {
-			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-			session.beginTransaction();
-			
-			UserBanListDAOHibernate dao = new UserBanListDAOHibernate(session);
-			//insert
-			UserBanList bean = new UserBanList();
-			bean.setBuserA(5);
-			bean.setBuserB(2);
-			int temp2 = dao.insert(bean);
-			System.out.println(temp2);
-			
-			
-			//update
+//	public static void main(String[] args) {
+//		try {
+//			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//			session.beginTransaction();
+//			
+//			UserBanListDAOHibernate dao = new UserBanListDAOHibernate(session);
+//			//insert
 //			UserBanList bean = new UserBanList();
-//			bean.setbUserID(1);
-//			bean.setBuserA(1);
-//			int temp = dao.update(bean);
-//			System.out.println("更改"+temp+"筆資料");
-			
-			
-			//select
-//			UserBanList bean = dao.selectOne(1);
-//			System.out.println(bean);
-//			UserBanList bean = new UserBanList();
-			
-			
-			
-			
-			session.getTransaction().commit();
-		} finally {
-			HibernateUtil.closeSessionFactory();
-		}
-	}
+//			bean.setBuserA(5);
+//			bean.setBuserB(2);
+//			int temp2 = dao.insert(bean);
+//			System.out.println(temp2);
+//			
+//			
+//			//update
+////			UserBanList bean = new UserBanList();
+////			bean.setbUserID(1);
+////			bean.setBuserA(1);
+////			int temp = dao.update(bean);
+////			System.out.println("更改"+temp+"筆資料");
+//			
+//			
+//			//select
+////			UserBanList bean = dao.selectOne(1);
+////			System.out.println(bean);
+////			UserBanList bean = new UserBanList();
+//			
+//			
+//			
+//			
+//			session.getTransaction().commit();
+//		} finally {
+//			HibernateUtil.closeSessionFactory();
+//		}
+//	}
 	
 	
 	

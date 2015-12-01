@@ -74,25 +74,25 @@ public class eMessageDAOHibernate{
 	
 	
 	
-	public static void main(String[] args) {
-		try {
-			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-			session.beginTransaction();
-			
-			eMessageDAOHibernate dao = new eMessageDAOHibernate(session);
-			eMessage bean = dao.selectOne(1);
-			System.out.println(bean);
-//			UserBanList bean = new UserBanList();
-			
-			
-			
-			
-			session.getTransaction().commit();
-		} finally {
-			HibernateUtil.closeSessionFactory();
-		}
-	}
-	
+//	public static void main(String[] args) {
+//		try {
+//			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//			session.beginTransaction();
+//			
+//			eMessageDAOHibernate dao = new eMessageDAOHibernate(session);
+//			eMessage bean = dao.selectOne(1);
+//			System.out.println(bean);
+////			UserBanList bean = new UserBanList();
+//			
+//			
+//			
+//			
+//			session.getTransaction().commit();
+//		} finally {
+//			HibernateUtil.closeSessionFactory();
+//		}
+//	}
+//	
 	
 	
 	

@@ -64,21 +64,21 @@ public class UserOwnerDAOHibernate{
 	
 	
 	
-	public static void main(String[] args) {
-		try {
-			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-			session.beginTransaction();
-			
-			UserOwnerDAOHibernate dao = new UserOwnerDAOHibernate(session);
-			UserOwner bean = dao.selectOne(1);
-			System.out.println("UserOwner = "+bean);
-//			UserBanList bean = new UserBanList();
-			
-			session.getTransaction().commit();
-		} finally {
-			HibernateUtil.closeSessionFactory();
-		}
-	}
+//	public static void main(String[] args) {
+//		try {
+//			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//			session.beginTransaction();
+//			
+//			UserOwnerDAOHibernate dao = new UserOwnerDAOHibernate(session);
+//			UserOwner bean = dao.selectOne(1);
+//			System.out.println("UserOwner = "+bean);
+////			UserBanList bean = new UserBanList();
+//			
+//			session.getTransaction().commit();
+//		} finally {
+//			HibernateUtil.closeSessionFactory();
+//		}
+//	}
 	
 	
 	

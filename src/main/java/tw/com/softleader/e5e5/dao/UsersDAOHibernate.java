@@ -82,26 +82,26 @@ public class UsersDAOHibernate{
 	
 	
 	
-	public static void main(String[] args) {
-		try {
-			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-			session.beginTransaction();
-			
-			UsersDAOHibernate dao = new UsersDAOHibernate(session);
-//			Users bean = dao.selectOne(1);
-//			System.out.println(bean);
-			Users bean = new Users();
-			bean.setUserName("agasdgasga");
-			int temp = dao.insert(bean);
-			System.out.println(temp);
-			
-			
-			
-			session.getTransaction().commit();
-		} finally {
-			HibernateUtil.closeSessionFactory();
-		}
-	}
+//	public static void main(String[] args) {
+//		try {
+//			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//			session.beginTransaction();
+//			
+//			UsersDAOHibernate dao = new UsersDAOHibernate(session);
+////			Users bean = dao.selectOne(1);
+////			System.out.println(bean);
+//			Users bean = new Users();
+//			bean.setUserName("agasdgasga");
+//			int temp = dao.insert(bean);
+//			System.out.println(temp);
+//			
+//			
+//			
+//			session.getTransaction().commit();
+//		} finally {
+//			HibernateUtil.closeSessionFactory();
+//		}
+//	}
 	
 	
 	
