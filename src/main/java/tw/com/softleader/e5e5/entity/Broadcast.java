@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,8 +18,9 @@ import model.hibernate.HibernateUtil;
 @Table(name="Broadcast")
 public class Broadcast implements java.io.Serializable {
 	@Id
+	@Column(name="BroadcastId")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int broadcastId;
+	private int id;
 	private Date postTime;
 	private String broadcastDescription;
 	private byte[] picture;
@@ -29,7 +31,7 @@ public class Broadcast implements java.io.Serializable {
 			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 			session.beginTransaction();
 
-			Broadcast bean = (Broadcast) session.load(Broadcast.class, 1);
+			Broadcast bean = (Broadcast) session.get(Broadcast.class, 2);
 			System.out.println(bean);
 
 			session.getTransaction().commit();
@@ -41,12 +43,12 @@ public class Broadcast implements java.io.Serializable {
 	public Broadcast() {
 	}
 
-	public Broadcast(int broadcastId) {
-		this.broadcastId = broadcastId;
+	public Broadcast(int id) {
+		this.id = id;
 	}
 
-	public Broadcast(int broadcastId, Date postTime, String broadcastDescription, byte[] picture, Integer userId) {
-		this.broadcastId = broadcastId;
+	public Broadcast(int id, Date postTime, String broadcastDescription, byte[] picture, Integer userId) {
+		this.id = id;
 		this.postTime = postTime;
 		this.broadcastDescription = broadcastDescription;
 		this.picture = picture;
@@ -55,16 +57,16 @@ public class Broadcast implements java.io.Serializable {
 	
 	@Override
 	public String toString() {
-		return "Broadcast [broadcastId=" + broadcastId + ", postTime=" + postTime + ", broadcastDescription="
+		return "Broadcast [id=" + id + ", postTime=" + postTime + ", broadcastDescription="
 				+ broadcastDescription + ", picture=" + Arrays.toString(picture) + ", userId=" + userId + "]";
 	}
 
-	public int getBroadcastId() {
-		return this.broadcastId;
+	public int getId() {
+		return this.id;
 	}
 
-	public void setBroadcastId(int broadcastId) {
-		this.broadcastId = broadcastId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Date getPostTime() {

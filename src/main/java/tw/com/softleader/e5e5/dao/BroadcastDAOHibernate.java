@@ -44,10 +44,10 @@ public class BroadcastDAOHibernate{
 		}
 	}
 
-	public Broadcast selectById(int broadcastId) {
+	public Broadcast selectById(int id) {
 		Broadcast bean = null;
 		try {
-			bean = (Broadcast) getSession().get(Broadcast.class, broadcastId);
+			bean = (Broadcast) getSession().get(Broadcast.class, id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -65,7 +65,7 @@ public class BroadcastDAOHibernate{
 
 	}
 	public int insert(Broadcast bean){
-		Broadcast temp=(Broadcast) getSession().get(Broadcast.class, bean.getBroadcastId());
+		Broadcast temp=(Broadcast) getSession().get(Broadcast.class, bean.getId());
 		if(temp==null){
 			getSession().save(bean);
 			return 1;
@@ -73,10 +73,10 @@ public class BroadcastDAOHibernate{
 		return 0;
 	}
 	public int update(Broadcast bean){
-		Broadcast temp=(Broadcast) getSession().get(Broadcast.class, bean.getBroadcastId());
+		Broadcast temp=(Broadcast) getSession().get(Broadcast.class, bean.getId());
 		if(temp!=null){
 			temp.setBroadcastDescription(bean.getBroadcastDescription());
-			temp.setBroadcastId(bean.getBroadcastId());
+			temp.setId(bean.getId());
 			temp.setPicture(bean.getPicture());
 			temp.setPostTime(bean.getPostTime());
 			temp.setUserId(bean.getUserId());
