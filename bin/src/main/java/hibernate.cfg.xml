@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+		<property name="hibernate.connection.url">jdbc:sqlserver://softleader.com.tw:1433;database=EEIT82DB</property>
+		<property name="hibernate.connection.username">EEIT82</property>
+		<property name="hibernate.connection.password">EEIT82</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+
+		<property name="hibernate.current_session_context_class">thread</property>
+		<property name="hibernate.show_sql">true</property>
+
+		<!-- <mapping class="model.DeptBean"/> -->
+		<!-- <mapping class="model.ProjBean"/> -->
+		<!-- <mapping class="model.ProductBean"/> -->
+		<!-- <mapping class="model.DetailBean"/> -->
+		<!-- <mapping class="model.EmpBean"/> -->
+		<mapping class="tw.com.softleader.e5e5.entity.Broadcast" />
+		<mapping class="tw.com.softleader.e5e5.entity.Chat" />
+		<mapping class="tw.com.softleader.e5e5.entity.School" />
+		<mapping class="tw.com.softleader.e5e5.entity.Exchange" />
+		<mapping class="tw.com.softleader.e5e5.entity.ReportVio" />
+		<mapping class="tw.com.softleader.e5e5.entity.boardCategories" />
+		<mapping class="tw.com.softleader.e5e5.entity.Product" />
+		<mapping class="tw.com.softleader.e5e5.entity.UserBanList" />
+		<mapping class="tw.com.softleader.e5e5.entity.UserOwner" />
+		<mapping class="tw.com.softleader.e5e5.entity.eMessage" />
+		<mapping class="tw.com.softleader.e5e5.entity.Users" />
+
+		<!-- <mapping resource="model/DeptBean.hbm.xml"/> <mapping resource="model/EmpBean.hbm.xml"/> 
+			<mapping resource="model/ProjBean.hbm.xml"/> <mapping resource="model/DetailBean.hbm.xml"/> 
+			<mapping resource="model/ProductBean.hbm.xml"/> -->
+	</session-factory>
+</hibernate-configuration>
