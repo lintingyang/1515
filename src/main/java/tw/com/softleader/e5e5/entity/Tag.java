@@ -1,5 +1,5 @@
 package tw.com.softleader.e5e5.entity;
-// Generated 2015/12/2 �U�� 07:16:55 by Hibernate Tools 4.3.1.Final
+// Generated 2015/12/2 �U�� 09:36:37 by Hibernate Tools 4.3.1.Final
 
 import java.util.HashSet;
 import java.util.Set;

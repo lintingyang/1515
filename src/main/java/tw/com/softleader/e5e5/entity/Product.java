@@ -1,5 +1,5 @@
 package tw.com.softleader.e5e5.entity;
-// Generated 2015/12/2 �U�� 07:16:55 by Hibernate Tools 4.3.1.Final
+// Generated 2015/12/2 �U�� 09:36:37 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -43,10 +43,10 @@ public class Product implements java.io.Serializable {
 	private String grade;
 	private Date gradeTime;
 	private Set<Product> products = new HashSet<Product>(0);
-	private Set<Exchange> exchangesForProductAId = new HashSet<Exchange>(0);
-	private Set<Exchange> exchangesForProductBId = new HashSet<Exchange>(0);
 	private Set<QuestionAndAnswer> questionAndAnswers = new HashSet<QuestionAndAnswer>(0);
 	private Set<Report> reports = new HashSet<Report>(0);
+	private Set<Exchange> exchangesForProductAId = new HashSet<Exchange>(0);
+	private Set<Exchange> exchangesForProductBId = new HashSet<Exchange>(0);
 
 	public Product() {
 	}
@@ -59,8 +59,8 @@ public class Product implements java.io.Serializable {
 			User userByUserId, String name, String category, byte[] video, Date postTime, Date deadline,
 			String location, String tradeWay, String wishItem, Character postStatus, Character tradeStatus,
 			Integer clickTimes, Date tradeFinishedTime, String grade, Date gradeTime, Set<Product> products,
-			Set<Exchange> exchangesForProductAId, Set<Exchange> exchangesForProductBId,
-			Set<QuestionAndAnswer> questionAndAnswers, Set<Report> reports) {
+			Set<QuestionAndAnswer> questionAndAnswers, Set<Report> reports, Set<Exchange> exchangesForProductAId,
+			Set<Exchange> exchangesForProductBId) {
 		this.id = id;
 		this.exchange = exchange;
 		this.product = product;
@@ -82,10 +82,10 @@ public class Product implements java.io.Serializable {
 		this.grade = grade;
 		this.gradeTime = gradeTime;
 		this.products = products;
-		this.exchangesForProductAId = exchangesForProductAId;
-		this.exchangesForProductBId = exchangesForProductBId;
 		this.questionAndAnswers = questionAndAnswers;
 		this.reports = reports;
+		this.exchangesForProductAId = exchangesForProductAId;
+		this.exchangesForProductBId = exchangesForProductBId;
 	}
 
 	@Id
@@ -288,24 +288,6 @@ public class Product implements java.io.Serializable {
 		this.products = products;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productByProductAId")
-	public Set<Exchange> getExchangesForProductAId() {
-		return this.exchangesForProductAId;
-	}
-
-	public void setExchangesForProductAId(Set<Exchange> exchangesForProductAId) {
-		this.exchangesForProductAId = exchangesForProductAId;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productByProductBId")
-	public Set<Exchange> getExchangesForProductBId() {
-		return this.exchangesForProductBId;
-	}
-
-	public void setExchangesForProductBId(Set<Exchange> exchangesForProductBId) {
-		this.exchangesForProductBId = exchangesForProductBId;
-	}
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
 	public Set<QuestionAndAnswer> getQuestionAndAnswers() {
 		return this.questionAndAnswers;
@@ -322,6 +304,24 @@ public class Product implements java.io.Serializable {
 
 	public void setReports(Set<Report> reports) {
 		this.reports = reports;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productByProductAId")
+	public Set<Exchange> getExchangesForProductAId() {
+		return this.exchangesForProductAId;
+	}
+
+	public void setExchangesForProductAId(Set<Exchange> exchangesForProductAId) {
+		this.exchangesForProductAId = exchangesForProductAId;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productByProductBId")
+	public Set<Exchange> getExchangesForProductBId() {
+		return this.exchangesForProductBId;
+	}
+
+	public void setExchangesForProductBId(Set<Exchange> exchangesForProductBId) {
+		this.exchangesForProductBId = exchangesForProductBId;
 	}
 
 }

@@ -1,11 +1,13 @@
 package tw.com.softleader.e5e5.entity;
-// Generated 2015/12/2 �U�� 07:16:55 by Hibernate Tools 4.3.1.Final
+// Generated 2015/12/2 �U�� 09:36:37 by Hibernate Tools 4.3.1.Final
 
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -18,9 +20,9 @@ import javax.persistence.Table;
 public class Admin implements java.io.Serializable {
 
 	private int id;
-	private String password;
-	private String name;
 	private String authority;
+	private String name;
+	private String password;
 	private Set<Report> reports = new HashSet<Report>(0);
 	private Set<AdminQuestionAndAnswer> adminQuestionAndAnswers = new HashSet<AdminQuestionAndAnswer>(0);
 
@@ -31,18 +33,18 @@ public class Admin implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Admin(int id, String password, String name, String authority, Set<Report> reports,
+	public Admin(int id, String authority, String name, String password, Set<Report> reports,
 			Set<AdminQuestionAndAnswer> adminQuestionAndAnswers) {
 		this.id = id;
-		this.password = password;
-		this.name = name;
 		this.authority = authority;
+		this.name = name;
+		this.password = password;
 		this.reports = reports;
 		this.adminQuestionAndAnswers = adminQuestionAndAnswers;
 	}
 
 	@Id
-
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	public int getId() {
 		return this.id;
@@ -52,13 +54,13 @@ public class Admin implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "password", length = 20)
-	public String getPassword() {
-		return this.password;
+	@Column(name = "authority", length = 10)
+	public String getAuthority() {
+		return this.authority;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setAuthority(String authority) {
+		this.authority = authority;
 	}
 
 	@Column(name = "name", length = 20)
@@ -70,13 +72,13 @@ public class Admin implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "authority", length = 10)
-	public String getAuthority() {
-		return this.authority;
+	@Column(name = "password", length = 20)
+	public String getPassword() {
+		return this.password;
 	}
 
-	public void setAuthority(String authority) {
-		this.authority = authority;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "admin")

@@ -1,5 +1,5 @@
 package tw.com.softleader.e5e5.entity;
-// Generated 2015/12/2 �U�� 07:16:55 by Hibernate Tools 4.3.1.Final
+// Generated 2015/12/2 �U�� 09:36:37 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -37,19 +37,16 @@ public class User implements java.io.Serializable {
 	private String focusItemList;
 	private Integer gameScore;
 	private Integer onlineDatetime;
-	private Set<AdminQuestionAndAnswer> adminQuestionAndAnswers = new HashSet<AdminQuestionAndAnswer>(0);
-	private Set<UserBanList> userBanListsForUserBId = new HashSet<UserBanList>(0);
-	private Set<Thread> threads = new HashSet<Thread>(0);
-	private Set<UserBanList> userBanListsForUserAId = new HashSet<UserBanList>(0);
-	private Set<UserOwner> userOwners = new HashSet<UserOwner>(0);
-	private Set<FocusUserList> focusUserListsForUserAId = new HashSet<FocusUserList>(0);
 	private Set<Broadcast> broadcasts = new HashSet<Broadcast>(0);
+	private Set<FocusUserList> focusUserListsForUserAId = new HashSet<FocusUserList>(0);
+	private Set<UserBanList> userBanListsForUserAId = new HashSet<UserBanList>(0);
+	private Set<UserBanList> userBanListsForUserBId = new HashSet<UserBanList>(0);
 	private Set<FocusUserList> focusUserListsForUserBId = new HashSet<FocusUserList>(0);
-	private Set<School> schools = new HashSet<School>(0);
 	private Set<Messages> messageses = new HashSet<Messages>(0);
 	private Set<Product> productsForItemOwnerId = new HashSet<Product>(0);
+	private Set<School> schools = new HashSet<School>(0);
+	private Set<Thread> threads = new HashSet<Thread>(0);
 	private Set<Chat> chats = new HashSet<Chat>(0);
-	private Set<Report> reports = new HashSet<Report>(0);
 	private Set<Product> productsForUserId = new HashSet<Product>(0);
 
 	public User() {
@@ -62,11 +59,10 @@ public class User implements java.io.Serializable {
 	public User(int id, String password, String name, String nickname, String account, Integer age, Character sex,
 			Date birthday, String address, String phone, String cellphone, String email, String picture,
 			String schoolEmail, String focusItemList, Integer gameScore, Integer onlineDatetime,
-			Set<AdminQuestionAndAnswer> adminQuestionAndAnswers, Set<UserBanList> userBanListsForUserBId,
-			Set<Thread> threads, Set<UserBanList> userBanListsForUserAId, Set<UserOwner> userOwners,
-			Set<FocusUserList> focusUserListsForUserAId, Set<Broadcast> broadcasts,
-			Set<FocusUserList> focusUserListsForUserBId, Set<School> schools, Set<Messages> messageses,
-			Set<Product> productsForItemOwnerId, Set<Chat> chats, Set<Report> reports, Set<Product> productsForUserId) {
+			Set<Broadcast> broadcasts, Set<FocusUserList> focusUserListsForUserAId,
+			Set<UserBanList> userBanListsForUserAId, Set<UserBanList> userBanListsForUserBId,
+			Set<FocusUserList> focusUserListsForUserBId, Set<Messages> messageses, Set<Product> productsForItemOwnerId,
+			Set<School> schools, Set<Thread> threads, Set<Chat> chats, Set<Product> productsForUserId) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
@@ -84,19 +80,16 @@ public class User implements java.io.Serializable {
 		this.focusItemList = focusItemList;
 		this.gameScore = gameScore;
 		this.onlineDatetime = onlineDatetime;
-		this.adminQuestionAndAnswers = adminQuestionAndAnswers;
-		this.userBanListsForUserBId = userBanListsForUserBId;
-		this.threads = threads;
-		this.userBanListsForUserAId = userBanListsForUserAId;
-		this.userOwners = userOwners;
-		this.focusUserListsForUserAId = focusUserListsForUserAId;
 		this.broadcasts = broadcasts;
+		this.focusUserListsForUserAId = focusUserListsForUserAId;
+		this.userBanListsForUserAId = userBanListsForUserAId;
+		this.userBanListsForUserBId = userBanListsForUserBId;
 		this.focusUserListsForUserBId = focusUserListsForUserBId;
-		this.schools = schools;
 		this.messageses = messageses;
 		this.productsForItemOwnerId = productsForItemOwnerId;
+		this.schools = schools;
+		this.threads = threads;
 		this.chats = chats;
-		this.reports = reports;
 		this.productsForUserId = productsForUserId;
 	}
 
@@ -257,48 +250,12 @@ public class User implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	public Set<AdminQuestionAndAnswer> getAdminQuestionAndAnswers() {
-		return this.adminQuestionAndAnswers;
+	public Set<Broadcast> getBroadcasts() {
+		return this.broadcasts;
 	}
 
-	public void setAdminQuestionAndAnswers(Set<AdminQuestionAndAnswer> adminQuestionAndAnswers) {
-		this.adminQuestionAndAnswers = adminQuestionAndAnswers;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserBId")
-	public Set<UserBanList> getUserBanListsForUserBId() {
-		return this.userBanListsForUserBId;
-	}
-
-	public void setUserBanListsForUserBId(Set<UserBanList> userBanListsForUserBId) {
-		this.userBanListsForUserBId = userBanListsForUserBId;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	public Set<Thread> getThreads() {
-		return this.threads;
-	}
-
-	public void setThreads(Set<Thread> threads) {
-		this.threads = threads;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserAId")
-	public Set<UserBanList> getUserBanListsForUserAId() {
-		return this.userBanListsForUserAId;
-	}
-
-	public void setUserBanListsForUserAId(Set<UserBanList> userBanListsForUserAId) {
-		this.userBanListsForUserAId = userBanListsForUserAId;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	public Set<UserOwner> getUserOwners() {
-		return this.userOwners;
-	}
-
-	public void setUserOwners(Set<UserOwner> userOwners) {
-		this.userOwners = userOwners;
+	public void setBroadcasts(Set<Broadcast> broadcasts) {
+		this.broadcasts = broadcasts;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserAId")
@@ -310,13 +267,22 @@ public class User implements java.io.Serializable {
 		this.focusUserListsForUserAId = focusUserListsForUserAId;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	public Set<Broadcast> getBroadcasts() {
-		return this.broadcasts;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserAId")
+	public Set<UserBanList> getUserBanListsForUserAId() {
+		return this.userBanListsForUserAId;
 	}
 
-	public void setBroadcasts(Set<Broadcast> broadcasts) {
-		this.broadcasts = broadcasts;
+	public void setUserBanListsForUserAId(Set<UserBanList> userBanListsForUserAId) {
+		this.userBanListsForUserAId = userBanListsForUserAId;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserBId")
+	public Set<UserBanList> getUserBanListsForUserBId() {
+		return this.userBanListsForUserBId;
+	}
+
+	public void setUserBanListsForUserBId(Set<UserBanList> userBanListsForUserBId) {
+		this.userBanListsForUserBId = userBanListsForUserBId;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserBId")
@@ -326,15 +292,6 @@ public class User implements java.io.Serializable {
 
 	public void setFocusUserListsForUserBId(Set<FocusUserList> focusUserListsForUserBId) {
 		this.focusUserListsForUserBId = focusUserListsForUserBId;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	public Set<School> getSchools() {
-		return this.schools;
-	}
-
-	public void setSchools(Set<School> schools) {
-		this.schools = schools;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
@@ -356,21 +313,30 @@ public class User implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	public Set<School> getSchools() {
+		return this.schools;
+	}
+
+	public void setSchools(Set<School> schools) {
+		this.schools = schools;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	public Set<Thread> getThreads() {
+		return this.threads;
+	}
+
+	public void setThreads(Set<Thread> threads) {
+		this.threads = threads;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	public Set<Chat> getChats() {
 		return this.chats;
 	}
 
 	public void setChats(Set<Chat> chats) {
 		this.chats = chats;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	public Set<Report> getReports() {
-		return this.reports;
-	}
-
-	public void setReports(Set<Report> reports) {
-		this.reports = reports;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserId")

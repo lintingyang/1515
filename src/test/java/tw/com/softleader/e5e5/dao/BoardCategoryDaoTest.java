@@ -30,14 +30,14 @@ public class BoardCategoryDaoTest {
 		
 		boardCategoryDao.save(boardCategory);
 		
-		BoardCategory dbEntity = boardCategoryDao.findOne(1);
-		log.debug(dbEntity);
-		
-		List<BoardCategory> boardCategories = boardCategoryDao.findByName("xyz");
-		
-		for(BoardCategory b:boardCategories) {
-			log.debug(b);
-		}
+//		BoardCategory dbEntity = boardCategoryDao.findOne(1);
+//		log.debug(dbEntity);
+//		
+//		List<BoardCategory> boardCategories = boardCategoryDao.findByName("xyz");
+//		
+//		for(BoardCategory b:boardCategories) {
+//			log.debug(b);
+//		}
 		
 		
 		

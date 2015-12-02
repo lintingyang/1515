@@ -1,5 +1,5 @@
 package tw.com.softleader.e5e5.entity;
-// Generated 2015/12/2 �U�� 07:16:55 by Hibernate Tools 4.3.1.Final
+// Generated 2015/12/2 �U�� 09:36:37 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -34,8 +34,8 @@ public class Board implements java.io.Serializable {
 	private Integer replyCount;
 	private Character isCream;
 	private String picture;
-	private Set<Thread> threads = new HashSet<Thread>(0);
 	private Set<UserOwner> userOwners = new HashSet<UserOwner>(0);
+	private Set<Thread> threads = new HashSet<Thread>(0);
 
 	public Board() {
 	}
@@ -47,7 +47,7 @@ public class Board implements java.io.Serializable {
 
 	public Board(int id, BoardCategoria boardCategoria, BoardCategory boardCategory, Reply reply, Thread thread,
 			Date createdDate, String name, String description, Integer threadCount, Integer replyCount,
-			Character isCream, String picture, Set<Thread> threads, Set<UserOwner> userOwners) {
+			Character isCream, String picture, Set<UserOwner> userOwners, Set<Thread> threads) {
 		this.id = id;
 		this.boardCategoria = boardCategoria;
 		this.boardCategory = boardCategory;
@@ -60,8 +60,8 @@ public class Board implements java.io.Serializable {
 		this.replyCount = replyCount;
 		this.isCream = isCream;
 		this.picture = picture;
-		this.threads = threads;
 		this.userOwners = userOwners;
+		this.threads = threads;
 	}
 
 	@Id
@@ -180,21 +180,21 @@ public class Board implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "board")
-	public Set<Thread> getThreads() {
-		return this.threads;
-	}
-
-	public void setThreads(Set<Thread> threads) {
-		this.threads = threads;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "board")
 	public Set<UserOwner> getUserOwners() {
 		return this.userOwners;
 	}
 
 	public void setUserOwners(Set<UserOwner> userOwners) {
 		this.userOwners = userOwners;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "board")
+	public Set<Thread> getThreads() {
+		return this.threads;
+	}
+
+	public void setThreads(Set<Thread> threads) {
+		this.threads = threads;
 	}
 
 }
