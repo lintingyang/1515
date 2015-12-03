@@ -1,5 +1,5 @@
 package tw.com.softleader.e5e5.entity;
-// Generated 2015/12/2 �U�� 07:16:55 by Hibernate Tools 4.3.1.Final
+// Generated 2015/12/2 �U�� 09:36:37 by Hibernate Tools 4.3.1.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,8 +17,8 @@ import javax.persistence.Table;
 public class UserBanList implements java.io.Serializable {
 
 	private int id;
-	private User userByUserBId;
 	private User userByUserAId;
+	private User userByUserBId;
 
 	public UserBanList() {
 	}
@@ -27,10 +27,10 @@ public class UserBanList implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public UserBanList(int id, User userByUserBId, User userByUserAId) {
+	public UserBanList(int id, User userByUserAId, User userByUserBId) {
 		this.id = id;
-		this.userByUserBId = userByUserBId;
 		this.userByUserAId = userByUserAId;
+		this.userByUserBId = userByUserBId;
 	}
 
 	@Id
@@ -45,16 +45,6 @@ public class UserBanList implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_b_id")
-	public User getUserByUserBId() {
-		return this.userByUserBId;
-	}
-
-	public void setUserByUserBId(User userByUserBId) {
-		this.userByUserBId = userByUserBId;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_a_id")
 	public User getUserByUserAId() {
 		return this.userByUserAId;
@@ -62,6 +52,16 @@ public class UserBanList implements java.io.Serializable {
 
 	public void setUserByUserAId(User userByUserAId) {
 		this.userByUserAId = userByUserAId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_b_id")
+	public User getUserByUserBId() {
+		return this.userByUserBId;
+	}
+
+	public void setUserByUserBId(User userByUserBId) {
+		this.userByUserBId = userByUserBId;
 	}
 
 }

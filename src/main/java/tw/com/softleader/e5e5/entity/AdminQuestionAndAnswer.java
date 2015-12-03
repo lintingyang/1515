@@ -1,5 +1,5 @@
 package tw.com.softleader.e5e5.entity;
-// Generated 2015/12/2 �U�� 07:16:55 by Hibernate Tools 4.3.1.Final
+// Generated 2015/12/2 �U�� 09:36:37 by Hibernate Tools 4.3.1.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,9 +18,9 @@ public class AdminQuestionAndAnswer implements java.io.Serializable {
 
 	private int id;
 	private Admin admin;
-	private User user;
-	private String question;
 	private String answer;
+	private String question;
+	private Integer userId;
 
 	public AdminQuestionAndAnswer() {
 	}
@@ -29,12 +29,12 @@ public class AdminQuestionAndAnswer implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public AdminQuestionAndAnswer(int id, Admin admin, User user, String question, String answer) {
+	public AdminQuestionAndAnswer(int id, Admin admin, String answer, String question, Integer userId) {
 		this.id = id;
 		this.admin = admin;
-		this.user = user;
-		this.question = question;
 		this.answer = answer;
+		this.question = question;
+		this.userId = userId;
 	}
 
 	@Id
@@ -58,14 +58,13 @@ public class AdminQuestionAndAnswer implements java.io.Serializable {
 		this.admin = admin;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
-	public User getUser() {
-		return this.user;
+	@Column(name = "answer", length = 100)
+	public String getAnswer() {
+		return this.answer;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setAnswer(String answer) {
+		this.answer = answer;
 	}
 
 	@Column(name = "question", length = 100)
@@ -77,13 +76,13 @@ public class AdminQuestionAndAnswer implements java.io.Serializable {
 		this.question = question;
 	}
 
-	@Column(name = "answer", length = 100)
-	public String getAnswer() {
-		return this.answer;
+	@Column(name = "user_id")
+	public Integer getUserId() {
+		return this.userId;
 	}
 
-	public void setAnswer(String answer) {
-		this.answer = answer;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 }

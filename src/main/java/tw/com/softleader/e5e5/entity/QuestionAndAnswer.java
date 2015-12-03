@@ -1,5 +1,5 @@
 package tw.com.softleader.e5e5.entity;
-// Generated 2015/12/2 �U�� 07:16:55 by Hibernate Tools 4.3.1.Final
+// Generated 2015/12/2 �U�� 09:36:37 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -21,10 +21,10 @@ public class QuestionAndAnswer implements java.io.Serializable {
 
 	private int id;
 	private Product product;
-	private String question;
 	private String answer;
 	private Date editTime;
 	private Character isPublic;
+	private String question;
 
 	public QuestionAndAnswer() {
 	}
@@ -33,14 +33,14 @@ public class QuestionAndAnswer implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public QuestionAndAnswer(int id, Product product, String question, String answer, Date editTime,
-			Character isPublic) {
+	public QuestionAndAnswer(int id, Product product, String answer, Date editTime, Character isPublic,
+			String question) {
 		this.id = id;
 		this.product = product;
-		this.question = question;
 		this.answer = answer;
 		this.editTime = editTime;
 		this.isPublic = isPublic;
+		this.question = question;
 	}
 
 	@Id
@@ -62,15 +62,6 @@ public class QuestionAndAnswer implements java.io.Serializable {
 
 	public void setProduct(Product product) {
 		this.product = product;
-	}
-
-	@Column(name = "question", length = 200)
-	public String getQuestion() {
-		return this.question;
-	}
-
-	public void setQuestion(String question) {
-		this.question = question;
 	}
 
 	@Column(name = "answer", length = 200)
@@ -99,6 +90,15 @@ public class QuestionAndAnswer implements java.io.Serializable {
 
 	public void setIsPublic(Character isPublic) {
 		this.isPublic = isPublic;
+	}
+
+	@Column(name = "question", length = 200)
+	public String getQuestion() {
+		return this.question;
+	}
+
+	public void setQuestion(String question) {
+		this.question = question;
 	}
 
 }

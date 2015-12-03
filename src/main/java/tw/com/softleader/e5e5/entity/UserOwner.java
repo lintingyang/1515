@@ -1,5 +1,5 @@
 package tw.com.softleader.e5e5.entity;
-// Generated 2015/12/2 �U�� 07:16:55 by Hibernate Tools 4.3.1.Final
+// Generated 2015/12/2 �U�� 09:36:37 by Hibernate Tools 4.3.1.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +18,7 @@ public class UserOwner implements java.io.Serializable {
 
 	private int id;
 	private Board board;
-	private User user;
+	private Integer userId;
 
 	public UserOwner() {
 	}
@@ -27,10 +27,10 @@ public class UserOwner implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public UserOwner(int id, Board board, User user) {
+	public UserOwner(int id, Board board, Integer userId) {
 		this.id = id;
 		this.board = board;
-		this.user = user;
+		this.userId = userId;
 	}
 
 	@Id
@@ -54,14 +54,13 @@ public class UserOwner implements java.io.Serializable {
 		this.board = board;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
-	public User getUser() {
-		return this.user;
+	@Column(name = "user_id")
+	public Integer getUserId() {
+		return this.userId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 }
