@@ -49,6 +49,20 @@ public class Messages implements java.io.Serializable {
 		this.time = time;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public String toString() {
+		return "Messages [id=" + id + ", user=" + user + ", article=" + article + ", deliverTime=" + deliverTime
+				+ ", readTime=" + readTime + ", receiverId=" + receiverId + ", senderId=" + senderId + ", time=" + time
+				+ "]";
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)

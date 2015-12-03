@@ -35,6 +35,18 @@ public class UserOwner implements java.io.Serializable {
 		this.userId = userId;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public String toString() {
+		return "UserOwner [id=" + id + ", board=" + board + ", userId=" + userId + "]";
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)

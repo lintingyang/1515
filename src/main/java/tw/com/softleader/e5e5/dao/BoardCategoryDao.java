@@ -10,4 +10,8 @@ public interface BoardCategoryDao extends JpaRepository<BoardCategory, Integer>{
 
 	public List<BoardCategory> findByName(String name);
 	
+	
+	
+	
+	
 }

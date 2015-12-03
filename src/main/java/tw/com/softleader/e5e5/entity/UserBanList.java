@@ -22,6 +22,19 @@ public class UserBanList implements java.io.Serializable {
 	private User userByUserAId;
 	private User userByUserBId;
 
+	
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public String toString() {
+		return "UserBanList [id=" + id + ", userByUserAId=" + userByUserAId + ", userByUserBId=" + userByUserBId + "]";
+	}
+
 	public UserBanList() {
 	}
 

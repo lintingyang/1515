@@ -24,21 +24,25 @@ public class BoardCategoryDaoTest {
 	
 	@Test
 	public void testCrud() {
-		BoardCategory boardCategory = new BoardCategory();
-		boardCategory.setCreatedDate(new Date());
-		boardCategory.setName("xyz");
-		
-		boardCategoryDao.save(boardCategory);
-		
+//		BoardCategory boardCategory = new BoardCategory();
+//		boardCategory.setCreatedDate(new Date());
+//		boardCategory.setName("xyz");
+//		
+//		boardCategoryDao.save(boardCategory);
+//		
 //		BoardCategory dbEntity = boardCategoryDao.findOne(1);
 //		log.debug(dbEntity);
 //		
-//		List<BoardCategory> boardCategories = boardCategoryDao.findByName("xyz");
-//		
-//		for(BoardCategory b:boardCategories) {
-//			log.debug(b);
-//		}
+		List<BoardCategory> boardCategories = boardCategoryDao.findByName("xyz");
 		
+		for(BoardCategory b:boardCategories) {
+			log.info(b);
+		}
+		
+		log.error("Hello ERROR");
+		log.warn("Hello Warn");
+		log.info("Hello Info");
+		log.debug("Hello Debug");
 		
 		
 	}
