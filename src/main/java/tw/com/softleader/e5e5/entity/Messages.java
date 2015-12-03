@@ -1,5 +1,5 @@
 package tw.com.softleader.e5e5.entity;
-// Generated 2015/12/2 �U�� 07:16:55 by Hibernate Tools 4.3.1.Final
+// Generated 2015/12/2 �U�� 09:36:37 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -23,12 +23,12 @@ public class Messages implements java.io.Serializable {
 
 	private int id;
 	private User user;
-	private Date time;
-	private String senderId;
-	private String receiverId;
-	private Date readTime;
-	private Date deliverTime;
 	private String article;
+	private Date deliverTime;
+	private Date readTime;
+	private String receiverId;
+	private String senderId;
+	private Date time;
 
 	public Messages() {
 	}
@@ -37,16 +37,16 @@ public class Messages implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Messages(int id, User user, Date time, String senderId, String receiverId, Date readTime, Date deliverTime,
-			String article) {
+	public Messages(int id, User user, String article, Date deliverTime, Date readTime, String receiverId,
+			String senderId, Date time) {
 		this.id = id;
 		this.user = user;
-		this.time = time;
-		this.senderId = senderId;
-		this.receiverId = receiverId;
-		this.readTime = readTime;
-		this.deliverTime = deliverTime;
 		this.article = article;
+		this.deliverTime = deliverTime;
+		this.readTime = readTime;
+		this.receiverId = receiverId;
+		this.senderId = senderId;
+		this.time = time;
 	}
 
 	@Id
@@ -70,42 +70,13 @@ public class Messages implements java.io.Serializable {
 		this.user = user;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "time", length = 23)
-	public Date getTime() {
-		return this.time;
+	@Column(name = "article")
+	public String getArticle() {
+		return this.article;
 	}
 
-	public void setTime(Date time) {
-		this.time = time;
-	}
-
-	@Column(name = "sender_id", length = 30)
-	public String getSenderId() {
-		return this.senderId;
-	}
-
-	public void setSenderId(String senderId) {
-		this.senderId = senderId;
-	}
-
-	@Column(name = "receiver_id", length = 30)
-	public String getReceiverId() {
-		return this.receiverId;
-	}
-
-	public void setReceiverId(String receiverId) {
-		this.receiverId = receiverId;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "read_time", length = 23)
-	public Date getReadTime() {
-		return this.readTime;
-	}
-
-	public void setReadTime(Date readTime) {
-		this.readTime = readTime;
+	public void setArticle(String article) {
+		this.article = article;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -118,13 +89,42 @@ public class Messages implements java.io.Serializable {
 		this.deliverTime = deliverTime;
 	}
 
-	@Column(name = "article")
-	public String getArticle() {
-		return this.article;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "read_time", length = 23)
+	public Date getReadTime() {
+		return this.readTime;
 	}
 
-	public void setArticle(String article) {
-		this.article = article;
+	public void setReadTime(Date readTime) {
+		this.readTime = readTime;
+	}
+
+	@Column(name = "receiver_id", length = 30)
+	public String getReceiverId() {
+		return this.receiverId;
+	}
+
+	public void setReceiverId(String receiverId) {
+		this.receiverId = receiverId;
+	}
+
+	@Column(name = "sender_id", length = 30)
+	public String getSenderId() {
+		return this.senderId;
+	}
+
+	public void setSenderId(String senderId) {
+		this.senderId = senderId;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "time", length = 23)
+	public Date getTime() {
+		return this.time;
+	}
+
+	public void setTime(Date time) {
+		this.time = time;
 	}
 
 }

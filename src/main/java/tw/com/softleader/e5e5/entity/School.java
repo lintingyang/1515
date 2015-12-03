@@ -1,5 +1,5 @@
 package tw.com.softleader.e5e5.entity;
-// Generated 2015/12/2 �U�� 07:16:55 by Hibernate Tools 4.3.1.Final
+// Generated 2015/12/2 �U�� 09:36:37 by Hibernate Tools 4.3.1.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,8 +18,8 @@ public class School implements java.io.Serializable {
 
 	private int id;
 	private User user;
-	private Character checkMail;
 	private String area;
+	private Character checkMail;
 	private String name;
 
 	public School() {
@@ -29,11 +29,11 @@ public class School implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public School(int id, User user, Character checkMail, String area, String name) {
+	public School(int id, User user, String area, Character checkMail, String name) {
 		this.id = id;
 		this.user = user;
-		this.checkMail = checkMail;
 		this.area = area;
+		this.checkMail = checkMail;
 		this.name = name;
 	}
 
@@ -58,15 +58,6 @@ public class School implements java.io.Serializable {
 		this.user = user;
 	}
 
-	@Column(name = "check_mail", length = 1)
-	public Character getCheckMail() {
-		return this.checkMail;
-	}
-
-	public void setCheckMail(Character checkMail) {
-		this.checkMail = checkMail;
-	}
-
 	@Column(name = "area", length = 15)
 	public String getArea() {
 		return this.area;
@@ -74,6 +65,15 @@ public class School implements java.io.Serializable {
 
 	public void setArea(String area) {
 		this.area = area;
+	}
+
+	@Column(name = "check_mail", length = 1)
+	public Character getCheckMail() {
+		return this.checkMail;
+	}
+
+	public void setCheckMail(Character checkMail) {
+		this.checkMail = checkMail;
 	}
 
 	@Column(name = "name", length = 30)

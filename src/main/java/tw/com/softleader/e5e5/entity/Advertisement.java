@@ -1,5 +1,5 @@
 package tw.com.softleader.e5e5.entity;
-// Generated 2015/12/2 �U�� 07:16:55 by Hibernate Tools 4.3.1.Final
+// Generated 2015/12/2 �U�� 09:36:37 by Hibernate Tools 4.3.1.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,9 +14,9 @@ import javax.persistence.Table;
 public class Advertisement implements java.io.Serializable {
 
 	private int id;
-	private String picture;
 	private String article;
 	private String link;
+	private String picture;
 
 	public Advertisement() {
 	}
@@ -25,11 +25,11 @@ public class Advertisement implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Advertisement(int id, String picture, String article, String link) {
+	public Advertisement(int id, String article, String link, String picture) {
 		this.id = id;
-		this.picture = picture;
 		this.article = article;
 		this.link = link;
+		this.picture = picture;
 	}
 
 	@Id
@@ -41,15 +41,6 @@ public class Advertisement implements java.io.Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	@Column(name = "picture")
-	public String getPicture() {
-		return this.picture;
-	}
-
-	public void setPicture(String picture) {
-		this.picture = picture;
 	}
 
 	@Column(name = "article", length = 100)
@@ -68,6 +59,15 @@ public class Advertisement implements java.io.Serializable {
 
 	public void setLink(String link) {
 		this.link = link;
+	}
+
+	@Column(name = "picture")
+	public String getPicture() {
+		return this.picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
 
 }
