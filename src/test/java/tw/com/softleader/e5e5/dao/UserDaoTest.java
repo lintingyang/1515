@@ -35,15 +35,25 @@ public class UserDaoTest {
 //		usera.setCellphone("0911-111-111");
 //		usera.setGameScore(320);
 //		userDao.save(usera);
+		User userid = userDao.findById(1);
+		log.debug(userid);
 		
-		User userone = userDao.findOne(1);
-		log.debug(userone);
 		
-		List<User> users = userDao.findById(1);
+		User useradd = userDao.findByAddressStartingWith("台北市");
+		log.debug(useradd);
 		
-		for(User u:users) {
-			log.debug(u);
-		}
+//		User usercell = userDao.findByCellphone("0911-111-111");
+//		log.debug(usercell);
+		
+		
+//		User userone = userDao.findOne(1);
+//		log.debug(userone);
+		
+//		List<User> users = userDao.findAll();
+//		
+//		for(User u:users) {
+//			log.debug(u);
+//		}
 		
 		
 
