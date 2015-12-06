@@ -34,13 +34,23 @@ public class UserDaoTest {
 //		usera.setBirthday(new java.util.Date());
 //		usera.setCellphone("0911-111-111");
 //		usera.setGameScore(320);
+//		usera.setGameScore(30000);
 //		userDao.save(usera);
-		User userid = userDao.findById(1);
-		log.debug(userid);
+		
+//		User userid = userDao.findById(1);
+//		log.debug(userid);
+		
+//		List<User> userscs = userDao.findByGameScoreGreaterThanEqualOrderByGameScoreDesc(3000);
+//		for(User usersc : userscs ){
+//		log.debug(usersc);
+//		}
 		
 		
-		User useradd = userDao.findByAddressStartingWith("台北市");
-		log.debug(useradd);
+		userDao.delete(7);
+		
+		
+//		User useradd = userDao.findByAddressStartingWith("台北市");
+//		log.debug(useradd);
 		
 //		User usercell = userDao.findByCellphone("0911-111-111");
 //		log.debug(usercell);

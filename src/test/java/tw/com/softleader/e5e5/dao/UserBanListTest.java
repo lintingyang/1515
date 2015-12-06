@@ -1,6 +1,6 @@
 package tw.com.softleader.e5e5.dao;
 
-import static org.junit.Assert.*;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.junit.Test;
@@ -10,6 +10,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import tw.com.softleader.e5e5.E5e5App;
+import tw.com.softleader.e5e5.entity.User;
 import tw.com.softleader.e5e5.entity.UserBanList;
 
 
@@ -26,14 +27,18 @@ public class UserBanListTest {
 
 	@Test
 	public void testCrud() {
-		
+
 	UserBanList ubs = new UserBanList();
-	ubs.setUserAid(1);
-	ubs.setUserBid(4);
+	ubs.setUserByUserAId( new User(2));
+	ubs.setUserByUserBId(new User(5));
 	userbanlistdao.save(ubs);	
-		
-		
-		
+	
+	
+	
+//		List<UserBanList> ubss = userbanlistdao.findAll();
+//		for(UserBanList ubs : ubss){
+//		log.debug(ubs);
+//		}
 		
 		
 	}

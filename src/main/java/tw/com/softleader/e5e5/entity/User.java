@@ -103,18 +103,15 @@ public class User implements java.io.Serializable {
 	
 	
 	
+
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", password=" + password + ", name=" + name + ", nickname=" + nickname + ", account="
 				+ account + ", age=" + age + ", sex=" + sex + ", birthday=" + birthday + ", address=" + address
 				+ ", phone=" + phone + ", cellphone=" + cellphone + ", email=" + email + ", picture=" + picture
 				+ ", schoolEmail=" + schoolEmail + ", focusItemList=" + focusItemList + ", gameScore=" + gameScore
-				+ ", onlineDatetime=" + onlineDatetime + ", broadcasts=" + broadcasts + ", focusUserListsForUserAId="
-				+ focusUserListsForUserAId + ", userBanListsForUserAId=" + userBanListsForUserAId
-				+ ", userBanListsForUserBId=" + userBanListsForUserBId + ", focusUserListsForUserBId="
-				+ focusUserListsForUserBId + ", messageses=" + messageses + ", productsForItemOwnerId="
-				+ productsForItemOwnerId + ", schools=" + schools + ", threads=" + threads + ", chats=" + chats
-				+ ", productsForUserId=" + productsForUserId + "]";
+				+ ", onlineDatetime=" + onlineDatetime + "]";
 	}
 
 	@Id

@@ -20,15 +20,14 @@ import javax.transaction.Transactional;
 public class UserBanList implements java.io.Serializable {
 
 	private int id;
-	private int userAid;
-	private int userBid;
 	private User userByUserAId;
 	private User userByUserBId;
+	
+
 
 	@Override
 	public String toString() {
-		return "UserBanList [id=" + id + ", userAid=" + userAid + ", userBid=" + userBid + ", userByUserAId="
-				+ userByUserAId + ", userByUserBId=" + userByUserBId + "]";
+		return "UserBanList [id=" + id + ", userByUserAId=" + userByUserAId + ", userByUserBId=" + userByUserBId + "]";
 	}
 
 	public UserBanList() {
@@ -38,15 +37,12 @@ public class UserBanList implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public UserBanList(int id, int userAid ,int userBid , User userByUserAId, User userByUserBId) {
+	public UserBanList(int id, User userByUserAId, User userByUserBId) {
 		this.id = id;
 		this.userByUserAId = userByUserAId;
 		this.userByUserBId = userByUserBId;
-		this.userAid = userAid;
-		this.userBid = userBid;
-		
-	}	
-	
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
@@ -57,27 +53,9 @@ public class UserBanList implements java.io.Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	@Column(name="user_a_id", insertable=false, updatable=false)
-	public int getUserAid() {
-		return userAid;
-	}
 
-	public void setUserAid(int userAid) {
-		this.userAid = userAid;
-	}
-	
-	@Column(name="user_b_id", insertable=false, updatable=false)
-	public int getUserBid() {
-		return userBid;
-	}
-
-	public void setUserBid(int userBid) {
-		this.userBid = userBid;
-	}
-	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_a_id",referencedColumnName="id")
+	@JoinColumn(name = "user_a_id",referencedColumnName="id",insertable=false,updatable=false)
 	@Transactional
 	public User getUserByUserAId() {
 		return this.userByUserAId;
@@ -88,7 +66,7 @@ public class UserBanList implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_b_id",referencedColumnName="id")
+	@JoinColumn(name = "user_b_id",referencedColumnName="id",insertable=false,updatable=false)
 	@Transactional
 	public User getUserByUserBId() {
 		return this.userByUserBId;
