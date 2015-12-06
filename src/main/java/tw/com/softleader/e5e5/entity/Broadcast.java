@@ -1,10 +1,12 @@
 package tw.com.softleader.e5e5.entity;
-// Generated 2015/12/2 �U�� 09:36:37 by Hibernate Tools 4.3.1.Final
+
 
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -40,9 +42,16 @@ public class Broadcast implements java.io.Serializable {
 		this.postTime = postTime;
 	}
 
-	@Id
+	
+	@Override
+	public String toString() {
+		return "Broadcast [id=" + id + ", broadcastDescription=" + broadcastDescription + ", picture=" + picture
+				+ ", postTime=" + postTime + "]";
+	}
 
-	@Column(name = "id", unique = true, nullable = false)
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "id", unique = true)
 	public int getId() {
 		return this.id;
 	}
