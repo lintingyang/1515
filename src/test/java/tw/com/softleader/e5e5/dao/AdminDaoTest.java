@@ -24,11 +24,12 @@ public class AdminDaoTest {
 	@Autowired
 	private AdminDao adminDao;
 	
+
 	@Test
 	public void testFindAll() {
 	
 		Admin admin = new Admin();
-		admin.setPassword("123456");;
+		admin.setPassword("123456");
 		admin.setName("xyz");
 		
 		adminDao.save(admin);
