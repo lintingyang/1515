@@ -43,8 +43,8 @@ public class User implements java.io.Serializable {
 	private Integer onlineDatetime;
 	private Set<Broadcast> broadcasts = new HashSet<Broadcast>(0);
 	private Set<FocusUserList> focusUserListsForUserAId = new HashSet<FocusUserList>(0);
-	private Set<UserBanList> userBanListsForUserAId = new HashSet<UserBanList>(0);
-	private Set<UserBanList> userBanListsForUserBId = new HashSet<UserBanList>(0);
+//	private Set<UserBanList> userBanListsForUserAId = new HashSet<UserBanList>(0);
+//	private Set<UserBanList> userBanListsForUserBId = new HashSet<UserBanList>(0);
 	private Set<FocusUserList> focusUserListsForUserBId = new HashSet<FocusUserList>(0);
 	private Set<Messages> messageses = new HashSet<Messages>(0);
 	private Set<Product> productsForItemOwnerId = new HashSet<Product>(0);
@@ -64,7 +64,7 @@ public class User implements java.io.Serializable {
 			Date birthday, String address, String phone, String cellphone, String email, String picture,
 			String schoolEmail, String focusItemList, Integer gameScore, Integer onlineDatetime,
 			Set<Broadcast> broadcasts, Set<FocusUserList> focusUserListsForUserAId,
-			Set<UserBanList> userBanListsForUserAId, Set<UserBanList> userBanListsForUserBId,
+//			Set<UserBanList> userBanListsForUserAId, Set<UserBanList> userBanListsForUserBId,
 			Set<FocusUserList> focusUserListsForUserBId, Set<Messages> messageses, Set<Product> productsForItemOwnerId,
 			Set<School> schools, Set<Thread> threads, Set<Chat> chats, Set<Product> productsForUserId) {
 		this.id = id;
@@ -86,8 +86,8 @@ public class User implements java.io.Serializable {
 		this.onlineDatetime = onlineDatetime;
 		this.broadcasts = broadcasts;
 		this.focusUserListsForUserAId = focusUserListsForUserAId;
-		this.userBanListsForUserAId = userBanListsForUserAId;
-		this.userBanListsForUserBId = userBanListsForUserBId;
+//		this.userBanListsForUserAId = userBanListsForUserAId;
+//		this.userBanListsForUserBId = userBanListsForUserBId;
 		this.focusUserListsForUserBId = focusUserListsForUserBId;
 		this.messageses = messageses;
 		this.productsForItemOwnerId = productsForItemOwnerId;
@@ -290,25 +290,25 @@ public class User implements java.io.Serializable {
 		this.focusUserListsForUserAId = focusUserListsForUserAId;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "userByUserAId")
-	@Transactional
-	public Set<UserBanList> getUserBanListsForUserAId() {
-		return this.userBanListsForUserAId;
-	}
+//	@OneToMany(fetch = FetchType.EAGER, mappedBy = "userByUserAId")
+//	@Transactional
+//	public Set<UserBanList> getUserBanListsForUserAId() {
+//		return this.userBanListsForUserAId;
+//	}
 
-	public void setUserBanListsForUserAId(Set<UserBanList> userBanListsForUserAId) {
-		this.userBanListsForUserAId = userBanListsForUserAId;
-	}
+//	public void setUserBanListsForUserAId(Set<UserBanList> userBanListsForUserAId) {
+//		this.userBanListsForUserAId = userBanListsForUserAId;
+//	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "userByUserBId")
-	@Transactional
-	public Set<UserBanList> getUserBanListsForUserBId() {
-		return this.userBanListsForUserBId;
-	}
-
-	public void setUserBanListsForUserBId(Set<UserBanList> userBanListsForUserBId) {
-		this.userBanListsForUserBId = userBanListsForUserBId;
-	}
+//	@OneToMany(fetch = FetchType.EAGER, mappedBy = "userByUserBId")
+//	@Transactional
+//	public Set<UserBanList> getUserBanListsForUserBId() {
+//		return this.userBanListsForUserBId;
+//	}
+//
+//	public void setUserBanListsForUserBId(Set<UserBanList> userBanListsForUserBId) {
+//		this.userBanListsForUserBId = userBanListsForUserBId;
+//	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "userByUserBId")
 	@Transactional
