@@ -8,6 +8,6 @@ import tw.com.softleader.e5e5.entity.UserBanList;
 
 public interface UserBanListDao extends JpaRepository<UserBanList, Integer> {
 	
-	public List<UserBanList> findByUserAId(Integer userAId);
+	//public List<UserBanList> findByuserByUserAId(Integer userAId);
 	
 }

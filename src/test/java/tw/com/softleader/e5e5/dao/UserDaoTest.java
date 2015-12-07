@@ -40,13 +40,13 @@ public class UserDaoTest {
 //		User userid = userDao.findById(1);
 //		log.debug(userid);
 		
-//		List<User> userscs = userDao.findByGameScoreGreaterThanEqualOrderByGameScoreDesc(3000);
-//		for(User usersc : userscs ){
-//		log.debug(usersc);
-//		}
+		List<User> userscs = userDao.findByGameScoreGreaterThanEqualOrderByGameScoreDesc(3000);
+		for(User usersc : userscs ){
+		log.debug(usersc);
+		}
 		
 		
-		userDao.delete(7);
+//		userDao.delete(7);
 		
 		
 //		User useradd = userDao.findByAddressStartingWith("台北市");

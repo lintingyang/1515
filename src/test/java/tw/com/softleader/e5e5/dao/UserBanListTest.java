@@ -24,14 +24,19 @@ public class UserBanListTest {
 	
 	@Autowired
 	private UserBanListDao userbanlistdao;
+	
+	@Autowired
+	private UserDao userDao;
 
 	@Test
 	public void testCrud() {
+	User u1 = userDao.findById(2);
+	User u2 = userDao.findById(5);
 
 	UserBanList ubs = new UserBanList();
-	ubs.setUserByUserAId( new User(2));
-	ubs.setUserByUserBId(new User(5));
-	userbanlistdao.save(ubs);	
+	ubs.setUserByUserAId(u1);
+	ubs.setUserByUserBId(u2);
+	userbanlistdao.save(ubs);
 	
 	
 	
