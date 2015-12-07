@@ -58,7 +58,7 @@ public class UserOwner implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "board_id")
 	@Transactional
 	public Board getBoard() {
