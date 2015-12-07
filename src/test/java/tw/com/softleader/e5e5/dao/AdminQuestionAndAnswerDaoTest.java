@@ -1,9 +1,6 @@
 package tw.com.softleader.e5e5.dao;
 
-import static org.junit.Assert.*;
-
-import java.util.Date;
-import java.util.List;
+import static org.junit.Assert.fail;
 
 import org.apache.log4j.Logger;
 import org.junit.Test;
@@ -13,36 +10,21 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import tw.com.softleader.e5e5.E5e5App;
-import tw.com.softleader.e5e5.entity.Admin;
+import tw.com.softleader.e5e5.entity.AdminQuestionAndAnswer;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes={E5e5App.class})
-public class AdminDaoTest {
 
+public class AdminQuestionAndAnswerDaoTest {
 	private Logger log = Logger.getLogger(this.getClass());
 	
 	@Autowired
-	private AdminDao adminDao;
+	private AdminQuestionAndAnswerDao adminQuestionAndAnswerDao;
 	
-
 	@Test
-	public void testFindAll() {
-	
-		Admin admin = new Admin();
-		admin.setPassword("123456");
-		admin.setName("xyz");
-		
-		adminDao.save(admin);
-		
-		Admin dbEntity = adminDao.findOne(1);
-		log.debug(dbEntity);
-		
-//		List<Admin> boardCategories = adminDao.findByName("xyz");
-		
-//		for(Admin b:boardCategories) {
-//			log.debug(b);
-//		}
-		
+	public void testFind() {
+		AdminQuestionAndAnswer a = adminQuestionAndAnswerDao.findOne(1);
+		log.error(a);
 	}
 
 }

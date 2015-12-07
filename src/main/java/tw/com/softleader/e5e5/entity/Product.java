@@ -89,6 +89,17 @@ public class Product implements java.io.Serializable {
 		this.exchangesForProductAId = exchangesForProductAId;
 		this.exchangesForProductBId = exchangesForProductBId;
 	}
+	
+	
+	@Override
+	public String toString() {
+		return "[id=" + id + ", name=" + name + ", category=" + category + ", productPicture=" + productPicture
+				+ ", video=" + video + ", userByUserId" + userByUserId + ", postTime=" + postTime + ", deadline="
+				+ deadline + ", location=" + location + ", tradeWay=" + tradeWay + ", wishItem=" + wishItem
+				+ ", postStatus=" + postStatus + ", tradeStatus=" + tradeStatus + ", clickTimes=" + clickTimes
+				+ ", exchange=" + exchange + ", product=" + product + ", userByItemOwnerId=" + userByItemOwnerId
+				+ ", tradeFinishedTime=" + tradeFinishedTime + ", grade=" + grade + ", gradeTime=" + gradeTime + "]";
+	}
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
