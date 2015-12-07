@@ -26,14 +26,14 @@ public class BoardCategoriaDaoTest {
 	public void testCrud() {
 		BoardCategoria boardCategoria = new BoardCategoria();
 		boardCategoria.setCreatedDate(new Date());
-		boardCategoria.setName("North-area");
+		boardCategoria.setName("East-area");
 
 		boardCategoriaDao.save(boardCategoria);
 		
 		BoardCategoria dbEntity = boardCategoriaDao.findOne(1);
 		log.debug(dbEntity);
 
-		List<BoardCategoria> boardCategories = boardCategoriaDao.findByName("abc");
+		List<BoardCategoria> boardCategories = boardCategoriaDao.findByName("North-area");
 
 		for (BoardCategoria b : boardCategories) {
 			log.debug(b);

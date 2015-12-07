@@ -33,7 +33,7 @@ public class ThreadDaoTest {
 
 		thread.setTitle("徵家教");
 		thread.setCreatedDate(new java.sql.Date(0));
-		thread.setThreadContent("教高一數學");
+		thread.setThreadContent("教高一英文");
 		thread.setBoard(board);
 
 		threadDao.save(thread);
