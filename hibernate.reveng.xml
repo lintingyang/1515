@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-catalog="EEIT82DB" match-schema="dbo" match-name="admin"/>
+  <table-filter match-catalog="EEIT82DB" match-schema="dbo" match-name="admin_question_and_answer"/>
+  <table-filter match-catalog="EEIT82DB" match-schema="dbo" match-name="advertisement"/>
+  <table-filter match-catalog="EEIT82DB" match-schema="dbo" match-name="board"/>
+  <table-filter match-catalog="EEIT82DB" match-schema="dbo" match-name="board_categoria"/>
+  <table-filter match-catalog="EEIT82DB" match-schema="dbo" match-name="board_category"/>
+  <table-filter match-catalog="EEIT82DB" match-schema="dbo" match-name="broadcast"/>
+  <table-filter match-catalog="EEIT82DB" match-schema="dbo" match-name="chat"/>
+  <table-filter match-catalog="EEIT82DB" match-schema="dbo" match-name="exchange"/>
+  <table-filter match-catalog="EEIT82DB" match-schema="dbo" match-name="focus_user_list"/>
+  <table-filter match-catalog="EEIT82DB" match-schema="dbo" match-name="forum_picture"/>
+  <table-filter match-catalog="EEIT82DB" match-schema="dbo" match-name="messages"/>
+  <table-filter match-catalog="EEIT82DB" match-schema="dbo" match-name="product"/>
+  <table-filter match-catalog="EEIT82DB" match-schema="dbo" match-name="product_picture"/>
+  <table-filter match-catalog="EEIT82DB" match-schema="dbo" match-name="question_and_answer"/>
+  <table-filter match-catalog="EEIT82DB" match-schema="dbo" match-name="reply"/>
+  <table-filter match-catalog="EEIT82DB" match-schema="dbo" match-name="report"/>
+  <table-filter match-catalog="EEIT82DB" match-schema="dbo" match-name="school"/>
+  <table-filter match-catalog="EEIT82DB" match-schema="dbo" match-name="sysdiagrams"/>
+  <table-filter match-catalog="EEIT82DB" match-schema="dbo" match-name="tag"/>
+  <table-filter match-catalog="EEIT82DB" match-schema="dbo" match-name="thread"/>
+  <table-filter match-catalog="EEIT82DB" match-schema="dbo" match-name="thread_tag"/>
+  <table-filter match-catalog="EEIT82DB" match-schema="dbo" match-name="user"/>
+  <table-filter match-catalog="EEIT82DB" match-schema="dbo" match-name="user_ban_list"/>
+  <table-filter match-catalog="EEIT82DB" match-schema="dbo" match-name="user_owner"/>
+</hibernate-reverse-engineering>

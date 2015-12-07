@@ -207,8 +207,10 @@ public class Board implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "boardCategoria："+boardCategoria+"createdDate："+createdDate
-				+"name："+name+"description："+description+"threadCount："+threadCount;
+		return "Board [id=" + id + ", createdDate=" + createdDate + ", name=" + name + ", description=" + description
+				+ ", threadCount=" + threadCount + ", replyCount=" + replyCount + ", isCream=" + isCream + ", picture="
+				+ picture + "]";
 	}
+
 
 }
