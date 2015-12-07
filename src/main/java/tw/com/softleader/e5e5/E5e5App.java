@@ -14,14 +14,16 @@ public class E5e5App {
 	public static void main(final String[] args) {
 		SpringApplication.run(E5e5App.class, args);
 		
-//		log.error("Hello ERROR");
-//		log.warn("Hello Warn");
-//		log.info("Hello Info");
-//		log.debug("Hello Debug");
-//		
-//		int result = new CalculateService().sum(3, 5);
-//		
-//		log.info("result="+result);
+		log.error("Hello ERROR");
+		log.warn("Hello Warn");
+		log.info("Hello Info");
+		log.debug("Hello Debug");
+		
+		int result = new CalculateService().sum(3, 5);
+		
+		log.info("result="+result);
+		log.error("error!!");
+
 		
 	}
 

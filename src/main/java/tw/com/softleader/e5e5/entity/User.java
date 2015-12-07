@@ -270,7 +270,7 @@ public class User implements java.io.Serializable {
 		this.onlineDatetime = onlineDatetime;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	@Transactional
 	public Set<Broadcast> getBroadcasts() {
 		return this.broadcasts;
@@ -280,7 +280,7 @@ public class User implements java.io.Serializable {
 		this.broadcasts = broadcasts;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "userByUserAId")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserAId")
 	@Transactional
 	public Set<FocusUserList> getFocusUserListsForUserAId() {
 		return this.focusUserListsForUserAId;
@@ -290,7 +290,7 @@ public class User implements java.io.Serializable {
 		this.focusUserListsForUserAId = focusUserListsForUserAId;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "userByUserAId")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserAId")
 	@Transactional
 	public Set<UserBanList> getUserBanListsForUserAId() {
 		return this.userBanListsForUserAId;
@@ -300,7 +300,7 @@ public class User implements java.io.Serializable {
 		this.userBanListsForUserAId = userBanListsForUserAId;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "userByUserBId")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserBId")
 	@Transactional
 	public Set<UserBanList> getUserBanListsForUserBId() {
 		return this.userBanListsForUserBId;
@@ -310,7 +310,7 @@ public class User implements java.io.Serializable {
 		this.userBanListsForUserBId = userBanListsForUserBId;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "userByUserBId")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserBId")
 	@Transactional
 	public Set<FocusUserList> getFocusUserListsForUserBId() {
 		return this.focusUserListsForUserBId;
@@ -320,7 +320,7 @@ public class User implements java.io.Serializable {
 		this.focusUserListsForUserBId = focusUserListsForUserBId;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	@Transactional
 	public Set<Messages> getMessageses() {
 		return this.messageses;
@@ -330,7 +330,7 @@ public class User implements java.io.Serializable {
 		this.messageses = messageses;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "userByItemOwnerId")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByItemOwnerId")
 	@Transactional
 	public Set<Product> getProductsForItemOwnerId() {
 		return this.productsForItemOwnerId;
@@ -340,7 +340,7 @@ public class User implements java.io.Serializable {
 		this.productsForItemOwnerId = productsForItemOwnerId;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	@Transactional
 	public Set<School> getSchools() {
 		return this.schools;
@@ -350,7 +350,7 @@ public class User implements java.io.Serializable {
 		this.schools = schools;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	@Transactional
 	public Set<Thread> getThreads() {
 		return this.threads;
@@ -360,7 +360,7 @@ public class User implements java.io.Serializable {
 		this.threads = threads;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	@Transactional
 	public Set<Chat> getChats() {
 		return this.chats;
@@ -370,7 +370,7 @@ public class User implements java.io.Serializable {
 		this.chats = chats;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "userByUserId")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserId")
 	@Transactional
 	public Set<Product> getProductsForUserId() {
 		return this.productsForUserId;
