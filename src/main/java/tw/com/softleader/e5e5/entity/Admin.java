@@ -18,6 +18,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "admin", schema = "dbo", catalog = "EEIT82DB")
 public class Admin implements java.io.Serializable {
+	
+
+	@Override
+	public String toString() {
+		return "Admin [id=" + id + ", authority=" + authority + ", name=" + name + ", password=" + password
+				+ ", reports=" + "]";
+	}
 
 	private int id;
 	private String authority;

@@ -20,8 +20,8 @@ public class AdminQuestionAndAnswer implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "AdminQuestionAndAnswer [id=" + id + ", admin=" + admin + ", answer=" + answer + ", question=" + question
-				+ ", user=" + user + "]";
+		return "AdminQuestionAndAnswer [id=" + id +  ", answer=" + answer + ", question=" + question
+				+ ", user=" + "]";
 	}
 
 	private int id;

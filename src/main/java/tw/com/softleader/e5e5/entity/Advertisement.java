@@ -19,6 +19,11 @@ public class Advertisement implements java.io.Serializable {
 	private String article;
 	private String link;
 	private String picture;
+	
+	@Override
+	public String toString() {
+		return "Advertisement [id=" + id + ", article=" + article + ", link=" + link + ", picture=" + picture + "]";
+	}
 
 	public Advertisement() {
 	}
