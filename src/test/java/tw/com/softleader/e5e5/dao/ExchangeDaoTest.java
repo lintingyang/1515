@@ -25,11 +25,6 @@ private Logger log = Logger.getLogger(this.getClass());
 	@Autowired
 	private ProductDao productDao;
 	
-//	@Test
-//	public void testFindByExchangeTime() {
-//		fail("Not yet implemented");
-//	}
-
 	@Test
 	public void testFindByProductByProductAId() {
 		
