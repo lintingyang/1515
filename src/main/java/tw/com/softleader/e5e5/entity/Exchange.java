@@ -45,6 +45,13 @@ public class Exchange implements java.io.Serializable {
 		this.exchangeTime = exchangeTime;
 		this.products = products;
 	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "Exchange [id=" + id + ", exchangeTime=" + exchangeTime + "]";
+	}
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
