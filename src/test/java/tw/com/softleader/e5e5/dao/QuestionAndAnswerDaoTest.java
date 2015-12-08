@@ -33,7 +33,18 @@ public class QuestionAndAnswerDaoTest {
 		for (QuestionAndAnswer qa : qandas) {
 			log.info(qa);
 		}
-
 	}
 
+	@Test
+	public void testFindAll(){
+		List<QuestionAndAnswer> qandas = qandaDao.findAll();
+		for(QuestionAndAnswer qa:qandas){
+			log.info(qa);
+		}
+	}
+	
+	@Test
+	public void testInsert(){
+		
+	}
 }
