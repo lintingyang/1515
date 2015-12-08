@@ -3,6 +3,8 @@ package tw.com.softleader.e5e5.entity;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -55,8 +57,9 @@ public class Tag implements java.io.Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tag")
+ 
+			
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tag",cascade={ CascadeType.REMOVE})
 	public Set<ThreadTag> getThreadTags() {
 		return this.threadTags;
 	}

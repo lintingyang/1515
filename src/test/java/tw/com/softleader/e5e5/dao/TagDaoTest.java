@@ -23,7 +23,7 @@ public class TagDaoTest {
 		Tag tag = new Tag();
 		tag.setName("hahaha");
 		tagDao.save(tag);
-		tagDao.delete(1);
+		tagDao.delete(5);
 	}
 
 }
