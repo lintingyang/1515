@@ -42,6 +42,11 @@ public class Chat implements java.io.Serializable {
 		this.sendTime = sendTime;
 	}
 
+	@Override
+	public String toString() {
+		return "Chat [id=" + id + ", messages=" + messages + ", picture=" + picture + ", sendTime=" + sendTime + "]";
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
