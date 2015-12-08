@@ -1,6 +1,7 @@
 package tw.com.softleader.e5e5.entity;
 // Generated 2015/12/2 �U�� 09:36:37 by Hibernate Tools 4.3.1.Final
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -91,14 +92,17 @@ public class Product implements java.io.Serializable {
 	}
 	
 	
+
+
+	
+
 	@Override
 	public String toString() {
-		return "[id=" + id + ", name=" + name + ", category=" + category + ", productPicture=" + productPicture
-				+ ", video=" + video + ", userByUserId" + userByUserId + ", postTime=" + postTime + ", deadline="
-				+ deadline + ", location=" + location + ", tradeWay=" + tradeWay + ", wishItem=" + wishItem
-				+ ", postStatus=" + postStatus + ", tradeStatus=" + tradeStatus + ", clickTimes=" + clickTimes
-				+ ", exchange=" + exchange + ", product=" + product + ", userByItemOwnerId=" + userByItemOwnerId
-				+ ", tradeFinishedTime=" + tradeFinishedTime + ", grade=" + grade + ", gradeTime=" + gradeTime + "]";
+		return "Product [id=" + id + ", name=" + name + ", category=" + category + ", video=" + Arrays.toString(video)
+				+ ", postTime=" + postTime + ", deadline=" + deadline + ", location=" + location + ", tradeWay="
+				+ tradeWay + ", wishItem=" + wishItem + ", postStatus=" + postStatus + ", tradeStatus=" + tradeStatus
+				+ ", clickTimes=" + clickTimes + ", tradeFinishedTime=" + tradeFinishedTime + ", grade=" + grade
+				+ ", gradeTime=" + gradeTime + "]";
 	}
 
 	@Id

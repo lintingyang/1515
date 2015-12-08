@@ -25,15 +25,25 @@ private Logger log = Logger.getLogger(this.getClass());
 	@Autowired
 	private ProductDao productDao;
 	
+//	@Test
+//	public void testFindByProductByProductAId() {
+//		
+//		Product product = productDao.findOne(3);
+//		log.info(product);
+//		List<Exchange> exchanges = exchangeDao.findByProductByProductAId(product);
+//		for(Exchange e:exchanges){
+//			log.info(e);
+//		}
+//	}
+	
 	@Test
-	public void testFindByProductByProductAId() {
+	public void testfindTopOneOrderByCount(){
 		
-		Product product = productDao.findOne(3);
-		log.info(product);
-		List<Exchange> exchanges = exchangeDao.findByProductByProductAId(product);
-		for(Exchange e:exchanges){
-			log.info(e);
-		}
+		int ex = exchangeDao.findTopOrderByCount();
+		
+		
+		log.info("*****name=" + ex);
 	}
 
+	
 }
