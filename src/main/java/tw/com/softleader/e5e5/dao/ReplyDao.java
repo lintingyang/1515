@@ -11,4 +11,6 @@ public interface ReplyDao extends JpaRepository<Reply, Integer> {
 
 	public List<Reply> findByReplyContent(String replyContent);
 
+	public List<Reply> findByTitle(String title);
+
 }

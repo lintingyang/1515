@@ -26,7 +26,6 @@ public class ChatService {
 
 	@Transactional
 	public List<Chat> getLastThreeChats() {
-		// ChatDao chatDao= new ChatDao();
 		List<Chat> chats = chatDao.findAllOrderBySendTime();
 		return chats;
 	}

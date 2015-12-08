@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -74,7 +75,8 @@ public class BoardCategoria implements java.io.Serializable {
 		this.createdDate = createdDate;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "boardCategoria")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "boardCategoria"
+			,cascade={ CascadeType.REMOVE})
 	public Set<Board> getBoards() {
 		return this.boards;
 	}
@@ -85,7 +87,7 @@ public class BoardCategoria implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "name:"+name+"date:"+createdDate;
+		return "name:"+name+"	date:"+createdDate;
 	}
 
 }
