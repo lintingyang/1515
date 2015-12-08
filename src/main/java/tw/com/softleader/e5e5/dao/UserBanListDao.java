@@ -1,6 +1,5 @@
-package tw.com.softleader.e5e5.dao;
 
-import java.util.List;
+package tw.com.softleader.e5e5.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -11,3 +10,4 @@ public interface UserBanListDao extends JpaRepository<UserBanList, Integer> {
 	//public List<UserBanList> findByuserByUserAId(Integer userAId);
 	
 }
+

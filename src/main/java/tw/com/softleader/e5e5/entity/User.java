@@ -105,6 +105,10 @@ public class User implements java.io.Serializable {
 	
 
 
+	public void setUserBanListsForUserAId(Set<UserBanList> userBanListsForUserAId) {
+		this.userBanListsForUserAId = userBanListsForUserAId;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", password=" + password + ", name=" + name + ", nickname=" + nickname + ", account="
@@ -294,10 +298,6 @@ public class User implements java.io.Serializable {
 	@Transactional
 	public Set<UserBanList> getUserBanListsForUserAId() {
 		return this.userBanListsForUserAId;
-	}
-
-	public void setUserBanListsForUserAId(Set<UserBanList> userBanListsForUserAId) {
-		this.userBanListsForUserAId = userBanListsForUserAId;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserBId")
