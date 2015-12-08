@@ -28,6 +28,7 @@ public class BoardDaoTest {
 	
 	@Test
 	public void testCrud() {
+		//create
 //		Board board = new Board();
 //		BoardCategoria  boardCategoria = boardCategoriaDao.findOne(3);
 //		board.setName("華夏科技大學");
@@ -40,21 +41,20 @@ public class BoardDaoTest {
 //		log.debug(dbEntity);
 //		
 		//刪除，記得自己想好如何設定cascade
-//		boardDao.delete(1);
+		boardDao.delete(4);
 		
-		//更新
+		//update
 //		Board board4 = boardDao.findOne(4);
 //		board4.setName("test3");
 //		boardDao.save(board4);
 		
-		BoardCategoria  boardCategoria2 = boardCategoriaDao.findOne(3);
-		log.debug(boardCategoria2);
-		List<Board> boards = boardDao.findByBoardCategoria(boardCategoria2);
+		//read
+//		BoardCategoria  boardCategoria2 = boardCategoriaDao.findOne(3);
+//		log.debug(boardCategoria2);
 //		List<Board> boards = boardDao.findByBoardCategoria(boardCategoria2);
-//		
-		for(Board b : boards){
-			log.debug(b);
-		}
+//		for(Board b : boards){
+//			log.debug(b);
+//		}
 	
 	}
 

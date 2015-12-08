@@ -24,19 +24,27 @@ public class BoardCategoriaDaoTest {
 
 	@Test
 	public void testCrud() {
-		BoardCategoria boardCategoria = new BoardCategoria();
-		boardCategoria.setCreatedDate(new Date());
-		boardCategoria.setName("East-area");
-
-		boardCategoriaDao.save(boardCategoria);
+		//create
+//		BoardCategoria boardCategoria = new BoardCategoria();
+//		boardCategoria.setCreatedDate(new Date());
+//		boardCategoria.setName("West-area");
+//		boardCategoriaDao.save(boardCategoria);
 		
-		BoardCategoria dbEntity = boardCategoriaDao.findOne(1);
-		log.debug(dbEntity);
+		//update
+//		BoardCategoria dbEntity = boardCategoriaDao.findOne(1);
+//		dbEntity.setName("Test");
+//		boardCategoriaDao.save(dbEntity);
+//		log.debug(dbEntity);
 
+		//delete
+//		boardCategoriaDao.delete(3);
+		
+		//read
 		List<BoardCategoria> boardCategories = boardCategoriaDao.findByName("North-area");
-
 		for (BoardCategoria b : boardCategories) {
 			log.debug(b);
 		}
+		
+		
 	}
 }

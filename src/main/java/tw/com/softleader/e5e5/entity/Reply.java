@@ -4,6 +4,8 @@ package tw.com.softleader.e5e5.entity;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,6 +35,12 @@ public class Reply implements java.io.Serializable {
 	private Integer floor;
 	private Set<Board> boards = new HashSet<Board>(0);
 
+	@Override
+	public String toString() {
+		return "Reply [id=" + id + ", forumPicture=" + forumPicture + ", createdDate=" + createdDate + ", title="
+				+ title + ", replyContent=" + replyContent + ", floor=" + floor + "]";
+	}
+
 	public Reply() {
 	}
 
@@ -54,7 +62,7 @@ public class Reply implements java.io.Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	public int getId() {
 		return this.id;
@@ -64,7 +72,8 @@ public class Reply implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	// 刪Reply刪Reply對應的圖
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.REMOVE })
 	@JoinColumn(name = "picture_id")
 	public ForumPicture getForumPicture() {
 		return this.forumPicture;

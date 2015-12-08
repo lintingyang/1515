@@ -184,7 +184,7 @@ public class Board implements java.io.Serializable {
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
-
+//	刪Board刪版主們
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "board", 
 			cascade={ CascadeType.REMOVE})
 	@Transactional
@@ -195,8 +195,10 @@ public class Board implements java.io.Serializable {
 	public void setUserOwners(Set<UserOwner> userOwners) {
 		this.userOwners = userOwners;
 	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "board")
+	
+//	刪Board刪所有Threads
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "board"
+			,cascade={ CascadeType.REMOVE})
 	public Set<Thread> getThreads() {
 		return this.threads;
 	}

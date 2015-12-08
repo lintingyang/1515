@@ -27,8 +27,9 @@ public class ReplyDaoTest {
 	
 	@Test
 	public void testCrud() {
+		//create
 		Reply reply = new Reply();
-		Thread thread = threadDao.findOne(4);
+		Thread thread = threadDao.findOne(10);
 		reply.setTitle("選我");
 		reply.setCreatedDate(new java.util.Date());
 		reply.setFloor(2);
@@ -36,10 +37,11 @@ public class ReplyDaoTest {
 		reply.setThread(thread);
 		replyDao.save(reply);
 
-		Reply dbEntity = replyDao.findOne(1);
+		Reply dbEntity = replyDao.findOne(4);
 		log.debug(dbEntity);
 
-		List<Reply> replies = replyDao.findByReplyContent("abc");
+		List<Reply> replies = replyDao.findByTitle("選我");
+		List<Reply> replies2 = replyDao.findByReplyContent("我會");
 
 		for (Reply b : replies) {
 			log.debug(b);
