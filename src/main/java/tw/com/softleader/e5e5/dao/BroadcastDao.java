@@ -15,4 +15,7 @@ public interface BroadcastDao extends JpaRepository<Broadcast, Integer> {
 	//find last 10 chat message by post time
 	@Query(value ="select top 10 * from broadcast where post_time is not null order by post_time desc", nativeQuery = true)
 	public List<Broadcast> findAllOrderByPostTime();
+	
+	@Query(value ="select user_id from broadcast group by user_id order by count(*)", nativeQuery = true)
+	public int findUserIdbyCount();
 }
