@@ -25,9 +25,10 @@ public class ExchangeServiceTest {
 	@Test
 	public void testfindMostPopularProduct() {
 		ExchangeService es = new ExchangeService(exchangeDao, productDao);
-		Product result = es.findMostPopularProduct();
-		log.info(result);
-	
+//		Product result = es.findMostPopularProduct();
+		String productName = es.findMostPopularProduct().getName();
+//		log.info(result);
+		log.info("最熱門物品=" + productName);
 	}
 	
 
