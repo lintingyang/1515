@@ -26,14 +26,30 @@ public class ThreadTagDaoTest {
 	
 	@Test
 	public void testCrud() {
-		ThreadTag threadTag = new ThreadTag();
-		threadTag.setTag(tagDao.findOne(5));
-		threadTag.setThread(threadDao.findOne(6));
-		threadTagDao.save(threadTag);
-		threadTagDao.delete(4);
-		List<ThreadTag> list = threadTagDao.findAll();
-		for(ThreadTag obj:list){
-			log.error(obj);
+		
+//		
+//		ThreadTag threadTag = new ThreadTag();
+//		threadTag.setTag(tagDao.findOne(5));
+//		threadTag.setThread(threadDao.findOne(6));
+//		threadTagDao.save(threadTag);
+//		threadTagDao.delete(4);
+//		List<ThreadTag> list = threadTagDao.findAll();
+//		for(ThreadTag obj:list){
+//			log.error(obj);
+//		}
+//		
+		
+		
+		List<ThreadTag> list = threadTagDao.findByTag(tagDao.findOne(3));
+		
+		for(ThreadTag a :list){
+			log.error(a);
+		}
+		
+		
+		List<Integer> a = threadTagDao.findByTopUsedTag();
+		for(Integer i:a){
+			log.error(i);
 		}
 	}
 
