@@ -32,27 +32,19 @@ public class MessagesDaoTest {
 		
 //		Messages msg = new Messages();
 //		msg.setReadTime(new java.util.Date(32767321L));
-//		msg.setReceiverId("2");
 //		msg.setArticle("gagagagaga");
-//		msg.setSenderId("dfbsffsgerhhner");
-//		msg.setUser(new User(3));
+//		msg.setUserBySenderId(new User(1));
+//		msg.setUserByReceiverId(new User(3));
+//		msg.setReadTime(new java.util.Date());
 //		messagesDao.save(msg);
 		
-//		Messages msg = new Messages();
-//		msg.setId(1);
-//		msg.setReadTime(new java.util.Date(50));
-//		msg.setArticle("hahahahahah");
-//		msg.setSenderId("asdasdsad");
-//		msg.setUser(new User(2));
-//		messagesDao.save(msg);
+
 		
-//		Messages msg = new Messages();
-//		msg.setUser(new User(3));
-//		messagesDao.delete(msg);
 		
-//		Messages msg1 = messagesDao.findById(1);
-//		log.debug(msg1);
-//		
+		List<Messages> msg1 = messagesDao.findBySenderId(1);
+		for(Messages msg : msg1){
+		log.debug(msg);
+		}
 //		List<Messages> temp = messagesDao.findByUser(new User(2));
 //		for(Messages msg2 : temp){
 //			log.debug(msg2);
