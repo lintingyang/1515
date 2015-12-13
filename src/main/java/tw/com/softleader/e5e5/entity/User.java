@@ -50,7 +50,6 @@ public class User implements java.io.Serializable {
 	private Set<FocusUserList> focusUserListsForUserBId = new HashSet<FocusUserList>(0);
 	private Set<Messages> messageses = new HashSet<Messages>(0);
 	private Set<Product> productsForItemOwnerId = new HashSet<Product>(0);
-	private Set<School> schools = new HashSet<School>(0);
 	private Set<Thread> threads = new HashSet<Thread>(0);
 	private Set<Chat> chats = new HashSet<Chat>(0);
 	private Set<Product> productsForUserId = new HashSet<Product>(0);
@@ -69,7 +68,7 @@ public class User implements java.io.Serializable {
 			Set<Broadcast> broadcasts, Set<FocusUserList> focusUserListsForUserAId,
 			Set<UserBanList> userBanListsForUserAId, Set<UserBanList> userBanListsForUserBId,
 			Set<FocusUserList> focusUserListsForUserBId, Set<Messages> messageses, Set<Product> productsForItemOwnerId,
-			Set<School> schools, Set<Thread> threads, Set<Chat> chats, Set<Product> productsForUserId) {
+			 Set<Thread> threads, Set<Chat> chats, Set<Product> productsForUserId) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
@@ -96,7 +95,6 @@ public class User implements java.io.Serializable {
 		this.focusUserListsForUserBId = focusUserListsForUserBId;
 		this.messageses = messageses;
 		this.productsForItemOwnerId = productsForItemOwnerId;
-		this.schools = schools;
 		this.threads = threads;
 		this.chats = chats;
 		this.productsForUserId = productsForUserId;
@@ -364,16 +362,6 @@ public class User implements java.io.Serializable {
 
 	public void setProductsForItemOwnerId(Set<Product> productsForItemOwnerId) {
 		this.productsForItemOwnerId = productsForItemOwnerId;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	@Transactional
-	public Set<School> getSchools() {
-		return this.schools;
-	}
-
-	public void setSchools(Set<School> schools) {
-		this.schools = schools;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")

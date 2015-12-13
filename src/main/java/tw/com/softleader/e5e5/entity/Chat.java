@@ -26,6 +26,7 @@ public class Chat implements java.io.Serializable {
 	private String messages;
 	private String picture;
 	private Date sendTime;
+	private Character showUserInfo;
 
 	public Chat() {
 	}
@@ -42,9 +43,12 @@ public class Chat implements java.io.Serializable {
 		this.sendTime = sendTime;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "Chat [id=" + id + ", messages=" + messages + ", picture=" + picture + ", sendTime=" + sendTime + "]";
+		return "Chat [id=" + id + ", messages=" + messages + ", picture=" + picture + ", sendTime=" + sendTime
+				+ ", showUserInfo=" + showUserInfo + "]";
 	}
 
 	@Id
@@ -94,6 +98,15 @@ public class Chat implements java.io.Serializable {
 
 	public void setSendTime(Date sendTime) {
 		this.sendTime = sendTime;
+	}
+
+	@Column(name = "show_user_info", length = 1)
+	public Character getShowUserInfo() {
+		return showUserInfo;
+	}
+
+	public void setShowUserInfo(Character showUserInfo) {
+		this.showUserInfo = showUserInfo;
 	}
 
 }
