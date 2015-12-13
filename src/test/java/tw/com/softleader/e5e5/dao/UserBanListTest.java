@@ -24,17 +24,27 @@ public class UserBanListTest {
 	
 	@Autowired
 	private UserBanListDao userbanlistdao;
+	
+	@Autowired
+	private UserDao userDao;
 
 	@Test
 	public void testCrud() {
-
-	UserBanList ubs = new UserBanList();
-	ubs.setUserByUserAId( new User(2));
-	ubs.setUserByUserBId(new User(5));
-	userbanlistdao.save(ubs);	
-	
-	
-	
+//	User u1 = userDao.findById(2);
+//	User u2 = userDao.findById(5);
+//
+//	UserBanList ubs = new UserBanList();
+//	ubs.setUserByUserAId(u1);
+//	ubs.setUserByUserBId(u2);
+//	userbanlistdao.save(ubs);
+		
+		
+		List<UserBanList> ubss = userbanlistdao.findByUserAId(1);
+		for(UserBanList ubs : ubss){
+			log.debug(ubs);
+		}
+		
+		
 //		List<UserBanList> ubss = userbanlistdao.findAll();
 //		for(UserBanList ubs : ubss){
 //		log.debug(ubs);

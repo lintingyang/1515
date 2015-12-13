@@ -18,11 +18,17 @@ import javax.persistence.Table;
 @Table(name = "admin_question_and_answer", schema = "dbo", catalog = "EEIT82DB")
 public class AdminQuestionAndAnswer implements java.io.Serializable {
 
+	@Override
+	public String toString() {
+		return "AdminQuestionAndAnswer [id=" + id +  ", answer=" + answer + ", question=" + question
+				+ ", user=" + "]";
+	}
+
 	private int id;
 	private Admin admin;
 	private String answer;
 	private String question;
-	private Integer userId;
+	private User user;
 
 	public AdminQuestionAndAnswer() {
 	}
@@ -31,12 +37,12 @@ public class AdminQuestionAndAnswer implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public AdminQuestionAndAnswer(int id, Admin admin, String answer, String question, Integer userId) {
+	public AdminQuestionAndAnswer(int id, Admin admin, String answer, String question, User user) {
 		this.id = id;
 		this.admin = admin;
 		this.answer = answer;
 		this.question = question;
-		this.userId = userId;
+		this.user = user;
 	}
 
 	@Id
@@ -78,13 +84,14 @@ public class AdminQuestionAndAnswer implements java.io.Serializable {
 		this.question = question;
 	}
 
-	@Column(name = "user_id")
-	public Integer getUserId() {
-		return this.userId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
+	public User getUser() {
+		return this.user;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

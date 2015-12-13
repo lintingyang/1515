@@ -17,6 +17,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "thread_tag", schema = "dbo", catalog = "EEIT82DB")
 public class ThreadTag implements java.io.Serializable {
+	
+	@Override
+	public String toString() {
+		return "ThreadTag [id=" + id + ", tag=" + tag.getId() + ", thread=" + thread.getId() + "]";
+	}
 
 	private int id;
 	private Tag tag;

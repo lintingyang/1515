@@ -45,6 +45,14 @@ public class QuestionAndAnswer implements java.io.Serializable {
 		this.question = question;
 	}
 
+	
+	
+	@Override
+	public String toString() {
+		return "QuestionAndAnswer [id=" + id + ", answer=" + answer + ", editTime=" + editTime + ", isPublic="
+				+ isPublic + ", question=" + question + "]";
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)

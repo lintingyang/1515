@@ -4,6 +4,8 @@ package tw.com.softleader.e5e5.entity;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -41,6 +43,12 @@ public class Thread implements java.io.Serializable {
 	private Set<Board> boards = new HashSet<Board>(0);
 	private Set<Reply> replies = new HashSet<Reply>(0);
 
+	@Override
+	public String toString() {
+		return "Thread [id=" + id + ", title=" + title + ", createdDate=" + createdDate
+				+ ", threadContent=" + threadContent + ", isReadonly=" + isReadonly + ", topped=" + topped + "]";
+	}
+
 	public Thread() {
 	}
 
@@ -73,7 +81,7 @@ public class Thread implements java.io.Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	public int getId() {
 		return this.id;
@@ -196,7 +204,8 @@ public class Thread implements java.io.Serializable {
 		this.reports = reports;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "thread")
+	// 刪Thread也一併刪ThreadTags
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "thread", cascade = { CascadeType.REMOVE })
 	public Set<ThreadTag> getThreadTags() {
 		return this.threadTags;
 	}
@@ -214,7 +223,8 @@ public class Thread implements java.io.Serializable {
 		this.boards = boards;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "thread")
+	// 刪Thread也一併刪Reply
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "thread", cascade = { CascadeType.REMOVE })
 	public Set<Reply> getReplies() {
 		return this.replies;
 	}
