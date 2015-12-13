@@ -41,6 +41,8 @@ public class User implements java.io.Serializable {
 	private String focusItemList;
 	private Integer gameScore;
 	private Integer onlineDatetime;
+	private String schoolName;
+	private Character emailCheck;
 	private Set<Broadcast> broadcasts = new HashSet<Broadcast>(0);
 	private Set<FocusUserList> focusUserListsForUserAId = new HashSet<FocusUserList>(0);
 	private Set<UserBanList> userBanListsForUserAId = new HashSet<UserBanList>(0);
@@ -48,7 +50,6 @@ public class User implements java.io.Serializable {
 	private Set<FocusUserList> focusUserListsForUserBId = new HashSet<FocusUserList>(0);
 	private Set<Messages> messageses = new HashSet<Messages>(0);
 	private Set<Product> productsForItemOwnerId = new HashSet<Product>(0);
-	private Set<School> schools = new HashSet<School>(0);
 	private Set<Thread> threads = new HashSet<Thread>(0);
 	private Set<Chat> chats = new HashSet<Chat>(0);
 	private Set<Product> productsForUserId = new HashSet<Product>(0);
@@ -62,11 +63,12 @@ public class User implements java.io.Serializable {
 
 	public User(int id, String password, String name, String nickname, String account, Integer age, Character sex,
 			Date birthday, String address, String phone, String cellphone, String email, String picture,
-			String schoolEmail, String focusItemList, Integer gameScore, Integer onlineDatetime,
+			String schoolEmail, String focusItemList, Integer gameScore, Integer onlineDatetime,String schoolName,
+			Character emailCheck,
 			Set<Broadcast> broadcasts, Set<FocusUserList> focusUserListsForUserAId,
 			Set<UserBanList> userBanListsForUserAId, Set<UserBanList> userBanListsForUserBId,
 			Set<FocusUserList> focusUserListsForUserBId, Set<Messages> messageses, Set<Product> productsForItemOwnerId,
-			Set<School> schools, Set<Thread> threads, Set<Chat> chats, Set<Product> productsForUserId) {
+			 Set<Thread> threads, Set<Chat> chats, Set<Product> productsForUserId) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
@@ -84,6 +86,8 @@ public class User implements java.io.Serializable {
 		this.focusItemList = focusItemList;
 		this.gameScore = gameScore;
 		this.onlineDatetime = onlineDatetime;
+		this.schoolName = schoolName;
+		this.emailCheck = emailCheck;
 		this.broadcasts = broadcasts;
 		this.focusUserListsForUserAId = focusUserListsForUserAId;
 		this.userBanListsForUserAId = userBanListsForUserAId;
@@ -91,7 +95,6 @@ public class User implements java.io.Serializable {
 		this.focusUserListsForUserBId = focusUserListsForUserBId;
 		this.messageses = messageses;
 		this.productsForItemOwnerId = productsForItemOwnerId;
-		this.schools = schools;
 		this.threads = threads;
 		this.chats = chats;
 		this.productsForUserId = productsForUserId;
@@ -115,8 +118,10 @@ public class User implements java.io.Serializable {
 				+ account + ", age=" + age + ", sex=" + sex + ", birthday=" + birthday + ", address=" + address
 				+ ", phone=" + phone + ", cellphone=" + cellphone + ", email=" + email + ", picture=" + picture
 				+ ", schoolEmail=" + schoolEmail + ", focusItemList=" + focusItemList + ", gameScore=" + gameScore
-				+ ", onlineDatetime=" + onlineDatetime + "]";
+				+ ", onlineDatetime=" + onlineDatetime +", schoolName=" +schoolName+", emailCheck=" + emailCheck +"]";
 	}
+
+	
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -274,6 +279,25 @@ public class User implements java.io.Serializable {
 		this.onlineDatetime = onlineDatetime;
 	}
 
+	@Column(name="school_name")
+	public String getSchoolName() {
+		return schoolName;
+	}
+
+	public void setSchoolName(String schoolName) {
+		this.schoolName = schoolName;
+	}
+	
+	@Column(name = "email_check", length = 1)
+	public Character getEmailCheck() {
+		return emailCheck;
+	}
+
+	public void setEmailCheck(Character emailCheck) {
+		this.emailCheck = emailCheck;
+	}
+	
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	@Transactional
 	public Set<Broadcast> getBroadcasts() {
@@ -338,16 +362,6 @@ public class User implements java.io.Serializable {
 
 	public void setProductsForItemOwnerId(Set<Product> productsForItemOwnerId) {
 		this.productsForItemOwnerId = productsForItemOwnerId;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	@Transactional
-	public Set<School> getSchools() {
-		return this.schools;
-	}
-
-	public void setSchools(Set<School> schools) {
-		this.schools = schools;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")

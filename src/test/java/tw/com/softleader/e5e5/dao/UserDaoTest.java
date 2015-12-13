@@ -29,12 +29,16 @@ public class UserDaoTest {
 	public void testCrud() {
 	
 //		User usera = new User();
+//		usera.setId(8);
+//		usera.setName("趙高");
 //		usera.setAddress("台北市大安區");
 //		usera.setAge(28);
 //		usera.setBirthday(new java.util.Date());
 //		usera.setCellphone("0911-111-111");
 //		usera.setGameScore(320);
 //		usera.setGameScore(30000);
+//		usera.setSchoolName("中央大學");
+//		usera.setEmailCheck('T');
 //		userDao.save(usera);
 		
 		User userid = userDao.findById(1);
