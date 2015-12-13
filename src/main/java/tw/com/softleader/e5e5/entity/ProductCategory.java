@@ -37,6 +37,12 @@ public class ProductCategory implements java.io.Serializable {
 		this.products = products;
 	}
 
+	
+	@Override
+	public String toString() {
+		return "ProductCategory [id=" + id + ", name=" + name + "]";
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
