@@ -1,5 +1,6 @@
 package tw.com.softleader.e5e5.entity;
-// Generated 2015/12/2 �U�� 09:36:37 by Hibernate Tools 4.3.1.Final
+// default package
+// Generated 2015/12/14 �U�� 08:58:01 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -24,11 +25,12 @@ public class Report implements java.io.Serializable {
 	private int id;
 	private Admin admin;
 	private Product product;
+	private Reply reply;
 	private Thread thread;
+	private User user;
 	private String article;
 	private Character isPassed;
 	private Date reportTime;
-	private Integer reporterId;
 
 	public Report() {
 	}
@@ -37,16 +39,17 @@ public class Report implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Report(int id, Admin admin, Product product, Thread thread, String article, Character isPassed,
-			Date reportTime, Integer reporterId) {
+	public Report(int id, Admin admin, Product product, Reply reply, Thread thread, User user, String article,
+			Character isPassed, Date reportTime) {
 		this.id = id;
 		this.admin = admin;
 		this.product = product;
+		this.reply = reply;
 		this.thread = thread;
+		this.user = user;
 		this.article = article;
 		this.isPassed = isPassed;
 		this.reportTime = reportTime;
-		this.reporterId = reporterId;
 	}
 
 	@Id
@@ -81,6 +84,16 @@ public class Report implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "reply_id")
+	public Reply getReply() {
+		return this.reply;
+	}
+
+	public void setReply(Reply reply) {
+		this.reply = reply;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "thread_id")
 	public Thread getThread() {
 		return this.thread;
@@ -88,6 +101,16 @@ public class Report implements java.io.Serializable {
 
 	public void setThread(Thread thread) {
 		this.thread = thread;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "reporter_id")
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Column(name = "article", length = 200)
@@ -116,15 +139,6 @@ public class Report implements java.io.Serializable {
 
 	public void setReportTime(Date reportTime) {
 		this.reportTime = reportTime;
-	}
-
-	@Column(name = "reporter_id")
-	public Integer getReporterId() {
-		return this.reporterId;
-	}
-
-	public void setReporterId(Integer reporterId) {
-		this.reporterId = reporterId;
 	}
 
 }

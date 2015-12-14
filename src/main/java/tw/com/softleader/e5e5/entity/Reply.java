@@ -1,11 +1,10 @@
 package tw.com.softleader.e5e5.entity;
-// Generated 2015/12/2 �U�� 09:36:37 by Hibernate Tools 4.3.1.Final
+// default package
+// Generated 2015/12/14 �U�� 08:58:01 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -34,12 +33,8 @@ public class Reply implements java.io.Serializable {
 	private String replyContent;
 	private Integer floor;
 	private Set<Board> boards = new HashSet<Board>(0);
-
-	@Override
-	public String toString() {
-		return "Reply [id=" + id + ", forumPicture=" + forumPicture + ", createdDate=" + createdDate + ", title="
-				+ title + ", replyContent=" + replyContent + ", floor=" + floor + "]";
-	}
+	private Set<ForumPicture> forumPictures = new HashSet<ForumPicture>(0);
+	private Set<Report> reports = new HashSet<Report>(0);
 
 	public Reply() {
 	}
@@ -50,7 +45,7 @@ public class Reply implements java.io.Serializable {
 	}
 
 	public Reply(int id, ForumPicture forumPicture, Thread thread, Date createdDate, String title, String replyContent,
-			Integer floor, Set<Board> boards) {
+			Integer floor, Set<Board> boards, Set<ForumPicture> forumPictures, Set<Report> reports) {
 		this.id = id;
 		this.forumPicture = forumPicture;
 		this.thread = thread;
@@ -59,10 +54,12 @@ public class Reply implements java.io.Serializable {
 		this.replyContent = replyContent;
 		this.floor = floor;
 		this.boards = boards;
+		this.forumPictures = forumPictures;
+		this.reports = reports;
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	public int getId() {
 		return this.id;
@@ -72,8 +69,7 @@ public class Reply implements java.io.Serializable {
 		this.id = id;
 	}
 
-	// 刪Reply刪Reply對應的圖
-	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.REMOVE })
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "picture_id")
 	public ForumPicture getForumPicture() {
 		return this.forumPicture;
@@ -137,6 +133,24 @@ public class Reply implements java.io.Serializable {
 
 	public void setBoards(Set<Board> boards) {
 		this.boards = boards;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "reply")
+	public Set<ForumPicture> getForumPictures() {
+		return this.forumPictures;
+	}
+
+	public void setForumPictures(Set<ForumPicture> forumPictures) {
+		this.forumPictures = forumPictures;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "reply")
+	public Set<Report> getReports() {
+		return this.reports;
+	}
+
+	public void setReports(Set<Report> reports) {
+		this.reports = reports;
 	}
 
 }

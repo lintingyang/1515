@@ -1,5 +1,6 @@
 package tw.com.softleader.e5e5.entity;
-// Generated 2015/12/2 �U�� 09:36:37 by Hibernate Tools 4.3.1.Final
+// default package
+// Generated 2015/12/14 �U�� 08:58:01 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -43,14 +44,6 @@ public class QuestionAndAnswer implements java.io.Serializable {
 		this.editTime = editTime;
 		this.isPublic = isPublic;
 		this.question = question;
-	}
-
-	
-	
-	@Override
-	public String toString() {
-		return "QuestionAndAnswer [id=" + id + ", answer=" + answer + ", editTime=" + editTime + ", isPublic="
-				+ isPublic + ", question=" + question + "]";
 	}
 
 	@Id
