@@ -1,6 +1,8 @@
 package tw.com.softleader.e5e5.entity;
 // Generated 2015/12/2 �U�� 09:36:37 by Hibernate Tools 4.3.1.Final
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,7 +23,7 @@ public class AdminQuestionAndAnswer implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "AdminQuestionAndAnswer [id=" + id +  ", answer=" + answer + ", question=" + question
-				+ ", user=" + "]";
+				+ ", createdDate=" +createdDate+ "]";
 	}
 
 	private int id;
@@ -29,6 +31,9 @@ public class AdminQuestionAndAnswer implements java.io.Serializable {
 	private String answer;
 	private String question;
 	private User user;
+	private Date createdDate;
+	
+
 
 	public AdminQuestionAndAnswer() {
 	}
@@ -37,12 +42,13 @@ public class AdminQuestionAndAnswer implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public AdminQuestionAndAnswer(int id, Admin admin, String answer, String question, User user) {
+	public AdminQuestionAndAnswer(int id, Admin admin, String answer, String question, User user, Date createdDate) {
 		this.id = id;
 		this.admin = admin;
 		this.answer = answer;
 		this.question = question;
 		this.user = user;
+		this.createdDate = createdDate;
 	}
 
 	@Id
@@ -89,9 +95,18 @@ public class AdminQuestionAndAnswer implements java.io.Serializable {
 	public User getUser() {
 		return this.user;
 	}
-
+	
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	@Column(name = "created_date")
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+	
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
 	}
 
 }

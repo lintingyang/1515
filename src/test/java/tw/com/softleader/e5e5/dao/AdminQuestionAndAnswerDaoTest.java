@@ -27,7 +27,10 @@ public class AdminQuestionAndAnswerDaoTest {
 	
 	@Test
 	public void testFind() {
-//		
+		List<AdminQuestionAndAnswer> list = adminQuestionAndAnswerDao.findAll();
+		for(AdminQuestionAndAnswer a:list){
+			log.error(a);
+		}
 //		Admin admin = adminDao.findOne(1);
 //		Admin admin2 = new Admin();
 //		admin2.setName("test save");
@@ -37,8 +40,9 @@ public class AdminQuestionAndAnswerDaoTest {
 //		for(AdminQuestionAndAnswer aa: a){
 //			log.error(a);
 //		}
-		adminQuestionAndAnswerDao.delete(1);
-		
+//		adminQuestionAndAnswerDao.delete(1);
+		AdminQuestionAndAnswer qaa = new AdminQuestionAndAnswer(); 
+		adminQuestionAndAnswerDao.save(qaa);
 		
 	}
 

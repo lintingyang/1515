@@ -28,20 +28,20 @@ public class AdminDaoTest {
 	@Test
 	public void testFindAll() {
 	
-		Admin admin = new Admin();
-		admin.setPassword("123456");
-		admin.setName("xyz");
 		
-		adminDao.save(admin);
+//		Admin dbEntity = adminDao.findByAccount("abc");
+//		log.debug(dbEntity);
+//		Admin admin = new Admin();
+//		admin.setPassword("123456");
+//		admin.setName("xyz");		
+//		adminDao.save(admin);
+
 		
-		Admin dbEntity = adminDao.findOne(1);
-		log.debug(dbEntity);
+		List<Admin> boardCategories = adminDao.findByName("abc");
 		
-//		List<Admin> boardCategories = adminDao.findByName("xyz");
-		
-//		for(Admin b:boardCategories) {
-//			log.debug(b);
-//		}
+		for(Admin b:boardCategories) {
+			log.debug(b);
+		}
 		
 	}
 

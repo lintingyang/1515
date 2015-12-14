@@ -26,14 +26,16 @@ public class Admin implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "Admin [id=" + id + ", authority=" + authority + ", name=" + name + ", password=" + password
-				+ ", reports=" + "]";
+		return "Admin [id=" + id + ", account = "+ account +", authority=" + authority + ", name=" + name + ", password=" + password
+				+ ", email = "+email + "]";
 	}
 
 	private int id;
+	private String account;
 	private String authority;
 	private String name;
 	private String password;
+	private String email;
 	private Set<Report> reports = new HashSet<Report>(0);
 	private Set<AdminQuestionAndAnswer> adminQuestionAndAnswers = new HashSet<AdminQuestionAndAnswer>(0);
 
@@ -44,13 +46,16 @@ public class Admin implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Admin(int id, String authority, String name, String password, Set<Report> reports,
+	public Admin(int id,String account, String authority, String name, String password,String email,Set<Report> reports,
 			Set<AdminQuestionAndAnswer> adminQuestionAndAnswers) {
+		
 		this.id = id;
+		this.account = account;
 		this.authority = authority;
 		this.name = name;
 		this.password = password;
 		this.reports = reports;
+		this.email = email;
 		this.adminQuestionAndAnswers = adminQuestionAndAnswers;
 	}
 
@@ -64,12 +69,20 @@ public class Admin implements java.io.Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	@Column(name = "account",length = 20)
+	public String getAccount(){
+		return this.account;
+	}
+	public void setAccount(String account){
+		this.account = account;
+	}
 
 	@Column(name = "authority", length = 10)
 	public String getAuthority() {
 		return this.authority;
 	}
-
+	
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
@@ -91,7 +104,13 @@ public class Admin implements java.io.Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	@Column(name = "email" ,length = 50)
+	public String getEmail(){
+		return this.email;
+	}
+	public void setEmail(String email){
+		this.email = email;
+	}
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "admin")
 	public Set<Report> getReports() {
 		return this.reports;
