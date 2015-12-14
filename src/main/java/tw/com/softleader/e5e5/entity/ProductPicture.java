@@ -1,15 +1,14 @@
 package tw.com.softleader.e5e5.entity;
-// Generated 2015/12/2 �U�� 09:36:37 by Hibernate Tools 4.3.1.Final
+// Generated 2015/12/14 �U�� 06:49:36 by Hibernate Tools 4.3.1.Final
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -20,20 +19,21 @@ import javax.persistence.Table;
 public class ProductPicture implements java.io.Serializable {
 
 	private int id;
+	private Product product;
 	private String picture;
-	private Set<Product> products = new HashSet<Product>(0);
 
 	public ProductPicture() {
 	}
 
-	public ProductPicture(int id) {
+	public ProductPicture(int id, Product product) {
 		this.id = id;
+		this.product = product;
 	}
 
-	public ProductPicture(int id, String picture, Set<Product> products) {
+	public ProductPicture(int id, Product product, String picture) {
 		this.id = id;
+		this.product = product;
 		this.picture = picture;
-		this.products = products;
 	}
 
 	@Id
@@ -47,6 +47,16 @@ public class ProductPicture implements java.io.Serializable {
 		this.id = id;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "product_id", nullable = false)
+	public Product getProduct() {
+		return this.product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
 	@Column(name = "picture")
 	public String getPicture() {
 		return this.picture;
@@ -54,15 +64,6 @@ public class ProductPicture implements java.io.Serializable {
 
 	public void setPicture(String picture) {
 		this.picture = picture;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productPicture")
-	public Set<Product> getProducts() {
-		return this.products;
-	}
-
-	public void setProducts(Set<Product> products) {
-		this.products = products;
 	}
 
 }

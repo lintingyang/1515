@@ -1,12 +1,9 @@
 package tw.com.softleader.e5e5.entity;
-// Generated 2015/12/13 下午 03:39:44 by Hibernate Tools 4.3.1.Final
+// Generated 2015/12/14 �U�� 06:49:36 by Hibernate Tools 4.3.1.Final
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,11 +25,12 @@ import javax.persistence.TemporalType;
 public class Product implements java.io.Serializable {
 
 	private int id;
+	private Product product;
 	private String name;
-	private ProductCategory productCategory;
-	private ProductPicture productPicture;
+	private Integer categoryId;
+	private Integer pictureId;
 	private byte[] video;
-	private User userByUserId;
+	private Integer userId;
 	private Date postTime;
 	private Date deadline;
 	private String location;
@@ -41,9 +39,8 @@ public class Product implements java.io.Serializable {
 	private Character postStatus;
 	private Character tradeStatus;
 	private Integer clickTimes;
-	private Exchange exchange;
-	private Product product;
-	private User userByItemOwnerId;
+	private Integer exchangeId;
+	private Integer itemOwnerId;
 	private Date tradeFinishedTime;
 	private String grade;
 	private Date gradeTime;
@@ -51,8 +48,7 @@ public class Product implements java.io.Serializable {
 	private Set<Product> products = new HashSet<Product>(0);
 	private Set<QuestionAndAnswer> questionAndAnswers = new HashSet<QuestionAndAnswer>(0);
 	private Set<Report> reports = new HashSet<Report>(0);
-	private Set<Exchange> exchangesForProductAId = new HashSet<Exchange>(0);
-	private Set<Exchange> exchangesForProductBId = new HashSet<Exchange>(0);
+	private Set<ProductPicture> productPictures = new HashSet<ProductPicture>(0);
 
 	public Product() {
 	}
@@ -61,18 +57,18 @@ public class Product implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Product(int id, String name, ProductCategory productCategory, ProductPicture productPicture, byte[] video,
-			User userByUserId, Date postTime, Date deadline, String location, String tradeWay, String wishItem,
-			Character postStatus, Character tradeStatus, Integer clickTimes, Exchange exchange, Product product,
-			User userByItemOwnerId, Date tradeFinishedTime, String grade, Date gradeTime, String category,
-			Set<Product> products, Set<QuestionAndAnswer> questionAndAnswers, Set<Report> reports,
-			Set<Exchange> exchangesForProductAId, Set<Exchange> exchangesForProductBId) {
+	public Product(int id, Product product, String name, Integer categoryId, Integer pictureId, byte[] video,
+			Integer userId, Date postTime, Date deadline, String location, String tradeWay, String wishItem,
+			Character postStatus, Character tradeStatus, Integer clickTimes, Integer exchangeId, Integer itemOwnerId,
+			Date tradeFinishedTime, String grade, Date gradeTime, String category, Set<Product> products,
+			Set<QuestionAndAnswer> questionAndAnswers, Set<Report> reports, Set<ProductPicture> productPictures) {
 		this.id = id;
+		this.product = product;
 		this.name = name;
-		this.productCategory = productCategory;
-		this.productPicture = productPicture;
+		this.categoryId = categoryId;
+		this.pictureId = pictureId;
 		this.video = video;
-		this.userByUserId = userByUserId;
+		this.userId = userId;
 		this.postTime = postTime;
 		this.deadline = deadline;
 		this.location = location;
@@ -81,9 +77,8 @@ public class Product implements java.io.Serializable {
 		this.postStatus = postStatus;
 		this.tradeStatus = tradeStatus;
 		this.clickTimes = clickTimes;
-		this.exchange = exchange;
-		this.product = product;
-		this.userByItemOwnerId = userByItemOwnerId;
+		this.exchangeId = exchangeId;
+		this.itemOwnerId = itemOwnerId;
 		this.tradeFinishedTime = tradeFinishedTime;
 		this.grade = grade;
 		this.gradeTime = gradeTime;
@@ -91,22 +86,11 @@ public class Product implements java.io.Serializable {
 		this.products = products;
 		this.questionAndAnswers = questionAndAnswers;
 		this.reports = reports;
-		this.exchangesForProductAId = exchangesForProductAId;
-		this.exchangesForProductBId = exchangesForProductBId;
-	}
-	
-
-	@Override
-	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", video=" + Arrays.toString(video) + ", postTime=" + postTime
-				+ ", deadline=" + deadline + ", location=" + location + ", tradeWay=" + tradeWay + ", wishItem="
-				+ wishItem + ", postStatus=" + postStatus + ", tradeStatus=" + tradeStatus + ", clickTimes="
-				+ clickTimes + ", tradeFinishedTime=" + tradeFinishedTime + ", grade=" + grade + ", gradeTime="
-				+ gradeTime + "]";
+		this.productPictures = productPictures;
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	public int getId() {
 		return this.id;
@@ -114,6 +98,16 @@ public class Product implements java.io.Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "item_id")
+	public Product getProduct() {
+		return this.product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	@Column(name = "name", length = 30)
@@ -125,24 +119,22 @@ public class Product implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "category_id")
-	public ProductCategory getProductCategory() {
-		return this.productCategory;
+	@Column(name = "category_id")
+	public Integer getCategoryId() {
+		return this.categoryId;
 	}
 
-	public void setProductCategory(ProductCategory productCategory) {
-		this.productCategory = productCategory;
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.REMOVE })
-	@JoinColumn(name = "picture_id")
-	public ProductPicture getProductPicture() {
-		return this.productPicture;
+	@Column(name = "picture_id")
+	public Integer getPictureId() {
+		return this.pictureId;
 	}
 
-	public void setProductPicture(ProductPicture productPicture) {
-		this.productPicture = productPicture;
+	public void setPictureId(Integer pictureId) {
+		this.pictureId = pictureId;
 	}
 
 	@Column(name = "video")
@@ -154,14 +146,13 @@ public class Product implements java.io.Serializable {
 		this.video = video;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
-	public User getUserByUserId() {
-		return this.userByUserId;
+	@Column(name = "user_id")
+	public Integer getUserId() {
+		return this.userId;
 	}
 
-	public void setUserByUserId(User userByUserId) {
-		this.userByUserId = userByUserId;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -238,34 +229,22 @@ public class Product implements java.io.Serializable {
 		this.clickTimes = clickTimes;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "exchange_id")
-	public Exchange getExchange() {
-		return this.exchange;
+	@Column(name = "exchange_id")
+	public Integer getExchangeId() {
+		return this.exchangeId;
 	}
 
-	public void setExchange(Exchange exchange) {
-		this.exchange = exchange;
+	public void setExchangeId(Integer exchangeId) {
+		this.exchangeId = exchangeId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "item_id")
-	public Product getProduct() {
-		return this.product;
+	@Column(name = "item_owner_id")
+	public Integer getItemOwnerId() {
+		return this.itemOwnerId;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "item_owner_id")
-	public User getUserByItemOwnerId() {
-		return this.userByItemOwnerId;
-	}
-
-	public void setUserByItemOwnerId(User userByItemOwnerId) {
-		this.userByItemOwnerId = userByItemOwnerId;
+	public void setItemOwnerId(Integer itemOwnerId) {
+		this.itemOwnerId = itemOwnerId;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -315,7 +294,7 @@ public class Product implements java.io.Serializable {
 		this.products = products;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = { CascadeType.REMOVE })
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
 	public Set<QuestionAndAnswer> getQuestionAndAnswers() {
 		return this.questionAndAnswers;
 	}
@@ -324,7 +303,7 @@ public class Product implements java.io.Serializable {
 		this.questionAndAnswers = questionAndAnswers;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = { CascadeType.REMOVE })
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
 	public Set<Report> getReports() {
 		return this.reports;
 	}
@@ -333,22 +312,13 @@ public class Product implements java.io.Serializable {
 		this.reports = reports;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productByProductAId", cascade = { CascadeType.REMOVE })
-	public Set<Exchange> getExchangesForProductAId() {
-		return this.exchangesForProductAId;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+	public Set<ProductPicture> getProductPictures() {
+		return this.productPictures;
 	}
 
-	public void setExchangesForProductAId(Set<Exchange> exchangesForProductAId) {
-		this.exchangesForProductAId = exchangesForProductAId;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productByProductBId", cascade = { CascadeType.REMOVE })
-	public Set<Exchange> getExchangesForProductBId() {
-		return this.exchangesForProductBId;
-	}
-
-	public void setExchangesForProductBId(Set<Exchange> exchangesForProductBId) {
-		this.exchangesForProductBId = exchangesForProductBId;
+	public void setProductPictures(Set<ProductPicture> productPictures) {
+		this.productPictures = productPictures;
 	}
 
 }

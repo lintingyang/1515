@@ -1,5 +1,5 @@
 package tw.com.softleader.e5e5.entity;
-// Generated 2015/12/2 �U�� 09:36:37 by Hibernate Tools 4.3.1.Final
+// Generated 2015/12/14 �U�� 06:49:36 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -22,13 +22,14 @@ import javax.persistence.TemporalType;
 public class Report implements java.io.Serializable {
 
 	private int id;
-	private Admin admin;
 	private Product product;
-	private Thread thread;
 	private String article;
 	private Character isPassed;
 	private Date reportTime;
 	private Integer reporterId;
+	private Integer adminId;
+	private Integer threadId;
+	private Integer replyId;
 
 	public Report() {
 	}
@@ -37,16 +38,17 @@ public class Report implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Report(int id, Admin admin, Product product, Thread thread, String article, Character isPassed,
-			Date reportTime, Integer reporterId) {
+	public Report(int id, Product product, String article, Character isPassed, Date reportTime, Integer reporterId,
+			Integer adminId, Integer threadId, Integer replyId) {
 		this.id = id;
-		this.admin = admin;
 		this.product = product;
-		this.thread = thread;
 		this.article = article;
 		this.isPassed = isPassed;
 		this.reportTime = reportTime;
 		this.reporterId = reporterId;
+		this.adminId = adminId;
+		this.threadId = threadId;
+		this.replyId = replyId;
 	}
 
 	@Id
@@ -61,16 +63,6 @@ public class Report implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "admin_id")
-	public Admin getAdmin() {
-		return this.admin;
-	}
-
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id")
 	public Product getProduct() {
 		return this.product;
@@ -78,16 +70,6 @@ public class Report implements java.io.Serializable {
 
 	public void setProduct(Product product) {
 		this.product = product;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "thread_id")
-	public Thread getThread() {
-		return this.thread;
-	}
-
-	public void setThread(Thread thread) {
-		this.thread = thread;
 	}
 
 	@Column(name = "article", length = 200)
@@ -125,6 +107,33 @@ public class Report implements java.io.Serializable {
 
 	public void setReporterId(Integer reporterId) {
 		this.reporterId = reporterId;
+	}
+
+	@Column(name = "admin_id")
+	public Integer getAdminId() {
+		return this.adminId;
+	}
+
+	public void setAdminId(Integer adminId) {
+		this.adminId = adminId;
+	}
+
+	@Column(name = "thread_id")
+	public Integer getThreadId() {
+		return this.threadId;
+	}
+
+	public void setThreadId(Integer threadId) {
+		this.threadId = threadId;
+	}
+
+	@Column(name = "reply_id")
+	public Integer getReplyId() {
+		return this.replyId;
+	}
+
+	public void setReplyId(Integer replyId) {
+		this.replyId = replyId;
 	}
 
 }

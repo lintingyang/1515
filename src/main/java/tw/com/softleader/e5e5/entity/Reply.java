@@ -1,16 +1,12 @@
 package tw.com.softleader.e5e5.entity;
-// Generated 2015/12/2 �U�� 09:36:37 by Hibernate Tools 4.3.1.Final
+// Generated 2015/12/14 �U�� 06:40:08 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -27,19 +23,12 @@ import javax.persistence.TemporalType;
 public class Reply implements java.io.Serializable {
 
 	private int id;
-	private ForumPicture forumPicture;
 	private Thread thread;
 	private Date createdDate;
 	private String title;
 	private String replyContent;
 	private Integer floor;
-	private Set<Board> boards = new HashSet<Board>(0);
-
-	@Override
-	public String toString() {
-		return "Reply [id=" + id + ", forumPicture=" + forumPicture + ", createdDate=" + createdDate + ", title="
-				+ title + ", replyContent=" + replyContent + ", floor=" + floor + "]";
-	}
+	private Set<ForumPicture> forumPictures = new HashSet<ForumPicture>(0);
 
 	public Reply() {
 	}
@@ -49,20 +38,19 @@ public class Reply implements java.io.Serializable {
 		this.title = title;
 	}
 
-	public Reply(int id, ForumPicture forumPicture, Thread thread, Date createdDate, String title, String replyContent,
-			Integer floor, Set<Board> boards) {
+	public Reply(int id, Thread thread, Date createdDate, String title, String replyContent, Integer floor,
+			Set<ForumPicture> forumPictures) {
 		this.id = id;
-		this.forumPicture = forumPicture;
 		this.thread = thread;
 		this.createdDate = createdDate;
 		this.title = title;
 		this.replyContent = replyContent;
 		this.floor = floor;
-		this.boards = boards;
+		this.forumPictures = forumPictures;
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	@Column(name = "id", unique = true, nullable = false)
 	public int getId() {
 		return this.id;
@@ -70,17 +58,6 @@ public class Reply implements java.io.Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	// 刪Reply刪Reply對應的圖
-	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.REMOVE })
-	@JoinColumn(name = "picture_id")
-	public ForumPicture getForumPicture() {
-		return this.forumPicture;
-	}
-
-	public void setForumPicture(ForumPicture forumPicture) {
-		this.forumPicture = forumPicture;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -131,12 +108,12 @@ public class Reply implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "reply")
-	public Set<Board> getBoards() {
-		return this.boards;
+	public Set<ForumPicture> getForumPictures() {
+		return this.forumPictures;
 	}
 
-	public void setBoards(Set<Board> boards) {
-		this.boards = boards;
+	public void setForumPictures(Set<ForumPicture> forumPictures) {
+		this.forumPictures = forumPictures;
 	}
 
 }

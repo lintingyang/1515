@@ -1,15 +1,14 @@
 package tw.com.softleader.e5e5.entity;
-// Generated 2015/12/2 �U�� 09:36:37 by Hibernate Tools 4.3.1.Final
+// Generated 2015/12/14 �U�� 06:40:08 by Hibernate Tools 4.3.1.Final
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -20,9 +19,9 @@ import javax.persistence.Table;
 public class ForumPicture implements java.io.Serializable {
 
 	private int id;
+	private Reply reply;
+	private Thread thread;
 	private String picture;
-	private Set<Thread> threads = new HashSet<Thread>(0);
-	private Set<Reply> replies = new HashSet<Reply>(0);
 
 	public ForumPicture() {
 	}
@@ -31,11 +30,11 @@ public class ForumPicture implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public ForumPicture(int id, String picture, Set<Thread> threads, Set<Reply> replies) {
+	public ForumPicture(int id, Reply reply, Thread thread, String picture) {
 		this.id = id;
+		this.reply = reply;
+		this.thread = thread;
 		this.picture = picture;
-		this.threads = threads;
-		this.replies = replies;
 	}
 
 	@Id
@@ -49,6 +48,26 @@ public class ForumPicture implements java.io.Serializable {
 		this.id = id;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "reply_id")
+	public Reply getReply() {
+		return this.reply;
+	}
+
+	public void setReply(Reply reply) {
+		this.reply = reply;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "thread_id")
+	public Thread getThread() {
+		return this.thread;
+	}
+
+	public void setThread(Thread thread) {
+		this.thread = thread;
+	}
+
 	@Column(name = "picture")
 	public String getPicture() {
 		return this.picture;
@@ -56,24 +75,6 @@ public class ForumPicture implements java.io.Serializable {
 
 	public void setPicture(String picture) {
 		this.picture = picture;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "forumPicture")
-	public Set<Thread> getThreads() {
-		return this.threads;
-	}
-
-	public void setThreads(Set<Thread> threads) {
-		this.threads = threads;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "forumPicture")
-	public Set<Reply> getReplies() {
-		return this.replies;
-	}
-
-	public void setReplies(Set<Reply> replies) {
-		this.replies = replies;
 	}
 
 }
