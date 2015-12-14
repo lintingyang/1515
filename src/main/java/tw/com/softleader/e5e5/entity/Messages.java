@@ -24,12 +24,11 @@ import javax.transaction.Transactional;
 public class Messages implements java.io.Serializable {
 
 	private int id;
-	private User user;
+	private User userByReceiverId;
+	private User userBySenderId;
 	private String article;
 	private Date deliverTime;
 	private Date readTime;
-	private String receiverId;
-	private String senderId;
 	private Date time;
 
 	public Messages() {
@@ -39,30 +38,23 @@ public class Messages implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Messages(int id, User user, String article, Date deliverTime, Date readTime, String receiverId,
-			String senderId, Date time) {
+	public Messages(int id, User userByReceiverId, User userBySenderId, String article, Date deliverTime, Date readTime,
+			Date time) {
 		this.id = id;
-		this.user = user;
+		this.userByReceiverId = userByReceiverId;
+		this.userBySenderId = userBySenderId;
 		this.article = article;
 		this.deliverTime = deliverTime;
 		this.readTime = readTime;
-		this.receiverId = receiverId;
-		this.senderId = senderId;
 		this.time = time;
 	}
 
-	
-	
-	
-	
-	
-	
-	
+
 	@Override
 	public String toString() {
-		return "Messages [id=" + id + ", user=" + user + ", article=" + article + ", deliverTime=" + deliverTime
-				+ ", readTime=" + readTime + ", receiverId=" + receiverId + ", senderId=" + senderId + ", time=" + time
-				+ "]";
+		return "Messages [id=" + id + ", userByReceiverId=" + userByReceiverId + ", userBySenderId=" + userBySenderId
+				+ ", article=" + article + ", deliverTime=" + deliverTime + ", readTime=" + readTime + ", time=" + time
+				 + "]";
 	}
 
 	@Id
@@ -77,13 +69,23 @@ public class Messages implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
-	public User getUser() {
-		return this.user;
+	@JoinColumn(name = "receiver_id")
+	public User getUserByReceiverId() {
+		return this.userByReceiverId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserByReceiverId(User userByReceiverId) {
+		this.userByReceiverId = userByReceiverId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "sender_id")
+	public User getUserBySenderId() {
+		return this.userBySenderId;
+	}
+
+	public void setUserBySenderId(User userBySenderId) {
+		this.userBySenderId = userBySenderId;
 	}
 
 	@Column(name = "article")
@@ -115,27 +117,8 @@ public class Messages implements java.io.Serializable {
 		this.readTime = readTime;
 	}
 
-	@Column(name = "receiver_id", length = 30)
-	public String getReceiverId() {
-		return this.receiverId;
-	}
-
-	public void setReceiverId(String receiverId) {
-		this.receiverId = receiverId;
-	}
-
-	@Column(name = "sender_id", length = 30)
-	public String getSenderId() {
-		return this.senderId;
-	}
-
-	public void setSenderId(String senderId) {
-		this.senderId = senderId;
-	}
-
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "time", length = 23)
-	@Transactional
 	public Date getTime() {
 		return this.time;
 	}
