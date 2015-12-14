@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import tw.com.softleader.e5e5.dao.UserBanListDao;
 import tw.com.softleader.e5e5.dao.UserDao;
+import tw.com.softleader.e5e5.entity.User;
 import tw.com.softleader.e5e5.entity.UserBanList;
 
 @Service
@@ -31,6 +32,36 @@ public class UserBanListService {
 		return null;
 	}
 	
+	@Transactional
+	public int insert (int userAId , int userBId){
+		List<UserBanList> ubss = ublDao.findByUserAId(userAId);
+		boolean temp = false;
+		for(UserBanList ubs : ubss){
+			if((int)ubs.getUserByUserBId().getId() != userBId ){
+				temp=true;
+			}
+		}
+	
+	if(!temp){
+		UserBanList ub = new UserBanList();
+		ub.setUserByUserAId(new User(userAId));
+		ub.setUserByUserBId(new User(userBId));
+		ublDao.save(ub);
+		return 1;	
+	}
+		return 0;
+	}
+	
+	@Transactional
+	public boolean deletOne(int userAId , int userBId){
+		UserBanList ub2 =ublDao.findByOnly(userAId, userBId);
+		if(ub2!=null){
+			ublDao.delete(ub2.getId());
+			return true;
+		}
+		
+		return false;
+	}
 	
 
 }

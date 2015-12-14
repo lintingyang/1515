@@ -38,7 +38,7 @@ public class FocusUserList implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "FocusUserList [id=" + id + ", userByUserAId=" + userByUserAId + ", userByUserBId=" + userByUserBId
+		return "FocusUserList [id=" + id + ", userByUserAId=" + userByUserAId.getId() + ", userByUserBId=" + userByUserBId.getId()
 				+ "]";
 	}
 
