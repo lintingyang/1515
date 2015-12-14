@@ -1,12 +1,11 @@
 package tw.com.softleader.e5e5.entity;
-// Generated 2015/12/14 �U�� 06:49:36 by Hibernate Tools 4.3.1.Final
+// default package
+// Generated 2015/12/14 �U�� 08:58:01 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -44,17 +43,9 @@ public class QuestionAndAnswer implements java.io.Serializable {
 		this.isPublic = isPublic;
 		this.question = question;
 	}
-	
-	
-
-	@Override
-	public String toString() {
-		return "QuestionAndAnswer [id=" + id + ", answer=" + answer + ", editTime=" + editTime + ", isPublic="
-				+ isPublic + ", question=" + question + "]";
-	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+
 	@Column(name = "id", unique = true, nullable = false)
 	public int getId() {
 		return this.id;
