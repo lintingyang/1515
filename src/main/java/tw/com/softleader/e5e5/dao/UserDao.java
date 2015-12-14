@@ -24,7 +24,7 @@ public interface UserDao extends JpaRepository<User, Integer> {
 	
 	public List<User> findBySchoolEmailEndingWith(String cellphone);
 	
-//	@Query(value="select id , name , game_score from [user] where game_score >=?1 order by game_score desc" , nativeQuery = true)
-	public List<User> findByGameScoreGreaterThanEqualOrderByGameScoreDesc(Integer gameScore);
+	@Query(value="select id , name , game_score from [user] where game_score >=?1 order by game_score desc" , nativeQuery = true)
+	public List<Object[]> findByGameScoreGreaterThanEqualOrderByGameScoreDesc(Integer gameScore);
 
 }
