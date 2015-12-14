@@ -1,5 +1,6 @@
 package tw.com.softleader.e5e5.entity;
-// Generated 2015/12/14 �U�� 06:49:36 by Hibernate Tools 4.3.1.Final
+// default package
+// Generated 2015/12/14 �U�� 08:58:01 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
 import javax.persistence.Column;

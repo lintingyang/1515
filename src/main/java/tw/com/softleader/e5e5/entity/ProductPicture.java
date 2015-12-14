@@ -1,6 +1,9 @@
 package tw.com.softleader.e5e5.entity;
-// Generated 2015/12/14 �U�� 06:49:36 by Hibernate Tools 4.3.1.Final
+// default package
+// Generated 2015/12/14 �U�� 08:58:01 by Hibernate Tools 4.3.1.Final
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -21,6 +25,7 @@ public class ProductPicture implements java.io.Serializable {
 	private int id;
 	private Product product;
 	private String picture;
+	private Set<Product> products = new HashSet<Product>(0);
 
 	public ProductPicture() {
 	}
@@ -30,10 +35,11 @@ public class ProductPicture implements java.io.Serializable {
 		this.product = product;
 	}
 
-	public ProductPicture(int id, Product product, String picture) {
+	public ProductPicture(int id, Product product, String picture, Set<Product> products) {
 		this.id = id;
 		this.product = product;
 		this.picture = picture;
+		this.products = products;
 	}
 
 	@Id
@@ -64,6 +70,15 @@ public class ProductPicture implements java.io.Serializable {
 
 	public void setPicture(String picture) {
 		this.picture = picture;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productPicture")
+	public Set<Product> getProducts() {
+		return this.products;
+	}
+
+	public void setProducts(Set<Product> products) {
+		this.products = products;
 	}
 
 }

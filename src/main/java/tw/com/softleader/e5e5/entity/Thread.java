@@ -1,5 +1,6 @@
 package tw.com.softleader.e5e5.entity;
-// Generated 2015/12/14 �U�� 06:40:08 by Hibernate Tools 4.3.1.Final
+// default package
+// Generated 2015/12/14 �U�� 08:58:01 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -7,7 +8,11 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -21,6 +26,9 @@ import javax.persistence.TemporalType;
 public class Thread implements java.io.Serializable {
 
 	private int id;
+	private Board board;
+	private ForumPicture forumPicture;
+	private User user;
 	private String title;
 	private Date createdDate;
 	private String threadContent;
@@ -29,25 +37,30 @@ public class Thread implements java.io.Serializable {
 	private Date lastReplyDate;
 	private Character isReadonly;
 	private Character topped;
-	private int boardId;
-	private Integer userId;
+	private Set<Report> reports = new HashSet<Report>(0);
+	private Set<ThreadTag> threadTags = new HashSet<ThreadTag>(0);
 	private Set<ForumPicture> forumPictures = new HashSet<ForumPicture>(0);
+	private Set<Board> boards = new HashSet<Board>(0);
 	private Set<Reply> replies = new HashSet<Reply>(0);
 
 	public Thread() {
 	}
 
-	public Thread(int id, String title, String threadContent, int boardId) {
+	public Thread(int id, Board board, String title, String threadContent) {
 		this.id = id;
+		this.board = board;
 		this.title = title;
 		this.threadContent = threadContent;
-		this.boardId = boardId;
 	}
 
-	public Thread(int id, String title, Date createdDate, String threadContent, Integer hit, Integer replayCount,
-			Date lastReplyDate, Character isReadonly, Character topped, int boardId, Integer userId,
-			Set<ForumPicture> forumPictures, Set<Reply> replies) {
+	public Thread(int id, Board board, ForumPicture forumPicture, User user, String title, Date createdDate,
+			String threadContent, Integer hit, Integer replayCount, Date lastReplyDate, Character isReadonly,
+			Character topped, Set<Report> reports, Set<ThreadTag> threadTags, Set<ForumPicture> forumPictures,
+			Set<Board> boards, Set<Reply> replies) {
 		this.id = id;
+		this.board = board;
+		this.forumPicture = forumPicture;
+		this.user = user;
 		this.title = title;
 		this.createdDate = createdDate;
 		this.threadContent = threadContent;
@@ -56,14 +69,15 @@ public class Thread implements java.io.Serializable {
 		this.lastReplyDate = lastReplyDate;
 		this.isReadonly = isReadonly;
 		this.topped = topped;
-		this.boardId = boardId;
-		this.userId = userId;
+		this.reports = reports;
+		this.threadTags = threadTags;
 		this.forumPictures = forumPictures;
+		this.boards = boards;
 		this.replies = replies;
 	}
 
 	@Id
-
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	public int getId() {
 		return this.id;
@@ -71,6 +85,36 @@ public class Thread implements java.io.Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "board_id", nullable = false)
+	public Board getBoard() {
+		return this.board;
+	}
+
+	public void setBoard(Board board) {
+		this.board = board;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "picture_id")
+	public ForumPicture getForumPicture() {
+		return this.forumPicture;
+	}
+
+	public void setForumPicture(ForumPicture forumPicture) {
+		this.forumPicture = forumPicture;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Column(name = "title", nullable = false, length = 20)
@@ -147,22 +191,22 @@ public class Thread implements java.io.Serializable {
 		this.topped = topped;
 	}
 
-	@Column(name = "board_id", nullable = false)
-	public int getBoardId() {
-		return this.boardId;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "thread")
+	public Set<Report> getReports() {
+		return this.reports;
 	}
 
-	public void setBoardId(int boardId) {
-		this.boardId = boardId;
+	public void setReports(Set<Report> reports) {
+		this.reports = reports;
 	}
 
-	@Column(name = "user_id")
-	public Integer getUserId() {
-		return this.userId;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "thread")
+	public Set<ThreadTag> getThreadTags() {
+		return this.threadTags;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setThreadTags(Set<ThreadTag> threadTags) {
+		this.threadTags = threadTags;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "thread")
@@ -172,6 +216,15 @@ public class Thread implements java.io.Serializable {
 
 	public void setForumPictures(Set<ForumPicture> forumPictures) {
 		this.forumPictures = forumPictures;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "thread")
+	public Set<Board> getBoards() {
+		return this.boards;
+	}
+
+	public void setBoards(Set<Board> boards) {
+		this.boards = boards;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "thread")
