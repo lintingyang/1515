@@ -26,8 +26,6 @@ public class ForumPicture implements java.io.Serializable {
 	private Reply reply;
 	private Thread thread;
 	private String picture;
-	private Set<Reply> replies = new HashSet<Reply>(0);
-	private Set<Thread> threads = new HashSet<Thread>(0);
 
 	public ForumPicture() {
 	}
@@ -36,13 +34,11 @@ public class ForumPicture implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public ForumPicture(int id, Reply reply, Thread thread, String picture, Set<Reply> replies, Set<Thread> threads) {
+	public ForumPicture(int id, Reply reply, Thread thread, String picture) {
 		this.id = id;
 		this.reply = reply;
 		this.thread = thread;
 		this.picture = picture;
-		this.replies = replies;
-		this.threads = threads;
 	}
 
 	@Id
@@ -83,24 +79,6 @@ public class ForumPicture implements java.io.Serializable {
 
 	public void setPicture(String picture) {
 		this.picture = picture;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "forumPicture")
-	public Set<Reply> getReplies() {
-		return this.replies;
-	}
-
-	public void setReplies(Set<Reply> replies) {
-		this.replies = replies;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "forumPicture")
-	public Set<Thread> getThreads() {
-		return this.threads;
-	}
-
-	public void setThreads(Set<Thread> threads) {
-		this.threads = threads;
 	}
 
 }

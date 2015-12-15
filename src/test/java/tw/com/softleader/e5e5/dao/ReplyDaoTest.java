@@ -37,7 +37,7 @@ public class ReplyDaoTest {
 		reply.setThread(thread);
 		replyDao.save(reply);
 
-		Reply dbEntity = replyDao.findOne(4);
+		Reply dbEntity = replyDao.findOne(5);
 		log.debug(dbEntity);
 
 		List<Reply> replies = replyDao.findByTitle("選我");
