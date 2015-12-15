@@ -38,6 +38,7 @@ public class UserBanListTest {
 //	ubs.setUserByUserBId(u2);
 //	userbanlistdao.save(ubs);
 		
+
 		
 		List<UserBanList> ubss = userbanlistdao.findByUserAId(1);
 		for(UserBanList ubs : ubss){

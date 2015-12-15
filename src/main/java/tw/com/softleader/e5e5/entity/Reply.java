@@ -5,6 +5,8 @@ package tw.com.softleader.e5e5.entity;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,7 +28,6 @@ import javax.persistence.TemporalType;
 public class Reply implements java.io.Serializable {
 
 	private int id;
-	private ForumPicture forumPicture;
 	private Thread thread;
 	private Date createdDate;
 	private String title;
@@ -45,9 +46,8 @@ public class Reply implements java.io.Serializable {
 	}
 
 	public Reply(int id, ForumPicture forumPicture, Thread thread, Date createdDate, String title, String replyContent,
-			Integer floor, Set<Board> boards, Set<ForumPicture> forumPictures, Set<Report> reports) {
+			Integer floor, Set<Board> boards, Set<Report> reports) {
 		this.id = id;
-		this.forumPicture = forumPicture;
 		this.thread = thread;
 		this.createdDate = createdDate;
 		this.title = title;
@@ -67,16 +67,6 @@ public class Reply implements java.io.Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "picture_id")
-	public ForumPicture getForumPicture() {
-		return this.forumPicture;
-	}
-
-	public void setForumPicture(ForumPicture forumPicture) {
-		this.forumPicture = forumPicture;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -134,8 +124,9 @@ public class Reply implements java.io.Serializable {
 	public void setBoards(Set<Board> boards) {
 		this.boards = boards;
 	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "reply")
+	//刪回覆刪圖
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "reply",
+			cascade={ CascadeType.REMOVE})
 	public Set<ForumPicture> getForumPictures() {
 		return this.forumPictures;
 	}
@@ -143,7 +134,7 @@ public class Reply implements java.io.Serializable {
 	public void setForumPictures(Set<ForumPicture> forumPictures) {
 		this.forumPictures = forumPictures;
 	}
-
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "reply")
 	public Set<Report> getReports() {
 		return this.reports;

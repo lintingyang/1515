@@ -41,15 +41,23 @@ public class UserDaoTest {
 //		usera.setEmailCheck('T');
 //		userDao.save(usera);
 		
-		User userid = userDao.findById(1);
-		log.debug(userid);
+//		User userid = userDao.findById(1);
+//		log.debug(userid);
 		
-		List<User> userscs = userDao.findByGameScoreGreaterThanEqualOrderByGameScoreDesc(3000);
-		for(User usersc : userscs ){
-		log.debug(usersc);
+//		List<User> userscs = userDao.findByGameScoreGreaterThanEqualOrderByGameScoreDesc(3000);
+//		for(User usersc : userscs ){
+//		log.debug(usersc);
+//		}
+		
+		List<Object[]> userscs = userDao.findByGameScoreGreaterThanEqualOrderByGameScoreDesc(3000);
+		
+//		User us = (User) temp[0];
+		for(int j =0 ; j <= 2 ; j++){
+			Object[] temp = userscs.get(j);
+				for(int i =0 ; i <= 2 ; i++){
+					log.debug(temp[i]);
+				}
 		}
-		
-		
 //		userDao.delete(7);
 		
 		

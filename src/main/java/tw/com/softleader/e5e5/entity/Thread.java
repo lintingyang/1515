@@ -5,6 +5,8 @@ package tw.com.softleader.e5e5.entity;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,7 +29,6 @@ public class Thread implements java.io.Serializable {
 
 	private int id;
 	private Board board;
-	private ForumPicture forumPicture;
 	private User user;
 	private String title;
 	private Date createdDate;
@@ -53,13 +54,12 @@ public class Thread implements java.io.Serializable {
 		this.threadContent = threadContent;
 	}
 
-	public Thread(int id, Board board, ForumPicture forumPicture, User user, String title, Date createdDate,
+	public Thread(int id, Board board, User user, String title, Date createdDate,
 			String threadContent, Integer hit, Integer replayCount, Date lastReplyDate, Character isReadonly,
 			Character topped, Set<Report> reports, Set<ThreadTag> threadTags, Set<ForumPicture> forumPictures,
 			Set<Board> boards, Set<Reply> replies) {
 		this.id = id;
 		this.board = board;
-		this.forumPicture = forumPicture;
 		this.user = user;
 		this.title = title;
 		this.createdDate = createdDate;
@@ -95,16 +95,6 @@ public class Thread implements java.io.Serializable {
 
 	public void setBoard(Board board) {
 		this.board = board;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "picture_id")
-	public ForumPicture getForumPicture() {
-		return this.forumPicture;
-	}
-
-	public void setForumPicture(ForumPicture forumPicture) {
-		this.forumPicture = forumPicture;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -190,7 +180,7 @@ public class Thread implements java.io.Serializable {
 	public void setTopped(Character topped) {
 		this.topped = topped;
 	}
-
+	//刪帖不刪檢舉
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "thread")
 	public Set<Report> getReports() {
 		return this.reports;
@@ -199,8 +189,9 @@ public class Thread implements java.io.Serializable {
 	public void setReports(Set<Report> reports) {
 		this.reports = reports;
 	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "thread")
+	//刪帖刪標籤
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "thread",
+			cascade={ CascadeType.REMOVE})
 	public Set<ThreadTag> getThreadTags() {
 		return this.threadTags;
 	}
@@ -208,8 +199,9 @@ public class Thread implements java.io.Serializable {
 	public void setThreadTags(Set<ThreadTag> threadTags) {
 		this.threadTags = threadTags;
 	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "thread")
+	//刪帖刪圖
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "thread",
+			cascade={ CascadeType.REMOVE})
 	public Set<ForumPicture> getForumPictures() {
 		return this.forumPictures;
 	}
@@ -226,8 +218,9 @@ public class Thread implements java.io.Serializable {
 	public void setBoards(Set<Board> boards) {
 		this.boards = boards;
 	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "thread")
+	//刪帖刪回覆
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "thread",
+			cascade={ CascadeType.REMOVE})
 	public Set<Reply> getReplies() {
 		return this.replies;
 	}

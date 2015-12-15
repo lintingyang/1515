@@ -45,15 +45,15 @@ public class ThreadDaoTest {
 //		threadDao.save(thread);
 		
 		
-//		Thread  dbEntity = threadDao.findOne(4);
-//		log.debug(dbEntity);
+		Thread  dbEntity = threadDao.findOne(6);
+		log.debug(dbEntity);
 		
-		threadDao.delete(5);
+//		threadDao.delete(5);
 		
-		List<Thread> threads = threadDao.findByTitle("徵家教");		
+/*		List<Thread> threads = threadDao.findByTitle("徵家教");		
 		for(Thread b:threads) {
 			log.debug(b);
-		}
+		}*/
 	
 	}
 }
