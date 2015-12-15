@@ -23,13 +23,13 @@ public class ProductDaoTest {
 	@Autowired
 	private ProductDao productDao;
 	
-	@Test
-	public void testFindByName() {
-		List<Product> products = productDao.findByName("曾經天胡麻將桌");
-		for(Product p:products) {
-			log.debug(p);
-		}
-	}
+//	@Test
+//	public void testFindByName() {
+//		List<Product> products = productDao.findByName("曾經天胡麻將桌");
+//		for(Product p:products) {
+//			log.debug(p);
+//		}
+//	}
 
 	@Test
 	public void testCrud() {
@@ -67,8 +67,8 @@ public class ProductDaoTest {
 //		productDao.delete(6);
 		
 		//findOne
-//		Product productx = productDao.findOne(3);
-//		log.debug(productx);
+		Product productx = productDao.findOne(3);
+		log.debug(productx);
 		
 		//findAll^^^
 //		List<Product> products = productDao.findAll();

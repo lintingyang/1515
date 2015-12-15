@@ -54,7 +54,7 @@ public class ProductPicture implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "product_id", nullable = false)
+	@JoinColumn(name = "id", nullable = false)
 	public Product getProduct() {
 		return this.product;
 	}
@@ -70,15 +70,6 @@ public class ProductPicture implements java.io.Serializable {
 
 	public void setPicture(String picture) {
 		this.picture = picture;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productPicture")
-	public Set<Product> getProducts() {
-		return this.products;
-	}
-
-	public void setProducts(Set<Product> products) {
-		this.products = products;
 	}
 
 }
