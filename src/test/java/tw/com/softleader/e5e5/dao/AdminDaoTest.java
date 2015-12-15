@@ -29,8 +29,8 @@ public class AdminDaoTest {
 	public void testFindAll() {
 	
 		
-//		Admin dbEntity = adminDao.findByAccount("abc");
-//		log.debug(dbEntity);
+		Admin dbEntity = adminDao.findByAccount("123");
+		log.debug(dbEntity);
 //		Admin admin = new Admin();
 //		admin.setPassword("123456");
 //		admin.setName("xyz");		
