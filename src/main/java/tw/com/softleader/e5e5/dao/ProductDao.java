@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import tw.com.softleader.e5e5.entity.Product;
-import tw.com.softleader.e5e5.entity.User;
 
 public interface ProductDao extends JpaRepository<Product, Integer> {
 

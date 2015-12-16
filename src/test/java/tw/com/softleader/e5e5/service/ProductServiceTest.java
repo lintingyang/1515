@@ -13,9 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import tw.com.softleader.e5e5.E5e5App;
 import tw.com.softleader.e5e5.dao.ProductDao;
-import tw.com.softleader.e5e5.dao.UserDao;
 import tw.com.softleader.e5e5.entity.Product;
-import tw.com.softleader.e5e5.entity.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes={E5e5App.class})
@@ -25,13 +23,11 @@ public class ProductServiceTest {
 	
 	@Autowired
 	private ProductDao productDao;
-	@Autowired
-	private UserDao userDao;
 	
 	//(1)最新商品列：fineAll byPostTime
 	@Test
 	public void testGetProductsOrderByPostTime(){
-		ProductService productservice = new ProductService(productDao, userDao);
+		ProductService productservice = new ProductService(productDao);
 		List<Product> resultByPostTime = productservice.getProductsOrderByPostTime();
 		for(Product rbpt:resultByPostTime){
 			log.debug("(1)最新商品列：" + rbpt);
@@ -41,7 +37,7 @@ public class ProductServiceTest {
 	//(2)點擊次數排序商品列：findAll byClickTimes
 	@Test
 	public void testGetProductsOrderByClickTimes(){
-		ProductService productService = new ProductService(productDao, userDao);
+		ProductService productService = new ProductService(productDao);
 		List<Product> resultByClickTimes = productService.getProductsOrderByClickTimes();
 		for(Product rbct:resultByClickTimes){
 			log.debug("(2)點擊次數排序商品列" + rbct);
@@ -51,7 +47,7 @@ public class ProductServiceTest {
 	//(3)依商品名稱搜尋：findAll byName 
 	@Test
 	public void testGetProductsByName(){
-		ProductService productService = new ProductService(productDao, userDao);
+		ProductService productService = new ProductService(productDao);
 		List<Product> resultByProductsKeywords = productService.getProductsByName("會");
 		for(Product rbpk:resultByProductsKeywords){
 			log.debug("(3)依商品名稱搜尋：" + rbpk);
@@ -61,7 +57,7 @@ public class ProductServiceTest {
 	//(4)依商品交換地搜尋：findAll byLocation
 	@Test
 	public void testGetProductsByLocation(){
-		ProductService productService = new ProductService(productDao, userDao);
+		ProductService productService = new ProductService(productDao);
 		List<Product> resultByLocationKeywords = productService.getProductsByLocation("台灣大學");
 		for(Product rblk:resultByLocationKeywords){
 			log.debug("(4)依商品交換地搜尋" + rblk);
@@ -71,7 +67,7 @@ public class ProductServiceTest {
 	//(5)依會員名稱搜尋：findAll byUserName 
 	@Test
 	public void testGetProductsByUserName(){
-		ProductService productService = new ProductService(productDao, userDao);
+		ProductService productService = new ProductService(productDao);
 		List<Product> resultByUserName = productService.getProductsByUserName("張三");
 		for(Product rbun:resultByUserName){
 			log.debug("(5)依會員名稱搜尋：" + rbun);
@@ -81,7 +77,7 @@ public class ProductServiceTest {
 	//(6)依會員學校搜尋：findAll byUserSchoolName 
 	@Test
 	public void testGetProductsByUserSchoolName(){
-		ProductService productService = new ProductService(productDao, userDao);
+		ProductService productService = new ProductService(productDao);
 		List<Product> resultByUserSchoolName = productService.getProductsByUserSchoolName("央");
 		for(Product rbusn:resultByUserSchoolName){
 			log.debug("(6)依會員學校搜尋：" + rbusn);
@@ -91,7 +87,7 @@ public class ProductServiceTest {
 	//(7)依商品種類搜尋：findAll byProductCategory 
 	@Test
 	public void testGetProductsByProductCategory(){
-		ProductService productService = new ProductService(productDao, userDao);
+		ProductService productService = new ProductService(productDao);
 		List<Product> resultByProductCategory = productService.getProductsByProductCategory("家");
 		for(Product rbpc:resultByProductCategory){
 			log.debug("(7)依商品種類搜尋：" + rbpc);
@@ -101,13 +97,16 @@ public class ProductServiceTest {
 	//(8)查詢商品是否交易成功：findOne byTradeStatus
 	@Test
 	public void testGetProductTradeStaus(){
-		ProductService productService = new ProductService(productDao, userDao);
+		ProductService productService = new ProductService(productDao);
+		
 		//ex:交易成功
 //		String resultT = productService.getProductTradeStaus("750G硬碟");		
 //		log.debug("(8)查詢商品是否交易成功：" + resultT);
+		
 		//ex:尚未交易
 //		String resultF = productService.getProductTradeStaus("檯燈");		
 //		log.debug("(8)查詢商品是否交易成功：" + resultF);
+		
 		//ex:查無此商品
 		String resultN = productService.getProductTradeStaus("");		
 		log.debug("(8)查詢商品是否交易成功：" + resultN);

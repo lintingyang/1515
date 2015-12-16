@@ -8,19 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tw.com.softleader.e5e5.dao.ProductDao;
-import tw.com.softleader.e5e5.dao.UserDao;
 import tw.com.softleader.e5e5.entity.Product;
-import tw.com.softleader.e5e5.entity.User;
 
 @Service
 public class ProductService {
 	private final ProductDao productDao;
-	private final UserDao userDao;
 	
 	@Autowired
-	public ProductService(ProductDao productDao, UserDao userDao){
+	public ProductService(ProductDao productDao){
 		this.productDao = productDao;
-		this.userDao = userDao;
 	}
 	
 	//(1)最新商品列：fineAll byPostTime
