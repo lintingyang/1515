@@ -9,7 +9,7 @@
 </head>
 <body>
 <form  action="/chats/query" method="get">
-	<input type="text" name="user.id"><br>
+	<input type="text" name="id"><br>
 	<input type="submit" value="Insert">
 </form>
 	<c:if test="${!empty beans}">
