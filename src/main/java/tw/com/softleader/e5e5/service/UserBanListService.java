@@ -35,21 +35,24 @@ public class UserBanListService {
 	public int insert (int userAId , int userBId){
 		List<UserBanList> ubss = ublDao.findByUserAId(userAId);
 		boolean temp = false;
+		
 		for(UserBanList ubs : ubss){
 			if((int)ubs.getUserByUserBId().getId() != userBId ){
 				temp=true;
+				break;
 			}
 		}
+		if(temp){
+			UserBanList ub = new UserBanList();
+			ub.setUserByUserAId(new User(userAId));
+			ub.setUserByUserBId(new User(userBId));
+			ublDao.save(ub);
+			return 1;	
+		}
+			return 0;
+	}
 	
-	if(!temp){
-		UserBanList ub = new UserBanList();
-		ub.setUserByUserAId(new User(userAId));
-		ub.setUserByUserBId(new User(userBId));
-		ublDao.save(ub);
-		return 1;	
-	}
-		return 0;
-	}
+	
 	
 	@Transactional
 	public boolean deletOne(int userAId , int userBId){

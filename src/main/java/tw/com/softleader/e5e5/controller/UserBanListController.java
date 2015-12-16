@@ -27,8 +27,9 @@ public class UserBanListController {
 	
 	@RequestMapping(value="/query")
 	public String query(Model model ,@RequestParam("aId") Integer aid ,@RequestParam("bId") Integer bid) {
-		int temp = ublService.insert(aid, bid);
-		model.addAttribute("addOne", temp);
+		ublService.insert(aid, bid);
+		List<UserBanList> ubls = ublService.findOneUser(5);
+		model.addAttribute("addOne", ubls);
 		
 		return "/userbanlist/list";
 	}

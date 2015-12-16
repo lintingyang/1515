@@ -8,7 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="/userbanlists/query" method="GET">
+
+	<form action="/userbanlists/query" method="get">
 		<input type="text" name="aId"></br>
 		<input type="text" name="bId"></br>
 		<input type="submit" value="送出">
@@ -17,7 +18,8 @@
 	<table>
 		<c:forEach items="${addOne}" var="temp1">
 			<tr>
-				<td>${temp1}</td>
+				<td>${temp1.userByUserAId.name}</td>
+				<td>${temp1.userByUserBId.name}</td>
 			</tr>
 		</c:forEach>
 	</table>
