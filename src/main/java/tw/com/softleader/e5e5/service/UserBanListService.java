@@ -14,14 +14,13 @@ import tw.com.softleader.e5e5.entity.UserBanList;
 @Service
 public class UserBanListService {
 	
+	@Autowired
 	private UserBanListDao ublDao;
-	private UserDao userDao;
 	
 	@Autowired
-	public UserBanListService(UserBanListDao ublDao, UserDao userDao){
-	this.ublDao = ublDao;
-	this.userDao = userDao;
-	}
+	private UserDao userDao;
+	
+
 	
 	@Transactional
 	public List<UserBanList> findOneUser(int id){
