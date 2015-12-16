@@ -10,6 +10,7 @@ public class ChatController {
 	
 	@RequestMapping(value = "/list") // ** /chat/list
 	public String list(Model model) {
+		
 		return "/chat/list";
 	}
 	@RequestMapping(value = "/query") 
