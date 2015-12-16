@@ -29,7 +29,7 @@ public class ChatController {
 	}
 
 	@RequestMapping(value = "/query")
-	public String query(Model model, @ModelAttribute("user") User user) {
+	public String query(@ModelAttribute User user,Model model) {
 		chatService.postChat(user.getId(), "messages_no");
 		List<Chat> chats = chatService.getLastThreeChats();
 		model.addAttribute("beans", chats);
