@@ -11,13 +11,14 @@ import tw.com.softleader.e5e5.entity.Admin;
 
 @Service
 public class AdminService {
-	private AdminDao adminDao;
-
 	@Autowired
-	public AdminService(AdminDao adminDao) {
-		this.adminDao = adminDao;
+	private AdminDao adminDao;
+	
+	
+	@Transactional
+	public Admin findByAccount(String account){
+		return adminDao.findByAccount(account);
 	}
-
 	@Transactional
 	public List<Admin> findAllAdmins() {
 		return adminDao.findAll();
