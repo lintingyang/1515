@@ -29,7 +29,6 @@ public class Messages implements java.io.Serializable {
 	private String article;
 	private Date deliverTime;
 	private Date readTime;
-	private Date time;
 
 	public Messages() {
 	}
@@ -38,22 +37,21 @@ public class Messages implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Messages(int id, User userByReceiverId, User userBySenderId, String article, Date deliverTime, Date readTime,
-			Date time) {
+	public Messages(int id, User userByReceiverId, User userBySenderId, String article, Date deliverTime, Date readTime
+			) {
 		this.id = id;
 		this.userByReceiverId = userByReceiverId;
 		this.userBySenderId = userBySenderId;
 		this.article = article;
 		this.deliverTime = deliverTime;
 		this.readTime = readTime;
-		this.time = time;
 	}
 
 
 	@Override
 	public String toString() {
-		return "Messages [id=" + id + ", userByReceiverId=" + userByReceiverId + ", userBySenderId=" + userBySenderId
-				+ ", article=" + article + ", deliverTime=" + deliverTime + ", readTime=" + readTime + ", time=" + time
+		return "Messages [id=" + id + ", userByReceiverId=" + userByReceiverId.getId() + ", userBySenderId=" + userBySenderId.getId()
+				+ ", article=" + article + ", deliverTime=" + deliverTime + ", readTime=" + readTime 
 				 + "]";
 	}
 
@@ -68,7 +66,7 @@ public class Messages implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "receiver_id")
 	public User getUserByReceiverId() {
 		return this.userByReceiverId;
@@ -78,7 +76,7 @@ public class Messages implements java.io.Serializable {
 		this.userByReceiverId = userByReceiverId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "sender_id")
 	public User getUserBySenderId() {
 		return this.userBySenderId;
@@ -117,14 +115,5 @@ public class Messages implements java.io.Serializable {
 		this.readTime = readTime;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "time", length = 23)
-	public Date getTime() {
-		return this.time;
-	}
-
-	public void setTime(Date time) {
-		this.time = time;
-	}
 
 }

@@ -16,15 +16,20 @@ public interface UserDao extends JpaRepository<User, Integer> {
 //	
 //	public boolean deleteById(Integer id);
 	
+	public User findByAccount(String account);
+	
 	public User findById(Integer id);
 	
 	public List<User> findByBirthdayAfter(Date birthday);
 	
 	public List<User> findByAddressStartingWith(String address);
 	
-	public List<User> findBySchoolEmailEndingWith(String cellphone);
+	public User findBySchoolEmail(String schoolEmail);
+	
+	public List<User> findBySchoolEmailEndingWith(String schoolEmail);
 	
 	@Query(value="select id , name , game_score from [user] where game_score >=?1 order by game_score desc" , nativeQuery = true)
-	public List<Object[]> findByGameScoreGreaterThanEqualOrderByGameScoreDesc(Integer gameScore);
-
+	public List<Object[]> findRangeScore(Integer gameScore);
+	
+	public List<User> findByGameScoreGreaterThanEqualOrderByGameScoreDesc(Integer gameScore);
 }

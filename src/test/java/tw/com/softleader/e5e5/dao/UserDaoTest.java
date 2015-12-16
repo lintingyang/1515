@@ -49,7 +49,7 @@ public class UserDaoTest {
 //		log.debug(usersc);
 //		}
 		
-		List<Object[]> userscs = userDao.findByGameScoreGreaterThanEqualOrderByGameScoreDesc(3000);
+		List<Object[]> userscs = userDao.findRangeScore(3000);
 		
 //		User us = (User) temp[0];
 		for(int j =0 ; j <= 2 ; j++){
