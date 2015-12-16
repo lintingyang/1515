@@ -21,33 +21,32 @@ public class UserBanListServiceTest {
 	private Logger log = Logger.getLogger(this.getClass());
 	
 	@Autowired
-	private UserBanListDao ublDao;
-	@Autowired
-	private UserDao userDao;
-	
-	
-//	@Test
-//	public void testFindOneUser() {
-//		UserBanListService ubs = new UserBanListService(ublDao,userDao);
-//		List<UserBanList> test = ubs.findOneUser(1);
-//		for(UserBanList ubl:test){
-//			log.debug(ubl);
-//		}
-//	}
+	private UserBanListService ublService;
 
-//	@Test
-//	public void testinsert(){
-//		UserBanListService ubs = new UserBanListService(ublDao,userDao);
-//		
-//		log.debug(ubs.insert(5, 1));
-//		
-//	}
+	
+	
+	@Test
+	public void testFindOneUser() {
+	;
+		List<UserBanList> test = ublService.findOneUser(1);
+		for(UserBanList ubl:test){
+			log.debug(ubl);
+		}
+	}
+
+	@Test
+	public void testinsert(){
+		int ubs = ublService.insert(5,1);
+		
+		log.debug(ubs);
+		
+	}
 	
 	@Test
 	public void testDelete(){
-		UserBanListService ubs = new UserBanListService(ublDao,userDao);
+		boolean ubs = ublService.deletOne(5, 1);
 		
-		log.debug(ubs.deletOne(5, 1));
+		log.debug(ubs);
 	}
 	
 	

@@ -14,14 +14,12 @@ import tw.com.softleader.e5e5.entity.User;
 @Service
 public class FocusUserListService {
 	
+	@Autowired
 	private FocusUserListDao fulDao;
+	@Autowired
 	private UserDao uDao;
 	
-	@Autowired
-	public FocusUserListService(FocusUserListDao fulDao , UserDao uDao){
-		this.fulDao = fulDao;
-		this.uDao = uDao;
-	}
+
 	
 	@Transactional
 	public List<FocusUserList> findOneUser(int id){

@@ -15,15 +15,11 @@ import tw.com.softleader.e5e5.entity.User;
 @Service
 public class MessagesService {
 	
+	@Autowired
 	private MessagesDao msgDao;
-	
+	@Autowired
 	private UserDao userDao;
 	
-	
-	@Autowired
-	public MessagesService(MessagesDao msgDao){
-		this.msgDao = msgDao;
-	}
 	
 	@Transactional
 	public List<Messages> findSenderAllArticle(Integer senderId){

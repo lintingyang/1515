@@ -3,7 +3,6 @@ package tw.com.softleader.e5e5;
 import org.apache.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
 
 import tw.com.softleader.e5e5.service.CalculateService;
 
