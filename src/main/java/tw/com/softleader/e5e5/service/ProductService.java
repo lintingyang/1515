@@ -70,6 +70,22 @@ public class ProductService {
 		return productDao.findAllByProductCategory(productCategory);
 	}
 
+	//(8)查詢商品是否交易成功：findOne byTradeStatus
+	@Transactional
+	public String getProductTradeStaus(String name){
+		try {
+			if(productDao.findOneByTradeStatus(name).equals("T")){
+				return "交易成功";
+			}else {
+				return "尚未交易";
+			}
+		} catch (Exception e) {
+			return "查無此商品";
+		}
+	}
+	
+	
+	
 	
 	
 	

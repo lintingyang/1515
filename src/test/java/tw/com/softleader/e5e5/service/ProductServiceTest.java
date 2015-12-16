@@ -96,7 +96,26 @@ public class ProductServiceTest {
 		for(Product rbpc:resultByProductCategory){
 			log.debug("(7)依商品種類搜尋：" + rbpc);
 		}
-	}	
+	}
+	
+	//(8)查詢商品是否交易成功：findOne byTradeStatus
+	@Test
+	public void testGetProductTradeStaus(){
+		ProductService productService = new ProductService(productDao, userDao);
+		//ex:交易成功
+//		String resultT = productService.getProductTradeStaus("750G硬碟");		
+//		log.debug("(8)查詢商品是否交易成功：" + resultT);
+		//ex:尚未交易
+//		String resultF = productService.getProductTradeStaus("檯燈");		
+//		log.debug("(8)查詢商品是否交易成功：" + resultF);
+		//ex:查無此商品
+		String resultN = productService.getProductTradeStaus("");		
+		log.debug("(8)查詢商品是否交易成功：" + resultN);
+	}
+	
+	
+	
+	
 	
 //	@Test
 //	public void testGetTopclickedProducts() {
