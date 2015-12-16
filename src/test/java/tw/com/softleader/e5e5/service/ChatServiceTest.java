@@ -15,28 +15,25 @@ import tw.com.softleader.e5e5.dao.UserDao;
 import tw.com.softleader.e5e5.entity.Chat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes={E5e5App.class})
+@SpringApplicationConfiguration(classes = { E5e5App.class })
 public class ChatServiceTest {
 
 	private Logger log = Logger.getLogger(this.getClass());
-	
+
 	@Autowired
-	private ChatDao chatDao;
-	@Autowired
-	private UserDao userDao;
+	private ChatService chatService;
+
 	@Test
 	public void testGetLastThreeChats() {
-		ChatService cs = new ChatService(chatDao,userDao);
-		List<Chat> chats=cs.getLastThreeChats();
-		for(Chat c: chats){
-			log.debug("Test: "+c);
+		List<Chat> chats = chatService.getLastThreeChats();
+		for (Chat c : chats) {
+			log.debug("Test: " + c);
 		}
 	}
+
 	@Test
 	public void testPostChat() {
-		ChatService cs = new ChatService(chatDao,userDao);
-		cs.postChat(1, "測試");
+		chatService.postChat(1, "測試");
 	}
-
 
 }

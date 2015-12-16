@@ -14,15 +14,13 @@ import tw.com.softleader.e5e5.entity.User;
 
 @Service
 public class ChatService {
-
+	
+	@Autowired
 	private ChatDao chatDao;
+	@Autowired
 	private UserDao userDao;
 
-	@Autowired
-	public ChatService(ChatDao chatDao,UserDao userDao) {
-		this.chatDao = chatDao;
-		this.userDao = userDao;
-	}
+	
 
 	@Transactional
 	public List<Chat> getLastThreeChats() {
