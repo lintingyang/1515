@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import tw.com.softleader.e5e5.entity.Product;
-import tw.com.softleader.e5e5.entity.User;
 
 public interface ProductDao extends JpaRepository<Product, Integer> {
 
@@ -39,6 +38,9 @@ public interface ProductDao extends JpaRepository<Product, Integer> {
 	@Query(value ="SELECT p.* FROM product p JOIN product_category pc ON p.category_id = pc.id WHERE pc.name LIKE %?1%", nativeQuery = true)
 	public List<Product> findAllByProductCategory(String productCategory);
 	
+	//(8)查詢商品是否交易成功：findOne byTradeStatus 
+	@Query(value ="SELECT trade_status FROM product WHERE name = ?1", nativeQuery = true)
+	public String findOneByTradeStatus(String name);
 	
 
 	

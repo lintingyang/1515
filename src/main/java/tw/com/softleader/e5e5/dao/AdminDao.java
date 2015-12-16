@@ -9,4 +9,5 @@ import tw.com.softleader.e5e5.entity.BoardCategoria;
 
 public interface AdminDao extends JpaRepository<Admin, Integer> {
 	public List<Admin> findByName(String name);
+	public Admin findByAccount(String account);
 }

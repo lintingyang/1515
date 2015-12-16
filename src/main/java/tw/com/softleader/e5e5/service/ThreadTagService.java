@@ -27,5 +27,6 @@ public class ThreadTagService {
 		List<ThreadTag> list = this.threadTagDao.findByTag(tagbean);
 		return list;
 	}
-	
 }
+	
+

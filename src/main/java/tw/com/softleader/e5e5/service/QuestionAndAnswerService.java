@@ -1,6 +1,8 @@
 package tw.com.softleader.e5e5.service;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import tw.com.softleader.e5e5.dao.ProductDao;
 import tw.com.softleader.e5e5.dao.QuestionAndAnswerDao;
 import tw.com.softleader.e5e5.entity.Product;
-import tw.com.softleader.e5e5.entity.QuestionAndAnswer;
 
 @Service
 public class QuestionAndAnswerService {
@@ -25,13 +26,14 @@ public class QuestionAndAnswerService {
 	}
 
 	@Transactional
-	public String[] findQAByProduct(Product product){
+	public List<String> findQAByProduct(Product product){
+		List<String> result = new ArrayList<String>();
 		if(product != null){
 		List<Object[]> list = questionandanswerDao.findByProduct(product);
-		Object[] array = list.get(0);
-		String question = (String) array[0];
-		String answer = (String) array[1];
-		String[] result = {question, answer};
+		for(int i=0; i<list.size(); i++){
+			Object[] row = list.get(i);
+			result.add(Arrays.toString(row));
+		}
 		return result;
 		} 
 		return null;
