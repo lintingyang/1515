@@ -15,12 +15,8 @@ import tw.com.softleader.e5e5.entity.User;
 @Service
 public class UserService {
 	
-	private UserDao uDao;
-	
 	@Autowired
-	public UserService(UserDao uDao){
-		this.uDao = uDao;
-	}
+	private UserDao uDao;
 	
 	@Transactional
 	public User findByAccount(String account){
