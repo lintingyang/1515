@@ -30,7 +30,7 @@ public class ProductServiceTest {
 		ProductService productservice = new ProductService(productDao);
 		List<Product> resultByPostTime = productservice.getProductsOrderByPostTime();
 		for(Product rbpt:resultByPostTime){
-			log.debug("(1)最新商品列：" + rbpt);
+			log.debug("(1)最新商品列：" + rbpt.getName() + ",上傳時間" + rbpt.getPostTime());
 		}
 	}
 	
@@ -40,7 +40,7 @@ public class ProductServiceTest {
 		ProductService productService = new ProductService(productDao);
 		List<Product> resultByClickTimes = productService.getProductsOrderByClickTimes();
 		for(Product rbct:resultByClickTimes){
-			log.debug("(2)點擊次數排序商品列" + rbct);
+			log.debug("(2)點擊次數排序商品列" + rbct.getName() + ",點擊次數" + rbct.getClickTimes() + "次");
 		}
 	}
 	
