@@ -43,6 +43,12 @@ public class ProductPicture implements java.io.Serializable {
 
 	}
 
+	
+	@Override
+	public String toString() {
+		return "ProductPicture [id=" + id + ", picture=" + picture + "]";
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
