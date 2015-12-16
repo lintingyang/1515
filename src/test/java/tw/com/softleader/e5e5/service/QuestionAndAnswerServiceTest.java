@@ -1,4 +1,6 @@
 package tw.com.softleader.e5e5.service;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,8 +25,15 @@ public class QuestionAndAnswerServiceTest {
 	@Test
 	public void testFindQAByProduct() {
 		QuestionAndAnswerService qas = new QuestionAndAnswerService(qandaDao,productDao); 
-		String[] result = qas.findQAByProduct(productDao.findOne(3));
-		log.info(result);
+		List<String> result = qas.findQAByProduct(productDao.findOne(3));
+		for(int i = 0; i<result.size(); i++){
+			String value = result.get(i);
+			log.info(value);
+//			String[] sa = value.split(",");
+//			for(int j = 0; j<sa.length; j++){
+//				log.info(sa[j]);
+//			}
+		}
 	}
 
 }
