@@ -22,16 +22,13 @@ public class FocusUserListServiceTest {
 	private Logger log = Logger.getLogger(this.getClass());
 	
 	@Autowired
-	private FocusUserListDao fulDao;
-	
-	@Autowired
-	private UserDao uDao;
+	private FocusUserListService fulService;
+
 	
 	
 //	@Test
 //	public void testFindOneUser() {
-//		FocusUserListService fuls = new FocusUserListService(fulDao,uDao);
-//		List<FocusUserList> test = fuls.findOneUser(2);
+//		List<FocusUserList> test = fulService.findOneUser(2);
 //		for(FocusUserList ful : test){
 //			log.debug(ful);
 //		}
@@ -39,14 +36,14 @@ public class FocusUserListServiceTest {
 	
 //	@Test
 //	public void testinsert(){
-//		FocusUserListService fuls2 = new FocusUserListService(fulDao,uDao);
-//		log.debug(fuls2.insert(2, 1));
+//		int fuls2 = fulService.insert(2, 1);
+//		log.debug(fuls2);
 //	}
 	
 	@Test
 	public void testDelete(){
-		FocusUserListService fuls3 = new FocusUserListService(fulDao,uDao);
-		log.debug(fuls3.deletOne(5, 1));
+		boolean fuls3 = fulService.deletOne(5, 1);
+		log.debug(fuls3);
 		}
 	
 }
