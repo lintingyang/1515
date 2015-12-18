@@ -16,7 +16,7 @@ import tw.com.softleader.e5e5.service.ChatService;
 @Controller
 @RequestMapping(value = "/chats")
 public class ChatController {
-	
+
 	@Autowired
 	private ChatService chatService;
 
@@ -27,13 +27,6 @@ public class ChatController {
 		return "/chat/list";
 	}
 
-	@RequestMapping(value = "/query")
-	public String query(@ModelAttribute User user,Model model) {
-		chatService.postChat(user.getId(), "messages_no");
-		List<Chat> chats = chatService.getLastThreeChats();
-		model.addAttribute("beans", chats);
-		return "/chat/list";
-	}
 //	@RequestMapping(value = "/query")
 //	public String query(Model model, @RequestParam("id") Integer id) {
 //		chatService.postChat(id, "messages");
@@ -48,9 +41,12 @@ public class ChatController {
 	}
 
 	@RequestMapping(value = "/add")
-	public String add(Model model) {
+	public String add(@ModelAttribute User user,Model model) {
+		Chat chat=chatService.postChat(user.getId(), "messages_testest");
+		model.addAttribute("bean", chat);
 		return "/chat/add";
 	}
+
 
 	@RequestMapping(value = "/insert")
 	public String insert(Model model) {
