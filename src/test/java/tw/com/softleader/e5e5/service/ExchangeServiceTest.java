@@ -18,14 +18,13 @@ public class ExchangeServiceTest {
 	private Logger log = Logger.getLogger(this.getClass());
 	
 	@Autowired
-	private ExchangeDao exchangeDao;
-	@Autowired
-	private ProductDao productDao;
+	private ExchangeService exchangeService;
+	
 	@Test
 	public void testfindMostPopularProduct() {
-		ExchangeService es = new ExchangeService(exchangeDao, productDao);
+		
 //		Product result = es.findMostPopularProduct();
-		String productName = es.findMostPopularProduct().getName();
+		String productName = exchangeService.findMostPopularProduct().getName();
 //		log.info(result);
 		log.info("最熱門物品=" + productName);
 	}
