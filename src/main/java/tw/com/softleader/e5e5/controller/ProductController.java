@@ -25,58 +25,55 @@ import tw.com.softleader.e5e5.service.ProductService;
 
 @Service
 public class ProductController {
-	
+
 	@Autowired
 	public ProductService productService;
-	
-	@RequestMapping(value = "/list") // ** /product/list
+
+	@RequestMapping(value = "/list") // ** /products/list
 	public String list(Model model) {
-		List<Product> models = productService.getAllProducts();
-		model.addAttribute("products", models);
+		List<Product> products = productService.getAllProducts();
+		model.addAttribute("products", products);
 		return "/product/list";
 	}
-//	@RequestMapping(value = "/query") 
-//	public String query(@ModelAttribute Product id, Model model) {
-//		List<Product> models = productService.getProductsByName(id.getName());
-//		model.addAttribute("product", models);
-//		return "/product/list";
-//	}
-	
-//	@RequestMapping(value = "/query")
-//	public String query(@ModelAttribute User user,Model model) {
-//		chatService.postChat(user.getId(), "messages_no");
-//		List<Chat> chats = chatService.getLastThreeChats();
-//		model.addAttribute("beans", chats);
-//		return "/chat/list";
-//	}
-//	@RequestMapping(value = "/query")
-//	public String query(Model model, @RequestParam("id") Integer id) {
-//		chatService.postChat(id, "messages");
-//		List<Chat> chats = chatService.getLastThreeChats();
-//		model.addAttribute("beans", chats);
-//		return "/chat/list";
-//	}
-	
+
+	@RequestMapping(value = "/query")
+	public String query(Model model, @RequestParam("pname") String name) {
+		List<Product> products = productService.getAllByKeywords(name);
+		model.addAttribute("products", products);
+		return "/product/list";
+	}
+
+	// @RequestMapping(value = "/query")
+	// public String query(@ModelAttribute User user,Model model) {
+	// chatService.postChat(user.getId(), "messages_no");
+	// List<Chat> chats = chatService.getLastThreeChats();
+	// model.addAttribute("beans", chats);
+	// return "/chat/list";
+	// }
+
 	@RequestMapping(value = "/delete")
 	public String delete(Model model) {
 		return "/product/list.jsp";
 	}
+
 	@RequestMapping(value = "/add")
 	public String add(Model model) {
 		return "/product/add.jsp";
 	}
+
 	@RequestMapping(value = "/insert")
 	public String insert(Model model) {
 		return "/product/add.jsp";
 	}
+
 	@RequestMapping(value = "/edit")
 	public String edit(Model model) {
 		return "/product/edit.jsp";
 	}
+
 	@RequestMapping(value = "/update")
 	public String update(Model model) {
 		return "/product/add.jsp";
 	}
-	
 
 }

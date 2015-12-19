@@ -6,11 +6,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+table {
+	border-collapse: collapse;
+}
+
+td, th {
+	border: 1px solid blue;
+}
+</style>
 </head>
 <body>
 	<form action="/products/query" method="get">
-		產品名稱：<input type="text" name="id"><input type="submit"
-			value="submit" id="btn"> <br>
+		關鍵字(產品名稱、交換地、使用者名稱、產品類別)：
+		<input type="text" name="pname">
+		<input type="submit" value="search"><hr>
 	</form>
 	<table style="border: 1px solid blue;">
 		<thead>
@@ -18,7 +28,9 @@
 				<th>編號</th>
 				<th>名稱</th>
 				<th>類別</th>
+				<th>類別名稱</th>
 				<th>使用者</th>
+				<th>使用者名稱</th>
 				<th>刊登時間</th>
 				<th>截止日期</th>
 				<th>交換地</th>
@@ -37,26 +49,28 @@
 		</thead>
 		<c:forEach items="${products}" var="p">
 			<tr>
-				<td style="border: 1px solid blue;">${p.id}</td>
-				<td style="border: 1px solid blue;">${p.name}</td>
-				<td style="border: 1px solid blue;">${p.category_id}</td>
-				<td style="border: 1px solid blue;">${p.name}</td>
-				<td style="border: 1px solid blue;">${p.name}</td>
-				<td style="border: 1px solid blue;">${p.name}</td>
-				<td style="border: 1px solid blue;">${p.name}</td>
-				<td style="border: 1px solid blue;">${p.name}</td>
-				<td style="border: 1px solid blue;">${p.name}</td>
-				<td style="border: 1px solid blue;">${p.name}</td>
-				<td style="border: 1px solid blue;">${p.name}</td>
-				<td style="border: 1px solid blue;">${p.name}</td>
-				<td style="border: 1px solid blue;">${p.name}</td>
-				<td style="border: 1px solid blue;">${p.name}</td>
-				<td style="border: 1px solid blue;">${p.name}</td>
-				<td style="border: 1px solid blue;">${p.name}</td>
-				<td style="border: 1px solid blue;">${p.name}</td>
-				<td style="border: 1px solid blue;">${p.name}</td>
+				<td>${p.id}</td>
+				<td>${p.name}</td>
+				<td>${p.productCategory.id}</td>
+				<td>${p.productCategory.name}</td>
+				<td>${p.userByUserId.id}</td>
+				<td>${p.userByUserId.name}</td>
+				<td>${p.postTime}</td>
+				<td>${p.deadline}</td>
+				<td>${p.location}</td>
+				<td>${p.tradeWay}</td>
+				<td>${p.wishItem}</td>
+				<td>${p.postStatus}</td>
+				<td>${p.tradeStatus}</td>
+				<td>${p.clickTimes}</td>
+				<td>${p.exchange.id}</td>
+				<td>${p.product.id}</td>
+				<td>${p.userByItemOwnerId.id}</td>
+				<td>${p.tradeFinishedTime}</td>
+				<td>${p.grade}</td>
+				<td>${p.gradeTime}</td>
 			</tr>
-		</c:forEach> 
+		</c:forEach>
 	</table>
 </body>
 </html>

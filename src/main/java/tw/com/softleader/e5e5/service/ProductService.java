@@ -80,12 +80,17 @@ public class ProductService {
 		}
 	}
 	
-	//(9) 所有商品列表 findAll
+	//(9) 所有商品列表：findAll
 	@Transactional
 	public List<Product> getAllProducts(){
 		return productDao.findAll();
 	}
 	
+	//(10) 關鍵字搜尋:
+	@Transactional
+	public List<Product> getAllByKeywords(String keywords){
+		return productDao.findAllByKeywords(keywords);
+	}
 	
 	
 	
