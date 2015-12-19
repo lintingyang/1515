@@ -80,7 +80,11 @@ public class ProductService {
 		}
 	}
 	
-	
+	//(9) 所有商品列表 findAll
+	@Transactional
+	public List<Product> getAllProducts(){
+		return productDao.findAll();
+	}
 	
 	
 	
