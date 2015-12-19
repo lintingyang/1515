@@ -29,7 +29,7 @@ public class AdminDaoTest {
 	public void testFindAll() {
 	
 		
-		Admin dbEntity = adminDao.findByAccount("123");
+		Admin dbEntity = adminDao.findByAccount("1");
 		log.debug(dbEntity);
 //		Admin admin = new Admin();
 //		admin.setPassword("123456");
