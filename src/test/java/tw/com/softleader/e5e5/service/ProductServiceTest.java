@@ -112,7 +112,15 @@ public class ProductServiceTest {
 		log.debug("(8)查詢商品是否交易成功：" + resultN);
 	}
 	
-	
+	//(9) 所有商品列表 findAll
+	@Test
+	public void testGetAllProducts(){
+		ProductService productService = new ProductService(productDao);
+		List<Product> resultAllProducts = productService.getAllProducts();
+		for(Product rap:resultAllProducts){
+			log.debug(rap);
+		}
+	}
 	
 	
 	

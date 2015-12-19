@@ -8,7 +8,7 @@
 <title>List</title>
 </head>
 <body>
-<form  action="/chats/query" method="get">
+<form  action="/chats/add" method="get">
 	<input type="text" name="id"><br>
 	<input type="submit" value="Insert">
 </form>
