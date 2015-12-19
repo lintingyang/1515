@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Product List</title>
+<title>Product Edit</title>
 <style type="text/css">
 table {
 	border-collapse: collapse;
@@ -15,6 +15,13 @@ td, th {
 	border: 1px solid blue;
 }
 </style>
+<script type="text/javascript"> 
+window.onload = function(){
+	var status = document.getElementsByTagName("p").firstChild.nodeValue;
+		alert(status);	
+}
+
+</script>
 </head>
 <body>
 	<form action="/products/query" method="get">
@@ -61,8 +68,10 @@ td, th {
 				<td>${p.tradeWay}</td>
 				<td>${p.wishItem}</td>
 				<td>
-					${p.postStatus}
-					<input type="button" value="edit" onclick="javascript:location.href='edit?q=${p.id}'">
+					<p>${p.postStatus}</p>
+					<input type="radio" name="status${p.id}" value="T" checked="checked">刊登
+					<input type="radio" name="status${p.id}" value="F" >下架
+					<input type="button" id="edit" value="確定修改">
 				</td>
 				<td>${p.tradeStatus}</td>
 				<td>${p.clickTimes}</td>

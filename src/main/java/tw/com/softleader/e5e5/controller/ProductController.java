@@ -53,27 +53,30 @@ public class ProductController {
 
 	@RequestMapping(value = "/delete")
 	public String delete(Model model) {
-		return "/product/list.jsp";
+		return "/product/list";
 	}
 
 	@RequestMapping(value = "/add")
 	public String add(Model model) {
-		return "/product/add.jsp";
+		return "/product/add";
 	}
 
 	@RequestMapping(value = "/insert")
 	public String insert(Model model) {
-		return "/product/add.jsp";
+		return "/product/add";
 	}
 
 	@RequestMapping(value = "/edit")
 	public String edit(Model model) {
-		return "/product/edit.jsp";
+		List<Product> products = productService.getAllProducts();
+		model.addAttribute("products", products);
+		
+		return "/product/edit";
 	}
 
 	@RequestMapping(value = "/update")
 	public String update(Model model) {
-		return "/product/add.jsp";
+		return "/product/add";
 	}
 
 }
