@@ -13,7 +13,7 @@
 	<form action="/admins/query" method="get">
 		帳號搜尋:<input type="text" name="account"> <input type="submit">
 	</form>
-	<button type="button" onclick = "location.href='/admins/add'">新增管理員</button>
+	<button type="button" onclick="location.href='/admins/add'">新增管理員</button>
 
 	${aaa.name}
 	<table border="1">
@@ -28,8 +28,8 @@
 		</tr>
 		<c:forEach items="${ entity }" var="admin">
 			<tr>
-				<td>
-				<input type = "button" value="修改" onclick = "javascript:location.href='/admins/edit?account=${ admin.account }'">
+				<td><input type="button" value="修改"
+					onclick="javascript:location.href='/admins/edit?id=${ admin.id }'">
 				</td>
 				<td>${ admin.id }</td>
 				<td>${ admin.account }</td>
@@ -37,7 +37,7 @@
 				<td>${ admin.name }</td>
 				<td>${ admin.email }</td>
 				<td>${ admin.authority }</td>
-				
+
 			</tr>
 
 		</c:forEach>

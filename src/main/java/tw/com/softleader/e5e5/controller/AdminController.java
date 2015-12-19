@@ -60,9 +60,9 @@ public class AdminController {
 		return "/admin/add";
 	}
 
-	@RequestMapping(value = "/edit")
+	@RequestMapping(value = "/edit") 
 	public String edit(Model model,@ModelAttribute Admin admin) {
-		Admin admin1 = adminService.findByAccount(admin.getAccount());
+		Admin admin1 = adminService.findById(admin.getId());
 		model.addAttribute("admin",admin1);
 		return "/admin/edit";
 	}
