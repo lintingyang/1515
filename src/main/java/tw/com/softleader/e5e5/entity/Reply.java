@@ -1,5 +1,6 @@
 package tw.com.softleader.e5e5.entity;
 // default package
+
 // Generated 2015/12/14 �U�� 08:58:01 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
@@ -33,9 +34,16 @@ public class Reply implements java.io.Serializable {
 	private String title;
 	private String replyContent;
 	private Integer floor;
+	private Character isHide;
 	private Set<Board> boards = new HashSet<Board>(0);
 	private Set<ForumPicture> forumPictures = new HashSet<ForumPicture>(0);
 	private Set<Report> reports = new HashSet<Report>(0);
+
+	@Override
+	public String toString() {
+		return "Reply [id=" + id + ", createdDate=" + createdDate + ", title=" + title + ", replyContent="
+				+ replyContent + ", floor=" + floor + "]";
+	}
 
 	public Reply() {
 	}
@@ -45,8 +53,8 @@ public class Reply implements java.io.Serializable {
 		this.title = title;
 	}
 
-	public Reply(int id, ForumPicture forumPicture, Thread thread, Date createdDate, String title, String replyContent,
-			Integer floor, Set<Board> boards, Set<Report> reports) {
+	public Reply(int id, Thread thread, Date createdDate, String title, String replyContent, Integer floor,
+			Set<Board> boards, Set<Report> reports, Set<ForumPicture> forumPictures) {
 		this.id = id;
 		this.thread = thread;
 		this.createdDate = createdDate;
@@ -59,7 +67,7 @@ public class Reply implements java.io.Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	public int getId() {
 		return this.id;
@@ -67,6 +75,14 @@ public class Reply implements java.io.Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	@Column(name = "is_hide", length = 1)
+	public Character getIsHide() {
+		return isHide;
+	}
+
+	public void setIsHide(Character isHide) {
+		this.isHide = isHide;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -124,9 +140,9 @@ public class Reply implements java.io.Serializable {
 	public void setBoards(Set<Board> boards) {
 		this.boards = boards;
 	}
-	//刪回覆刪圖
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "reply",
-			cascade={ CascadeType.REMOVE})
+
+	// 刪回覆刪圖
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "reply", cascade = { CascadeType.REMOVE })
 	public Set<ForumPicture> getForumPictures() {
 		return this.forumPictures;
 	}
@@ -134,7 +150,7 @@ public class Reply implements java.io.Serializable {
 	public void setForumPictures(Set<ForumPicture> forumPictures) {
 		this.forumPictures = forumPictures;
 	}
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "reply")
 	public Set<Report> getReports() {
 		return this.reports;

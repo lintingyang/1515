@@ -27,6 +27,12 @@ public class ForumPicture implements java.io.Serializable {
 	private Thread thread;
 	private String picture;
 
+	
+	@Override
+	public String toString() {
+		return "ForumPicture [id=" + id + ", picture=" + picture + "]";
+	}
+
 	public ForumPicture() {
 	}
 
