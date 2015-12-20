@@ -15,14 +15,12 @@ import tw.com.softleader.e5e5.entity.User;
 
 @Service
 public class BroadcastService {
-
+	@Autowired
 	private BroadcastDao broadcastDao;
+	@Autowired
 	private UserDao userDao;
 
-	@Autowired
-	public BroadcastService(BroadcastDao broadcastDao,UserDao userDao) {
-		this.broadcastDao = broadcastDao;
-		this.userDao = userDao;
+	public BroadcastService() {
 	}
 
 	@Transactional
@@ -43,6 +41,14 @@ public class BroadcastService {
 		result = broadcastDao.save(broadcast);
 
 		return result;
+	}
+	@Transactional
+	public boolean deleteBroadcast(int id) {
+		if(broadcastDao.findOne(id)!=null){			
+			broadcastDao.delete(id);
+			return true;
+		}
+		return false;
 	}
 
 }

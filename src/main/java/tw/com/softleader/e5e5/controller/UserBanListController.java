@@ -20,18 +20,34 @@ public class UserBanListController {
 	
 	@RequestMapping(value="/list")
 	public String list(Model model){
-		 List<UserBanList> ubls = ublService.findOneUser(1);
-		 model.addAttribute("someOne", ubls);
+
 		return "/userbanlist/list";
 	}
 	
 	@RequestMapping(value="/query")
-	public String query(Model model ,@RequestParam("aId") Integer aid ,@RequestParam("bId") Integer bid) {
+	public String query(Model model , @RequestParam("queryId") Integer queryId) {
+		List<UserBanList> ubls = ublService.findOneUser(queryId);
+		 model.addAttribute("someOne", ubls);
+		return "/userbanlist/list";
+	}
+	
+	@RequestMapping(value = "/add")
+	public String add (Model model){
+		return "/userbanlist/add";
+	}
+	
+	@RequestMapping(value = "/insert")
+	public String insert(Model model ,@RequestParam("aId") Integer aid ,@RequestParam("bId") Integer bid){
 		ublService.insert(aid, bid);
 		List<UserBanList> ubls = ublService.findOneUser(5);
 		model.addAttribute("addOne", ubls);
-		
+		return "/userbanlist/add";
+	}
+	
+	@RequestMapping(value = "/delete")
+	public String delete(Model model){
 		return "/userbanlist/list";
 	}
+
 	
 }

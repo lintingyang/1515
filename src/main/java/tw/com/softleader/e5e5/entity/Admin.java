@@ -32,7 +32,7 @@ public class Admin implements java.io.Serializable {
 
 	private int id;
 	private String account;
-	private String authority;
+	private String authority; 
 	private String name;
 	private String password;
 	private String email;

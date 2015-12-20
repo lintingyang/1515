@@ -17,37 +17,36 @@ import tw.com.softleader.e5e5.entity.Admin;
 @SpringApplicationConfiguration(classes = { E5e5App.class })
 public class AdminServiceTest {
 	@Autowired
-	private AdminDao adminDao;
+	private AdminService adminService;
 
 	Logger log = Logger.getLogger(this.getClass());
 
-	// @Test
-	// public void deleteAdminByName() {
-	// AdminService adminService = new AdminService(adminDao);
-	// int result = adminService.deleteByAccount("55555");
-	// log.error("delete = " + result);
-	// }
+	 @Test
+	 public void deleteAdminByName() {
+	 int result = adminService.deleteByAccount("55555");
+	 log.error("delete = " + result);
+	 }
+	 
 	@Test
 	public void updateAuthority(){
-		AdminService adminService = new AdminService(adminDao);
 		int result = adminService.updateAuthority("345", "A");
 		log.error("updateAuthority = "+ result);
 	}
+	
 	@Test
 	public void addNewAdmin(){
-		AdminService adminService = new AdminService(adminDao);
 		int result = adminService.addNewAdmin("shuangtest", "AA", "shuang", "0000", "f228300k@gmail.com");
 		log.error("addNewAdmin " + result);
 	}
+	
 	@Test
 	public void updateAdmin(){
-		AdminService adminService = new AdminService(adminDao);
 		int result = adminService.updateAdmin("123", null, "ssss","123", "123");
 		log.error("update = " + result);
 	}
+	
 	@Test
 	public void findAllAdmins() {
-		AdminService adminService = new AdminService(adminDao);
 		List<Admin> list = adminService.findAllAdmins();
 		for (Admin admin : list) {
 			log.error(admin);
