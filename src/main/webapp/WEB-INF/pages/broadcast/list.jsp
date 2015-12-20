@@ -8,9 +8,9 @@
 <title>List</title>
 </head>
 <body>
-<form  action="/chats/insert" method="get">
+<form  action="/broadcasts/insert" method="get">
 	<input type="text" name="id" size="5" placeholder="使用者ID">
-	<input type="text" name="message">
+	<input type="text" name="broadcastDescription">
 	<input type="submit" value="輸入">
 </form>
 	<c:if test="${!empty beans}">
@@ -19,7 +19,7 @@
 				<tr>
 					<th>id</th>
 					<th>user</th>
-					<th>messages</th>
+					<th>broadcastDescription</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -27,7 +27,7 @@
 					<tr>
 						<td>${s.id}</td>
 						<td>${s.user.name}</td>
-						<td>${s.messages}</td>
+						<td>${s.broadcastDescription}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
