@@ -48,9 +48,17 @@ public class UserController {
 	
 	@RequestMapping(value = "/update")
 	public String update(Model model ,@RequestParam("account") String account,@RequestParam("isolate") Character isolate) {
+		System.out.println("====================================");
+		System.out.println("====================================");
+		System.out.println("====================================");
+		System.out.println("====================================");
+		System.out.println("====================================");
+		System.out.println("====================================");
+		System.out.println("====================================");
+		System.out.println(account+"========================================"+isolate);
 		userService.updataIsolated(account, isolate);
 		User temp = userService.findByAccount(account);
-		model.addAttribute("getTwo", temp);
+		model.addAttribute("getOne", temp);
 		return "/user/edit";
 	}
 }

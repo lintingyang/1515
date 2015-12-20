@@ -29,15 +29,17 @@ public class Board implements java.io.Serializable {
 
 	private int id;
 	private BoardCategoria boardCategoria;
-//	private BoardCategory boardCategory;
+	// private BoardCategory boardCategory;
 	private Reply reply;
 	private Thread thread;
 	private Date createdDate;
 	private String name;
 	private String description;
+	private Integer hit;
 	private Integer threadCount;
 	private Integer replyCount;
 	private Character isCream;
+	private Character isHide;
 	private String picture;
 	private Set<UserOwner> userOwners = new HashSet<UserOwner>(0);
 	private Set<Thread> threads = new HashSet<Thread>(0);
@@ -45,17 +47,26 @@ public class Board implements java.io.Serializable {
 	public Board() {
 	}
 
+	@Column(name = "is_hide", length = 1)
+	public Character getIsHide() {
+		return isHide;
+	}
+
+	public void setIsHide(Character isHide) {
+		this.isHide = isHide;
+	}
+
 	public Board(int id, String name) {
 		this.id = id;
 		this.name = name;
 	}
 
-	public Board(int id, BoardCategoria boardCategoria, Reply reply, Thread thread,
-			Date createdDate, String name, String description, Integer threadCount, Integer replyCount,
-			Character isCream, String picture, Set<UserOwner> userOwners, Set<Thread> threads) {
+	public Board(int id, BoardCategoria boardCategoria, Reply reply, Thread thread, Date createdDate, String name,
+			String description, Integer threadCount, Integer replyCount, Character isCream, String picture,
+			Set<UserOwner> userOwners, Set<Thread> threads) {
 		this.id = id;
 		this.boardCategoria = boardCategoria;
-//		this.boardCategory = boardCategory;
+		// this.boardCategory = boardCategory;
 		this.reply = reply;
 		this.thread = thread;
 		this.createdDate = createdDate;
@@ -70,7 +81,7 @@ public class Board implements java.io.Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	public int getId() {
 		return this.id;
@@ -91,15 +102,15 @@ public class Board implements java.io.Serializable {
 		this.boardCategoria = boardCategoria;
 	}
 
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "category_id", insertable = false, updatable = false)
-//	public BoardCategory getBoardCategory() {
-//		return this.boardCategory;
-//	}
-//
-//	public void setBoardCategory(BoardCategory boardCategory) {
-//		this.boardCategory = boardCategory;
-//	}
+	// @ManyToOne(fetch = FetchType.LAZY)
+	// @JoinColumn(name = "category_id", insertable = false, updatable = false)
+	// public BoardCategory getBoardCategory() {
+	// return this.boardCategory;
+	// }
+	//
+	// public void setBoardCategory(BoardCategory boardCategory) {
+	// this.boardCategory = boardCategory;
+	// }
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "last_reply_id")
@@ -184,9 +195,9 @@ public class Board implements java.io.Serializable {
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
-//	刪Board刪版主們
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "board", 
-			cascade={ CascadeType.REMOVE})
+
+	// 刪Board刪版主們
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "board", cascade = { CascadeType.REMOVE })
 	@Transactional
 	public Set<UserOwner> getUserOwners() {
 		return this.userOwners;
@@ -195,10 +206,9 @@ public class Board implements java.io.Serializable {
 	public void setUserOwners(Set<UserOwner> userOwners) {
 		this.userOwners = userOwners;
 	}
-	
-//	刪Board刪所有Threads
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "board"
-			,cascade={ CascadeType.REMOVE})
+
+	// 刪Board刪所有Threads
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "board", cascade = { CascadeType.REMOVE })
 	public Set<Thread> getThreads() {
 		return this.threads;
 	}
@@ -213,6 +223,5 @@ public class Board implements java.io.Serializable {
 				+ ", threadCount=" + threadCount + ", replyCount=" + replyCount + ", isCream=" + isCream + ", picture="
 				+ picture + "]";
 	}
-
 
 }

@@ -18,14 +18,13 @@ import tw.com.softleader.e5e5.entity.ThreadTag;
 public class ThreadTagServiceTest {
 	
 	Logger log = Logger.getLogger(this.getClass());
+
 	@Autowired
-	private ThreadTagDao threadTagDao;
-	@Autowired
-	private TagDao tagDao;
+	private ThreadTagService threadTagService;
 	@Test
 	public void testThreadTagService() {
-		ThreadTagService service = new ThreadTagService(threadTagDao,tagDao);
-		List<ThreadTag> list = service.findByTagService(3);
+		
+		List<ThreadTag> list = threadTagService.findByTagService(3);
 		
 		log.error("findByTag = 3");
 		for(ThreadTag bean :list){

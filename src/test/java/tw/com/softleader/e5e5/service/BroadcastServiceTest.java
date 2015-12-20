@@ -19,12 +19,10 @@ public class BroadcastServiceTest {
 
 	private Logger log = Logger.getLogger(this.getClass());
 	@Autowired
-	private BroadcastDao broadcastDao;
-	@Autowired
-	private UserDao userDao;
+	BroadcastService bs;
+
 	@Test
 	public void testGetLastTenBroadcasts() {
-		BroadcastService bs = new BroadcastService(broadcastDao, userDao);
 		List<Broadcast> broadcasts =bs.getLastTenBroadcasts();
 		for(Broadcast b:broadcasts){
 			log.debug(b);
@@ -33,7 +31,6 @@ public class BroadcastServiceTest {
 
 	@Test
 	public void testPostBroadcast() {
-		BroadcastService bs = new BroadcastService(broadcastDao, userDao);
 		bs.postBroadcast(1, "測試是也");
 	}
 

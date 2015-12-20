@@ -42,7 +42,9 @@ public interface ProductDao extends JpaRepository<Product, Integer> {
 	@Query(value ="SELECT trade_status FROM product WHERE name = ?1", nativeQuery = true)
 	public String findOneByTradeStatus(String name);
 	
-
+	//(10)關鍵字搜尋:產品名稱、交換地、使用者名稱、產品類別
+	@Query(value ="SELECT p.* FROM product p JOIN product_category pc ON p.category_id = pc.id JOIN [user] u ON p.user_id = u.id WHERE pc.name LIKE %?1% OR p.name LIKE %?1% OR p.location LIKE %?1% OR u.name LIKE %?1%", nativeQuery = true)
+	public List<Product> findAllByKeywords(String keywords);
 	
 	
 	
