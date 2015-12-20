@@ -31,17 +31,17 @@ public class BoardDaoTest {
 		//create
 //		Board board = new Board();
 //		BoardCategoria  boardCategoria = boardCategoriaDao.findOne(3);
-//		board.setName("華夏科技大學");
+//		board.setName("淡江大學");
 //		board.setCreatedDate(new Date());
 //		board.setBoardCategoria(boardCategoria);
 //		board.setDescription("taiwan number one!");
 //		boardDao.save(board);
 //		
-//		Board dbEntity = boardDao.findOne(7);
-//		log.debug(dbEntity);
+		Board dbEntity = boardDao.findOne(6);
+		log.debug(dbEntity);
 //		
 		//刪除，記得自己想好如何設定cascade
-		boardDao.delete(4);
+//		boardDao.delete(4);
 		
 		//update
 //		Board board4 = boardDao.findOne(4);
@@ -49,12 +49,12 @@ public class BoardDaoTest {
 //		boardDao.save(board4);
 		
 		//read
-//		BoardCategoria  boardCategoria2 = boardCategoriaDao.findOne(3);
-//		log.debug(boardCategoria2);
-//		List<Board> boards = boardDao.findByBoardCategoria(boardCategoria2);
-//		for(Board b : boards){
-//			log.debug(b);
-//		}
+		BoardCategoria  boardCategoria = boardCategoriaDao.findOne(3);
+		log.debug(boardCategoria);
+		List<Board> boards = boardDao.findByBoardCategoria(boardCategoria);
+		for(Board b : boards){
+			log.debug(b);
+		}
 	
 	}
 

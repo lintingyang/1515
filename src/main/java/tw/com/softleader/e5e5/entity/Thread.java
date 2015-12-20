@@ -37,12 +37,22 @@ public class Thread implements java.io.Serializable {
 	private Integer replayCount;
 	private Date lastReplyDate;
 	private Character isReadonly;
+	private Character isCream;
+	private Character isHide;
 	private Character topped;
 	private Set<Report> reports = new HashSet<Report>(0);
 	private Set<ThreadTag> threadTags = new HashSet<ThreadTag>(0);
 	private Set<ForumPicture> forumPictures = new HashSet<ForumPicture>(0);
 	private Set<Board> boards = new HashSet<Board>(0);
 	private Set<Reply> replies = new HashSet<Reply>(0);
+
+	
+	@Override
+	public String toString() {
+		return "Thread [id=" + id + ", title=" + title + ", createdDate=" + createdDate + ", threadContent="
+				+ threadContent + ", hit=" + hit + ", replayCount=" + replayCount + ", lastReplyDate=" + lastReplyDate
+				+ ", isReadonly=" + isReadonly + ", topped=" + topped + "]";
+	}
 
 	public Thread() {
 	}
@@ -85,6 +95,24 @@ public class Thread implements java.io.Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	@Column(name = "is_hide", length = 1)	
+	public Character getIsHide() {
+		return isHide;
+	}
+
+	public void setIsHide(Character isHide) {
+		this.isHide = isHide;
+	}
+
+	@Column(name = "is_cream", length = 1)
+	public Character getIsCream() {
+		return isCream;
+	}
+
+	public void setIsCream(Character isCream) {
+		this.isCream = isCream;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
