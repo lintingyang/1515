@@ -10,8 +10,8 @@
 <body>
 
 	<form action="/userbanlists/query" method="get">
-		<input type="text" name="aId"></br>
-		<input type="text" name="bId"></br>
+		<input type="text" name="aId"><br>
+		<input type="text" name="bId"><br>
 		<input type="submit" value="送出">
 	</form>
 	
