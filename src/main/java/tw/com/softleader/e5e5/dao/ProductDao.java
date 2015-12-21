@@ -47,7 +47,6 @@ public interface ProductDao extends JpaRepository<Product, Integer> {
 	public List<Product> findAllByKeywords(String keywords);
 	
 	
-	
 //	//find most clicked product
 //	@Query(value="SELECT TOP 1 name FROM product ORDER BY click_times DESC", nativeQuery=true)
 //	public String findByTopClickedProduct();

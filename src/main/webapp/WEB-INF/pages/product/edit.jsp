@@ -15,19 +15,19 @@ td, th {
 	border: 1px solid blue;
 }
 </style>
-<script type="text/javascript"> 
-window.onload = function(){
-	var status = document.getElementsByTagName("p").firstChild.nodeValue;
-		alert(status);	
-}
-
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+	window.onload = function() {
+		$('#opt').val("${p.postStatus}");
+	}
 </script>
 </head>
 <body>
 	<form action="/products/query" method="get">
-		關鍵字(產品名稱、交換地、使用者名稱、產品類別)：
-		<input type="text" name="pname">
-		<input type="submit" value="search"><hr>
+		關鍵字(產品名稱、交換地、使用者名稱、產品類別)： <input type="text" name="pKeywords"> <input
+			type="submit" value="search">
+		<hr>
 	</form>
 	<table style="border: 1px solid blue;">
 		<thead>
@@ -54,7 +54,7 @@ window.onload = function(){
 				<th>評比時間</th>
 			</tr>
 		</thead>
-		<c:forEach items="${products}" var="p">
+		<tbody>
 			<tr>
 				<td>${p.id}</td>
 				<td>${p.name}</td>
@@ -68,10 +68,15 @@ window.onload = function(){
 				<td>${p.tradeWay}</td>
 				<td>${p.wishItem}</td>
 				<td>
-					<p>${p.postStatus}</p>
-					<input type="radio" name="status${p.id}" value="T" checked="checked">刊登
-					<input type="radio" name="status${p.id}" value="F" >下架
-					<input type="button" id="edit" value="確定修改">
+					<p id="ps">${p.postStatus}</p>
+					<form action="/products/update">
+						<select id="opt" name="pPS">
+							<option value="T">T</option>
+							<option value="F">F</option>
+						</select> 
+						<input type="hidden" name="pId" value="${p.id}">
+						<input type="submit" value="確定修改">
+					</form>
 				</td>
 				<td>${p.tradeStatus}</td>
 				<td>${p.clickTimes}</td>
@@ -82,7 +87,9 @@ window.onload = function(){
 				<td>${p.grade}</td>
 				<td>${p.gradeTime}</td>
 			</tr>
-		</c:forEach>
+		</tbody>
 	</table>
+
+
 </body>
 </html>

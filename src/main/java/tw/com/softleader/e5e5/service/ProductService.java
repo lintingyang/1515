@@ -89,9 +89,27 @@ public class ProductService {
 	//(10) 關鍵字搜尋:
 	@Transactional
 	public List<Product> getAllByKeywords(String keywords){
-		return productDao.findAllByKeywords(keywords);
+		if(keywords.isEmpty()){
+			return productDao.findAll();
+		}else{
+			return productDao.findAllByKeywords(keywords);
+		}
 	}
 	
+	//(11)find one by id
+	@Transactional
+	public Product getOneById(Integer id){
+		return productDao.findOne(id);
+	}
+	
+	//(12)update status
+	@Transactional
+	public Product update(Integer id, char postStatus){
+		Product product = productDao.findOne(id);
+		product.setPostStatus(postStatus);
+		productDao.save(product);
+		return productDao.findOne(id);
+	}
 	
 	
 //		@Transactional
