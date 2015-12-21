@@ -14,10 +14,18 @@ public class AdminService {
 	@Autowired
 	private AdminDao adminDao;
 	
-	
+	@Transactional
+	public Admin findById(Integer id){
+		return adminDao.findOne(id);
+	}
 	@Transactional
 	public Admin findByAccount(String account){
-		return adminDao.findByAccount(account);
+		Admin admin =  adminDao.findByAccount(account);
+		if(admin !=null){
+			return admin;
+		}else{
+			return null;
+		}
 	}
 	@Transactional
 	public List<Admin> findAllAdmins() {

@@ -8,11 +8,7 @@
 <title>List</title>
 </head>
 <body>
-<form  action="/broadcasts/insert" method="get">
-	<input type="text" name="id" size="5" placeholder="使用者ID">
-	<input type="text" name="broadcastDescription">
-	<input type="submit" value="輸入">
-</form>
+
 	<c:if test="${!empty beans}">
 		<table>
 			<thead>
