@@ -48,6 +48,11 @@ public class BoardService {
 		return boardDao.findByName(name);
 	}
 
+	//依ID搜尋版面
+	@Transactional
+	public Board getBoardById(Integer id) {
+		return boardDao.findOne(id);
+	}
 	//依帖子數搜尋
 	@Transactional
 	public List<Board> getBoardByThreadCount(String name) {

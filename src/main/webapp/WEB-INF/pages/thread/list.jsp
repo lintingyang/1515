@@ -11,7 +11,7 @@
 
 
 	<form action="/threads/query" method="get">
-		帖子搜尋:<input type="text" name="id"> <input type="submit">
+		輸入ID回文搜尋:<input type="text" name="id"> <input type="submit">
 	</form>
 
 	<button type="button" onclick="location.href='/threads/add'">新增帖子</button>

@@ -10,35 +10,33 @@
 <body>
 
 
-	<form action="/boards/query" method="get">
-		輸入ID版面帖子搜尋:<input type="text" name="id"> <input type="submit">
+	<form action="/replies/query" method="get">
+		搜尋:<input type="text" name="id"> <input type="submit">
 	</form>
 	
-	<button type="button" onclick="location.href='/boards/add'">新增版面</button><hr>
-	<button type="button" onclick="location.href='/boards/list2'">顯示全部版面(依名稱排序)</button>
+	<button type="button" onclick="location.href='/replies/add'">新增回文</button><hr>
+	<button type="button" onclick="location.href='/replies/list2'">所有回文依時間排序</button>
 	<c:if test="${!empty beans}">
 		<table>
 			<thead>
 				<tr>
 					<th>id</th>
-					<th>name</th>
+					<th>title</th>
 					<th>createdDate</th>
-					<th>description</th>
-					<th>threadCount</th>
-					<th>replyCount</th>
-					<th>boardCategoria</th>
+					<th>replyContent</th>
+					<th>floor</th>
+					<th>isHide</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="s" items="${beans}">
 					<tr>
 						<td>${s.id}</td>
-						<td>${s.name}</td>
+						<td>${s.title}</td>
 						<td>${s.createdDate}</td>
-						<td>${s.description}</td>
-						<td>${s.threadCount}</td>
-						<td>${s.replyCount}</td>
-						<td>${s.boardCategoria}</td>
+						<td>${s.replyContent}</td>
+						<td>${s.floor}</td>
+						<td>${s.isHide}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

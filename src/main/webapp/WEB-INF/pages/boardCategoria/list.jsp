@@ -31,7 +31,7 @@
 						<td>${s.id}</td>
 						<td>${s.name}</td>
 						<td><input type="button" value="修改名稱"
-							onclick="javascript:location.href='/boardCategorias/edit?id=${ result.id }'">
+							onclick="javascript:location.href='/boardCategorias/edit?id=${ s.id }'">
 						</td>
 						<td>${s.createdDate}</td>
 					</tr>
@@ -39,25 +39,25 @@
 			</tbody>
 		</table>
 	</c:if>
-	<c:if test="${!empty boards}">
-		<table>
-			<thead>
-				<tr>
-					<th>id</th>
-					<th>name</th>
-					<th>createdDate</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="s" items="${boards}">
-					<tr>
-						<td>${s.id}</td>
-						<td>${s.name}</td>
-						<td>${s.createdDate}</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</c:if>
+<%-- 	<c:if test="${!empty boards}"> --%>
+<!-- 		<table> -->
+<!-- 			<thead> -->
+<!-- 				<tr> -->
+<!-- 					<th>id</th> -->
+<!-- 					<th>name</th> -->
+<!-- 					<th>createdDate</th> -->
+<!-- 				</tr> -->
+<!-- 			</thead> -->
+<!-- 			<tbody> -->
+<%-- 				<c:forEach var="s" items="${boards}"> --%>
+<!-- 					<tr> -->
+<%-- 						<td>${s.id}</td> --%>
+<%-- 						<td>${s.name}</td> --%>
+<%-- 						<td>${s.createdDate}</td> --%>
+<!-- 					</tr> -->
+<%-- 				</c:forEach> --%>
+<!-- 			</tbody> -->
+<!-- 		</table> -->
+<%-- 	</c:if> --%>
 </body>
 </html>

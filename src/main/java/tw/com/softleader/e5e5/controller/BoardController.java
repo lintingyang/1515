@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.com.softleader.e5e5.entity.Board;
 import tw.com.softleader.e5e5.service.BoardService;
+import tw.com.softleader.e5e5.service.ThreadService;
 
 @Controller
 @RequestMapping(value = "/boards")
@@ -17,7 +18,9 @@ public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
-
+	@Autowired
+	private ThreadService threadService;
+	
 	@RequestMapping(value = "/list")
 	public String list(Model model) {
 		List<Board> list = boardService.getBoardById();
@@ -32,10 +35,23 @@ public class BoardController {
 		return "/board/list";
 	}
 
+//	@RequestMapping(value = "/query")
+//	public String query(@RequestParam("name") String name, Model model) {
+//		Board board =boardService.getBoardByName(name);
+//		model.addAttribute("beans", board);
+//		return "/board/list";
+//	}
 	@RequestMapping(value = "/query")
-	public String query(@RequestParam("name") String name, Model model) {
-		Board board =boardService.getBoardByName(name);
-		model.addAttribute("beans", board);
+	public String query(@RequestParam("id") Integer id, Model model) {
+		if (id != null) {
+			Board board = boardService.getBoardById(id);
+			if (board != null) {
+				List<tw.com.softleader.e5e5.entity.Thread> models = threadService.getThreadByBoard(board);
+				model.addAttribute("beans", models);
+			}
+			return "/thread/list";
+		}
 		return "/board/list";
 	}
+	
 }

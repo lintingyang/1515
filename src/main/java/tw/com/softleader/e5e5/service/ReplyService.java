@@ -48,4 +48,9 @@ public class ReplyService {
 		}
 		return 'F';
 	}
+	
+	@Transactional
+	public List<Reply> getReplyById() {
+		return replyDao.findAll();
+	}
 }

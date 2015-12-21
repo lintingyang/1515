@@ -58,4 +58,8 @@ public class ThreadService {
 		th.setHit(hit);
 		return th;
 	}
+
+	public List<Thread> getThreadByBoard(Board board) {
+		return threadDao.findByBoard(board);
+	}
 }

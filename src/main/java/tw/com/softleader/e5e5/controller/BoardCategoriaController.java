@@ -38,14 +38,14 @@ public class BoardCategoriaController {
 				List<Board> models = boardService.getBoardByBoardCategoria(bc);
 				model.addAttribute("beans", models);
 			}
-			return "/boardCategoria/list";
+			return "/board/list";
 		}
 		return "/boardCategoria/list";
 	}
 
 	@RequestMapping(value = "/delete")
 	public String delete(Model model) {
-		return "/boardCategoria/list.jsp";
+		return "/boardCategoria/list";
 	}
 
 	@RequestMapping(value = "/add")
@@ -66,14 +66,14 @@ public class BoardCategoriaController {
 
 	@RequestMapping(value = "/edit")
 	public String edit(Model model, @ModelAttribute BoardCategoria boardCategoria) {
-		BoardCategoria bc = boardCategoriaService.findById(boardCategoria.getId());
+		BoardCategoria bc = boardCategoriaService.findByName(boardCategoria.getName());
 		model.addAttribute("boardCategorias", bc);
 		return "/boardCategoria/edit";
 	}
 
 	@RequestMapping(value = "/update")
 	public String update(Model model) {
-		return "/boardCategoria/add.jsp";
+		return "/boardCategoria/add";
 	}
 
 }

@@ -26,7 +26,7 @@ public class BoardCategoriaService {
 	}
 
 	@Transactional
-	public BoardCategoria findbyName(String name) {
+	public BoardCategoria findByName(String name) {
 		BoardCategoria boardCategoria = boardCategoriaDao.findByName(name);
 		if (boardCategoria != null) {
 			return boardCategoria;
