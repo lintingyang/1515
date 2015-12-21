@@ -12,7 +12,7 @@ public interface ThreadDao extends JpaRepository<Thread, Integer> {
 
 	public List<Thread> findByTitle(String title);
 
-	@Query(value = "select * from Thread t where created_time is not null order by created_time desc", nativeQuery = true)
+	@Query(value = "select * from Thread t where created_date is not null order by created_date desc", nativeQuery = true)
 	public List<Thread> findAllByCreatedTime();
 
 	@Query(value = "select * from Thread t where hit is not null order by hit desc", nativeQuery = true)

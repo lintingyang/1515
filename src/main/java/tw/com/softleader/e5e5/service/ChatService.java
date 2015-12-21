@@ -41,5 +41,19 @@ public class ChatService {
 
 		return result;
 	}
+	@Transactional
+	public Chat postChat(int userId, String messages,String picture) {
+		Chat result = null;
+		Chat chat = new Chat();
+		User user = userDao.findOne(userId);
+		
+		chat.setMessages(messages);
+		chat.setUser(user);
+		chat.setPicture(picture);
+		chat.setSendTime(new Date());
+		result = chatDao.save(chat);
+		
+		return result;
+	}
 
 }
