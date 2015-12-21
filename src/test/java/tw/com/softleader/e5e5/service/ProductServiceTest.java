@@ -123,6 +123,14 @@ public class ProductServiceTest {
 	}
 	
 	
+	//(12)update status
+	@Test
+	public void testUpdate(){
+		ProductService productService = new ProductService(productDao);
+		Product result = productService.update(12, 'F');
+		log.debug("更新postStatus:" + result);
+	}
+	
 	
 //	@Test
 //	public void testGetTopclickedProducts() {
