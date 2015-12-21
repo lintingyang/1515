@@ -1,5 +1,6 @@
 package tw.com.softleader.e5e5.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -11,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.com.softleader.e5e5.entity.Admin;
-import tw.com.softleader.e5e5.entity.Chat;
-import tw.com.softleader.e5e5.entity.User;
 import tw.com.softleader.e5e5.service.AdminService;
 
 @Controller
@@ -21,28 +20,37 @@ public class AdminController {
 	Logger log = Logger.getLogger(getClass());
 	@Autowired
 	private AdminService adminService;
-	
 
 	@RequestMapping(value = "/list")
-	public String list(Model model){
-		
+	public String list(Model model) {
+
 		List<Admin> list = adminService.findAllAdmins();
-		model.addAttribute("entity",list);
+		model.addAttribute("entity", list);
 		return "/admin/list";
 	}
-	@RequestMapping(value = "/query")
-	public String query(Model model,@ModelAttribute Admin admin){
-		Admin admin1 = adminService.findByAccount(admin.getAccount());
-		model.addAttribute("aaa",admin1);
+
+	@RequestMapping(value = "/query") // 用帳號搜尋管理員資料
+	public String query(Model model, @RequestParam("account") String account) {
+
+		if (account != null) {  
+			Admin admin1 = adminService.findByAccount(account);
+			if (admin1 != null) {  //判斷是否有找到此帳號
+				List<Admin> list = new ArrayList<Admin>();
+				list.add(admin1);
+				model.addAttribute("entity", list);
+			}
+
+		}
 		return "/admin/list";
+
 	}
-//	@RequestMapping(value = "/query")
-//	public String query(Model model,@RequestParam("account") String admin){
-//		Admin admin1 = adminService.findByAccount(admin);
-//		model.addAttribute("aaa",admin1);
-//		return "/admin/list";
-//	}
-//	
+	// @RequestMapping(value = "/query")
+	// public String query(Model model,@ModelAttribute@ String admin){
+	// Admin admin1 = adminService.findByAccount(admin);
+	// model.addAttribute("aaa",admin1);
+	// return "/admin/list";
+	// }
+	//
 
 	@RequestMapping(value = "/delete")
 	public String delete(Model model) {
@@ -54,16 +62,24 @@ public class AdminController {
 		return "/admin/add";
 	}
 
-
 	@RequestMapping(value = "/insert")
-	public String insert(Model model) {
+	public String insert(Model model, @ModelAttribute Admin admin) {
+		int result = adminService.addNewAdmin(admin.getAccount(), admin.getAuthority(), admin.getName(),
+				admin.getPassword(), admin.getEmail());
+		if (result == 1) {
+			log.error("add success!");
+			model.addAttribute("message", "新增成功");
+		} else {
+			log.error("add error account exist!");
+			model.addAttribute("message", "新增出錯！");
+		}
 		return "/admin/add";
 	}
 
-	@RequestMapping(value = "/edit") 
-	public String edit(Model model,@ModelAttribute Admin admin) {
+	@RequestMapping(value = "/edit")
+	public String edit(Model model, @ModelAttribute Admin admin) {
 		Admin admin1 = adminService.findById(admin.getId());
-		model.addAttribute("admin",admin1);
+		model.addAttribute("admin", admin1);
 		return "/admin/edit";
 	}
 

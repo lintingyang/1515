@@ -15,7 +15,7 @@
 	</form>
 	<button type="button" onclick="location.href='/admins/add'">新增管理員</button>
 
-	${aaa.name}
+	
 	<table border="1">
 		<tr>
 			<th>edit</th>
@@ -26,17 +26,17 @@
 			<th>email</th>
 			<th>authority</th>
 		</tr>
-		<c:forEach items="${ entity }" var="admin">
+		<c:forEach items="${ entity }" var="result">
 			<tr>
 				<td><input type="button" value="修改"
-					onclick="javascript:location.href='/admins/edit?id=${ admin.id }'">
+					onclick="javascript:location.href='/admins/edit?id=${ result.id }'">
 				</td>
-				<td>${ admin.id }</td>
-				<td>${ admin.account }</td>
-				<td>${ admin.password }</td>
-				<td>${ admin.name }</td>
-				<td>${ admin.email }</td>
-				<td>${ admin.authority }</td>
+				<td>${ result.id }</td>
+				<td>${ result.account }</td>
+				<td>${ result.password }</td>
+				<td>${ result.name }</td>
+				<td>${ result.email }</td>
+				<td>${ result.authority }</td>
 
 			</tr>
 
