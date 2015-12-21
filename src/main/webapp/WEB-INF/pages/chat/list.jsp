@@ -8,9 +8,10 @@
 <title>List</title>
 </head>
 <body>
-<form  action="/chats/insert" method="get">
+<form  action="/chats/insert" method="post" enctype="multipart/form-data">
 	<input type="text" name="id" size="5" placeholder="使用者ID">
-	<input type="text" name="message">
+	<input type="text" name="message"><br>
+	<input type="file" name="file" /><br>
 	<input type="submit" value="輸入">
 </form>
 	<c:if test="${!empty beans}">
@@ -20,6 +21,7 @@
 					<th>id</th>
 					<th>user</th>
 					<th>messages</th>
+					<th>picture</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -28,6 +30,7 @@
 						<td>${s.id}</td>
 						<td>${s.user.name}</td>
 						<td>${s.messages}</td>
+						<td>${s.picture}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
