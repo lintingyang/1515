@@ -8,7 +8,7 @@ import tw.com.softleader.e5e5.entity.BoardCategoria;
 
 public interface BoardCategoriaDao extends JpaRepository<BoardCategoria, Integer>{
 
-	public List<BoardCategoria> findByName(String name);
+	public BoardCategoria findByName(String name);
 
 	
 }

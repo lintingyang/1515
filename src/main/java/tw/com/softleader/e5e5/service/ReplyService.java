@@ -38,6 +38,10 @@ public class ReplyService {
 	}
 	
 	@Transactional
+	public  List<Reply> getReplyByThread(Thread thread){
+		return replyDao.findByThread(thread);
+	}
+	@Transactional
 	public Character hideReply(Reply reply){
 		if(reply.getIsHide()=='F'){
 			reply.setIsHide('T');

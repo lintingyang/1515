@@ -34,7 +34,7 @@ public class Thread implements java.io.Serializable {
 	private Date createdDate;
 	private String threadContent;
 	private Integer hit;
-	private Integer replayCount;
+	private Integer replyCount;
 	private Date lastReplyDate;
 	private Character isReadonly;
 	private Character isCream;
@@ -50,7 +50,7 @@ public class Thread implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "Thread [id=" + id + ", title=" + title + ", createdDate=" + createdDate + ", threadContent="
-				+ threadContent + ", hit=" + hit + ", replayCount=" + replayCount + ", lastReplyDate=" + lastReplyDate
+				+ threadContent + ", hit=" + hit + ", replyCount=" + replyCount + ", lastReplyDate=" + lastReplyDate
 				+ ", isReadonly=" + isReadonly + ", topped=" + topped + "]";
 	}
 
@@ -65,7 +65,7 @@ public class Thread implements java.io.Serializable {
 	}
 
 	public Thread(int id, Board board, User user, String title, Date createdDate,
-			String threadContent, Integer hit, Integer replayCount, Date lastReplyDate, Character isReadonly,
+			String threadContent, Integer hit, Integer replyCount, Date lastReplyDate, Character isReadonly,
 			Character topped, Set<Report> reports, Set<ThreadTag> threadTags, Set<ForumPicture> forumPictures,
 			Set<Board> boards, Set<Reply> replies) {
 		this.id = id;
@@ -75,7 +75,7 @@ public class Thread implements java.io.Serializable {
 		this.createdDate = createdDate;
 		this.threadContent = threadContent;
 		this.hit = hit;
-		this.replayCount = replayCount;
+		this.replyCount = replyCount;
 		this.lastReplyDate = lastReplyDate;
 		this.isReadonly = isReadonly;
 		this.topped = topped;
@@ -173,12 +173,12 @@ public class Thread implements java.io.Serializable {
 	}
 
 	@Column(name = "replay_count")
-	public Integer getReplayCount() {
-		return this.replayCount;
+	public Integer getReplyCount() {
+		return this.replyCount;
 	}
 
-	public void setReplayCount(Integer replayCount) {
-		this.replayCount = replayCount;
+	public void setReplyCount(Integer replyCount) {
+		this.replyCount = replyCount;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
