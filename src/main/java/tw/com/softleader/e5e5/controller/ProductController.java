@@ -37,7 +37,7 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/query")
-	public String query(Model model, @RequestParam("pname") String name) {
+	public String query(Model model, @RequestParam("pKeywords") String name) {
 		List<Product> products = productService.getAllByKeywords(name);
 		model.addAttribute("products", products);
 		return "/product/list";
@@ -67,16 +67,17 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/edit")
-	public String edit(Model model) {
-		List<Product> products = productService.getAllProducts();
-		model.addAttribute("products", products);
-		
+	public String edit(Model model, @RequestParam("pId") Integer id) {
+		Product products = productService.getOneById(id);
+		model.addAttribute("p", products);
 		return "/product/edit";
 	}
 
 	@RequestMapping(value = "/update")
-	public String update(Model model) {
-		return "/product/add";
+	public String update(Model model, @RequestParam("pId") Integer id, @RequestParam("pPS") char postStatus) {
+		Product products = productService.update(id, postStatus);
+		model.addAttribute("p", products);
+		return "/product/edit";
 	}
 
 }
