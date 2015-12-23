@@ -33,6 +33,7 @@ public class BroadcastController {
 		Broadcast broadcast=broadcastService.postBroadcast(id, broadcastDescription);
 		List<Broadcast> broadcasts = broadcastService.getLastTenBroadcasts();
 		model.addAttribute("beans", broadcasts);
+		
 		return "/broadcast/list";
 	}
 	
