@@ -20,6 +20,7 @@ public class ThreadService {
 	@Autowired
 	private ThreadDao threadDao;
 	
+	//新增帖子
 	@Transactional
 	public int createThread(Board board , User user , String title , String threadContent , Set<ThreadTag> threadTags ,Set<ForumPicture> forumPictures){
 		Thread thread = new Thread();

@@ -66,14 +66,20 @@ public class BoardCategoriaController {
 
 	@RequestMapping(value = "/edit")
 	public String edit(Model model, @ModelAttribute BoardCategoria boardCategoria) {
-		BoardCategoria bc = boardCategoriaService.findByName(boardCategoria.getName());
+		BoardCategoria bc = boardCategoriaService.findById(boardCategoria.getId());
 		model.addAttribute("boardCategorias", bc);
 		return "/boardCategoria/edit";
 	}
 
 	@RequestMapping(value = "/update")
-	public String update(Model model) {
-		return "/boardCategoria/add";
+	public String update(@ModelAttribute BoardCategoria boardCategoria,  Model model) {
+		int result = boardCategoriaService.updateCategoria(boardCategoria.getId(), boardCategoria.getName());
+		if (result == 1) {
+			model.addAttribute("message", "修改成功");
+		} else {
+			model.addAttribute("message", "修改失敗");
+		}
+		return "/boardCategoria/edit";
 	}
 
 }
