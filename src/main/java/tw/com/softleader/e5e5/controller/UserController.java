@@ -26,9 +26,9 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/query")
-	public String query(Model model ,@RequestParam String account) {
-		User temp = userService.findByAccount(account);
-		model.addAttribute("getOne", temp);
+	public String query(Model model ,@RequestParam("account") String account) {
+		User temp1 = userService.findByAccount(account);
+		model.addAttribute("getOne", temp1);
 		return "/user/list";
 	}
 	
