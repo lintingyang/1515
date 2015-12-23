@@ -30,7 +30,7 @@ public class UserBanListController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/query")
+	@RequestMapping(value="/query", produces = "application/json")
 	public List<UserBanList> query(@RequestBody UserBanList form) {
 		
 		log.debug("{}", form);

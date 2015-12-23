@@ -6,36 +6,58 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>List</title>
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+<script src="/resources/js/jquery-1.11.3.js"></script>  
+<script src="/resources/js/bootstrap.min.js"></script>
+<script>
+$(function(){    
+	 $("#btn").click(function(){
+		 	var formData = JSON.stringify($("#myForm").serializeArray());
+		 	formData={"id":"1","broadcastDescription":"test"};
+			alert(formData);
+	        $.ajax({
+	           type: "GET",
+	           url: "http://localhost:8080/broadcasts/insert",
+	           data: formData,
+	           success: function(data){
+	        	   alert("data");
+	           },
+	           dataType: "json",
+	           contentType : "application/json"
+	         });
+	    });
+});
+</script>
 </head>
 <body>
-<form  action="/broadcasts/insert" method="get">
-	<input type="text" name="id" size="5" placeholder="使用者ID">
-	<input type="text" name="broadcastDescription">
-	<input type="submit" value="輸入">
-</form>
-	<c:if test="${!empty beans}">
-		<table>
-			<thead>
+	<form id="myForm">
+		<input type="text" name="id" size="5" placeholder="使用者ID">
+		<input type="text" name="broadcastDescription">
+	</form>
+	<button id="btn">輸入</button>
+	<table>
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>user</th>
+				<th>broadcastDescription</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="s" items="${beans}">
 				<tr>
-					<th>id</th>
-					<th>user</th>
-					<th>broadcastDescription</th>
-					<th></th>
+					<td>${s.id}</td>
+					<td>${s.user.name}</td>
+					<td>${s.broadcastDescription}</td>
+					<td><input type="submit" value="Delete" 
+   					onclick="window.location='delete?id=${s.id}';" />  </td>
 				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="s" items="${beans}">
-					<tr>
-						<td>${s.id}</td>
-						<td>${s.user.name}</td>
-						<td>${s.broadcastDescription}</td>
-						<td><input type="submit" value="Delete" 
-    					onclick="window.location='delete?id=${s.id}';" />  </td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</c:if>
+			</c:forEach>
+		</tbody>
+	</table>
+
+
 
 
 </body>

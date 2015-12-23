@@ -7,6 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>List</title>
 </head>
+
+
 <body>
 <form  action="/chats/insert" method="post" enctype="multipart/form-data">
 	<input type="text" name="id" size="5" placeholder="使用者ID">
