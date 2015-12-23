@@ -40,7 +40,7 @@ public class AdminController {
 	@RequestMapping(value = "/query") // 用帳號搜尋管理員資料
 	public String query(Model model, @RequestParam("account") String account) {
 
-		account = account.replaceAll("\\s+", "");
+		//account = account.replaceAll("\\s+", "");
 		if (account != null && !account.equals("")) {  
 			Admin admin1 = adminService.findByAccount(account);
 			if (admin1 != null) {  //判斷是否有找到此帳號
