@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+search by product A id:
 <form action="/exchanges/query" method="get">
 <input name="id">
 <input type="submit" value="submit">
@@ -18,6 +19,7 @@
 		<td>${item.id}</td>	
 		<td>${item.exchangeTime}</td>
 		<td>${item.productByProductAId.name}</td>
+		<td>${item.productByProductBId.name}</td>
 	</tr>
 	</c:forEach>
 	<c:forEach items="${results}" var="item">
@@ -25,6 +27,7 @@
 		<td>${item.id}</td>	
 		<td>${item.exchangeTime}</td>
 		<td>${item.productByProductAId.name}</td>
+		<td>${item.productByProductBId.name}</td>
 	</tr>
 	</c:forEach>
 </table>

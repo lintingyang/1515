@@ -19,6 +19,11 @@ public class BoardService {
 	@Autowired
 	private BoardCategoriaDao boardCategoriaDao;
 	
+	//依Id排序版面
+	@Transactional
+	public List<Board> getBoardById() {
+		return boardDao.findAll();
+	}
 	//依名字排序版面
 	@Transactional
 	public List<Board> getBoardByName() {
@@ -43,11 +48,17 @@ public class BoardService {
 		return boardDao.findByName(name);
 	}
 
+	//依ID搜尋版面
+	@Transactional
+	public Board getBoardById(Integer id) {
+		return boardDao.findOne(id);
+	}
 	//依帖子數搜尋
 	@Transactional
 	public List<Board> getBoardByThreadCount(String name) {
 		return boardDao.findAllOrderByThreadCount();
 	}
+	//新增版
 	@Transactional
 	public int createBoard(BoardCategoria boardCategoria, String name, String description, String picture) {
 		if (boardDao.findByName(name) == null) {

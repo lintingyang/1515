@@ -30,7 +30,7 @@ public class ThreadService {
 		thread.setThreadContent(threadContent);
 		thread.setHit(0);
 		thread.setIsCream('F');
-		thread.setReplayCount(0);
+		thread.setReplyCount(0);
 		thread.setIsReadonly('F');
 		thread.setTopped('F');
 		thread.setForumPictures(forumPictures);
@@ -44,9 +44,22 @@ public class ThreadService {
 		return threadDao.findAllByCreatedTime();
 	}
 	@Transactional
+	public Thread getThreadById(Integer id){
+		return threadDao.findOne(id);
+	}
+	
+	@Transactional
+	public List<Thread> getThreadById(){
+		return threadDao.findAll();
+	}
+	@Transactional
 	public Thread updateHit(Thread thread ,Integer hit){
 		Thread th = threadDao.findOne(thread.getId());
 		th.setHit(hit);
 		return th;
+	}
+
+	public List<Thread> getThreadByBoard(Board board) {
+		return threadDao.findByBoard(board);
 	}
 }
