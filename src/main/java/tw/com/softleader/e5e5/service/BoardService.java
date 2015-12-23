@@ -73,14 +73,15 @@ public class BoardService {
 			board.setDescription(description);
 			board.setPicture(picture);
 			boardDao.save(board);
+			return 1;
 		}
 		return -1;
 	}
 	
 	//設定隱藏版
 	@Transactional
-	public char hideBoard(Character ch) {
-		Board board = new Board();
+	public char hideBoard(Integer id ,Character ch) {
+		Board board = boardDao.findOne(id);
 		if (ch == 'T') {
 			board.setIsHide('T');
 		}else if(ch == 'F'){

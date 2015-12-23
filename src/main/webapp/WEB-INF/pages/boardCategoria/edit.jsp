@@ -9,12 +9,12 @@
 </head>
 <body>
 
-	<form action="/boardCategorias/edit" method="get">
-		
+	<form action="/boardCategorias/update" method="get">
+		<input type="hidden" name="id" value="${boardCategoria.id}">
 		<input type="text" name="name" > 
-		<input type="submit" value="送出">
+		<input type="submit" value="送出"><input type="button" value="回列表" onclick="location.href='/boardCategorias/list'">
 	</form>
-	
+		${ message }
 
 </body>
 

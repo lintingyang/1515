@@ -11,49 +11,46 @@
 
 
 
-	<form action="/boardCategorias/edit" method="get">
+<!-- 	<form action="/boards/edit" method="get"> -->
 	
-		<input type="text" name="name" > 
-		<input type="submit" value="送出">
-	</form>
+<!-- 		<input type="text" name="name" >  -->
+<!-- 		<input type="submit" value="送出"> -->
+<!-- 	</form> -->
 	
-	<form action="/users/update" method="get">
-	<table>
-		<tr>
-			<th>ID</th>
-			<th>Name</th>
-			<th>CreatedDate</th>
-		</tr>
-		<c:if test="${!empty getOne.id}" >
-		<tr>
-			<td>${getOne.id}</td>
-			<td>${getOne.name}</td>
-			<td><input type="text" name="account" value="${getOne.account}" readonly="readonly" style="border:none"></td>
-			<td>${getOne.address}</td>
-			<td>${getOne.schoolEmail}</td>
-			<td>${getOne.gameScore}</td>
-			<td>${getOne.onlineDatetime}</td>
-			<td>
-				<select name="isolate"> 
-					<option value="F">F
-					<option value="T">T
-				</select>
-				<input type="submit" value="送出">
-			</td>
-			
-		</tr>
-		<tr>
-			<td>${getOne.id}</td>
-			<td>${getOne.name}</td>
-			<td>${getOne.account}</td>
-			<td>${getOne.address}</td>
-			<td>${getOne.schoolEmail}</td>
-			<td>${getOne.gameScore}</td>
-			<td>${getOne.onlineDatetime}</td>
-			<td>${getOne.isolated}</td>
-		</tr>
-		</c:if>
-	</table>
+	<form action="/boards/update" method="get">
+	<c:if test="${!empty beans}">
+		<table>
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>name</th>
+					<th>createdDate</th>
+					<th>description</th>
+					<th>threadCount</th>
+					<th>replyCount</th>
+					<th>boardCategoria</th>
+					<th>isCream</th>
+					<th>isHide</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="s" items="${beans}">
+					<tr>
+						<td>${s.id}</td>
+						<td>${s.name}</td>
+						<td>${s.createdDate}</td>
+						<td>${s.description}</td>
+						<td>${s.threadCount}</td>
+						<td>${s.replyCount}</td>
+						<td>${s.boardCategoria}</td>
+						<td>${s.isCream}</td>
+						<td>${s.isHide}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</c:if>
+
 	</form>
 	
 
