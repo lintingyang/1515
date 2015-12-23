@@ -12,6 +12,7 @@
 		查詢單一帳號:<input type="text" name="account"> 
 		<input type="submit" value="送出">
 	</form>
+	
 	<table>
 		<tr>
 			<th>ID</th>

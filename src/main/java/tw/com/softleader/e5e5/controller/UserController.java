@@ -47,7 +47,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/update")
-	public String update(Model model ,@RequestParam("account") String account,@RequestParam("isolate") Character isolate) {
+	public String update(Model model ,@RequestParam("account") String account,@RequestParam("isolate") Character isolate ,@RequestParam("score") String changeScore) {
 		System.out.println("====================================");
 		System.out.println("====================================");
 		System.out.println("====================================");
@@ -55,10 +55,24 @@ public class UserController {
 		System.out.println("====================================");
 		System.out.println("====================================");
 		System.out.println("====================================");
-		System.out.println(account+"========================================"+isolate);
-		userService.updataIsolated(account, isolate);
-		User temp = userService.findByAccount(account);
-		model.addAttribute("getOne", temp);
+		System.out.println(account+"========================================"+isolate+"==================="+changeScore);
+		
+		try{
+			int score = Integer.parseInt(changeScore);
+			userService.updataIsolated(account, isolate);
+			userService.drewScores(account, score);
+			User temp = userService.findByAccount(account);
+			model.addAttribute("getOne", temp);
+			}
+		catch(Exception e){
+			
+			userService.updataIsolated(account, isolate);
+			User temp = userService.findByAccount(account);
+			model.addAttribute("getOne", temp);
+			
+		}
+		
+
 		return "/user/edit";
 	}
 }

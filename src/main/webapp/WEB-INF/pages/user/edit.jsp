@@ -13,7 +13,7 @@
 
 	<form action="/users/update1" method="get">
 	
-		<input type="text" name="account" > 
+		<input type="text" name="account" placeholder="數入account"> 
 		<input type="submit" value="送出">
 	</form>
 	
@@ -28,6 +28,7 @@
 			<th>GameScore</th>
 			<th>onlineDatetime</th>
 			<th>Isolated</th>
+			<th>changeScore</th>
 		</tr>
 		<c:if test="${!empty getOne.id}" >
 		<tr>
@@ -43,10 +44,11 @@
 					<option value="F">F
 					<option value="T">T
 				</select>
-				<input type="submit" value="送出">
 			</td>
-			
+			<td><input type="text" name="score"/></td>
+			<td><input type="submit" value="送出"></td>
 		</tr>
+
 		<tr>
 			<td>${getOne.id}</td>
 			<td>${getOne.name}</td>
