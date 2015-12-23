@@ -18,10 +18,14 @@ td, th {
 </head>
 <body>
 	<form action="/products/query" method="get">
-		關鍵字(產品名稱、交換地、使用者名稱、產品類別)：
-		<input type="text" name="pname">
-		<input type="submit" value="search"><hr>
+		關鍵字(產品名稱、交換地、使用者名稱、產品類別)： <input type="text" name="pKeywords"> <input
+			type="submit" value="search">
 	</form>
+	<hr>
+	<form action="/products/add">
+		<input type="submit" value="新增產品">
+	</form>
+	<hr>
 	<table style="border: 1px solid blue;">
 		<thead>
 			<tr>
@@ -45,35 +49,41 @@ td, th {
 				<th>交換時間</th>
 				<th>評比</th>
 				<th>評比時間</th>
+				<th>刪除產品</th>
 			</tr>
 		</thead>
-		<c:forEach items="${products}" var="p">
-			<tr>
-				<td>${p.id}</td>
-				<td>${p.name}</td>
-				<td>${p.productCategory.id}</td>
-				<td>${p.productCategory.name}</td>
-				<td>${p.userByUserId.id}</td>
-				<td>${p.userByUserId.name}</td>
-				<td>${p.postTime}</td>
-				<td>${p.deadline}</td>
-				<td>${p.location}</td>
-				<td>${p.tradeWay}</td>
-				<td>${p.wishItem}</td>
-				<td>
-					${p.postStatus}
-					<input type="button" value="edit" onclick="javascript:location.href='edit?q=${p.id}'">
-				</td>
-				<td>${p.tradeStatus}</td>
-				<td>${p.clickTimes}</td>
-				<td>${p.exchange.id}</td>
-				<td>${p.product.id}</td>
-				<td>${p.userByItemOwnerId.id}</td>
-				<td>${p.tradeFinishedTime}</td>
-				<td>${p.grade}</td>
-				<td>${p.gradeTime}</td>
-			</tr>
-		</c:forEach>
+		<tbody>
+			<c:forEach items="${products}" var="p">
+				<tr>
+					<td>${p.id}</td>
+					<td>${p.name}</td>
+					<td>${p.productCategory.id}</td>
+					<td>${p.productCategory.name}</td>
+					<td>${p.userByUserId.id}</td>
+					<td>${p.userByUserId.name}</td>
+					<td>${p.postTime}</td>
+					<td>${p.deadline}</td>
+					<td>${p.location}</td>
+					<td>${p.tradeWay}</td>
+					<td>${p.wishItem}</td>
+					<td>${p.postStatus} <input type="button" value="修改狀態"
+						onclick="javascript:location.href='edit?id=${p.id}'">
+					</td>
+					<td>${p.tradeStatus}</td>
+					<td>${p.clickTimes}</td>
+					<td>${p.exchange.id}</td>
+					<td>${p.product.id}</td>
+					<td>${p.userByItemOwnerId.id}</td>
+					<td>${p.tradeFinishedTime}</td>
+					<td>${p.grade}</td>
+					<td>${p.gradeTime}</td>
+					<td>
+						<input type="button" value="刪除產品" 
+						onclick="javascript:location.href='delete?id=${p.id}'">
+					</td>
+				</tr>
+			</c:forEach>
+		</tbody>
 	</table>
 </body>
 </html>

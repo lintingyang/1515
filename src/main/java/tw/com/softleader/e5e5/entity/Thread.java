@@ -34,15 +34,25 @@ public class Thread implements java.io.Serializable {
 	private Date createdDate;
 	private String threadContent;
 	private Integer hit;
-	private Integer replayCount;
+	private Integer replyCount;
 	private Date lastReplyDate;
 	private Character isReadonly;
+	private Character isCream;
+	private Character isHide;
 	private Character topped;
 	private Set<Report> reports = new HashSet<Report>(0);
 	private Set<ThreadTag> threadTags = new HashSet<ThreadTag>(0);
 	private Set<ForumPicture> forumPictures = new HashSet<ForumPicture>(0);
 	private Set<Board> boards = new HashSet<Board>(0);
 	private Set<Reply> replies = new HashSet<Reply>(0);
+
+	
+	@Override
+	public String toString() {
+		return "Thread [id=" + id + ", title=" + title + ", createdDate=" + createdDate + ", threadContent="
+				+ threadContent + ", hit=" + hit + ", replyCount=" + replyCount + ", lastReplyDate=" + lastReplyDate
+				+ ", isReadonly=" + isReadonly + ", topped=" + topped + "]";
+	}
 
 	public Thread() {
 	}
@@ -55,7 +65,7 @@ public class Thread implements java.io.Serializable {
 	}
 
 	public Thread(int id, Board board, User user, String title, Date createdDate,
-			String threadContent, Integer hit, Integer replayCount, Date lastReplyDate, Character isReadonly,
+			String threadContent, Integer hit, Integer replyCount, Date lastReplyDate, Character isReadonly,
 			Character topped, Set<Report> reports, Set<ThreadTag> threadTags, Set<ForumPicture> forumPictures,
 			Set<Board> boards, Set<Reply> replies) {
 		this.id = id;
@@ -65,7 +75,7 @@ public class Thread implements java.io.Serializable {
 		this.createdDate = createdDate;
 		this.threadContent = threadContent;
 		this.hit = hit;
-		this.replayCount = replayCount;
+		this.replyCount = replyCount;
 		this.lastReplyDate = lastReplyDate;
 		this.isReadonly = isReadonly;
 		this.topped = topped;
@@ -85,6 +95,24 @@ public class Thread implements java.io.Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	@Column(name = "is_hide", length = 1)	
+	public Character getIsHide() {
+		return isHide;
+	}
+
+	public void setIsHide(Character isHide) {
+		this.isHide = isHide;
+	}
+
+	@Column(name = "is_cream", length = 1)
+	public Character getIsCream() {
+		return isCream;
+	}
+
+	public void setIsCream(Character isCream) {
+		this.isCream = isCream;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -145,12 +173,12 @@ public class Thread implements java.io.Serializable {
 	}
 
 	@Column(name = "replay_count")
-	public Integer getReplayCount() {
-		return this.replayCount;
+	public Integer getReplyCount() {
+		return this.replyCount;
 	}
 
-	public void setReplayCount(Integer replayCount) {
-		this.replayCount = replayCount;
+	public void setReplyCount(Integer replyCount) {
+		this.replyCount = replyCount;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)

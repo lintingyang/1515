@@ -13,37 +13,59 @@ import tw.com.softleader.e5e5.entity.Admin;
 public class AdminService {
 	@Autowired
 	private AdminDao adminDao;
-	
-	
+
 	@Transactional
-	public Admin findByAccount(String account){
-		return adminDao.findByAccount(account);
+	public Admin findById(Integer id) {
+		return adminDao.findOne(id);
 	}
+
+	@Transactional
+	public int deleteById(Integer id) {
+		Admin admin = adminDao.findOne(id);
+		if (admin != null) {
+			adminDao.delete(admin);
+			return 1;
+		}
+		return 0;
+	}
+
+	@Transactional
+	public Admin findByAccount(String account) {
+		Admin admin = adminDao.findByAccount(account);
+		if (admin != null) {
+			return admin;
+		} else {
+			return null;
+		}
+	}
+
 	@Transactional
 	public List<Admin> findAllAdmins() {
 		return adminDao.findAll();
 	}
+
 	@Transactional
-	public int updateAuthority(String account,String authority){
+	public int updateAuthority(String account, String authority) {
 		Admin admin = adminDao.findByAccount(account);
-		if(admin != null){
+		if (admin != null) {
 			admin.setAuthority(authority);
 			adminDao.save(admin);
 			return 1;
 		}
 		return 0;
 	}
+
 	@Transactional
-	public int updateAdmin(String account, String authority, String name, String password, String email){
+	public int updateAdmin(String account, String authority, String name, String password, String email) {
 		Admin admin = adminDao.findByAccount(account);
-		if(admin !=null){
+		if (admin != null) {
 			admin.setAuthority(authority);
 			admin.setName(name);
 			admin.setEmail(email);
 			admin.setPassword(password);
 			adminDao.save(admin);
 			return 1;
-		}else {
+		} else {
 			return 0;
 		}
 	}
@@ -51,7 +73,7 @@ public class AdminService {
 	@Transactional
 	public int addNewAdmin(String account, String authority, String name, String password, String email) {
 		Admin checkAdmin = adminDao.findByAccount(account);
-		if (checkAdmin == null) {         //檢查是否有相同帳號，如果有則回傳0
+		if (checkAdmin == null) { // 檢查是否有相同帳號，如果有則回傳0
 			Admin admin = new Admin();
 			admin.setAccount(account);
 			admin.setAuthority(authority);
@@ -59,7 +81,7 @@ public class AdminService {
 			admin.setPassword(password);
 			admin.setEmail(email);
 			adminDao.save(admin);
-			return 1;                 //新增成功則回傳1
+			return 1; // 新增成功則回傳1
 		} else {
 			return 0;
 		}

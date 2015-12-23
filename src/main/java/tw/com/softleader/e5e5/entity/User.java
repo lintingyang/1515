@@ -43,6 +43,7 @@ public class User implements java.io.Serializable {
 	private Integer onlineDatetime;
 	private String schoolName;
 	private Character emailCheck;
+	private Character isolated;
 	private Set<Broadcast> broadcasts = new HashSet<Broadcast>(0);
 	private Set<FocusUserList> focusUserListsForUserAId = new HashSet<FocusUserList>(0);
 	private Set<UserBanList> userBanListsForUserAId = new HashSet<UserBanList>(0);
@@ -61,11 +62,11 @@ public class User implements java.io.Serializable {
 	public User(int id) {
 		this.id = id;
 	}
-
+	
 	public User(int id, String password, String name, String nickname, String account, Integer age, Character sex,
 			Date birthday, String address, String phone, String cellphone, String email, String picture,
 			String schoolEmail, String focusItemList, Integer gameScore, Integer onlineDatetime,String schoolName,
-			Character emailCheck,
+			Character emailCheck,Character isolated,
 			Set<Broadcast> broadcasts, Set<FocusUserList> focusUserListsForUserAId,
 			Set<UserBanList> userBanListsForUserAId, Set<UserBanList> userBanListsForUserBId,
 			Set<FocusUserList> focusUserListsForUserBId, Set<Messages> messageses, Set<Product> productsForItemOwnerId,
@@ -90,6 +91,7 @@ public class User implements java.io.Serializable {
 		this.onlineDatetime = onlineDatetime;
 		this.schoolName = schoolName;
 		this.emailCheck = emailCheck;
+		this.isolated = isolated;
 		this.broadcasts = broadcasts;
 		this.focusUserListsForUserAId = focusUserListsForUserAId;
 		this.userBanListsForUserAId = userBanListsForUserAId;
@@ -111,9 +113,8 @@ public class User implements java.io.Serializable {
 	
 
 
-	public void setUserBanListsForUserAId(Set<UserBanList> userBanListsForUserAId) {
-		this.userBanListsForUserAId = userBanListsForUserAId;
-	}
+
+
 
 	@Override
 	public String toString() {
@@ -121,7 +122,7 @@ public class User implements java.io.Serializable {
 				+ account + ", age=" + age + ", sex=" + sex + ", birthday=" + birthday + ", address=" + address
 				+ ", phone=" + phone + ", cellphone=" + cellphone + ", email=" + email + ", picture=" + picture
 				+ ", schoolEmail=" + schoolEmail + ", focusItemList=" + focusItemList + ", gameScore=" + gameScore
-				+ ", onlineDatetime=" + onlineDatetime +", schoolName=" +schoolName+", emailCheck=" + emailCheck +"]";
+				+ ", onlineDatetime=" + onlineDatetime +", schoolName=" +schoolName+", emailCheck=" + emailCheck + ", isolated"+ isolated +"]";
 	}
 
 	
@@ -300,6 +301,15 @@ public class User implements java.io.Serializable {
 		this.emailCheck = emailCheck;
 	}
 	
+	@Column(name = "isolated", length = 1)
+	public Character getIsolated() {
+		return isolated;
+	}
+
+	public void setIsolated(Character isolated) {
+		this.isolated = isolated;
+	}
+	
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	@Transactional
@@ -317,6 +327,8 @@ public class User implements java.io.Serializable {
 		return this.focusUserListsForUserAId;
 	}
 
+	
+	
 	public void setFocusUserListsForUserAId(Set<FocusUserList> focusUserListsForUserAId) {
 		this.focusUserListsForUserAId = focusUserListsForUserAId;
 	}
@@ -327,6 +339,11 @@ public class User implements java.io.Serializable {
 		return this.userBanListsForUserAId;
 	}
 
+	public void setUserBanListsForUserAId(Set<UserBanList> userBanListsForUserAId) {
+		this.userBanListsForUserAId = userBanListsForUserAId;
+	}
+	
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserBId")
 	@Transactional
 	public Set<UserBanList> getUserBanListsForUserBId() {

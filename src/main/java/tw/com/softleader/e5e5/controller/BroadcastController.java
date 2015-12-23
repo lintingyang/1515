@@ -42,7 +42,7 @@ public class BroadcastController {
 		broadcastService.deleteBroadcast(id);
 		List<Broadcast> broadcasts = broadcastService.getLastTenBroadcasts();
 		model.addAttribute("beans", broadcasts);
-		return "/broadcast/list";
+		return "/broadcast/delete";
 	}
 
 }
