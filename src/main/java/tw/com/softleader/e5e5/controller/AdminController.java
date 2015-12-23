@@ -41,7 +41,6 @@ public class AdminController {
 		
 
 		return list;
-
 	}
 
 	@RequestMapping(value = "/delete")
