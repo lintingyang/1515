@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Product Edit</title>
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet" >
 <style type="text/css">
 table {
 	border-collapse: collapse;
@@ -23,6 +24,8 @@ label{
 	text-align: center;
 }
 </style>
+<script type="text/javascript"	src="/resources/js/jquery-1.11.3.js"></script>
+<script type="text/javascript"	src="/resources/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<form action="/products/query" method="get">
@@ -35,13 +38,26 @@ label{
 	</form>
 	<input type="button" value="回商品清單列表" onclick="javascript:location.href='list'">
 	<hr>
-	<form action="/products/insert">
+
+
+	<form id="theForm">
+		Name:<input type="text" name="name">
+		location:<input type="text" name="location">
+		<input type="button" value="insertOne" id="btnIn">
+	
+	
+	</form>
+	
+	<hr>
+
+
+	<!-- <form action="/products/insert">
 		<div>
 			<label>產品名稱：</label><input type="text" name="name" size="30">
 		</div>
-		<!-- <div>
+		<div>
 			<label>使用者：</label><input type="text" name="user" size="10">
-		</div> -->
+		</div>
 		<div>
 			<label>產品類別：</label>
 			<select name="pCategory">
@@ -58,9 +74,9 @@ label{
 				<option value="11">美妝</option>
 			</select>
 		</div>
-<!-- 		<div> -->
-<!-- 			<label>刊登截止日期：</label><input type="text" name="deadline"> -->
-<!-- 		</div> -->
+		<div>
+			<label>刊登截止日期：</label><input type="text" name="deadline">
+		</div>
 		<div>
 			<label>交換地點：</label><input type="text" size="50" name="location">
 		</div>
@@ -70,16 +86,46 @@ label{
 		<div>
 			<label>慾望清單：</label><textarea rows="4" cols="50" name="wishItem"></textarea>
 		</div>
-		<!-- <div>
+		<div>
 			<label>圖片：</label><input type="file" name="picture" multiple>
 		</div>
 		<div>
 			<label>影片：</label><input type="file" name="video">
-		</div> -->
+		</div>
 		<div>
 			<input type="submit" value="送出">
 		</div>
-	</form>
+	</form> -->
 	${result}
+<script>
+	$('#btnIn').click(function(){
+// 		 console.log(data);
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "/products/insert",
+			data : JSON.stringify({name:$("#name").val(),
+				location:$("#location").val()}),
+			dataType : 'json',
+			success : function(data) {
+				console.log("SUCCESS: ", data);
+				display(data);
+			},
+			done : function(e) {
+				console.log("DONE");
+				enableSearchButton(true);
+			}
+		});  
+		
+		
+		
+		
+		
+		
+	});
+	
+
+
+</script>
 </body>
 </html>

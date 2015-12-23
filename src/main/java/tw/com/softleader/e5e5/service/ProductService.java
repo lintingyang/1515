@@ -21,15 +21,12 @@ import tw.com.softleader.e5e5.entity.User;
 
 @Service
 public class ProductService {
-	private final ProductDao productDao;
-	private final ProductCategoryDao productCategoryDao;
-
 	@Autowired
-	public ProductService(ProductDao productDao, ProductCategoryDao productCategoryDao) {
-		this.productDao = productDao;
-		this.productCategoryDao = productCategoryDao;
-	}
-
+	private ProductDao productDao;
+	
+	@Autowired
+	private ProductCategoryDao productCategoryDao;
+	
 	// (1)最新商品列：fineAll byPostTime
 	@Transactional
 	public List<Product> getProductsOrderByPostTime() {

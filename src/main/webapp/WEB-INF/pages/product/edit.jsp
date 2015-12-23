@@ -15,8 +15,9 @@ td, th {
 	border: 1px solid blue;
 }
 </style>
-<script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet" >
+<script type="text/javascript"	src="/resources/js/jquery-1.11.3.js"></script>
+<script type="text/javascript"	src="/resources/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	window.onload = function() {
 		$('#opt').val("${p.postStatus}");

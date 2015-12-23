@@ -11,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.sym.Name;
 
@@ -58,17 +60,29 @@ public class ProductController {
 	public String add(Model model) {
 		return "/product/add";
 	}
-
+	
+	@ResponseBody
 	@RequestMapping(value = "/insert")
-	public String insert(Model model, @ModelAttribute Product product, @RequestParam("pCategory") int pCategory) {
-		int number = productService.insert(product.getName(), pCategory, product.getDeadline(), product.getLocation(), product.getTradeWay(), product.getWishItem());
+	public String insert(Model model, @RequestBody Product product) {
+		int number = productService.insert(product.getName(), 1, product.getDeadline(), product.getLocation(), product.getTradeWay(), product.getWishItem());
 		if(number == 1){
 			model.addAttribute("result", "新增成功");
 		}else{
 			model.addAttribute("result", "新增失敗");
 		}
+		System.out.println("############################"+product);
 		return "/product/add";
 	}
+//	@RequestMapping(value = "/insert")
+//	public String insert(Model model, @ModelAttribute Product product, @RequestParam("pCategory") int pCategory) {
+//		int number = productService.insert(product.getName(), pCategory, product.getDeadline(), product.getLocation(), product.getTradeWay(), product.getWishItem());
+//		if(number == 1){
+//			model.addAttribute("result", "新增成功");
+//		}else{
+//			model.addAttribute("result", "新增失敗");
+//		}
+//		return "/product/add";
+//	}
 
 	@RequestMapping(value = "/edit")
 	public String edit(Model model, @ModelAttribute Product product) {
