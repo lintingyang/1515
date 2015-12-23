@@ -9,10 +9,10 @@
 <body>
 
 	<form method="get" action="/admins/update">
-		姓名：<input type = "text" name ="name" value=" ${ admin.name }"/><br><br>
-		帳號：<input type = "text" name ="account" value=" ${ admin.account }"/><br><br>
-		密碼：<input type = "text" name ="password" value=" ${ admin.password }"/><br><br>
-		信箱：<input type = "text" name ="email" value=" ${ admin.email }"/><br><br>
+		帳號：<input type = "text" name ="account" value="${ admin.account }" readonly/><br><br>
+		姓名：<input type = "text" name ="name" value="${ admin.name } "/><br><br>
+		密碼：<input type = "text" name ="password" value="${ admin.password }"/><br><br>
+		信箱：<input type = "text" name ="email" value="${ admin.email }"/><br><br>
 		權限：<select name = "authority" > 
 			<option value="a">最高權限</option>
 			<option value="b">中等權限</option>
