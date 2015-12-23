@@ -62,7 +62,6 @@
 		</c:if>
 	</table>
 	</form>
-	<a href='http://localhost:8080/users/list'>aaa</a>
 	<input type ="button" onclick="javascript:location.href='http://localhost:8080/users/list'" value="回帳號列表"></input>
 	<input type ="button" onclick="history.back()" value="回到上一頁"></input>
 </body>

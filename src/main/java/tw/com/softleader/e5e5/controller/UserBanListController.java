@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.com.softleader.e5e5.entity.UserBanList;
 import tw.com.softleader.e5e5.service.UserBanListService;
@@ -24,11 +26,12 @@ public class UserBanListController {
 		return "/userbanlist/list";
 	}
 	
-	@RequestMapping(value="/query")
-	public String query(Model model , @RequestParam("queryId") Integer queryId) {
-		List<UserBanList> ubls = ublService.findOneUser(queryId);
-		 model.addAttribute("someOne", ubls);
-		return "/userbanlist/list";
+	@ResponseBody
+	@RequestMapping(value="/query" )
+	public List<UserBanList> query(Model model , @RequestBody UserBanList form) {
+		
+		return ublService.findOneUser(form.getId());
+
 	}
 	
 	@RequestMapping(value = "/add")
