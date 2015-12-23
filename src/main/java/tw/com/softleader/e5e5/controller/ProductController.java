@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.sym.Name;
 
+import tw.com.softleader.e5e5.dao.ProductCategoryDao;
 import tw.com.softleader.e5e5.entity.Chat;
 import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.entity.ProductCategory;
@@ -59,12 +60,12 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/insert")
-	public String insert(Model model, @ModelAttribute Product product) {
-		int number = productService.insert(product.getName(), product.getDeadline(), product.getLocation(), product.getTradeWay(), product.getWishItem());
+	public String insert(Model model, @ModelAttribute Product product, @RequestParam("pCategory") int pCategory) {
+		int number = productService.insert(product.getName(), pCategory, product.getDeadline(), product.getLocation(), product.getTradeWay(), product.getWishItem());
 		if(number == 1){
-			model.addAttribute("result", "success~");
+			model.addAttribute("result", "新增成功");
 		}else{
-			model.addAttribute("result", "fail");
+			model.addAttribute("result", "新增失敗");
 		}
 		return "/product/add";
 	}
