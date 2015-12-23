@@ -12,6 +12,7 @@
 		查詢單一帳號:<input type="text" name="account"> 
 		<input type="submit" value="送出">
 	</form>
+	
 	<table>
 		<tr>
 			<th>ID</th>
@@ -23,21 +24,7 @@
 			<th>onlineDatetime</th>
 			<th>Isolated</th>
 		</tr>
-		<c:choose>
-			<c:when test="${!empty getOne.id}" >
-			<tr>
-				<td>${getOne.id}</td>
-				<td>${getOne.name}</td>
-				<td>${getOne.account}</td>
-				<td>${getOne.address}</td>
-				<td>${getOne.schoolEmail}</td>
-				<td>${getOne.gameScore}</td>
-				<td>${getOne.onlineDatetime}</td>
-				<td>${getOne.isolated}</td>
-			</tr>
-			</c:when>
-			
-			<c:otherwise>
+		
 				<c:forEach items="${getAllUser}" var="temp">
 					<tr>
 						<td>${temp.id}</td>
@@ -50,10 +37,8 @@
 						<td>${temp.isolated}</td>
 					</tr>
 				</c:forEach>
-			</c:otherwise>
-		</c:choose>
 
-
+	
 
 	</table>
 

@@ -35,13 +35,17 @@ public class UserService {
 	public String[] findRangeScore(Integer score){
 		
 		List<User> temp = uDao.findByGameScoreGreaterThanEqualOrderByGameScoreDesc(score);
+		if(temp!=null){
 		String[] result = null;
 		int i =0;
 		for(User user : temp){
 			result[i] = user.getAccount();
 			i++;
 		}	
-		return result;
+		return result;}
+		else{
+			return null;
+		}
 	}
 	
 	@Transactional
@@ -105,7 +109,7 @@ public class UserService {
 			temp3.setSchoolName(temp.getSchoolName());
 			temp3.setSex(temp.getSex());
 			temp3.setIsolated(temp.getIsolated());
-			temp3.setGameScore(score);
+			temp3.setGameScore(temp.getGameScore()+score);
 			uDao.save(temp3);
 			return 1;
 		}		
