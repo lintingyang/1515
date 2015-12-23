@@ -9,7 +9,12 @@
 </head>
 <body>
 
-
+<!-- <form  action="/admins/upload" method="post" enctype="multipart/form-data"> -->
+<!-- 	<input type="text" name="id" size="5" placeholder="使用者ID"> -->
+<!-- 	<input type="text" name="message"><br> -->
+<!-- 	<input type="file" name="file" /><br> -->
+<!-- 	<input type="submit" value="輸入"> -->
+<!-- </form> -->
 	<form action="/admins/query" method="get">
 		帳號搜尋:<input type="text" name="account"> <input type="submit">${ error }
 	</form>

@@ -22,6 +22,7 @@ public class E5e5App {
 		int result = new CalculateService().sum(3, 5);
 		
 		log.info("result="+result);
+		
 		log.error("error!!");
 
 		

@@ -1,7 +1,14 @@
 package tw.com.softleader.e5e5.controller;
 
+
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.softleader.e5e5.entity.Admin;
 import tw.com.softleader.e5e5.service.AdminService;
@@ -93,8 +101,35 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/update")
-	public String update(Model model) {
-		return "/admin/edit";
+	public String update(Model model,@RequestParam("name")String name,@RequestParam("account")String account,
+			@RequestParam("password")String password,@RequestParam("authority")String authority,
+			@RequestParam("email")String email){
+		int result = adminService.updateAdmin(account, authority, name, password, email);
+		if(result == 1){
+			model.addAttribute("error", "修改成功！");
+		}else if(result == 0){
+			model.addAttribute("error","修改失敗！");
+		}
+		List<Admin> list = adminService.findAllAdmins();
+		model.addAttribute("entity", list);
+		
+		return "/admin/list";
 	}
+	
+//	@RequestMapping(value = "/upload")
+//	public String insert(Model model,@RequestParam("file") MultipartFile file) {
+//		BufferedImage src = null;
+//		if (!file.isEmpty()) {
+//			try {
+//				src = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
+//				 File destination = new File("src/main/webapp/WEB-INF/images/03.jpg"); 
+//				 ImageIO.write(src, "jpg", destination);
+//			} catch (IOException e) {
+//				log.error("exception");
+//			}
+//		}
+//		return "/admin/list";
+//	}
+
 
 }
