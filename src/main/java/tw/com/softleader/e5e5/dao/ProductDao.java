@@ -9,7 +9,6 @@ import tw.com.softleader.e5e5.entity.Product;
 
 public interface ProductDao extends JpaRepository<Product, Integer> {
 
-
 	//(1)最新商品列：fineAll byPostTime
 	@Query(value ="SELECT * FROM product WHERE post_time IS NOT NULL ORDER BY post_time DESC", nativeQuery = true)
 	public List<Product> findAllByPostTime();
@@ -46,12 +45,4 @@ public interface ProductDao extends JpaRepository<Product, Integer> {
 	@Query(value ="SELECT p.* FROM product p JOIN product_category pc ON p.category_id = pc.id JOIN [user] u ON p.user_id = u.id WHERE pc.name LIKE %?1% OR p.name LIKE %?1% OR p.location LIKE %?1% OR u.name LIKE %?1%", nativeQuery = true)
 	public List<Product> findAllByKeywords(String keywords);
 	
-	
-//	//find most clicked product
-//	@Query(value="SELECT TOP 1 name FROM product ORDER BY click_times DESC", nativeQuery=true)
-//	public String findByTopClickedProduct();
-//	
-//	//find user who posted products most
-//	@Query(value="SELECT TOP 1 user_id FROM product GROUP BY user_id ORDER BY COUNT (*) DESC", nativeQuery=true)
-//	public int findByUserCounts();
 }

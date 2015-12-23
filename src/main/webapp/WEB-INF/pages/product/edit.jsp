@@ -27,8 +27,13 @@ td, th {
 	<form action="/products/query" method="get">
 		關鍵字(產品名稱、交換地、使用者名稱、產品類別)： <input type="text" name="pKeywords"> <input
 			type="submit" value="search">
-		<hr>
 	</form>
+	<hr>
+	<form action="/products/add">
+		<input type="submit" value="新增產品"><a>
+	</form>
+	<input type="button" value="回商品清單列表" onclick="javascript:location.href='list'">
+	<hr>
 	<table style="border: 1px solid blue;">
 		<thead>
 			<tr>
@@ -89,7 +94,5 @@ td, th {
 			</tr>
 		</tbody>
 	</table>
-
-
 </body>
 </html>

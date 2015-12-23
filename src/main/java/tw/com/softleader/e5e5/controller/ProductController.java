@@ -1,5 +1,6 @@
 package tw.com.softleader.e5e5.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -17,6 +18,7 @@ import com.fasterxml.jackson.core.sym.Name;
 
 import tw.com.softleader.e5e5.entity.Chat;
 import tw.com.softleader.e5e5.entity.Product;
+import tw.com.softleader.e5e5.entity.ProductCategory;
 import tw.com.softleader.e5e5.entity.User;
 import tw.com.softleader.e5e5.service.ProductService;
 
@@ -43,16 +45,11 @@ public class ProductController {
 		return "/product/list";
 	}
 
-	// @RequestMapping(value = "/query")
-	// public String query(@ModelAttribute User user,Model model) {
-	// chatService.postChat(user.getId(), "messages_no");
-	// List<Chat> chats = chatService.getLastThreeChats();
-	// model.addAttribute("beans", chats);
-	// return "/chat/list";
-	// }
-
 	@RequestMapping(value = "/delete")
-	public String delete(Model model) {
+	public String delete(Model model, @ModelAttribute Product product) {
+		productService.deleteById(product.getId());
+		List<Product> products = productService.getAllProducts();
+		model.addAttribute("products", products);
 		return "/product/list";
 	}
 
@@ -62,13 +59,19 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/insert")
-	public String insert(Model model) {
+	public String insert(Model model, @ModelAttribute Product product) {
+		int number = productService.insert(product.getName(), product.getDeadline(), product.getLocation(), product.getTradeWay(), product.getWishItem());
+		if(number == 1){
+			model.addAttribute("result", "success~");
+		}else{
+			model.addAttribute("result", "fail");
+		}
 		return "/product/add";
 	}
 
 	@RequestMapping(value = "/edit")
-	public String edit(Model model, @RequestParam("pId") Integer id) {
-		Product products = productService.getOneById(id);
+	public String edit(Model model, @ModelAttribute Product product) {
+		Product products = productService.getOneById(product.getId());
 		model.addAttribute("p", products);
 		return "/product/edit";
 	}
