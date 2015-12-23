@@ -29,34 +29,23 @@ public class UserController {
 	public String query(Model model ,@RequestParam String account) {
 		User temp = userService.findByAccount(account);
 		model.addAttribute("getOne", temp);
-		return "/user/list";
+		return "/user/edit";
 	}
 	
-	@RequestMapping(value = "/edit")
-	public String edit(Model model) {
+//	@RequestMapping(value = "/edit")
+//	public String edit(Model model) {
+//		return "/user/edit";
+//	}
+
+//	@RequestMapping(value = "/update1")
+//	public String update1(Model model ,@RequestParam("account") String account) {
 //		User temp = userService.findByAccount(account);
 //		model.addAttribute("getOne", temp);
-		return "/user/edit";
-	}
-
-	@RequestMapping(value = "/update1")
-	public String update1(Model model ,@RequestParam("account") String account) {
-		User temp = userService.findByAccount(account);
-		model.addAttribute("getOne", temp);
-		return "/user/edit";
-	}
+//		return "/user/edit";
+//	}
 	
 	@RequestMapping(value = "/update")
 	public String update(Model model ,@RequestParam("account") String account,@RequestParam("isolate") Character isolate ,@RequestParam("score") String changeScore) {
-		System.out.println("====================================");
-		System.out.println("====================================");
-		System.out.println("====================================");
-		System.out.println("====================================");
-		System.out.println("====================================");
-		System.out.println("====================================");
-		System.out.println("====================================");
-		System.out.println(account+"========================================"+isolate+"==================="+changeScore);
-		
 		try{
 			int score = Integer.parseInt(changeScore);
 			userService.updataIsolated(account, isolate);

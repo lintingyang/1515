@@ -11,7 +11,7 @@
 
 
 
-	<form action="/users/update1" method="get">
+	<form action="/users/query" method="get">
 	
 		<input type="text" name="account" placeholder="數入account"> 
 		<input type="submit" value="送出">
@@ -62,8 +62,8 @@
 		</c:if>
 	</table>
 	</form>
-	
-
+	<input type ="button" onclick="javascript:location.href='http://localhost:8080/users/list'" value="回帳號列表"></input>
+	<input type ="button" onclick="history.back()" value="回到上一頁"></input>
 </body>
 
 </html>
