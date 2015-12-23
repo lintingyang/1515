@@ -11,7 +11,7 @@
 
 
 	<form action="/admins/query" method="get">
-		帳號搜尋:<input type="text" name="account"> <input type="submit">
+		帳號搜尋:<input type="text" name="account"> <input type="submit">${ error }
 	</form>
 	<button type="button" onclick="location.href='/admins/add'">新增管理員</button>
 
@@ -25,6 +25,7 @@
 			<th>name</th>
 			<th>email</th>
 			<th>authority</th>
+			<th>delete</th>
 		</tr>
 		<c:forEach items="${ entity }" var="result">
 			<tr>
@@ -37,6 +38,9 @@
 				<td>${ result.name }</td>
 				<td>${ result.email }</td>
 				<td>${ result.authority }</td>
+				<td><input type="button" value="刪除"
+					onclick="javascript:location.href='/admins/delete?id=${ result.id }'">
+				</td>
 
 			</tr>
 

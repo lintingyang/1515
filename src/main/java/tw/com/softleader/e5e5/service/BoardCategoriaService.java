@@ -19,10 +19,19 @@ public class BoardCategoriaService {
 	public List<BoardCategoria> getAll() {
 		return boardCategoriaDao.findAll();
 	}
+	
+	@Transactional
+	public BoardCategoria findById(Integer id){
+		return boardCategoriaDao.findOne(id);
+	}
 
 	@Transactional
-	public List<BoardCategoria> findbyName(String name) {
-		return boardCategoriaDao.findByName(name);
+	public BoardCategoria findByName(String name) {
+		BoardCategoria boardCategoria = boardCategoriaDao.findByName(name);
+		if (boardCategoria != null) {
+			return boardCategoria;
+		}
+		return null;
 	}
 
 	@Transactional

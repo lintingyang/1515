@@ -32,14 +32,20 @@ public class AdminController {
 	@RequestMapping(value = "/query") // 用帳號搜尋管理員資料
 	public String query(Model model, @RequestParam("account") String account) {
 
-		if (account != null) {  
+		account = account.replaceAll("\\s+", "");
+		if (account != null && !account.equals("")) {  
 			Admin admin1 = adminService.findByAccount(account);
 			if (admin1 != null) {  //判斷是否有找到此帳號
 				List<Admin> list = new ArrayList<Admin>();
 				list.add(admin1);
 				model.addAttribute("entity", list);
+			}else{
+				model.addAttribute("error","查無此帳號");
 			}
-
+		}else{
+			model.addAttribute("error", "請輸入查詢資料");
+			List<Admin> list = adminService.findAllAdmins();
+			model.addAttribute("entity", list);
 		}
 		return "/admin/list";
 
@@ -53,7 +59,10 @@ public class AdminController {
 	//
 
 	@RequestMapping(value = "/delete")
-	public String delete(Model model) {
+	public String delete(Model model,@ModelAttribute Admin admin) {
+		adminService.deleteById(admin.getId());
+		List<Admin> list = adminService.findAllAdmins();
+		model.addAttribute("entity", list);
 		return "/admin/list";
 	}
 
@@ -85,7 +94,7 @@ public class AdminController {
 
 	@RequestMapping(value = "/update")
 	public String update(Model model) {
-		return "/admin/add";
+		return "/admin/edit";
 	}
 
 }
