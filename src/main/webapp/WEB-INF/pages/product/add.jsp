@@ -41,10 +41,10 @@ label{
 		</div>
 		<!-- <div>
 			<label>使用者：</label><input type="text" name="user" size="10">
-		</div>
+		</div> -->
 		<div>
 			<label>產品類別：</label>
-			<select name="category">
+			<select name="pCategory">
 				<option value="1">3C</option>
 				<option value="2">家電</option>
 				<option value="3">傢俱</option>
@@ -57,7 +57,7 @@ label{
 				<option value="10">食品</option>
 				<option value="11">美妝</option>
 			</select>
-		</div> -->
+		</div>
 <!-- 		<div> -->
 <!-- 			<label>刊登截止日期：</label><input type="text" name="deadline"> -->
 <!-- 		</div> -->

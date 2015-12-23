@@ -18,6 +18,8 @@ public interface UserDao extends JpaRepository<User, Integer> {
 	
 	public User findByAccount(String account);
 	
+	public User findByAccountContaining(String account);
+	
 	public User findById(Integer id);
 	
 	public List<User> findByBirthdayAfter(Date birthday);

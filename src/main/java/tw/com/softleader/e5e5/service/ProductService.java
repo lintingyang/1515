@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tw.com.softleader.e5e5.dao.ProductCategoryDao;
 import tw.com.softleader.e5e5.dao.ProductDao;
 import tw.com.softleader.e5e5.entity.Exchange;
 import tw.com.softleader.e5e5.entity.Product;
@@ -21,10 +22,12 @@ import tw.com.softleader.e5e5.entity.User;
 @Service
 public class ProductService {
 	private final ProductDao productDao;
+	private final ProductCategoryDao productCategoryDao;
 
 	@Autowired
-	public ProductService(ProductDao productDao) {
+	public ProductService(ProductDao productDao, ProductCategoryDao productCategoryDao) {
 		this.productDao = productDao;
+		this.productCategoryDao = productCategoryDao;
 	}
 
 	// (1)最新商品列：fineAll byPostTime
@@ -133,9 +136,10 @@ public class ProductService {
 
 	// (14)新增產品
 	@Transactional
-	public int insert(String name, Date deadline, String location, String tradeWay, String wishItem) {
+	public int insert(String name,int category, Date deadline, String location, String tradeWay, String wishItem) {
 		Product product = new Product();
 		product.setName(name);
+		product.setProductCategory(productCategoryDao.findOne(category));
 		product.setPostTime(new Date());
 		product.setDeadline(deadline);
 		product.setLocation(location);
