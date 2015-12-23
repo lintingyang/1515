@@ -40,11 +40,11 @@ public class BoardCategoriaDaoTest {
 //		boardCategoriaDao.delete(3);
 		
 		//read
-		List<BoardCategoria> boardCategories = boardCategoriaDao.findByName("North-area");
-		for (BoardCategoria b : boardCategories) {
-			log.debug(b);
-		}
-		
+//		List<BoardCategoria> boardCategories = boardCategoriaDao.findByName("North-area");
+//		for (BoardCategoria b : boardCategories) {
+//			log.debug(b);
+//		}
+//		
 		
 	}
 }

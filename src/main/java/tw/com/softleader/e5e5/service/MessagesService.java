@@ -30,9 +30,19 @@ public class MessagesService {
 		return null;
 	}
 	
+	public List<Messages> findByBoth(Integer senderId ,Integer receiverId){
+		if(msgDao.findBySenderId(receiverId)!=null){
+			List<Messages> msgs = msgDao.findByBoth(senderId, receiverId);
+			return msgs;
+		}
+		return null;
+		
+	}
+	
+	
 	@Transactional
 	public int insert (Integer senderId ,Integer receiverId,String article){
-		if(userDao.findById(senderId)!=null){
+		if(userDao.findById(receiverId)!=null){
 			Messages msg = new Messages();
 			msg.setUserBySenderId(new User(senderId));
 			msg.setUserByReceiverId(new User(receiverId));

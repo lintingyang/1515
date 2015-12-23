@@ -26,39 +26,42 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/query")
-	public String query(Model model ,@RequestParam("account") String account) {
-		User temp1 = userService.findByAccount(account);
-		model.addAttribute("getOne", temp1);
-		return "/user/list";
+	public String query(Model model ,@RequestParam String account) {
+		User temp = userService.findByAccount(account);
+		model.addAttribute("getOne", temp);
+		return "/user/edit";
 	}
 	
-	@RequestMapping(value = "/edit")
-	public String edit(Model model) {
+//	@RequestMapping(value = "/edit")
+//	public String edit(Model model) {
+//		return "/user/edit";
+//	}
+
+//	@RequestMapping(value = "/update1")
+//	public String update1(Model model ,@RequestParam("account") String account) {
 //		User temp = userService.findByAccount(account);
 //		model.addAttribute("getOne", temp);
-		return "/user/edit";
-	}
-
-	@RequestMapping(value = "/update1")
-	public String update1(Model model ,@RequestParam("account") String account) {
-		User temp = userService.findByAccount(account);
-		model.addAttribute("getOne", temp);
-		return "/user/edit";
-	}
+//		return "/user/edit";
+//	}
 	
 	@RequestMapping(value = "/update")
-	public String update(Model model ,@RequestParam("account") String account,@RequestParam("isolate") Character isolate) {
-		System.out.println("====================================");
-		System.out.println("====================================");
-		System.out.println("====================================");
-		System.out.println("====================================");
-		System.out.println("====================================");
-		System.out.println("====================================");
-		System.out.println("====================================");
-		System.out.println(account+"========================================"+isolate);
-		userService.updataIsolated(account, isolate);
-		User temp = userService.findByAccount(account);
-		model.addAttribute("getOne", temp);
+	public String update(Model model ,@RequestParam("account") String account,@RequestParam("isolate") Character isolate ,@RequestParam("score") String changeScore) {
+		try{
+			int score = Integer.parseInt(changeScore);
+			userService.updataIsolated(account, isolate);
+			userService.drewScores(account, score);
+			User temp = userService.findByAccount(account);
+			model.addAttribute("getOne", temp);
+			}
+		catch(Exception e){
+			
+			userService.updataIsolated(account, isolate);
+			User temp = userService.findByAccount(account);
+			model.addAttribute("getOne", temp);
+			
+		}
+		
+
 		return "/user/edit";
 	}
 }

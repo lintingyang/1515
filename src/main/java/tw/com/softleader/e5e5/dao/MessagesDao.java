@@ -10,7 +10,10 @@ import tw.com.softleader.e5e5.entity.Messages;
 public interface MessagesDao extends JpaRepository<Messages, Integer> {
 	
 	@Query(value="select * from Messages where sender_id = ?1 order by deliver_time Desc", nativeQuery = true)
-	public List<Messages> findBySenderId(Integer id);
+	public List<Messages> findBySenderId(Integer SenderId);
+	
+	@Query(value="select * from Messages where sender_id = ?1 and receiver_id = ?2 order by deliver_time Desc", nativeQuery = true)
+	public List<Messages> findByBoth(Integer SenderId,Integer ReceiverId);
 	
 	@Query(value="select * from Messages where sender_id = ?1 and receiver_id = ?2 order by deliver_time Desc", nativeQuery = true)
 	public List<Messages> findByOther(Integer senderId,Integer receiverId);
