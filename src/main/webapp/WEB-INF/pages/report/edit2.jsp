@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Report List</title>
+<title>Report Edit2</title>
 <style type="text/css">
 table {
 	border-collapse: collapse;
@@ -20,8 +20,12 @@ td, th {
 <body>
 	<a href="/reports/list">所有檢舉</a>
 	<a href="/reports/unread">未審核檢舉</a>
-	<a href="/reports/editold">修改已審核檢舉(*)</a>
-	<br />
+	<form>
+		**此功能需要管理員權限認證**
+		<input placeholder="查詢歷史檢舉(無法查詢未審核檢舉)">
+		<input type="submit" value="送出">
+	</form>
+	<br>
 	<table>
 		<thead>
 			<tr>

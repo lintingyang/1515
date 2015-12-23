@@ -33,47 +33,16 @@ public class ReportController {
 	}
 	
 	@RequestMapping(value="/edit")
-	public String editT(Model model, @RequestParam("id") int id, @RequestParam("passed") char status){
+	public String edit(Model model, @RequestParam("id") int id, @RequestParam("passed") char status){
 		reportService.updateIsPassed(id, status);
 		Report result = reportService.findById(id);
 		model.addAttribute("edits", result);
 		return "/report/edit";
 	}
 	
-//	@RequestMapping(value="/editF")
-//	public String editF(Model model, @ModelAttribute Report report){
-//		reportService.updateIsPassed(report.getId(), 'F');
-//		Report result = reportService.findById(report.getId());
-//		model.addAttribute("edits", result);
-//		return "/report/edit";
-//	}
-	
-//	@RequestMapping(value = "/query") 
-//	public String query(Model model, @ModelAttribute("id") Product product) {
-//		List<Exchange> models = exchangeService.findByProductAId(product.getId());
-//		model.addAttribute("results", models);
-//		return "/exchange/listex";
-//	}
-//	@RequestMapping(value = "/delete")
-//	public String delete(Model model) {
-//		return "/chat/list.jsp";
-//	}
-//	@RequestMapping(value = "/add")
-//	public String add(Model model) {
-//		return "/chat/add.jsp";
-//	}
-//	@RequestMapping(value = "/insert")
-//	public String insert(Model model) {
-//		return "/chat/add.jsp";
-//	}
-//	@RequestMapping(value = "/edit")
-//	public String edit(Model model) {
-//		return "/chat/edit.jsp";
-//	}
-//	@RequestMapping(value = "/update")
-//	public String update(Model model) {
-//		return "/chat/add.jsp";
-//	}
-	
+	@RequestMapping(value="/editold")
+	public String editOld(){
+		return "/report/edit2";
+	}
 
 }

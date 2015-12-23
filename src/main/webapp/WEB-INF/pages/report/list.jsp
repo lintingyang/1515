@@ -20,6 +20,7 @@ td, th {
 <body>
 	<a href="/reports/list">所有檢舉</a>
 	<a href="/reports/unread">未審核檢舉</a>
+	<a href="/reports/editold">修改已審核檢舉(*)</a>
 	<br />
 	<table>
 		<thead>
