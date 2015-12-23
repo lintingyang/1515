@@ -20,8 +20,6 @@ public class ChatService {
 	@Autowired
 	private UserDao userDao;
 
-	
-
 	@Transactional
 	public List<Chat> getLastThreeChats() {
 		List<Chat> chats = chatDao.findAllOrderBySendTime();
