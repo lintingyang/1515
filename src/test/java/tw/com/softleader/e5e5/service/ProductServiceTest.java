@@ -2,6 +2,7 @@ package tw.com.softleader.e5e5.service;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -130,6 +131,14 @@ public class ProductServiceTest {
 		Product result = productService.update(12, 'F');
 		log.debug("更新postStatus:" + result);
 	}
+	
+	//(14)新增產品
+		@Test
+		public void testInsert(){
+			ProductService productService = new ProductService(productDao);
+			int result = productService.insert("FFFFFF", new Date(), "FFFFF","FFFFF","FFFFF");
+			log.debug("新增" + result);
+		}
 	
 	
 //	@Test

@@ -58,9 +58,9 @@ label{
 				<option value="11">美妝</option>
 			</select>
 		</div> -->
-		<div>
-			<label>刊登截止日期：</label><input type="text" name="deadline">
-		</div>
+<!-- 		<div> -->
+<!-- 			<label>刊登截止日期：</label><input type="text" name="deadline"> -->
+<!-- 		</div> -->
 		<div>
 			<label>交換地點：</label><input type="text" size="50" name="location">
 		</div>
