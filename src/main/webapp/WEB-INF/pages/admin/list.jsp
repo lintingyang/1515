@@ -9,9 +9,14 @@
 </head>
 <body>
 
-
+<!-- <form  action="/admins/upload" method="post" enctype="multipart/form-data"> -->
+<!-- 	<input type="text" name="id" size="5" placeholder="使用者ID"> -->
+<!-- 	<input type="text" name="message"><br> -->
+<!-- 	<input type="file" name="file" /><br> -->
+<!-- 	<input type="submit" value="輸入"> -->
+<!-- </form> -->
 	<form action="/admins/query" method="get">
-		帳號搜尋:<input type="text" name="account"> <input type="submit">
+		帳號搜尋:<input type="text" name="account"> <input type="submit">${ error }
 	</form>
 	<button type="button" onclick="location.href='/admins/add'">新增管理員</button>
 
@@ -25,6 +30,7 @@
 			<th>name</th>
 			<th>email</th>
 			<th>authority</th>
+			<th>delete</th>
 		</tr>
 		<c:forEach items="${ entity }" var="result">
 			<tr>
@@ -37,6 +43,9 @@
 				<td>${ result.name }</td>
 				<td>${ result.email }</td>
 				<td>${ result.authority }</td>
+				<td><input type="button" value="刪除"
+					onclick="javascript:location.href='/admins/delete?id=${ result.id }'">
+				</td>
 
 			</tr>
 

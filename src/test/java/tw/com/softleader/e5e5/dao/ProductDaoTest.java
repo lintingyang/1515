@@ -13,6 +13,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import tw.com.softleader.e5e5.E5e5App;
 import tw.com.softleader.e5e5.entity.Product;
+import tw.com.softleader.e5e5.entity.ProductCategory;
 import tw.com.softleader.e5e5.entity.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -35,8 +36,7 @@ public class ProductDaoTest {
 	public void testCrud() {
 		//insert
 //		Product productIn = new Product();
-//		productIn.setName("中級會計學課本");
-//		productIn.setCategory("書籍");
+//		productIn.setName("高級會計學課本");
 ////		productIn.setPictureId(pictureId);
 ////		productIn.setVideo(video);
 //		productIn.setUserByUserId(new User(2));
@@ -58,9 +58,13 @@ public class ProductDaoTest {
 		
 		//update
 //		Product productUp = new Product();
-//		productUp.setId(5);
-//		productUp.setName("中級統計學");
+//		productUp.setId(13);
+//		productUp.setPostStatus('F');
 //		productDao.save(productUp);
+		
+		
+		
+		
 		
 		
 		//delete

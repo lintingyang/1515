@@ -20,6 +20,7 @@
 					<th>id</th>
 					<th>user</th>
 					<th>broadcastDescription</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -28,6 +29,8 @@
 						<td>${s.id}</td>
 						<td>${s.user.name}</td>
 						<td>${s.broadcastDescription}</td>
+						<td><input type="submit" value="Delete" 
+    					onclick="window.location='delete?id=${s.id}';" />  </td>
 					</tr>
 				</c:forEach>
 			</tbody>
