@@ -65,7 +65,7 @@ public class BoardCategoriaController {
 	}
 
 	@RequestMapping(value = "/edit")
-	public String edit(Model model, @ModelAttribute BoardCategoria boardCategoria) {
+	public String edit(Model model,BoardCategoria boardCategoria) {
 		BoardCategoria bc = boardCategoriaService.findById(boardCategoria.getId());
 		model.addAttribute("boardCategorias", bc);
 		return "/boardCategoria/edit";

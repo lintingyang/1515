@@ -25,7 +25,7 @@ public class BoardController {
 	private ThreadService threadService;
 	@Autowired
 	private BoardCategoriaService boardCategoriaService;
-	
+
 	@RequestMapping(value = "/list")
 	public String list(Model model) {
 		List<Board> list = boardService.getBoardById();
@@ -40,12 +40,12 @@ public class BoardController {
 		return "/board/list";
 	}
 
-//	@RequestMapping(value = "/query")
-//	public String query(@RequestParam("name") String name, Model model) {
-//		Board board =boardService.getBoardByName(name);
-//		model.addAttribute("beans", board);
-//		return "/board/list";
-//	}
+	// @RequestMapping(value = "/query")
+	// public String query(@RequestParam("name") String name, Model model) {
+	// Board board =boardService.getBoardByName(name);
+	// model.addAttribute("beans", board);
+	// return "/board/list";
+	// }
 	@RequestMapping(value = "/query")
 	public String query(@RequestParam("id") Integer id, Model model) {
 		if (id != null) {
@@ -58,17 +58,18 @@ public class BoardController {
 		}
 		return "/board/list";
 	}
-	
+
 	@RequestMapping(value = "/add")
-	public String add(Model model) {
-		List<BoardCategoria> models = boardCategoriaService.getAll();
-		model.addAttribute("beans", models);
+	public String add(Model model,@ModelAttribute BoardCategoria boardCategoria) {
+		BoardCategoria bc = boardCategoriaService.findById(boardCategoria.getId());
+		model.addAttribute("boardCategorias", bc);
 		return "/board/add";
 	}
 
 	@RequestMapping(value = "/insert")
-	public String insert(Model model, @ModelAttribute Board board) {
-		int result = boardService.createBoard(board.getBoardCategoria(),board.getName(),board.getDescription(),null);
+	public String insert(Model model, @ModelAttribute Board board, @ModelAttribute BoardCategoria bc) {
+		int result = boardService.createBoard(boardCategoriaService.findById(bc.getId()), board.getName(),
+				board.getDescription(), null);
 		if (result == 1) {
 			model.addAttribute("message", "新增成功");
 		} else {
@@ -76,9 +77,10 @@ public class BoardController {
 		}
 		return "/board/add";
 	}
+
 	@RequestMapping(value = "/edit1")
-	public String edit(@RequestParam("id") Integer id ,@RequestParam("isHide") Character ch, Model model) {
-		boardService.hideBoard(id,ch);
+	public String edit(@RequestParam("id") Integer id, @RequestParam("isHide") Character ch, Model model) {
+		boardService.hideBoard(id, ch);
 		List<Board> models = boardService.getBoardByName();
 		model.addAttribute("beans", models);
 		return "/board/list";

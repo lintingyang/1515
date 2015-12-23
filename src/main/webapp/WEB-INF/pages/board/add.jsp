@@ -15,6 +15,7 @@
 <%-- 			<option value="${s.name}">${s.name} --%>
 <%-- 		</c:forEach> --%>
 <!-- 		</select> <br> -->
+		<input type="hidden" name="id" value="${boardCategoria.id}">
 		版面名稱：<input type="text" name="name" /><br>
 		版面敘述：<input type="text" name="description" /><br>
 		<input type = "submit" value = "送出表單"/><input type="button" value="回列表" onclick="location.href='/boards/list'">
