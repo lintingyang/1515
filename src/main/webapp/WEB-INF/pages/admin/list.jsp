@@ -25,7 +25,7 @@
 
 
 <form id="search-form">
-	<input type="text" name="account" id="account"/>
+	帳號查詢:<input type="text" name="account" id="account"/>
 	<input type="button" value="submit" id="submittn" name="submit">
 </form>
 
@@ -40,8 +40,8 @@ $("#submittn").click(function(){
 		url:'/admins/query',
 		dataType:'json',
 		data:JSON.stringify({account:$("#account").val()}),
-	    done : function(data){
-	    	console.log("1111");
+	    success : function(data){
+	    	console.log(data);
 	    }
 	})
 })
@@ -49,10 +49,10 @@ $("#submittn").click(function(){
 </script>
 
 
-	<form action="/admins/query" method="get">
-		帳號搜尋:<input type="text" name="account" id="account"> <input
-			id="searchbtn" type="submit">${ error }
-	</form>
+<!-- 	<form action="/admins/query" method="get"> -->
+<!-- 		帳號搜尋:<input type="text" name="account" id="account"> <input -->
+<%-- 			id="searchbtn" type="submit">${ error } --%>
+<!-- 	</form> -->
 	<button type="button" onclick="location.href='/admins/add'">新增管理員</button>
 
 
