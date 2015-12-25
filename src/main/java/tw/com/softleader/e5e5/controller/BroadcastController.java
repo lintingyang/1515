@@ -50,7 +50,7 @@ public class BroadcastController {
 			@RequestParam("broadcastDescription") String broadcastDescription) {
 		log.debug("tetestes: "+id);
 
-		Broadcast broadcast=broadcastService.postBroadcast(1, "test");
+//		Broadcast broadcast=broadcastService.postBroadcast(1, "test");
 //		Broadcast broadcast=broadcastService.postBroadcast(id, broadcastDescription);
 		List<Broadcast> broadcasts = broadcastService.getLastTenBroadcasts();
 //		Broadcast b = new Broadcast();

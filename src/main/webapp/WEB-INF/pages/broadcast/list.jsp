@@ -14,27 +14,37 @@ $(function(){
 	 $("#btn").click(function(){
 		 	var formData = JSON.stringify($("#myForm").serializeArray());
 		 	formData={"id":"1","broadcastDescription":"test"};
-			alert(formData);
 	        $.ajax({
 	           type: "GET",
 	           url: "http://localhost:8080/broadcasts/insert",
 	           data: formData,
 	           success: function(data){
-	        	   alert("data");
+	        	   drawTable(data);
 	           },
 	           dataType: "json",
 	           contentType : "application/json"
 	         });
 	    });
+	 
+	 function drawTable(data) {
+		 var obj = JSON.stringify(data);
+		 console.log(obj);
+		 $.each($.parseJSON(data), function() {
+		        alert(this.id + " ");
+		    });
+		
+		}
 });
 </script>
 </head>
 <body>
+
 	<form id="myForm">
 		<input type="text" name="id" size="5" placeholder="使用者ID">
 		<input type="text" name="broadcastDescription">
 	</form>
 	<button id="btn">輸入</button>
+<div id="div1">
 	<table>
 		<thead>
 			<tr>
@@ -56,7 +66,7 @@ $(function(){
 			</c:forEach>
 		</tbody>
 	</table>
-
+</div>
 
 
 
