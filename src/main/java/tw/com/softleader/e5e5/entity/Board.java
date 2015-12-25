@@ -30,8 +30,6 @@ public class Board implements java.io.Serializable {
 	private int id;
 	private BoardCategoria boardCategoria;
 	// private BoardCategory boardCategory;
-	private Reply reply;
-	private Thread thread;
 	private Date createdDate;
 	private String name;
 	private String description;
@@ -61,14 +59,12 @@ public class Board implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public Board(int id, BoardCategoria boardCategoria, Reply reply, Thread thread, Date createdDate, String name,
+	public Board(int id, BoardCategoria boardCategoria, Date createdDate, String name,
 			String description, Integer threadCount, Integer replyCount, Character isCream, String picture,
 			Set<UserOwner> userOwners, Set<Thread> threads) {
 		this.id = id;
 		this.boardCategoria = boardCategoria;
 		// this.boardCategory = boardCategory;
-		this.reply = reply;
-		this.thread = thread;
 		this.createdDate = createdDate;
 		this.name = name;
 		this.description = description;
@@ -112,25 +108,6 @@ public class Board implements java.io.Serializable {
 	// this.boardCategory = boardCategory;
 	// }
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "last_reply_id")
-	public Reply getReply() {
-		return this.reply;
-	}
-
-	public void setReply(Reply reply) {
-		this.reply = reply;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "last_thread_id")
-	public Thread getThread() {
-		return this.thread;
-	}
-
-	public void setThread(Thread thread) {
-		this.thread = thread;
-	}
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "created_date", length = 23)
