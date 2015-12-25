@@ -36,17 +36,26 @@ $('#searchButton').click(function() {
 			url: '/userbanlists/query',
 			dataType:'json',
 			type: 'post',
-			data: JSON.stringify({id:$("#id").val()}),
-			done: function(data) {
+			data: JSON.stringify({"id":$("#id").val()}),
+			success: function(data) {
 				console.log(data);
-			}
-			
-			
-		});
-		
-		
+			}			
+		});	
 });
-
+// $(function(){
+// 	$.ajax({
+// 		'type':'get',  //post,delete
+// 		'url':"/userbanlists/query",
+// 		'dataType':'json',
+// 		'data':{},
+// 		'success':function(data){
+// 			$(data).find('Category').each(function(){
+// 				var tp = $("<option></option>").val($(this).children('CategoryID').text())
+// 												.text($(this).children('CategoryName').text());
+// 				$('#select1').append(tp);
+// 			});
+// 		}
+// 	});
 
 </script>
 

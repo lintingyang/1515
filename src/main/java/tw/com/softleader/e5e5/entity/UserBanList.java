@@ -23,18 +23,18 @@ public class UserBanList implements java.io.Serializable {
 
 	private int id;
 	
-	@JsonBackReference
+
 	private User userByUserAId;
 	
-	@JsonBackReference
+
 	private User userByUserBId;
 
 
 
-	@Override
-	public String toString() {
-		return "UserBanList [id=" + id + ", userByUserAId=" + userByUserAId.getId() + ", userByUserBId=" + userByUserBId.getId() + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "UserBanList [id=" + id + ", userByUserAId=" + userByUserAId + ", userByUserBId=" + userByUserBId + "]";
+//	}
 
 	public UserBanList() {
 	}
@@ -60,7 +60,7 @@ public class UserBanList implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_a_id",referencedColumnName="id")
 	@Transactional
 	public User getUserByUserAId() {
@@ -71,7 +71,7 @@ public class UserBanList implements java.io.Serializable {
 		this.userByUserAId = userByUserAId;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_b_id",referencedColumnName="id")
 	@Transactional
 	public User getUserByUserBId() {
