@@ -74,12 +74,13 @@ public class User implements java.io.Serializable {
 	public User(int id, String password, String name, String nickname, String account, Integer age, Character sex,
 			Date birthday, String address, String phone, String cellphone, String email, String picture,
 			String schoolEmail, String focusItemList, Integer gameScore, Integer onlineDatetime,String schoolName,
-			Character emailCheck,Character isolated,
-			Set<Broadcast> broadcasts, Set<FocusUserList> focusUserListsForUserAId,
-			Set<UserBanList> userBanListsForUserAId, Set<UserBanList> userBanListsForUserBId,
-			Set<FocusUserList> focusUserListsForUserBId, Set<Messages> messageses, Set<Product> productsForItemOwnerId,
-			Set<Thread> threads, Set<Chat> chats, Set<Product> productsForUserId, Set<Messages> messagesForReceiverId,
-			Set<Messages> messagesForSenderId) {
+			Character emailCheck,Character isolated
+//			,Set<Broadcast> broadcasts, Set<FocusUserList> focusUserListsForUserAId,
+//			Set<UserBanList> userBanListsForUserAId, Set<UserBanList> userBanListsForUserBId,
+//			Set<FocusUserList> focusUserListsForUserBId, Set<Messages> messageses, Set<Product> productsForItemOwnerId,
+//			Set<Thread> threads, Set<Chat> chats, Set<Product> productsForUserId, Set<Messages> messagesForReceiverId,
+//			Set<Messages> messagesForSenderId
+			) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
@@ -317,8 +318,7 @@ public class User implements java.io.Serializable {
 	public void setIsolated(Character isolated) {
 		this.isolated = isolated;
 	}
-	
-	
+
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 //	@Transactional
 //	public Set<Broadcast> getBroadcasts() {
@@ -328,6 +328,7 @@ public class User implements java.io.Serializable {
 //	public void setBroadcasts(Set<Broadcast> broadcasts) {
 //		this.broadcasts = broadcasts;
 //	}
+//
 
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserAId")
 //	@Transactional
