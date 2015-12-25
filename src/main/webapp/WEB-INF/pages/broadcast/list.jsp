@@ -28,8 +28,7 @@ $(function(){
 	 
 	 function drawTable(data) {
 		 var obj = JSON.stringify(data);
-		 console.log(obj);
-		 $.each($.parseJSON(data), function() {
+		 $.each($.parseJSON(obj), function() {
 		        alert(this.id + " ");
 		    });
 		

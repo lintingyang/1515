@@ -1,6 +1,5 @@
 package tw.com.softleader.e5e5.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -11,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import tw.com.softleader.e5e5.entity.Broadcast;
-import tw.com.softleader.e5e5.entity.User;
 import tw.com.softleader.e5e5.service.BroadcastService;
 
 @Controller
@@ -61,8 +61,9 @@ public class BroadcastController {
 //		List<Broadcast> broadcasts = new ArrayList();
 //		broadcasts.add(b);
 		
-		log.debug(broadcasts);
-		System.out.println(broadcasts);
+//		log.debug(broadcasts);
+//		System.out.println(broadcasts);
+//		Hibernate.initialize(broadcasts);
 		return broadcasts;
 	}
 	
