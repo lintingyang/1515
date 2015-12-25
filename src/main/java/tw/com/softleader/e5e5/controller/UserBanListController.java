@@ -33,7 +33,7 @@ public class UserBanListController {
 	@RequestMapping(value="/query", produces = "application/json")
 	public List<UserBanList> query(@RequestBody UserBanList form) {
 		
-		log.debug("=====================================================================================}", form);
+		log.debug("{=====================================================================================}", form.getId());
 		
 		return ublService.findOneUser(form.getId());
 	}

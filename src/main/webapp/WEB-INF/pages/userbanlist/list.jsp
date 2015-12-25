@@ -36,7 +36,7 @@ $('#searchButton').click(function() {
 			url: '/userbanlists/query',
 			dataType:'json',
 			type: 'post',
-			data: JSON.stringify({"id":$("#id").val()}),
+			data: JSON.stringify({id:$("#id").val()}),
 			success: function(data) {
 				console.log(data);
 			}			

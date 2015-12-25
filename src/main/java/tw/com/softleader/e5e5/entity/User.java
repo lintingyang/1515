@@ -318,8 +318,7 @@ public class User implements java.io.Serializable {
 	public void setIsolated(Character isolated) {
 		this.isolated = isolated;
 	}
-	
-//	
+
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 //	@Transactional
 //	public Set<Broadcast> getBroadcasts() {
@@ -330,6 +329,7 @@ public class User implements java.io.Serializable {
 //		this.broadcasts = broadcasts;
 //	}
 //
+
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserAId")
 //	@Transactional
 //	public Set<FocusUserList> getFocusUserListsForUserAId() {
