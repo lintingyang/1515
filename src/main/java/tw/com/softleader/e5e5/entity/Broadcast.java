@@ -42,11 +42,10 @@ public class Broadcast implements java.io.Serializable {
 		this.postTime = postTime;
 	}
 
-	
 	@Override
 	public String toString() {
-		return "Broadcast [id=" + id + ", broadcastDescription=" + broadcastDescription + ", picture=" + picture
-				+ ", postTime=" + postTime + "]";
+		return "Broadcast [id=" + id + ", user=" + user + ", broadcastDescription=" + broadcastDescription
+				+ ", picture=" + picture + ", postTime=" + postTime + "]";
 	}
 
 	@Id
