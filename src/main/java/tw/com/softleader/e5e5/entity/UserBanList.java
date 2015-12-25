@@ -60,7 +60,7 @@ public class UserBanList implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_a_id",referencedColumnName="id")
 	@Transactional
 	public User getUserByUserAId() {
@@ -71,7 +71,7 @@ public class UserBanList implements java.io.Serializable {
 		this.userByUserAId = userByUserAId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_b_id",referencedColumnName="id")
 	@Transactional
 	public User getUserByUserBId() {
