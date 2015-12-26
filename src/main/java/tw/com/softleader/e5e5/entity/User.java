@@ -46,23 +46,23 @@ public class User implements java.io.Serializable {
 	private String schoolName;
 	private Character emailCheck;
 	private Character isolated;
-	private Set<Broadcast> broadcasts = new HashSet<Broadcast>(0);
-	private Set<FocusUserList> focusUserListsForUserAId = new HashSet<FocusUserList>(0);
-	
-	@JsonManagedReference
-	private Set<UserBanList> userBanListsForUserAId = new HashSet<UserBanList>(0);
-	
-	@JsonManagedReference
-	private Set<UserBanList> userBanListsForUserBId = new HashSet<UserBanList>(0);
-	
-	
-	private Set<FocusUserList> focusUserListsForUserBId = new HashSet<FocusUserList>(0);
-	private Set<Messages> messagesForReceiverId = new HashSet<Messages>(0);
-	private Set<Messages> messagesForSenderId = new HashSet<Messages>(0);
-	private Set<Product> productsForItemOwnerId = new HashSet<Product>(0);
-	private Set<Thread> threads = new HashSet<Thread>(0);
-	private Set<Chat> chats = new HashSet<Chat>(0);
-	private Set<Product> productsForUserId = new HashSet<Product>(0);
+//	private Set<Broadcast> broadcasts = new HashSet<Broadcast>(0);
+//	private Set<FocusUserList> focusUserListsForUserAId = new HashSet<FocusUserList>(0);
+//	
+//	@JsonManagedReference
+//	private Set<UserBanList> userBanListsForUserAId = new HashSet<UserBanList>(0);
+//	
+//	@JsonManagedReference
+//	private Set<UserBanList> userBanListsForUserBId = new HashSet<UserBanList>(0);
+//	
+//	
+//	private Set<FocusUserList> focusUserListsForUserBId = new HashSet<FocusUserList>(0);
+//	private Set<Messages> messagesForReceiverId = new HashSet<Messages>(0);
+//	private Set<Messages> messagesForSenderId = new HashSet<Messages>(0);
+//	private Set<Product> productsForItemOwnerId = new HashSet<Product>(0);
+//	private Set<Thread> threads = new HashSet<Thread>(0);
+//	private Set<Chat> chats = new HashSet<Chat>(0);
+//	private Set<Product> productsForUserId = new HashSet<Product>(0);
 
 	public User() {
 	}
@@ -74,12 +74,13 @@ public class User implements java.io.Serializable {
 	public User(int id, String password, String name, String nickname, String account, Integer age, Character sex,
 			Date birthday, String address, String phone, String cellphone, String email, String picture,
 			String schoolEmail, String focusItemList, Integer gameScore, Integer onlineDatetime,String schoolName,
-			Character emailCheck,Character isolated,
-			Set<Broadcast> broadcasts, Set<FocusUserList> focusUserListsForUserAId,
-			Set<UserBanList> userBanListsForUserAId, Set<UserBanList> userBanListsForUserBId,
-			Set<FocusUserList> focusUserListsForUserBId, Set<Messages> messageses, Set<Product> productsForItemOwnerId,
-			Set<Thread> threads, Set<Chat> chats, Set<Product> productsForUserId, Set<Messages> messagesForReceiverId,
-			Set<Messages> messagesForSenderId) {
+			Character emailCheck,Character isolated
+//			,Set<Broadcast> broadcasts, Set<FocusUserList> focusUserListsForUserAId,
+//			Set<UserBanList> userBanListsForUserAId, Set<UserBanList> userBanListsForUserBId,
+//			Set<FocusUserList> focusUserListsForUserBId, Set<Messages> messageses, Set<Product> productsForItemOwnerId,
+//			Set<Thread> threads, Set<Chat> chats, Set<Product> productsForUserId, Set<Messages> messagesForReceiverId,
+//			Set<Messages> messagesForSenderId
+			) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
@@ -100,17 +101,17 @@ public class User implements java.io.Serializable {
 		this.schoolName = schoolName;
 		this.emailCheck = emailCheck;
 		this.isolated = isolated;
-		this.broadcasts = broadcasts;
-		this.focusUserListsForUserAId = focusUserListsForUserAId;
-		this.userBanListsForUserAId = userBanListsForUserAId;
-		this.userBanListsForUserBId = userBanListsForUserBId;
-		this.focusUserListsForUserBId = focusUserListsForUserBId;
-		this.messagesForReceiverId = messagesForReceiverId;
-		this.messagesForSenderId = messagesForSenderId;
-		this.productsForItemOwnerId = productsForItemOwnerId;
-		this.threads = threads;
-		this.chats = chats;
-		this.productsForUserId = productsForUserId;
+//		this.broadcasts = broadcasts;
+//		this.focusUserListsForUserAId = focusUserListsForUserAId;
+//		this.userBanListsForUserAId = userBanListsForUserAId;
+//		this.userBanListsForUserBId = userBanListsForUserBId;
+//		this.focusUserListsForUserBId = focusUserListsForUserBId;
+//		this.messagesForReceiverId = messagesForReceiverId;
+//		this.messagesForSenderId = messagesForSenderId;
+//		this.productsForItemOwnerId = productsForItemOwnerId;
+//		this.threads = threads;
+//		this.chats = chats;
+//		this.productsForUserId = productsForUserId;
 	}
 
 	
@@ -317,119 +318,119 @@ public class User implements java.io.Serializable {
 	public void setIsolated(Character isolated) {
 		this.isolated = isolated;
 	}
-	
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	@Transactional
-	public Set<Broadcast> getBroadcasts() {
-		return this.broadcasts;
-	}
 
-	public void setBroadcasts(Set<Broadcast> broadcasts) {
-		this.broadcasts = broadcasts;
-	}
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+//	@Transactional
+//	public Set<Broadcast> getBroadcasts() {
+//		return this.broadcasts;
+//	}
+//
+//	public void setBroadcasts(Set<Broadcast> broadcasts) {
+//		this.broadcasts = broadcasts;
+//	}
+//
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserAId")
-	@Transactional
-	public Set<FocusUserList> getFocusUserListsForUserAId() {
-		return this.focusUserListsForUserAId;
-	}
-
-	
-	
-	public void setFocusUserListsForUserAId(Set<FocusUserList> focusUserListsForUserAId) {
-		this.focusUserListsForUserAId = focusUserListsForUserAId;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserAId")
-	@Transactional
-	public Set<UserBanList> getUserBanListsForUserAId() {
-		return this.userBanListsForUserAId;
-	}
-
-	public void setUserBanListsForUserAId(Set<UserBanList> userBanListsForUserAId) {
-		this.userBanListsForUserAId = userBanListsForUserAId;
-	}
-	
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserBId")
-	@Transactional
-	public Set<UserBanList> getUserBanListsForUserBId() {
-		return this.userBanListsForUserBId;
-	}
-
-	public void setUserBanListsForUserBId(Set<UserBanList> userBanListsForUserBId) {
-		this.userBanListsForUserBId = userBanListsForUserBId;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByReceiverId")
-	@Transactional
-	public Set<Messages> getMessagesForReceiverId() {
-		return messagesForReceiverId;
-	}
-
-	public void setMessagesForReceiverId(Set<Messages> messagesForReceiverId) {
-		this.messagesForReceiverId = messagesForReceiverId;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userBySenderId")
-	@Transactional
-	public Set<Messages> getMessagesForSenderId() {
-		return messagesForSenderId;
-	}
-	
-	public void setMessagesForSenderId(Set<Messages> messagesForSenderId) {
-		this.messagesForSenderId = messagesForSenderId;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserBId")
-	@Transactional
-	public Set<FocusUserList> getFocusUserListsForUserBId() {
-		return this.focusUserListsForUserBId;
-	}
-
-	public void setFocusUserListsForUserBId(Set<FocusUserList> focusUserListsForUserBId) {
-		this.focusUserListsForUserBId = focusUserListsForUserBId;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByItemOwnerId")
-	@Transactional
-	public Set<Product> getProductsForItemOwnerId() {
-		return this.productsForItemOwnerId;
-	}
-
-	public void setProductsForItemOwnerId(Set<Product> productsForItemOwnerId) {
-		this.productsForItemOwnerId = productsForItemOwnerId;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	@Transactional
-	public Set<Thread> getThreads() {
-		return this.threads;
-	}
-
-	public void setThreads(Set<Thread> threads) {
-		this.threads = threads;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	@Transactional
-	public Set<Chat> getChats() {
-		return this.chats;
-	}
-
-	public void setChats(Set<Chat> chats) {
-		this.chats = chats;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserId")
-	@Transactional
-	public Set<Product> getProductsForUserId() {
-		return this.productsForUserId;
-	}
-
-	public void setProductsForUserId(Set<Product> productsForUserId) {
-		this.productsForUserId = productsForUserId;
-	}
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserAId")
+//	@Transactional
+//	public Set<FocusUserList> getFocusUserListsForUserAId() {
+//		return this.focusUserListsForUserAId;
+//	}
+//
+//	
+//	
+//	public void setFocusUserListsForUserAId(Set<FocusUserList> focusUserListsForUserAId) {
+//		this.focusUserListsForUserAId = focusUserListsForUserAId;
+//	}
+//
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserAId")
+//	@Transactional
+//	public Set<UserBanList> getUserBanListsForUserAId() {
+//		return this.userBanListsForUserAId;
+//	}
+//
+//	public void setUserBanListsForUserAId(Set<UserBanList> userBanListsForUserAId) {
+//		this.userBanListsForUserAId = userBanListsForUserAId;
+//	}
+//	
+//	
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserBId")
+//	@Transactional
+//	public Set<UserBanList> getUserBanListsForUserBId() {
+//		return this.userBanListsForUserBId;
+//	}
+//
+//	public void setUserBanListsForUserBId(Set<UserBanList> userBanListsForUserBId) {
+//		this.userBanListsForUserBId = userBanListsForUserBId;
+//	}
+//
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByReceiverId")
+//	@Transactional
+//	public Set<Messages> getMessagesForReceiverId() {
+//		return messagesForReceiverId;
+//	}
+//
+//	public void setMessagesForReceiverId(Set<Messages> messagesForReceiverId) {
+//		this.messagesForReceiverId = messagesForReceiverId;
+//	}
+//
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userBySenderId")
+//	@Transactional
+//	public Set<Messages> getMessagesForSenderId() {
+//		return messagesForSenderId;
+//	}
+//	
+//	public void setMessagesForSenderId(Set<Messages> messagesForSenderId) {
+//		this.messagesForSenderId = messagesForSenderId;
+//	}
+//
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserBId")
+//	@Transactional
+//	public Set<FocusUserList> getFocusUserListsForUserBId() {
+//		return this.focusUserListsForUserBId;
+//	}
+//
+//	public void setFocusUserListsForUserBId(Set<FocusUserList> focusUserListsForUserBId) {
+//		this.focusUserListsForUserBId = focusUserListsForUserBId;
+//	}
+//
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByItemOwnerId")
+//	@Transactional
+//	public Set<Product> getProductsForItemOwnerId() {
+//		return this.productsForItemOwnerId;
+//	}
+//
+//	public void setProductsForItemOwnerId(Set<Product> productsForItemOwnerId) {
+//		this.productsForItemOwnerId = productsForItemOwnerId;
+//	}
+//
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+//	@Transactional
+//	public Set<Thread> getThreads() {
+//		return this.threads;
+//	}
+//
+//	public void setThreads(Set<Thread> threads) {
+//		this.threads = threads;
+//	}
+//
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+//	@Transactional
+//	public Set<Chat> getChats() {
+//		return this.chats;
+//	}
+//
+//	public void setChats(Set<Chat> chats) {
+//		this.chats = chats;
+//	}
+//
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userByUserId")
+//	@Transactional
+//	public Set<Product> getProductsForUserId() {
+//		return this.productsForUserId;
+//	}
+//
+//	public void setProductsForUserId(Set<Product> productsForUserId) {
+//		this.productsForUserId = productsForUserId;
+//	}
 
 }

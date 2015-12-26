@@ -6,10 +6,11 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import tw.com.softleader.e5e5.entity.Broadcast;
 import tw.com.softleader.e5e5.service.BroadcastService;
@@ -48,10 +49,22 @@ public class BroadcastController {
 	public List<Broadcast> insert(@RequestParam("id") Integer id,
 			@RequestParam("broadcastDescription") String broadcastDescription) {
 		log.debug("tetestes: "+id);
-		
+
+//		Broadcast broadcast=broadcastService.postBroadcast(1, "test");
 //		Broadcast broadcast=broadcastService.postBroadcast(id, broadcastDescription);
-//		List<Broadcast> broadcasts = broadcastService.getLastTenBroadcasts();
-		return null;
+		List<Broadcast> broadcasts = broadcastService.getLastTenBroadcasts();
+//		Broadcast b = new Broadcast();
+//		b.setId(1);
+//		User user = new User();
+//		user.setId(5);
+//		b.setUser(user);
+//		List<Broadcast> broadcasts = new ArrayList();
+//		broadcasts.add(b);
+		
+//		log.debug(broadcasts);
+//		System.out.println(broadcasts);
+//		Hibernate.initialize(broadcasts);
+		return broadcasts;
 	}
 	
 	@RequestMapping(value = "/delete")
