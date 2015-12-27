@@ -1,0 +1,25 @@
+.giin {
+	text-transform: uppercase;
+}
+
+.panel-setting {
+	border-color: #d6d6d6;
+	border-radius: 0 !important;
+	
+}
+
+.panel-setting>.panel-heading {
+	background: -webkit-linear-gradient(top, #f9f6f1 0%,#f2efea 100%);
+	color: #333333;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	border-radius: 0 !important;
+}
+
+.thead-center>tr>th,.tbody-center>tr>td {
+	text-align: center;
+}
+
+.radio {
+	display: inline-block;
+}
