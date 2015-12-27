@@ -5,13 +5,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="/resources/js/jquery-1.11.3.js"></script>
+<script src="/resources/js/bootstrap.js"></script>
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Report List</title>
 <style type="text/css">
 table {
 	border-collapse: collapse;
+	margin: 20px;
 }
-
 td, th {
 	border: 1px solid blue;
 	padding: 5px;
@@ -19,7 +22,7 @@ td, th {
 </style>
 </head>
 <body>
-	<a href="/reports/list">所有檢舉</a>
+	<a href="/reports/list" id="showall">所有檢舉</a>
 	<a href="/reports/unread">未審核檢舉</a>
 	<a href="/reports/editold">修改已審核檢舉(*)</a>
 	<br />
@@ -58,9 +61,9 @@ td, th {
 				<td>${item.article}</td>
 				<td>${item.reportTime}</td>
 				<td>
-					<input type="button" value="通過" name="pass"
+					<input type="button" value="通過" id="pass" name="pass" class="btn btn-primary"
 					onclick="javascript:location.href='/reports/edit?id=${item.id}&passed=T'">
-					<input type="button" value="不通過" name="notpass"
+					<input type="button" value="不通過" id="notpass" name="notpass" class="btn btn-warning"
 					onclick="javascript:location.href='/reports/edit?id=${item.id}&passed=F'" />
 				</td>
 				<td><c:choose>
@@ -70,6 +73,20 @@ td, th {
 			</tr>
 		</c:forEach>
 	</table>
+<script>
+$("#showall").click(function(){
+	$.ajax({
+		type:"get",
+		dataType:"json",
+		url:"localhost:8080/reports/list",
+		success:function(data){
+			console.log("success,", data);
+		}
+	})
+})
 
+
+
+</script>
 </body>
 </html>

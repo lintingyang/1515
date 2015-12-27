@@ -20,13 +20,10 @@ public class UserBanListService {
 	@Autowired
 	private UserDao userDao;
 	
-
-	
-	@Transactional
 	public List<UserBanList> findOneUser(int id){
 		if(userDao.findById(id)!=null){
-		List<UserBanList> result = ublDao.findByUserAId(id);
-		return result;
+			List<UserBanList> result = ublDao.findByUserAId(id);
+			return result;
 		}
 		return null;
 	}

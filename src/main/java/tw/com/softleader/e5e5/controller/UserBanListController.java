@@ -2,6 +2,8 @@ package tw.com.softleader.e5e5.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import tw.com.softleader.e5e5.service.UserBanListService;
 @Controller
 @RequestMapping(value = "/userbanlists")
 public class UserBanListController {
+	private Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private UserBanListService ublService;
@@ -27,8 +30,10 @@ public class UserBanListController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/query" )
-	public List<UserBanList> query(Model model , @RequestBody UserBanList form) {
+	@RequestMapping(value="/query")
+	public List<UserBanList> query(@RequestBody UserBanList form) {
+		
+		log.debug("{}", form);
 		
 		return ublService.findOneUser(form.getId());
 
