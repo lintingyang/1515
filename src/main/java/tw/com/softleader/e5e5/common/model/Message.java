@@ -9,6 +9,18 @@ public class Message implements Serializable {
 	private String name;
 	private String value;
 	
+	public Message() {
+	}
+	
+	public Message(String value) {
+		this.value = value;
+	}
+	
+	public Message(String name, String value) {
+		this.name = name;
+		this.value = value;
+	}
+	 
 	@Override
 	public String toString() {
 		return "Message [name=" + name + ", value=" + value + "]";
