@@ -1,0 +1,26 @@
+	<script type="text/javascript" src='../jquery/jquery-2.0.3.min.js'></script>
+	<script type="text/javascript" src='jquery.multi-select.js'></script>
+	<link href='multi-select.css' rel="stylesheet">
+	
+	<div class="form-group">
+	    <label for="roles" class="col-lg-2 control-label">Roles</label>
+	    <div class="col-lg-10">
+	      <select multiple="multiple" id="roles" name="roles">
+	      	<option value="adminRole">Administrator</option>
+	      	<option value="userRole1">User1</option>
+	      	<option value="userRole2">User2</option>
+	      	<option value="userRole3">User3</option>
+	      	<option value="userRole4">User4</option>
+	      	<option value="userRole5">User5</option>
+	      	<option value="userRole6">User6</option>
+	      </select> 
+	      <span class="help-block"><div class="text-danger"></div></span>
+	    </div>
+	  </div>
+	  <script language="javascript">
+	  	$('#roles').multiSelect({
+	  		selectableHeader:"<b>Selectable Roles</b>",
+	  		selectionHeader:"<b>Selection Roles</b>"
+	  	}).multiSelect('select',['adminRole',
+	  	                         'userRole1']);
+	  </script>	 

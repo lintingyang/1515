@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -71,5 +72,33 @@ public class MovieController {
 		return movies;
 		
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="insert", method = RequestMethod.POST )
+	public String insert(@RequestBody Movie form) {
+		
+		// call service.insert(form)
+		
+		return "Already Insert..";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="update", method = RequestMethod.PUT )
+	public String update(@RequestBody Movie form) {
+		
+		// call service.insert(form)
+		
+		return "Already Update..";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="delete", method = RequestMethod.PUT )
+	public String delete(@RequestBody Movie form) {
+		
+		// call service.insert(form)
+		
+		return "Already Delete..";
+	}
+	
 
 }

@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+.title {
+	display: block;
+	padding: 0;
+	margin-bottom: 20px;
+	font-size: 18px;
+	line-height: 30px;
+	color: #333333;
+	border: 0;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.innerTitle {
+	font-size: 16px;
+}
+
+.warn-wording {
+	color: #FF0000;
+}
+
+.msg-wording {
+	color: #0000FF;
+}
+
+.big-checkbox {
+	width: 20px;
+	height: 20px;
+}
+
+.big-radio {
+	width: 18px;
+	height: 18px;
+}
+
+.even-row-color {
+	background-color: #BBE;
+}
+
+.form-group.required .control-label:after { 
+   content:"*";
+   color:red;
+}
