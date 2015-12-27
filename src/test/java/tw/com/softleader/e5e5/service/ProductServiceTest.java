@@ -133,7 +133,6 @@ public class ProductServiceTest {
 	
 //	@Test
 //	public void testGetTopclickedProducts() {
-//		ProductService productService = new ProductService(productDao, userDao);
 //		List<Product> result= productService.getTopclickedProducts();
 //		for(Product p:result){
 //			log.debug(p);
@@ -141,7 +140,6 @@ public class ProductServiceTest {
 //	}
 //	@Test
 //	public void testFindPostedMostUser() {
-//		ProductService productService = new ProductService(productDao, userDao);
 //		int who= productService.findPostedMostUser();
 //		User u = userDao.findById(who);
 //		log.debug(u);

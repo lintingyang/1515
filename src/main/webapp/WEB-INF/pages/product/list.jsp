@@ -5,6 +5,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="/resources/js/jquery-1.11.3.js"></script>
+<script src="/resources/js/bootstrap.js"></script>
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <title>Product List</title>
 <style type="text/css">
 table {
@@ -18,14 +21,39 @@ td, th {
 </head>
 <body>
 	<form action="/products/query" method="get">
-		關鍵字(產品名稱、交換地、使用者名稱、產品類別)： <input type="text" name="pKeywords"> <input
-			type="submit" value="search">
+		關鍵字(產品名稱、交換地、使用者名稱、產品類別)： <input type="text" name="pKeywords">
+		<input type="submit" value="search">
 	</form>
 	<hr>
+
 	<form action="/products/add">
 		<input type="submit" value="新增產品">
 	</form>
 	<hr>
+	
+	<form id="search-form">
+		id查詢:<input type="text" name="id" id="pId" /> 
+		<input type="button" value="searchById" id="btnSe"/>
+	</form>
+	<hr>
+	<script>
+		$("#btnSe").click(function() {
+			console.log("search.............");
+			$.ajax({
+				type : "post",
+				contentType : 'application/json',
+				url : '/products/query1',
+				dataType : 'json',
+				data : JSON.stringify({
+					id : $("#pId").val()
+				}),
+				success : function(data) {
+					console.log(data);
+				}
+			})
+		})
+	</script>
+
 	<table style="border: 1px solid blue;">
 		<thead>
 			<tr>
@@ -66,7 +94,7 @@ td, th {
 					<td>${p.location}</td>
 					<td>${p.tradeWay}</td>
 					<td>${p.wishItem}</td>
-					<td>${p.postStatus} <input type="button" value="修改狀態"
+					<td>${p.postStatus}<input type="button" value="修改狀態"
 						onclick="javascript:location.href='edit?id=${p.id}'">
 					</td>
 					<td>${p.tradeStatus}</td>
@@ -77,10 +105,8 @@ td, th {
 					<td>${p.tradeFinishedTime}</td>
 					<td>${p.grade}</td>
 					<td>${p.gradeTime}</td>
-					<td>
-						<input type="button" value="刪除產品" 
-						onclick="javascript:location.href='delete?id=${p.id}'">
-					</td>
+					<td><input type="button" value="刪除產品"
+						onclick="javascript:location.href='delete?id=${p.id}'"></td>
 				</tr>
 			</c:forEach>
 		</tbody>

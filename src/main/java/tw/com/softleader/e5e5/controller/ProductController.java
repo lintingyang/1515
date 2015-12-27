@@ -1,11 +1,7 @@
 package tw.com.softleader.e5e5.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import javax.persistence.Entity;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,14 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.sym.Name;
-
-import tw.com.softleader.e5e5.dao.ProductCategoryDao;
 import tw.com.softleader.e5e5.entity.Admin;
-import tw.com.softleader.e5e5.entity.Chat;
 import tw.com.softleader.e5e5.entity.Product;
-import tw.com.softleader.e5e5.entity.ProductCategory;
-import tw.com.softleader.e5e5.entity.User;
 import tw.com.softleader.e5e5.service.ProductService;
 
 @Controller
@@ -49,7 +39,17 @@ public class ProductController {
 		model.addAttribute("products", products);
 		return "/product/list";
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(value = "/query1",  produces = "application/json") 
+	public Product query(@RequestBody Product product) {
+		System.out.println("=========+++++++===========" + product);
+		Product products = productService.getOneById((Integer)product.getId());
+//		List<Product> list = new ArrayList<Product>();
+//		list.add(p);
+		return products;
+	}
+	
 	@RequestMapping(value = "/delete")
 	public String delete(Model model, @ModelAttribute Product product) {
 		productService.deleteById(product.getId());
