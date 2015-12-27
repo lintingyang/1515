@@ -1,5 +1,6 @@
 package tw.com.softleader.e5e5.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.sym.Name;
 
 import tw.com.softleader.e5e5.dao.ProductCategoryDao;
+import tw.com.softleader.e5e5.entity.Admin;
 import tw.com.softleader.e5e5.entity.Chat;
 import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.entity.ProductCategory;
@@ -62,9 +64,11 @@ public class ProductController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/insert")
+	@RequestMapping(value = "/insert" ) 
 	public String insert(Model model, @RequestBody Product product) {
-		int number = productService.insert(product.getName(), 1, product.getDeadline(), product.getLocation(), product.getTradeWay(), product.getWishItem());
+		System.out.println("product========================" + product);
+		int number = productService.insert(product.getName(), 2, product.getDeadline(), product.getLocation(), product.getTradeWay(), product.getWishItem());
+		System.out.println("number========================" + number);
 		if(number == 1){
 			model.addAttribute("result", "新增成功");
 		}else{
@@ -73,6 +77,18 @@ public class ProductController {
 		System.out.println("############################"+product);
 		return "/product/add";
 	}
+//	@ResponseBody
+//	@RequestMapping(value = "/insert")
+//	public String insert(Model model, @RequestBody Product product) {
+//		int number = productService.insert(product.getName(), 1, product.getDeadline(), product.getLocation(), product.getTradeWay(), product.getWishItem());
+//		if(number == 1){
+//			model.addAttribute("result", "新增成功");
+//		}else{
+//			model.addAttribute("result", "新增失敗");
+//		}
+//		System.out.println("############################"+product);
+//		return "/product/add";
+//	}
 //	@RequestMapping(value = "/insert")
 //	public String insert(Model model, @ModelAttribute Product product, @RequestParam("pCategory") int pCategory) {
 //		int number = productService.insert(product.getName(), pCategory, product.getDeadline(), product.getLocation(), product.getTradeWay(), product.getWishItem());
