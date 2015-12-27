@@ -51,7 +51,7 @@ public class BroadcastController {
 		log.debug("tetestes: "+id);
 
 //		Broadcast broadcast=broadcastService.postBroadcast(1, "test");
-//		Broadcast broadcast=broadcastService.postBroadcast(id, broadcastDescription);
+		Broadcast broadcast=broadcastService.postBroadcast(id, broadcastDescription);
 		List<Broadcast> broadcasts = broadcastService.getLastTenBroadcasts();
 //		Broadcast b = new Broadcast();
 //		b.setId(1);

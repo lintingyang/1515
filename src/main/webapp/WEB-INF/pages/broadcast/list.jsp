@@ -13,7 +13,10 @@
 $(function(){    
 	 $("#btn").click(function(){
 		 	var formData = JSON.stringify($("#myForm").serializeArray());
-		 	formData={"id":"1","broadcastDescription":"test"};
+// 		 	formData={"id":"1","broadcastDescription":"test"};
+		 	formData={"id":$("#id").val(),"broadcastDescription":$("#broadcastDescription").val()}
+
+// 		 	data:JSON.stringify({account:$("#account").val()}),
 	        $.ajax({
 	           type: "GET",
 	           url: "http://localhost:8080/broadcasts/insert",
@@ -28,8 +31,18 @@ $(function(){
 	 
 	 function drawTable(data) {
 		 var obj = JSON.stringify(data);
+// 		 document.getElementById("tbody1").innerHTML="";
+		 var counter=0;
 		 $.each($.parseJSON(obj), function() {
-		        alert(this.id + " ");
+			    //var str="<tr><td>"+this.id+"</td><td>"+this.user.name+"</td><td>"+this.broadcastDescription+"</td></tr>"
+		        //document.getElementById("tbody1").innerHTML=str;
+			    $("td:eq("+counter+")").html(this.id);
+			    counter++;
+			    $("td:eq("+counter+")").html(this.user.name);
+			    counter++
+			    $("td:eq("+counter+")").html(this.broadcastDescription);
+			    counter=counter+2;
+// 				$("tbody").append("<tr><td>"+this.id+"</td><td>"+this.user.name+"</td><td>"+this.broadcastDescription+"</td></tr>")
 		    });
 		
 		}
@@ -39,21 +52,20 @@ $(function(){
 <body>
 
 	<form id="myForm">
-		<input type="text" name="id" size="5" placeholder="使用者ID">
-		<input type="text" name="broadcastDescription">
+		<input type="text" id="id" name="id" size="5" placeholder="使用者ID">
+		<input type="text" id="broadcastDescription" name="broadcastDescription">
 	</form>
 	<button id="btn">輸入</button>
-<div id="div1">
+
 	<table>
 		<thead>
 			<tr>
 				<th>id</th>
 				<th>user</th>
 				<th>broadcastDescription</th>
-				<th></th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id="tbody1">
 			<c:forEach var="s" items="${beans}">
 				<tr>
 					<td>${s.id}</td>
@@ -64,8 +76,7 @@ $(function(){
 				</tr>
 			</c:forEach>
 		</tbody>
-	</table>
-</div>
+
 
 
 
