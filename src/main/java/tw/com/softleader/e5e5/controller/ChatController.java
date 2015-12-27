@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -47,18 +49,18 @@ public class ChatController {
 	public String insert(Model model, @RequestParam("id") Integer id, @RequestParam("message") String message,
 			@RequestParam("file") MultipartFile file) {
 		BufferedImage src = null;
-		int counter=1;
-		String path = "WebContent/imgs/" + String.valueOf(id)+"/";
+		int counter=0;
+		String path = "/resources/imgs/";
 		if (!file.isEmpty()) {
 			try {
 				src = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
 				if (!(new File(path)).exists()) {
 					(new File(path)).mkdir();
 				}
-				File destination = new File(path+file.getOriginalFilename());
+				File destination = new File(path + String.valueOf(id)+"_"+file.getOriginalFilename());
 				while(destination.exists()){
 					counter++;
-					destination = new File(path+counter+file.getOriginalFilename());
+					destination = new File(path+ String.valueOf(id)+"_"+counter+"_"+file.getOriginalFilename());
 				}
 				ImageIO.write(src, "png", destination);
 			} catch (IOException e) {
