@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -12,6 +13,7 @@ import javax.persistence.Table;
 
 import tw.com.softleader.e5e5.common.entity.GenericEntity;
 
+@Entity
 @SuppressWarnings("serial")
 @Table(name = "SEC_USER")
 public class SecUser extends GenericEntity {
@@ -23,7 +25,7 @@ public class SecUser extends GenericEntity {
 	private String password;
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-	@JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
+	@JoinTable(name = "SEC_USER_ROLE_MAP", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
 	private Set<SecRole> roles;
 	
 

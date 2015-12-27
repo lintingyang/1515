@@ -3,6 +3,7 @@ package tw.com.softleader.e5e5.security.entity;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -10,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import tw.com.softleader.e5e5.common.entity.GenericEntity;
 
+@Entity
 @SuppressWarnings("serial")
 @Table(name = "SEC_ROLE")
 public class SecRole extends GenericEntity {
