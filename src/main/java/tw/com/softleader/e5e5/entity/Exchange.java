@@ -31,6 +31,42 @@ public class Exchange implements java.io.Serializable {
 	private Product productByProductAId;
 	private Product productByProductBId;
 	private Date exchangeTime;
+	public Date getTradeFinishedTime() {
+		return tradeFinishedTime;
+	}
+
+	public void setTradeFinishedTime(Date tradeFinishedTime) {
+		this.tradeFinishedTime = tradeFinishedTime;
+	}
+
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+
+	public Date getGradeTime() {
+		return gradeTime;
+	}
+
+	public void setGradeTime(Date gradeTime) {
+		this.gradeTime = gradeTime;
+	}
+
+	public Character getTradeStatus() {
+		return tradeStatus;
+	}
+
+	public void setTradeStatus(Character tradeStatus) {
+		this.tradeStatus = tradeStatus;
+	}
+
+	private Date tradeFinishedTime;
+	private String grade;
+	private Date gradeTime;
+	private Character tradeStatus;
 //	private Set<Product> products = new HashSet<Product>(0);
 
 	public Exchange() {

@@ -41,14 +41,9 @@ public class Product implements java.io.Serializable {
 	private String tradeWay;
 	private String wishItem;
 	private Character postStatus;
-	private Character tradeStatus;
 	private Integer clickTimes;
-	private Exchange exchange;
-	private Product product;
-	private User userByItemOwnerId;
-	private Date tradeFinishedTime;
-	private String grade;
-	private Date gradeTime;
+
+
 //	private Set<Product> products = new HashSet<Product>(0);
 //	private Set<QuestionAndAnswer> questionAndAnswers = new HashSet<QuestionAndAnswer>(0);
 //	private Set<Report> reports = new HashSet<Report>(0);
@@ -82,14 +77,8 @@ public class Product implements java.io.Serializable {
 		this.tradeWay = tradeWay;
 		this.wishItem = wishItem;
 		this.postStatus = postStatus;
-		this.tradeStatus = tradeStatus;
 		this.clickTimes = clickTimes;
-		this.exchange = exchange;
-		this.product = product;
-		this.userByItemOwnerId = userByItemOwnerId;
-		this.tradeFinishedTime = tradeFinishedTime;
-		this.grade = grade;
-		this.gradeTime = gradeTime;
+
 //		this.products = products;
 //		this.questionAndAnswers = questionAndAnswers;
 //		this.reports = reports;
@@ -103,9 +92,9 @@ public class Product implements java.io.Serializable {
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", video=" + Arrays.toString(video) + ", postTime=" + postTime
 				+ ", deadline=" + deadline + ", location=" + location + ", tradeWay=" + tradeWay + ", wishItem="
-				+ wishItem + ", postStatus=" + postStatus + ", tradeStatus=" + tradeStatus + ", clickTimes="
-				+ clickTimes + ", tradeFinishedTime=" + tradeFinishedTime + ", grade=" + grade + ", gradeTime="
-				+ gradeTime + "]";
+				+ wishItem + ", postStatus=" + postStatus + ", tradeStatus=" + ", clickTimes="
+				+ clickTimes + ", tradeFinishedTime=" + ", gradeTime="
+				+ "]";
 	}
 
 	@Id
@@ -217,14 +206,6 @@ public class Product implements java.io.Serializable {
 		this.postStatus = postStatus;
 	}
 
-	@Column(name = "trade_status", length = 1)
-	public Character getTradeStatus() {
-		return this.tradeStatus;
-	}
-
-	public void setTradeStatus(Character tradeStatus) {
-		this.tradeStatus = tradeStatus;
-	}
 
 	@Column(name = "click_times")
 	public Integer getClickTimes() {
@@ -235,70 +216,7 @@ public class Product implements java.io.Serializable {
 		this.clickTimes = clickTimes;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "exchange_id", referencedColumnName="id")
-	@Transactional
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	public Exchange getExchange() {
-		return this.exchange;
-	}
 
-	public void setExchange(Exchange exchange) {
-		this.exchange = exchange;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "item_id", referencedColumnName="id")
-	@Transactional
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	public Product getProduct() {
-		return this.product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "item_owner_id", referencedColumnName="id")
-	@Transactional
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	public User getUserByItemOwnerId() {
-		return this.userByItemOwnerId;
-	}
-
-	public void setUserByItemOwnerId(User userByItemOwnerId) {
-		this.userByItemOwnerId = userByItemOwnerId;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "trade_finished_time", length = 23)
-	public Date getTradeFinishedTime() {
-		return this.tradeFinishedTime;
-	}
-
-	public void setTradeFinishedTime(Date tradeFinishedTime) {
-		this.tradeFinishedTime = tradeFinishedTime;
-	}
-
-	@Column(name = "grade", length = 5)
-	public String getGrade() {
-		return this.grade;
-	}
-
-	public void setGrade(String grade) {
-		this.grade = grade;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "grade_time", length = 23)
-	public Date getGradeTime() {
-		return this.gradeTime;
-	}
-
-	public void setGradeTime(Date gradeTime) {
-		this.gradeTime = gradeTime;
-	}
 
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
 //	public Set<Product> getProducts() {
