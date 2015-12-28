@@ -4,11 +4,11 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +26,9 @@ import tw.com.softleader.e5e5.service.ChatService;
 @Controller
 @RequestMapping(value = "/chats")
 public class ChatController {
+	
+	@Autowired
+	private ServletContext servletContext;
 	
 	private Logger log = Logger.getLogger(this.getClass());
 	@Autowired
@@ -47,10 +50,13 @@ public class ChatController {
 
 	@RequestMapping(value = "/insert")
 	public String insert(Model model, @RequestParam("id") Integer id, @RequestParam("message") String message,
-			@RequestParam("file") MultipartFile file) {
+			@RequestParam("file") MultipartFile file , HttpServletRequest request) {
+
 		BufferedImage src = null;
 		int counter=0;
 		String path = "/resources/imgs/";
+//		path = request.getSession().getServletContext().getRealPath(path);
+		path = servletContext.getRealPath(path);
 		if (!file.isEmpty()) {
 			try {
 				src = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
@@ -62,8 +68,10 @@ public class ChatController {
 					counter++;
 					destination = new File(path+ String.valueOf(id)+"_"+counter+"_"+file.getOriginalFilename());
 				}
+				System.out.println("destination="+destination.getAbsolutePath());
 				ImageIO.write(src, "png", destination);
 			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
 		Chat chat = chatService.postChat(id, message);
