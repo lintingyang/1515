@@ -36,8 +36,8 @@ public class Admin implements java.io.Serializable {
 	private String name;
 	private String password;
 	private String email;
-	private Set<Report> reports = new HashSet<Report>(0);
-	private Set<AdminQuestionAndAnswer> adminQuestionAndAnswers = new HashSet<AdminQuestionAndAnswer>(0);
+//	private Set<Report> reports = new HashSet<Report>(0);
+//	private Set<AdminQuestionAndAnswer> adminQuestionAndAnswers = new HashSet<AdminQuestionAndAnswer>(0);
 
 	public Admin() {
 	}
@@ -46,17 +46,17 @@ public class Admin implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Admin(int id,String account, String authority, String name, String password,String email,Set<Report> reports,
-			Set<AdminQuestionAndAnswer> adminQuestionAndAnswers) {
+	public Admin(int id,String account, String authority, String name, String password,String email
+			) {
 		
 		this.id = id;
 		this.account = account;
 		this.authority = authority;
 		this.name = name;
 		this.password = password;
-		this.reports = reports;
+//		this.reports = reports;
 		this.email = email;
-		this.adminQuestionAndAnswers = adminQuestionAndAnswers;
+//		this.adminQuestionAndAnswers = adminQuestionAndAnswers;
 	}
 
 	@Id
@@ -111,22 +111,22 @@ public class Admin implements java.io.Serializable {
 	public void setEmail(String email){
 		this.email = email;
 	}
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "admin")
-	public Set<Report> getReports() {
-		return this.reports;
-	}
-
-	public void setReports(Set<Report> reports) {
-		this.reports = reports;
-	}
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "admin")
-	public Set<AdminQuestionAndAnswer> getAdminQuestionAndAnswers() {
-		return this.adminQuestionAndAnswers;
-	}
-
-	public void setAdminQuestionAndAnswers(Set<AdminQuestionAndAnswer> adminQuestionAndAnswers) {
-		this.adminQuestionAndAnswers = adminQuestionAndAnswers;
-	}
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "admin")
+//	public Set<Report> getReports() {
+//		return this.reports;
+//	}
+//
+//	public void setReports(Set<Report> reports) {
+//		this.reports = reports;
+//	}
+//	
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "admin")
+//	public Set<AdminQuestionAndAnswer> getAdminQuestionAndAnswers() {
+//		return this.adminQuestionAndAnswers;
+//	}
+//
+//	public void setAdminQuestionAndAnswers(Set<AdminQuestionAndAnswer> adminQuestionAndAnswers) {
+//		this.adminQuestionAndAnswers = adminQuestionAndAnswers;
+//	}
 
 }

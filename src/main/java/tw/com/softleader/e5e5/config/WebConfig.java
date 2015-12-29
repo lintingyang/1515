@@ -12,12 +12,13 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = { "com.geowarin.mvc.base.controller" })
+@ComponentScan(basePackages = { "tw.com.softleader.e5e5.controller" })
 public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+        registry.addResourceHandler("/assets/**").addResourceLocations("/assets/");
     }
 
     @Bean

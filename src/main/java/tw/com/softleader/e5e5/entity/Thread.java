@@ -43,7 +43,6 @@ public class Thread implements java.io.Serializable {
 	private Set<Report> reports = new HashSet<Report>(0);
 	private Set<ThreadTag> threadTags = new HashSet<ThreadTag>(0);
 	private Set<ForumPicture> forumPictures = new HashSet<ForumPicture>(0);
-	private Set<Board> boards = new HashSet<Board>(0);
 	private Set<Reply> replies = new HashSet<Reply>(0);
 
 	
@@ -64,7 +63,7 @@ public class Thread implements java.io.Serializable {
 		this.threadContent = threadContent;
 	}
 
-	public Thread(int id, Board board, User user, String title, Date createdDate,
+	public Thread(int id, User user, String title, Date createdDate,
 			String threadContent, Integer hit, Integer replyCount, Date lastReplyDate, Character isReadonly,
 			Character topped, Set<Report> reports, Set<ThreadTag> threadTags, Set<ForumPicture> forumPictures,
 			Set<Board> boards, Set<Reply> replies) {
@@ -82,7 +81,6 @@ public class Thread implements java.io.Serializable {
 		this.reports = reports;
 		this.threadTags = threadTags;
 		this.forumPictures = forumPictures;
-		this.boards = boards;
 		this.replies = replies;
 	}
 
@@ -238,14 +236,6 @@ public class Thread implements java.io.Serializable {
 		this.forumPictures = forumPictures;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "thread")
-	public Set<Board> getBoards() {
-		return this.boards;
-	}
-
-	public void setBoards(Set<Board> boards) {
-		this.boards = boards;
-	}
 	//刪帖刪回覆
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "thread",
 			cascade={ CascadeType.REMOVE})

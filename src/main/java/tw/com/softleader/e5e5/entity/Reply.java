@@ -35,7 +35,6 @@ public class Reply implements java.io.Serializable {
 	private String replyContent;
 	private Integer floor;
 	private Character isHide;
-	private Set<Board> boards = new HashSet<Board>(0);
 	private Set<ForumPicture> forumPictures = new HashSet<ForumPicture>(0);
 	private Set<Report> reports = new HashSet<Report>(0);
 
@@ -54,14 +53,13 @@ public class Reply implements java.io.Serializable {
 	}
 
 	public Reply(int id, Thread thread, Date createdDate, String title, String replyContent, Integer floor,
-			Set<Board> boards, Set<Report> reports, Set<ForumPicture> forumPictures) {
+			 Set<Report> reports, Set<ForumPicture> forumPictures) {
 		this.id = id;
 		this.thread = thread;
 		this.createdDate = createdDate;
 		this.title = title;
 		this.replyContent = replyContent;
 		this.floor = floor;
-		this.boards = boards;
 		this.forumPictures = forumPictures;
 		this.reports = reports;
 	}
@@ -130,15 +128,6 @@ public class Reply implements java.io.Serializable {
 
 	public void setFloor(Integer floor) {
 		this.floor = floor;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "reply")
-	public Set<Board> getBoards() {
-		return this.boards;
-	}
-
-	public void setBoards(Set<Board> boards) {
-		this.boards = boards;
 	}
 
 	// 刪回覆刪圖
