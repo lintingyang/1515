@@ -50,7 +50,7 @@ public class ChatController {
 
 	@RequestMapping(value = "/insert")
 	public String insert(Model model, @RequestParam("id") Integer id, @RequestParam("message") String message,
-			@RequestParam("file") MultipartFile file , HttpServletRequest request) {
+			@RequestParam("file") MultipartFile file) {
 
 		BufferedImage src = null;
 		int counter=0;
@@ -68,7 +68,7 @@ public class ChatController {
 					counter++;
 					destination = new File(path+ String.valueOf(id)+"_"+counter+"_"+file.getOriginalFilename());
 				}
-				System.out.println("destination="+destination.getAbsolutePath());
+				//System.out.println("destination="+destination.getAbsolutePath());
 				ImageIO.write(src, "png", destination);
 			} catch (IOException e) {
 				e.printStackTrace();

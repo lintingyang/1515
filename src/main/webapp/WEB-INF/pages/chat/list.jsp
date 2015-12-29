@@ -11,8 +11,6 @@
 
 <body>
 
-
-<h1><%=request.getRealPath("/") %></h1>
 <form  action="/chats/insert" method="post" enctype="multipart/form-data">
 	<input type="text" name="id" size="5" placeholder="使用者ID">
 	<input type="text" name="message"><br>
