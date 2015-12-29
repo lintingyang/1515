@@ -50,14 +50,7 @@ td, th {
 				<th>交換方式</th>
 				<th>慾望清單</th>
 				<th>刊登狀態</th>
-				<th>交易狀態</th>
 				<th>點擊次數</th>
-				<th>交換編號</th>
-				<th>交換商品編號</th>
-				<th>交換商品使用者</th>
-				<th>交換時間</th>
-				<th>評比</th>
-				<th>評比時間</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -84,14 +77,7 @@ td, th {
 						<input type="submit" value="確定修改">
 					</form>
 				</td>
-				<td>${p.tradeStatus}</td>
 				<td>${p.clickTimes}</td>
-				<td>${p.exchange.id}</td>
-				<td>${p.product.id}</td>
-				<td>${p.userByItemOwnerId.id}</td>
-				<td>${p.tradeFinishedTime}</td>
-				<td>${p.grade}</td>
-				<td>${p.gradeTime}</td>
 			</tr>
 		</tbody>
 	</table>

@@ -69,14 +69,7 @@ td, th {
 				<th>交換方式</th>
 				<th>慾望清單</th>
 				<th>刊登狀態</th>
-				<th>交易狀態</th>
 				<th>點擊次數</th>
-				<th>交換編號</th>
-				<th>交換商品編號</th>
-				<th>交換商品使用者</th>
-				<th>交換時間</th>
-				<th>評比</th>
-				<th>評比時間</th>
 				<th>刪除產品</th>
 			</tr>
 		</thead>
@@ -97,14 +90,7 @@ td, th {
 					<td>${p.postStatus}<input type="button" value="修改狀態"
 						onclick="javascript:location.href='edit?id=${p.id}'">
 					</td>
-					<td>${p.tradeStatus}</td>
 					<td>${p.clickTimes}</td>
-					<td>${p.exchange.id}</td>
-					<td>${p.product.id}</td>
-					<td>${p.userByItemOwnerId.id}</td>
-					<td>${p.tradeFinishedTime}</td>
-					<td>${p.grade}</td>
-					<td>${p.gradeTime}</td>
 					<td><input type="button" value="刪除產品"
 						onclick="javascript:location.href='delete?id=${p.id}'"></td>
 				</tr>

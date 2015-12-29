@@ -43,13 +43,9 @@ public class Product implements java.io.Serializable {
 	private Character postStatus;
 	private Integer clickTimes;
 
-
-//	private Set<Product> products = new HashSet<Product>(0);
-//	private Set<QuestionAndAnswer> questionAndAnswers = new HashSet<QuestionAndAnswer>(0);
-//	private Set<Report> reports = new HashSet<Report>(0);
-//	private Set<Exchange> exchangesForProductAId = new HashSet<Exchange>(0);
-//	private Set<ProductPicture> productPictures = new HashSet<ProductPicture>(0);
-//	private Set<Exchange> exchangesForProductBId = new HashSet<Exchange>(0);
+	// private Set<QuestionAndAnswer> questionAndAnswers = new HashSet<QuestionAndAnswer>(0);
+	// private Set<Report> reports = new HashSet<Report>(0);
+	// private Set<ProductPicture> productPictures = new HashSet<ProductPicture>(0);
 
 	public Product() {
 	}
@@ -62,10 +58,9 @@ public class Product implements java.io.Serializable {
 			Date deadline, String location, String tradeWay, String wishItem, Character postStatus,
 			Character tradeStatus, Integer clickTimes, Exchange exchange, Product product, User userByItemOwnerId,
 			Date tradeFinishedTime, String grade, Date gradeTime
-//			, Set<Product> products,
-//			Set<QuestionAndAnswer> questionAndAnswers, Set<Report> reports, Set<Exchange> exchangesForProductAId,
-//			Set<ProductPicture> productPictures, Set<Exchange> exchangesForProductBId
-			) {
+	// Set<QuestionAndAnswer> questionAndAnswers, Set<Report> reports,
+	// Set<ProductPicture> productPictures
+	) {
 		this.id = id;
 		this.name = name;
 		this.productCategory = productCategory;
@@ -79,22 +74,16 @@ public class Product implements java.io.Serializable {
 		this.postStatus = postStatus;
 		this.clickTimes = clickTimes;
 
-//		this.products = products;
-//		this.questionAndAnswers = questionAndAnswers;
-//		this.reports = reports;
-//		this.exchangesForProductAId = exchangesForProductAId;
-//		this.productPictures = productPictures;
-//		this.exchangesForProductBId = exchangesForProductBId;
+		// this.questionAndAnswers = questionAndAnswers;
+		// this.reports = reports;
+		// this.productPictures = productPictures;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", video=" + Arrays.toString(video) + ", postTime=" + postTime
 				+ ", deadline=" + deadline + ", location=" + location + ", tradeWay=" + tradeWay + ", wishItem="
-				+ wishItem + ", postStatus=" + postStatus + ", tradeStatus=" + ", clickTimes="
-				+ clickTimes + ", tradeFinishedTime=" + ", gradeTime="
-				+ "]";
+				+ wishItem + ", postStatus=" + postStatus + ", clickTimes=" + clickTimes + "]";
 	}
 
 	@Id
@@ -118,9 +107,9 @@ public class Product implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "category_id", referencedColumnName="id")
+	@JoinColumn(name = "category_id", referencedColumnName = "id")
 	@Transactional
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public ProductCategory getProductCategory() {
 		return this.productCategory;
 	}
@@ -139,9 +128,9 @@ public class Product implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", referencedColumnName="id")
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	@Transactional
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public User getUserByUserId() {
 		return this.userByUserId;
 	}
@@ -206,7 +195,6 @@ public class Product implements java.io.Serializable {
 		this.postStatus = postStatus;
 	}
 
-
 	@Column(name = "click_times")
 	public Integer getClickTimes() {
 		return this.clickTimes;
@@ -216,60 +204,33 @@ public class Product implements java.io.Serializable {
 		this.clickTimes = clickTimes;
 	}
 
-
-
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-//	public Set<Product> getProducts() {
-//		return this.products;
-//	}
-//
-//	public void setProducts(Set<Product> products) {
-//		this.products = products;
-//	}
-//
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = { CascadeType.REMOVE })
-//	public Set<QuestionAndAnswer> getQuestionAndAnswers() {
-//		return this.questionAndAnswers;
-//	}
-//
-//	public void setQuestionAndAnswers(Set<QuestionAndAnswer> questionAndAnswers) {
-//		this.questionAndAnswers = questionAndAnswers;
-//	}
-//
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-//	public Set<Report> getReports() {
-//		return this.reports;
-//	}
-//
-//	public void setReports(Set<Report> reports) {
-//		this.reports = reports;
-//	}
-//
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productByProductAId", cascade = { CascadeType.REMOVE })
-//	public Set<Exchange> getExchangesForProductAId() {
-//		return this.exchangesForProductAId;
-//	}
-//
-//	public void setExchangesForProductAId(Set<Exchange> exchangesForProductAId) {
-//		this.exchangesForProductAId = exchangesForProductAId;
-//	}
-//
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = { CascadeType.REMOVE })
-//	public Set<ProductPicture> getProductPictures() {
-//		return this.productPictures;
-//	}
-//
-//	public void setProductPictures(Set<ProductPicture> productPictures) {
-//		this.productPictures = productPictures;
-//	}
-//
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "productByProductBId", cascade = { CascadeType.REMOVE })
-//	public Set<Exchange> getExchangesForProductBId() {
-//		return this.exchangesForProductBId;
-//	}
-//
-//	public void setExchangesForProductBId(Set<Exchange> exchangesForProductBId) {
-//		this.exchangesForProductBId = exchangesForProductBId;
-//	}
-
+	// @OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = {
+	// CascadeType.REMOVE })
+	// public Set<QuestionAndAnswer> getQuestionAndAnswers() {
+	// return this.questionAndAnswers;
+	// }
+	//
+	// public void setQuestionAndAnswers(Set<QuestionAndAnswer>
+	// questionAndAnswers) {
+	// this.questionAndAnswers = questionAndAnswers;
+	// }
+	//
+	// @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+	// public Set<Report> getReports() {
+	// return this.reports;
+	// }
+	//
+	// public void setReports(Set<Report> reports) {
+	// this.reports = reports;
+	// }
+	//
+	// @OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = {
+	// CascadeType.REMOVE })
+	// public Set<ProductPicture> getProductPictures() {
+	// return this.productPictures;
+	// }
+	//
+	// public void setProductPictures(Set<ProductPicture> productPictures) {
+	// this.productPictures = productPictures;
+	// }
 }
