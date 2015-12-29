@@ -39,8 +39,8 @@ public class Board implements java.io.Serializable {
 	private Character isCream;
 	private Character isHide;
 	private String picture;
-	private Set<UserOwner> userOwners = new HashSet<UserOwner>(0);
-	private Set<Thread> threads = new HashSet<Thread>(0);
+//	private Set<UserOwner> userOwners = new HashSet<UserOwner>(0);
+//	private Set<Thread> threads = new HashSet<Thread>(0);
 
 	public Board() {
 	}
@@ -60,8 +60,8 @@ public class Board implements java.io.Serializable {
 	}
 
 	public Board(int id, BoardCategoria boardCategoria, Date createdDate, String name,
-			String description, Integer threadCount, Integer replyCount, Character isCream, String picture,
-			Set<UserOwner> userOwners, Set<Thread> threads) {
+			String description, Integer threadCount, Integer replyCount, Character isCream, String picture
+			) {
 		this.id = id;
 		this.boardCategoria = boardCategoria;
 		// this.boardCategory = boardCategory;
@@ -72,8 +72,8 @@ public class Board implements java.io.Serializable {
 		this.replyCount = replyCount;
 		this.isCream = isCream;
 		this.picture = picture;
-		this.userOwners = userOwners;
-		this.threads = threads;
+//		this.userOwners = userOwners;
+//		this.threads = threads;
 	}
 
 	@Id
@@ -174,25 +174,25 @@ public class Board implements java.io.Serializable {
 	}
 
 	// 刪Board刪版主們
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "board", cascade = { CascadeType.REMOVE })
-	@Transactional
-	public Set<UserOwner> getUserOwners() {
-		return this.userOwners;
-	}
-
-	public void setUserOwners(Set<UserOwner> userOwners) {
-		this.userOwners = userOwners;
-	}
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "board", cascade = { CascadeType.REMOVE })
+//	@Transactional
+//	public Set<UserOwner> getUserOwners() {
+//		return this.userOwners;
+//	}
+//
+//	public void setUserOwners(Set<UserOwner> userOwners) {
+//		this.userOwners = userOwners;
+//	}
 
 	// 刪Board刪所有Threads
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "board", cascade = { CascadeType.REMOVE })
-	public Set<Thread> getThreads() {
-		return this.threads;
-	}
-
-	public void setThreads(Set<Thread> threads) {
-		this.threads = threads;
-	}
+//	public Set<Thread> getThreads() {
+//		return this.threads;
+//	}
+//
+//	public void setThreads(Set<Thread> threads) {
+//		this.threads = threads;
+//	}
 
 	@Override
 	public String toString() {

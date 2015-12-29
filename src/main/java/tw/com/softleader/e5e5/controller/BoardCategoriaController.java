@@ -2,12 +2,16 @@ package tw.com.softleader.e5e5.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.com.softleader.e5e5.entity.Board;
 import tw.com.softleader.e5e5.entity.BoardCategoria;
@@ -17,7 +21,8 @@ import tw.com.softleader.e5e5.service.BoardService;
 @Controller
 @RequestMapping(value = "/boardCategorias")
 public class BoardCategoriaController {
-
+	private Logger log = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	private BoardCategoriaService boardCategoriaService;
 	@Autowired
@@ -29,10 +34,17 @@ public class BoardCategoriaController {
 		model.addAttribute("beans", models);
 		return "/boardCategoria/list";
 	}
-
-	@RequestMapping(value = "/query")
-	public String query(@RequestParam("id") Integer id, Model model) {
-		if (id != null) {
+	
+	@ResponseBody
+	@RequestMapping(value = "/query", produces = "application/json")
+	public List<BoardCategoria> query(@RequestBody BoardCategoria boardCategoria) {
+		
+		log.debug("{=====================================================================================}"
+		+ boardCategoria.getId());
+		
+		return boardCategoriaService.getAll();
+		
+		/*if (id != null) {
 			BoardCategoria bc = boardCategoriaService.findById(id);
 			if (bc != null) {
 				List<Board> models = boardService.getBoardByBoardCategoria(bc);
@@ -40,7 +52,7 @@ public class BoardCategoriaController {
 			}
 			return "/board/list";
 		}
-		return "/boardCategoria/list";
+		return "/boardCategoria/list";*/
 	}
 
 	@RequestMapping(value = "/delete")
@@ -52,7 +64,8 @@ public class BoardCategoriaController {
 	public String add(Model model) {
 		return "/boardCategoria/add";
 	}
-
+	
+	@ResponseBody
 	@RequestMapping(value = "/insert")
 	public String insert(Model model, @ModelAttribute BoardCategoria boardCategoria) {
 		int result = boardCategoriaService.createBoardCategoria(boardCategoria.getName());

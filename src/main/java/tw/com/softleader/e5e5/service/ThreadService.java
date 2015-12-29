@@ -22,21 +22,19 @@ public class ThreadService {
 	
 	//新增帖子
 	@Transactional
-	public int createThread(Board board , User user , String title , String threadContent , Set<ThreadTag> threadTags ,Set<ForumPicture> forumPictures){
-		Thread thread = new Thread();
-		thread.setBoard(board);
-		thread.setUser(user);
-		thread.setTitle(title);
-		thread.setCreatedDate(new java.util.Date());
-		thread.setThreadContent(threadContent);
-		thread.setHit(0);
-		thread.setIsCream('F');
-		thread.setReplyCount(0);
-		thread.setIsReadonly('F');
-		thread.setTopped('F');
-		thread.setForumPictures(forumPictures);
-		thread.setThreadTags(threadTags);		
-		threadDao.save(thread);
+	public int createThread(Board board , User user , Thread thread){
+		Thread th = new Thread();
+		th.setBoard(board);
+		th.setUser(user);
+		th.setTitle(th.getTitle());
+		th.setCreatedDate(new java.util.Date());
+		th.setThreadContent(th.getThreadContent());
+		th.setHit(0);
+		th.setIsCream('F');
+		th.setReplyCount(0);
+		th.setIsReadonly('F');
+		th.setTopped('F');		
+		threadDao.save(th);
 		return 1;
 	}
 	

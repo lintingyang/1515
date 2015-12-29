@@ -19,73 +19,77 @@ td, th {
 	padding: 5px;
 }
 </style>
+	<script>
+	$(function(){
+		$("#showall").click(function() {
+// 			alert("click");
+			$.ajax({
+				type : "get",
+				url : "/reports/show",
+				dataType : "json",
+				contentType:"application/json",
+				data : {},
+				success : function(data) {
+					console.log(data);
+				}
+			});
+		});
+	});
+	</script>
 </head>
 <body>
-	<a href="/reports/list" id="showall">所有檢舉</a>
+	<a href="#" id="showall">所有檢舉</a>
 	<a href="/reports/unread">未審核檢舉</a>
-	<a href="/reports/editold">修改已審核檢舉(*)</a>
+	<!-- 	<a href="/reports/editold">修改已審核檢舉(*)</a> -->
 	<br />
-	<table>
-		<thead>
-			<tr>
-				<th>編號</th>
-				<th>檢舉者</th>
-				<th>檢舉內文</th>
-				<th>檢舉時間</th>
-				<th>是否通過</th>
-				<th>審核者</th>
-			</tr>
-		</thead>
-		<c:forEach items="${list}" var="item">
-			<tr>
-				<td>${item.id}</td>
-				<td>${item.user.name}</td>
-				<td>${item.article}</td>
-				<td>${item.reportTime}</td>
-				<td><c:choose>
-						<c:when test="${item.isPassed.toString() eq 'T'}">通過</c:when>
-						<c:when test="${item.isPassed.toString() eq 'F'}">未通過</c:when>
-						<c:otherwise>尚未審核</c:otherwise>
-					</c:choose></td>
-				<td><c:choose>
-						<c:when test="${not empty item.admin.id}">${item.admin.id}</c:when>
-						<c:otherwise>無</c:otherwise>
-					</c:choose></td>
-			</tr>
-		</c:forEach>
-		<c:forEach items="${unreads}" var="item">
-			<tr>
-				<td>${item.id}</td>
-				<td>${item.user.name}</td>
-				<td>${item.article}</td>
-				<td>${item.reportTime}</td>
-				<td>
-					<input type="button" value="通過" id="pass" name="pass" class="btn btn-primary"
-					onclick="javascript:location.href='/reports/edit?id=${item.id}&passed=T'">
-					<input type="button" value="不通過" id="notpass" name="notpass" class="btn btn-warning"
-					onclick="javascript:location.href='/reports/edit?id=${item.id}&passed=F'" />
-				</td>
-				<td><c:choose>
-						<c:when test="${not empty item.admin.id}">${item.admin.id}</c:when>
-						<c:otherwise>無</c:otherwise>
-					</c:choose></td>
-			</tr>
-		</c:forEach>
-	</table>
-<script>
-$("#showall").click(function(){
-	$.ajax({
-		type:"get",
-		dataType:"json",
-		url:"localhost:8080/reports/list",
-		success:function(data){
-			console.log("success,", data);
-		}
-	})
-})
+<!-- 	<table> -->
+<!-- 		<thead> -->
+<!-- 			<tr> -->
+<!-- 				<th>編號</th> -->
+<!-- 				<th>檢舉者</th> -->
+<!-- 				<th>檢舉內文</th> -->
+<!-- 				<th>檢舉時間</th> -->
+<!-- 				<th>是否通過</th> -->
+<!-- 				<th>審核者</th> -->
+<!-- 			</tr> -->
+<!-- 		</thead> -->
+<%-- 		<c:forEach items="${list}" var="item"> --%>
+<!-- 			<tr> -->
+<%-- 				<td>${item.id}</td> --%>
+<%-- 				<td>${item.user.name}</td> --%>
+<%-- 				<td>${item.article}</td> --%>
+<%-- 				<td>${item.reportTime}</td> --%>
+<%-- 				<td><c:choose> --%>
+<%-- 						<c:when test="${item.isPassed.toString() eq 'T'}">通過</c:when> --%>
+<%-- 						<c:when test="${item.isPassed.toString() eq 'F'}">未通過</c:when> --%>
+<%-- 						<c:otherwise>尚未審核</c:otherwise> --%>
+<%-- 					</c:choose></td> --%>
+<%-- 				<td><c:choose> --%>
+<%-- 						<c:when test="${not empty item.admin.id}">${item.admin.id}</c:when> --%>
+<%-- 						<c:otherwise>無</c:otherwise> --%>
+<%-- 					</c:choose></td> --%>
+<!-- 			</tr> -->
+<%-- 		</c:forEach> --%>
+<%-- 		<c:forEach items="${unreads}" var="item"> --%>
+<!-- 			<tr> -->
+<%-- 				<td>${item.id}</td> --%>
+<%-- 				<td>${item.user.name}</td> --%>
+<%-- 				<td>${item.article}</td> --%>
+<%-- 				<td>${item.reportTime}</td> --%>
+<!-- 				<td><input type="button" value="通過" id="pass" name="pass" -->
+<!-- 					class="btn btn-primary" -->
+<%-- 					onclick="javascript:location.href='/reports/edit?id=${item.id}&passed=T'"> --%>
+<!-- 					<input type="button" value="不通過" id="notpass" name="notpass" -->
+<!-- 					class="btn btn-warning" -->
+<%-- 					onclick="javascript:location.href='/reports/edit?id=${item.id}&passed=F'" /> --%>
+<!-- 				</td> -->
+<%-- 				<td><c:choose> --%>
+<%-- 						<c:when test="${not empty item.admin.id}">${item.admin.id}</c:when> --%>
+<%-- 						<c:otherwise>無</c:otherwise> --%>
+<%-- 					</c:choose></td> --%>
+<!-- 			</tr> -->
+<%-- 		</c:forEach> --%>
+<!-- 	</table> -->
 
-
-
-</script>
 </body>
 </html>
