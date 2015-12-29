@@ -90,21 +90,21 @@ public class ProductServiceTest {
 	}
 	
 	//(8)查詢商品是否交易成功：findOne byTradeStatus
-	@Test
-	public void testGetProductTradeStaus(){
-		
-		//ex:交易成功
-//		String resultT = productService.getProductTradeStaus("750G硬碟");		
-//		log.debug("(8)查詢商品是否交易成功：" + resultT);
-		
-		//ex:尚未交易
-//		String resultF = productService.getProductTradeStaus("檯燈");		
-//		log.debug("(8)查詢商品是否交易成功：" + resultF);
-		
-		//ex:查無此商品
-		String resultN = productService.getProductTradeStaus("");		
-		log.debug("(8)查詢商品是否交易成功：" + resultN);
-	}
+//	@Test
+//	public void testGetProductTradeStaus(){
+//		
+//		//ex:交易成功
+////		String resultT = productService.getProductTradeStaus("750G硬碟");		
+////		log.debug("(8)查詢商品是否交易成功：" + resultT);
+//		
+//		//ex:尚未交易
+////		String resultF = productService.getProductTradeStaus("檯燈");		
+////		log.debug("(8)查詢商品是否交易成功：" + resultF);
+//		
+//		//ex:查無此商品
+//		String resultN = productService.getProductTradeStaus("");		
+//		log.debug("(8)查詢商品是否交易成功：" + resultN);
+//	}
 	
 	//(9) 所有商品列表 findAll
 	@Test
@@ -131,19 +131,6 @@ public class ProductServiceTest {
 		}
 	
 	
-//	@Test
-//	public void testGetTopclickedProducts() {
-//		List<Product> result= productService.getTopclickedProducts();
-//		for(Product p:result){
-//			log.debug(p);
-//		}
-//	}
-//	@Test
-//	public void testFindPostedMostUser() {
-//		int who= productService.findPostedMostUser();
-//		User u = userDao.findById(who);
-//		log.debug(u);
-//	}
 	
 
 }
