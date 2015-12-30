@@ -22,22 +22,19 @@ public class ReportController {
 	
 	@RequestMapping(value="/list")
 	public String list(Model model){
-		return "/report/list";
+		return "/report/list";//回傳jsp頁面
 	}
 	
 	@RequestMapping(value="/show", method=RequestMethod.GET)
 	@ResponseBody
 	public List<Report> show(Model model){
-		List<Report> models = reportService.findHistory();
-//		model.addAttribute("list", models);
-		return models;
+		return reportService.findHistory();
 	}
 	
-	@RequestMapping(value = "/unread")
-	public String unread(Model model) {
-		List<Report> models = reportService.findAllUnread();
-		model.addAttribute("unreads", models);
-		return "/report/list";
+	@RequestMapping(value = "/unread", method=RequestMethod.GET)
+	@ResponseBody
+	public List<Report> unread(Model model) {
+		return reportService.findAllUnread();
 	}
 	
 	@RequestMapping(value="/edit")
