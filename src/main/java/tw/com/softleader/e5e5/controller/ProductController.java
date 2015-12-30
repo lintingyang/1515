@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.com.softleader.e5e5.entity.Admin;
 import tw.com.softleader.e5e5.entity.Product;
+import tw.com.softleader.e5e5.entity.ProductCategory;
 import tw.com.softleader.e5e5.service.ProductService;
 
 @Controller
@@ -25,7 +26,19 @@ public class ProductController {
 
 	@Autowired
 	public ProductService productService;
-
+	
+	@ResponseBody
+	@RequestMapping(value = "/query2",  produces = "application/json") 
+	public List<Product> query(@RequestBody ProductCategory productCategory) {
+		System.out.println("=========+++++++===========" + productCategory);
+		List<Product> products = productService.getProductsByProductCategory(productCategory.getName());
+		return products;
+	}
+	
+	
+	
+	
+	
 	@RequestMapping(value = "/list") // ** /products/list
 	public String list(Model model) {
 		List<Product> products = productService.getAllProducts();
