@@ -9,6 +9,13 @@ import tw.com.softleader.e5e5.entity.Product;
 
 public interface ProductDao extends JpaRepository<Product, Integer> {
 
+	//後台
+	//(1)findOne byId
+	//(2)findAll
+	//(3)update product's post_status
+	
+	
+	
 	//(1)最新商品列：fineAll byPostTime
 	@Query(value ="SELECT * FROM product WHERE post_time IS NOT NULL ORDER BY post_time DESC", nativeQuery = true)
 	public List<Product> findAllByPostTime();
@@ -37,9 +44,9 @@ public interface ProductDao extends JpaRepository<Product, Integer> {
 	@Query(value ="SELECT p.* FROM product p JOIN product_category pc ON p.category_id = pc.id WHERE pc.name LIKE %?1%", nativeQuery = true)
 	public List<Product> findAllByProductCategory(String productCategory);
 	
-	//(8)查詢商品是否交易成功：findOne byTradeStatus 
-	@Query(value ="SELECT trade_status FROM product WHERE name = ?1", nativeQuery = true)
-	public String findOneByTradeStatus(String name);
+//	//(8)查詢商品是否交易成功：findOne byTradeStatus 
+//	@Query(value ="SELECT trade_status FROM product WHERE name = ?1", nativeQuery = true)
+//	public String findOneByTradeStatus(String name);
 	
 	//(10)關鍵字搜尋:產品名稱、交換地、使用者名稱、產品類別
 	@Query(value ="SELECT p.* FROM product p JOIN product_category pc ON p.category_id = pc.id JOIN [user] u ON p.user_id = u.id WHERE pc.name LIKE %?1% OR p.name LIKE %?1% OR p.location LIKE %?1% OR u.name LIKE %?1%", nativeQuery = true)

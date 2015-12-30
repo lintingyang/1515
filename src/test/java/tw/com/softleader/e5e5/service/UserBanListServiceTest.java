@@ -34,20 +34,20 @@ public class UserBanListServiceTest {
 		}
 	}
 
-	@Test
-	public void testinsert(){
-		int ubs = ublService.insert(5,1);
-		
-		log.debug(ubs);
-		
-	}
-	
-	@Test
-	public void testDelete(){
-		boolean ubs = ublService.deletOne(5, 1);
-		
-		log.debug(ubs);
-	}
+//	@Test
+//	public void testinsert(){
+//		int ubs = ublService.insert(5,1);
+//		
+//		log.debug(ubs);
+//		
+//	}
+//	
+//	@Test
+//	public void testDelete(){
+//		boolean ubs = ublService.deletOne(5, 1);
+//		
+//		log.debug(ubs);
+//	}
 	
 	
 	

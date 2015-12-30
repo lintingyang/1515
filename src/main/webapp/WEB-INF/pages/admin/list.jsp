@@ -21,42 +21,22 @@
 	<!-- 	<input type="text" name="message"><br> -->
 	<!-- 	<input type="file" name="file" /><br> -->
 	<!-- 	<input type="submit" value="輸入"> -->
+<!-- 	<form action="/admins/query" method="get"> -->
+<!-- 		帳號搜尋:<input type="text" name="account" id="account"> <input -->
+<%-- 			id="searchbtn" type="submit">${ error } --%>
+<!-- 	</form> -->
+<div style="width:800px ;margin: auto;">
 	
-
 
 <form id="search-form">
 	帳號查詢:<input type="text" name="account" id="account"/>
 	<input type="button" value="submit" id="submittn" name="submit">
 </form>
 
+<button type="button" onclick="location.href='/admins/add'">新增管理員</button>
 
-<script>
-
-$("#submittn").click(function(){
-	console.log("search!");
-	$.ajax({
-		type:"post",
-		contentType:'application/json',
-		url:'/admins/query',
-		dataType:'json',
-		data:JSON.stringify({account:$("#account").val()}),
-	    success : function(data){
-	    	console.log(data);
-	    }
-	})
-})
-
-</script>
-
-
-<!-- 	<form action="/admins/query" method="get"> -->
-<!-- 		帳號搜尋:<input type="text" name="account" id="account"> <input -->
-<%-- 			id="searchbtn" type="submit">${ error } --%>
-<!-- 	</form> -->
-	<button type="button" onclick="location.href='/admins/add'">新增管理員</button>
-
-
-	<table border="1">
+	<table border="1" id="simpleTable">
+	<thead>
 		<tr>
 			<th>edit</th>
 			<th>id</th>
@@ -67,6 +47,8 @@ $("#submittn").click(function(){
 			<th>authority</th>
 			<th>delete</th>
 		</tr>
+		</thead>
+		<tbody id="mytbody">
 		<c:forEach items="${ entity }" var="result">
 			<tr>
 				<td><input type="button" value="修改"
@@ -85,6 +67,52 @@ $("#submittn").click(function(){
 			</tr>
 
 		</c:forEach>
+		</tbody>
 	</table>
+	
+	</div>
+	
+	
+
+<script>
+$("#submittn").click(function(){
+	console.log("search!");
+	$.ajax({
+		type:"post",
+		contentType:'application/json',
+		url:'/admins/query',
+		dataType:'json',
+		data:JSON.stringify({account:$("#account").val()}),
+		success: function(data) {
+			console.log(data);
+			$.each(data,function(i,datas){
+				var editbtn = $("<td></td>").html('<input type="button" name="edit" value="修改" >');
+				var temp1 = $("<td></td>").text(datas.id);	
+				var temp2 = $("<td></td>").text(datas.account);
+				var temp3 = $("<td></td>").text(datas.password);
+				var temp4 = $("<td></td>").text(datas.name);
+				var temp5 = $("<td></td>").text(datas.email);
+				var temp6 = $("<td></td>").text(datas.authority);
+				var deletebtn = $("<td></td>").html('<input type="button" name="delete" value="刪除" >');
+				var maTr = $("<tr></tr>").append([editbtn,temp1,temp2,temp3,temp4,temp5,temp6,deletebtn]);
+				$("#mytbody").html(maTr);
+				
+				$("input[name = edit]").bind("click",function(){
+					javascript:location.href='/admins/edit?id='+datas.id;
+				})
+				
+				$("input[name = delete]").bind("click",function(){
+					
+					javascript:location.href='/admins/delete?id='+datas.id;
+					alert("delete");
+				})
+			})
+			
+		
+		}
+	})
+})
+
+</script>
 </body>
 </html>

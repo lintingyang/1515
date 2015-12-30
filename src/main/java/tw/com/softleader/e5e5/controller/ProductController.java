@@ -1,26 +1,20 @@
 package tw.com.softleader.e5e5.controller;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.Entity;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.sym.Name;
-
-import tw.com.softleader.e5e5.dao.ProductCategoryDao;
-import tw.com.softleader.e5e5.entity.Chat;
+import tw.com.softleader.e5e5.entity.Admin;
 import tw.com.softleader.e5e5.entity.Product;
-import tw.com.softleader.e5e5.entity.ProductCategory;
-import tw.com.softleader.e5e5.entity.User;
 import tw.com.softleader.e5e5.service.ProductService;
 
 @Controller
@@ -45,7 +39,15 @@ public class ProductController {
 		model.addAttribute("products", products);
 		return "/product/list";
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(value = "/query1",  produces = "application/json") 
+	public Product query(@RequestBody Product product) {
+		System.out.println("=========+++++++===========" + product);
+		Product products = productService.getOneById((Integer)product.getId());
+		return products;
+	}
+	
 	@RequestMapping(value = "/delete")
 	public String delete(Model model, @ModelAttribute Product product) {
 		productService.deleteById(product.getId());
@@ -53,22 +55,58 @@ public class ProductController {
 		model.addAttribute("products", products);
 		return "/product/list";
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(value = "/delete1",  produces = "application/json") 
+	public String delete(@RequestBody Product product) {
+		System.out.println("=========+++++++===========" + product);
+		int num =productService.deleteById(product.getId());
+		if(num == 1){
+			return "delete successful !!";
+		}else{
+			return "delete failed !!";			
+		}
+	}
+	
 	@RequestMapping(value = "/add")
 	public String add(Model model) {
 		return "/product/add";
 	}
-
-	@RequestMapping(value = "/insert")
-	public String insert(Model model, @ModelAttribute Product product, @RequestParam("pCategory") int pCategory) {
-		int number = productService.insert(product.getName(), pCategory, product.getDeadline(), product.getLocation(), product.getTradeWay(), product.getWishItem());
+	
+	@ResponseBody
+	@RequestMapping(value = "/insert" ) 
+	public String insert(@RequestBody Product product) {
+		System.out.println("product========================" + product);
+		int number = productService.insert(product.getName(), 2, product.getDeadline(), product.getLocation(), product.getTradeWay(), product.getWishItem());
+		System.out.println("number========================" + number);
 		if(number == 1){
-			model.addAttribute("result", "新增成功");
+			return "insert successful !!";
 		}else{
-			model.addAttribute("result", "新增失敗");
+			return "insert failed !!";
 		}
-		return "/product/add";
 	}
+//	@ResponseBody
+//	@RequestMapping(value = "/insert")
+//	public String insert(Model model, @RequestBody Product product) {
+//		int number = productService.insert(product.getName(), 1, product.getDeadline(), product.getLocation(), product.getTradeWay(), product.getWishItem());
+//		if(number == 1){
+//			model.addAttribute("result", "新增成功");
+//		}else{
+//			model.addAttribute("result", "新增失敗");
+//		}
+//		System.out.println("############################"+product);
+//		return "/product/add";
+//	}
+//	@RequestMapping(value = "/insert")
+//	public String insert(Model model, @ModelAttribute Product product, @RequestParam("pCategory") int pCategory) {
+//		int number = productService.insert(product.getName(), pCategory, product.getDeadline(), product.getLocation(), product.getTradeWay(), product.getWishItem());
+//		if(number == 1){
+//			model.addAttribute("result", "新增成功");
+//		}else{
+//			model.addAttribute("result", "新增失敗");
+//		}
+//		return "/product/add";
+//	}
 
 	@RequestMapping(value = "/edit")
 	public String edit(Model model, @ModelAttribute Product product) {
@@ -83,5 +121,11 @@ public class ProductController {
 		model.addAttribute("p", products);
 		return "/product/edit";
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(value = "/update1",  produces = "application/json") 
+	public Product update(@RequestBody Product product) {
+		System.out.println("=========+++++++===========" + product);
+		return productService.update(product.getId(), product.getPostStatus());
+	}
 }

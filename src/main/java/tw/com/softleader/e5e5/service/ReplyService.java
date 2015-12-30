@@ -23,7 +23,6 @@ public class ReplyService {
 //		Reply reply = new Reply(id, forumPicture, thread, createdDate, 
 //				title, replyContent, floor, boards, reports)
 		Reply reply = new Reply();
-		reply.setForumPictures(forumPictures);
 		reply.setThread(thread);
 		reply.setTitle(title);
 		reply.setCreatedDate(new java.util.Date());

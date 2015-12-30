@@ -24,8 +24,8 @@ import tw.com.softleader.e5e5.service.UserService;
 @RequestMapping(value = "/threads")
 public class ThreadController {
 
-//	@Autowired
-//	private UserService userService;
+	// @Autowired
+	// private UserService userService;
 	@Autowired
 	private BoardService boardService;
 	@Autowired
@@ -35,7 +35,7 @@ public class ThreadController {
 	@Autowired
 	private BoardCategoriaService boardCategoriaService;
 
-	@RequestMapping(value = "/list")
+	@RequestMapping(value = "/admin/list")
 	public String list(Model model) {
 		List<Thread> list = threadService.getThreadById();
 		model.addAttribute("beans", list);
@@ -67,23 +67,22 @@ public class ThreadController {
 		model.addAttribute("boards", models);
 		return "/thread/add";
 	}
-//	@RequestMapping(value = "/add2")
-//	public String add2(Model model) {
-//		BoardCategoria bc = new BoardCategoria();
-//		List<Board> models = boardService.getBoardByBoardCategoria(bc);
-//		model.addAttribute("boards", models);
+	// @RequestMapping(value = "/add2")
+	// public String add2(Model model) {
+	// BoardCategoria bc = new BoardCategoria();
+	// List<Board> models = boardService.getBoardByBoardCategoria(bc);
+	// model.addAttribute("boards", models);
+	// return "/thread/add";
+	// }
+
+//	@RequestMapping(value = "/insert")
+//	public String insert(Model model, @ModelAttribute Thread thread , Board board ,Thread thread) {
+//		int result = threadService.createThread(board,user,thread){
+//		if (result == 1) {
+//			model.addAttribute("message", "新增成功");
+//		} else {
+//			model.addAttribute("message", "新增失敗");
+//		}
 //		return "/thread/add";
 //	}
-
-	@RequestMapping(value = "/insert")
-	public String insert(Model model, @ModelAttribute Thread thread) {
-		int result = threadService.createThread(thread.getBoard(), null ,thread.getTitle(),
-				thread.getThreadContent(), thread.getThreadTags(), null);
-		if (result == 1) {
-			model.addAttribute("message", "新增成功");
-		} else {
-			model.addAttribute("message", "新增失敗");
-		}
-		return "/thread/add";
-	}
 }

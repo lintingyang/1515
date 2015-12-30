@@ -5,16 +5,45 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+<script src="/resources/js/jquery-1.11.3.js"></script>  
+<script src="/resources/js/bootstrap.min.js"></script>
+<script>
+$(function(){    
+	$("#btn").click(function(){
+		event.preventDefault();
+	 	var formData={"id":$("#id").val(),"message":$("#message").val()}
+        $.ajax({
+           type: "GET",
+           url: "http://localhost:8080/chats/insertM",
+           data: formData,
+           success: function(data){
+        	   alert(data);
+           },
+           dataType: "json",
+           contentType : "application/json"
+         });
+    });
+	 
+});
+</script>
 <title>List</title>
 </head>
 
 
 <body>
+
 <form  action="/chats/insert" method="post" enctype="multipart/form-data">
-	<input type="text" name="id" size="5" placeholder="使用者ID">
-	<input type="text" name="message"><br>
-	<input type="file" name="file" /><br>
+	<input type="text" name="id" size="5" placeholder="使用者ID" required>
+	<input type="text" name="message" required><br>
+	<input type="file" name="file"  required/><br>
 	<input type="submit" value="輸入">
+</form>
+<br>
+<form id="myForm" enctype="multipart/form-data">
+	<input type="text" id="id" name="id" size="5" placeholder="使用者ID" required>
+	<input type="text" id="message" name="message" required><br>
+	<input type="submit" id="btn" value="輸入">
 </form>
 	<c:if test="${!empty beans}">
 		<table>
@@ -32,7 +61,7 @@
 						<td>${s.id}</td>
 						<td>${s.user.name}</td>
 						<td>${s.messages}</td>
-						<td>${s.picture}</td>
+						<td><img src="${s.picture}"/></td>
 					</tr>
 				</c:forEach>
 			</tbody>
