@@ -41,7 +41,7 @@ td, th {
 								console.log(value.user.name);
 								var td1 = $("<td></td>").text(value.id);
 // 								var td2 = $("<td></td>").text(value.user.name);
-								var td2 = $("<td></td>").html("<a href='#'>"+value.user.name+"</a>");
+								var td2 = $("<td></td>").html("<a href='/users/query1?account="+value.user.account+"'>"+value.user.name+"</a>");
 								var td3 = $("<td></td>").text(value.article);
 								var td4 = $("<td></td>").text(
 										new Date(value.reportTime).toString().substring(0, 25));

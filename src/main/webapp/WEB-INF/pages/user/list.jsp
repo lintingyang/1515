@@ -33,20 +33,20 @@
 		</thead>
 		
 		<tbody>
-<%-- 			<c:choose> --%>
-<%-- 				<c:when test="${!empty data}"> --%>
-<!-- 					<tr> -->
-<%-- 						<td>${findUser.id}</td> --%>
-<%-- 						<td>${findUser.name}</td> --%>
-<%-- 						<td>${findUser.account}</td> --%>
-<%-- 						<td>${findUser.address}</td> --%>
-<%-- 						<td>${findUser.schoolEmail}</td> --%>
-<%-- 						<td>${findUser.gameScore}</td> --%>
-<%-- 						<td>${findUser.onlineDatetime}</td> --%>
-<%-- 						<td>${findUser.isolated}</td> --%>
-<!-- 					</tr> -->
-<%-- 				</c:when> --%>
-<%-- 				<c:otherwise> --%>
+			<c:choose>
+				<c:when test="${!empty findUser}">
+					<tr>
+						<td>${findUser.id}</td>
+						<td>${findUser.name}</td>
+						<td>${findUser.account}</td>
+						<td>${findUser.address}</td>
+						<td>${findUser.schoolEmail}</td>
+						<td>${findUser.gameScore}</td>
+						<td>${findUser.onlineDatetime}</td>
+						<td>${findUser.isolated}</td>
+					</tr>
+				</c:when>
+				<c:otherwise>
 					<c:forEach items="${getAllUser}" var="temp">
 						<tr>
 							<td>${temp.id}</td>
@@ -59,8 +59,8 @@
 							<td>${temp.isolated}</td>
 						</tr>
 					</c:forEach>
-<%-- 				</c:otherwise> --%>
-<%-- 			</c:choose> --%>
+				</c:otherwise>
+			</c:choose>
 	</tbody>
 	</table>
 <script type="text/javascript">
