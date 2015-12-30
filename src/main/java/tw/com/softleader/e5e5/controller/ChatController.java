@@ -28,7 +28,7 @@ import tw.com.softleader.e5e5.service.ChatService;
 @RequestMapping(value = "/chats")
 public class ChatController {
 	
-	@Autowired
+//	@Autowired(required=true)
 	private ServletContext servletContext;
 	
 	private Logger log = Logger.getLogger(this.getClass());
