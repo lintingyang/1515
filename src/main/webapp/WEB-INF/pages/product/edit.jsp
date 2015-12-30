@@ -15,8 +15,9 @@ td, th {
 	border: 1px solid blue;
 }
 </style>
-<script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet" >
+<script type="text/javascript"	src="/resources/js/jquery-1.11.3.js"></script>
+<script type="text/javascript"	src="/resources/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	window.onload = function() {
 		$('#opt').val("${p.postStatus}");
@@ -49,14 +50,7 @@ td, th {
 				<th>交換方式</th>
 				<th>慾望清單</th>
 				<th>刊登狀態</th>
-				<th>交易狀態</th>
 				<th>點擊次數</th>
-				<th>交換編號</th>
-				<th>交換商品編號</th>
-				<th>交換商品使用者</th>
-				<th>交換時間</th>
-				<th>評比</th>
-				<th>評比時間</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -83,14 +77,7 @@ td, th {
 						<input type="submit" value="確定修改">
 					</form>
 				</td>
-				<td>${p.tradeStatus}</td>
 				<td>${p.clickTimes}</td>
-				<td>${p.exchange.id}</td>
-				<td>${p.product.id}</td>
-				<td>${p.userByItemOwnerId.id}</td>
-				<td>${p.tradeFinishedTime}</td>
-				<td>${p.grade}</td>
-				<td>${p.gradeTime}</td>
 			</tr>
 		</tbody>
 	</table>

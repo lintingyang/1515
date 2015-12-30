@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Product Edit</title>
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
 table {
 	border-collapse: collapse;
@@ -14,34 +15,66 @@ table {
 td, th {
 	border: 1px solid blue;
 }
-div{
+
+div {
 	padding-bottom: 20px;
 }
-label{
-	width:150px;
-	float:left;
+
+label {
+	width: 150px;
+	float: left;
 	text-align: center;
 }
 </style>
+<script type="text/javascript" src="/resources/js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<form action="/products/query" method="get">
-		關鍵字(產品名稱、交換地、使用者名稱、產品類別)： <input type="text" name="pKeywords"> <input
-			type="submit" value="search">
+		關鍵字(產品名稱、交換地、使用者名稱、產品類別)： <input type="text" name="pKeywords">
+		<input type="submit" value="search">
 	</form>
 	<hr>
+	
 	<form action="/products/add">
 		<input type="submit" value="新增產品">
 	</form>
-	<input type="button" value="回商品清單列表" onclick="javascript:location.href='list'">
+	<input type="button" value="回商品清單列表"
+		onclick="javascript:location.href='list'">
 	<hr>
-	<form action="/products/insert">
+
+	<form id="theForm">
+		Name:<input type="text" name="name" id="pId"> 
+		location:<input type="text" name="location" id="pLocation"> 
+		<input type="button" value="insertOne" id="btnIn">
+	</form>
+	<hr>
+	
+	<script type="text/javascript">
+		$("#btnIn").click(function() {
+			console.log("search!");
+			$.ajax({
+				type : "post",
+				contentType : 'application/json',
+				url : '/products/insert',
+				dataType : 'json',
+				data : JSON.stringify({
+					name : $("#pId").val(),
+					location : $("#pLocation").val()
+				}),
+				success : function(data) {
+					console.log(data);
+				}
+			})
+		})
+	</script>
+	<!-- <form action="/products/insert">
 		<div>
 			<label>產品名稱：</label><input type="text" name="name" size="30">
 		</div>
-		<!-- <div>
+		<div>
 			<label>使用者：</label><input type="text" name="user" size="10">
-		</div> -->
+		</div>
 		<div>
 			<label>產品類別：</label>
 			<select name="pCategory">
@@ -58,9 +91,9 @@ label{
 				<option value="11">美妝</option>
 			</select>
 		</div>
-<!-- 		<div> -->
-<!-- 			<label>刊登截止日期：</label><input type="text" name="deadline"> -->
-<!-- 		</div> -->
+		<div>
+			<label>刊登截止日期：</label><input type="text" name="deadline">
+		</div>
 		<div>
 			<label>交換地點：</label><input type="text" size="50" name="location">
 		</div>
@@ -70,16 +103,16 @@ label{
 		<div>
 			<label>慾望清單：</label><textarea rows="4" cols="50" name="wishItem"></textarea>
 		</div>
-		<!-- <div>
+		<div>
 			<label>圖片：</label><input type="file" name="picture" multiple>
 		</div>
 		<div>
 			<label>影片：</label><input type="file" name="video">
-		</div> -->
+		</div>
 		<div>
 			<input type="submit" value="送出">
 		</div>
-	</form>
+	</form> -->
 	${result}
 </body>
 </html>

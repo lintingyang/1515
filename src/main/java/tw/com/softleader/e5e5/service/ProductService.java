@@ -21,15 +21,37 @@ import tw.com.softleader.e5e5.entity.User;
 
 @Service
 public class ProductService {
-	private final ProductDao productDao;
-	private final ProductCategoryDao productCategoryDao;
-
 	@Autowired
-	public ProductService(ProductDao productDao, ProductCategoryDao productCategoryDao) {
-		this.productDao = productDao;
-		this.productCategoryDao = productCategoryDao;
+	private ProductDao productDao;
+	
+	@Autowired
+	private ProductCategoryDao productCategoryDao;
+	
+	//後台
+	//(1)findOne byId
+	@Transactional
+	public Product getOneById(Integer id) {
+		return productDao.findOne(id);
 	}
-
+	
+	//(2)findAll
+	@Transactional
+	public List<Product> getAllProducts() {
+		return productDao.findAll();
+	}
+	//(3)update product's post_status
+	@Transactional
+	public Product update(Integer id, char postStatus) {
+		Product product = productDao.findOne(id);
+		product.setPostStatus(postStatus);
+		productDao.save(product);
+		return productDao.findOne(id);
+	}
+	
+	
+	
+	
+	
 	// (1)最新商品列：fineAll byPostTime
 	@Transactional
 	public List<Product> getProductsOrderByPostTime() {
@@ -77,25 +99,20 @@ public class ProductService {
 		return productDao.findAllByProductCategory(productCategory);
 	}
 
-	// (8)查詢商品是否交易成功：findOne byTradeStatus
-	@Transactional
-	public String getProductTradeStaus(String name) {
-		try {
-			if (productDao.findOneByTradeStatus(name).equals("T")) {
-				return "交易成功";
-			} else {
-				return "尚未交易";
-			}
-		} catch (Exception e) {
-			return "查無此商品";
-		}
-	}
+//	// (8)查詢商品是否交易成功：findOne byTradeStatus
+//	@Transactional
+//	public String getProductTradeStaus(String name) {
+//		try {
+//			if (productDao.findOneByTradeStatus(name).equals("T")) {
+//				return "交易成功";
+//			} else {
+//				return "尚未交易";
+//			}
+//		} catch (Exception e) {
+//			return "查無此商品";
+//		}
+//	}
 
-	// (9) 所有商品列表：findAll
-	@Transactional
-	public List<Product> getAllProducts() {
-		return productDao.findAll();
-	}
 
 	// (10) 關鍵字搜尋:產品名稱、交換地、使用者名稱、產品類別
 	@Transactional
@@ -105,21 +122,6 @@ public class ProductService {
 		} else {
 			return productDao.findAllByKeywords(keywords);
 		}
-	}
-
-	// (11)找單一產品 by id
-	@Transactional
-	public Product getOneById(Integer id) {
-		return productDao.findOne(id);
-	}
-
-	// (12)管理員修改刊登狀態
-	@Transactional
-	public Product update(Integer id, char postStatus) {
-		Product product = productDao.findOne(id);
-		product.setPostStatus(postStatus);
-		productDao.save(product);
-		return productDao.findOne(id);
 	}
 
 	// (13)刪除產品
@@ -145,27 +147,10 @@ public class ProductService {
 		product.setLocation(location);
 		product.setTradeWay(tradeWay);
 		product.setWishItem(wishItem);
+		product.setPostStatus('T');
 		productDao.save(product);
 		return 1;
 
 	}
-	// @Transactional
-	// public int insert(String name, ProductCategory category, byte[] video,
-	// User userId, Date deadline,
-	// String location, String tradeWay, String wishItem) {
-	// Product product = new Product();
-	// product.setName(name);
-	// product.setProductCategory(category);
-	// product.setVideo(video);
-	// product.setUserByUserId(userId);
-	// product.setPostTime(new Date());
-	// product.setDeadline(deadline);
-	// product.setLocation(location);
-	// product.setTradeWay(tradeWay);
-	// product.setWishItem(wishItem);
-	// productDao.save(product);
-	// return 1;
-	//
-	// }
 
 }

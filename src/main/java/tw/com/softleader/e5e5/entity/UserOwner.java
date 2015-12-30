@@ -20,7 +20,7 @@ public class UserOwner implements java.io.Serializable {
 
 	private int id;
 	private Board board;
-	private Integer userId;
+	private User userId;
 
 	public UserOwner() {
 	}
@@ -29,17 +29,11 @@ public class UserOwner implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public UserOwner(int id, Board board, Integer userId) {
+	public UserOwner(int id, Board board, User userId) {
 		this.id = id;
 		this.board = board;
 		this.userId = userId;
 	}
-
-	
-	
-	
-	
-	
 	
 	
 	@Override
@@ -68,13 +62,15 @@ public class UserOwner implements java.io.Serializable {
 	public void setBoard(Board board) {
 		this.board = board;
 	}
-
-	@Column(name = "user_id")
-	public Integer getUserId() {
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
+	@Transactional
+	public User getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(User userId) {
 		this.userId = userId;
 	}
 
