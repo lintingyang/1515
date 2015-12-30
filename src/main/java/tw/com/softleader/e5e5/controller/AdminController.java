@@ -25,7 +25,7 @@ public class AdminController {
 	Logger log = Logger.getLogger(getClass());
 	@Autowired
 	private AdminService adminService;
-	
+
 	@RequestMapping(value = "/list")
 	public String list(Model model) {
 
@@ -35,13 +35,12 @@ public class AdminController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/query" ) // 用帳號搜尋管理員資料
+	@RequestMapping(value = "/query") // 用帳號搜尋管理員資料
 	public List<Admin> query(@RequestBody Admin account) {
-		log.error("account ========"+account);
+		log.error("account ========" + account);
 		Admin admin1 = adminService.findByAccount(account.getAccount());
 		List<Admin> list = new ArrayList<Admin>();
 		list.add(admin1);
-		
 
 		return list;
 	}
@@ -95,24 +94,37 @@ public class AdminController {
 
 		return "/admin/list";
 	}
-	
-	
+
+	@RequestMapping(value = "/")
+	public String index() {
+		return "/index";
+	}
+
 	@RequestMapping(value = "/login")
-	public String login(){
+	public String login() {
 		return "/admin/login";
 	}
-	@RequestMapping( value="/check" )
-	public String logincheck( HttpServletRequest request,@RequestParam("account") String account, @RequestParam("password") String password){
+
+	@RequestMapping(value = "/check")
+	public String logincheck(HttpServletRequest request, @RequestParam("account") String account,
+			@RequestParam("password") String password) {
 		Admin admin = adminService.login(account, password);
 		HttpSession session = request.getSession();
-		if(admin!=null){
+		if (admin != null) {
 			session.setAttribute("admin", admin);
 			session.setAttribute("error", "hello");
-			return "/admin/login";
-		}else{
+			return "/index";
+		} else {
 			session.setAttribute("error", "登入失敗");
 			return "/admin/login";
 		}
+
+	}
+
+	@RequestMapping(value = "/logout")
+	public String logout(HttpSession session){
+		session.removeAttribute("admin");
+		return "/index";
 	}
 
 }
