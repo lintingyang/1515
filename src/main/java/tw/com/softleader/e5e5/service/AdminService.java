@@ -105,11 +105,15 @@ public class AdminService {
 	public Admin login(String account ,String password){
 		Admin admin = adminDao.findByAccount(account);
 		if(admin != null){
-			if(password == admin.getPassword()){
+			if(password.equals(admin.getPassword()) ){
 				log.error("登入成功！");
 				return admin;
+			}else{
+				log.error(admin.getAccount());
+				log.error("密碼錯誤");
 			}
 		}
+		log.error("admin === null");
 		return null;
 		
 	}

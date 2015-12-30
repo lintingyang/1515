@@ -19,6 +19,7 @@
 		<table class="table" border="1">
 			<thead>
 				<tr>
+					<td>edit</td>
 					<td>id</td>
 					<td>user</td>
 					<td>title</td>
@@ -26,11 +27,15 @@
 					<td>answer</td>
 					<td>admin</td>
 					<td>create_date</td>
+					<td>delete</td>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="mytbody">
 				<c:forEach items="${ adminQA }" var="result">
 					<tr>
+				<td><input type="button" value="修改"
+					onclick="javascript:location.href='/admins/edit?id=${ result.id }'">
+				</td>
 						<td>${ result.id }</td>
 						<td>${ result.user.account }</td>
 						<td>${ result.title }</td>
@@ -38,6 +43,9 @@
 						<td>${ result.answer }</td>
 						<td>${ result.admin.account }</td>
 						<td>${ result.createdDate }</td>
+						<td><input type="button" value="刪除"
+					onclick="javascript:location.href='/admins/delete?id=${ result.id }'">
+				</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -57,6 +65,31 @@
 				data : {},
 				success : function(data) {
 					console.log(data);
+					$.each(data,function(i,datas){
+						var editbtn = $("<td></td>").html('<input type="button" name="edit" value="修改" >');
+						var temp1 = $("<td></td>").text(datas.id);	
+						var temp2 = $("<td></td>").text(datas.user.account);
+						var temp3 = $("<td></td>").text(datas.title);
+						var temp4 = $("<td></td>").text(datas.question);
+						var temp5 = $("<td></td>").text(datas.answer);
+						var temp6 = $("<td></td>").text(datas.admin.account);
+						var temp7 = $("<td></td>").text(datas.createdDate);
+						var deletebtn = $("<td></td>").html('<input type="button" name="delete" value="刪除" >');
+						var maTr = $("<tr></tr>").append([editbtn,temp1,temp2,temp3,temp4,temp5,temp6,temp7,deletebtn]);
+						$("#mytbody").html(maTr);
+						
+ 						$("input[name = edit]").bind("click",function(){
+ 							javascript:location.href='/admins/edit?id='+datas.id;
+ 						})
+						
+ 						$("input[name = delete]").bind("click",function(){
+							
+ 							javascript:location.href='/admins/delete?id='+datas.id;
+ 							alert("delete");
+ 						})
+					})
+					
+				
 				}
 			});
 

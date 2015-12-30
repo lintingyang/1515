@@ -8,5 +8,14 @@
 </head>
 <body>
 
+
+<form action="/admins/check">
+帳號：<input type="text" name="account"><br>
+密碼：<input type="text" name="password"><br>
+<input type="submit">
+${ error }
+${ admin.account }
+
+</form>
 </body>
 </html>
