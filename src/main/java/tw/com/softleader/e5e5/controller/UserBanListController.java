@@ -29,12 +29,11 @@ public class UserBanListController {
 		return "/userbanlist/list";
 	}
 	
+
 	@ResponseBody
 	@RequestMapping(value="/query", produces = "application/json")
 	public List<UserBanList> query(@RequestBody UserBanList userBanList) {
-		
 		log.debug("{=====================================================================================}"+ userBanList.getId());
-		
 		return ublService.findOneUser((Integer)userBanList.getId());
 	}
 	

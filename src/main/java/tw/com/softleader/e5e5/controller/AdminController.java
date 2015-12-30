@@ -3,6 +3,9 @@ package tw.com.softleader.e5e5.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,13 +35,12 @@ public class AdminController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/query" ) // 用帳號搜尋管理員資料
+	@RequestMapping(value = "/query") // 用帳號搜尋管理員資料
 	public List<Admin> query(@RequestBody Admin account) {
-		log.error("account ========"+account);
+		log.error("account ========" + account);
 		Admin admin1 = adminService.findByAccount(account.getAccount());
 		List<Admin> list = new ArrayList<Admin>();
 		list.add(admin1);
-		
 
 		return list;
 	}
@@ -93,20 +95,36 @@ public class AdminController {
 		return "/admin/list";
 	}
 
-	// @RequestMapping(value = "/upload")
-	// public String insert(Model model,@RequestParam("file") MultipartFile
-	// file) {
-	// BufferedImage src = null;
-	// if (!file.isEmpty()) {
-	// try {
-	// src = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
-	// File destination = new File("src/main/webapp/WEB-INF/images/03.jpg");
-	// ImageIO.write(src, "jpg", destination);
-	// } catch (IOException e) {
-	// log.error("exception");
-	// }
-	// }
-	// return "/admin/list";
-	// }
+	@RequestMapping(value = "/")
+	public String index() {
+		return "/index";
+	}
+
+	@RequestMapping(value = "/login")
+	public String login() {
+		return "/admin/login";
+	}
+
+	@RequestMapping(value = "/check")
+	public String logincheck(HttpServletRequest request, @RequestParam("account") String account,
+			@RequestParam("password") String password) {
+		Admin admin = adminService.login(account, password);
+		HttpSession session = request.getSession();
+		if (admin != null) {
+			session.setAttribute("admin", admin);
+			session.setAttribute("error", "hello");
+			return "/index";
+		} else {
+			session.setAttribute("error", "登入失敗");
+			return "/admin/login";
+		}
+
+	}
+
+	@RequestMapping(value = "/logout")
+	public String logout(HttpSession session){
+		session.removeAttribute("admin");
+		return "/index";
+	}
 
 }

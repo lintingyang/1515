@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -39,6 +40,16 @@ public class UserController {
 		log.debug("{=====================================================================================}"+ user.getAccount());
 		return userService.findByAccount(user.getAccount());
 	}
+	
+	@RequestMapping(value = "/query1", method=RequestMethod.GET)
+	public String query1(Model model ,@RequestParam("account") String account) {
+		User temp = userService.findByAccount(account);
+		model.addAttribute("findUser", temp);
+		return "/user/list";
+	}
+	
+	
+	
 	
 	@RequestMapping(value = "/edit")
 	public String edit(Model model) {

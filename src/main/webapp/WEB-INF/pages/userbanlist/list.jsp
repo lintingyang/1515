@@ -13,14 +13,17 @@
 </head>
 <body>
 
+
 	<form id="theForm" action="/userbanlists/query" method="get">
 		輸入帳號<input type="text" id="id" name="id"><br>
 		<input id="searchButton" type="button" class="primary-btn" value="Searching.."/>
 	</form>
 	
+
 	他的黑名單:
 	<table id="simpleTable">
 		<thead>
+
 			<tr>
 				<th>ID</th>
 				<th>UserAId</th>
@@ -30,10 +33,16 @@
 		<tbody>
 		
 		</tbody>
+
 	</table>
 
 
+
 </body>
+
+<script src="/resources/js/jquery-1.11.3.js"></script>
+<script src="/resources/js/bootstrap.min.js" ></script>
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 <script language="javascript">
 $('#searchButton').click(function() {
 		console.log("searching...");
@@ -61,6 +70,7 @@ $('#searchButton').click(function() {
 			}			
 		});	
 });
+
 
 
 </script>

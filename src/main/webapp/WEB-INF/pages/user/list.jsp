@@ -34,17 +34,17 @@
 		
 		<tbody>
 			<c:choose>
-				<c:when test="${!empty data}">
-<!-- 					<tr> -->
-<%-- 						<td>${findUser.id}</td> --%>
-<%-- 						<td>${findUser.name}</td> --%>
-<%-- 						<td>${findUser.account}</td> --%>
-<%-- 						<td>${findUser.address}</td> --%>
-<%-- 						<td>${findUser.schoolEmail}</td> --%>
-<%-- 						<td>${findUser.gameScore}</td> --%>
-<%-- 						<td>${findUser.onlineDatetime}</td> --%>
-<%-- 						<td>${findUser.isolated}</td> --%>
-<!-- 					</tr> -->
+				<c:when test="${!empty findUser}">
+					<tr>
+						<td>${findUser.id}</td>
+						<td>${findUser.name}</td>
+						<td>${findUser.account}</td>
+						<td>${findUser.address}</td>
+						<td>${findUser.schoolEmail}</td>
+						<td>${findUser.gameScore}</td>
+						<td>${findUser.onlineDatetime}</td>
+						<td>${findUser.isolated}</td>
+					</tr>
 				</c:when>
 				<c:otherwise>
 					<c:forEach items="${getAllUser}" var="temp">
@@ -88,7 +88,7 @@ $('#searchButton').click(function() {
 			var temp8 = $("<td></td>").text(data.isolated);	
 			var maTr = $("<tr></tr>").append([temp1,temp2,temp3,temp4,temp5,temp6,temp7,temp8]);
 			
-			$(mytbody).append(maTr);
+			$(mytbody).html(maTr);
 				
 				
 				
