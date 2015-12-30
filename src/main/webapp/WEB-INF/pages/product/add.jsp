@@ -57,13 +57,16 @@ label {
 				type : "post",
 				contentType : 'application/json',
 				url : '/products/insert',
-				dataType : 'json',
+				dataType : 'text',
 				data : JSON.stringify({
 					name : $("#pId").val(),
 					location : $("#pLocation").val()
 				}),
 				success : function(data) {
-					console.log(data);
+					$('table').html('');
+ 					var body = $('body');
+ 					var message = $('<h3></h3>').text(data);
+ 					$(body).append(message);
 				}
 			})
 		})
@@ -113,6 +116,5 @@ label {
 			<input type="submit" value="送出">
 		</div>
 	</form> -->
-	${result}
 </body>
 </html>

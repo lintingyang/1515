@@ -47,6 +47,18 @@ public class ProductService {
 		productDao.save(product);
 		return productDao.findOne(id);
 	}
+	//(4)update product's post_status return int
+		@Transactional
+		public int updateStatus(Integer id, char postStatus) {
+			Product product = productDao.findOne(id);
+			if(product != null){
+				product.setPostStatus(postStatus);
+				productDao.save(product);
+				return 1;
+			}else{
+				return 0;
+			}
+		}
 	
 	
 	

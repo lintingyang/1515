@@ -18,6 +18,101 @@ td, th {
 	border: 1px solid blue;
 }
 </style>
+<script type="text/javascript">
+	$(function() {
+		$("#btnSe").click(function() {
+			$.ajax({
+				type : "post",
+				contentType : 'application/json',
+				url : '/products/query1',
+				dataType : 'json',
+				data : JSON.stringify({
+					id : $("#pId").val()
+				}),
+				success : function(data) {
+					console.log(data);
+					$('tbody').html('');
+					var myBody = $('tbody');
+					var pId = $('<td></td>').text(data.id);
+					var pIdValue = $('<td></td>').text();
+					var pName = $('<td></td>').text(data.name);
+					var pCategoryId = $('<td></td>').text(data.productCategory.id);
+					var pCategoryName = $('<td></td>').text(data.productCategory.name);
+					var pUserByUserId = $('<td></td>').text(data.userByUserId.id);
+					var pUserByUserIdName = $('<td></td>').text(data.userByUserId.name);
+					var pPostTime = $('<td></td>').text(data.postTime);
+					var pDeadline = $('<td></td>').text(data.deadline);
+					var pLocation = $('<td></td>').text(data.location);
+					var pTradeWay = $('<td></td>').text(data.tradeWay);
+					var pWishItem = $('<td></td>').text(data.wishItem);
+					var pPostStatus = $('<td></td>').text(data.postStatus);
+					var pPostStatusBtn = $('<input></input>').attr('type','button').attr('value','修改狀態').attr('id','btnUp');
+					$(pPostStatus).append(pPostStatusBtn);
+					var pClickTimes = $('<td></td>').text(data.clickTimes);
+					var pDelete = $('<td></td>')
+					var pDeleteBtn = $('<input></input>').attr('type','button').attr('value','刪除產品').attr('id','btnDe');
+					$(pDelete).append(pDeleteBtn);					
+					var bodyTr = $('<tr></tr>').append([pId,pName,pCategoryId,pCategoryName,pUserByUserId,pUserByUserIdName,pPostTime,pDeadline,pLocation,pTradeWay,pWishItem,pPostStatus,pPostStatus,pClickTimes,pDelete]);
+					$(myBody).append(bodyTr);
+					var i =JSON.stringify({
+	 					id : $("#pId").val()
+	 				})
+					
+	 				$("#btnDe").click(function() {
+			 			$.ajax({
+			 				type : "POST",
+			 				contentType : 'application/json',
+			 				url : '/products/delete1',
+			 				dataType : 'text',
+			 				data : i,
+			 				success : function(data) {
+			 					$('table').html('');
+			 					var body = $('body');
+			 					var message = $('<h3></h3>').text(data);
+			 					$(body).append(message);
+			 				}
+			 			});
+					});
+					$("#btnUp").click(function() {
+						pPostStatus.html('').text(data.postStatus);
+						var st = data.postStatus;
+						var select = $('<select></select>').attr('name','pPs').attr('id','pPsId');
+						var optionT = $('<option></option>').attr('value','T').text('T');
+						var optionF = $('<option></option>').attr('value','F').text('F');
+						$(select).append([optionT,optionF]);
+						var statusFC = $('<input></input>').attr('type','button').attr('value','確認修改').attr('id','btnUpF');
+						$(pPostStatus).append([select,statusFC]);
+						$('#pPsId').val(st);
+						
+						$("#btnUpF").click(function() {
+							var stF = $('#pPsId').val();
+				 			$.ajax({
+				 				type : "POST",
+				 				contentType : 'application/json',
+				 				url : '/products/update1',
+				 				dataType : 'json',
+				 				data : JSON.stringify({
+				 					id : $("#pId").val(),
+				 					postStatus : $('#pPsId').val()
+				 				}),
+				 				success : function(data) {
+				 					alert("update successful!!!")
+				 					pPostStatus.html('').text(data.postStatus);
+									$(pPostStatus).append(pPostStatusBtn);
+// 				 					$('table').html('');
+// 				 					var body = $('body');
+// 				 					var message = $('<h3></h3>').text(data);
+// 				 					$(body).append(message);
+				 				}
+				 			});
+						});
+					});
+				}
+			});
+		});
+		
+	})
+</script>
 </head>
 <body>
 	<form action="/products/query" method="get">
@@ -29,30 +124,14 @@ td, th {
 	<form action="/products/add">
 		<input type="submit" value="新增產品">
 	</form>
+	<input type="button" value="回商品清單列表" onclick="javascript:location.href='list'">
 	<hr>
-	
+
 	<form id="search-form">
-		id查詢:<input type="text" name="id" id="pId" /> 
-		<input type="button" value="searchById" id="btnSe"/>
+		id查詢:<input type="text" name="id" id="pId" /> <input type="button"
+			value="searchById" id="btnSe" />
 	</form>
 	<hr>
-	<script>
-		$("#btnSe").click(function() {
-			console.log("search.............");
-			$.ajax({
-				type : "post",
-				contentType : 'application/json',
-				url : '/products/query1',
-				dataType : 'json',
-				data : JSON.stringify({
-					id : $("#pId").val()
-				}),
-				success : function(data) {
-					console.log(data);
-				}
-			})
-		})
-	</script>
 
 	<table style="border: 1px solid blue;">
 		<thead>

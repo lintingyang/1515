@@ -45,8 +45,6 @@ public class ProductController {
 	public Product query(@RequestBody Product product) {
 		System.out.println("=========+++++++===========" + product);
 		Product products = productService.getOneById((Integer)product.getId());
-//		List<Product> list = new ArrayList<Product>();
-//		list.add(p);
 		return products;
 	}
 	
@@ -57,7 +55,19 @@ public class ProductController {
 		model.addAttribute("products", products);
 		return "/product/list";
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(value = "/delete1",  produces = "application/json") 
+	public String delete(@RequestBody Product product) {
+		System.out.println("=========+++++++===========" + product);
+		int num =productService.deleteById(product.getId());
+		if(num == 1){
+			return "delete successful !!";
+		}else{
+			return "delete failed !!";			
+		}
+	}
+	
 	@RequestMapping(value = "/add")
 	public String add(Model model) {
 		return "/product/add";
@@ -65,17 +75,15 @@ public class ProductController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/insert" ) 
-	public String insert(Model model, @RequestBody Product product) {
+	public String insert(@RequestBody Product product) {
 		System.out.println("product========================" + product);
 		int number = productService.insert(product.getName(), 2, product.getDeadline(), product.getLocation(), product.getTradeWay(), product.getWishItem());
 		System.out.println("number========================" + number);
 		if(number == 1){
-			model.addAttribute("result", "新增成功");
+			return "insert successful !!";
 		}else{
-			model.addAttribute("result", "新增失敗");
+			return "insert failed !!";
 		}
-		System.out.println("############################"+product);
-		return "/product/add";
 	}
 //	@ResponseBody
 //	@RequestMapping(value = "/insert")
@@ -113,5 +121,11 @@ public class ProductController {
 		model.addAttribute("p", products);
 		return "/product/edit";
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(value = "/update1",  produces = "application/json") 
+	public Product update(@RequestBody Product product) {
+		System.out.println("=========+++++++===========" + product);
+		return productService.update(product.getId(), product.getPostStatus());
+	}
 }
