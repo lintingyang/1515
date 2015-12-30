@@ -13,7 +13,10 @@
 </head>
 <body>
 	<div style="width: 50%;border: 1px gray solid;margin:auto;">
-		<a href="/admins/login">登入</a> <a href="/admins/logout">登出</a> 使用者 ${ admin.name }
+		<c:if test="${ SessionScope.admin }">
+			<a href="/admins/login">登入</a> 
+		</c:if>
+		<a href="/admins/logout">登出</a> 使用者 ${ admin.name } 
 		<br> <a href="/admins/list">admins</a> <a href="/boards/list">boards</a>
 		<a href="/adminquestionandanswers/list">Question And Answer</a>
 	</div>

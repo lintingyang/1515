@@ -1,6 +1,5 @@
 package tw.com.softleader.e5e5.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import tw.com.softleader.e5e5.entity.Admin;
+import tw.com.softleader.e5e5.entity.Exchange;
 import tw.com.softleader.e5e5.entity.Product;
+import tw.com.softleader.e5e5.service.ExchangeService;
 import tw.com.softleader.e5e5.service.ProductService;
 
 @Controller
@@ -25,7 +25,19 @@ public class ProductController {
 
 	@Autowired
 	public ProductService productService;
-
+	
+	@Autowired
+	public ExchangeService exchangeService;
+	@RequestMapping(value = "/product") //shuang物品畫面
+	public String product(Model model,@RequestParam("id") int id){
+		Product product =  productService.getOneById(id);
+		List<Exchange> exchangeList = exchangeService.findByProductAId(id);
+		model.addAttribute("product",product);
+		model.addAttribute("exchange",exchangeList);
+		return "/product/product";
+	}
+	
+	
 	@RequestMapping(value = "/list") // ** /products/list
 	public String list(Model model) {
 		List<Product> products = productService.getAllProducts();
