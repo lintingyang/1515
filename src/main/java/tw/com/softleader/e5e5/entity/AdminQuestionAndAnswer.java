@@ -32,7 +32,7 @@ public class AdminQuestionAndAnswer implements java.io.Serializable {
 	private String question;
 	private User user;
 	private Date createdDate;
-	
+	private String title;
 
 
 	public AdminQuestionAndAnswer() {
@@ -107,6 +107,14 @@ public class AdminQuestionAndAnswer implements java.io.Serializable {
 	
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
+	}
+	@Column(name = "title",length = 25)
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 }

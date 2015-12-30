@@ -22,7 +22,7 @@ public class AdminController {
 	Logger log = Logger.getLogger(getClass());
 	@Autowired
 	private AdminService adminService;
-
+	
 	@RequestMapping(value = "/list")
 	public String list(Model model) {
 

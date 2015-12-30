@@ -2,6 +2,7 @@ package tw.com.softleader.e5e5.service;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +11,9 @@ import tw.com.softleader.e5e5.dao.AdminDao;
 import tw.com.softleader.e5e5.entity.Admin;
 
 @Service
+@Transactional
 public class AdminService {
+	Logger log = Logger.getLogger(this.getClass());
 	@Autowired
 	private AdminDao adminDao;
 
@@ -99,5 +102,17 @@ public class AdminService {
 		}
 
 	}
+	public Admin login(String account ,String password){
+		Admin admin = adminDao.findByAccount(account);
+		if(admin != null){
+			if(password == admin.getPassword()){
+				log.error("登入成功！");
+				return admin;
+			}
+		}
+		return null;
+		
+	}
+	
 
 }

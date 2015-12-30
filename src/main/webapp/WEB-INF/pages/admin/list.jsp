@@ -21,17 +21,60 @@
 	<!-- 	<input type="text" name="message"><br> -->
 	<!-- 	<input type="file" name="file" /><br> -->
 	<!-- 	<input type="submit" value="輸入"> -->
+<!-- 	<form action="/admins/query" method="get"> -->
+<!-- 		帳號搜尋:<input type="text" name="account" id="account"> <input -->
+<%-- 			id="searchbtn" type="submit">${ error } --%>
+<!-- 	</form> -->
+<div style="width:800px ;margin: auto;">
 	
-
 
 <form id="search-form">
 	帳號查詢:<input type="text" name="account" id="account"/>
 	<input type="button" value="submit" id="submittn" name="submit">
 </form>
 
+<button type="button" onclick="location.href='/admins/add'">新增管理員</button>
+
+	<table border="1" id="simpleTable">
+	<thead>
+		<tr>
+			<th>edit</th>
+			<th>id</th>
+			<th>account</th>
+			<th>password</th>
+			<th>name</th>
+			<th>email</th>
+			<th>authority</th>
+			<th>delete</th>
+		</tr>
+		</thead>
+		<tbody id="mytbody">
+		<c:forEach items="${ entity }" var="result">
+			<tr>
+				<td><input type="button" value="修改"
+					onclick="javascript:location.href='/admins/edit?id=${ result.id }'">
+				</td>
+				<td>${ result.id }</td>
+				<td>${ result.account }</td>
+				<td>${ result.password }</td>
+				<td>${ result.name }</td>
+				<td>${ result.email }</td>
+				<td>${ result.authority }</td>
+				<td><input type="button" value="刪除"
+					onclick="javascript:location.href='/admins/delete?id=${ result.id }'">
+				</td>
+
+			</tr>
+
+		</c:forEach>
+		</tbody>
+	</table>
+	
+	</div>
+	
+	
 
 <script>
-
 $("#submittn").click(function(){
 	console.log("search!");
 	$.ajax({
@@ -71,48 +114,5 @@ $("#submittn").click(function(){
 })
 
 </script>
-
-
-<!-- 	<form action="/admins/query" method="get"> -->
-<!-- 		帳號搜尋:<input type="text" name="account" id="account"> <input -->
-<%-- 			id="searchbtn" type="submit">${ error } --%>
-<!-- 	</form> -->
-	<button type="button" onclick="location.href='/admins/add'">新增管理員</button>
-
-
-	<table border="1" id="simpleTable">
-	<thead>
-		<tr>
-			<th>edit</th>
-			<th>id</th>
-			<th>account</th>
-			<th>password</th>
-			<th>name</th>
-			<th>email</th>
-			<th>authority</th>
-			<th>delete</th>
-		</tr>
-		</thead>
-		<tbody id="mytbody">
-		<c:forEach items="${ entity }" var="result">
-			<tr>
-				<td><input type="button" value="修改"
-					onclick="javascript:location.href='/admins/edit?id=${ result.id }'">
-				</td>
-				<td>${ result.id }</td>
-				<td>${ result.account }</td>
-				<td>${ result.password }</td>
-				<td>${ result.name }</td>
-				<td>${ result.email }</td>
-				<td>${ result.authority }</td>
-				<td><input type="button" value="刪除"
-					onclick="javascript:location.href='/admins/delete?id=${ result.id }'">
-				</td>
-
-			</tr>
-
-		</c:forEach>
-		</tbody>
-	</table>
 </body>
 </html>
