@@ -9,11 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import tw.com.softleader.e5e5.common.dao.GenericDao;
+import tw.com.softleader.e5e5.common.dao.OurDao;
+import tw.com.softleader.e5e5.common.model.Message;
+import tw.com.softleader.e5e5.common.service.OurService;
 import tw.com.softleader.e5e5.dao.UserDao;
 import tw.com.softleader.e5e5.entity.User;
 
 @Service
-public class UserService {
+public class UserService extends OurService<User>{
 	
 	@Autowired
 	private UserDao uDao;
@@ -146,6 +150,30 @@ public class UserService {
 			return 1;
 		}		
 		return 0 ;
+	}
+
+	@Override
+	public OurDao<User> getDao() {
+		// TODO Auto-generated method stub
+		return uDao;
+	}
+
+	@Override
+	protected List<Message> validateInsert(User entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected List<Message> validateUpdate(User entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected List<Message> validateDelete(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

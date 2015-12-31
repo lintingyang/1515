@@ -21,13 +21,13 @@
 				<div>
 					<form role="form" class="form-horizontal" id="listForm">
 						<div class="form-group">
-							<label for="code" class="col-sm-2 control-label">代碼</label>
+							<label for="code" class="col-sm-2 control-label">UserId</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="code" name="code" placeholder="Code" />
+								<input type="text" class="form-control" id="id" name="id" placeholder="UserId" />
 							</div>
-							<label for="name" class="col-sm-2 control-label">名稱</label>
+							<label for="name" class="col-sm-2 control-label">Message</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="name" name="name" placeholder="Name" />
+								<input type="text" class="form-control" id="messages" name="messages" placeholder="Message" />
 							</div>						
 							
 						</div>
@@ -41,7 +41,7 @@
 			</section>
 			
 			<div>
-          		<a href="<c:url value='/security/roles/add'/>" class="btn btn-sm btn-primary" data-loading-text="Loading">
+          		<a href="<c:url value='/test/chat/add'/>" class="btn btn-sm btn-primary" data-loading-text="Loading">
             		<span class="glyphicon glyphicon-plus"></span>新增
             	</a>
       		</div>
@@ -59,7 +59,7 @@
 
 <script type="text/javascript">
 	
-	var url = '<c:url value="/security/roles"/>';
+	var url = '<c:url value="/test/chat"/>';
 	
 	$(function() {
 		$("#searchBtn").bind("click", function() {
@@ -67,8 +67,8 @@
 		});
 		
 		$("#resetBtn").bind("click", function() {
-			$("#name").val("");
-			$("#code").val("");
+			$("#id").val("");
+			$("#messages").val("");
 		});
 		
 		$("#slGrid").slGrid({
@@ -76,14 +76,12 @@
 			dataFormId: 'listForm',
 			mtype: 'GET',
 			
-			colNames:['id','功能','代碼','名稱','異動人員','異動時間'],
+			colNames:['id','userId', 'Message'],
 		   	colModel:[
-		   		{name:'id', hidden:true},
-		   		{name:'btns', width: 150, formatter:btns},
-		   		{name:'code', width: 100},
-		   		{name:'name', width: 200},
-		   		{name:'modifiedBy', width: 200},
-		   		{name:'modiiedDate', width: 200}
+		   		{name:'id', width: 150},
+// 		   		{name:'btns', width: 150, formatter:btns},
+		   		{name:'user', width: 150},
+		   		{name:'messages', width: 150},
 		   	],
 		   	sortname:"id",
 		   	sortorder:"DESC",
@@ -93,34 +91,34 @@
 		   	}
 		});
 		
-		function btns(value, row) {
+// 		function btns(value, row) {
 			
-			var $delBtn = $('<button type="button" class="btn btn-danger btn-xs"></button>');
-			$delBtn.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
+// 			var $delBtn = $('<button type="button" class="btn btn-danger btn-xs"></button>');
+// 			$delBtn.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
 			
-			$delBtn.click(function() {
-				swal({
-					title: "Are you sure?",
-					text: "是否確定刪除此筆資料？",
-					type: "warning",
-					showCancelButton: true,
-					confirmButtonColor: "#F5A056",
-					closeOnConfirm: true
-				}, function() {
-					$delBtn.button('loading');
-					$.delete_(url+ "/" + row.id, function() {
-						$delBtn.button('reset');
-						$("#slGrid").trigger('reloadGrid');
-					});
-				});
-			});
+// 			$delBtn.click(function() {
+// 				swal({
+// 					title: "Are you sure?",
+// 					text: "是否確定刪除此筆資料？",
+// 					type: "warning",
+// 					showCancelButton: true,
+// 					confirmButtonColor: "#F5A056",
+// 					closeOnConfirm: true
+// 				}, function() {
+// 					$delBtn.button('loading');
+// 					$.delete_(url+ "/" + row.id, function() {
+// 						$delBtn.button('reset');
+// 						$("#slGrid").trigger('reloadGrid');
+// 					});
+// 				});
+// 			});
 			
-			var $editBtn = $('<a class="btn btn-success btn-xs"></a>');
-			$editBtn.attr("href", url + "/" + row.id);
-			$editBtn.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
+// 			var $editBtn = $('<a class="btn btn-success btn-xs"></a>');
+// 			$editBtn.attr("href", url + "/" + row.id);
+// 			$editBtn.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
 			
-			return $("<div></div>").append($editBtn).append("&nbsp;").append($delBtn);
-		}
+// 			return $("<div></div>").append($editBtn).append("&nbsp;").append($delBtn);
+// 		}
 		
 	});
 </script>
