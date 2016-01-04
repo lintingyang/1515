@@ -31,16 +31,18 @@
 								<div class="form-group required">
 									<label for="code" class="col-md-2 control-label">UserId</label>
 									<div class="col-md-10">
-										<input type="text" class="form-control" id="id" name="id"
-											placeholder="UserId" value="${entity.id}" required />
+										<input type="text" class="form-control" id="user.id"
+											name="user.id" placeholder="UserId" value="${entity.user.id}" />
+									<span class="help-block"><div class="text-danger"></div></span>
 									</div>
 								</div>
 								<div class="form-group required">
 									<label for="name" class="col-md-2 control-label">Message</label>
 									<div class="col-md-10">
-										<input type="text" class="form-control" id="message"
-											name="message" placeholder="Message"
-											value="${entity.message}" required />
+										<input type="text" class="form-control" id="messages"
+											name="messages" placeholder="Message"
+											value="${entity.messages}" /> 
+											<span class="help-block"><div class="text-danger"></div></span>
 									</div>
 								</div>
 							</div>
@@ -77,28 +79,28 @@ $(function() {
 		function() {
 		var $btn = $(this);
 			$btn.button("loading");
-			var formData={"id":$("#id").val(),"message":$("#message").val()}
-	        $.ajax({
-	           type: "GET",
-	           url: "/test/chat/insert",
-	           data: formData,
-	           success: function(data){
-// 	        	   alert(data);
-	        	   show(data);
-	           },
-	           dataType: "json",
-	           contentType : "application/json"
-	         });
-// 			$.post("<c:url value='/test/chat'/>", "dataForm",
-// 					function(data) {
-// 						if (data.messagesEmpty) {
-// 							$("#dataForm").trigger("reset");
-// 							swal("SUCCESS", "新增成功！", "success");
-// 							$btn.button("reset");
-// 						}
-// 					}, function(data, textStatus, jqXHR) {
-// 						$btn.button("reset");
-// 					});
+// 			var formData={"id":$("#id").val(),"message":$("#message").val()}
+// 	        $.ajax({
+// 	           type: "GET",
+// 	           url: "/test/chat/insert",
+// 	           data: formData,
+// 	           success: function(data){
+// // 	        	   alert(data);
+// 	        	   show(data);
+// 	           },
+// 	           dataType: "json",
+// 	           contentType : "application/json"
+// 	         });
+			$.post("<c:url value='/test/chat'/>", "dataForm",
+					function(data) {
+						if (data.messagesEmpty) {
+							$("#dataForm").trigger("reset");
+							swal("SUCCESS", "新增成功！", "success");
+							$btn.button("reset");
+						}
+					}, function(data, textStatus, jqXHR) {
+						$btn.button("reset");
+					});
 			
 			$btn.button("reset");
 		});	

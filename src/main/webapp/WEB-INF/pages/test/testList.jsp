@@ -23,7 +23,7 @@
 						<div class="form-group">
 							<label for="code" class="col-sm-2 control-label">UserId</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="id" name="id" placeholder="UserId" />
+								<input type="text" class="form-control" id="user.id" name="user.id" placeholder="UserId" />
 							</div>
 							<label for="name" class="col-sm-2 control-label">Message</label>
 							<div class="col-sm-4">
@@ -62,6 +62,7 @@
 	var url = '<c:url value="/test/chat"/>';
 	
 	$(function() {
+		
 		$("#searchBtn").bind("click", function() {
 			$("#slGrid").trigger('reloadGrid');
 		});
@@ -75,12 +76,11 @@
 			url: url,
 			dataFormId: 'listForm',
 			mtype: 'GET',
-			
-			colNames:['id','userId', 'Message'],
+			colNames:['id','button', 'userId', 'Message'],
 		   	colModel:[
 		   		{name:'id', width: 150},
-// 		   		{name:'btns', width: 150, formatter:btns},
-		   		{name:'user', width: 150},
+		   		{name:'btns', width: 150, formatter:btns},
+		   		{name:'user.id', width: 150},
 		   		{name:'messages', width: 150},
 		   	],
 		   	sortname:"id",
@@ -89,36 +89,37 @@
 		   	loadComplete: function() {
 		   		$("#searchBtn").button('reset');
 		   	}
+		
 		});
 		
-// 		function btns(value, row) {
+		function btns(value, row) {
 			
-// 			var $delBtn = $('<button type="button" class="btn btn-danger btn-xs"></button>');
-// 			$delBtn.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
+			var $delBtn = $('<button type="button" class="btn btn-danger btn-xs"></button>');
+			$delBtn.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
 			
-// 			$delBtn.click(function() {
-// 				swal({
-// 					title: "Are you sure?",
-// 					text: "是否確定刪除此筆資料？",
-// 					type: "warning",
-// 					showCancelButton: true,
-// 					confirmButtonColor: "#F5A056",
-// 					closeOnConfirm: true
-// 				}, function() {
-// 					$delBtn.button('loading');
-// 					$.delete_(url+ "/" + row.id, function() {
-// 						$delBtn.button('reset');
-// 						$("#slGrid").trigger('reloadGrid');
-// 					});
-// 				});
-// 			});
+			$delBtn.click(function() {
+				swal({
+					title: "Are you sure?",
+					text: "是否確定刪除此筆資料？",
+					type: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#F5A056",
+					closeOnConfirm: true
+				}, function() {
+					$delBtn.button('loading');
+					$.delete_(url+ "/" + row.id, function() {
+						$delBtn.button('reset');
+						$("#slGrid").trigger('reloadGrid');
+					});
+				});
+			});
 			
-// 			var $editBtn = $('<a class="btn btn-success btn-xs"></a>');
-// 			$editBtn.attr("href", url + "/" + row.id);
-// 			$editBtn.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
+			var $editBtn = $('<a class="btn btn-success btn-xs"></a>');
+			$editBtn.attr("href", url + "/" + row.id);
+			$editBtn.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
 			
-// 			return $("<div></div>").append($editBtn).append("&nbsp;").append($delBtn);
-// 		}
+			return $("<div></div>").append($editBtn).append("&nbsp;").append($delBtn);
+		}
 		
 	});
 </script>

@@ -63,7 +63,16 @@ public class ChatService extends OurService<Chat> {
 		
 		return result;
 	}
+	@Transactional
+	public Chat update(int id, String messages) {
+		Chat chat = new Chat();
+		chat =  chatDao.findOne(id);
 
+		chat.setMessages(messages);
+		Chat result = chatDao.save(chat);
+
+		return result;
+	}
 	@Override
 	protected List<Message> validateInsert(Chat entity) {
 		// TODO Auto-generated method stub
