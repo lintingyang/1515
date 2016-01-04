@@ -43,8 +43,13 @@
 							<li id="navBatches"><a href="${pageContext.request.contextPath}/security/roles/list">角色管理</a></li>
 						</ul>
 					</li>		
-	
-					</li>
+					<li id="navBatches"><a href="#" class="dropdown-toggle" data-toggle="dropdown">檢舉管理<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li id="navBatches"><a href="${pageContext.request.contextPath}/report/products/list">檢舉物品</a></li>
+							<li id="navBatches"><a href="${pageContext.request.contextPath}/report/products/questions/list">檢舉物品的問與答</a></li>
+							<li id="navBatches"><a href="${pageContext.request.contextPath}/report/users/list">檢舉使用者</a></li>
+						</ul>
+					</li>		
 					<li id="navSettings"><a href="#" class="dropdown-toggle" data-toggle="dropdown">系統設定<b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li id="navSettings"><a href="${pageContext.request.contextPath}/sysparams/edit">系統參數設定</a></li>
