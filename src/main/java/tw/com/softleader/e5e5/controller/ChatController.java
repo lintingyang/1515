@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ import tw.com.softleader.e5e5.service.ChatService;
 @RequestMapping(value = "/chats")
 public class ChatController {
 	
-//	@Autowired(required=true)
+	@Autowired
 	private ServletContext servletContext;
 	
 	private Logger log = Logger.getLogger(this.getClass());
@@ -70,15 +69,19 @@ public class ChatController {
 					counter++;
 					destination = new File(path+ String.valueOf(id)+"_"+counter+"_"+file.getOriginalFilename());
 				}
+				System.out.println("================================"+destination);
 				ImageIO.write(src, "png", destination);
-			} catch (IOException e) {
-			} finally{
+			} catch (IOException e) {}
+			 finally{
 				Chat chat = chatService.postChat(id, message,destination.getAbsolutePath());
 				List<Chat> chats = chatService.getLastThreeChats();
 				model.addAttribute("beans", chats);
 				return "redirect:/chats/list";
 			}
-		}else{
+		}
+		
+		
+		else{
 			Chat chat = chatService.postChat(id, message);
 			List<Chat> chats = chatService.getLastThreeChats();
 			model.addAttribute("beans", chats);

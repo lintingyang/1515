@@ -46,23 +46,6 @@ public class User implements java.io.Serializable {
 	private String schoolName;
 	private Character emailCheck;
 	private Character isolated;
-//	private Set<Broadcast> broadcasts = new HashSet<Broadcast>(0);
-//	private Set<FocusUserList> focusUserListsForUserAId = new HashSet<FocusUserList>(0);
-//	
-//	@JsonManagedReference
-//	private Set<UserBanList> userBanListsForUserAId = new HashSet<UserBanList>(0);
-//	
-//	@JsonManagedReference
-//	private Set<UserBanList> userBanListsForUserBId = new HashSet<UserBanList>(0);
-//	
-//	
-//	private Set<FocusUserList> focusUserListsForUserBId = new HashSet<FocusUserList>(0);
-//	private Set<Messages> messagesForReceiverId = new HashSet<Messages>(0);
-//	private Set<Messages> messagesForSenderId = new HashSet<Messages>(0);
-//	private Set<Product> productsForItemOwnerId = new HashSet<Product>(0);
-//	private Set<Thread> threads = new HashSet<Thread>(0);
-//	private Set<Chat> chats = new HashSet<Chat>(0);
-//	private Set<Product> productsForUserId = new HashSet<Product>(0);
 
 	public User() {
 	}
@@ -75,11 +58,6 @@ public class User implements java.io.Serializable {
 			Date birthday, String address, String phone, String cellphone, String email, String picture,
 			String schoolEmail, String focusItemList, Integer gameScore, Integer onlineDatetime,String schoolName,
 			Character emailCheck,Character isolated
-//			,Set<Broadcast> broadcasts, Set<FocusUserList> focusUserListsForUserAId,
-//			Set<UserBanList> userBanListsForUserAId, Set<UserBanList> userBanListsForUserBId,
-//			Set<FocusUserList> focusUserListsForUserBId, Set<Messages> messageses, Set<Product> productsForItemOwnerId,
-//			Set<Thread> threads, Set<Chat> chats, Set<Product> productsForUserId, Set<Messages> messagesForReceiverId,
-//			Set<Messages> messagesForSenderId
 			) {
 		this.id = id;
 		this.password = password;
@@ -101,17 +79,6 @@ public class User implements java.io.Serializable {
 		this.schoolName = schoolName;
 		this.emailCheck = emailCheck;
 		this.isolated = isolated;
-//		this.broadcasts = broadcasts;
-//		this.focusUserListsForUserAId = focusUserListsForUserAId;
-//		this.userBanListsForUserAId = userBanListsForUserAId;
-//		this.userBanListsForUserBId = userBanListsForUserBId;
-//		this.focusUserListsForUserBId = focusUserListsForUserBId;
-//		this.messagesForReceiverId = messagesForReceiverId;
-//		this.messagesForSenderId = messagesForSenderId;
-//		this.productsForItemOwnerId = productsForItemOwnerId;
-//		this.threads = threads;
-//		this.chats = chats;
-//		this.productsForUserId = productsForUserId;
 	}
 
 	
