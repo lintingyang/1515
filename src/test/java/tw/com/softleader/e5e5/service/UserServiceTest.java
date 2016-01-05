@@ -26,11 +26,16 @@ public class UserServiceTest {
 //		log.debug(i);
 //	}
 
+//	@Test
+//	public void testfind(){
+//		User temp = userService.findByAccount("1");
+//		log.debug(temp);
+//	}
+
 	@Test
-	public void testfind(){
-		User temp = userService.findByAccount("1");
-		log.debug(temp);
+	public void testU(){
+		log.debug(userService.updateEmail("7", "eeit82@iii.org"));
+		 
 	}
-	
 	
 }
