@@ -60,7 +60,7 @@
 				<ul class="dropdown-menu" aria-labelledby="drop3">
 					<li><a href="/WebContent/user/myProfile.jsp">會員資料</a></li>
 					<li><a href="/WebContent/user/userFriendList.jsp">關注名單</a></li>
-					<li><a href="#">物品資料</a></li>
+					<li><a href="/WebContent/product/productedit.jsp">物品管理</a></li>
 					<li><a href="/WebContent/product/newproduct.jsp">新增物品</a></li>
 					<li><a href="/WebContent/user/modifyFileAsk.jsp">帳號修改</a></li>
 					<li><a href="#">登出</a></li>
@@ -82,7 +82,8 @@
         <h4 class="modal-title" id="myModalLabel">請選擇類別</h4>
       </div>
       <div class="modal-body">
-        ...
+        ...j21j312jlkja;kj
+        asdjalsdkj<br>akjhdajhd
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
