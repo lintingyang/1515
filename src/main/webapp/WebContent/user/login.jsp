@@ -17,6 +17,10 @@ $(function(){
 
 
 <style>
+#Img1{
+	text-align: center;
+}
+
 
  #inputEmail3 { 
  	size:10; 
@@ -33,11 +37,14 @@ $(function(){
  }
 </style>
 
-<div class="row">
-	<div class="col-md-6">
-		<img src="${pageContext.request.contextPath}/images/wallpaper.jpg" id="localImg">
+	<div class="row">
+	<div class="col-md-6" id="Img1">
+		<img src="/resources/imgs/wallpaper.jpg" id="localImg">
+		<div>
+			<p>歡迎來到E715交流網，祝您有美好的一天</p>
+		</div>
 	</div>
-	<div class="col-md-6">
+	<div class="col-md-6" id="loginBlock">
 		<form class="form-horizontal" id="formTest">
 			<div class="form-group">
 				<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
@@ -73,4 +80,4 @@ $(function(){
 
 
 
-<c:import url="/layout/footer.jsp"></c:import>
+<c:import url="/WebContent/layout/footer.jsp"></c:import>

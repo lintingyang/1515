@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:import url="/layout/header.jsp"></c:import>
+<c:import url="/WebContent/layout/header.jsp"></c:import>
 
 <style>
 #successInsert {
@@ -31,11 +31,6 @@ window.onload = function () {
 	document.getElementById("perfectData").onclick = Next;
     
 }
-
-
-
-
-
 	function goTop() {
 		location.href = "loginFirst.jsp";
 	}
@@ -49,7 +44,7 @@ window.onload = function () {
 
 <div>
 	<div id="successImg">
-	<img src="${pageContext.request.contextPath}/images/wallpaper.jpg" id="img1">
+		<img src="/resources/imgs/wallpaper.jpg" id="img1">
 	</div>
 	<p id="successInsert">恭喜您新增帳號成功</p>
 
@@ -69,4 +64,4 @@ window.onload = function () {
 
 </div>
 
-<c:import url="/layout/footer.jsp"></c:import>
+<c:import url="/WebContent/layout/footer.jsp"></c:import>

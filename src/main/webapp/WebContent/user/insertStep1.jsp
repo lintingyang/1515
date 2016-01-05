@@ -76,4 +76,4 @@ height:35px;
 </div>
 
 
-<c:import url="/layout/footer.jsp"></c:import>
+<c:import url="/WebContent/layout/footer.jsp"></c:import>
