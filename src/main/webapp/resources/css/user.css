@@ -24,5 +24,18 @@
 	text-align:left
 }
 
+.alignCenter{
+	text-align:center;
+}
 
+.warmFontColor{
+	font-size: 16px;
+	color: red;
+}
 
+.importMsgFont{
+	font-size: 16px;
+	letter-spacing: 3px;
+	font-weight: 900;
+	
+}
