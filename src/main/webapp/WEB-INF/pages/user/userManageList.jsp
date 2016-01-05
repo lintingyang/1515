@@ -23,14 +23,10 @@
 				<div>
 					<form role="form" class="form-horizontal" id="listForm">
 						<div class="form-group">
-							<label for="code" class="col-sm-2 control-label">會員 Id</label>
+							<label for="code" class="col-sm-2 control-label">會員帳號</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="id" name="id"
-									placeholder="user's id" />
-							</div>
-							<div class="col-sm-4">
-								<button id="queryBtn" class="btn btn-primary"
-									data-loading-text="loading..." type="button">搜尋</button>
+								<input type="text" class="form-control" id="account"
+									name="account" placeholder="user's id" />
 							</div>
 						</div>
 					</form>
@@ -42,15 +38,9 @@
 					<button id="resetBtn" class="btn btn-warning"
 						data-loading-text="loading..." type="button" value="reset">重設</button>
 				</div>
-				
+
 			</section>
-			
-			<div>
-          		<a href="<c:url value='/security/roles/add'/>" class="btn btn-sm btn-primary" data-loading-text="Loading">
-            		<span class="glyphicon glyphicon-plus"></span>新增
-            	</a>
-      		</div>
-      		
+
 			<table id="slGrid"
 				class="table table-hover table-condensed table-bordered"></table>
 
@@ -64,7 +54,7 @@
 </body>
 
 <script type="text/javascript">
-	var url = '<c:url value="/security/roles"/>';
+	var url = '<c:url value="/admin/users"/>';
 
 	$(function() {
 		$("#searchBtn").bind("click", function() {
@@ -76,67 +66,72 @@
 			$("#giin").val("");
 		});
 
-		$("#slGrid").slGrid(
-				{
-					url : url,
-					dataFormId : 'listForm',
-					mtype : 'GET',
+		$("#slGrid").slGrid({
+			url : url,
+			dataFormId : 'listForm',
+			mtype : 'GET',
 
-					colNames : [ 'id', '帳號', '會員名稱', '學校信箱', '封鎖' ],
-					colModel : [ {
-						name : 'id',
-						hidden : true
-					}, {
-						name : 'account',
-						width : 100
-					}, {
-						name : 'nickname',
-						width : 100
-					}, {
-						name : 'schoolEmail',
-						width : 100
-					}, {
-						name : 'btns',
-						width : 70,
-						formatter : btns
-					} ],
-					sortname : "id",
-					sortorder : "DESC",
-					pager : "slPager",
-					loadComplete : function() {
-						$("#searchBtn").button('reset');
-					}
-				});
-		
-	function btns(value, row) {
-			
+			colNames : [ 'id', '帳號', '會員名稱', '學校信箱', '封鎖狀態', '封鎖' ],
+			colModel : [ {
+				name : 'id',
+				hidden : true
+			}, {
+				name : 'account',
+				width : 100
+			}, {
+				name : 'nickname',
+				width : 100
+			}, {
+				name : 'schoolEmail',
+				width : 100
+			}, {
+				name : 'isolated',
+				width : 100
+			}, {
+				name : 'btns',
+				width : 70,
+				formatter : btns
+			} ],
+			sortname : "id",
+			sortorder : "DESC",
+			pager : "slPager",
+			loadComplete : function() {
+				$("#searchBtn").button('reset');
+			}
+		});
+
+		function btns(value, row) {
+
 			var $delBtn = $('<button type="button" class="btn btn-danger btn-xs"></button>');
-			$delBtn.append('<span class="glyphicon glyphicon-eye-close"></span> 否');
-			
+			$delBtn
+					.append('<span class="glyphicon glyphicon-eye-close"></span> 否');
+
 			$delBtn.click(function() {
 				swal({
-					title: "Are you sure?",
-					text: "是否確定封鎖此會員？",
-					type: "warning",
-					showCancelButton: true,
-					confirmButtonColor: "#F5A056",
-					closeOnConfirm: true
+					title : "Are you sure?",
+					text : "是否確定封鎖此會員？",
+					type : "warning",
+					showCancelButton : true,
+					confirmButtonColor : "#F5A056",
+					closeOnConfirm : true
 				}, function() {
 					$delBtn.button('loading');
-					$.delete_(url+ "/" + row.id, function() {
+					$.put(url + "/" + row.id, function() {
 						$delBtn.button('reset');
 						$("#slGrid").trigger('reloadGrid');
 					});
 				});
 			});
-			
+
 			var $editBtn = $('<a class="btn btn-success btn-xs"></a>');
 			$editBtn.attr("href", url + "/" + row.id);
-			$editBtn.append('<span class="glyphicon glyphicon-eye-open"></span> 是');
-			
-			return $("<div></div>").append($editBtn).append("&nbsp;").append($delBtn);
+			$editBtn
+					.append('<span class="glyphicon glyphicon-eye-open"></span> 是');
+
+			return $("<div></div>").append($editBtn).append("&nbsp;").append(
+					$delBtn);
 		}
-		
+
 	});
 </script>
 </html>

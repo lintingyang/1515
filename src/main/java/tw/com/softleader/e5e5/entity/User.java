@@ -35,7 +35,7 @@ public class User extends OurEntity implements java.io.Serializable {
 	private String nickname;
 	private String account;
 	private Integer age;
-	private Sex sex;
+//	private Sex sex;
 	private LocalDateTime birthday;
 	private String address;
 	private String phone;
@@ -47,9 +47,9 @@ public class User extends OurEntity implements java.io.Serializable {
 	private Integer gameScore;
 	private Integer onlineDatetime;
 	private String schoolName;
-	private TrueFalse emailCheck;
-	private TrueFalse isolated;
-	private Role role;
+//	private TrueFalse emailCheck;
+//	private TrueFalse isolated;
+//	private Role role;
 
 
 	public User() {
@@ -59,27 +59,27 @@ public class User extends OurEntity implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", password=" + password + ", name=" + name + ", nickname=" + nickname + ", account="
-				+ account + ", age=" + age + ", sex=" + sex + ", birthday=" + birthday + ", address=" + address
-				+ ", phone=" + phone + ", cellphone=" + cellphone + ", email=" + email + ", picture=" + picture
-				+ ", schoolEmail=" + schoolEmail + ", focusItemList=" + focusItemList + ", gameScore=" + gameScore
-				+ ", onlineDatetime=" + onlineDatetime +", schoolName=" +schoolName+", emailCheck=" + emailCheck + ", isolated"+ isolated +"]";
-	}
+//	@Override
+//	public String toString() {
+//		return "User [id=" + id + ", password=" + password + ", name=" + name + ", nickname=" + nickname + ", account="
+//				+ account + ", age=" + age + ", sex=" + sex + ", birthday=" + birthday + ", address=" + address
+//				+ ", phone=" + phone + ", cellphone=" + cellphone + ", email=" + email + ", picture=" + picture
+//				+ ", schoolEmail=" + schoolEmail + ", focusItemList=" + focusItemList + ", gameScore=" + gameScore
+//				+ ", onlineDatetime=" + onlineDatetime +", schoolName=" +schoolName+", emailCheck=" + emailCheck + ", isolated"+ isolated +"]";
+//	}
 
 	
-
-	@Enumerated(EnumType.STRING)
-	@Column(name = "role", length = 10)
-	public Role getRole() {
-		return role;
-	}
-
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
+//
+//	@Enumerated(EnumType.STRING)
+//	@Column(name = "role", length = 10)
+//	public Role getRole() {
+//		return role;
+//	}
+//
+//
+//	public void setRole(Role role) {
+//		this.role = role;
+//	}
 	
 	@Column(name = "password", length = 20)
 	public String getPassword() {
@@ -126,15 +126,15 @@ public class User extends OurEntity implements java.io.Serializable {
 		this.age = age;
 	}
 	
-	@Enumerated(EnumType.STRING)
-	@Column(name = "sex", length = 10)
-	public Sex getSex() {
-		return this.sex;
-	}
-
-	public void setSex(Sex sex) {
-		this.sex = sex;
-	}
+//	@Enumerated(EnumType.STRING)
+//	@Column(name = "sex", length = 10)
+//	public Sex getSex() {
+//		return this.sex;
+//	}
+//
+//	public void setSex(Sex sex) {
+//		this.sex = sex;
+//	}
 
 	@Column(name = "birthday", length = 23)
 	public LocalDateTime getBirthday() {
@@ -235,24 +235,24 @@ public class User extends OurEntity implements java.io.Serializable {
 		this.schoolName = schoolName;
 	}
 	
-	@Enumerated(EnumType.STRING)
-	@Column(name = "email_check", length = 10)
-	public TrueFalse getEmailCheck() {
-		return emailCheck;
-	}
-
-	public void setEmailCheck(TrueFalse emailCheck) {
-		this.emailCheck = emailCheck;
-	}
+//	@Enumerated(EnumType.STRING)
+//	@Column(name = "email_check", length = 10)
+//	public TrueFalse getEmailCheck() {
+//		return emailCheck;
+//	}
+//
+//	public void setEmailCheck(TrueFalse emailCheck) {
+//		this.emailCheck = emailCheck;
+//	}
 	
-	@Enumerated(EnumType.STRING)
-	@Column(name = "isolated", length = 10)
-	public TrueFalse getIsolated() {
-		return isolated;
-	}
-
-	public void setIsolated(TrueFalse isolated) {
-		this.isolated = isolated;
-	}
+//	@Enumerated(EnumType.STRING)
+//	@Column(name = "isolated", length = 10)
+//	public TrueFalse getIsolated() {
+//		return isolated;
+//	}
+//
+//	public void setIsolated(TrueFalse isolated) {
+//		this.isolated = isolated;
+//	}
 
 }
