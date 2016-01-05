@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import tw.com.softleader.e5e5.common.dao.OurDao;
 import tw.com.softleader.e5e5.entity.Chat;
 
-public interface ChatDao extends JpaRepository<Chat, Integer> {
+public interface ChatDao extends OurDao<Chat> {
 
 //	@Autowired
 //	private Chat chat;

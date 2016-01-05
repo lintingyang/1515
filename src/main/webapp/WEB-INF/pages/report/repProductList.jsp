@@ -57,7 +57,7 @@
 </body>
 
 <script type="text/javascript">
-	var url = '<c:url value="/security/roles"/>';
+	var url = '<c:url value="/report/products"/>';
 
 	$(function() {
 		$("#searchBtn").bind("click", function() {

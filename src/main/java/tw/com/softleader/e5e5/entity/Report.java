@@ -33,19 +33,13 @@ public class Report implements java.io.Serializable {
 	private int id;
 	private User role;
 	private Product product;
+	private QuestionAndAnswer productQuestions;
 	private Reply reply;
 	private Thread thread;
 	private User user;
 	private String article;
 	private TrueFalse isPassed;
 	private LocalDateTime reportTime;
-
-	public Report() {
-	}
-
-	public Report(int id) {
-		this.id = id;
-	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,7 +54,7 @@ public class Report implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@JoinColumn(name = "product_id")
+	@JoinColumn(name = "product_id", referencedColumnName = "id")
 	public Product getProduct() {
 		return this.product;
 	}
@@ -71,10 +65,23 @@ public class Report implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@JoinColumn(name = "product_qiestions_id", referencedColumnName = "id")
+	public QuestionAndAnswer getProductQuestions() {
+		return productQuestions;
+	}
+	
+	public void setProductQuestions(QuestionAndAnswer productQuestions) {
+		this.productQuestions = productQuestions;
+	}
+	
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@JoinColumn(name = "reply_id")
 	public Reply getReply() {
 		return this.reply;
 	}
+
 
 	public void setReply(Reply reply) {
 		this.reply = reply;

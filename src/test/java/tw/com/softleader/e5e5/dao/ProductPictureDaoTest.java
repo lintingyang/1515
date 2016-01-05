@@ -30,11 +30,11 @@ public class ProductPictureDaoTest {
 	@Test
 	public void testCrud() {
 		//insert
-		ProductPicture pic = new ProductPicture();
+//		ProductPicture pic = new ProductPicture();
 		Product product = productDao.findOne(3);
-		pic.setPicture("http://picture_xx.jpg");
-		pic.setProduct(product);
-		productpictureDao.save(pic);
+//		pic.setPicture("http://picture_xx.jpg");
+//		pic.setProduct(product);
+//		productpictureDao.save(pic);
 			
 		//find
 		List<ProductPicture> pics = productpictureDao.findByProduct(product);

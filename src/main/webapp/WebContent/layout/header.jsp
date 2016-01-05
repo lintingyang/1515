@@ -11,9 +11,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <!-- CDN -->
 
-
+<link rel="stylesheet" href="/resources/css/prodcss.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/prodcss.css" />
+
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/resources/js/jquery-1.11.3.js"></script>
 <script type="text/javascript"
@@ -44,7 +44,7 @@
 			<div class="form-group">
 				<input type="text" class="form-control" placeholder="Search">
 			</div>
-			<button type="submit" class="btn btn-default">Submit</button>
+			<button  type="submit" class="btn btn-default">Submit</button>
 		</form>
 			<a class="navbar-brand" href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-menu-down"></span></a>
 		
@@ -60,11 +60,11 @@
 				<ul class="dropdown-menu" aria-labelledby="drop3">
 					<li><a href="/WebContent/user/myProfile.jsp">會員資料</a></li>
 					<li><a href="/WebContent/user/userFriendList.jsp">關注名單</a></li>
-					<li><a href="#">物品資料</a></li>
+					<li><a href="/WebContent/product/productedit.jsp">物品管理</a></li>
 					<li><a href="/WebContent/product/newproduct.jsp">新增物品</a></li>
 					<li><a href="/WebContent/user/modifyFileAsk.jsp">帳號修改</a></li>
-					<li><a href="#">登出</a></li>
-					<li role="separator" class="divider"></li>
+					<li><a href="/WebContent/user/login.jsp">登出</a></li>
+	
 				</ul></li>
 		</ul>
 	</div>
@@ -77,16 +77,46 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" style="background-color: gray;">
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">請選擇類別</h4>
+<!--       <div class="modal-header"> -->
+<!--         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
+        
+<!--       </div> -->
+      <div class="modal-body" style="text-align: center;">
+      <h5 id="myModalLabel">請選擇類別</h5>
+      		<table style=" margin:auto;">
+      			<tr>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg">文具</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg">服飾</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg">皮件</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg">電玩</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg">玩具</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg">書籍</button></td>
+      			</tr>
+      			<tr>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg">文具</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg">服飾</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg">皮件</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg">電玩</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg">玩具</button></td>
+     				<td class="productcategory" ><button class=" btn btn-default btn-lg">書籍</button></td>		      			
+      			</tr>
+      			<tr>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg">文具</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg">服飾</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg">皮件</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg">電玩</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg">玩具</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg">書籍</button></td>
+      			</tr>
+      		</table>
+      		<br>
+      		
+      		<br>
+       <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
       </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
+<!--       <div class="modal-footer"> -->
+       
+<!--       </div> -->
     </div>
   </div>
 </div>

@@ -31,11 +31,6 @@ window.onload = function () {
 	document.getElementById("perfectData").onclick = Next;
     
 }
-
-
-
-
-
 	function goTop() {
 		location.href = "loginFirst.jsp";
 	}
@@ -49,7 +44,7 @@ window.onload = function () {
 
 <div>
 	<div id="successImg">
-	<img src="/resources/imgs/wallpaper.jpg" id="img1">
+		<img src="/resources/imgs/wallpaper.jpg" id="img1">
 	</div>
 	<p id="successInsert">恭喜您新增帳號成功</p>
 
