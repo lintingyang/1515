@@ -103,4 +103,4 @@
 		</ul>
 	</nav>
 </div>
-<c:import url="/WebContent/layout/header.jsp"></c:import>
+<c:import url="/WebContent/layout/footer.jsp"></c:import>
