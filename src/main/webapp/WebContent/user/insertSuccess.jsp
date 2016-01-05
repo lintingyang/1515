@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/WebContent/layout/header.jsp"></c:import>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/user.css" />
+
 
 <style>
 #successInsert {
@@ -32,7 +34,7 @@ window.onload = function () {
     
 }
 	function goTop() {
-		location.href = "loginFirst.jsp";
+		location.href = "/WebContent/index.jsp";
 	}
 	function Next() {
 		location.href = "insertStep4.jsp";

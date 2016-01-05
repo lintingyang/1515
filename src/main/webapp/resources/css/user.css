@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+
+#divCenter {
+/* 	text-align: center; */
+	margin-top: 100px;
+}
+
+#formCenter{
+	margin:0 auto;
+	
+}
+
+#divBorder {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	height: 64px;
+}
+
+.textSize{
+		width: 55%;	
+}
+
+.alignLeft{
+	text-align:left
+}
+
+
+
