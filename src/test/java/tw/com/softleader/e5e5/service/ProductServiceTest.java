@@ -2,6 +2,7 @@ package tw.com.softleader.e5e5.service;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import tw.com.softleader.e5e5.E5e5App;
 import tw.com.softleader.e5e5.dao.ProductCategoryDao;
 import tw.com.softleader.e5e5.dao.ProductDao;
 import tw.com.softleader.e5e5.entity.Product;
+import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes={E5e5App.class})
@@ -119,14 +121,14 @@ public class ProductServiceTest {
 	//(12)update status
 	@Test
 	public void testUpdate(){
-		Product result = productService.update(12, 'F');
+		Product result = productService.update(12,TrueFalse.FALSE);
 		log.debug("更新postStatus:" + result);
 	}
 	
 	//(14)新增產品
 		@Test
 		public void testInsert(){
-			int result = productService.insert("HHHHHH",2 , new Date(), "HHH","HHH","HHH");
+			int result = productService.insert("HHHHHH",2 , LocalDateTime.now(), "HHH","HHH","HHH");
 			log.debug("新增" + result);
 		}
 	

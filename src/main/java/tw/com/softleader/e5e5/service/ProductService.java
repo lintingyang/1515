@@ -1,8 +1,8 @@
 package tw.com.softleader.e5e5.service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -11,13 +11,8 @@ import org.springframework.stereotype.Service;
 
 import tw.com.softleader.e5e5.dao.ProductCategoryDao;
 import tw.com.softleader.e5e5.dao.ProductDao;
-import tw.com.softleader.e5e5.entity.Exchange;
 import tw.com.softleader.e5e5.entity.Product;
-import tw.com.softleader.e5e5.entity.ProductCategory;
-import tw.com.softleader.e5e5.entity.ProductPicture;
-import tw.com.softleader.e5e5.entity.QuestionAndAnswer;
-import tw.com.softleader.e5e5.entity.Report;
-import tw.com.softleader.e5e5.entity.User;
+import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 
 @Service
 public class ProductService {
@@ -41,7 +36,7 @@ public class ProductService {
 	}
 	//(3)update product's post_status
 	@Transactional
-	public Product update(Integer id, char postStatus) {
+	public Product update(Integer id, TrueFalse postStatus) {
 		Product product = productDao.findOne(id);
 		product.setPostStatus(postStatus);
 		productDao.save(product);
@@ -49,7 +44,7 @@ public class ProductService {
 	}
 	//(4)update product's post_status return int
 		@Transactional
-		public int updateStatus(Integer id, char postStatus) {
+		public int updateStatus(Integer id, TrueFalse postStatus) {
 			Product product = productDao.findOne(id);
 			if(product != null){
 				product.setPostStatus(postStatus);
@@ -150,16 +145,16 @@ public class ProductService {
 
 	// (14)新增產品
 	@Transactional
-	public int insert(String name,int category, Date deadline, String location, String tradeWay, String wishItem) {
+	public int insert(String name,int category, LocalDateTime deadline, String location, String tradeWay, String wishItem) {
 		Product product = new Product();
 		product.setName(name);
 		product.setProductCategory(productCategoryDao.findOne(category));
-		product.setPostTime(new Date());
-		product.setDeadline(deadline);
+		product.setPostTime(LocalDateTime.now());
+		product.setDeadline(LocalDateTime.of(2015, 4, 4, 10, 55));
 		product.setLocation(location);
 		product.setTradeWay(tradeWay);
 		product.setWishItem(wishItem);
-		product.setPostStatus('T');
+		product.setPostStatus(TrueFalse.FALSE);
 		productDao.save(product);
 		return 1;
 

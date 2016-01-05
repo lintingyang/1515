@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.com.softleader.e5e5.entity.User;
-import tw.com.softleader.e5e5.entity.UserBanList;
+import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 import tw.com.softleader.e5e5.service.UserService;
 
 @Controller
@@ -64,7 +64,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/update")
-	public String update(Model model ,@RequestParam("account") String account,@RequestParam("isolate") Character isolate ,@RequestParam("score") String changeScore) {
+	public String update(Model model ,@RequestParam("account") String account,@RequestParam("isolate") TrueFalse isolate ,@RequestParam("score") String changeScore) {
 		try{
 			int score = Integer.parseInt(changeScore);
 			userService.updataIsolated(account, isolate);

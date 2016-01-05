@@ -24,8 +24,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "report", schema = "dbo", catalog = "EEIT82DB")
 public class Report implements java.io.Serializable {
 
+
 	private int id;
-	private Admin admin;
+	private User role;
 	private Product product;
 	private Reply reply;
 	private Thread thread;
@@ -40,20 +41,7 @@ public class Report implements java.io.Serializable {
 	public Report(int id) {
 		this.id = id;
 	}
-
-	public Report(int id, Admin admin, Product product, Reply reply, Thread thread, User user, String article,
-			Character isPassed, Date reportTime) {
-		this.id = id;
-		this.admin = admin;
-		this.product = product;
-		this.reply = reply;
-		this.thread = thread;
-		this.user = user;
-		this.article = article;
-		this.isPassed = isPassed;
-		this.reportTime = reportTime;
-	}
-
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
@@ -63,17 +51,6 @@ public class Report implements java.io.Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@JoinColumn(name = "admin_id")
-	public Admin getAdmin() {
-		return this.admin;
-	}
-
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -119,7 +96,17 @@ public class Report implements java.io.Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JoinColumn(name = "role")
+	public User getRole() {
+		return role;
+	}
 
+	public void setRole(User role) {
+		this.role = role;
+	}
 	@Column(name = "article", length = 200)
 	public String getArticle() {
 		return this.article;

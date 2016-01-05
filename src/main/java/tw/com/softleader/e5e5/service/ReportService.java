@@ -40,7 +40,6 @@ public class ReportService {
 	public int updateIsPassed(int id, char status){
 		Report temp = reportDao.findOne(id);
 		if(temp != null){
-			temp.setAdmin(temp.getAdmin());
 			temp.setArticle(temp.getArticle());
 			temp.setIsPassed(status);
 			temp.setProduct(temp.getProduct());

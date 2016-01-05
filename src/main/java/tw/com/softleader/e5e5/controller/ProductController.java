@@ -17,7 +17,7 @@ import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.service.ExchangeService;
 
 import tw.com.softleader.e5e5.entity.ProductCategory;
-
+import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 import tw.com.softleader.e5e5.service.ProductService;
 
 @Controller
@@ -141,7 +141,7 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/update")
-	public String update(Model model, @RequestParam("pId") Integer id, @RequestParam("pPS") char postStatus) {
+	public String update(Model model, @RequestParam("pId") Integer id, @RequestParam("pPS") TrueFalse postStatus) {
 		Product products = productService.update(id, postStatus);
 		model.addAttribute("p", products);
 		return "/product/edit";
