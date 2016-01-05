@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:import url="/layout/header.jsp"></c:import>
+<c:import url="/WebContent/layout/header.jsp"></c:import>
 <div class="container" style="margin: 50px auto;">
 	<div class="row">
 		<div class="col-md-1 col-md-offset-5">
 			<img class="img-circle" style="width: 150px;"
-				src="${pageContext.request.contextPath }/images/noname.jpg">
+				src="/resources/imgs/noname.jpg">
 		</div>
 	</div>
 	<hr>
@@ -36,4 +36,4 @@
 
 
 </div>
-<c:import url="/layout/footer.jsp"></c:import>
+<c:import url="/WebContent/layout/footer.jsp"></c:import>

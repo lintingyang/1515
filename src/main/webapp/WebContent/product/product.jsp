@@ -68,7 +68,7 @@
 
 		<div class="container"
 			style="width: 100%; height: 100px; text-align: center;">
-			<input class="btn btn-primary btn-lg" type="button" value="我要交換">
+			<input class="btn btn-primary btn-lg" type="button" value="我要交換" onclick="location.href='/WebContent/product/exchangeproduct.jsp'">
 		</div>
 	</div>
 
@@ -109,7 +109,7 @@
 						
 						<div style="text-align: center;">
 						
-							<textarea   class="form-control" rows="9" cols="100" placeholder="提出發問..."></textarea>
+							<textarea   rows="9" cols="100" placeholder="提出發問..."></textarea>
 							<br>
 							<br> <input type="button" value="送出" class="btn btn-primary">
 							<div class="checkbox">
@@ -255,4 +255,4 @@
 </div>
 
 
-<c:import url="/WebContent/layout/header.jsp"></c:import>
+<c:import url="/WebContent/layout/footer.jsp"></c:import>

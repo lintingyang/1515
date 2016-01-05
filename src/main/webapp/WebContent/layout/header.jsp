@@ -19,7 +19,8 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/resources/js/bootstrap.min.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<title>Insert title here</title>
+<title>E715</title>
+
 
 
 
@@ -57,9 +58,11 @@
 					Me <span class="caret">
 					</span></a>
 				<ul class="dropdown-menu" aria-labelledby="drop3">
-					<li><a href="/WebContent/user/myProfile.jsp#">會員資料</a></li>
+					<li><a href="/WebContent/user/myProfile.jsp">會員資料</a></li>
+					<li><a href="/WebContent/user/userFriendList.jsp">關注名單</a></li>
 					<li><a href="#">物品資料</a></li>
 					<li><a href="/WebContent/product/newproduct.jsp">新增物品</a></li>
+					<li><a href="/WebContent/user/modifyFileAsk.jsp">帳號修改</a></li>
 					<li><a href="#">登出</a></li>
 					<li role="separator" class="divider"></li>
 				</ul></li>
