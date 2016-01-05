@@ -6,10 +6,10 @@
 	box-shadow:none;
 	cursor :pointer;
 }
-/* .prolist:hover{ */
-/* 	box-shadow:1px 1px 8px gray; */
+.prolist:hover{
+	box-shadow:1px 1px 8px gray;
 
-/* } */
+}
 .prodimg{
 	width: 200px;
 	height:200px;
