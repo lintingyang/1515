@@ -18,8 +18,6 @@ import tw.com.softleader.e5e5.entity.User;
 import tw.com.softleader.e5e5.entity.enums.Role;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 
-
-
 public class UserDaoTest extends AbstractTest{
 	
 	private Logger log = Logger.getLogger(this.getClass());
@@ -32,6 +30,7 @@ public class UserDaoTest extends AbstractTest{
 	public void testCrud() {
 	
 		User usera = new User();
+
 		usera.setName("yoming2");
 		usera.setNickname("yo");
 		usera.setAddress("台北市大安區");
@@ -46,6 +45,17 @@ public class UserDaoTest extends AbstractTest{
 		usera.setRole(Role.USER);
 		userDao.save(usera);
 		assertEquals(Role.USER,usera.getRole());
+
+		usera.setName("aaa");
+		userDao.save(usera);
+		User userb = new User();
+		userb.setName("bbb");
+		userDao.save(userb);
+		User userc = new User();
+		userc.setName("ccc");
+		userDao.save(userc);
+		
+
 //		User userid = userDao.findById(1);
 //		log.debug(userid);
 		
@@ -76,11 +86,11 @@ public class UserDaoTest extends AbstractTest{
 //		User userone = userDao.findOne(1);
 //		log.debug(userone);
 		
-//		List<User> users = userDao.findAll();
-//		
-//		for(User u:users) {
-//			log.debug(u);
-//		}
+		List<User> users = userDao.findAll();
+		
+		for(User u:users) {
+			log.debug(u);
+		}
 		
 		
 
