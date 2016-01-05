@@ -5,9 +5,10 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import tw.com.softleader.e5e5.common.dao.OurDao;
 import tw.com.softleader.e5e5.entity.Product;
 
-public interface ProductDao extends JpaRepository<Product, Integer> {
+public interface ProductDao extends OurDao<Product> {
 
 	//後台
 	//(1)findOne byId

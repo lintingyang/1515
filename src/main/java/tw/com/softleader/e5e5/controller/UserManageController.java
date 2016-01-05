@@ -41,7 +41,6 @@ public class UserManageController {
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public GridResponse<User> query(final Model model, final User user, final Pageable pageable) {
-
 		Page<User> page;
 		
 		try {

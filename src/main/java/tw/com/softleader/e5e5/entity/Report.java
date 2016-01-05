@@ -21,6 +21,7 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import tw.com.softleader.e5e5.common.entity.OurEntity;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 
 /**
@@ -28,9 +29,9 @@ import tw.com.softleader.e5e5.entity.enums.TrueFalse;
  */
 @Entity
 @Table(name = "report", schema = "dbo", catalog = "EEIT82DB")
-public class Report implements java.io.Serializable {
+public class Report extends OurEntity implements java.io.Serializable {
 
-	private int id;
+//	private int id;
 	private User role;
 	private Product product;
 	private QuestionAndAnswer productQuestions;
@@ -38,18 +39,25 @@ public class Report implements java.io.Serializable {
 	private Thread thread;
 	private User user;
 	private String article;
-	private TrueFalse isPassed;
+//	private TrueFalse isPassed;
 	private LocalDateTime reportTime;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	public int getId() {
-		return this.id;
-	}
+	
+	
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@Column(name = "id", unique = true, nullable = false)
+//	public int getId() {
+//		return this.id;
+//	}
+//
+//	public void setId(int id) {
+//		this.id = id;
+//	}
 
-	public void setId(int id) {
-		this.id = id;
+	@Override
+	public String toString() {
+		return "Report [article=" + article + ", reportTime=" + reportTime + "]";
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -129,15 +137,15 @@ public class Report implements java.io.Serializable {
 		this.article = article;
 	}
 
-	@Enumerated(EnumType.STRING)
-	@Column(name = "is_passed", length = 10)
-	public TrueFalse getIsPassed() {
-		return this.isPassed;
-	}
-
-	public void setIsPassed(TrueFalse isPassed) {
-		this.isPassed = isPassed;
-	}
+//	@Enumerated(EnumType.STRING)
+//	@Column(name = "is_passed", length = 10)
+//	public TrueFalse getIsPassed() {
+//		return this.isPassed;
+//	}
+//
+//	public void setIsPassed(TrueFalse isPassed) {
+//		this.isPassed = isPassed;
+//	}
 
 	@Column(name = "report_time", length = 23)
 	public LocalDateTime getReportTime() {

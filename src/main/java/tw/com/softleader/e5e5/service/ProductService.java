@@ -9,13 +9,16 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tw.com.softleader.e5e5.common.dao.OurDao;
+import tw.com.softleader.e5e5.common.model.Message;
+import tw.com.softleader.e5e5.common.service.OurService;
 import tw.com.softleader.e5e5.dao.ProductCategoryDao;
 import tw.com.softleader.e5e5.dao.ProductDao;
 import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 
 @Service
-public class ProductService {
+public class ProductService extends OurService<Product>{
 	@Autowired
 	private ProductDao productDao;
 	
@@ -38,7 +41,7 @@ public class ProductService {
 	@Transactional
 	public Product update(Integer id, TrueFalse postStatus) {
 		Product product = productDao.findOne(id);
-		product.setPostStatus(postStatus);
+//		product.setPostStatus(postStatus);
 		productDao.save(product);
 		return productDao.findOne(id);
 	}
@@ -47,7 +50,7 @@ public class ProductService {
 		public int updateStatus(Integer id, TrueFalse postStatus) {
 			Product product = productDao.findOne(id);
 			if(product != null){
-				product.setPostStatus(postStatus);
+//				product.setPostStatus(postStatus);
 				productDao.save(product);
 				return 1;
 			}else{
@@ -154,10 +157,34 @@ public class ProductService {
 		product.setLocation(location);
 		product.setTradeWay(tradeWay);
 		product.setWishItem(wishItem);
-		product.setPostStatus(TrueFalse.FALSE);
+//		product.setPostStatus(TrueFalse.FALSE);
 		productDao.save(product);
 		return 1;
 
+	}
+
+	@Override
+	public OurDao<Product> getDao() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected List<Message> validateInsert(Product entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected List<Message> validateUpdate(Product entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected List<Message> validateDelete(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

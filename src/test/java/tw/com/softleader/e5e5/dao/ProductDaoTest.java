@@ -36,7 +36,7 @@ public class ProductDaoTest extends AbstractTest  {
 		newProduct.setLocation("台北市捷運大安站");
 		newProduct.setTradeWay("面交");
 		newProduct.setWishItem("檯燈、電腦散熱器、行動電源");
-		newProduct.setPostStatus(TrueFalse.FALSE);
+//		newProduct.setPostStatus(TrueFalse.FALSE);
 		newProduct.setClickTimes(3);
 		newProduct = productDao.save(newProduct); 
 		

@@ -21,8 +21,11 @@ import tw.com.softleader.e5e5.common.ajax.AjaxResponse;
 import tw.com.softleader.e5e5.common.ajax.GridResponse;
 import tw.com.softleader.e5e5.common.dao.CommonCriterion;
 import tw.com.softleader.e5e5.common.dao.QueryOpType;
+import tw.com.softleader.e5e5.entity.Product;
+import tw.com.softleader.e5e5.entity.User;
 import tw.com.softleader.e5e5.security.entity.SecRole;
 import tw.com.softleader.e5e5.security.service.SecRoleService;
+import tw.com.softleader.e5e5.service.ProductService;
 
 @Controller
 @RequestMapping(value="/admin/products")
@@ -30,13 +33,34 @@ public class ProductManageController {
 	
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 	
-//	@Autowired
-//	private SecRoleService secRoleService;
+	@Autowired
+	private ProductService productService;
 	
 	@RequestMapping(value="/list",  method = RequestMethod.GET)
 	public String listPage() {
 		return "/product/productManageList";
 	}
 	
+	@RequestMapping(method = RequestMethod.GET)
+	@ResponseBody
+	public GridResponse<Product> query(final Model model, final Product product, final Pageable pageable) {
+		Page<Product> page;
+		
+		try {
+			final List<CommonCriterion> criterions = new ArrayList<CommonCriterion>();
+
+//			 if (StringUtils.isNotEmpty(user.getAccount())) {
+//			 criterions.add(new CommonCriterion(QueryOpType.LIKE, "account", "%"
+//			 + user.getAccount() + "%"));
+//			 }
+
+			page = productService.getByCondition(criterions, pageable);
+
+		} catch (final Exception e) {
+			return new GridResponse<Product>(e);
+		}
+
+		return new GridResponse<Product>(page);
+	}
 
 }

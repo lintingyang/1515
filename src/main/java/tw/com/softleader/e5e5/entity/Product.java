@@ -22,6 +22,7 @@ import javax.transaction.Transactional;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import tw.com.softleader.e5e5.common.entity.OurEntity;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 
 /**
@@ -29,9 +30,9 @@ import tw.com.softleader.e5e5.entity.enums.TrueFalse;
  */
 @Entity
 @Table(name = "product", schema = "dbo", catalog = "EEIT82DB")
-public class Product implements java.io.Serializable {
+public class Product extends OurEntity implements java.io.Serializable {
 
-	private int id;
+//	private int id;
 	private String name;
 	private ProductCategory productCategory;
 	private byte[] video;
@@ -41,7 +42,7 @@ public class Product implements java.io.Serializable {
 	private String location;
 	private String tradeWay;
 	private String wishItem;
-	private TrueFalse postStatus;
+//	private TrueFalse postStatus;
 	private Integer clickTimes;
 
 	public Product() {
@@ -55,19 +56,19 @@ public class Product implements java.io.Serializable {
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", video=" + Arrays.toString(video) + ", postTime=" + postTime
 				+ ", deadline=" + deadline + ", location=" + location + ", tradeWay=" + tradeWay + ", wishItem="
-				+ wishItem + ", postStatus=" + postStatus + ", clickTimes=" + clickTimes + "]";
+				+ wishItem + ", clickTimes=" + clickTimes + "]";
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	public int getId() {
-		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@Column(name = "id", unique = true, nullable = false)
+//	public int getId() {
+//		return this.id;
+//	}
+//
+//	public void setId(int id) {
+//		this.id = id;
+//	}
 
 	@Column(name = "name", length = 30)
 	public String getName() {
@@ -157,15 +158,15 @@ public class Product implements java.io.Serializable {
 	public void setWishItem(String wishItem) {
 		this.wishItem = wishItem;
 	}
-	@Enumerated(EnumType.STRING)
-	@Column(name = "post_status", length = 10)
-	public TrueFalse getPostStatus() {
-		return this.postStatus;
-	}
-
-	public void setPostStatus(TrueFalse postStatus) {
-		this.postStatus = postStatus;
-	}
+//	@Enumerated(EnumType.STRING)
+//	@Column(name = "post_status", length = 10)
+//	public TrueFalse getPostStatus() {
+//		return this.postStatus;
+//	}
+//
+//	public void setPostStatus(TrueFalse postStatus) {
+//		this.postStatus = postStatus;
+//	}
 
 	@Column(name = "click_times")
 	public Integer getClickTimes() {

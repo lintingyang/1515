@@ -83,16 +83,16 @@
 				width : 70,
 				formatter : btns
 			}, {
-				name : 'status',
+				name : 'account',
 				width : 80
 			}, {
-				name : 'product',
+				name : 'product.name',
 				width : 100
 			}, {
-				name : 'time',
+				name : 'reportTime',
 				width : 100
 			}, {
-				name : 'reason',
+				name : 'article',
 				width : 400
 			}, {
 				name : 'rUser',

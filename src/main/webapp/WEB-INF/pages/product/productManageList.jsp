@@ -25,7 +25,7 @@
 						<div class="form-group">
 							<label for="code" class="col-sm-2 control-label">物品名稱</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="id" name="id"
+								<input type="text" class="form-control" id="name" name="name"
 									placeholder="product name" />
 							</div>
 							<div class="col-sm-4">
@@ -57,7 +57,7 @@
 </body>
 
 <script type="text/javascript">
-	var url = '<c:url value="/security/roles"/>';
+	var url = '<c:url value="/admin/products"/>';
 
 	$(function() {
 		$("#searchBtn").bind("click", function() {

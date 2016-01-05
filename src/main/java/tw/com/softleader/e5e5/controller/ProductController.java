@@ -147,10 +147,10 @@ public class ProductController {
 		return "/product/edit";
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/update1",  produces = "application/json") 
-	public Product update(@RequestBody Product product) {
-		System.out.println("=========+++++++===========" + product);
-		return productService.update(product.getId(), product.getPostStatus());
-	}
+//	@ResponseBody
+//	@RequestMapping(value = "/update1",  produces = "application/json") 
+//	public Product update(@RequestBody Product product) {
+//		System.out.println("=========+++++++===========" + product);
+//		return productService.update(product.getId(), product.getPostStatus());
+//	}
 }
