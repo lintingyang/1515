@@ -38,8 +38,7 @@ public class UserDaoTest extends AbstractTest{
 		usera.setAge(28);
 		usera.setBirthday(LocalDateTime.now());
 		usera.setCellphone("0911-111-111");
-		usera.setGameScore(320);
-		usera.setGameScore(30000);
+		usera.setEcoin(320);
 		usera.setSchoolName("中央大學");
 		usera.setEmailCheck(TrueFalse.FALSE);
 		usera.setRole(Role.USER);

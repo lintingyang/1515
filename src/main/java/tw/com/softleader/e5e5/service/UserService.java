@@ -36,22 +36,22 @@ public class UserService extends OurService<User>{
 	}
 	
 	
-	@Transactional
-	public String[] findRangeScore(Integer score){
-		
-		List<User> temp = uDao.findByGameScoreGreaterThanEqualOrderByGameScoreDesc(score);
-		if(temp!=null){
-		String[] result = null;
-		int i =0;
-		for(User user : temp){
-			result[i] = user.getAccount();
-			i++;
-		}	
-		return result;}
-		else{
-			return null;
-		}
-	}
+//	@Transactional
+//	public String[] findRangeScore(Integer score){
+//		
+//		List<User> temp = uDao.findByGameScoreGreaterThanEqualOrderByGameScoreDesc(score);
+//		if(temp!=null){
+//		String[] result = null;
+//		int i =0;
+//		for(User user : temp){
+//			result[i] = user.getAccount();
+//			i++;
+//		}	
+//		return result;}
+//		else{
+//			return null;
+//		}
+//	}
 	
 	@Transactional
 	public int insert(String password, String name, String nickname, String account, Integer age, Sex sex,
@@ -114,7 +114,7 @@ public class UserService extends OurService<User>{
 			temp3.setSchoolName(temp.getSchoolName());
 			temp3.setSex(temp.getSex());
 			temp3.setIsolated(temp.getIsolated());
-			temp3.setGameScore(temp.getGameScore()+score);
+			temp3.setEcoin(temp.getEcoin()+score);
 			uDao.save(temp3);
 			return 1;
 		}		
@@ -136,7 +136,7 @@ public class UserService extends OurService<User>{
 			temp2.setEmail(temp.getEmail());
 			temp2.setEmailCheck(temp.getEmailCheck());
 			temp2.setFocusItemList(temp.getFocusItemList());
-			temp2.setGameScore(temp.getGameScore());
+			temp2.setEcoin(temp.getEcoin());
 			temp2.setName(temp.getName());
 			temp2.setNickname(temp.getNickname());
 			temp2.setOnlineDatetime(temp.getOnlineDatetime());
