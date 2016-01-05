@@ -29,31 +29,33 @@ public class UserDaoTest extends AbstractTest{
 	@Test
 	public void testCrud() {
 	
-		User usera = new User();
+//		User usera = new User();
+//
+//		usera.setName("yoming2");
+//		usera.setNickname("yo");
+//		usera.setAddress("台北市大安區");
+//		usera.setPassword("password");
+//		usera.setAge(28);
+//		usera.setBirthday(LocalDateTime.now());
+//		usera.setCellphone("0911-111-111");
+//		usera.setGameScore(320);
+//		usera.setGameScore(30000);
+//		usera.setSchoolName("中央大學");
+//		usera.setEmailCheck(TrueFalse.FALSE);
+//		usera.setRole(Role.USER);
+//		userDao.save(usera);
+//		assertEquals(Role.USER,usera.getRole());
+//
+//		usera.setName("aaa");
+//		userDao.save(usera);
+//		User userb = new User();
+//		userb.setName("bbb");
+//		userDao.save(userb);
+//		User userc = new User();
+//		userc.setName("ccc");
+//		userDao.save(userc);
+//		
 
-		usera.setName("yoming2");
-		usera.setNickname("yo");
-		usera.setAddress("台北市大安區");
-		usera.setPassword("password");
-		usera.setAge(28);
-		usera.setBirthday(LocalDateTime.now());
-		usera.setCellphone("0911-111-111");
-		usera.setEcoin(320);
-		usera.setSchoolName("中央大學");
-		usera.setEmailCheck(TrueFalse.FALSE);
-		usera.setRole(Role.USER);
-		userDao.save(usera);
-		assertEquals(Role.USER,usera.getRole());
-
-		usera.setName("aaa");
-		userDao.save(usera);
-		User userb = new User();
-		userb.setName("bbb");
-		userDao.save(userb);
-		User userc = new User();
-		userc.setName("ccc");
-		userDao.save(userc);
-		
 
 //		User userid = userDao.findById(1);
 //		log.debug(userid);

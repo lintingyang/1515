@@ -94,6 +94,7 @@ public class TestController {
 			final List<CommonCriterion> criterions = new ArrayList<CommonCriterion>();
 
 			if (StringUtils.isNotEmpty(chat.getMessages())) {
+				log.debug("********chatkuklukliuklukyl=" );
 				criterions.add(new CommonCriterion(QueryOpType.LIKE, "messages", "%" + chat.getMessages() + "%"));
 			}
 
