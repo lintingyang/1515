@@ -42,8 +42,15 @@
 					<button id="resetBtn" class="btn btn-warning"
 						data-loading-text="loading..." type="button" value="reset">重設</button>
 				</div>
+				
 			</section>
-
+			
+			<div>
+          		<a href="<c:url value='/security/roles/add'/>" class="btn btn-sm btn-primary" data-loading-text="Loading">
+            		<span class="glyphicon glyphicon-plus"></span>新增
+            	</a>
+      		</div>
+      		
 			<table id="slGrid"
 				class="table table-hover table-condensed table-bordered"></table>
 
@@ -104,12 +111,12 @@
 	function btns(value, row) {
 			
 			var $delBtn = $('<button type="button" class="btn btn-danger btn-xs"></button>');
-			$delBtn.append('<span class="glyphicon glyphicon-trash"></span> 刪除');
+			$delBtn.append('<span class="glyphicon glyphicon-eye-close"></span> 否');
 			
 			$delBtn.click(function() {
 				swal({
 					title: "Are you sure?",
-					text: "是否確定刪除此筆資料？",
+					text: "是否確定封鎖此會員？",
 					type: "warning",
 					showCancelButton: true,
 					confirmButtonColor: "#F5A056",
@@ -125,7 +132,7 @@
 			
 			var $editBtn = $('<a class="btn btn-success btn-xs"></a>');
 			$editBtn.attr("href", url + "/" + row.id);
-			$editBtn.append('<span class="glyphicon glyphicon-pencil"></span> 編輯');
+			$editBtn.append('<span class="glyphicon glyphicon-eye-open"></span> 是');
 			
 			return $("<div></div>").append($editBtn).append("&nbsp;").append($delBtn);
 		}

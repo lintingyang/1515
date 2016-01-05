@@ -30,19 +30,19 @@ public class ChatDaoTest {
 	
 	@Test
 	public void testSaveS() {
-		Chat chat = new Chat();
-		User userone = userDao.findOne(4);
-		log.debug(userone);
+//		Chat chat = new Chat();
+//		User userone = userDao.findOne(4);
+//		log.debug(userone);
 		
 //		chat.setMessages("有人在嘛");
 //		chat.setSendTime(new Date());
 //		chat.setUser(userone);
 //		log.debug(chatDao.save(chat));
 		
-		List<Chat> chats = chatDao.findAllOrderBySendTime();
-		for(Chat c: chats){
-			log.debug("Test: "+c);
-		}
+//		List<Chat> chats = chatDao.findAllOrderBySendTime();
+//		for(Chat c: chats){
+//			log.debug("Test: "+c);
+//		}
 	}
 
 }
