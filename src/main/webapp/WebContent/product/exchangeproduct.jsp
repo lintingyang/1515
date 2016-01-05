@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:import url="/layout/header.jsp"></c:import>
+<c:import url="/WebContent/layout/header.jsp"></c:import>
 
 <div class="container" style="margin: 50px auto;">
 	<div class="row">
 		<div class="col-md-3">
 			<div class="row">
 				<div>
-					<img src="${pageContext.request.contextPath}/images/noname.jpg"
+					<img src="/resources/imgs/noname.jpg"
 						style="width:250px;" class="img-circle">
 				</div>
 				<div>
@@ -60,7 +60,7 @@
 		<div class="col-md-3">
 			<div class="row">
 				<div>
-					<img src="${pageContext.request.contextPath}/images/user.jpeg"
+					<img src="/resources/imgs/user.jpeg"
 						style="width: 250px;" class="img-circle">
 				</div>
 				<div>
@@ -84,4 +84,4 @@
 	</div>
 </div>
 
-	<c:import url="/layout/footer.jsp"></c:import>
+	<c:import url="/WebContent/layout/footer.jsp"></c:import>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:import url="/layout/header.jsp"></c:import>
+<c:import url="/WebContent/layout/header.jsp"></c:import>
 
 <div class="container" style="margin: 50px auto;">
 
@@ -10,7 +10,7 @@
 		<div class="col-md-10">
 			<div class="col-md-3">
 				<img class="img-circle" style="width: 150px;"
-					src="${pageContext.request.contextPath }/images/noname.jpg">
+					src="/resources/imgs/noname.jpg">
 			</div>
 			<div class="col-md-9">
 			<br><br><br>
@@ -64,25 +64,25 @@
 			<div class="col-md-3">
 				<div class="prolist">
 					<img class="prodimg"
-						src="${pageContext.request.contextPath}/images/phone.jpg">雙雙的Mac
+						src="/resources/imgs/phone.jpg">雙雙的Mac
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="prolist">
 					<img class="prodimg"
-						src="${pageContext.request.contextPath}/images/phone.jpg">雙雙的Mac
+						src="/resources/imgs/phone.jpg">雙雙的Mac
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="prolist">
 					<img class="prodimg"
-						src="${pageContext.request.contextPath}/images/phone.jpg">雙雙的Mac
+						src="/resources/imgs/phone.jpg">雙雙的Mac
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="prolist">
 					<img class="prodimg"
-						src="${pageContext.request.contextPath}/images/phone.jpg">雙雙的Mac
+						src="/resources/imgs/phone.jpg">雙雙的Mac
 				</div>
 			</div>
 		</div>
@@ -103,4 +103,4 @@
 		</ul>
 	</nav>
 </div>
-<c:import url="/layout/footer.jsp"></c:import>
+<c:import url="/WebContent/layout/header.jsp"></c:import>

@@ -1,32 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:import url="/layout/header.jsp"></c:import>
+<c:import url="/WebContent/layout/header.jsp"></c:import>
 <div class="container" style="margin: 50px auto;">
 	<div class="col-md-6">
 		<div class="row">
 			<div>
-				<img src="${pageContext.request.contextPath}/images/phone.jpg"
+				<img src="/resources/imgs/phone.jpg"
 					style="width: 400px;">
 			</div>
 		</div>
 		<div class="row">
 			<ul class="nav navbar-nav">
 				<li><a class="thumbnail" href="#"><img class="smaimg"
-						src="${pageContext.request.contextPath}/images/phone.jpg"></a></li>
+						src="/resources/imgs/phone.jpg"></a></li>
 				<li><a class="thumbnail" href="#"><img class="smaimg"
-						src="${pageContext.request.contextPath}/images/phone.jpg"></a></li>
+						src="/resources/imgs/phone.jpg"></a></li>
 				<li><a class="thumbnail" href="#"><img class="smaimg"
-						src="${pageContext.request.contextPath}/images/phone.jpg"></a></li>
+						src="/resources/imgs/phone.jpg"></a></li>
 				<li><a class="thumbnail" href="#"><img class="smaimg"
-						src="${pageContext.request.contextPath}/images/phone.jpg"></a></li>
+						src="/resources/imgs/phone.jpg"></a></li>
 			</ul>
 		</div>
 		<div class="row">
 			<hr>
 			<ul class="nav navbar-nav">
 				<li><img class="img-circle" style="width: 100px;"
-					src="${pageContext.request.contextPath }/images/noname.jpg"></li>
+					src="/resources/imgs/noname.jpg"></li>
 				<li><ul style="list-style: none;">
 						<li><h4>
 								Account <a href="#"></a>
@@ -133,7 +133,7 @@
 						<tr>
 							<td>
 								<div class="col-md-2">
-									<img src="${pageContext.request.contextPath}/images/phone.jpg"
+									<img src="/resources/imgs/phone.jpg"
 										style="height: 100px;">
 								</div>
 								<div class="col-md-6">
@@ -143,7 +143,7 @@
 								<div class="col-md-4" style="border-left: 1px dashed gray;">
 									<ul class="nav navbar-nav">
 										<li><img class="img-circle" style="height: 80px;"
-											src="${pageContext.request.contextPath }/images/noname.jpg"></li>
+											src="/resources/imgs/noname.jpg"></li>
 										<li><ul style="list-style: none;">
 												<li><h4>
 														Account <a href="#"></a>
@@ -160,7 +160,7 @@
 						<tr>
 							<td>
 								<div class="col-md-2">
-									<img src="${pageContext.request.contextPath}/images/phone.jpg"
+									<img src="/resources/imgs/phone.jpg"
 										style="height: 100px;">
 								</div>
 								<div class="col-md-6">
@@ -170,7 +170,7 @@
 								<div class="col-md-4" style="border-left: 1px dashed gray;">
 									<ul class="nav navbar-nav">
 										<li><img class="img-circle" style="height: 80px;"
-											src="${pageContext.request.contextPath }/images/noname.jpg"></li>
+											src="/resources/imgs/noname.jpg"></li>
 										<li><ul style="list-style: none;">
 												<li><h4>
 														Account <a href="#"></a>
@@ -187,7 +187,7 @@
 						<tr>
 							<td>
 								<div class="col-md-2">
-									<img src="${pageContext.request.contextPath}/images/phone.jpg"
+									<img src="/resources/imgs/phone.jpg"
 										style="height: 100px;">
 								</div>
 								<div class="col-md-6">
@@ -197,7 +197,7 @@
 								<div class="col-md-4" style="border-left: 1px dashed gray;">
 									<ul class="nav navbar-nav">
 										<li><img class="img-circle" style="height: 80px;"
-											src="${pageContext.request.contextPath }/images/noname.jpg"></li>
+											src="/resources/imgs/noname.jpg"></li>
 										<li><ul style="list-style: none;">
 												<li><h4>
 														Account <a href="#"></a>
@@ -215,7 +215,7 @@
 						<tr>
 							<td>
 								<div class="col-md-2">
-									<img src="${pageContext.request.contextPath}/images/phone.jpg"
+									<img src="/resources/imgs/phone.jpg"
 										style="height: 100px;">
 								</div>
 								<div class="col-md-6">
@@ -225,7 +225,7 @@
 								<div class="col-md-4" style="border-left: 1px dashed gray;">
 									<ul class="nav navbar-nav">
 										<li><img class="img-circle" style="height: 80px;"
-											src="${pageContext.request.contextPath }/images/noname.jpg"></li>
+											src="/resources/imgs/noname.jpg"></li>
 										<li><ul style="list-style: none;">
 												<li><h4>
 														Account <a href="#"></a>
@@ -255,4 +255,4 @@
 </div>
 
 
-<c:import url="/layout/footer.jsp"></c:import>
+<c:import url="/WebContent/layout/header.jsp"></c:import>

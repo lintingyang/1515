@@ -18,7 +18,7 @@
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
 			<div class="col-md-3">
-				<div class="prolist" onclick="location.href='/product/product.jsp';">
+				<div class="prolist" onclick="location.href='/WebContent/product/product.jsp';">
 					<img class="prodimg"
 						src="/resources/imgs/phone.jpg" >雙雙的Mac
 				</div>

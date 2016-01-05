@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:import url="/layout/header.jsp"></c:import>
+<c:import url="/WebContent/layout/header.jsp"></c:import>
 
 <div class="container" style="margin: 50px auto;">
 	<form>
@@ -9,20 +9,20 @@
 		<div class="col-md-5">
 			<div class="row">
 				<div>
-					<img src="${pageContext.request.contextPath}/images/phone.jpg"
+					<img src="/resources/imgs/phone.jpg"
 						style="width: 400px;">
 				</div>
 			</div>
 			<div class="row">
 				<ul class="nav navbar-nav"> 
 					<li><a class="thumbnail" href="#"><img class="smaimg"
-							src="${pageContext.request.contextPath}/images/phone.jpg"></a></li>
+							src="/resources/imgs/phone.jpg"></a></li>
 					<li><a class="thumbnail" href="#"><img class="smaimg"
-							src="${pageContext.request.contextPath}/images/phone.jpg"></a></li>
+							src="/resources/imgs/phone.jpg"></a></li>
 					<li><a class="thumbnail" href="#"><img class="smaimg"
-							src="${pageContext.request.contextPath}/images/phone.jpg"></a></li>
+							src="/resources/imgs/phone.jpg"></a></li>
 					<li><a class="thumbnail" href="#"><img class="smaimg"
-							src="${pageContext.request.contextPath}/images/phone.jpg"></a></li>
+							src="/resources/imgs/phone.jpg"></a></li>
 				</ul>
 			</div>
 
@@ -175,4 +175,4 @@
 
 
 
-<c:import url="/layout/footer.jsp"></c:import>
+<c:import url="/WebContent/layout/footer.jsp"></c:import>

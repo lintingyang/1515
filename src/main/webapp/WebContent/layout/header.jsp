@@ -37,7 +37,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="${pageContext.request.contextPath }/index.jsp">E715</a>
+			<a class="navbar-brand" href="/WebContent/index.jsp">E715</a>
 		</div>
 		<form class="navbar-form navbar-left" role="search">
 			<div class="form-group">
@@ -53,13 +53,13 @@
 				class="dropdown-toggle" data-toggle="dropdown" role="button"
 				aria-haspopup="true" aria-expanded="false"> <img
 					class="img-circle" style="width: 30px;"
-					src="${pageContext.request.contextPath }/images/user.jpeg">
+					src="/resources/imgs/user.jpeg">
 					Me <span class="caret">
 					</span></a>
 				<ul class="dropdown-menu" aria-labelledby="drop3">
-					<li><a href="${pageContext.request.contextPath }/user/myProfile.jsp#">會員資料</a></li>
+					<li><a href="/WebContent/user/myProfile.jsp#">會員資料</a></li>
 					<li><a href="#">物品資料</a></li>
-					<li><a href="${pageContext.request.contextPath}/product/newproduct.jsp">新增物品</a></li>
+					<li><a href="/WebContent/product/newproduct.jsp">新增物品</a></li>
 					<li><a href="#">登出</a></li>
 					<li role="separator" class="divider"></li>
 				</ul></li>
