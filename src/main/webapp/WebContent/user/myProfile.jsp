@@ -8,26 +8,20 @@
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
-			<div class="col-md-3">
-				<img class="img-circle" style="width: 150px;"
+			<div class="col-md-3"></div>
+			<div class="col-md-3" style="text-align: center;margin-top:20px;">
+				<img class="img-circle" style="width: 120px;"
 					src="/resources/imgs/noname.jpg">
 			</div>
-			<div class="col-md-9">
-			<br><br><br>
-				<ul class="list-inline">
-					<li><a href="#"><span
-							class="glyphicon glyphicon-thumbs-up iconpro"></span></span><span
-							class="badge">9</span></a></li>
-					<li><a href="#"><span
-							class="glyphicon glyphicon-thumbs-down iconpro"></span></span><span
-							class="badge">1</span></a></li>
-					<li><a href="#"><span
-							class="glyphicon glyphicon-envelope iconpro"></span><span
-							class="badge">5</span></a></li>
-					<li><a href="#"><span
-							class="glyphicon glyphicon-plus-sign iconpro"></span></a></li>
-					<li><a href="#"><span
-							class="glyphicon glyphicon-minus-sign iconpro"></span></a></li>
+			<div class="col-md-6">
+				<br> 
+				<ul style="list-style: none;">
+					<li><a href="#"><span class="glyphicon glyphicon-envelope iconpme" ></span></a> 
+						<a href="#"><span class="glyphicon glyphicon-plus iconpme"  style="margin-left: 20px;"></span></a></li>
+					<li><h4 >Lintingyang</h4></li>
+					<li><span style="color: gray;">淡江大學</span><br></li>
+
+
 				</ul>
 			</div>
 		</div>
@@ -37,21 +31,26 @@
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
-			<div class="col-md-3">
-				<ul class="nav navbar-nav">
-					<li><ul style="list-style: none;">
-							<li><h4>
-									Account <a href="#"></a>
-								</h4></li>
-							<li>Name</li>
-							<li>台灣大學</li>
-							<li>Email</li>
-						</ul></li>
-				</ul>
+			<div class="col-md-3"></div>
+			<div class="col-md-3" style="text-align: center;">
+				<div class="row">
+				<h4 style="color: gray;">Account</h4>	
+				</div>
+				<div class="row">
+					<div class="col-md-1"></div>
+					<div class="col-md-5">
+						<a href="#"><span
+							class="glyphicon glyphicon-thumbs-up iconpro">11</span><span
+							class="badge"></span></a>
+					</div>
+					<div class="col-md-5">
+						<a href="#"><span
+							class="glyphicon glyphicon-thumbs-down iconpro">22</span></a>
+					</div>
+					<div class="col-md-1"></div>
+				</div>
 			</div>
-			<div class="col-md-9">
-				<h1>about me</h1>
-			</div>
+			<div class="col-md-6"><span style="margin-left:40px;color:gray;">about me....</span></div>
 		</div>
 		<div class="col-md-1"></div>
 	</div>
@@ -63,26 +62,22 @@
 		<div class="col-md-10">
 			<div class="col-md-3">
 				<div class="prolist">
-					<img class="prodimg"
-						src="/resources/imgs/phone.jpg">雙雙的Mac
+					<img class="prodimg" src="/resources/imgs/phone.jpg">雙雙的Mac
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="prolist">
-					<img class="prodimg"
-						src="/resources/imgs/phone.jpg">雙雙的Mac
+					<img class="prodimg" src="/resources/imgs/phone.jpg">雙雙的Mac
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="prolist">
-					<img class="prodimg"
-						src="/resources/imgs/phone.jpg">雙雙的Mac
+					<img class="prodimg" src="/resources/imgs/phone.jpg">雙雙的Mac
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="prolist">
-					<img class="prodimg"
-						src="/resources/imgs/phone.jpg">雙雙的Mac
+					<img class="prodimg" src="/resources/imgs/phone.jpg">雙雙的Mac
 				</div>
 			</div>
 		</div>

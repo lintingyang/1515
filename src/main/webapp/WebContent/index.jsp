@@ -7,10 +7,10 @@
 <div class="container" style="margin: 50px auto;">
 	<div class="container">
 		<ul class="nav nav-tabs" id="tabs">
-			<li style="width: 25%; text-align: center;"><a href="#">熱門</a></li>
-			<li style="width: 25%; text-align: center;"><a href="#">最新</a></li>
-			<li style="width: 25%; text-align: center;"><a href="#">誠信</a></li>
-			<li style="width: 25%; text-align: center;"><a href="#">推薦</a></li>
+			<li style="width: 25%; text-align: center;"><a class="categorylist" href="#">熱門</a></li>
+			<li style="width: 25%; text-align: center;"><a class="categorylist" href="#">最新</a></li>
+			<li style="width: 25%; text-align: center;"><a class="categorylist" href="#">誠信</a></li>
+			<li style="width: 25%; text-align: center;"><a  class="categorylist" href="#">推薦</a></li>
 		</ul>
 	</div>
 	<br>
