@@ -1,41 +1,46 @@
 package tw.com.softleader.e5e5.dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import tw.com.softleader.e5e5.E5e5App;
+import lombok.extern.log4j.Log4j;
+import tw.com.softleader.e5e5.common.AbstractTest;
 import tw.com.softleader.e5e5.entity.ProductCategory;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = { E5e5App.class })
-public class ProductCategoryDaoTest {
-
-	private Logger log = Logger.getLogger(this.getClass());
+@Log4j
+public class ProductCategoryDaoTest extends AbstractTest{
 
 	@Autowired
 	private ProductCategoryDao productCategoryDao;
 	
 	@Test
 	public void testCrud() {
-//		ProductCategory productCategory = new ProductCategory();
-//		productCategory.setName("美妝");
-//		productCategoryDao.save(productCategory);
+		List<ProductCategory> categorys = productCategoryDao.findAll();
 		
-		ProductCategory findone = productCategoryDao.findOne(1);
-		log.debug(findone);
+		assertEquals(0, categorys.size());
 		
-		List<ProductCategory> findall = productCategoryDao.findAll();
-		for(ProductCategory fa:findall){
-			log.debug(fa);
-		}
+		ProductCategory newCategory = new ProductCategory();
+		newCategory.setName("3C");
+		newCategory = productCategoryDao.save(newCategory); 
+		
+		categorys = productCategoryDao.findAll();
+		assertEquals(1, categorys.size());
+		
+		ProductCategory oneCategory = productCategoryDao.findOne(newCategory.getId());
+		oneCategory.setName("家電");
+		newCategory = productCategoryDao.save(oneCategory);
+		
+		ProductCategory updateCategory = productCategoryDao.findOne(newCategory.getId());
+		assertEquals("家電", updateCategory.getName());
+		
+		productCategoryDao.delete(oneCategory.getId());
+		
+		categorys = productCategoryDao.findAll();
+		assertEquals(0, categorys.size());
 		
 	}
 

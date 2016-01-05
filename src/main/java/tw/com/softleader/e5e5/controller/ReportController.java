@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.com.softleader.e5e5.entity.Report;
+import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 import tw.com.softleader.e5e5.service.ReportService;
 
 @Controller
@@ -38,7 +39,7 @@ public class ReportController {
 	}
 	
 	@RequestMapping(value="/edit")
-	public String edit(Model model, @RequestParam("id") int id, @RequestParam("passed") char status){
+	public String edit(Model model, @RequestParam("id") int id, @RequestParam("passed") TrueFalse status){
 		reportService.updateIsPassed(id, status);
 		Report result = reportService.findById(id);
 		model.addAttribute("edits", result);

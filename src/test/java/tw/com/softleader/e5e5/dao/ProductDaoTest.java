@@ -2,85 +2,58 @@ package tw.com.softleader.e5e5.dao;
 
 import static org.junit.Assert.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import tw.com.softleader.e5e5.E5e5App;
-import tw.com.softleader.e5e5.entity.Product;
-import tw.com.softleader.e5e5.entity.ProductCategory;
-import tw.com.softleader.e5e5.entity.User;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes={E5e5App.class})
-public class ProductDaoTest {
-	private Logger log = Logger.getLogger(this.getClass());
+import lombok.extern.log4j.Log4j;
+import tw.com.softleader.e5e5.common.AbstractTest;
+import tw.com.softleader.e5e5.entity.Product;
+import tw.com.softleader.e5e5.entity.enums.TrueFalse;
+
+@Log4j
+public class ProductDaoTest extends AbstractTest  {
 	
 	@Autowired
 	private ProductDao productDao;
 	
-//	@Test
-//	public void testFindByName() {
-//		List<Product> products = productDao.findByName("曾經天胡麻將桌");
-//		for(Product p:products) {
-//			log.debug(p);
-//		}
-//	}
-
 	@Test
-	public void testCrud() {
-		//insert
-//		Product productIn = new Product();
-//		productIn.setName("高級會計學課本");
-////		productIn.setPictureId(pictureId);
-////		productIn.setVideo(video);
-//		productIn.setUserByUserId(new User(2));
-//		productIn.setPostTime(new Date());
-////		productIn.setDeadline(new Date());
-//		productIn.setLocation("台北市政治大學");
-//		productIn.setTradeWay("面交");
-//		productIn.setWishItem("管理學概論課本、審計學課本、統計學課本、總體經濟學課本");
-//		productIn.setPostStatus('T');
-//		productIn.setTradeStatus('F');
-//		productIn.setClickTimes(4);
-////		productIn.setExchangeId(exchangeId);
-////		productIn.setItemId(itemId);
-////		productIn.setItemOwnerId(itemOwnerId);
-////		productIn.setTradeFinishedTime(tradeFinishedTime);
-////		productIn.setGrade(grade);
-////		productIn.setGradeTime(gradeTime);
-//		productDao.save(productIn);
+	public void testCrud(){
 		
-		//update
-//		Product productUp = new Product();
-//		productUp.setId(13);
-//		productUp.setPostStatus('F');
-//		productDao.save(productUp);
+		List<Product> entities = productDao.findAll();
 		
+		assertEquals(0, entities.size());
 		
+		Product newProduct = new Product();
+		newProduct.setName("麻將桌");
+//		newProduct.setCategory(categry);
+//		newProduct.setUserId(userId);
+		newProduct.setPostTime(LocalDateTime.now());
+		newProduct.setDeadline(LocalDateTime.of(2016, 12, 31, 23, 59));
+		newProduct.setLocation("台北市捷運大安站");
+		newProduct.setTradeWay("面交");
+		newProduct.setWishItem("檯燈、電腦散熱器、行動電源");
+		newProduct.setPostStatus(TrueFalse.FALSE);
+		newProduct.setClickTimes(3);
+		newProduct = productDao.save(newProduct); 
 		
+		entities = productDao.findAll();
+		assertEquals(1, entities.size());
 		
+		Product oneProduct = productDao.findOne(newProduct.getId());
+		oneProduct.setLocation("台北市捷運忠孝復興站");
+		newProduct = productDao.save(oneProduct);
 		
+		Product updateProduct = productDao.findOne(newProduct.getId());
+		assertEquals("台北市捷運忠孝復興站", updateProduct.getLocation());
 		
-		//delete
-//		productDao.delete(6);
+		productDao.delete(oneProduct.getId());
 		
-		//findOne
-		Product productx = productDao.findOne(3);
-		log.debug(productx);
+		entities = productDao.findAll();
+		assertEquals(0, entities.size());
 		
-		//findAll^^^
-//		List<Product> products = productDao.findAll();
-//		for(Product p:products) {
-//			log.debug(p);
-//		}
 	}
-
-	
-
 }
