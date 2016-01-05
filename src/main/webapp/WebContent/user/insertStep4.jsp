@@ -106,5 +106,4 @@ $("#idbuthref").on('click',function(){
   </div>
 </div>
 
-
 <c:import url="/WebContent/layout/footer.jsp"></c:import>

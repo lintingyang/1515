@@ -33,7 +33,7 @@ public class BroadcastService {
 	public Broadcast postBroadcast(int userId, String broadcastDescription) {
 		Broadcast result = null;
 		Broadcast broadcast = new Broadcast();
-		User user = userDao.findOne(userId);
+		User user = (User) userDao.findOne(userId);
 
 		broadcast.setBroadcastDescription(broadcastDescription);
 		broadcast.setUser(user);

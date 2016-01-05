@@ -68,7 +68,7 @@
 		
 		$("#resetBtn").bind("click", function() {
 			$("#name").val("");
-			$("#giin").val("");
+			$("#code").val("");
 		});
 		
 		$("#slGrid").slGrid({

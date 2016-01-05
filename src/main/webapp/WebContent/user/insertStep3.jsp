@@ -102,8 +102,4 @@ $(function(){
   <div class="col-xs-6 col-md-2">
   </div>
 </div>
-
-
-	
-
 <c:import url="/WebContent/layout/footer.jsp"></c:import>

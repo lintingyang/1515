@@ -4,7 +4,7 @@
 <c:import url="/WebContent/layout/header.jsp"></c:import>
 
 
-<div class="container" style="margin: 100px auto;">
+<div class="container" style="margin: 50px auto;">
 	<div class="container">
 		<ul class="nav nav-tabs" id="tabs">
 			<li style="width: 25%; text-align: center;"><a href="#">熱門</a></li>
@@ -130,5 +130,4 @@
 	</nav>
 
 </div>
-
 <c:import url="/WebContent/layout/footer.jsp"></c:import>

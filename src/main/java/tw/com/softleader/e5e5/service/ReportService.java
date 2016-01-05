@@ -21,7 +21,6 @@ public class ReportService {
 	@Autowired
 	private ReportDao reportDao;
 
-	
 	@Transactional
 	public List<Report> findAllUnread(){
 		return reportDao.findAllUnread();
@@ -54,6 +53,34 @@ public class ReportService {
 		return 0;	
 	}
 	
-
+	//修改status pass
+	@Transactional
+	public int updateIsPassedPass(int id){
+		Report temp = reportDao.findOne(id);
+		if(temp != null){
+			temp.setIsPassed(TrueFalse.TRUE);
+			reportDao.save(temp);
+			return 1;
+		}
+		return 0;	
+	}
+	
+	//修改status not pass
+		@Transactional
+		public int updateIsPassedNotPass(int id){
+			Report temp = reportDao.findOne(id);
+			if(temp != null){
+				temp.setIsPassed(TrueFalse.FALSE);
+				reportDao.save(temp);
+				return 1;
+			}
+			return 0;	
+		}
+		
+	//尚未處理之物品
+	@Transactional
+	public List<Report> findAllProductUnread(){
+		return reportDao.findAllProductUnread();
+	}
 
 }

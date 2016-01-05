@@ -20,8 +20,8 @@
 			</div>
 			<div class="col-md-4 col-md-offset-2">
 				<br><br> 
-				<span class="btn btn-info"><span class="glyphicon glyphicon-user"
-					style="font-size: 2em"></span><h4>&nbsp;基本資料管理</h4></span>
+				<span class="btn btn-info" onclick="location.href='/WebContent/user/editProfile.jsp'"><span class="glyphicon glyphicon-user"
+					style="font-size: 2em" ></span><h4>&nbsp;基本資料管理</h4></span>
 
 			</div>
 

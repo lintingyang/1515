@@ -23,6 +23,7 @@ import tw.com.softleader.e5e5.common.dao.CommonCriterion;
 import tw.com.softleader.e5e5.common.dao.QueryOpType;
 import tw.com.softleader.e5e5.security.entity.SecRole;
 import tw.com.softleader.e5e5.security.service.SecRoleService;
+import tw.com.softleader.e5e5.service.ReportService;
 
 @Controller
 @RequestMapping(value="/report/products")
@@ -30,8 +31,8 @@ public class RepProductController {
 	
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 	
-//	@Autowired
-//	private SecRoleService secRoleService;
+	@Autowired
+	private ReportService reportService;
 	
 	@RequestMapping(value="/list",  method = RequestMethod.GET)
 	public String listPage() {
