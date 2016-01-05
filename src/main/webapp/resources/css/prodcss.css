@@ -1,0 +1,26 @@
+.prolist{
+	height: 260px;
+	width: 202px;
+/* 	border: 1px solid gray; */
+	margin:15px;
+	box-shadow:1px 1px 8px gray;
+	cursor :pointer;
+}
+.prodimg{
+	width: 200px;
+	height:200px;
+	margin:auto;
+	
+	
+/* 	border: 1px solid gray; */
+}
+
+.smaimg{
+	width: 50px;
+	height:50px;
+}
+
+.iconpro{
+	font-size:2em;
+	
+}
