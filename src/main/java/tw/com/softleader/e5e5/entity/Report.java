@@ -123,7 +123,7 @@ public class Report implements java.io.Serializable {
 	}
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "is_passed", length = 1)
+	@Column(name = "is_passed", length = 10)
 	public TrueFalse getIsPassed() {
 		return this.isPassed;
 	}
