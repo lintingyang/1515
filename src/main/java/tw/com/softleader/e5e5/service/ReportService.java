@@ -13,6 +13,7 @@ import tw.com.softleader.e5e5.dao.ReportDao;
 import tw.com.softleader.e5e5.entity.Exchange;
 import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.entity.Report;
+import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 
 @Service
 public class ReportService {
@@ -37,10 +38,9 @@ public class ReportService {
 	}
 	
 	@Transactional
-	public int updateIsPassed(int id, char status){
+	public int updateIsPassed(int id, TrueFalse status){
 		Report temp = reportDao.findOne(id);
 		if(temp != null){
-			temp.setAdmin(temp.getAdmin());
 			temp.setArticle(temp.getArticle());
 			temp.setIsPassed(status);
 			temp.setProduct(temp.getProduct());

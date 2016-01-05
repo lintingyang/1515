@@ -42,7 +42,13 @@
 							<li id="navBatches"><a href="${pageContext.request.contextPath}/security/users/list">使用者管理</a></li>
 							<li id="navBatches"><a href="${pageContext.request.contextPath}/security/roles/list">角色管理</a></li>
 						</ul>
-					</li>		
+					</li>
+					<li id="navBatches"><a href="#" class="dropdown-toggle" data-toggle="dropdown">管理<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li id="navBatches"><a href="${pageContext.request.contextPath}/admin/products/list">物品管理</a></li>
+							<li id="navBatches"><a href="${pageContext.request.contextPath}/admin/users/list">會員管理</a></li>
+						</ul>
+					</li>				
 					<li id="navBatches"><a href="#" class="dropdown-toggle" data-toggle="dropdown">檢舉管理<b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li id="navBatches"><a href="${pageContext.request.contextPath}/report/products/list">檢舉物品</a></li>

@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import tw.com.softleader.e5e5.dao.UserDao;
 import tw.com.softleader.e5e5.entity.User;
+import tw.com.softleader.e5e5.entity.enums.Sex;
+import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 
 @Service
 public class UserService {
@@ -49,10 +51,10 @@ public class UserService {
 	}
 	
 	@Transactional
-	public int insert(String password, String name, String nickname, String account, Integer age, Character sex,
+	public int insert(String password, String name, String nickname, String account, Integer age, Sex sex,
 			Date birthday, String address, String phone, String cellphone, String email, String picture,
-			String schoolEmail , Integer onlineDatetime,String schoolName,Character emailCheck){
-			Character temp1 = 'T';
+			String schoolEmail , Integer onlineDatetime,String schoolName,TrueFalse emailCheck){
+			TrueFalse temp1 = TrueFalse.TRUE;
 			if(uDao.findBySchoolEmail(schoolEmail) == null){
 				if(temp1.equals(emailCheck)){
 					if(account !=null && password!=null && account.length() >= 5 && uDao.findByAccount(account)==null
@@ -74,7 +76,7 @@ public class UserService {
 						user.setOnlineDatetime(onlineDatetime);
 						user.setSchoolName(schoolName);
 						user.setEmailCheck(emailCheck);
-						user.setIsolated('F');
+						user.setIsolated(TrueFalse.FALSE);
 						uDao.save(user);
 						return 1;
 					}
@@ -118,7 +120,7 @@ public class UserService {
 	} 
 	
 	@Transactional
-	public int updataIsolated (String account ,Character isolated ){
+	public int updataIsolated (String account ,TrueFalse isolated ){
 		User temp = uDao.findByAccount(account);
 		if (temp!=null){
 			User temp2 = new User();
