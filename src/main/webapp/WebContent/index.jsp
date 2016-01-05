@@ -131,4 +131,22 @@
 
 </div>
 
+
+
+
+
+<!-- <script> -->
+			
+			
+			
+			
+			
+			
+// 	$(".prolist").mouseover(function(){
+//  		console.log("123");
+// //  		$(this).css("box-shadow","1px 1px 10px gray");
+// //  		$(this).css("color","red")
+// 		$(this).animate({boxShadow:"0 0 30px #44f"});
+// 	})
+<!-- </script> -->
 <c:import url="/WebContent/layout/footer.jsp"></c:import>

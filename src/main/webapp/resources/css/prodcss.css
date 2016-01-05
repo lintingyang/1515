@@ -3,9 +3,13 @@
 	width: 202px;
 /* 	border: 1px solid gray; */
 	margin:15px;
-	box-shadow:1px 1px 8px gray;
+	box-shadow:none;
 	cursor :pointer;
 }
+/* .prolist:hover{ */
+/* 	box-shadow:1px 1px 8px gray; */
+
+/* } */
 .prodimg{
 	width: 200px;
 	height:200px;
