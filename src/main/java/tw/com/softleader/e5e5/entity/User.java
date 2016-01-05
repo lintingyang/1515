@@ -1,6 +1,7 @@
 package tw.com.softleader.e5e5.entity;
 // Generated 2015/12/2 �U�� 09:36:37 by Hibernate Tools 4.3.1.Final
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -33,7 +34,7 @@ public class User implements java.io.Serializable {
 	private String account;
 	private Integer age;
 	private Sex sex;
-	private Date birthday;
+	private LocalDateTime birthday;
 	private String address;
 	private String phone;
 	private String cellphone;
@@ -143,13 +144,12 @@ public class User implements java.io.Serializable {
 		this.sex = sex;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "birthday", length = 23)
-	public Date getBirthday() {
+	public LocalDateTime getBirthday() {
 		return this.birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(LocalDateTime birthday) {
 		this.birthday = birthday;
 	}
 

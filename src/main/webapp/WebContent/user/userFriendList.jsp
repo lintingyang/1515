@@ -4,7 +4,7 @@
 <link
 	href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css"
 	rel="stylesheet">
-<c:import url="/layout/header.jsp"></c:import>
+<c:import url="/WebContent/layout/header.jsp"></c:import>
 <div class="container" style="margin: 50px auto;">
 	<div style="height: 250px">
 		<div class="col-md-4"></div>
@@ -12,7 +12,7 @@
 			<div class="row">
 				<ul class="nav navbar-nav">
 					<li><img class="img-circle" style="width: 200px;"
-						src="${pageContext.request.contextPath }/images/noname.jpg"></li>
+						src="/resources/imgs/noname.jpg"></li>
 					<li><ul style="list-style: none;">
 							<li><h4>
 									Account <a href="#"></a>
@@ -44,8 +44,8 @@
 					<div class="row">
 						<div class="col-md-3">
 							<div align="center">
-								<a href="${pageContext.request.contextPath}/user/myProfile.jsp"> <img class="img-circle" style="height: 80px;"
-									src="${pageContext.request.contextPath}/images/noname.jpg"></a>
+								<a href="/WebContent/user/myProfile.jsp"> <img class="img-circle" style="height: 80px;"
+									src="/resources/imgs/noname.jpg"></a>
 								<p>Account</p>
 								<p>Name</p>
 								<p>台灣大學</p>
@@ -57,8 +57,8 @@
 						</div>
 						<div class="col-md-3">
 							<div align="center">
-								<a href="${pageContext.request.contextPath}/user/myProfile.jsp"> <img class="img-circle" style="height: 80px;"
-									src="${pageContext.request.contextPath}/images/noname.jpg"></a>
+								<a href="/WebContent/user/myProfile.jsp"> <img class="img-circle" style="height: 80px;"
+									src="/resources/imgs/noname.jpg"></a>
 								<p>Account</p>
 								<p>Name</p>
 								<p>台灣大學</p>
@@ -70,8 +70,8 @@
 						</div>
 						<div class="col-md-3">
 							<div align="center">
-								<a href="${pageContext.request.contextPath}/user/myProfile.jsp"> <img class="img-circle" style="height: 80px;"
-									src="${pageContext.request.contextPath}/images/noname.jpg"></a>
+								<a href="/WebContent/user/myProfile.jsp"> <img class="img-circle" style="height: 80px;"
+									src="/resources/imgs/noname.jpg"></a>
 								<p>Account</p>
 								<p>Name</p>
 								<p>台灣大學</p>
@@ -83,8 +83,8 @@
 						</div>
 						<div class="col-md-3">
 							<div align="center">
-								<a href="${pageContext.request.contextPath}/user/myProfile.jsp"> <img class="img-circle" style="height: 80px;"
-									src="${pageContext.request.contextPath}/images/noname.jpg"></a>
+								<a href="/WebContent/user/myProfile.jsp"> <img class="img-circle" style="height: 80px;"
+									src="/resources/imgs/noname.jpg"></a>
 								<p>Account</p>
 								<p>Name</p>
 								<p>台灣大學</p>
@@ -101,8 +101,8 @@
 					<div class="row">
 						<div class="col-md-3">
 							<div align="center">
-								<a href="${pageContext.request.contextPath}/user/myProfile.jsp"> <img class="img-circle" style="height: 80px;"
-									src="${pageContext.request.contextPath}/images/noname.jpg"></a>
+								<a href="/WebContent/user/myProfile.jsp"> <img class="img-circle" style="height: 80px;"
+									src="/resources/imgs/noname.jpg"></a>
 								<p>Account</p>
 								<p>Name</p>
 								<p>台灣大學</p>
@@ -114,8 +114,8 @@
 						</div>
 						<div class="col-md-3">
 							<div align="center">
-								<a href="${pageContext.request.contextPath}/user/myProfile.jsp"> <img class="img-circle" style="height: 80px;"
-									src="${pageContext.request.contextPath}/images/noname.jpg"></a>
+								<a href="/WebContent/user/myProfile.jsp"> <img class="img-circle" style="height: 80px;"
+									src="/resources/imgs/noname.jpg"></a>
 								<p>Account</p>
 								<p>Name</p>
 								<p>台灣大學</p>
@@ -127,8 +127,8 @@
 						</div>
 						<div class="col-md-3">
 							<div align="center">
-								<a href="${pageContext.request.contextPath}/user/myProfile.jsp"> <img class="img-circle" style="height: 80px;"
-									src="${pageContext.request.contextPath}/images/noname.jpg"></a>
+								<a href="/WebContent/user/myProfile.jsp"> <img class="img-circle" style="height: 80px;"
+									src="/resources/imgs/noname.jpg"></a>
 								<p>Account</p>
 								<p>Name</p>
 								<p>台灣大學</p>
@@ -140,8 +140,8 @@
 						</div>
 						<div class="col-md-3">
 							<div align="center">
-								<a href="${pageContext.request.contextPath}/user/myProfile.jsp"> <img class="img-circle" style="height: 80px;"
-									src="${pageContext.request.contextPath}/images/noname.jpg"></a>
+								<a href="/WebContent/user/myProfile.jsp"> <img class="img-circle" style="height: 80px;"
+									src="/resources/imgs/noname.jpg"></a>
 								<p>Account</p>
 								<p>Name</p>
 								<p>台灣大學</p>
@@ -173,4 +173,4 @@
 </div>
 
 
-<c:import url="/layout/footer.jsp"></c:import>
+<c:import url="/WebContent/layout/footer.jsp"></c:import>

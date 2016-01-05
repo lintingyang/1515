@@ -2,6 +2,7 @@ package tw.com.softleader.e5e5.dao;
 
 import static org.junit.Assert.assertEquals;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -36,7 +37,7 @@ public class UserDaoTest extends AbstractTest{
 		usera.setAddress("台北市大安區");
 		usera.setPassword("password");
 		usera.setAge(28);
-		usera.setBirthday(new java.util.Date());
+		usera.setBirthday(LocalDateTime.now());
 		usera.setCellphone("0911-111-111");
 		usera.setGameScore(320);
 		usera.setGameScore(30000);
