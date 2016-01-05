@@ -2,7 +2,7 @@ package tw.com.softleader.e5e5.service;
 
 
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +52,7 @@ public class UserService {
 	
 	@Transactional
 	public int insert(String password, String name, String nickname, String account, Integer age, Sex sex,
-			Date birthday, String address, String phone, String cellphone, String email, String picture,
+			LocalDateTime birthday, String address, String phone, String cellphone, String email, String picture,
 			String schoolEmail , Integer onlineDatetime,String schoolName,TrueFalse emailCheck){
 			TrueFalse temp1 = TrueFalse.TRUE;
 			if(uDao.findBySchoolEmail(schoolEmail) == null){

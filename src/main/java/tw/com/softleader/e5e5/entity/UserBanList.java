@@ -22,12 +22,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class UserBanList implements java.io.Serializable {
 
 	private int id;
-	
-
-	private User userByUserAId;
-	
-
-	private User userByUserBId;
+	private User userAId;
+	private User userBId;
 
 
 
@@ -41,12 +37,6 @@ public class UserBanList implements java.io.Serializable {
 
 	public UserBanList(int id) {
 		this.id = id;
-	}
-
-	public UserBanList(int id, User userByUserAId, User userByUserBId) {
-		this.id = id;
-		this.userByUserAId = userByUserAId;
-		this.userByUserBId = userByUserBId;
 	}
 
 	@Id
@@ -65,11 +55,11 @@ public class UserBanList implements java.io.Serializable {
 	@Transactional
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	public User getUserByUserAId() {
-		return this.userByUserAId;
+		return this.userAId;
 	}
 
 	public void setUserByUserAId(User userByUserAId) {
-		this.userByUserAId = userByUserAId;
+		this.userAId = userByUserAId;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -77,11 +67,11 @@ public class UserBanList implements java.io.Serializable {
 	@Transactional
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	public User getUserByUserBId() {
-		return this.userByUserBId;
+		return this.userBId;
 	}
 
 	public void setUserByUserBId(User userByUserBId) {
-		this.userByUserBId = userByUserBId;
+		this.userBId = userByUserBId;
 	}
 
 }
