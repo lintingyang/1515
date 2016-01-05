@@ -33,8 +33,8 @@ public interface UserDao extends OurDao<User> {
 	
 	public List<User> findBySchoolEmailEndingWith(String schoolEmail);
 	
-	@Query(value="select id , name , game_score from [user] where game_score >=?1 order by game_score desc" , nativeQuery = true)
-	public List<Object[]> findRangeScore(Integer gameScore);
-	
-	public List<User> findByGameScoreGreaterThanEqualOrderByGameScoreDesc(Integer gameScore);
+//	@Query(value="select id , name , game_score from [user] where game_score >=?1 order by game_score desc" , nativeQuery = true)
+//	public List<Object[]> findRangeScore(Integer gameScore);
+//	
+//	public List<User> findByGameScoreGreaterThanEqualOrderByGameScoreDesc(Integer gameScore);
 }

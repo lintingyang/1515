@@ -56,6 +56,7 @@ public class UserDaoTest extends AbstractTest{
 //		userDao.save(userc);
 //		
 
+
 //		User userid = userDao.findById(1);
 //		log.debug(userid);
 		
