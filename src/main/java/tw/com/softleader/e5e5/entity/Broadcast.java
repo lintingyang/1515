@@ -1,7 +1,9 @@
 package tw.com.softleader.e5e5.entity;
 
 
+import java.time.LocalDateTime;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,7 +29,7 @@ public class Broadcast implements java.io.Serializable {
 	private User user;
 	private String broadcastDescription;
 	private String picture;
-	private Date postTime;
+	private LocalDateTime postTime;
 
 	public Broadcast() {
 	}
@@ -36,7 +38,7 @@ public class Broadcast implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Broadcast(int id, User user, String broadcastDescription, String picture, Date postTime) {
+	public Broadcast(int id, User user, String broadcastDescription, String picture, LocalDateTime postTime) {
 		this.id = id;
 		this.user = user;
 		this.broadcastDescription = broadcastDescription;
@@ -90,13 +92,12 @@ public class Broadcast implements java.io.Serializable {
 		this.picture = picture;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "post_time", length = 23)
-	public Date getPostTime() {
+	public LocalDateTime getPostTime() {
 		return this.postTime;
 	}
 
-	public void setPostTime(Date postTime) {
+	public void setPostTime(LocalDateTime postTime) {
 		this.postTime = postTime;
 	}
 
