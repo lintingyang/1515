@@ -42,7 +42,7 @@ public class UserManageController {
 	@ResponseBody
 	public GridResponse<User> query(final Model model, final User user, final Pageable pageable) {
 		Page<User> page;
-		
+
 		try {
 			final List<CommonCriterion> criterions = new ArrayList<CommonCriterion>();
 

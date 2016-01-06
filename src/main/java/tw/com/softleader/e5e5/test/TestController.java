@@ -86,10 +86,8 @@ public class TestController {
 	public GridResponse<Chat> query(final Model model, final Chat chat, final Pageable pageable) {
 
 		Page<Chat> page;
-		if (chat != null) {
-			log.debug("********chat=" + chat.getMessages());
-			// log.debug("********chat=" + chat.getUser());
-		}
+		log.debug("dfadsfdsaf= "+pageable);
+		log.debug("fdasfdas="+chat);
 		try {
 			final List<CommonCriterion> criterions = new ArrayList<CommonCriterion>();
 
