@@ -77,7 +77,6 @@ public class Chat extends OurEntity implements java.io.Serializable {
 		this.picture = picture;
 	}
 
-	
 	public LocalDateTime getSendTime() {
 		return this.sendTime;
 	}

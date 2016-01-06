@@ -19,17 +19,31 @@ import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 public class UserService extends OurService<User> {
 
 	@Autowired
-	private UserDao uDao;
+	private UserDao userDao;
 
 	@Transactional
 	public User findByAccount(String account) {
-		User user = uDao.findByAccount(account);
+		User user = userDao.findByAccount(account);
 		return user;
+	}
+	
+	@Transactional
+	public User login(String account,String password){
+		User user = userDao.findByAccount(account);
+		if(user == null){
+			log.error("user為null , 請確定帳號是否正確");
+		}else if(user != null){
+			if(user.getPassword().equals(password)){
+				log.error("帳號正確，user = "+user.getAccount());
+				return user;
+			}
+		}
+		return null;
 	}
 
 	@Transactional
 	public List<User> findAll() {
-		List<User> allUser = uDao.findAll();
+		List<User> allUser = userDao.findAll();
 		return allUser;
 	}
 
@@ -38,7 +52,7 @@ public class UserService extends OurService<User> {
 //	@Transactional
 //	public String[] findRangeScore(Integer score){
 //		
-//		List<User> temp = uDao.findByGameScoreGreaterThanEqualOrderByGameScoreDesc(score);
+//		List<User> temp = userDao.findByGameScoreGreaterThanEqualOrderByGameScoreDesc(score);
 //		if(temp!=null){
 //		String[] result = null;
 //		int i =0;
@@ -57,9 +71,9 @@ public class UserService extends OurService<User> {
 			LocalDateTime birthday, String address, String phone, String cellphone, String email, String picture,
 			String schoolEmail, Integer onlineDatetime, String schoolName, TrueFalse emailCheck) {
 		TrueFalse temp1 = TrueFalse.TRUE;
-		if (uDao.findBySchoolEmail(schoolEmail) == null) {
+		if (userDao.findBySchoolEmail(schoolEmail) == null) {
 			if (temp1.equals(emailCheck)) {
-				if (account != null && password != null && account.length() >= 5 && uDao.findByAccount(account) == null
+				if (account != null && password != null && account.length() >= 5 && userDao.findByAccount(account) == null
 						&& password.length() >= 8 && (cellphone != null || phone != null)) {
 					User user = new User();
 					user.setName(name);
@@ -79,7 +93,7 @@ public class UserService extends OurService<User> {
 					user.setSchoolName(schoolName);
 					// user.setEmailCheck(emailCheck);
 					// user.setIsolated(TrueFalse.FALSE);
-					uDao.save(user);
+					userDao.save(user);
 					return 1;
 				}
 			}
@@ -90,7 +104,7 @@ public class UserService extends OurService<User> {
 
 	@Transactional
 	public int drewScores(String account, Integer score) {
-		User temp = uDao.findByAccount(account);
+		User temp = userDao.findByAccount(account);
 		if (temp != null) {
 			User temp3 = new User();
 			temp3.setId(temp.getId());
@@ -116,7 +130,7 @@ public class UserService extends OurService<User> {
 //			temp3.setGameScore(temp.getGameScore() + score);
 			temp3.setEcoin(temp.getEcoin()+score);
 
-			uDao.save(temp3);
+			userDao.save(temp3);
 			return 1;
 		}
 		return 0;
@@ -125,7 +139,7 @@ public class UserService extends OurService<User> {
 
 	@Transactional
 	public int updataIsolated(String account, TrueFalse isolated) {
-		User temp = uDao.findByAccount(account);
+		User temp = userDao.findByAccount(account);
 		if (temp != null) {
 			User temp2 = new User();
 			temp2.setId(temp.getId());
@@ -148,7 +162,7 @@ public class UserService extends OurService<User> {
 			temp2.setSchoolName(temp.getSchoolName());
 			// temp2.setSex(temp.getSex());
 			// temp2.setIsolated(isolated);
-			uDao.save(temp2);
+			userDao.save(temp2);
 			return 1;
 		}
 		return 0;
@@ -156,13 +170,13 @@ public class UserService extends OurService<User> {
 
 	@Transactional
 	public int updateEmail(String account, String schoolEmail) {
-		User temp = uDao.findByAccount(account);
+		User temp = userDao.findByAccount(account);
 		if (temp != null) {
 			User temp2 = new User();
 			temp2.setAccount(temp.getAccount());
 			temp2.setId(temp.getId());
 			temp2.setSchoolEmail(schoolEmail);
-			uDao.save(temp2);
+			userDao.save(temp2);
 			return 1;
 		}
 		return 0;
@@ -171,7 +185,7 @@ public class UserService extends OurService<User> {
 	@Override
 	public OurDao<User> getDao() {
 		// TODO Auto-generated method stub
-		return uDao;
+		return userDao;
 	}
 
 	@Override

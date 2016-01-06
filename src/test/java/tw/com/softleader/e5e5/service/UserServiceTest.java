@@ -8,11 +8,13 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import tw.com.softleader.e5e5.E5e5App;
+import tw.com.softleader.e5e5.common.AbstractTest;
 import tw.com.softleader.e5e5.entity.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes={E5e5App.class})
-public class UserServiceTest {
+
+public class UserServiceTest  extends AbstractTest{
 
 	
 	private Logger log = Logger.getLogger(this.getClass());
@@ -34,7 +36,8 @@ public class UserServiceTest {
 
 	@Test
 	public void testU(){
-		log.debug(userService.updateEmail("7", "eeit82@iii.org"));
+		User user = userService.login("1", "aaa");
+		log.error(user.getName());
 		 
 	}
 	

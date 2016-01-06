@@ -25,20 +25,18 @@
 }
 </style>
 
-<script>
-	window.onload = function() {
-		document.getElementById("goTop").onclick = goTop;
-
-		document.getElementById("perfectData").onclick = Next;
-
-	}
-	function goTop() {
-		location.href = "/WebContent/index.jsp";
-	}
-	function Next() {
-		location.href = "insertStep4.jsp";
-
-	}
+<script>	
+	$(function() {
+		$("#goTop").on('click', function() {
+			window.location.href = "/WebContent/index.jsp";
+		});
+		
+		$("#perfectData").on('click', function() {
+			window.location.href = "editProfile.jsp";
+		});
+		
+	});
+	
 </script>
 
 
