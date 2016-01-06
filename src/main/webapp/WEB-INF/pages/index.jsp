@@ -1,24 +1,133 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
-<script type="text/javascript" src="/resources/js/jquery-1.11.3.js"></script>
-<script type="text/javascript" src="/resources/js/bootstrap.min.js"></script>
-
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<div style="width: 50%;border: 1px gray solid;margin:auto;">
-		<c:if test="${ SessionScope.admin }">
-			<a href="/admins/login">登入</a> 
-		</c:if>
-		<a href="/admins/logout">登出</a> 使用者 ${ admin.name } 
-		<br> <a href="/admins/list">admins</a> <a href="/boards/list">boards</a>
-		<a href="/adminquestionandanswers/list">Question And Answer</a>
+<c:import url="/WEB-INF/pages/e715/layout/header.jsp"></c:import>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/user.css" />
+<div class="container" style="margin: 50px auto;">
+	<div class="container">
+		<ul class="nav nav-tabs" id="tabs">
+			<li style="width: 25%; text-align: center;"><a class="categorylist" href="#">熱門</a></li>
+			<li style="width: 25%; text-align: center;"><a class="categorylist" href="#">最新</a></li>
+			<li style="width: 25%; text-align: center;"><a class="categorylist" href="#">誠信</a></li>
+			<li style="width: 25%; text-align: center;"><a class="categorylist" href="#">推薦</a></li>
+		</ul>
 	</div>
-</body>
-</html>
+	<br>
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="prolist"
+						onclick="location.href='/WebContent/product/product.jsp';">
+						<img class="prodimg" src="/resources/imgs/phone.jpg">雙雙的Mac
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="prolist">
+						<img class="prodimg" src="/resources/imgs/phone.jpg">雙雙的Mac
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="prolist">
+						<img class="prodimg" src="/resources/imgs/phone.jpg">雙雙的Mac
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="prolist">
+						<img class="prodimg" src="/resources/imgs/phone.jpg">雙雙的Mac
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-3">
+					<div class="prolist">
+						<img class="prodimg" src="/resources/imgs/phone.jpg">雙雙的Mac
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="prolist">
+						<img class="prodimg" src="/resources/imgs/phone.jpg">雙雙的Mac
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="prolist">
+						<img class="prodimg" src="/resources/imgs/phone.jpg">雙雙的Mac
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="prolist">
+						<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
+					</div>
+				</div>
+			</div>
+
+
+
+
+			<div class="row">
+				<div class="col-md-3">
+					<div class="prolist">
+						<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="prolist">
+						<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="prolist">
+						<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="prolist">
+						<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-3">
+					<div class="prolist">
+						<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="prolist">
+						<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="prolist">
+						<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="prolist">
+						<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<nav class="alignCenter">
+		<ul class="pagination">
+			<li><a href="#" aria-label="Previous"> <span
+					aria-hidden="true">&laquo;</span>
+			</a></li>
+			<li><a href="#">1</a></li>
+			<li><a href="#">2</a></li>
+			<li><a href="#">3</a></li>
+			<li><a href="#">4</a></li>
+			<li><a href="#">5</a></li>
+			<li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+			</a></li>
+		</ul>
+	</nav>
+
+</div>
+<c:import url="/WebContent/layout/footer.jsp"></c:import>

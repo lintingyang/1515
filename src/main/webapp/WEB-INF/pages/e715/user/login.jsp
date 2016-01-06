@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/WEB-INF/pages/e715/layout/header.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/meta.jsp"/>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/user.css" />
+<link rel="stylesheet" href="/resources/css/user.css" />
 
 
 <script>
@@ -16,18 +16,14 @@ $(function(){
 	
 </script>
 
-
-
 <style>
 #Img1{
 	text-align: center;
-	
 }
 #loginBlock{
 	text-align: center;
 	margin-top: 150px; 
 }
- 
  #localImg{
  	width:50%;
  	margin-top: 100px;
@@ -48,18 +44,17 @@ $(function(){
 		</div>
 	</div>
 	<div class="col-md-6" id="loginBlock">
-		<form class="form-horizontal" id="formTest">
+		<form role="form" class="form-horizontal" action="/head/logincheck">
 			<div class="form-group" id="divBorder">
-				<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+				<label class="col-sm-2 control-label">Account</label>
 				<div class="col-sm-10">
-					<input type="email" class="form-control textSize" id="inputEmail3"
-						placeholder="Email">
+					<input type="text" class="form-control textSize" name="account"  placeholder="Account">
 				</div>
 			</div>
 			<div class="form-group" id="divBorder">
-				<label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+				<label class="col-sm-2 control-label">Password</label>
 				<div class="col-sm-10">
-					<input type="password" class="form-control textSize" id="inputPassword3"
+					<input type="password" class="form-control textSize" name="password"
 						placeholder="Password">
 				</div>
 			</div>
@@ -68,14 +63,13 @@ $(function(){
 					<a href="insertStep1.jsp">建立新帳號</a> 
 					<a href="findPassWord1.jsp" id="fpwdLink">?忘記密碼</a>
 					<div class="checkbox">
-						<label> <input type="checkbox"> Remember me
-						</label>
+						<label> <input type="checkbox"> Remember me</label>
 					</div>
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10 alignLeft">
-					<button type="button" class="btn btn-default " id="signIn">Sign in</button>
+					<input type="submit" class="btn btn-default " value="Sign in"  id="signin" />
 				</div>
 			</div>
 		</form>
