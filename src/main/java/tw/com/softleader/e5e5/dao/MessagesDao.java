@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import tw.com.softleader.e5e5.common.dao.OurDao;
 import tw.com.softleader.e5e5.entity.Messages;
+import tw.com.softleader.e5e5.entity.UserBanList;
 
-public interface MessagesDao extends JpaRepository<Messages, Integer> {
+public interface MessagesDao extends OurDao<Messages> {
 	
 	@Query(value="select * from Messages where sender_id = ?1 order by deliver_time Desc", nativeQuery = true)
 	public List<Messages> findBySenderId(Integer SenderId);

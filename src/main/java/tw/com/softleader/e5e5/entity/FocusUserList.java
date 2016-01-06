@@ -11,14 +11,24 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import tw.com.softleader.e5e5.common.entity.OurEntity;
+
 
 @Entity
 @Table(name = "focus_user_list", schema = "dbo", catalog = "EEIT82DB")
-public class FocusUserList implements java.io.Serializable {
+public class FocusUserList extends OurEntity implements java.io.Serializable {
 
-	private int id;
-	private User userByUserAId;
-	private User userByUserBId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_a_id")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private User UserAId;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_b_id")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private User UserBId;
 
 	public FocusUserList() {
 	}
@@ -29,8 +39,8 @@ public class FocusUserList implements java.io.Serializable {
 
 	public FocusUserList(int id, User userByUserAId, User userByUserBId) {
 		this.id = id;
-		this.userByUserAId = userByUserAId;
-		this.userByUserBId = userByUserBId;
+		this.UserAId = userByUserAId;
+		this.UserBId = userByUserBId;
 	}
 	
 	
@@ -38,39 +48,28 @@ public class FocusUserList implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "FocusUserList [id=" + id + ", userByUserAId=" + userByUserAId.getId() + ", userByUserBId=" + userByUserBId.getId()
+		return "FocusUserList [id=" + id + ", userByUserAId=" + UserAId.getId() + ", userByUserBId=" + UserBId.getId()
 				+ "]";
 	}
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	public int getId() {
-		return this.id;
+	public User getUserAId() {
+		return UserAId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setUserAId(User userAId) {
+		UserAId = userAId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_a_id")
-	public User getUserByUserAId() {
-		return this.userByUserAId;
+	public User getUserBId() {
+		return UserBId;
 	}
 
-	public void setUserByUserAId(User userByUserAId) {
-		this.userByUserAId = userByUserAId;
+	public void setUserBId(User userBId) {
+		UserBId = userBId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_b_id")
-	public User getUserByUserBId() {
-		return this.userByUserBId;
-	}
 
-	public void setUserByUserBId(User userByUserBId) {
-		this.userByUserBId = userByUserBId;
-	}
+
+
 
 }
