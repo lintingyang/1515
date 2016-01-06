@@ -17,12 +17,11 @@ public class OurEntity implements Serializable {
 	 * ID
 	 */
 
-	protected Integer id;
-	
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
+	protected Integer id;
+	
 	public Integer getId() {
 		return id;
 	}
