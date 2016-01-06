@@ -23,42 +23,14 @@ import tw.com.softleader.e5e5.common.entity.OurEntity;
 @Table(name = "product_category", schema = "dbo", catalog = "EEIT82DB")
 public class ProductCategory extends OurEntity implements java.io.Serializable {
 
-//	private int id;
+	@Column(name = "name", nullable = false, length = 20)
 	private String name;
-//	private Set<Product> products = new HashSet<Product>(0);
 
-	public ProductCategory() {
-	}
-
-	public ProductCategory(int id, String name) {
-		this.id = id;
-		this.name = name;
-	}
-
-//	public ProductCategory(int id, String name, Set<Product> products) {
-//		this.id = id;
-//		this.name = name;
-//		this.products = products;
-//	}
-
-	
 	@Override
 	public String toString() {
 		return "ProductCategory [id=" + id + ", name=" + name + "]";
 	}
 
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@Column(name = "id", unique = true, nullable = false)
-//	public int getId() {
-//		return this.id;
-//	}
-//
-//	public void setId(int id) {
-//		this.id = id;
-//	}
-
-	@Column(name = "name", nullable = false, length = 20)
 	public String getName() {
 		return this.name;
 	}
@@ -66,15 +38,5 @@ public class ProductCategory extends OurEntity implements java.io.Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-//	@OneToMany(fetch = FetchType.EAGER, mappedBy = "productCategory")
-//	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-//	public Set<Product> getProducts() {
-//		return this.products;
-//	}
-//
-//	public void setProducts(Set<Product> products) {
-//		this.products = products;
-//	}
 
 }

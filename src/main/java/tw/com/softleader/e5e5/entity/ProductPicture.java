@@ -30,12 +30,12 @@ public class ProductPicture implements java.io.Serializable {
 	public ProductPicture() {
 	}
 
+
 	@Override
 	public String toString() {
 		return "ProductPicture [id=" + id + ", picture=" + picture + "]";
 	}
 
-	
 	public int getId() {
 		return this.id;
 	}
@@ -43,7 +43,6 @@ public class ProductPicture implements java.io.Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	
 	public Product getProduct() {
 		return this.product;
@@ -53,7 +52,6 @@ public class ProductPicture implements java.io.Serializable {
 		this.product = product;
 	}
 
-	
 	public String getPicture() {
 		return this.picture;
 	}

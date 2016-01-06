@@ -25,26 +25,68 @@ import tw.com.softleader.e5e5.common.entity.OurEntity;
 @Table(name = "[user]")
 public class User extends OurEntity implements java.io.Serializable {
 
-//	private int id;
+	@Column(name = "password", length = 20)
 	private String password;
+	
+	@Column(name = "name", length = 30)
 	private String name;
+	
+	@Column(name = "nickname", length = 30)
 	private String nickname;
+	
+	@Column(name = "account", length = 25)
 	private String account;
+	
+	@Column(name = "age")
 	private Integer age;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "sex", length = 10)
 	private Sex sex;
+	
+	@Column(name = "birthday", length = 23)
 	private LocalDateTime birthday;
+	
+	@Column(name = "address", length = 50)
 	private String address;
+	
+	@Column(name = "phone", length = 20)
 	private String phone;
+	
+	@Column(name = "cellphone", length = 30)
 	private String cellphone;
+	
+	@Column(name = "email", length = 50)
 	private String email;
+	
+	@Column(name = "picture")
 	private String picture;
+	
+	@Column(name = "school_email", length = 50)
 	private String schoolEmail;
+
+	@Column(name = "focus_item_list", length = 30)
 	private String focusItemList;
+
+	@Column(name = "ecoin")
 	private Integer ecoin;
+
+	@Column(name = "online_datetime")
 	private Integer onlineDatetime;
+	
+	@Column(name="school_name")
 	private String schoolName;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "email_check", length = 10)
 	private TrueFalse emailCheck;
-	private TrueFalse isolated;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "isolated", length = 10)
+	private TrueFalse isolated;	
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "role", length = 10)
 	private Role role;
 
 
@@ -66,19 +108,14 @@ public class User extends OurEntity implements java.io.Serializable {
 	}
 
 	
-
-	@Enumerated(EnumType.STRING)
-	@Column(name = "role", length = 10)
 	public Role getRole() {
 		return role;
 	}
-
 
 	public void setRole(Role role) {
 		this.role = role;
 	}
 	
-	@Column(name = "password", length = 20)
 	public String getPassword() {
 		return this.password;
 	}
@@ -87,7 +124,6 @@ public class User extends OurEntity implements java.io.Serializable {
 		this.password = password;
 	}
 
-	@Column(name = "name", length = 30)
 	public String getName() {
 		return this.name;
 	}
@@ -96,7 +132,6 @@ public class User extends OurEntity implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "nickname", length = 30)
 	public String getNickname() {
 		return this.nickname;
 	}
@@ -105,7 +140,6 @@ public class User extends OurEntity implements java.io.Serializable {
 		this.nickname = nickname;
 	}
 
-	@Column(name = "account", length = 25)
 	public String getAccount() {
 		return this.account;
 	}
@@ -114,7 +148,6 @@ public class User extends OurEntity implements java.io.Serializable {
 		this.account = account;
 	}
 
-	@Column(name = "age")
 	public Integer getAge() {
 		return this.age;
 	}
@@ -123,8 +156,7 @@ public class User extends OurEntity implements java.io.Serializable {
 		this.age = age;
 	}
 	
-	@Enumerated(EnumType.STRING)
-	@Column(name = "sex", length = 10)
+
 	public Sex getSex() {
 		return this.sex;
 	}
@@ -133,7 +165,6 @@ public class User extends OurEntity implements java.io.Serializable {
 		this.sex = sex;
 	}
 
-	@Column(name = "birthday", length = 23)
 	public LocalDateTime getBirthday() {
 		return this.birthday;
 	}
@@ -142,7 +173,6 @@ public class User extends OurEntity implements java.io.Serializable {
 		this.birthday = birthday;
 	}
 
-	@Column(name = "address", length = 50)
 	public String getAddress() {
 		return this.address;
 	}
@@ -151,7 +181,6 @@ public class User extends OurEntity implements java.io.Serializable {
 		this.address = address;
 	}
 
-	@Column(name = "phone", length = 20)
 	public String getPhone() {
 		return this.phone;
 	}
@@ -160,7 +189,6 @@ public class User extends OurEntity implements java.io.Serializable {
 		this.phone = phone;
 	}
 
-	@Column(name = "cellphone", length = 30)
 	public String getCellphone() {
 		return this.cellphone;
 	}
@@ -169,7 +197,6 @@ public class User extends OurEntity implements java.io.Serializable {
 		this.cellphone = cellphone;
 	}
 
-	@Column(name = "email", length = 50)
 	public String getEmail() {
 		return this.email;
 	}
@@ -178,7 +205,6 @@ public class User extends OurEntity implements java.io.Serializable {
 		this.email = email;
 	}
 
-	@Column(name = "picture")
 	public String getPicture() {
 		return this.picture;
 	}
@@ -187,7 +213,6 @@ public class User extends OurEntity implements java.io.Serializable {
 		this.picture = picture;
 	}
 
-	@Column(name = "school_email", length = 50)
 	public String getSchoolEmail() {
 		return this.schoolEmail;
 	}
@@ -196,7 +221,7 @@ public class User extends OurEntity implements java.io.Serializable {
 		this.schoolEmail = schoolEmail;
 	}
 
-	@Column(name = "focus_item_list", length = 30)
+	
 	public String getFocusItemList() {
 		return this.focusItemList;
 	}
@@ -205,7 +230,7 @@ public class User extends OurEntity implements java.io.Serializable {
 		this.focusItemList = focusItemList;
 	}
 
-	@Column(name = "ecoin")
+	
 	public Integer getEcoin() {
 		return this.ecoin;
 	}
@@ -214,7 +239,7 @@ public class User extends OurEntity implements java.io.Serializable {
 		this.ecoin = ecoin;
 	}
 
-	@Column(name = "online_datetime")
+
 	public Integer getOnlineDatetime() {
 		return this.onlineDatetime;
 	}
@@ -222,8 +247,8 @@ public class User extends OurEntity implements java.io.Serializable {
 	public void setOnlineDatetime(Integer onlineDatetime) {
 		this.onlineDatetime = onlineDatetime;
 	}
+	
 
-	@Column(name="school_name")
 	public String getSchoolName() {
 		return schoolName;
 	}
@@ -232,8 +257,6 @@ public class User extends OurEntity implements java.io.Serializable {
 		this.schoolName = schoolName;
 	}
 	
-	@Enumerated(EnumType.STRING)
-	@Column(name = "email_check", length = 10)
 	public TrueFalse getEmailCheck() {
 		return emailCheck;
 	}
@@ -242,8 +265,6 @@ public class User extends OurEntity implements java.io.Serializable {
 		this.emailCheck = emailCheck;
 	}
 	
-	@Enumerated(EnumType.STRING)
-	@Column(name = "isolated", length = 10)
 	public TrueFalse getIsolated() {
 		return isolated;
 	}

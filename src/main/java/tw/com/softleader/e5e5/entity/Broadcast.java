@@ -1,7 +1,9 @@
 package tw.com.softleader.e5e5.entity;
 
 
+import java.time.LocalDateTime;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,12 +24,20 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "broadcast", schema = "dbo", catalog = "EEIT82DB")
 public class Broadcast implements java.io.Serializable {
-
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "id", unique = true)
 	private int id;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private User user;
+	@Column(name = "broadcast_description")
 	private String broadcastDescription;
+	@Column(name = "picture")
 	private String picture;
-	private Date postTime;
+	@Column(name = "post_time", length = 23)
+	private LocalDateTime postTime;
 
 	public Broadcast() {
 	}
@@ -36,7 +46,7 @@ public class Broadcast implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Broadcast(int id, User user, String broadcastDescription, String picture, Date postTime) {
+	public Broadcast(int id, User user, String broadcastDescription, String picture, LocalDateTime postTime) {
 		this.id = id;
 		this.user = user;
 		this.broadcastDescription = broadcastDescription;
@@ -50,9 +60,7 @@ public class Broadcast implements java.io.Serializable {
 				+ ", picture=" + picture + ", postTime=" + postTime + "]";
 	}
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "id", unique = true)
+
 	public int getId() {
 		return this.id;
 	}
@@ -61,9 +69,7 @@ public class Broadcast implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
 	public User getUser() {
 		return this.user;
 	}
@@ -72,7 +78,7 @@ public class Broadcast implements java.io.Serializable {
 		this.user = user;
 	}
 
-	@Column(name = "broadcast_description")
+
 	public String getBroadcastDescription() {
 		return this.broadcastDescription;
 	}
@@ -81,7 +87,6 @@ public class Broadcast implements java.io.Serializable {
 		this.broadcastDescription = broadcastDescription;
 	}
 
-	@Column(name = "picture")
 	public String getPicture() {
 		return this.picture;
 	}
@@ -90,13 +95,12 @@ public class Broadcast implements java.io.Serializable {
 		this.picture = picture;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "post_time", length = 23)
-	public Date getPostTime() {
+
+	public LocalDateTime getPostTime() {
 		return this.postTime;
 	}
 
-	public void setPostTime(Date postTime) {
+	public void setPostTime(LocalDateTime postTime) {
 		this.postTime = postTime;
 	}
 

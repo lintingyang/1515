@@ -6,13 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import tw.com.softleader.e5e5.common.dao.OurDao;
+import tw.com.softleader.e5e5.common.model.Message;
+import tw.com.softleader.e5e5.common.service.OurService;
 import tw.com.softleader.e5e5.dao.UserBanListDao;
 import tw.com.softleader.e5e5.dao.UserDao;
 import tw.com.softleader.e5e5.entity.User;
 import tw.com.softleader.e5e5.entity.UserBanList;
 
 @Service
-public class UserBanListService {
+public class UserBanListService  extends OurService<UserBanList>{
 	
 	@Autowired
 	private UserBanListDao ublDao;
@@ -60,6 +63,30 @@ public class UserBanListService {
 		}
 		
 		return false;
+	}
+
+	@Override
+	public OurDao<UserBanList> getDao() {
+		
+		return ublDao;
+	}
+
+	@Override
+	protected List<Message> validateInsert(UserBanList entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected List<Message> validateUpdate(UserBanList entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected List<Message> validateDelete(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

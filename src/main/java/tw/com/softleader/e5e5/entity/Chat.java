@@ -23,11 +23,18 @@ import tw.com.softleader.e5e5.common.entity.OurEntity;
 @Entity
 @Table(name = "chat", schema = "dbo", catalog = "EEIT82DB")
 public class Chat extends OurEntity implements java.io.Serializable {
-
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private User user;
+	@Column(name = "messages", length = 200)
 	private String messages;
+	@Column(name = "picture")
 	private String picture;
+	@Column(name = "send_time", length = 23)
 	private LocalDateTime sendTime;
+	@Column(name = "show_user_info", length = 1)
 	private Character showUserInfo;
 
 	public Chat() {
@@ -43,9 +50,7 @@ public class Chat extends OurEntity implements java.io.Serializable {
 				+ ", showUserInfo=" + showUserInfo + "]";
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
 	public User getUser() {
 		return this.user;
 	}
@@ -54,7 +59,7 @@ public class Chat extends OurEntity implements java.io.Serializable {
 		this.user = user;
 	}
 
-	@Column(name = "messages", length = 200)
+
 	public String getMessages() {
 		return this.messages;
 	}
@@ -63,7 +68,7 @@ public class Chat extends OurEntity implements java.io.Serializable {
 		this.messages = messages;
 	}
 
-	@Column(name = "picture")
+
 	public String getPicture() {
 		return this.picture;
 	}
@@ -73,7 +78,6 @@ public class Chat extends OurEntity implements java.io.Serializable {
 	}
 
 	
-	@Column(name = "send_time", length = 23)
 	public LocalDateTime getSendTime() {
 		return this.sendTime;
 	}
@@ -82,7 +86,7 @@ public class Chat extends OurEntity implements java.io.Serializable {
 		this.sendTime = sendTime;
 	}
 
-	@Column(name = "show_user_info", length = 1)
+
 	public Character getShowUserInfo() {
 		return showUserInfo;
 	}
