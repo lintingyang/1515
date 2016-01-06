@@ -54,7 +54,6 @@
   
   
   
-  <div class="col-md-2">.col-md-2</div>
 </div>
 
 </body>

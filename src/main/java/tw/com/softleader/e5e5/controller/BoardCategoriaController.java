@@ -39,9 +39,6 @@ public class BoardCategoriaController {
 	@RequestMapping(value = "/query", produces = "application/json")
 	public List<BoardCategoria> query(@RequestBody BoardCategoria boardCategoria) {
 		
-		log.debug("{=====================================================================================}"
-		+ boardCategoria.getId());
-		
 		return boardCategoriaService.getAll();
 		
 		/*if (id != null) {
