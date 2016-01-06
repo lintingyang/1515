@@ -44,7 +44,10 @@ public class ProductManageController {
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public GridResponse<Product> query(final Model model, final Product product, final Pageable pageable) {
-		Page<Product> page;
+//		Page<Product> page;
+		List<Product> list;
+		log.debug("++++++++"+product);
+		log.debug("====="+pageable);
 		
 		try {
 			final List<CommonCriterion> criterions = new ArrayList<CommonCriterion>();
@@ -54,13 +57,13 @@ public class ProductManageController {
 //			 + user.getAccount() + "%"));
 //			 }
 
-			page = productService.getByCondition(criterions, pageable);
-
+//			page = productService.getByCondition(criterions, pageable);
+			list = productService.getAll();
 		} catch (final Exception e) {
 			return new GridResponse<Product>(e);
 		}
 
-		return new GridResponse<Product>(page);
+		return new GridResponse<Product>(list);
 	}
 
 }

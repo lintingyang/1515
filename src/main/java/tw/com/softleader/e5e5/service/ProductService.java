@@ -151,7 +151,7 @@ public class ProductService extends OurService<Product>{
 	public int insert(String name,int category, LocalDateTime deadline, String location, String tradeWay, String wishItem) {
 		Product product = new Product();
 		product.setName(name);
-		product.setProductCategory(productCategoryDao.findOne(category));
+//		product.setProductCategory(productCategoryDao.findOne(category));
 		product.setPostTime(LocalDateTime.now());
 		product.setDeadline(LocalDateTime.of(2015, 4, 4, 10, 55));
 		product.setLocation(location);
