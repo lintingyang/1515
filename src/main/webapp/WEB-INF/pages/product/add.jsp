@@ -42,10 +42,10 @@ label {
 	<input type="button" value="回商品清單列表"
 		onclick="javascript:location.href='list'">
 	<hr>
-
+<!-- 
 	<form id="theForm">
-		Name:<input type="text" name="name" id="pId"> 
-		location:<input type="text" name="location" id="pLocation"> 
+		名稱:<input type="text" name="name" id="pId"> 
+		交換地:<input type="text" name="location" id="pLocation"> 
 		<input type="button" value="insertOne" id="btnIn">
 	</form>
 	<hr>
@@ -71,7 +71,8 @@ label {
 			})
 		})
 	</script>
-	<!-- <form action="/products/insert">
+-->
+    <form action="/products/insert">
 		<div>
 			<label>產品名稱：</label><input type="text" name="name" size="30">
 		</div>
@@ -94,9 +95,11 @@ label {
 				<option value="11">美妝</option>
 			</select>
 		</div>
-		<div>
-			<label>刊登截止日期：</label><input type="text" name="deadline">
-		</div>
+<!-- 	
+		<div> 
+	 			<label>刊登截止日期：</label><input type="text" name="deadline">
+ 		</div> 
+ -->
 		<div>
 			<label>交換地點：</label><input type="text" size="50" name="location">
 		</div>
@@ -115,6 +118,6 @@ label {
 		<div>
 			<input type="submit" value="送出">
 		</div>
-	</form> -->
+	</form>
 </body>
 </html>
