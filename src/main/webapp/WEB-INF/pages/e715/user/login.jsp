@@ -44,7 +44,7 @@ $(function(){
 		</div>
 	</div>
 	<div class="col-md-6" id="loginBlock">
-		<form role="form" class="form-horizontal" action="/head/logincheck">
+		<form role="form" class="form-horizontal" action="/head/logincheck" method="post">
 			<div class="form-group" id="divBorder">
 				<label class="col-sm-2 control-label">Account</label>
 				<div class="col-sm-10">

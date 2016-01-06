@@ -28,7 +28,7 @@ public class headerController {
 		return "/e715/user/login";
 	}
 	
-	@RequestMapping(value = "/logincheck")
+	@RequestMapping(value = "/logincheck" ,method = RequestMethod.POST)
 	public String loginCheck(Model model,@RequestParam("account")String account,
 			@RequestParam("password")String password,HttpSession session){
 	
