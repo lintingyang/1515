@@ -1,13 +1,12 @@
 package tw.com.softleader.e5e5.entity;
 
 
+import java.time.LocalDateTime;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -25,11 +24,10 @@ import tw.com.softleader.e5e5.common.entity.OurEntity;
 @Table(name = "chat", schema = "dbo", catalog = "EEIT82DB")
 public class Chat extends OurEntity implements java.io.Serializable {
 
-//	private int id;
 	private User user;
 	private String messages;
 	private String picture;
-	private Date sendTime;
+	private LocalDateTime sendTime;
 	private Character showUserInfo;
 
 	public Chat() {
@@ -39,32 +37,11 @@ public class Chat extends OurEntity implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Chat(int id, User user, String messages, String picture, Date sendTime) {
-		this.id = id;
-		this.user = user;
-		this.messages = messages;
-		this.picture = picture;
-		this.sendTime = sendTime;
-	}
-
-
-
 	@Override
 	public String toString() {
 		return "Chat [id=" + id + ", messages=" + messages + ", picture=" + picture + ", sendTime=" + sendTime
 				+ ", showUserInfo=" + showUserInfo + "]";
 	}
-
-//	@Id
-//	@GeneratedValue(strategy=GenerationType.IDENTITY)
-//	@Column(name = "id", unique = true, nullable = false)
-//	public int getId() {
-//		return this.id;
-//	}
-//
-//	public void setId(int id) {
-//		this.id = id;
-//	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
@@ -95,13 +72,13 @@ public class Chat extends OurEntity implements java.io.Serializable {
 		this.picture = picture;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
+	
 	@Column(name = "send_time", length = 23)
-	public Date getSendTime() {
+	public LocalDateTime getSendTime() {
 		return this.sendTime;
 	}
 
-	public void setSendTime(Date sendTime) {
+	public void setSendTime(LocalDateTime sendTime) {
 		this.sendTime = sendTime;
 	}
 
@@ -112,6 +89,6 @@ public class Chat extends OurEntity implements java.io.Serializable {
 
 	public void setShowUserInfo(Character showUserInfo) {
 		this.showUserInfo = showUserInfo;
-	}
-
+	}	
+	
 }

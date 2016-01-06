@@ -76,11 +76,12 @@
 			url: url,
 			dataFormId: 'listForm',
 			mtype: 'GET',
-			colNames:['id','button', 'userId', 'Message'],
+			colNames:['id','button', 'userId', 'Picture','Message'],
 		   	colModel:[
 		   		{name:'id', width: 150},
 		   		{name:'btns', width: 150, formatter:btns},
 		   		{name:'user.id', width: 150},
+		   		{name:'picture', width: 150},
 		   		{name:'messages', width: 150},
 		   	],
 		   	sortname:"id",
