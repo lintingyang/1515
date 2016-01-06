@@ -86,7 +86,7 @@ public class ChatService extends OurService<Chat> {
 	public String upLoadImage(int id, ServletContext servletContext,MultipartFile file) {
 		BufferedImage src = null;
 		int counter=0;
-		String path = "/resources/imgs/";
+		String path = "/resources/userimgs/";
 
 		path = servletContext.getRealPath(path);
 		File destination = null;

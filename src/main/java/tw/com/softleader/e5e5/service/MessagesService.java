@@ -1,11 +1,19 @@
 package tw.com.softleader.e5e5.service;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+
+import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.softleader.e5e5.common.dao.OurDao;
 import tw.com.softleader.e5e5.common.model.Message;
@@ -71,6 +79,36 @@ public class MessagesService extends OurService<Messages>{
 			}	
 		}
 		return record;
+	}
+	
+	@Transactional
+	public String upLoadImage(int id, ServletContext servletContext,MultipartFile file) {
+		BufferedImage src = null;
+		int counter=0;
+		String path = "/resources/userimgs/";
+
+		path = servletContext.getRealPath(path);
+		File destination = null;
+		try {
+			src = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
+			if (!(new File(path)).exists()) {
+				(new File(path)).mkdir();
+			}
+
+			destination = new File(path + String.valueOf(id)+"_"+file.getOriginalFilename());
+			while(destination.exists()){
+				counter++;
+				destination = new File(path+ String.valueOf(id)+"_"+counter+"_"+file.getOriginalFilename());
+			}
+			ImageIO.write(src, "png", destination);
+			String finalP= destination.getAbsolutePath().replace('\\', '/');
+			int cut=finalP.indexOf("webapp");
+			finalP=finalP.substring(cut+6);
+			return finalP;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override
