@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.test.context.web.WebAppConfiguration;
+
 import tw.com.softleader.e5e5.entity.enums.Role;
 import tw.com.softleader.e5e5.entity.enums.Sex;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
@@ -23,6 +25,7 @@ import tw.com.softleader.e5e5.common.entity.OurEntity;
 
 @Entity
 @Table(name = "[user]")
+@WebAppConfiguration
 public class User extends OurEntity implements java.io.Serializable {
 
 	@Column(name = "password", length = 20)

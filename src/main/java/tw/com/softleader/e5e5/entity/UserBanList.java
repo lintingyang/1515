@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.transaction.Transactional;
 
+import org.springframework.test.context.web.WebAppConfiguration;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import tw.com.softleader.e5e5.common.entity.OurEntity;
@@ -21,6 +23,7 @@ import tw.com.softleader.e5e5.common.entity.OurEntity;
  */
 @Entity
 @Table(name = "user_ban_list", schema = "dbo", catalog = "EEIT82DB")
+@WebAppConfiguration
 public class UserBanList  extends OurEntity implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)

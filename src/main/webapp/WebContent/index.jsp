@@ -6,7 +6,7 @@
 	href="${pageContext.request.contextPath }/resources/css/user.css" />
 
 <div class="container" style="margin: 50px auto;">
-	<div class="container">
+	<div>
 		<ul class="nav nav-tabs" id="tabs">
 			<li style="width: 25%; text-align: center;"><a class="categorylist" href="#">熱門</a></li>
 			<li style="width: 25%; text-align: center;"><a class="categorylist" href="#">最新</a></li>

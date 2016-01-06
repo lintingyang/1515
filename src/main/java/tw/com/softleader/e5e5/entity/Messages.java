@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.test.context.web.WebAppConfiguration;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import tw.com.softleader.e5e5.common.entity.OurEntity;
@@ -22,6 +24,7 @@ import tw.com.softleader.e5e5.common.entity.OurEntity;
  */
 @Entity
 @Table(name = "messages", schema = "dbo", catalog = "EEIT82DB")
+@WebAppConfiguration
 public class Messages extends OurEntity implements java.io.Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
