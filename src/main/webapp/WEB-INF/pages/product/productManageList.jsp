@@ -75,35 +75,12 @@
 					dataFormId : 'listForm',
 					mtype : 'GET',
 
-					colNames : [ 'id', '產品名稱', '會員', '上架時間', '下架時間', '刊登狀態',
-							'允許刊登', '封鎖' ],
-					colModel : [ {
-						name : 'id',
-						hidden : true
-					}, {
-						name : 'name',
-						width : 100
-					}, {
-						name : 'user',
-						width : 100
-					}, {
-						name : 'postDate',
-						width : 80
-					}, {
-						name : 'underdDate',
-						width : 80
-					}, {
-						name : 'status',
-						width : 80
-					}, {
-						name : 'btns',
-						width : 70,
-						formatter : btns
-					}, {
-						name : 'btns',
-						width : 70,
-						formatter : btns
-					} ],
+					colNames : [ 'id', '產品名稱', '功能' ],
+					colModel : [ 
+					       {name : 'id',hidden : true}, 
+					       {name : 'name',width : 100}, 
+					       {name : 'btns',width : 70,formatter : btns}, 
+					],
 					sortname : "id",
 					sortorder : "DESC",
 					pager : "slPager",

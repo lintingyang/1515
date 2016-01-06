@@ -1,7 +1,6 @@
 package tw.com.softleader.e5e5.service;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -151,7 +150,7 @@ public class ProductService extends OurService<Product>{
 	public int insert(String name,int category, LocalDateTime deadline, String location, String tradeWay, String wishItem) {
 		Product product = new Product();
 		product.setName(name);
-		product.setProductCategory(productCategoryDao.findOne(category));
+//		product.setProductCategory(productCategoryDao.findOne(category));
 		product.setPostTime(LocalDateTime.now());
 		product.setDeadline(LocalDateTime.of(2015, 4, 4, 10, 55));
 		product.setLocation(location);
@@ -165,8 +164,7 @@ public class ProductService extends OurService<Product>{
 
 	@Override
 	public OurDao<Product> getDao() {
-		// TODO Auto-generated method stub
-		return null;
+		return productDao;
 	}
 
 	@Override
