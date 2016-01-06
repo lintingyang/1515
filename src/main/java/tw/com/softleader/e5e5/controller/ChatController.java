@@ -51,48 +51,11 @@ public class ChatController {
 	@RequestMapping(value = "/insert")
 	public String insert(Model model, @RequestParam("id") Integer id, @RequestParam("message") String message,
 			@RequestParam("file") MultipartFile file) {
-
-		BufferedImage src = null;
-		int counter=0;
-		String path = "/resources/imgs/";
-
-		path = servletContext.getRealPath(path);
-		if (!file.isEmpty()) {
-			File destination = null;
-			try {
-				src = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
-				if (!(new File(path)).exists()) {
-					(new File(path)).mkdir();
-				}
-				destination = new File(path + String.valueOf(id)+"_"+file.getOriginalFilename());
-				while(destination.exists()){
-					counter++;
-					destination = new File(path+ String.valueOf(id)+"_"+counter+"_"+file.getOriginalFilename());
-				}
-				System.out.println("================================"+destination);
-				ImageIO.write(src, "png", destination);
-			} catch (IOException e) {}
-			 finally{
-				Chat chat = chatService.postChat(id, message,destination.getAbsolutePath());
-				List<Chat> chats = chatService.getLastThreeChats();
-				model.addAttribute("beans", chats);
-				return "redirect:/chats/list";
-			}
-		}
-		
-		
-		else{
-			Chat chat = chatService.postChat(id, message);
+			String path = chatService.upLoadImage(id, servletContext, file);
+			Chat chat = chatService.postChat(id, message,path);
 			List<Chat> chats = chatService.getLastThreeChats();
 			model.addAttribute("beans", chats);
 			return "redirect:/chats/list";
-		}
-		// Chat chat = chatService.postChat(id, message, new
-		// String(file.getBytes()));
-		// List<Chat> chats = chatService.getLastThreeChats();
-		// model.addAttribute("beans", chats);
-
-
 	}
 	
 	@RequestMapping(value = "/insertM")
