@@ -1,7 +1,6 @@
 package tw.com.softleader.e5e5.service;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -165,8 +164,7 @@ public class ProductService extends OurService<Product>{
 
 	@Override
 	public OurDao<Product> getDao() {
-		// TODO Auto-generated method stub
-		return null;
+		return productDao;
 	}
 
 	@Override
