@@ -44,7 +44,7 @@ public class User extends OurEntity implements java.io.Serializable {
 	private Integer onlineDatetime;
 	private String schoolName;
 //	private TrueFalse emailCheck;
-//	private TrueFalse isolated;
+	private TrueFalse isolated;
 //	private Role role;
 
 
@@ -241,14 +241,14 @@ public class User extends OurEntity implements java.io.Serializable {
 //		this.emailCheck = emailCheck;
 //	}
 	
-//	@Enumerated(EnumType.STRING)
-//	@Column(name = "isolated", length = 10)
-//	public TrueFalse getIsolated() {
-//		return isolated;
-//	}
-//
-//	public void setIsolated(TrueFalse isolated) {
-//		this.isolated = isolated;
-//	}
+	@Enumerated(EnumType.STRING)
+	@Column(name = "isolated", length = 10)
+	public TrueFalse getIsolated() {
+		return isolated;
+	}
+
+	public void setIsolated(TrueFalse isolated) {
+		this.isolated = isolated;
+	}
 
 }

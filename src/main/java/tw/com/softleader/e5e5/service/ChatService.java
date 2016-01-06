@@ -1,5 +1,6 @@
 package tw.com.softleader.e5e5.service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class ChatService extends OurService<Chat> {
 
 		chat.setMessages(messages);
 		chat.setUser(user);
-		chat.setSendTime(new Date());
+		chat.setSendTime(LocalDateTime.now());
 		result = chatDao.save(chat);
 
 		return result;
@@ -58,7 +59,7 @@ public class ChatService extends OurService<Chat> {
 		chat.setMessages(messages);
 		chat.setUser(user);
 		chat.setPicture(picture);
-		chat.setSendTime(new Date());
+		chat.setSendTime(LocalDateTime.now());
 		result = chatDao.save(chat);
 		
 		return result;

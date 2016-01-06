@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/WebContent/layout/header.jsp"></c:import>
-
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/user.css" />
 
 <div class="container" style="margin: 50px auto;">
 	<div class="container">
@@ -114,7 +115,7 @@
 			</div>
 		</div>
 	</div>
-	<nav style="text-align: center;">
+	<nav class="alignCenter">
 		<ul class="pagination">
 			<li><a href="#" aria-label="Previous"> <span
 					aria-hidden="true">&laquo;</span>

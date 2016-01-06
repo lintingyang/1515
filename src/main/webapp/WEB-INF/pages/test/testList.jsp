@@ -80,7 +80,7 @@
 		   	colModel:[
 		   		{name:'id', width: 150},
 		   		{name:'btns', width: 150, formatter:btns},
-		   		{name:'user.id', width: 150},
+		   		{name:'userId', width: 150},
 		   		{name:'messages', width: 150},
 		   	],
 		   	sortname:"id",

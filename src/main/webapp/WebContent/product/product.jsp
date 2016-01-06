@@ -166,6 +166,7 @@
 								<div class="col-md-6">
 									<h4>星巴克紀念杯款</h4>
 									物品狀況：九成新 <br>產品描述：j123oi21j3oijelkwjeq;oijaksjd;alkdjsqkje;lqwkej;ls
+									<input type="button" value="我想跟你換">
 								</div>
 								<div class="col-md-4" style="border-left: 1px dashed gray;">
 									<ul class="nav navbar-nav">
