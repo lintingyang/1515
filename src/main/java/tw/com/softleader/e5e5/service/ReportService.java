@@ -44,12 +44,12 @@ public class ReportService extends OurService<Report>{
 		Report temp = reportDao.findOne(id);
 		if(temp != null){
 			temp.setArticle(temp.getArticle());
-//			temp.setIsPassed(status);
 			temp.setProduct(temp.getProduct());
-			temp.setReply(temp.getReply());
 			temp.setReportTime(temp.getReportTime());
-			temp.setThread(temp.getThread());
-			temp.setUser(temp.getUser());
+			temp.setReporterId(temp.getReporterId());
+//			temp.setIsPassed(status);
+//			temp.setReply(temp.getReply());
+//			temp.setThread(temp.getThread());
 			reportDao.save(temp);
 			return 1;
 		}
