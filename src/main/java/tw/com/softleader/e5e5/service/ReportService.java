@@ -89,7 +89,7 @@ public class ReportService extends OurService<Report>{
 	@Override
 	public OurDao<Report> getDao() {
 		// TODO Auto-generated method stub
-		return null;
+		return reportDao;
 	}
 
 	@Override

@@ -25,7 +25,7 @@ public abstract class OurService<T extends OurEntity> {
 
 	public abstract OurDao<T> getDao();
 
-	protected abstract List<Message> validateInsert(final T entity);
+	protected abstract List<Message> validateInsert(final T entity);//abstraRct要實作
 
 	protected abstract List<Message> validateUpdate(final T entity);
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,12 +13,18 @@
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
 <!-- <script src="//cdn.jsdelivr.net/jquery.shadow-animation/1/mainfile"></script> -->
 <!-- CDN -->
-<script src="/resources/js/jquery-1.11.3.js"></script>
-<link rel="stylesheet" href="/resources/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-<link rel="stylesheet" href="/resources/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-<script src="/resources/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-<script src="//cdn.jsdelivr.net/jquery.shadow-animation/1/mainfile"></script>
+<!-- <script src="/resources/js/jquery-1.11.3.js"></script> -->
+<!-- <link rel="stylesheet" href="/resources/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
+<!-- <link rel="stylesheet" href="/resources/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"> -->
+<!-- <script src="/resources/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
+<c:import url="/WEB-INF/pages/layout/meta.jsp"></c:import>
+<c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
+<c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 
+
+<script src="//cdn.jsdelivr.net/jquery.shadow-animation/1/mainfile"></script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/user.css" />
 
 <link rel="stylesheet" href="/resources/css/prodcss.css" />
 
@@ -85,7 +92,7 @@
 <!--         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
         
 <!--       </div> -->
-      <div class="modal-body" style="text-align: center;">
+      <div class="modal-body alignCenter">
       <h5 id="myModalLabel">請選擇類別</h5>
       		<table style=" margin:auto;">
       			<tr>

@@ -65,7 +65,7 @@ $(function(){
 			<div class="form-group" id="divBorder">
 				<div class="col-sm-offset-2 col-sm-10 alignLeft">
 					<a href="insertStep1.jsp">建立新帳號</a> 
-					<a href="findPassWord.jsp" id="fpwdLink">?忘記密碼</a>
+					<a href="findPassWord1.jsp" id="fpwdLink">?忘記密碼</a>
 					<div class="checkbox">
 						<label> <input type="checkbox"> Remember me
 						</label>

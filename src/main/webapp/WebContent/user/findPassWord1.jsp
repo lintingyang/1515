@@ -32,7 +32,7 @@
 <script>
 	$(function() {
 		$("#btnNextStep").on('click', function() {
-			window.location.href = "login.jsp";
+			window.location.href = "findPassWord2.jsp";
 		});
 	});
 </script>
