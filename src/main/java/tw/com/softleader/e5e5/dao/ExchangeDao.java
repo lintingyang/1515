@@ -10,7 +10,7 @@ import tw.com.softleader.e5e5.entity.Product;
 
 public interface ExchangeDao extends JpaRepository<Exchange, Integer> {
 	
-	public List<Exchange> findByProductByProductAId (Product productAId);
+	public List<Exchange> findByProductAId (Product productAId);
 	
 	//find the most popular item(productA)
 	@Query(value="SELECT TOP 1 productA_id FROM exchange GROUP BY productA_id ORDER BY COUNT (*) DESC", nativeQuery = true)

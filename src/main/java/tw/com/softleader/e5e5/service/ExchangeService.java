@@ -36,13 +36,13 @@ public class ExchangeService {
 	@Transactional
 	public List<Exchange> findByProductAId(int productAId){
 		Product product = productDao.findOne(productAId);
-		List<Exchange> list = exchangeDao.findByProductByProductAId(product);
+		List<Exchange> list = exchangeDao.findByProductAId(product);
 		return list;
 	}
 	
 	@Transactional
 	public List<Exchange> findByProduct(Product product){
-		List<Exchange> list = exchangeDao.findByProductByProductAId(product);
+		List<Exchange> list = exchangeDao.findByProductAId(product);
 		return list;
 	}
 
