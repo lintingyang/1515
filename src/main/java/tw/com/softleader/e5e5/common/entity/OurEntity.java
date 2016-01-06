@@ -22,7 +22,6 @@ public class OurEntity implements Serializable {
 	@Column(name = "id", unique = true, nullable = false)
 	protected Integer id;
 	
-	
 	public Integer getId() {
 		return id;
 	}

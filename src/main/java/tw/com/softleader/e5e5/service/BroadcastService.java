@@ -1,5 +1,6 @@
 package tw.com.softleader.e5e5.service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class BroadcastService {
 
 		broadcast.setBroadcastDescription(broadcastDescription);
 		broadcast.setUser(user);
-		broadcast.setPostTime(new Date());
+		broadcast.setPostTime(LocalDateTime.now());
 		result = broadcastDao.save(broadcast);
 
 		return result;

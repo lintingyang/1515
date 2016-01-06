@@ -23,6 +23,7 @@ import javax.transaction.Transactional;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import tw.com.softleader.e5e5.common.entity.OurEntity;
+import tw.com.softleader.e5e5.entity.enums.Time;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 
 /**
@@ -32,26 +33,54 @@ import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 @Table(name = "product", schema = "dbo", catalog = "EEIT82DB")
 public class Product extends OurEntity implements java.io.Serializable {
 
-//	private int id;
+	@Column(name = "name", length = 30)
 	private String name;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "category_id", referencedColumnName = "id")
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private ProductCategory productCategory;
+
+	@Column(name = "video")
 	private byte[] video;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private User userId;
+
+	@Column(name = "post_time", length = 23)
 	private LocalDateTime postTime;
+
+	@Column(name = "deadline", length = 23)
 	private LocalDateTime deadline;
+
+	@Column(name = "location", length = 50)
 	private String location;
+
+	@Column(name = "trade_way", length = 20)
 	private String tradeWay;
+
+	@Column(name = "wish_item", length = 200)
 	private String wishItem;
-//	private TrueFalse postStatus;
+
+	@Column(name = "description", length = 200)
+	private String description;
+
+	@Column(name = "status", length = 50)
+	private String status;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "transaction_time", length = 10)
+	private Time transactionTime;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "post_status", length = 10)
+	private TrueFalse postStatus;
+
+	@Column(name = "click_times")
 	private Integer clickTimes;
 
-	public Product() {
-	}
-
-	public Product(int id) {
-		this.id = id;
-	}
-	
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", video=" + Arrays.toString(video) + ", postTime=" + postTime
@@ -59,18 +88,6 @@ public class Product extends OurEntity implements java.io.Serializable {
 				+ wishItem + ", clickTimes=" + clickTimes + "]";
 	}
 
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@Column(name = "id", unique = true, nullable = false)
-//	public int getId() {
-//		return this.id;
-//	}
-//
-//	public void setId(int id) {
-//		this.id = id;
-//	}
-
-	@Column(name = "name", length = 30)
 	public String getName() {
 		return this.name;
 	}
@@ -79,10 +96,38 @@ public class Product extends OurEntity implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "category_id", referencedColumnName = "id")
-	@Transactional
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	public User getUserId() {
+		return userId;
+	}
+
+	public void setUserId(User userId) {
+		this.userId = userId;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Time getTransactionTime() {
+		return transactionTime;
+	}
+
+	public void setTransactionTime(Time transactionTime) {
+		this.transactionTime = transactionTime;
+	}
+
 	public ProductCategory getProductCategory() {
 		return this.productCategory;
 	}
@@ -91,7 +136,6 @@ public class Product extends OurEntity implements java.io.Serializable {
 		this.productCategory = productCategory;
 	}
 
-	@Column(name = "video")
 	public byte[] getVideo() {
 		return this.video;
 	}
@@ -100,10 +144,6 @@ public class Product extends OurEntity implements java.io.Serializable {
 		this.video = video;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", referencedColumnName = "id")
-	@Transactional
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	public User getUserByUserId() {
 		return this.userId;
 	}
@@ -112,8 +152,6 @@ public class Product extends OurEntity implements java.io.Serializable {
 		this.userId = userByUserId;
 	}
 
-	
-	@Column(name = "post_time", length = 23)
 	public LocalDateTime getPostTime() {
 		return this.postTime;
 	}
@@ -122,8 +160,6 @@ public class Product extends OurEntity implements java.io.Serializable {
 		this.postTime = postTime;
 	}
 
-
-	@Column(name = "deadline", length = 23)
 	public LocalDateTime getDeadline() {
 		return this.deadline;
 	}
@@ -132,7 +168,6 @@ public class Product extends OurEntity implements java.io.Serializable {
 		this.deadline = deadline;
 	}
 
-	@Column(name = "location", length = 50)
 	public String getLocation() {
 		return this.location;
 	}
@@ -141,7 +176,6 @@ public class Product extends OurEntity implements java.io.Serializable {
 		this.location = location;
 	}
 
-	@Column(name = "trade_way", length = 20)
 	public String getTradeWay() {
 		return this.tradeWay;
 	}
@@ -150,7 +184,6 @@ public class Product extends OurEntity implements java.io.Serializable {
 		this.tradeWay = tradeWay;
 	}
 
-	@Column(name = "wish_item", length = 200)
 	public String getWishItem() {
 		return this.wishItem;
 	}
@@ -158,17 +191,15 @@ public class Product extends OurEntity implements java.io.Serializable {
 	public void setWishItem(String wishItem) {
 		this.wishItem = wishItem;
 	}
-//	@Enumerated(EnumType.STRING)
-//	@Column(name = "post_status", length = 10)
-//	public TrueFalse getPostStatus() {
-//		return this.postStatus;
-//	}
-//
-//	public void setPostStatus(TrueFalse postStatus) {
-//		this.postStatus = postStatus;
-//	}
 
-	@Column(name = "click_times")
+	public TrueFalse getPostStatus() {
+		return this.postStatus;
+	}
+
+	public void setPostStatus(TrueFalse postStatus) {
+		this.postStatus = postStatus;
+	}
+
 	public Integer getClickTimes() {
 		return this.clickTimes;
 	}

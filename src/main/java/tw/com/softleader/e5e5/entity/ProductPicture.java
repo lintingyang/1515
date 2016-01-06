@@ -22,36 +22,24 @@ import javax.transaction.Transactional;
 @Entity
 @Table(name = "product_picture", schema = "dbo", catalog = "EEIT82DB")
 public class ProductPicture implements java.io.Serializable {
-
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private int id;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "product_id", referencedColumnName="id")
 	private Product product;
+	
+	@Column(name = "picture")
 	private String picture;
 
-
-	public ProductPicture() {
-	}
-
-	public ProductPicture(int id, Product product) {
-		this.id = id;
-		this.product = product;
-	}
-
-	public ProductPicture(int id, Product product, String picture) {
-		this.id = id;
-		this.product = product;
-		this.picture = picture;
-
-	}
-
-	
 	@Override
 	public String toString() {
 		return "ProductPicture [id=" + id + ", picture=" + picture + "]";
 	}
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
 	public int getId() {
 		return this.id;
 	}
@@ -59,10 +47,7 @@ public class ProductPicture implements java.io.Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "product_id", referencedColumnName="id")
-	@Transactional
+	
 	public Product getProduct() {
 		return this.product;
 	}
@@ -71,7 +56,6 @@ public class ProductPicture implements java.io.Serializable {
 		this.product = product;
 	}
 
-	@Column(name = "picture")
 	public String getPicture() {
 		return this.picture;
 	}
