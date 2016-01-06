@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/WebContent/layout/header.jsp"></c:import>
-<%-- <c:import url="/WEB-INF/pages/layout/meta.jsp"></c:import> --%>
+<c:import url="/WEB-INF/pages/layout/meta.jsp"></c:import>
 <%-- <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import> --%>
 <%-- <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import> --%>
 

@@ -10,7 +10,7 @@
 			<li style="width: 25%; text-align: center;"><a class="categorylist" href="#">熱門</a></li>
 			<li style="width: 25%; text-align: center;"><a class="categorylist" href="#">最新</a></li>
 			<li style="width: 25%; text-align: center;"><a class="categorylist" href="#">誠信</a></li>
-			<li style="width: 25%; text-align: center;"><a  class="categorylist" href="#">推薦</a></li>
+			<li style="width: 25%; text-align: center;"><a class="categorylist" href="#">推薦</a></li>
 		</ul>
 	</div>
 	<br>

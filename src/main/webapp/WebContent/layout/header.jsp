@@ -89,7 +89,7 @@
       <h5 id="myModalLabel">請選擇類別</h5>
       		<table style=" margin:auto;">
       			<tr>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">文具</button></td>
+      				<td class="productcategory" ><img alt="123546"></td>
       				<td class="productcategory" ><button class=" btn btn-default btn-lg">服飾</button></td>
       				<td class="productcategory" ><button class=" btn btn-default btn-lg">皮件</button></td>
       				<td class="productcategory" ><button class=" btn btn-default btn-lg">電玩</button></td>

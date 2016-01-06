@@ -128,6 +128,11 @@
 
 						</label>
 					</div>
+						<div class="radio">
+						<label> <input type="radio" name="gridRadios"  value="option2"> 郵寄
+
+						</label>
+					</div>
 
 				</div>
 				
@@ -136,7 +141,7 @@
 			<div class="form-group row">
 					<div class="col-sm-10">
 						<div class="checkbox">
-							<label> <input type="checkbox"> 運費自付
+							<label> <input type="checkbox"> 
 							</label>
 						</div>
 					</div>
