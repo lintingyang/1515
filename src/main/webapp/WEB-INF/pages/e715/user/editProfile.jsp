@@ -36,6 +36,8 @@
 }
 </style>
 
+
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-12"></div>
@@ -43,37 +45,42 @@
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-2">
-			<a href="#" title="更換大頭貼"> <img class="img-circle"
-				style="width: 100px" src="/resources/imgs/noname.jpg">
-			</a>
+			 <img class="img-circle" id="dropZone" name="headPortrait"
+				style="width: 100px" src="${user.picture}">
+			
 			<h3>userAcount</h3>
 		</div>
 		<div class="col-md-6">
+		
 			<h3>修改個人資料</h3>
-			<form class="form-horizontal">
+			
+		<form class="form-horizontal" action="/E715Member/updataInfo" enctype="multipart/form-data" method="post">
 
 				<div class="form-group" id="divBorder">
 					<label for="inputPassword3" class="col-sm-2 control-label">頭像:</label>
 					<div class="col-sm-10 fileImg">
-						<input type="file" id="exampleInputFile">
+						<input type="file" id="exampleInputFile" name="file">
 					</div>
 				</div>
-
+				
 				<div class="form-group" id="divBorder">
-					<label class="col-md-2 control-label">email:</label>
+					<label class="col-md-2 control-label">School_email:</label>
 					<div class="col-md-10">${user.schoolEmail}(已認證)</div>
 				</div>
+		
+				
+				
 				<div class="form-group" id="divBorder">
 					<label class="col-md-2 control-label">姓名:</label>
 					<div class="col-md-10">
-						<input type="text" class="form-control" id="name"
+						<input type="text" class="form-control" id="name" name="name"
 							value="${user.name}" placeholder="輸入姓名">
 					</div>
 				</div>
 				<div class="form-group" id="divBorder">
 					<label class="col-md-2 control-label">暱稱:</label>
 					<div class="col-md-10">
-						<input type="text" class="form-control" id="nickname"
+						<input type="text" class="form-control" id="nickname" name="nickname"
 							value="${user.nickname}" placeholder="在這裡輸入暱稱">
 					</div>
 				</div>
@@ -91,34 +98,27 @@
 				<div class="form-group" id="divBorder">
 					<label for="inputPassword3" class="col-sm-2 control-label">生日:</label>
 					<div class="col-sm-10" style="padding-top: 7px">
-						<select>
-							<option>1970</option>
-							<option>1971</option>
-							<option>1972</option>
-							<option>1973</option>
-						</select><span id="split">/</span> <select>
-							<option>01</option>
-							<option>02</option>
-							<option>03</option>
-						</select><span id="split">/</span> <select>
-							<option>01</option>
-							<option>02</option>
-							<option>03</option>
-						</select>
+					<select name="month" onchange="call()" > 
+					<option value="">select</option> 
+					</select> 月
+					<select name="day" > 
+					<option value="">select</option> </select> 
+					日<select name="year" onchange="call()" >  
+					<option value="">select</option></select>年 
 					</div>
 				</div>
 
 				<div class="form-group" id="divBorder">
 					<label class="col-md-2 control-label">電話:</label>
 					<div class="col-md-10">
-						<input type="text" class="form-control" id="inputPhone" value="${user.phone}${cellphone}"
+						<input type="text" class="form-control" id="inputPhone" value="${user.phone}${cellphone}" name="phone"
 							placeholder="輸入家電或手機">
 					</div>
 				</div>
 				<div class="form-group" id="divBorder">
 					<label class="col-md-2 control-label">備用Email:</label>
 					<div class="col-md-10">
-						<input type="text" class="form-control" id="inputReservedEmail"
+						<input type="text" class="form-control" id="inputReservedEmail" name="email"
 							value="${user.email}" placeholder="輸入備用信箱">
 					</div>
 				</div>
@@ -126,15 +126,15 @@
 				<div class="form-group" id="divBorder">
 					<label for="inputEmail3" class="col-sm-2 control-label">系所:</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="inputDep"
-							placeholder="輸入系所" value="${user.email}">
+						<input type="text" class="form-control" id="subject" name="subject"
+							placeholder="輸入系所" value="${user.subject}">
 					</div>
 				</div>
 				<div class="form-group" id="divBorder">
 					<label for="inputPassword3" class="col-sm-2 control-label">地址:</label>
 					<div class="col-sm-10">
-						<input type="password" class="form-control" id="inputAddr"
-							placeholder="輸入地址">
+						<input type="text" class="form-control" id="inputAddr" name="Addr"
+							value="${user.address}" placeholder="輸入地址">
 					</div>
 				</div>
 				<div class="form-group" id="divBorder">
@@ -153,7 +153,7 @@
 				<div class="form-group" id="divBorder">
 					<label for="inputPassword3" class="col-sm-2 control-label">關於我</label>
 					<div class="col-sm-10">
-						<textarea rows="10" cols="70"
+						<textarea rows="10" cols="70" name="aboutMe"
 							onKeyDown='if (this.value.length>=300){event.returnValue=false}'></textarea>
 					</div>
 				</div>
@@ -161,7 +161,7 @@
 
 				<div class="form-group">
 					<div class="col-md-offset-2 col-md-10">
-						<button type="button" class="btn btn-default" id="submit">修改</button>
+						<button type="submit" class="btn btn-default" id="submit">修改</button>
 						<button type="button" class="btn btn-warning" id="clear">取消</button>
 					</div>
 				</div>

@@ -2,8 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/WEB-INF/pages/e715/layout/header.jsp"></c:import>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/user.css" />
 <div class="container" style="margin: 50px auto;">
 	<div class="container">
 		<ul class="nav nav-tabs" id="tabs">
@@ -16,7 +14,12 @@
 	<br>
 	<div class="row">
 		<div class="col-md-1"></div>
-		<div class="col-md-10">
+		<div class="col-md-10" id="productlist">
+		
+		
+
+		
+		
 			<div class="row">
 				<div class="col-md-3">
 					<div class="prolist"
@@ -112,6 +115,12 @@
 					</div>
 				</div>
 			</div>
+			
+			
+			
+			
+			
+			
 		</div>
 	</div>
 	<nav class="alignCenter">
@@ -130,4 +139,62 @@
 	</nav>
 
 </div>
+
+
+
+
+<script type="text/javascript">
+
+$('.categorylist').click(function() {
+	
+	console.log("category = "+ $(this).text());
+	
+	
+	$.ajax({
+		contentType:"application/json",
+		url:"/query",
+		dataType :"json",
+		type:"get",
+		data:{ "orderby" : $(this).text()},
+		success: function(data){
+			console.log(data[0]);
+		}
+		
+	});
+	
+// 	$.ajax({
+// 		contentType:'application/json',
+// 		url: '/users/query',
+// 		dataType:'json',
+// 		type: 'post',
+// 		data: JSON.stringify({account:$("#account").val()}),
+// 		success: function(data) {
+// 			console.log(data);
+// 			var mytbody = $('#simpleTable>tbody');
+			
+			
+// 			var temp1 = $("<td></td>").text(data.id);	
+// 			var temp2 = $("<td></td>").text(data.name);	
+// 			var temp3 = $("<td></td>").text(data.account);	
+// 			var temp4 = $("<td></td>").text(data.address);	
+// 			var temp5 = $("<td></td>").text(data.schoolEmail);	
+// 			var temp6 = $("<td></td>").text(data.gameScore);	
+// 			var temp7 = $("<td></td>").text(data.onlineDatetime);	
+// 			var temp8 = $("<td></td>").text(data.isolated);	
+// 			var maTr = $("<tr></tr>").append([temp1,temp2,temp3,temp4,temp5,temp6,temp7,temp8]);
+			
+// 			$(mytbody).html(maTr);
+				
+				
+				
+			
+// 		}			
+// 	});	
+});
+
+
+</script>
 <c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>
+
+
+

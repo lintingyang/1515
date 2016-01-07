@@ -14,6 +14,7 @@ import tw.com.softleader.e5e5.common.service.OurService;
 import tw.com.softleader.e5e5.dao.ProductCategoryDao;
 import tw.com.softleader.e5e5.dao.ProductDao;
 import tw.com.softleader.e5e5.entity.Product;
+import tw.com.softleader.e5e5.entity.enums.Time;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 
 @Service
@@ -147,16 +148,19 @@ public class ProductService extends OurService<Product>{
 
 	// (14)新增產品
 	@Transactional
-	public int insert(String name,int category, LocalDateTime deadline, String location, String tradeWay, String wishItem) {
+	public int insert(String name, int category, String status ,String description, LocalDateTime deadline,Time transactionTime, String location, String tradeWay, String wishItem, TrueFalse postStatus) {
 		Product product = new Product();
 		product.setName(name);
-//		product.setProductCategory(productCategoryDao.findOne(category));
+		product.setProductCategory(productCategoryDao.findOne(category));
+		product.setStatus(status);
+		product.setDescription(description);
 		product.setPostTime(LocalDateTime.now());
-		product.setDeadline(LocalDateTime.of(2015, 4, 4, 10, 55));
+		product.setDeadline(deadline);
+		product.setTransactionTime(transactionTime);
 		product.setLocation(location);
 		product.setTradeWay(tradeWay);
 		product.setWishItem(wishItem);
-//		product.setPostStatus(TrueFalse.FALSE);
+		product.setPostStatus(postStatus);
 		productDao.save(product);
 		return 1;
 
