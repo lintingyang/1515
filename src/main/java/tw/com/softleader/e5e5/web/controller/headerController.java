@@ -41,6 +41,10 @@ public class headerController {
 		}
 		return "/index";
 	}
-	
+	@RequestMapping(value="/logout")
+	public String logout(HttpSession session){
+		session.removeAttribute("user");
+		return "/index";
+	}
 	
 }
