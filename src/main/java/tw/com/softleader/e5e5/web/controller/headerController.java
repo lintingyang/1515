@@ -54,6 +54,7 @@ public class headerController {
 		}
 		return "/index";
 	}
+
 	//註冊帳號
 	@RequestMapping(value = "/insert")
 	public String insert(Model model, 
@@ -124,5 +125,12 @@ public class headerController {
 
 	}
 	
+
+	@RequestMapping(value="/logout")
+	public String logout(HttpSession session){
+		session.removeAttribute("user");
+		return "/index";
+	}
+
 	
 }
