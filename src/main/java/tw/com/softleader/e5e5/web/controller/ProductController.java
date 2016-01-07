@@ -55,11 +55,14 @@ public class ProductController {
 		return "/e715/product/proAdd";
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/insert" ) 
-	public String insert(@RequestBody Product product) {
+	
+//	@ResponseBody
+//	@RequestMapping(value = "/insert" ) 
+//	public String insert(@RequestBody Product product) {
+	@RequestMapping(value = "/insert")
+	public String insert(Model model, @ModelAttribute Product product, @RequestParam("pCategory") int pCategory, @RequestParam("pStatusBad") String pStatusBad) {
 		System.out.println("product========================" + product);
-		int number = productService.insert(product.getName(), 1, product.getStatus(), product.getDescription(), product.getDeadline(), product.getTransactionTime(), product.getLocation(), product.getTradeWay(), product.getWishItem(), product.getPostStatus());
+		int number = productService.insert(product.getName(), pCategory, product.getStatus() + pStatusBad, product.getDescription(), product.getDeadline(), product.getTransactionTime(), product.getLocation(), product.getTradeWay(), product.getWishItem(), product.getPostStatus());
 		System.out.println("number========================" + number);
 		if(number == 1){
 			return "insert successful !!";

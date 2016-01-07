@@ -29,6 +29,12 @@ public class headerController {
 	Logger log = Logger.getLogger(this.getClass());
 	
 	
+	@RequestMapping(value="/logout")
+	public String logout(HttpSession session){
+		session.removeAttribute("user");
+		return "/index";
+	}
+	
 	@RequestMapping(value = "/login" ,method = RequestMethod.GET)
 	public String loginPage(){
 		return "/e715/user/login";
@@ -127,12 +133,7 @@ public class headerController {
 		}
 
 	}
-	
-	@RequestMapping(value="/logout")
-	public String logout(HttpSession session){
-		session.removeAttribute("user");
-		return "/index";
-	}
+
 
 	
 }

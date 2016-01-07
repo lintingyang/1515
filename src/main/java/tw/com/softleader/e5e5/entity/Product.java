@@ -71,10 +71,12 @@ public class Product extends OurEntity implements java.io.Serializable {
 	private String status;
 
 	@Enumerated(EnumType.STRING)
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@Column(name = "transaction_time", length = 10)
 	private Time transactionTime;
 
 	@Enumerated(EnumType.STRING)
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@Column(name = "post_status", length = 10)
 	private TrueFalse postStatus;
 
@@ -144,13 +146,6 @@ public class Product extends OurEntity implements java.io.Serializable {
 		this.video = video;
 	}
 
-	public User getUserByUserId() {
-		return this.userId;
-	}
-
-	public void setUserByUserId(User userByUserId) {
-		this.userId = userByUserId;
-	}
 
 	public LocalDateTime getPostTime() {
 		return this.postTime;

@@ -156,7 +156,7 @@ $('.categorylist').click(function() {
 		type:"get",
 		data:{ "orderby" : $(this).text()},
 		success: function(data){
-			console.log(data);
+			console.log(data[0]);
 		}
 		
 	});

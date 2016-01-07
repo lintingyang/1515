@@ -68,7 +68,7 @@
 					<li><a class="userlist" href="/WebContent/user/myProfile.jsp">會員資料</a></li>
 					<li><a class="userlist" href="/WebContent/user/userFriendList.jsp">關注名單</a></li>
 					<li><a class="userlist" href="/WebContent/product/productedit.jsp">物品管理</a></li>
-					<li><a class="userlist" href="/WebContent/product/newproduct.jsp">新增物品</a></li>
+					<li><a class="userlist" href="/product/add">新增物品</a></li>
 					<li><a class="userlist" href="/WebContent/user/modifyFileAsk.jsp">帳號修改</a></li>
 					<li><a class="userlist" href="/head/logout">登出</a></li>
 					<li><a class="userlist" href="/head/login">登入</a></li>
