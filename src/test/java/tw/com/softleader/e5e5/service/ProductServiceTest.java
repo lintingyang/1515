@@ -28,6 +28,10 @@ public class ProductServiceTest {
 	@Autowired
 	private ProductService productService;
 	
+	@Test
+	public void test(){
+		List<Product> products = productService.findByIsPosted(2, TrueFalse.TRUE);
+	}
 	//(1)最新商品列：fineAll byPostTime
 	@Test
 	public void testGetProductsOrderByPostTime(){
