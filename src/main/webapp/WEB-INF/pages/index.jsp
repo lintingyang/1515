@@ -130,4 +130,4 @@
 	</nav>
 
 </div>
-<c:import url="/WebContent/layout/footer.jsp"></c:import>
+<c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>

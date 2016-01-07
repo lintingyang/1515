@@ -80,6 +80,9 @@ public class User extends OurEntity implements java.io.Serializable {
 	@Column(name="school_name")
 	private String schoolName;
 	
+	@Column(name="subject")
+	private String subject;
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "email_check", length = 10)
 	private TrueFalse emailCheck;
@@ -92,7 +95,7 @@ public class User extends OurEntity implements java.io.Serializable {
 	@Column(name = "role", length = 10)
 	private Role role;
 
-
+	
 
 	public User() {
 	}
@@ -258,6 +261,14 @@ public class User extends OurEntity implements java.io.Serializable {
 
 	public void setSchoolName(String schoolName) {
 		this.schoolName = schoolName;
+	}
+	
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 	
 	public TrueFalse getEmailCheck() {

@@ -81,7 +81,7 @@ public class UserService extends OurService<User> {
 					user.setPassword(password);
 					user.setNickname(nickname);
 					user.setAge(age);
-					// user.setSex(sex);
+					user.setSex(sex);
 					user.setBirthday(birthday);
 					user.setAddress(address);
 					user.setPhone(phone);
@@ -91,8 +91,9 @@ public class UserService extends OurService<User> {
 					user.setSchoolEmail(schoolEmail);
 					user.setOnlineDatetime(onlineDatetime);
 					user.setSchoolName(schoolName);
-					// user.setEmailCheck(emailCheck);
-					// user.setIsolated(TrueFalse.FALSE);
+					user.setEmailCheck(emailCheck);
+					user.setEcoin(50);
+					user.setIsolated(TrueFalse.FALSE);
 					userDao.save(user);
 					return 1;
 				}
@@ -103,34 +104,10 @@ public class UserService extends OurService<User> {
 	}
 
 	@Transactional
-	public int drewScores(String account, Integer score) {
-		User temp = userDao.findByAccount(account);
-		if (temp != null) {
-			User temp3 = new User();
-			temp3.setId(temp.getId());
-			temp3.setAccount(temp.getAccount());
-			temp3.setAddress(temp.getAddress());
-			temp3.setAge(temp.getAge());
-			temp3.setBirthday(temp.getBirthday());
-			temp3.setCellphone(temp.getCellphone());
-			temp3.setEmail(temp.getEmail());
-			// temp3.setEmailCheck(temp.getEmailCheck());
-			temp3.setFocusItemList(temp.getFocusItemList());
-			temp3.setName(temp.getName());
-			temp3.setNickname(temp.getNickname());
-			temp3.setOnlineDatetime(temp.getOnlineDatetime());
-			temp3.setPassword(temp.getPassword());
-			temp3.setPhone(temp.getPhone());
-			temp3.setPicture(temp.getPicture());
-			temp3.setSchoolEmail(temp.getSchoolEmail());
-			temp3.setSchoolName(temp.getSchoolName());
-
-			// temp3.setSex(temp.getSex());
-			// temp3.setIsolated(temp.getIsolated());
-//			temp3.setGameScore(temp.getGameScore() + score);
-			temp3.setEcoin(temp.getEcoin()+score);
-
-			userDao.save(temp3);
+	public int drewScores(String account, Integer ecoin) {
+		User user = userDao.findByAccount(account);
+		if (user != null) {
+			user.setEcoin(ecoin);
 			return 1;
 		}
 		return 0;
@@ -168,6 +145,17 @@ public class UserService extends OurService<User> {
 		return 0;
 	}
 
+	@Transactional
+	public int updataPwd(String account, String oldPassWord, String newPasswWrd) {
+		User user = userDao.findByAccount(account);
+		if (user != null) {
+			user.setPassword(newPasswWrd);
+			userDao.save(user);
+			return 1;
+		}
+		return 0;
+	}
+	
 	@Transactional
 	public int updateEmail(String account, String schoolEmail) {
 		User temp = userDao.findByAccount(account);

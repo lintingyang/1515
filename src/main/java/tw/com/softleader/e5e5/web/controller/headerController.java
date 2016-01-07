@@ -30,8 +30,8 @@ public class headerController {
 	
 	@RequestMapping(value = "/logincheck" ,method = RequestMethod.POST)
 	public String loginCheck(Model model,@RequestParam("account")String account,
-			@RequestParam("password")String password,HttpSession session){
-	
+			@RequestParam("password")String password
+			,HttpSession session){
 		User user = userService.login(account, password);
 		if(user == null){
 			log.error("找不到該帳號");
@@ -46,5 +46,7 @@ public class headerController {
 		session.removeAttribute("user");
 		return "/index";
 	}
+	
+
 	
 }
