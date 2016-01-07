@@ -126,11 +126,11 @@ public class ProductServiceTest {
 	}
 	
 	//(14)新增產品
-		@Test
-		public void testInsert(){
-			int result = productService.insert("HHHHHH",2 , LocalDateTime.now(), "HHH","HHH","HHH");
-			log.debug("新增" + result);
-		}
+//		@Test
+//		public void testInsert(){
+//			int result = productService.insert("HHHHHH",2 , LocalDateTime.now(), "HHH","HHH","HHH");
+//			log.debug("新增" + result);
+//		}
 	
 	
 	

@@ -24,7 +24,7 @@ import tw.com.softleader.e5e5.service.ProductService;
 @RequestMapping(value = "/products")
 
 @Service
-public class ProductController {
+public class ProductControllerA {
 
 	@Autowired
 	public ProductService productService;
@@ -98,18 +98,18 @@ public class ProductController {
 		return "/product/add";
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/insert" ) 
-	public String insert(@RequestBody Product product) {
-		System.out.println("product========================" + product);
-		int number = productService.insert(product.getName(), 2, product.getDeadline(), product.getLocation(), product.getTradeWay(), product.getWishItem());
-		System.out.println("number========================" + number);
-		if(number == 1){
-			return "insert successful !!";
-		}else{
-			return "insert failed !!";
-		}
-	}
+//	@ResponseBody
+//	@RequestMapping(value = "/insert" ) 
+//	public String insert(@RequestBody Product product) {
+//		System.out.println("product========================" + product);
+////		int number = productService.insert(product.getName(), 2, product.getDeadline(), product.getLocation(), product.getTradeWay(), product.getWishItem());
+//		System.out.println("number========================" + number);
+//		if(number == 1){
+//			return "insert successful !!";
+//		}else{
+//			return "insert failed !!";
+//		}
+//	}
 //	@ResponseBody
 //	@RequestMapping(value = "/insert")
 //	public String insert(Model model, @RequestBody Product product) {
