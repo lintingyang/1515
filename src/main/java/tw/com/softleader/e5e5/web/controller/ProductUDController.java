@@ -37,12 +37,13 @@ public class ProductUDController {
 		List<Product> products = null;
 
 		if(query.equals("已刊登")){
-			products= productService.findByUsersProductsIsPosted(2, TrueFalse.TRUE);
+			products= productService.findByUsersProductsIsPosted(2,"TRUE");
 			log.debug("asdgfasdgsadgsdg");
 			log.debug(products);
 		}else if(query.equals("未刊登")){
 			products= productService.findByUsersProductsIsPosted(2, TrueFalse.FALSE);
 		}
+		
 		return products;
 	}
 
