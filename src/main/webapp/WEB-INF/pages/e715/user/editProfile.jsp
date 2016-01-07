@@ -64,7 +64,7 @@
 				</div>
 				
 				<div class="form-group" id="divBorder">
-					<label class="col-md-2 control-label">School_email:</label>
+					<label class="col-md-2 control-label">學校信箱:</label>
 					<div class="col-md-10">${user.schoolEmail}(已認證)</div>
 				</div>
 		
@@ -87,11 +87,33 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">性別:</label>
 					<div class="col-md-10">
-						<input type="radio" value="Male" id="radioSex" name="sex"
-							checked="checked"> <span id="radioSex">男</span> <input
-							type="radio" value="Female" id="radioSex" name="sex"> <span
-							id="radioSex">女</span> <input type="radio" value="Other"
-							id="radioSex" name="sex"> <span id="radioSex">其他</span>
+						<c:choose>
+							<c:when test="${user.sex.toString() eq 'MALE'}">
+								<input type="radio" id="radioSex" name="sex" value="MALE" checked> 
+									<span id="radioSex">男</span> 
+								<input type="radio" id="radioSex" name="sex" value="FEMALE"> 
+									<span id="radioSex">女</span> 
+								<input type="radio" id="radioSex" name="sex" value="OTHER">
+								    <span id="radioSex">其他</span>
+							</c:when>
+							<c:when test="${user.sex.toString() eq 'FEMALE'}">
+								<input type="radio" id="radioSex" name="sex" value="MALE"> 
+									<span id="radioSex">男</span> 
+								<input type="radio" id="radioSex" name="sex" value="FEMALE" checked> 
+									<span id="radioSex">女</span> 
+								<input type="radio" id="radioSex" name="sex" value="OTHER">
+								    <span id="radioSex">其他</span>
+							</c:when>
+							<c:otherwise>
+								<input type="radio" id="radioSex" name="sex" value="MALE"> 
+									<span id="radioSex">男</span> 
+								<input type="radio" id="radioSex" name="sex" value="FEMALE"> 
+									<span id="radioSex">女</span> 
+								<input type="radio" id="radioSex" name="sex" value="OTHER" checked>
+								    <span id="radioSex">其他</span>
+							</c:otherwise>      
+						</c:choose>    
+						
 					</div>
 				</div>
 

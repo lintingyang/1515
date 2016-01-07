@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.softleader.e5e5.entity.User;
+import tw.com.softleader.e5e5.entity.enums.Sex;
 import tw.com.softleader.e5e5.service.UserService;
 
 @Controller
@@ -75,52 +76,42 @@ public class memberController {
 	public String updataInfo(Model model, 
 			@RequestParam("file") MultipartFile file,
 			@RequestParam("name") String name,
-			@RequestParam("nickname") String nickname, @RequestParam("sex") String sex,
+			@RequestParam("nickname") String nickname, @RequestParam("sex") Sex sex,
 			//@RequestParam("month") String month, @RequestParam("day") String day, @RequestParam("year") String year,
 			@RequestParam("phone") String phone, @RequestParam("email") String email,
 			@RequestParam("subject") String subject, @RequestParam("Addr") String addr,
 			@RequestParam("aboutMe") String aboutMe, HttpSession session) {
-		System.out.println("asdasdasdasdasdasdasdadasdad");
 		User user = (User) session.getAttribute("user");
-
+		
+		//必填欄位不能為空值
 		if (user == null || name == null || nickname == null || phone == null) {
-			System.out.println("1111111111111111111111111111111111");
-			return "/e715/user/editProfile";
+				return "/e715/user/editProfile";
 		} else {
-			System.out.println("2222222222222222222222222222222");
+			
+			//讀取新圖跟砍檔(別忘記jsp的enctype
 			if (!file.isEmpty()) {
-				System.out.println("3333333333333333333333333333333333");
 				String path = userService.upLoadImage(user.getId(), servletContext, file);
 				user.setPicture(path);
 			}
 
 			user.setName(name);
 			user.setNickname(nickname);
-
+			//判斷是手機還是家電(基礎判斷)
 			if (phone.substring(0, 1).equals("09")) {
 				user.setCellphone(phone);
 			} else {
 				user.setPhone(phone);
 			}
+			user.setSex(sex);
 			user.setSubject(subject);
 			user.setEmail(email);
 			user.setAddress(addr);
 			user.setAboutMe(aboutMe);
-
 			userService.update(user);
 			return "/e715/user/editProfile";
 		}
 	}
 
-	// @RequestMapping(value = "/upLoadHeadPortraitFile")
-	// public String insert(Model model, @RequestParam("headPortraitFile")
-	// MultipartFile headPortraitFile , HttpSession session) {
-	// User user = (User) session.getAttribute("user");
-	// String path = userService.upLoadImage(user.getId(), servletContext,
-	// headPortraitFile);
-	// user.setPicture(path);
-	// userService.update(user);
-	// return "/e715/user/editProfile";
-	// }
+
 
 }
