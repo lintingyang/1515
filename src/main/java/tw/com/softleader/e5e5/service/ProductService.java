@@ -35,6 +35,28 @@ public class ProductService extends OurService<Product>{
 	
 	@Autowired
 	private ProductCategoryDao productCategoryDao;
+
+	
+	@Transactional
+	public List<Product> findeOrderByClickTime(String productName,String categoryName ){
+		List<Product> list = productDao.findByProdcutOrderByClickTimes(productName, categoryName);
+		return list;
+	}
+	@Transactional
+	public List<Product> findByProductOrderByPostTime(String productName,String categoryName ){
+		List<Product> list = productDao.findByProductOrderByPostTime(productName, categoryName);
+		return list;
+	}
+	
+	@Transactional
+	public List<Product> findByUsersProductsIsPosted(Integer id , TrueFalse postStatus){
+		return productDao.findUsersProductsByIsPosted(id, postStatus);
+	}
+	
+	@Transactional
+	public List<Product> findByUsersProductsIsPosted(Integer id , String postStatus){
+		return productDao.findUsersProductsByIsPosted(id, postStatus);
+	}
 	
 	//後台
 	//(1)findOne byId
@@ -48,14 +70,16 @@ public class ProductService extends OurService<Product>{
 	public List<Product> getAllProducts() {
 		return productDao.findAll();
 	}
+	
 	//(3)update product's post_status
 	@Transactional
 	public Product update(Integer id, TrueFalse postStatus) {
 		Product product = productDao.findOne(id);
-//		product.setPostStatus(postStatus);
+		product.setPostStatus(postStatus);
 		productDao.save(product);
 		return productDao.findOne(id);
 	}
+	
 	//(4)update product's post_status return int
 		@Transactional
 		public int updateStatus(Integer id, TrueFalse postStatus) {
