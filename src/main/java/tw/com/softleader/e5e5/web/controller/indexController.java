@@ -31,12 +31,17 @@ public class indexController {
 		log.error("orderby = "+orderby);
 		List<Product> list = null;
 		if(orderby.equals("熱門")){
-			list= productService.getProductsOrderByClickTimes();
+			list= productService.findeOrderByClickTime("", "文具用品");
 			log.error("getProductsOrderByClickTimes");
 			
 		}else if(orderby.equals("最新")){
-			list = productService.getProductsOrderByPostTime();
+			list = productService.findByProductOrderByPostTime("","文具用品");
 			log.error("getProductsOrderByPostTimes");
+		}else if(orderby.equals("誠信")){
+			
+			
+		}else if(orderby.equals("推薦")){
+			
 		}
 		return list;
 		

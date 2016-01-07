@@ -24,6 +24,20 @@ public class ProductService extends OurService<Product>{
 	
 	@Autowired
 	private ProductCategoryDao productCategoryDao;
+
+	
+	@Transactional
+	public List<Product> findeOrderByClickTime(String productName,String categoryName ){
+		List<Product> list = productDao.findByProdcutOrderByClickTimes(productName, categoryName);
+		return list;
+	}
+	@Transactional
+	public List<Product> findByProductOrderByPostTime(String productName,String categoryName ){
+		List<Product> list = productDao.findByProductOrderByPostTime(productName, categoryName);
+		return list;
+	}
+	
+	
 	
 	//後台
 	//(1)findOne byId
