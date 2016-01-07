@@ -60,7 +60,7 @@ $(function(){
 			</div>
 			<div class="form-group" id="divBorder">
 				<div class="col-sm-offset-2 col-sm-10 alignLeft">
-					<a href="insertStep1.jsp">建立新帳號</a> 
+					<a href="/head/create">建立新帳號</a> 
 					<a href="findPassWord1.jsp" id="fpwdLink">?忘記密碼</a>
 					<div class="checkbox">
 						<label> <input type="checkbox"> Remember me</label>
@@ -78,4 +78,4 @@ $(function(){
 
 
 
-<c:import url="/WebContent/layout/footer.jsp"></c:import>
+<c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>
