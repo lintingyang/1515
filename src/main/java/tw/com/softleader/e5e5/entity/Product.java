@@ -146,13 +146,6 @@ public class Product extends OurEntity implements java.io.Serializable {
 		this.video = video;
 	}
 
-	public User getUserByUserId() {
-		return this.userId;
-	}
-
-	public void setUserByUserId(User userByUserId) {
-		this.userId = userByUserId;
-	}
 
 	public LocalDateTime getPostTime() {
 		return this.postTime;
