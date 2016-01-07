@@ -21,11 +21,10 @@
 <%-- <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import> --%>
 <%-- <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import> --%>
 
-
-<!-- <script src="//cdn.jsdelivr.net/jquery.shadow-animation/1/mainfile"></script> -->
+<link rel="stylesheet" href="/resources/css/jPages.css">
 <link rel="styleshee" href="/resources/css/user.css" />
 <link rel="stylesheet" href="/resources/css/prodcss.css" />
-
+<script src="/resources/js/jPages.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <title>E715</title>

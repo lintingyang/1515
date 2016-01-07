@@ -57,10 +57,10 @@ public interface ProductDao extends OurDao<Product> {
 	@Query(value = "SELECT p.* FROM product p WHERE p.user_id = ?1 AND p.post_status = ?2 order by post_time", nativeQuery = true)
 	public List<Product> findUsersProductsByIsPosted(Integer id , TrueFalse postStatus);
 	
-	@Query(value = "SELECT p.* FROM product p JOIN product_category pc ON p.category_id = pc.id WHERE p.name LIKE %?1% AND pc.name = ?2 order by click_times", nativeQuery = true)
+	@Query(value = "SELECT p.* FROM product p JOIN product_category pc ON p.category_id = pc.id WHERE p.name LIKE %?1% AND pc.name = ?2 order by click_times DESC", nativeQuery = true)
 	public List<Product> findByProdcutOrderByClickTimes(String productName,String categoryName );
 
-	@Query(value = "SELECT p.* FROM product p JOIN product_category pc ON p.category_id = pc.id WHERE p.name LIKE %?1% AND pc.name = ?2 order by post_time", nativeQuery = true)
+	@Query(value = "SELECT p.* FROM product p JOIN product_category pc ON p.category_id = pc.id WHERE p.name LIKE %?1% AND pc.name = ?2 order by post_time DESC", nativeQuery = true)
 	public List<Product> findByProductOrderByPostTime(String productName,String categoryName );
 	
 }

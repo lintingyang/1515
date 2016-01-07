@@ -16,112 +16,81 @@
 		<div class="col-md-1"></div>
 		<div class="col-md-10" id="productlist">
 		
+		<div class="holder"></div>			
+	<div id="itemContainer">
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+		<div class="proddiv"><img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac</div>		
+	</div>
+	<div class="holder"></div>
 		
-
 		
 		
-			<div class="row">
-				<div class="col-md-3">
-					<div class="prolist"
-						onclick="location.href='/product/2';">
-						<img class="prodimg" src="/resources/imgs/phone.jpg">雙雙的Mac
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="prolist">
-						<img class="prodimg" src="/resources/imgs/phone.jpg">雙雙的Mac
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="prolist">
-						<img class="prodimg" src="/resources/imgs/phone.jpg">雙雙的Mac
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="prolist">
-						<img class="prodimg" src="/resources/imgs/phone.jpg">雙雙的Mac
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-md-3">
-					<div class="prolist">
-						<img class="prodimg" src="/resources/imgs/phone.jpg">雙雙的Mac
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="prolist">
-						<img class="prodimg" src="/resources/imgs/phone.jpg">雙雙的Mac
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="prolist">
-						<img class="prodimg" src="/resources/imgs/phone.jpg">雙雙的Mac
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="prolist">
-						<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-					</div>
-				</div>
-			</div>
-
-
-
-
-			<div class="row">
-				<div class="col-md-3">
-					<div class="prolist">
-						<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="prolist">
-						<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="prolist">
-						<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="prolist">
-						<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-md-3">
-					<div class="prolist">
-						<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="prolist">
-						<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="prolist">
-						<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="prolist">
-						<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-					</div>
-				</div>
-			</div>
-			
-			
-			
-			
-			
-			
+		
 		</div>
+			
+			
+			
+			
+			
+			
+	</div>
 	</div>
 	<nav class="alignCenter">
 		<ul class="pagination">
@@ -157,8 +126,20 @@ $('.categorylist').click(function() {
 		data:{ "orderby" : $(this).text()},
 		success: function(data){
 			console.log(data);
+			
+			
+			$("#itemContainer").html('');
+			$.each(data,function(i){
+				var productdiv = $("<div></div>");
+				var aclick = $("<a>").attr("href","/product/"+data[i].id);
+				var productimg = $("<img>").addClass("prodimg");
+				$(aclick).text(data[i].name).append($(productimg));
+				$(productdiv).addClass("proddiv").append($(aclick));
+				
+				$("#itemContainer").append(productdiv);
+				
+			})
 		}
-		
 	});
 	
 // 	$.ajax({
@@ -192,6 +173,23 @@ $('.categorylist').click(function() {
 });
 
 
+</script>
+<script>
+	$(function() {
+		$("div.holder").jPages({
+			containerID : "itemContainer",
+			perPage : 8,
+ 			fallback: 500,
+ 			first: "第一頁",
+ 			previous: "上一頁",
+ 			next: "下一頁",
+ 			last: "最後頁",
+		});
+
+	});
+	
+	
+	
 </script>
 <c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>
 
