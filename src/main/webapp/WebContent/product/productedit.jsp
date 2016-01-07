@@ -7,11 +7,10 @@
 <div class="container" style="margin: 100px auto;">
 	<div class="container">
 		<ul class="nav nav-tabs" id="tabs">
-			<li style="width: 20%; text-align: center;"><a href="#">已刊登</a></li>
-			<li style="width: 20%; text-align: center;"><a href="#">未刊登</a></li>
-			<li style="width: 20%; text-align: center;"><a href="#">待交換</a></li>
-			<li style="width: 20%; text-align: center;"><a href="#">已交換</a></li>
-			<li style="width: 20%; text-align: center;"><a href="#">被交換</a></li>
+			<li style="width: 25%; text-align: center;"><a href="#">已刊登</a></li>
+			<li style="width: 25%; text-align: center;"><a href="#">未刊登</a></li>
+			<li style="width: 25%; text-align: center;"><a href="#">待交換</a></li>
+			<li style="width: 25%; text-align: center;"><a href="#">已交換</a></li>
 		</ul>
 	</div>
 	<br>
