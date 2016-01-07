@@ -23,6 +23,10 @@ public class ProductDaoTest extends AbstractTest  {
 	@Test
 	public void testCrud(){
 		
+		
+		List<Product> entities = productDao.findUsersProductsByIsPosted(2, TrueFalse.FALSE);
+		assertEquals(0, entities.size());
+
 //		
 //		List<Product> entities = productDao.findAll();
 //		

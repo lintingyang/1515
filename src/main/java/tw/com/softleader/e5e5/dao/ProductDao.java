@@ -54,7 +54,7 @@ public interface ProductDao extends OurDao<Product> {
 	public List<Product> findAllByKeywords(String keywords);
 
 	//(11)查詢使用者已/未刊登的物品
-	@Query(value = "SELECT p.* FROM product p WHERE p.user_id = ?1 AND pc.post_status = ?2 order by post_time", nativeQuery = true)
+	@Query(value = "SELECT p.* FROM product p WHERE p.user_id = ?1 AND p.post_status = ?2 order by post_time", nativeQuery = true)
 	public List<Product> findUsersProductsByIsPosted(Integer id , TrueFalse postStatus);
 	
 	@Query(value = "SELECT p.* FROM product p JOIN product_category pc ON p.category_id = pc.id WHERE p.name LIKE %?1% AND pc.name = ?2 order by click_times", nativeQuery = true)

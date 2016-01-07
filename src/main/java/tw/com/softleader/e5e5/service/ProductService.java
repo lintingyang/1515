@@ -38,7 +38,7 @@ public class ProductService extends OurService<Product>{
 	}
 	
 	@Transactional
-	public List<Product> findByIsPosted(Integer id , TrueFalse postStatus){
+	public List<Product> findByUsersProductsIsPosted(Integer id , TrueFalse postStatus){
 		return productDao.findUsersProductsByIsPosted(id, postStatus);
 	}
 	
@@ -54,14 +54,16 @@ public class ProductService extends OurService<Product>{
 	public List<Product> getAllProducts() {
 		return productDao.findAll();
 	}
+	
 	//(3)update product's post_status
 	@Transactional
 	public Product update(Integer id, TrueFalse postStatus) {
 		Product product = productDao.findOne(id);
-//		product.setPostStatus(postStatus);
+		product.setPostStatus(postStatus);
 		productDao.save(product);
 		return productDao.findOne(id);
 	}
+	
 	//(4)update product's post_status return int
 		@Transactional
 		public int updateStatus(Integer id, TrueFalse postStatus) {
