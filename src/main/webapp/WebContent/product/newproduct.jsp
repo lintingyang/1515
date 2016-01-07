@@ -15,6 +15,9 @@
 			</div>
 			<div class="row">
 				<ul class="nav navbar-nav"> 
+				<li><div>123<a class="thumbnail" href="#"><img class="smaimg"
+							src="/resources/imgs/phone.jpg"></a></div></li>
+				
 					<li><a class="thumbnail" href="#"><img class="smaimg"
 							src="/resources/imgs/phone.jpg"></a></li>
 					<li><a class="thumbnail" href="#"><img class="smaimg"

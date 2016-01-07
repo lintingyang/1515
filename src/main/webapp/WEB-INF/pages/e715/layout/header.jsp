@@ -22,7 +22,7 @@
 <%-- <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import> --%>
 
 
-<script src="//cdn.jsdelivr.net/jquery.shadow-animation/1/mainfile"></script>
+<!-- <script src="//cdn.jsdelivr.net/jquery.shadow-animation/1/mainfile"></script> -->
 <link rel="styleshee" href="/resources/css/user.css" />
 <link rel="stylesheet" href="/resources/css/prodcss.css" />
 

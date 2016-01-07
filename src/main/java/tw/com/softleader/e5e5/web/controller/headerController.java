@@ -28,6 +28,9 @@ public class headerController {
 		return "/e715/user/login";
 	}
 	
+	
+	
+	//輸入完帳號密碼並按下登入鍵 進行登入檢查
 	@RequestMapping(value = "/logincheck" ,method = RequestMethod.POST)
 	public String loginCheck(Model model,@RequestParam("account")String account,
 			@RequestParam("password")String password,HttpSession session){
@@ -41,6 +44,8 @@ public class headerController {
 		}
 		return "/index";
 	}
+	
+	
 	@RequestMapping(value="/logout")
 	public String logout(HttpSession session){
 		session.removeAttribute("user");
