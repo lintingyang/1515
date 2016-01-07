@@ -2,11 +2,11 @@ package tw.com.softleader.e5e5.dao;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import tw.com.softleader.e5e5.common.dao.OurDao;
 import tw.com.softleader.e5e5.entity.Product;
+import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 
 public interface ProductDao extends OurDao<Product> {
 
@@ -52,5 +52,13 @@ public interface ProductDao extends OurDao<Product> {
 	//(10)關鍵字搜尋:產品名稱、交換地、使用者名稱、產品類別
 	@Query(value ="SELECT p.* FROM product p JOIN product_category pc ON p.category_id = pc.id JOIN [user] u ON p.user_id = u.id WHERE pc.name LIKE %?1% OR p.name LIKE %?1% OR p.location LIKE %?1% OR u.name LIKE %?1%", nativeQuery = true)
 	public List<Product> findAllByKeywords(String keywords);
+
+	@Query(value = "SELECT p.* FROM product p JOIN [user] u ON p.user_id = u.id WHERE u.name LIKE %?1%", nativeQuery = true)
+	public List<Product> findUsersProductsByIsPosted(String userName , TrueFalse postStatus);
 	
+	@Query(value = "SELECT p.* FROM product p JOIN product_category pc ON p.category_id = pc.id WHERE p.name LIKE %?1% AND pc.name = ?2 order by click_times", nativeQuery = true)
+	public List<Product> findByProdcutOrderByClickTimes(String productName,String categoryName );
+
+	@Query(value = "SELECT p.* FROM product p JOIN product_category pc ON p.category_id = pc.id WHERE p.name LIKE %?1% AND pc.name = ?2 order by post_time", nativeQuery = true)
+	public List<Product> findByProductOrderByPostTime(String productName,String categoryName );
 }
