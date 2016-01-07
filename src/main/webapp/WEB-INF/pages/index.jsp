@@ -23,7 +23,7 @@
 			<div class="row">
 				<div class="col-md-3">
 					<div class="prolist"
-						onclick="location.href='/WebContent/product/product.jsp';">
+						onclick="location.href='/product/2';">
 						<img class="prodimg" src="/resources/imgs/phone.jpg">雙雙的Mac
 					</div>
 				</div>

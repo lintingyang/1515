@@ -7,17 +7,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import tw.com.softleader.e5e5.entity.Chat;
 import tw.com.softleader.e5e5.entity.Exchange;
 import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.service.ExchangeService;
-
+import tw.com.softleader.e5e5.service.ProductPictureService;
 import tw.com.softleader.e5e5.entity.ProductCategory;
+import tw.com.softleader.e5e5.entity.ProductPicture;
+import tw.com.softleader.e5e5.entity.User;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
+import tw.com.softleader.e5e5.security.entity.SecRole;
 import tw.com.softleader.e5e5.service.ProductService;
 
 @Controller
@@ -27,6 +33,31 @@ public class ProductController {
 
 	@Autowired
 	public ProductService productService;
+	@Autowired
+	public ProductPictureService productPictureService;
+	@Autowired
+	public ExchangeService exchangeService;
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public String editPage(@PathVariable("id") final int id, final Model model) {
+		
+//		SecRole role = secRoleService.getOne(id);
+		
+//		model.addAttribute("entity", role);
+		Product product = productService.getOne(id);
+		List<ProductPicture> productPictures = productPictureService.getProductPictures(product);
+		model.addAttribute("product", product);
+		model.addAttribute("productPictures", productPictures);
+		return "/e715/product/product";
+	}
+	
+	@RequestMapping(value = "/findexchange")
+	@ResponseBody
+	public List<Exchange> add(@ModelAttribute @RequestParam("id") Integer id, Model model) {
+		List<Exchange> exchanges=exchangeService.findByProductAId(id);
+
+		return exchanges;
+	}
 	
 	//銘 新增商品
 	@RequestMapping(value = "/add")
