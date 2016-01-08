@@ -48,15 +48,29 @@ public class ProductService extends OurService<Product>{
 		return list;
 	}
 	
+	//(11)查詢使用者已/未刊登的物品/Enum
+		@Transactional
+		public List<Product> findByUsersProductsIsPosted(Integer id , TrueFalse postStatus){
+			return productDao.findUsersProductsByIsPosted(id, postStatus);
+		}
+		
+		//(11)查詢使用者已/未刊登的物品/String
+		@Transactional
+		public List<Product> findByUsersProductsIsPosted(Integer id , String postStatus){
+			return productDao.findUsersProductsByIsPosted(id, postStatus);
+		}
+		
+
+		//(12)查詢使用者已/待交換的物品/String
+		public List<Product> findUsersProductsByExchange(Integer id , String post){
+			return productDao.findUsersProductsByExchange(id, post);
+		}
 	@Transactional
-	public List<Product> findByUsersProductsIsPosted(Integer id , TrueFalse postStatus){
-		return productDao.findUsersProductsByIsPosted(id, postStatus);
+	public List<Product> findByUserId(Integer id ){
+		return productDao.findByUserId(id);
 	}
 	
-	@Transactional
-	public List<Product> findByUsersProductsIsPosted(Integer id , String postStatus){
-		return productDao.findUsersProductsByIsPosted(id, postStatus);
-	}
+
 	
 	//後台
 	//(1)findOne byId
@@ -183,9 +197,11 @@ public class ProductService extends OurService<Product>{
 
 	// (14)新增產品
 	@Transactional
-	public Product insert(String name,int user, int category, String status, String description, 
-						LocalDateTime deadline,Time transactionTime, String location, 
-						String tradeWay, String wishItem, TrueFalse postStatus) {
+	public Product insert(String name,int user, int category, String status, 
+							String description, LocalDateTime deadline, 
+							LocalDateTime startTime, Time transactionTime, 
+							String location, String tradeWay, String wishItem, 
+							TrueFalse postStatus) {
 		Product product = new Product();
 		product.setName(name);
 		product.setUserId(userDao.findOne(user));
@@ -193,6 +209,7 @@ public class ProductService extends OurService<Product>{
 		product.setStatus(status);
 		product.setDescription(description);
 		product.setPostTime(LocalDateTime.now());
+		product.setStartTime(startTime);
 		product.setDeadline(deadline);
 		product.setTransactionTime(transactionTime);
 		product.setLocation(location);

@@ -8,11 +8,16 @@ margin: auto;
 	height: 260px;
 	width: 200px;
 	text-align: center; 
+	color:gray;
 	margin:15px;
-	box-shadow:none;
 	cursor :pointer;
 	box-shadow:0px 0px 1px gray;
 	}
+.proddiv > a{
+	color:gray;
+	text-decoration:none;
+}
+
 div.holder{
 	width: 350px;
 	margin: 20px auto 20px auto;
@@ -20,7 +25,7 @@ div.holder{
 .prodimg{
 	width: 200px;
 	height:200px;
-	margin:auto;
+	margin: 0 auto;
 /* 	border: 1px solid gray; */
 }
 

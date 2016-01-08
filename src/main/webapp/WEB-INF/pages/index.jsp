@@ -6,13 +6,13 @@
 	<div class="container">
 		<ul class="nav nav-tabs" id="tabs">
 			<li style="width: 25%; text-align: center;"><a
-				class="categorylist" href="#">熱門</a></li>
+				class="categorylist searchbtn" onclick="changesearch" href="#">熱門</a></li>
 			<li style="width: 25%; text-align: center;"><a
-				class="categorylist" href="#">最新</a></li>
+				class="categorylist searchbtn" onclick="changesearch" href="#">最新</a></li>
 			<li style="width: 25%; text-align: center;"><a
-				class="categorylist" href="#">誠信</a></li>
+				class="categorylist searchbtn" onclick="changesearch" href="#">誠信</a></li>
 			<li style="width: 25%; text-align: center;"><a
-				class="categorylist" href="#">推薦</a></li>
+				class="categorylist searchbtn" onclick="changesearch" href="#">推薦</a></li>
 		</ul>
 	</div>
 	<br>
@@ -23,43 +23,68 @@
 			<div class="holder"></div>
 			<div id="itemContainer">
 
-				<c:forEach items="${products}" var="product">
-					<div class="proddiv">
-						<img class="prodimg" src="/resources/imgs/01.jpg">${ product.name }
-					</div>
-				</c:forEach>
-
 			</div>
 			<div class="holder"></div>
-
-
-
-
 		</div>
-
-
-
-
-
-
 	</div>
 </div>
 
 
 
-
+<!-- $("#searchbar").text() -->
 <script type="text/javascript">
-	$('.categorylist').click(function() {
+var searchType = "熱門";
+function changesearch(){
+	console.log(searchType);
+	$(searchType) = $(this).text();
+}
+
+$(function() { //畫面第一次進入時出現的product list
+	$.ajax({
+		contentType : "application/json",
+		url : "/query",
+		dataType : "json",
+		type : "get",
+		data : {"orderby" : "熱門","namelike": "${namelike}" },
+		success : function(data) {
+			console.log(data);
+
+			$("#itemContainer").html('');
+			$.each(data,function(i) {
+				var productdiv = $("<div></div>");
+				var aclick = $("<a>").attr("href","/product/" + data[i].id);
+				var productimg = $("<img>").addClass("prodimg");
+				var p = $("<span>").text(data[i].name);
+				$(aclick).append($(productimg)).append($(p));
+				$(productdiv).addClass("proddiv").append($(aclick));
+
+				$("#itemContainer").append(productdiv);
+				getpicture(data[i], productimg);})
+
+				$("div.holder").jPages({
+						containerID : "itemContainer",
+						perPage : 20,
+						fallback : 500,
+						first : "第一頁",
+						previous : "上一頁",
+						next : "下一頁",
+						last : "最後頁",
+					});
+			
+				}
+			});
+
+		});
+
+	$('.searchbtn').click(function() { //點選排列方式後按照順序排列
 		$.ajax({
 			contentType : "application/json",
 			url : "/query",
 			dataType : "json",
 			type : "get",
-			data : {
-				"orderby" : $(this).text()
-			},
+			data : {"orderby" : searchType,"namelike": $("#searchbar").val()},
 			success : function(data) {
-				console.log(data);
+// 				console.log(data);
 
 				$("#itemContainer").html('');
 				$.each(data,
@@ -67,7 +92,8 @@
 					var productdiv = $("<div></div>");
 					var aclick = $("<a>").attr("href","/product/" + data[i].id);
 					var productimg = $("<img>").addClass("prodimg");
-					$(aclick).text(data[i].name).append($(productimg));
+					var p = $("<span>").text(data[i].name);
+					$(aclick).append($(productimg)).append($(p));
 					$(productdiv).addClass("proddiv").append($(aclick));
 
 					$("#itemContainer").append(productdiv);
@@ -87,7 +113,7 @@
 
 			});
 
-	function getpicture(prod, prodimg) {
+	function getpicture(prod, prodimg) { //取得每一個商品的物件
 		var formData = {
 			"id" : prod.id
 		}
@@ -109,7 +135,7 @@
 
 	$(function() {
 		$("div.holder").jPages({
-			containerID : "itemContainer",
+			containerID : "itemContainer1",
 			perPage : 20,
 			fallback : 500,
 			first : "第一頁",
