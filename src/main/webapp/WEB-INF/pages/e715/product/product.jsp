@@ -53,16 +53,12 @@
 
 			</ul>
 		</div>
-
-
-
 	</div>
 	<div class="col-md-6">
 		<h3>${product.name}</h3>
 		<div>
 			<h5>希望交易商品：</h5>
 			<br> ${product.wishItem}
-
 		</div>
 		<hr>
 		<div>
@@ -79,17 +75,15 @@
 		<div>
 			<h5>交易方式：${product.tradeWay} </h5>
 		</div>
-
 		<div class="container"
 			style="width: 100%; height: 100px; text-align: center;">
 			<input class="btn btn-primary btn-lg" type="button" value="我要交換" onclick="location.href='/WebContent/product/exchangeproduct.jsp'">
 		</div>
 	</div>
 
-
 	<div class="col-md-12">
 		<div>
-			<!-- Nav tabs -->
+			<!-- 功能選單 -->
 			<br> <br>
 			<ul class="nav nav-tabs" role="tablist">
 				<li role="presentation" class="active"><a href="#question"
@@ -98,51 +92,42 @@
 					aria-controls="profile" role="tab" data-toggle="tab">交換物品</a></li>
 			</ul>
 
-			<!-- Tab panes -->
+			<!-- 問與答區塊開始 -->
 			<div class="tab-content">
 				<div role="tabpanel" class="tab-pane active" id="question">
-					question
-					<table class="table table-striped">
-						<tr>
-							<td><h4>Question:</h4>我可以用兩個CityCoffee跟你換嗎
-								<hr>
-								<h4>Answer:</h4>不行喔<br></td>
-						</tr>
-						<tr>
-							<td><h4>Question:</h4> 全新的嗎
-								<hr>
-								<h4>Answer:</h4>九成新<br></td>
-						</tr>
-						<tr>
-							<td><h4>Question:</h4>AAA <br>
-								<hr>
-								<h4>Answer:</h4>BBB<br></td>
-						</tr>
-					</table>
+					<table class="table table-striped" id="qatable"></table>
+<!-- 						<tr> -->
+<!-- 							<td><h4>Question:</h4>我可以用兩個CityCoffee跟你換嗎 -->
+<!-- 								<hr> -->
+<!-- 								<h4>Answer:</h4>不行喔<br></td> -->
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td><h4>Question:</h4> 全新的嗎 -->
+<!-- 								<hr> -->
+<!-- 								<h4>Answer:</h4>九成新<br></td> -->
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td><h4>Question:</h4>AAA <br> -->
+<!-- 								<hr> -->
+<!-- 								<h4>Answer:</h4>BBB<br></td> -->
+<!-- 						</tr> -->
 					<div>
-						
+						<!-- 發問區開始 -->
 						<div style="text-align: center;">
-						
-							<textarea   rows="9" cols="100" placeholder="提出發問..."></textarea>
+							<textarea rows="10" cols="100" placeholder="提出問題..."></textarea>
 							<br>
-							<br> <input type="button" value="送出" class="btn btn-primary">
-							<div class="checkbox">
-								<label> <input type="checkbox"> 匿名發言
-								</label>
+							<label><input type="checkbox">匿名發言</label>
+							<br>
+							<br> 
+							<input type="button" value="送出" class="btn btn-primary">
+							<div class="checkbox">	
 							</div>
 						</div>
+						<!-- 發問區結束 -->
 					</div>
-
-				</div>
-
-
-
-
-
-
-
+				</div><!-- 問與答區塊結束 -->
+				<!-- exchange區塊開始 -->
 				<div role="tabpanel" class="tab-pane" id="exchange">
-					exchange
 					<table class="table table-striped" id="testtable">
 <!-- 						<tr> -->
 <!-- 							<td> -->
@@ -254,17 +239,9 @@
 <!-- 								</div> -->
 <!-- 							</td> -->
 <!-- 						</tr> -->
-
-
-
 					</table>
-	
-
-
-				</div>
-
+				</div><!-- exchange區塊結束 -->
 			</div>
-
 		</div>
 	</div>
 </div>
@@ -278,7 +255,6 @@ $(function(){
         e.preventDefault();
         return false;
     });
-    
 
  	var formData={"id":${product.id}}
     $.ajax({
@@ -306,12 +282,10 @@ $(function(){
 					 this.productBId.userId.account+'<a href="#"></a></h4></li><li>'+
 					 this.productBId.userId.name +'</li><li>'+this.productBId.userId.schoolName+
 					 '</li></ul></li><li><span class="glyphicon glyphicon-plus">123</span></li></ul></div></td></tr>')
-			 
 		 });
-
 	}
  	
-});
+});/*end of function*/
 
 </script>
 <c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>
