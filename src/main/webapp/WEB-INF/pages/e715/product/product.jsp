@@ -183,13 +183,16 @@ $(function(){
        contentType : "application/json"
      });
  	 function show(data) {
- 		var obj = JSON.stringify(data);
- 		var imgId=0;
+ 		 //alert("rear"+data[0].tradeStatus);
+ 		 var obj = JSON.stringify(data);
+ 		 var imgId=0;
+//  		alert(obj[3]);
 		 $.each($.parseJSON(obj), function() {
 			imgId++;
 			var excBtn2='';
-			var userId1="${user.id}";
-				if(this.productBId.userId.id==userId1){
+			var loginId="${user.id}";
+			var prodUserId="${product.userId.account}";
+				if(prodUserId.length!=0 && prodUserId==loginId){
 					excBtn2 = '<button type="button" class="btn btn-primary">交換</button>';
 				}
 			
