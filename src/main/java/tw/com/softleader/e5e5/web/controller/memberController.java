@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.softleader.e5e5.entity.Exchange;
 import tw.com.softleader.e5e5.entity.Product;
+import tw.com.softleader.e5e5.entity.ProductPicture;
 import tw.com.softleader.e5e5.entity.User;
 import tw.com.softleader.e5e5.entity.enums.Grade;
 import tw.com.softleader.e5e5.entity.enums.Sex;
@@ -42,6 +43,10 @@ public class memberController {
 
 	Logger log = Logger.getLogger(this.getClass());
 	
+	@RequestMapping("/")
+	public String home(Model model) {
+		return "redirect:/";
+	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String showUserPage(@PathVariable("id") final int id, final Model model) {
@@ -82,7 +87,7 @@ public class memberController {
 				}
 			}
 		}
-		model.addAttribute("user", user);
+		model.addAttribute("currUser", user);
 		model.addAttribute("good", good);
 		model.addAttribute("bad", bad);
 		

@@ -13,15 +13,15 @@
 			<div class="col-md-3"></div>
 			<div class="col-md-3" style="text-align: center;margin-top:20px;">
 				<img class="img-circle" style="width: 120px;"
-					src="${user.picture}">
+					src="${currUser.picture}">
 			</div>
 			<div class="col-md-6">
 				<br> 
 				<ul style="list-style: none;">
 					<li><a href="#"><span class="glyphicon glyphicon-envelope iconpme" ></span></a> 
 						<a href="#"><span class="glyphicon glyphicon-plus iconpme"  style="margin-left: 20px;"></span></a></li>
-					<li><h4>${user.name}</h4></li>
-					<li><span style="color: gray;">${user.schoolName}</span><br></li>
+					<li><h4>${currUser.name}</h4></li>
+					<li><span style="color: gray;">${currUser.schoolName}</span><br></li>
 
 
 				</ul>
@@ -36,7 +36,7 @@
 			<div class="col-md-3"></div>
 			<div class="col-md-3" style="text-align: center;">
 				<div class="row">
-				<h4 style="color: gray;">${user.account}</h4>	
+				<h4 style="color: gray;">${currUser.account}</h4>	
 				</div>
 				<div class="row">
 					<div class="col-md-1"></div>
@@ -50,7 +50,7 @@
 					<div class="col-md-1"></div>
 				</div>
 			</div>
-			<div class="col-md-6"><span style="margin-left:40px;color:gray;">${user.aboutMe}</span></div>
+			<div class="col-md-6"><span style="margin-left:40px;color:gray;">${currUser.aboutMe}</span></div>
 		</div>
 		<div class="col-md-1"></div>
 	</div>
@@ -75,7 +75,7 @@ $(function() {
 		url : "/product/query",
 		dataType : "json",
 		type : "get",
-		data : {"id" : "${user.id}"},
+		data : {"id" : "${currUser.id}"},
 		success : function(data) {
 			$("#itemContainer").html('');
 			$.each(data,
