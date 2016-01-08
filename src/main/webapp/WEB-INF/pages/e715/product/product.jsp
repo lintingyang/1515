@@ -188,9 +188,11 @@ $(function(){
 		 $.each($.parseJSON(obj), function() {
 			imgId++;
 			var excBtn2='';
-			if(${user.id}==this.productBId.userId.id){
-				excBtn2 = '<button type="button" class="btn btn-primary">交換</button>';
-			}
+			var userId1="${user.id}";
+				if(this.productBId.userId.id==userId1){
+					excBtn2 = '<button type="button" class="btn btn-primary">交換</button>';
+				}
+			
 			$("#testtable").append('<tr><td><div class="col-md-2"><img id="imgId'+this.productBId.id+'" style="height: 100px;"></div><div class="col-md-6"><h4>'+
 					 this.productBId.name+'</h4>物品狀況：'+this.productBId.status +
 					 '<br>產品描述：'+this.productBId.description+
