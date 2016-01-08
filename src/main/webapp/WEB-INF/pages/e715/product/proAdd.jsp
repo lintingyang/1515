@@ -17,13 +17,12 @@
 		$('#wish').focusout(function(){
 			$('#divWish').attr('style', 'display:none');
 		});
-		$('#notPost').focusin(function(){
-			$('#divDeadline').attr('style', 'display:none');
-		});
-		$('#notPost').focusout(function(){
+		$('#yesPost').focusin(function(){
 			$('#divDeadline').attr('style', '');
 		});
-		
+		$('#yesPost').focusout(function(){
+			$('#divDeadline').attr('style', 'display:none');
+		});
 		
 		
 		
@@ -95,12 +94,12 @@
 				<label class="col-sm-4 form-control-label">上架與否</label>
 				<div class="col-sm-10">
 					<div class="radio">
-						<label> <input type="radio" name="postStatus" value="TRUE" checked>刊登</label> 
-						<label> <input type="radio" name="postStatus" value="FALSE" id="notPost">暫不刊登</label>
+						<label> <input type="radio" name="postStatus" value="TRUE" id="yesPost" >刊登</label> 
+						<label> <input type="radio" name="postStatus" value="FALSE" id="notPost" checked>暫不刊登</label>
 					</div>
 				</div>
 				</div>
-				<div class="form-group row" id="divDeadline">
+				<div class="form-group row" id="divDeadline" style="display:none">
 					<label for="inputEmail3" class="col-sm-3 form-control-label">交易期限</label>
 					<div class="col-sm-10">
 						西元<input type="text" name="pyyyy" placeholder="2016" size="4" maxlength="4">年
