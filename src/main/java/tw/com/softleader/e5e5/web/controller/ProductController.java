@@ -39,119 +39,50 @@ public class ProductController {
 	public ProductPictureService productPictureService;
 	@Autowired
 	public ExchangeService exchangeService;
+
 	
 	@Autowired
 	private ServletContext servletContext;
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String editPage(@PathVariable("id") final int id, final Model model) {
-		
-//		SecRole role = secRoleService.getOne(id);
-		
-//		model.addAttribute("entity", role);
+
+		// SecRole role = secRoleService.getOne(id);
+
+		// model.addAttribute("entity", role);
 		Product product = productService.getOne(id);
 		List<ProductPicture> productPictures = productPictureService.getProductPictures(product);
 		model.addAttribute("product", product);
 		model.addAttribute("productPictures", productPictures);
 		return "/e715/product/product";
 	}
-	
+
 	@RequestMapping(value = "/findexchange")
 	@ResponseBody
-	public List<Exchange> add(@ModelAttribute @RequestParam("id") Integer id, Model model) {
-		List<Exchange> exchanges=exchangeService.findByProductAId(id);
+	public List<Exchange> findExchange(@RequestParam("id") Integer id, Model model) {
+		List<Exchange> exchanges = exchangeService.findByProductAId(id);
 
 		return exchanges;
 	}
-	
-	//新增商品
+
+
+	@RequestMapping(value = "/findproductimg")
+	@ResponseBody
+	public ProductPicture findProductPicture(@RequestParam("id") Integer id, Model model) {
+		Product product = productService.getOne(id);
+		List<ProductPicture> productPictures = productPictureService.getProductPictures(product);
+		if (productPictures != null) {
+			return productPictures.get(0);
+		}else{
+			return null;
+		}
+	}
+
+
 	@RequestMapping(value = "/add")
 	public String add(Model model) {
 		return "/e715/product/proAdd";
 	}
-	//新增商品
-	@RequestMapping(value = "/insert")
-	public String insert(Model model, @ModelAttribute Product product, 
-									  @RequestParam("pCategory") int pCategory,
-									  @RequestParam("pPicture") MultipartFile pPicture,
-									  @RequestParam("pStatusBad") String pStatusBad, 
-									  @RequestParam("pWishItem") String pWishItem, 
-									  @RequestParam("pyyyy") String pyyyy, 
-									  @RequestParam("pMM") String pMM, 
-									  @RequestParam("pdd") String pdd, 
-									  @RequestParam("pHH") String pHH, 
-									  @RequestParam("pmm") String pmm,
-									  HttpSession session) {
-		
-		//錯誤訊息顯示
-//		Map<String, String> errorMessage = new HashMap<>();
-//		session.setAttribute("errorMsg", errorMessage);
-//		if(product.getName() == null || product.getName().trim().length() == 0){
-//			errorMessage.put("name", "請輸入商品標題/名稱");
-//		}
-//		if(product.getDescription() == null || product.getDescription().trim().length() == 0){
-//			errorMessage.put("description", "請輸入商品描述");
-//		}
-//		if(product.getLocation() == null || product.getLocation().trim().length() == 0){
-//			errorMessage.put("description", "請輸入交換地點");
-//		}
-//		try{
-//			LocalDateTime.of(pyyyy, pMM, pdd, pHH, pmm);
-//		}catch(Exception e){
-//			errorMessage.put("transTime", "時間格式不正確");
-//		}
-//		if(errorMessage != null && !errorMessage.isEmpty()) {
-//			return "redirect:/product/insert";
-//		}
-		
-		//取userId
-		User userData = (User) session.getAttribute("user");
-		
-		//時間處理
-		LocalDateTime dateTime =null;
-		if(pyyyy == null){
-			dateTime = null;				
-		}else{
-			int year = Integer.parseInt(pyyyy);
-			int month = Integer.parseInt(pMM);
-			int day = Integer.parseInt(pdd);
-			int hour = Integer.parseInt(pHH);
-			int minute = Integer.parseInt(pmm);
-			dateTime = LocalDateTime.of(year, month, day, hour, minute);
-		}
-		
-		//存入資料
-		Product newProduct = productService.insert(product.getName(),
-				userData.getId(), 
-				pCategory, 
-				product.getStatus() +"(" +pStatusBad +")", 
-				product.getDescription(), 
-				null, 
-				product.getTransactionTime(), 
-				product.getLocation(), 
-				product.getTradeWay(), product.getWishItem() +"(" +pWishItem +")", 
-				product.getPostStatus());
-		System.out.println("newProduct========================" + newProduct);
-		if(newProduct != null){
-			model.addAttribute("result", "新增成功");
-			session.setAttribute("new", newProduct);
-		}else{
-			model.addAttribute("result", "新增失敗");
-		}
-//		//get ProductId
-//		Product p = productService. 
-		
-		//存取productPicture
-		String path = productPictureService.upLoadImage(newProduct.getId(), servletContext, pPicture);
-		int numPicture = productPictureService.insertImage(newProduct.getId(), path);
-		if(numPicture == 1){
-			model.addAttribute("picResult", "圖片新增成功");
-		}else{
-			model.addAttribute("picResult", "圖片新增失敗");
-		}
-		
-		return "/e715/product/proAdd";
-		
-	}
 
-	}
+
+}
