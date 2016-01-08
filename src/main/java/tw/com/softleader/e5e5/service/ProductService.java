@@ -49,23 +49,29 @@ public class ProductService extends OurService<Product>{
 	}
 	
 	//(11)查詢使用者已/未刊登的物品/Enum
+		@Transactional
+		public List<Product> findByUsersProductsIsPosted(Integer id , TrueFalse postStatus){
+			return productDao.findUsersProductsByIsPosted(id, postStatus);
+		}
+		
+		//(11)查詢使用者已/未刊登的物品/String
+		@Transactional
+		public List<Product> findByUsersProductsIsPosted(Integer id , String postStatus){
+			return productDao.findUsersProductsByIsPosted(id, postStatus);
+		}
+		
+
+		//(12)查詢使用者已/待交換的物品/String
+		public List<Product> findUsersProductsByExchange(Integer id , String post){
+			return productDao.findUsersProductsByExchange(id, post);
+		}
 	@Transactional
-	public List<Product> findByUsersProductsIsPosted(Integer id , TrueFalse postStatus){
-		return productDao.findUsersProductsByIsPosted(id, postStatus);
-	}
-	
-	//(11)查詢使用者已/未刊登的物品/String
-	@Transactional
-	public List<Product> findByUsersProductsIsPosted(Integer id , String postStatus){
-		return productDao.findUsersProductsByIsPosted(id, postStatus);
+	public List<Product> findByUserId(Integer id ){
+		return productDao.findByUserId(id);
 	}
 	
 
-	//(12)查詢使用者已/待交換的物品/String
-	public List<Product> findUsersProductsByExchange(Integer id , String post){
-		return productDao.findUsersProductsByExchange(id, post);
-	}
-
+	
 	//後台
 	//(1)findOne byId
 	@Transactional
