@@ -179,7 +179,7 @@ $(function(){
  		var imgId=0;
 		 $.each($.parseJSON(obj), function() {
 			 imgId++;
-			 console.log("#imgId"+this.productBId.id);
+			 //console.log("#imgId"+this.productBId.id);
 			 $("#testtable").append('<tr><td><div class="col-md-2"><img id="imgId'+this.productBId.id+'" style="height: 100px;"></div><div class="col-md-6"><h4>'+
 					 this.productBId.name+'</h4>物品狀況：'+this.productBId.status +
 					 '<br>產品描述：'+this.productBId.description+

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,12 +65,13 @@ public class indexController {
 	
 	@RequestMapping(value = "/queryimg")
 	@ResponseBody
-	public List<ProductPicture> imglist(@RequestBody Product product){
-		log.error("================================================="+product.getId());
+	public List<ProductPicture> imglist(@RequestParam("id") Integer id, Model model){
+//		log.error("================================================="+product.getId());
+		Product product = productService.getOne(id);
 		List<ProductPicture> list = productPictureService.getProductPictures(product);
-//		for(ProductPicture result : list){
-//			log.error(result);
-//		}
+		for(ProductPicture result : list){
+			log.error("================================================="+result);
+		}
 		return list;
 	}
 }

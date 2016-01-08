@@ -238,7 +238,7 @@
 
 $('.categorylist').click(function() {
 	
-	console.log("category = "+ $(this).text());
+// 	console.log("category = "+ $(this).text());
 	
 	
 	$.ajax({
@@ -248,7 +248,7 @@ $('.categorylist').click(function() {
 		type:"get",
 		data:{ "orderby" : $(this).text()},
 		success: function(data){
-			console.log(data);
+// 			console.log(data);
 			
 			
 			$("#itemContainer").html('');
@@ -286,17 +286,18 @@ $('.categorylist').click(function() {
 // 			})
 // 		};
 function getpicture(prod){
+	var formData={"id":prod.id}
 	$.ajax({
 			contentType:"application/json",
 			url:"/queryimg",
 			dataType :"json",
-			type:"post",
-			data:JSON.stringify({id : prod.id}),
+			type:"get",
+			data:formData,
 			success: function(data){
-				console.log(JSON.stringify(data));
-				}
-			})
-		};
+				console.log("Test"+JSON.stringify(data));
+			}
+	});
+}
 </script>
 <script>
 	$(function() {
