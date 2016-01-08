@@ -3,8 +3,48 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/WEB-INF/pages/e715/layout/header.jsp"/>
 <c:import url="/WEB-INF/pages/layout/meta.jsp" />
+
+<link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+<script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="jqueryui/style.css">
+
 <script type="text/javascript">
 	$(function() {
+		//時間
+		$('#pStartTime').datepicker();
+		$('#pDeadline').datepicker();
+		
+		//顯示隱藏表格
+		$('input[name *= "status"]').change(function(){
+			if($(this).val() == "破損"){
+				$('#pStatusBad').attr('type', '');
+	 		}else{
+	 			$('#pStatusBad').attr('type', 'hidden');
+	 		}
+		});
+// 		$('input[name *= "postStatus"]').change(function(){
+// 			if($(this).val() == "TRUE"){
+// 				$('#divTime').attr('type', '');
+// 	 		}else{
+// 	 			$('#divTime').attr('type', 'hidden');
+// 	 		}
+// 		});
+// 		$('#wish').focusin(function(){
+// 			$('#divWish').attr('style', '');
+// 		});
+// 		$('#wish').focusout(function(){
+// 			$('#divWish').attr('style', 'display:none');
+// 		});
+// 		$('#yesPost').focusin(function(){
+// 			$('#divTime').attr('style', '');
+// 		});
+// 		$('#yesPost').focusout(function(){
+// 			$('#divTime').attr('style', 'display:none');
+// 		});
+		
+		
+		
 		$('#btnSend').click(function() {
 			swal({
 				title : "新增成功",
@@ -58,8 +98,8 @@
 						<div class="radio">
 							<label> <input type="radio" name="status" value="使用過">使用過</label></div>
 						<div class="radio">
-							<label> <input type="radio" name="status" value="破損">破損：
-							<input type="text" class="form" id="pStatusBad" name="pStatusBad" 
+							<label> <input type="radio" name="status" value="破損" id="bad">破損 &nbsp;
+							<input type="hidden" class="form" id="pStatusBad" name="pStatusBad" 
 								placeholder="請敘述破損狀況.."></label></div>
 					</div>
 				</div>
@@ -73,22 +113,29 @@
 				<label class="col-sm-4 form-control-label">上架與否</label>
 				<div class="col-sm-10">
 					<div class="radio">
-						<label> <input type="radio" name="postStatus" value="TRUE" checked>刊登</label> 
-						<label> <input type="radio" name="postStatus" value="FALSE">暫不刊登</label>
+						<label> <input type="radio" name="postStatus" value="TRUE" id="yesPost" checked>刊登</label> 
+						<label> <input type="radio" name="postStatus" value="FALSE" id="notPost" >暫不刊登</label>
 					</div>
 				</div>
-				
-			</div>
-				<div class="form-group row">
-					<label for="inputEmail3" class="col-sm-3 form-control-label">交易期限</label>
-					<div class="col-sm-10">
-						西元<input type="text" name="pyyyy" placeholder="2016" size="4" maxlength="4">年
-						<input type="text" name="pMM" placeholder="12" size="2" maxlength="2">月
-						<input type="text" name="pdd" placeholder="31" size="2" maxlength="2">日
-						<input type="text" name="pHH" placeholder="23" size="2" maxlength="2">時
-						<input type="text" name="pmm" placeholder="59" size="2" maxlength="2">分
+				</div>
+				<div id="divTime">
+					<div>
+						<p>刊登日期：<input type="text" id="pStartTime" name="pStartTime"></p>
+					</div>
+					<div>
+						<p>截止日期：<input type="text" id="pDeadline" name="pDeadline"></p>
 					</div>
 				</div>
+<!-- 				<div class="form-group row" id="divDeadline" style="display:none"> -->
+<!-- 					<label for="inputEmail3" class="col-sm-3 form-control-label">交易期限</label> -->
+<!-- 					<div class="col-sm-10"> -->
+<!-- 						西元<input type="text" name="pyyyy" placeholder="2016" size="4" maxlength="4">年 -->
+<!-- 						<input type="text" name="pMM" placeholder="12" size="2" maxlength="2">月 -->
+<!-- 						<input type="text" name="pdd" placeholder="31" size="2" maxlength="2">日 -->
+<!-- 						<input type="text" name="pHH" placeholder="23" size="2" maxlength="2">時 -->
+<!-- 						<input type="text" name="pmm" placeholder="59" size="2" maxlength="2">分 -->
+<!-- 					</div> -->
+<!-- 				</div> -->
 			</div>
 		</div>
 
@@ -137,11 +184,13 @@
 				<div class="radio">
 					<label> <input type="radio" name="wishItem" value="隨機" checked>隨機</label></div>
 				<div class="radio">
-					<label> <input type="radio" name="wishItem" value="NULL">贈送</label></div>
+					<label> <input type="radio" name="wishItem" value="免費">贈送</label></div>
 				<div class="radio">
-					<label> <input type="radio" name="wishItem" value="希望商品">希望商品：</label></div>
-				<textarea name="pWishItem" style="width: 80%;" class="form-control" rows="8"
-					placeholder="詳細敘述想要換到的商品"></textarea></div>
+					<label> <input type="radio" name="wishItem" value="希望商品" id="wish">希望商品</label></div>
+				<div id="divWish" style="display:none">
+					<textarea name="pWishItem" style="width: 80%;" class="form-control" rows="8"
+						placeholder="詳細敘述想要換到的商品"></textarea></div>
+				</div>
 			<div style="text-align: center; margin:50px auto;">
 				<button id="btnSend" type="submit" class="btn btn-success btn-lg">
 					<span class="glyphicon glyphicon-send" aria-hidden="true"></span> 送出

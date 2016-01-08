@@ -1,6 +1,7 @@
 package tw.com.softleader.e5e5.web.controller;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -84,6 +85,18 @@ public class ProductController {
 		}
 	}
 
+	@RequestMapping(value = "/query")
+	@ResponseBody
+	public List<Product> query(@RequestParam("id") Integer id, HttpSession session) {
+		List<Product> list = null;
+		
+		list = productService.findByUserId(id);
+		
+		return list;
+
+	}
+	
+	
 
 	@RequestMapping(value = "/add")
 	public String add(Model model) {
@@ -96,6 +109,7 @@ public class ProductController {
 									  @RequestParam("pPicture") MultipartFile pPicture,
 									  @RequestParam("pStatusBad") String pStatusBad, 
 									  @RequestParam("pWishItem") String pWishItem, 
+									  @RequestParam("pStartTime") String pStartTime, 
 									  @RequestParam("pyyyy") String pyyyy, 
 									  @RequestParam("pMM") String pMM, 
 									  @RequestParam("pdd") String pdd, 
@@ -127,30 +141,56 @@ public class ProductController {
 		//取userId
 		User userData = (User) session.getAttribute("user");
 		
-		//時間處理
-		LocalDateTime dateTime =null;
-		if(pyyyy == null){
-			dateTime = null;				
+		//物品狀態 輸入值修改
+		String productStatus = null;
+		if(product.getStatus() == "破損"){
+			productStatus = product.getStatus() +"(" +pStatusBad +")";
 		}else{
-			int year = Integer.parseInt(pyyyy);
-			int month = Integer.parseInt(pMM);
-			int day = Integer.parseInt(pdd);
-			int hour = Integer.parseInt(pHH);
-			int minute = Integer.parseInt(pmm);
-			dateTime = LocalDateTime.of(year, month, day, hour, minute);
+			productStatus = product.getStatus();
 		}
+		
+		//希望清單 輸入值判斷
+		String productWish = null;
+		if(product.getWishItem() == "希望商品"){
+			productWish = pWishItem;
+		}else{
+			productWish = product.getWishItem();
+		}
+		
+		//時間處理
+		LocalDateTime startTime =null;
+		String month = pStartTime.substring(0, 2);
+		String day = pStartTime.substring(3, 5);
+		String year = pStartTime.substring(6, 10);
+		String str = year + "-" + month + "-" + day+" 00:00"; //"1986-04-08";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		try {
+			startTime = LocalDateTime.parse(str, formatter);
+		} catch (Exception e) {
+		}
+		LocalDateTime deadline =null;
+		
+		
+//		if(pyyyy == null){
+//			dateTime = null;				
+//		}else{
+//			int year = Integer.parseInt(pyyyy);
+//			int month = Integer.parseInt(pMM);
+//			int day = Integer.parseInt(pdd);
+//			int hour = Integer.parseInt(pHH);
+//			int minute = Integer.parseInt(pmm);
+//			dateTime = LocalDateTime.of(year, month, day, hour, minute);
+//		}
+		
+		
 		
 		//存入資料
 		Product newProduct = productService.insert(product.getName(),
-				userData.getId(), 
-				pCategory, 
-				product.getStatus() +"(" +pStatusBad +")", 
-				product.getDescription(), 
-				null, 
-				product.getTransactionTime(), 
-				product.getLocation(), 
-				product.getTradeWay(), product.getWishItem() +"(" +pWishItem +")", 
-				product.getPostStatus());
+					userData.getId(), pCategory, productStatus, 
+					product.getDescription(), deadline, startTime,
+					product.getTransactionTime(), product.getLocation(), 
+					product.getTradeWay(), productWish, 
+					product.getPostStatus());
 		System.out.println("newProduct========================" + newProduct);
 		if(newProduct != null){
 			model.addAttribute("result", "新增成功");
@@ -158,8 +198,6 @@ public class ProductController {
 		}else{
 			model.addAttribute("result", "新增失敗");
 		}
-//		//get ProductId
-//		Product p = productService. 
 		
 		//存取productPicture
 		String path = productPictureService.upLoadImage(newProduct.getId(), servletContext, pPicture);

@@ -23,12 +23,6 @@
 			<div class="holder"></div>
 			<div id="itemContainer">
 
-				<c:forEach items="${products}" var="product">
-					<div class="proddiv">
-						<img class="prodimg" src="/resources/imgs/01.jpg">${ product.name }
-					</div>
-				</c:forEach>
-
 			</div>
 			<div class="holder"></div>
 
@@ -49,6 +43,45 @@
 
 
 <script type="text/javascript">
+
+$(function() {
+	$.ajax({
+		contentType : "application/json",
+		url : "/query",
+		dataType : "json",
+		type : "get",
+		data : {"orderby" : "熱門"},
+		success : function(data) {
+			console.log(data);
+
+			$("#itemContainer").html('');
+			$.each(data,
+				function(i) {
+				var productdiv = $("<div></div>");
+				var aclick = $("<a>").attr("href","/product/" + data[i].id);
+				var productimg = $("<img>").addClass("prodimg");
+				var p = $("<span>").text(data[i].name);
+				$(aclick).append($(productimg)).append($(p));
+				$(productdiv).addClass("proddiv").append($(aclick));
+
+				$("#itemContainer").append(productdiv);
+				getpicture(data[i], productimg);})
+
+				$("div.holder").jPages({
+						containerID : "itemContainer",
+						perPage : 20,
+						fallback : 500,
+						first : "第一頁",
+						previous : "上一頁",
+						next : "下一頁",
+						last : "最後頁",
+					});
+			
+				}
+			});
+
+		});
+
 	$('.categorylist').click(function() {
 		$.ajax({
 			contentType : "application/json",
@@ -59,7 +92,7 @@
 				"orderby" : $(this).text()
 			},
 			success : function(data) {
-				console.log(data);
+// 				console.log(data);
 
 				$("#itemContainer").html('');
 				$.each(data,
@@ -67,7 +100,8 @@
 					var productdiv = $("<div></div>");
 					var aclick = $("<a>").attr("href","/product/" + data[i].id);
 					var productimg = $("<img>").addClass("prodimg");
-					$(aclick).text(data[i].name).append($(productimg));
+					var p = $("<span>").text(data[i].name);
+					$(aclick).append($(productimg)).append($(p));
 					$(productdiv).addClass("proddiv").append($(aclick));
 
 					$("#itemContainer").append(productdiv);
@@ -109,7 +143,7 @@
 
 	$(function() {
 		$("div.holder").jPages({
-			containerID : "itemContainer",
+			containerID : "itemContainer1",
 			perPage : 20,
 			fallback : 500,
 			first : "第一頁",

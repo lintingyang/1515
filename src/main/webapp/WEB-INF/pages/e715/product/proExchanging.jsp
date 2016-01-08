@@ -75,9 +75,7 @@
 					</ul>
 				</div>
 			</div>
-
 		</div>
-
 	</div>
 	<div style="text-align: center;">
 		<button id="btnExchang" type="button" class="btn btn-success btn-lg">
@@ -86,7 +84,8 @@
 	</div>
 	<br>
 	<div style="text-align: center;">
-		<p><button type="button" class="btn btn-primary btn-lg">確認</button></p>
+		<p><button type="button" class="btn btn-primary btn-lg"
+			onclick="javascript:location.href='${thisProduct.id}'">回您交易的商品頁</button></p>
 	</div>
 </div>
 
