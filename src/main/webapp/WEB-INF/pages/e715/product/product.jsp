@@ -53,16 +53,12 @@
 
 			</ul>
 		</div>
-
-
-
 	</div>
 	<div class="col-md-6">
 		<h3>${product.name}</h3>
 		<div>
 			<h5>希望交易商品：</h5>
 			<br> ${product.wishItem}
-
 		</div>
 		<hr>
 		<div>
@@ -79,26 +75,16 @@
 		<div>
 			<h5>交易方式：${product.tradeWay} </h5>
 		</div>
-
 		<div class="container"
 			style="width: 100%; height: 100px; text-align: center;">
 			<input id="excBtn" class="btn btn-primary btn-lg" type="button" value="我要交換" onclick="location.href='/WebContent/product/exchangeproduct.jsp'">
 		</div>
 		
-		<!-- 下面這個btn銘要用的 -->
-		<div>
-			<form action="/product/exchanging">
-				<button id="btnExchang" type="submit" class="btn btn-success btn-lg">
-					<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> 轉入交易進行中畫面
-				</button>
-			</form>
-		</div>
 	</div>
-
 
 	<div class="col-md-12">
 		<div>
-			<!-- Nav tabs -->
+			<!-- 功能選單 -->
 			<br> <br>
 			<ul class="nav nav-tabs" role="tablist">
 				<li role="presentation" class="active"><a href="#question"
@@ -107,55 +93,46 @@
 					aria-controls="profile" role="tab" data-toggle="tab">交換物品</a></li>
 			</ul>
 
-			<!-- Tab panes -->
+			<!-- 問與答區塊開始 -->
 			<div class="tab-content">
 				<div role="tabpanel" class="tab-pane active" id="question">
-					question
-					<table class="table table-striped">
-						<tr>
-							<td><h4>Question:</h4>我可以用兩個CityCoffee跟你換嗎
-								<hr>
-								<h4>Answer:</h4>不行喔<br></td>
-						</tr>
-						<tr>
-							<td><h4>Question:</h4> 全新的嗎
-								<hr>
-								<h4>Answer:</h4>九成新<br></td>
-						</tr>
-						<tr>
-							<td><h4>Question:</h4>AAA <br>
-								<hr>
-								<h4>Answer:</h4>BBB<br></td>
-						</tr>
-					</table>
+					<table class="table table-striped" id="qatable"></table>
+<!-- 						<tr> -->
+<!-- 							<td><h4>Question:</h4>我可以用兩個CityCoffee跟你換嗎 -->
+<!-- 								<hr> -->
+<!-- 								<h4>Answer:</h4>不行喔<br></td> -->
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td><h4>Question:</h4> 全新的嗎 -->
+<!-- 								<hr> -->
+<!-- 								<h4>Answer:</h4>九成新<br></td> -->
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td><h4>Question:</h4>AAA <br> -->
+<!-- 								<hr> -->
+<!-- 								<h4>Answer:</h4>BBB<br></td> -->
+<!-- 						</tr> -->
 					<div>
-						
+						<!-- 發問區開始 -->
 						<div style="text-align: center;">
-						
-							<textarea   rows="9" cols="100" placeholder="提出發問..."></textarea>
+							<textarea rows="10" cols="100" placeholder="提出問題..."></textarea>
 							<br>
-							<br> <input type="button" value="送出" class="btn btn-primary">
-							<div class="checkbox">
-								<label> <input type="checkbox"> 匿名發言
-								</label>
+							<label><input type="checkbox">匿名發言</label>
+							<br>
+							<br> 
+							<input type="button" value="送出" class="btn btn-primary">
+							<div class="checkbox">	
 							</div>
 						</div>
+						<!-- 發問區結束 -->
 					</div>
-
-				</div>
-
-
-
-
-
-
-
+				</div><!-- 問與答區塊結束 -->
+				<!-- exchange區塊開始 -->
 				<div role="tabpanel" class="tab-pane" id="exchange">
 					<table class="table table-striped" id="testtable"></table>
 				</div>
-
+				<!-- exchange區塊結束 -->
 			</div>
-
 		</div>
 	</div>
 </div>
@@ -169,7 +146,6 @@ $(function(){
         e.preventDefault();
         return false;
     });
-    
 
  	var formData={"id":${product.id}}
     $.ajax({
@@ -183,18 +159,23 @@ $(function(){
        contentType : "application/json"
      });
  	 function show(data) {
- 		var obj = JSON.stringify(data);
- 		var imgId=0;
+ 		 //alert("rear"+data[0].tradeStatus);
+ 		 var obj = JSON.stringify(data);
+ 		 var imgId=0;
+//  		alert(obj[3]);
 		 $.each($.parseJSON(obj), function() {
 			imgId++;
 			var excBtn2='';
-			if(${user.id}==this.productBId.userId.id){
-				excBtn2 = '<button type="button" class="btn btn-primary">交換</button>';
-			}
+			var loginId="${user.id}";
+			var prodUserId="${product.userId.account}";
+				if(prodUserId.length!=0 && prodUserId==loginId){
+					excBtn2 = '<button id="cha" type="button" class="btn btn-primary" onclick="javascript:location.href=\'exchanging?id='+ this.id + '\'">交換</button>';
+				}
+			
 			$("#testtable").append('<tr><td><div class="col-md-2"><img id="imgId'+this.productBId.id+'" style="height: 100px;"></div><div class="col-md-6"><h4>'+
 					 this.productBId.name+'</h4>物品狀況：'+this.productBId.status +
 					 '<br>產品描述：'+this.productBId.description+
-					 '<br>'+excBtn2+'</div><div class="col-md-4" style="border-left: 1px dashed gray;"><ul class="nav navbar-nav"><li><img class="img-circle" style="height: 80px;"src="'+
+					 '<br><div name="d1">'+excBtn2+'</div></div><div class="col-md-4" style="border-left: 1px dashed gray;"><ul class="nav navbar-nav"><li><img class="img-circle" style="height: 80px;"src="'+
 					 this.productBId.userId.picture+
 					 '"></li><li><ul style="list-style: none;"><li><h4>'+
 					 this.productBId.userId.account+'<a href="#"></a></h4></li><li>'+
@@ -216,13 +197,15 @@ $(function(){
 		       contentType : "application/json"
 		     });		 
 		 });
-
+		 if($("#excBtn").val() == "交易結束"){
+			 $('div[name*="d1"]').html("");
+		 }
 	}
  	function getImg(img) {
         $("#imgId"+img.product.id).attr("src", img.picture);
  	}
  	
-});
+});/*end of function*/
 
 </script>
 <c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>

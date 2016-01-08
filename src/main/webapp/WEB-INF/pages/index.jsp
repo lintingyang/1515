@@ -22,183 +22,13 @@
 
 			<div class="holder"></div>
 			<div id="itemContainer">
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
-				<div class="proddiv">
-					<img class="prodimg" src="/resources/imgs/01.jpg">雙雙的Mac
-				</div>
+
+				<c:forEach items="${products}" var="product">
+					<div class="proddiv">
+						<img class="prodimg" src="/resources/imgs/01.jpg">${ product.name }
+					</div>
+				</c:forEach>
+
 			</div>
 			<div class="holder"></div>
 
@@ -214,107 +44,80 @@
 
 	</div>
 </div>
-<nav class="alignCenter">
-	<ul class="pagination">
-		<li><a href="#" aria-label="Previous"> <span
-				aria-hidden="true">&laquo;</span>
-		</a></li>
-		<li><a href="#">1</a></li>
-		<li><a href="#">2</a></li>
-		<li><a href="#">3</a></li>
-		<li><a href="#">4</a></li>
-		<li><a href="#">5</a></li>
-		<li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-		</a></li>
-	</ul>
-</nav>
-
-</div>
 
 
 
 
 <script type="text/javascript">
+	$('.categorylist').click(function() {
+		$.ajax({
+			contentType : "application/json",
+			url : "/query",
+			dataType : "json",
+			type : "get",
+			data : {
+				"orderby" : $(this).text()
+			},
+			success : function(data) {
+				console.log(data);
 
-$('.categorylist').click(function() {
-	
-// 	console.log("category = "+ $(this).text());
-	
-	
-	$.ajax({
-		contentType:"application/json",
-		url:"/query",
-		dataType :"json",
-		type:"get",
-		data:{ "orderby" : $(this).text()},
-		success: function(data){
-// 			console.log(data);
-			
-			
-			$("#itemContainer").html('');
-			$.each(data,function(i){
-				
-				getpicture(data[i]);
-				
-				var productdiv = $("<div></div>");
-				var aclick = $("<a>").attr("href","/product/"+data[i].id);
-				var productimg = $("<img>").addClass("prodimg");
-				$(aclick).text(data[i].name).append($(productimg));
-				$(productdiv).addClass("proddiv").append($(aclick));
-				
-				$("#itemContainer").append(productdiv);
-				
-			})
+				$("#itemContainer").html('');
+				$.each(data,
+					function(i) {
+					var productdiv = $("<div></div>");
+					var aclick = $("<a>").attr("href","/product/" + data[i].id);
+					var productimg = $("<img>").addClass("prodimg");
+					$(aclick).text(data[i].name).append($(productimg));
+					$(productdiv).addClass("proddiv").append($(aclick));
+
+					$("#itemContainer").append(productdiv);
+					getpicture(data[i], productimg);})
+
+					$("div.holder").jPages({
+							containerID : "itemContainer",
+							perPage : 20,
+							fallback : 500,
+							first : "第一頁",
+							previous : "上一頁",
+							next : "下一頁",
+							last : "最後頁",
+						});
+					}
+				});
+
+			});
+
+	function getpicture(prod, prodimg) {
+		var formData = {
+			"id" : prod.id
 		}
-	});
-	
+		$.ajax({
+			contentType : "application/json",
+			url : "/queryimg",
+			dataType : "json",
+			type : "get",
+			data : formData,
+			success : function(data) {
 
-});
-
-////localdatime出錯
-// function getpicture(prod){
-// 	console.log(prod)
-// 	$.ajax({
-// 			contentType:"application/json",
-// 			url:"/queryimg",
-// 			dataType :"json",
-// 			type:"post",
-// 			data:JSON.stringify(prod),
-// 			success: function(data){
-// 				console.log(data);
-// 				}
-// 			})
-// 		};
-function getpicture(prod){
-	var formData={"id":prod.id}
-	$.ajax({
-			contentType:"application/json",
-			url:"/queryimg",
-			dataType :"json",
-			type:"get",
-			data:formData,
-			success: function(data){
-				console.log("Test"+JSON.stringify(data));
+				if (data[0] != null) {
+					console.log(data[0].picture);
+					$(prodimg).attr("src", data[0].picture);
+				}
 			}
-	});
-}
-</script>
-<script>
+		});
+	}
+
 	$(function() {
 		$("div.holder").jPages({
 			containerID : "itemContainer",
-			perPage : 8,
- 			fallback: 500,
- 			first: "第一頁",
- 			previous: "上一頁",
- 			next: "下一頁",
- 			last: "最後頁",
+			perPage : 20,
+			fallback : 500,
+			first : "第一頁",
+			previous : "上一頁",
+			next : "下一頁",
+			last : "最後頁",
 		});
-
 	});
-	
-	
-	
 </script>
 <c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>
 

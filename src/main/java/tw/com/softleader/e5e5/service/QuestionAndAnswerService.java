@@ -1,50 +1,55 @@
 package tw.com.softleader.e5e5.service;
 
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import tw.com.softleader.e5e5.common.dao.OurDao;
+import tw.com.softleader.e5e5.common.model.Message;
+import tw.com.softleader.e5e5.common.service.OurService;
 import tw.com.softleader.e5e5.dao.ProductDao;
 import tw.com.softleader.e5e5.dao.QuestionAndAnswerDao;
-import tw.com.softleader.e5e5.entity.Product;
+import tw.com.softleader.e5e5.entity.QuestionAndAnswer;
 
 @Service
-public class QuestionAndAnswerService {
-
-	private final QuestionAndAnswerDao questionandanswerDao;
-	private final ProductDao productDao;
+public class QuestionAndAnswerService extends OurService<QuestionAndAnswer> {
 
 	@Autowired
-	public QuestionAndAnswerService(QuestionAndAnswerDao questionandanswerDao,ProductDao productDao) {
-		this.questionandanswerDao = questionandanswerDao;
-		this.productDao = productDao;
-	}
+	public QuestionAndAnswerDao questionandanswerDao;
+	@Autowired
+	public ProductDao productDao;
 
 	@Transactional
-	public List<String> findQAByProduct(Product product){
-		List<String> result = new ArrayList<String>();
-		if(product != null){
-		List<Object[]> list = questionandanswerDao.findByProduct(product);
-		for(int i=0; i<list.size(); i++){
-			Object[] row = list.get(i);
-			result.add(Arrays.toString(row));
+	public List<QuestionAndAnswer> findByProductId(int id) {
+		if(productDao.findOne(id) != null){
+			return questionandanswerDao.findByProductId(id);
 		}
-		return result;
-		} 
 		return null;
-		
 	}
-	
-//	public boolean deleteQuestion(int id){
-//		
-//		return false;
-//	}
 
+	@Override
+	public OurDao<QuestionAndAnswer> getDao() {
+		return questionandanswerDao;
+	}
 
+	@Override
+	protected List<Message> validateInsert(QuestionAndAnswer entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected List<Message> validateUpdate(QuestionAndAnswer entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected List<Message> validateDelete(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

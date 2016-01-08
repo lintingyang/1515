@@ -176,8 +176,9 @@ public class ProductController {
 	
 	//交易進行中頁面
 	@RequestMapping(value = "/exchanging")
-	public String exchanging(Model model, HttpSession session) {
-		
+	public String exchanging(Model model,@RequestParam("id") int exId , HttpSession session) {
+		Exchange exchange = exchangeService.finishTrade(exId);
+		session.setAttribute("exchange", exchange);
 		
 		return "/e715/product/proExchanging";
 	}

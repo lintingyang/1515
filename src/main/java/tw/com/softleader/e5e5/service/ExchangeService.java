@@ -1,6 +1,7 @@
 package tw.com.softleader.e5e5.service;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import tw.com.softleader.e5e5.dao.ExchangeDao;
 import tw.com.softleader.e5e5.dao.ProductDao;
 import tw.com.softleader.e5e5.entity.Exchange;
 import tw.com.softleader.e5e5.entity.Product;
+import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 
 @Service
 public class ExchangeService {
@@ -26,6 +28,23 @@ public class ExchangeService {
 		Product product = productDao.findOne(result);
 		return product;
 	}
+	
+	@Transactional
+	public Exchange findOne(int id){
+		return exchangeDao.findOne(id);
+	}
+	
+	
+	//交易完成
+	@Transactional
+	public Exchange finishTrade(int id){
+		Exchange ex = exchangeDao.findOne(id);
+		ex.setTradeFinishedTime(LocalDateTime.now());
+		ex.setTradeStatus(TrueFalse.TRUE);
+		ex = exchangeDao.save(ex);
+		return ex ;
+	}
+	
 	
 	@Transactional
 	public List<Exchange> findAll(){
