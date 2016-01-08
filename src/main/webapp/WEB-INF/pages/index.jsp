@@ -289,11 +289,10 @@ function getpicture(prod){
 	$.ajax({
 			contentType:"application/json",
 			url:"/queryimg",
-			dataType :"json",
 			type:"post",
 			data:JSON.stringify({id : prod.id}),
 			success: function(data){
-				console.log(JSON.stringify(data));
+				console.log(data);
 				}
 			})
 		};

@@ -21,10 +21,10 @@ import tw.com.softleader.e5e5.service.ProductService;
 public class indexController {
 	@Autowired
 	private ProductService productService;
-	
+
 	@Autowired
 	private ProductPictureService productPictureService;
-	
+
 	Logger log = Logger.getLogger(this.getClass());
 
 	@RequestMapping("/")
@@ -60,15 +60,33 @@ public class indexController {
 		return list;
 
 	}
-	
+
+//	 @RequestMapping(value = "/queryimg")
+//	 @ResponseBody
+//	 public List<ProductPicture> imglist(@RequestBody Product product){
+//	 log.error("================================================="+product.getId());
+//	 List<ProductPicture> list =
+//	 productPictureService.getProductPictures(product);
+//	// for(ProductPicture result : list){
+//	// log.error(result);
+//	// }
+//	 return list;
+//	 }
 	@RequestMapping(value = "/queryimg")
 	@ResponseBody
-	public List<ProductPicture> imglist(@RequestBody Product product){
-		log.error("================================================="+product.getId());
+	public String getimg(@RequestBody Product product) {
 		List<ProductPicture> list = productPictureService.getProductPictures(product);
-//		for(ProductPicture result : list){
-//			log.error(result);
-//		}
-		return list;
+		// for(ProductPicture result : list){
+		// log.error(result);
+		// }
+
+		if (list != null) {
+			ProductPicture picture = list.get(0);
+			String result = picture.getPicture();
+			return result;
+		} else {
+			return "aaaaaa";
+		}
+
 	}
 }
