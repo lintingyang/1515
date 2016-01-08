@@ -25,38 +25,27 @@
 
 			</div>
 			<div class="holder"></div>
-
-
-
-
 		</div>
-
-
-
-
-
-
 	</div>
 </div>
 
 
 
-
+<!-- $("#searchbar").text() -->
 <script type="text/javascript">
 
-$(function() {
+$(function() { //畫面第一次進入時出現的product list
 	$.ajax({
 		contentType : "application/json",
 		url : "/query",
 		dataType : "json",
 		type : "get",
-		data : {"orderby" : "熱門"},
+		data : {"orderby" : "熱門","namelike": "${namelike}" },
 		success : function(data) {
 			console.log(data);
 
 			$("#itemContainer").html('');
-			$.each(data,
-				function(i) {
+			$.each(data,function(i) {
 				var productdiv = $("<div></div>");
 				var aclick = $("<a>").attr("href","/product/" + data[i].id);
 				var productimg = $("<img>").addClass("prodimg");
@@ -82,15 +71,13 @@ $(function() {
 
 		});
 
-	$('.categorylist').click(function() {
+	$('.categorylist').click(function() { //點選排列方式後按照順序排列
 		$.ajax({
 			contentType : "application/json",
 			url : "/query",
 			dataType : "json",
 			type : "get",
-			data : {
-				"orderby" : $(this).text()
-			},
+			data : {"orderby" : $(this).text(),"namelike": "${namelike}"},
 			success : function(data) {
 // 				console.log(data);
 
@@ -121,7 +108,7 @@ $(function() {
 
 			});
 
-	function getpicture(prod, prodimg) {
+	function getpicture(prod, prodimg) { //取得每一個商品的物件
 		var formData = {
 			"id" : prod.id
 		}

@@ -47,11 +47,11 @@
 			</button>
 			<a class="navbar-brand" href="/">E715</a>
 		</div>
-		<form class="navbar-form navbar-left" role="search">
+		<form class="navbar-form navbar-left" role="search" action="/head/search">
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Search">
+				<input type="text" class="form-control" placeholder="Search" name="namelike" id="searchbar">
 			</div>
-			<button  type="submit" class="btn btn-default">Submit</button>
+			<button type="button" id="searchbtn"  class="btn btn-default" >Submit</button>
 		</form>
 		<a class="navbar-brand" href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-menu-down"></span></a>
 		
@@ -128,4 +128,5 @@
     </div>
   </div>
 </div>
+
 
