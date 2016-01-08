@@ -1,3 +1,4 @@
+
 package tw.com.softleader.e5e5.dao;
 
 import java.util.List;
@@ -20,3 +21,5 @@ public interface UserLikeDao extends OurDao<UserLike> {
 //	@Query(value ="insert into user_like([product_category_id], [user_id]) VALUES ( ?1 , ?2 )" , nativeQuery = true)
 //	public UserLike insert(Integer productCategoryId ,Integer userId);
 }
+
+

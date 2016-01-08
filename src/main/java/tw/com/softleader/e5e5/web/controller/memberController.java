@@ -1,3 +1,7 @@
+
+
+
+	
 package tw.com.softleader.e5e5.web.controller;
 
 import java.time.LocalDateTime;
@@ -11,20 +15,25 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import tw.com.softleader.e5e5.entity.Exchange;
 import tw.com.softleader.e5e5.entity.FocusUserList;
 import tw.com.softleader.e5e5.entity.ProductCategory;
 import tw.com.softleader.e5e5.entity.User;
 import tw.com.softleader.e5e5.entity.UserBanList;
 import tw.com.softleader.e5e5.entity.UserLike;
+import tw.com.softleader.e5e5.entity.enums.Grade;
 import tw.com.softleader.e5e5.entity.enums.Sex;
+import tw.com.softleader.e5e5.service.ExchangeService;
 import tw.com.softleader.e5e5.service.FocusUserListService;
 import tw.com.softleader.e5e5.service.ProductCategoryService;
+import tw.com.softleader.e5e5.service.ProductService;
 import tw.com.softleader.e5e5.service.UserBanListService;
 import tw.com.softleader.e5e5.service.UserLikeService;
 import tw.com.softleader.e5e5.service.UserService;
@@ -32,6 +41,7 @@ import tw.com.softleader.e5e5.service.UserService;
 @Controller
 @RequestMapping(value = "/E715Member")
 public class memberController {
+
 
 	@Autowired
 	private ServletContext servletContext;
@@ -47,7 +57,65 @@ public class memberController {
 	private FocusUserListService focusUserListService;
  	
 	
+	@Autowired
+	private ProductService productService;
+	@Autowired
+	private ExchangeService exchangeService;
+
 	Logger log = Logger.getLogger(this.getClass());
+	
+	@RequestMapping("/")
+	public String home(Model model) {
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public String showUserPage(@PathVariable("id") final int id, final Model model) {
+		
+
+		User user = userService.getOne(id);
+		if(user==null){
+			return "redirect:/";
+		}
+		int good=0;
+		int bad=0;
+//		List<Product> products = productService.findByUserId(id);
+//		if(products!=null){
+//			for (Product product : products) {
+//				List<Exchange> exchanges = exchangeService.findByProduct(product);
+//				if(exchanges!=null){
+//					for (Exchange exchange : exchanges) {
+//						if(exchange.getGrade()!=null ){
+//							if(Grade.GOOD.equals(exchange.getGrade())){
+//								good++;
+//							}else if(Grade.BAD.equals(exchange.getGrade())){
+//								bad++;
+//							}
+//						}
+//					}
+//				}
+//			}
+//		}
+		List<Exchange> exchanges = exchangeService.findAll();
+		for (Exchange exchange : exchanges) {
+			if(id==exchange.getProductAId().getUserId().getId()){
+				if(exchange.getGrade()!=null ){
+					if(Grade.GOOD.equals(exchange.getGrade())){
+						good++;
+					}else if(Grade.BAD.equals(exchange.getGrade())){
+						bad++;
+					}
+				}
+			}
+		}
+		model.addAttribute("currUser", user);
+		model.addAttribute("good", good);
+		model.addAttribute("bad", bad);
+		
+		
+		
+		return "/e715/user/myProfile";
+	}
 
 	@RequestMapping(value = "/findPassword", method = RequestMethod.GET)
 	public String findPassword() {
@@ -58,6 +126,8 @@ public class memberController {
 	public String modifyFileAsk() {
 		return "/e715/user/modifyFileAsk";
 	}
+	
+	
 
 	@RequestMapping(value = "/changePwd", method = RequestMethod.GET)
 	public String changePwd(HttpSession session) {
@@ -197,8 +267,5 @@ public class memberController {
 
 		}
 		
-		
-	
-	
 
 }

@@ -47,11 +47,11 @@
 			</button>
 			<a class="navbar-brand" href="/">E715</a>
 		</div>
-		<form class="navbar-form navbar-left" role="search">
+		<form class="navbar-form navbar-left" role="search" action="/head/search">
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Search">
+				<input type="text" class="form-control" placeholder="Search" name="namelike" id="searchbar">
 			</div>
-			<button  type="submit" class="btn btn-default">Submit</button>
+			<button type="button" id="searchbtn"  class="btn btn-default searchbtn" >Submit</button>
 		</form>
 		<a class="navbar-brand" href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-menu-down"></span></a>
 		
@@ -61,12 +61,13 @@
 				class="dropdown-toggle" data-toggle="dropdown" role="button"
 				aria-haspopup="true" aria-expanded="false"> 
 				<img class="img-circle" style="width: 30px;"
-					src="/resources/imgs/user.jpeg">Me ${user.name}
+					src="${user.picture}"> ${user.name}
 					<span class="caret"></span></a>
 				<ul class="dropdown-menu" aria-labelledby="drop3">
-					<li><a class="userlist" href="/WebContent/user/myProfile.jsp">會員資料</a></li>
+
+					<li><a class="userlist" href="/E715Member/${user.id}">會員資料</a></li>
 					<li><a class="userlist" href="/E715Member/userFriend">關注名單</a></li>
-					<li><a class="userlist" href="/WebContent/product/productedit.jsp">物品管理</a></li>
+					<li><a class="userlist" href="/product/list">物品管理</a></li><!-- yao -->
 					<li><a class="userlist" href="/product/add">新增物品</a></li>
 					<li><a class="userlist" href="/E715Member/modifyFileAsk">帳號修改</a></li>
 					<li><a class="userlist" href="/head/logout">登出</a></li>
@@ -128,4 +129,5 @@
     </div>
   </div>
 </div>
+
 

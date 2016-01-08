@@ -40,22 +40,22 @@ public class indexController {
 
 	@RequestMapping(value = "/query")
 	@ResponseBody
-	public List<Product> query(@RequestParam("orderby") String orderby, HttpSession session) {
+	public List<Product> query(@RequestParam("orderby") String orderby,@RequestParam("namelike")String namelike, HttpSession session) {
 		log.error("orderby = " + orderby);
 		List<Product> list = null;
 		if (orderby.equals("熱門")) {
 
-			if (session.getAttribute("searchByCategory") == null) {
+			if (namelike == null || namelike.equals("")) {
 				list = productService.getProductsOrderByClickTimes();
 			} else {
-				list = productService.findeOrderByClickTime("", "文具用品");
+				list = productService.findeOrderByClickTime(namelike, "文具用品");
 			}
 		} else if (orderby.equals("最新")) {
 
-			if (session.getAttribute("searchByName") == null) {
+			if (namelike == null || namelike.equals("")) {
 				list = productService.getProductsOrderByPostTime();
 			} else {
-				list = productService.findByProductOrderByPostTime("", "文具用品");
+				list = productService.findByProductOrderByPostTime(namelike, "文具用品");
 			}
 
 		} else if (orderby.equals("誠信")) {
