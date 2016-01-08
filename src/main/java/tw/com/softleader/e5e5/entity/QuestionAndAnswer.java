@@ -3,6 +3,8 @@ package tw.com.softleader.e5e5.entity;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import tw.com.softleader.e5e5.common.entity.OurEntity;
+import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 
 @Entity
 @Table(name = "question_and_answer", schema = "dbo", catalog = "EEIT82DB")
@@ -24,6 +27,9 @@ public class QuestionAndAnswer extends OurEntity implements java.io.Serializable
 	@Column(name = "question", length = 200)
 	private String question;
 	
+	@Column(name = "questioner_id")
+	private Integer questionerId;
+	
 	@Column(name = "answer", length = 200)
 	private String answer;
 	
@@ -33,8 +39,9 @@ public class QuestionAndAnswer extends OurEntity implements java.io.Serializable
 	@Column(name = "answer_time")
 	private LocalDateTime answerTime;
 	
-	@Column(name = "is_public", length = 1)
-	private Character isPublic;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "is_public")
+	private TrueFalse isPublic;
 	
 	public QuestionAndAnswer() {
 	}
@@ -59,6 +66,14 @@ public class QuestionAndAnswer extends OurEntity implements java.io.Serializable
 
 	public void setQuestion(String question) {
 		this.question = question;
+	}
+	
+	public Integer getQuestionerId() {
+		return questionerId;
+	}
+
+	public void setQuestionerId(Integer questionerId) {
+		this.questionerId = questionerId;
 	}
 
 	public String getAnswer() {
@@ -85,12 +100,22 @@ public class QuestionAndAnswer extends OurEntity implements java.io.Serializable
 		this.answerTime = answerTime;
 	}
 
-	public Character getIsPublic() {
+	public TrueFalse getIsPublic() {
 		return isPublic;
 	}
 
-	public void setIsPublic(Character isPublic) {
+	public void setIsPublic(TrueFalse isPublic) {
 		this.isPublic = isPublic;
 	}
+
+//	public char getIsPublic() {
+//		return isPublic;
+//	}
+//
+//	public void setIsPublic(char isPublic) {
+//		this.isPublic = isPublic;
+//	}
+
+
 
 }
