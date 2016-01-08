@@ -8,18 +8,18 @@
 		<div class="col-md-3">
 			<div class="row">
 				<div>
-					<img src="${exchang.productBId.userId.picture}"
+					<img src="${exchange.productBId.userId.picture}"
 						style="width:250px;" class="img-circle">
 				</div>
-				<div>
+				<div align="center">
 					<ul style="list-style: none;">
-						<li><h2>A${exchang.productBId.userId.account}</h2></li>
-						<li>A${exchang.productBId.userId.name}</li>
-						<li>A${exchang.productBId.userId.nickname}</li>
-						<li>A${exchang.productBId.userId.phone}</li>
-						<li>A${exchang.productBId.userId.sex}</li>
-						<li>A${exchang.productBId.userId.email}</li>
-						<li>A${exchang.productBId.userId.schoolName}</li>
+						<li><h2>${exchange.productBId.userId.account}</h2></li>
+						<li>${exchange.productBId.userId.name}</li>
+						<li>${exchange.productBId.userId.nickname}</li>
+						<li>${exchange.productBId.userId.phone}</li>
+						<li>${exchange.productBId.userId.sex}</li>
+						<li>${exchange.productBId.userId.email}</li>
+						<li>${exchange.productBId.userId.schoolName}</li>
 					</ul>
 				</div>
 			</div>
@@ -28,8 +28,8 @@
 		<div class="col-md-6">
 			<div class="col-md-6">
 				<blockquote>
-				  <p>A${exchang.productBId.description}</p>
-				  <footer>A${exchang.productBId.name}</footer>
+				  <p>${exchange.productBId.description}</p>
+				  <footer>A${exchange.productBId.name}</footer>
 				</blockquote>
 			</div>
 			<div class="col-md-6">
@@ -45,7 +45,7 @@
 				  <dt>交易方式:</dt>
 				  <dd>${thisProduct.tradeWay}</dd>
 				  <dt>交易時間:</dt>
-				  <dd>A{exchang.tradeFinishedTime}</dd>
+				  <dd>${exchange.tradeFinishedTime}</dd>
 				  <dt>交易地點:</dt>
 				  <dd>${thisProduct.location}</dd>
 				</dl></h4>
