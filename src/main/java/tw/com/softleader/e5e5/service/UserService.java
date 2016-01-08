@@ -1,11 +1,19 @@
 package tw.com.softleader.e5e5.service;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+
+import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.softleader.e5e5.common.dao.OurDao;
 import tw.com.softleader.e5e5.common.model.Message;
@@ -81,7 +89,7 @@ public class UserService extends OurService<User> {
 					user.setPassword(password);
 					user.setNickname(nickname);
 					user.setAge(age);
-					// user.setSex(sex);
+					user.setSex(sex);
 					user.setBirthday(birthday);
 					user.setAddress(address);
 					user.setPhone(phone);
@@ -91,8 +99,9 @@ public class UserService extends OurService<User> {
 					user.setSchoolEmail(schoolEmail);
 					user.setOnlineDatetime(onlineDatetime);
 					user.setSchoolName(schoolName);
-					// user.setEmailCheck(emailCheck);
-					// user.setIsolated(TrueFalse.FALSE);
+					user.setEmailCheck(emailCheck);
+					user.setEcoin(50);
+					user.setIsolated(TrueFalse.FALSE);
 					userDao.save(user);
 					return 1;
 				}
@@ -103,34 +112,10 @@ public class UserService extends OurService<User> {
 	}
 
 	@Transactional
-	public int drewScores(String account, Integer score) {
-		User temp = userDao.findByAccount(account);
-		if (temp != null) {
-			User temp3 = new User();
-			temp3.setId(temp.getId());
-			temp3.setAccount(temp.getAccount());
-			temp3.setAddress(temp.getAddress());
-			temp3.setAge(temp.getAge());
-			temp3.setBirthday(temp.getBirthday());
-			temp3.setCellphone(temp.getCellphone());
-			temp3.setEmail(temp.getEmail());
-			// temp3.setEmailCheck(temp.getEmailCheck());
-			temp3.setFocusItemList(temp.getFocusItemList());
-			temp3.setName(temp.getName());
-			temp3.setNickname(temp.getNickname());
-			temp3.setOnlineDatetime(temp.getOnlineDatetime());
-			temp3.setPassword(temp.getPassword());
-			temp3.setPhone(temp.getPhone());
-			temp3.setPicture(temp.getPicture());
-			temp3.setSchoolEmail(temp.getSchoolEmail());
-			temp3.setSchoolName(temp.getSchoolName());
-
-			// temp3.setSex(temp.getSex());
-			// temp3.setIsolated(temp.getIsolated());
-//			temp3.setGameScore(temp.getGameScore() + score);
-			temp3.setEcoin(temp.getEcoin()+score);
-
-			userDao.save(temp3);
+	public int drewScores(String account, Integer ecoin) {
+		User user = userDao.findByAccount(account);
+		if (user != null) {
+			user.setEcoin(ecoin);
 			return 1;
 		}
 		return 0;
@@ -168,6 +153,56 @@ public class UserService extends OurService<User> {
 		return 0;
 	}
 
+	@Transactional
+	public int updataPwd(String account, String oldPassWord, String newPasswWrd) {
+		User user = userDao.findByAccount(account);
+		if (user != null) {
+			user.setPassword(newPasswWrd);
+			userDao.save(user);
+			return 1;
+		}
+		return 0;
+	}
+	@Transactional
+	public String upLoadImage(int id, ServletContext servletContext,MultipartFile file) {
+		BufferedImage src = null;
+		int counter=0;
+		String path = "/resources/userimgs/";
+
+		path = servletContext.getRealPath(path);
+		File destination = null;
+		try {
+			src = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
+			if (!(new File(path)).exists()) {
+				(new File(path)).mkdir();
+			}
+
+			destination = new File(path + String.valueOf(id)+"_"+file.getOriginalFilename());
+			while(destination.exists()){
+				counter++;
+				destination = new File(path+ String.valueOf(id)+"_"+counter+"_"+file.getOriginalFilename());
+			}
+			ImageIO.write(src, "png", destination);
+			String finalP= destination.getAbsolutePath().replace('\\', '/');
+			int cut=finalP.indexOf("webapp");
+			finalP=finalP.substring(cut+6);
+			return finalP;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Transactional
+	public int updataInfo(User user) {
+		User temp = userDao.findByAccount(user.getAccount());
+		if (temp != null) {
+			userDao.save(user);
+			return 1;
+		}
+		return 0;
+	}
+	
 	@Transactional
 	public int updateEmail(String account, String schoolEmail) {
 		User temp = userDao.findByAccount(account);

@@ -39,21 +39,12 @@ public class headerController {
 	public String loginPage(){
 		return "/e715/user/login";
 	}
-	//進入註冊帳號頁
-	@RequestMapping(value = "/create" ,method = RequestMethod.GET)
-	public String createAccountPage(){
-		return "/e715/user/createaccount";
-	}
-	
-	
-	
-	
 	
 	//輸入完帳號密碼並按下登入鍵 進行登入檢查
 	@RequestMapping(value = "/logincheck" ,method = RequestMethod.POST)
 	public String loginCheck(Model model,@RequestParam("account")String account,
-			@RequestParam("password")String password,HttpSession session){
-	
+			@RequestParam("password")String password
+			,HttpSession session){
 		User user = userService.login(account, password);
 		if(user == null){
 			log.error("找不到該帳號");
@@ -62,6 +53,17 @@ public class headerController {
 			log.error("登入成功");
 		}
 		return "/index";
+	}
+	
+	
+	
+	
+	
+	
+	//進入註冊帳號頁
+	@RequestMapping(value = "/create" ,method = RequestMethod.GET)
+	public String createAccountPage(){
+		return "/e715/user/createaccount";
 	}
 
 	//註冊帳號
@@ -134,6 +136,8 @@ public class headerController {
 
 	}
 
+
+	
 
 	
 }

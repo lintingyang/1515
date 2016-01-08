@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:import url="/WEB-INF/pages/e715/layout/header.jsp"></c:import>
+<c:import url="/WEB-INF/pages/e715/layout/header.jsp"/>
 <c:import url="/WEB-INF/pages/layout/meta.jsp"/>
 <link rel="stylesheet" href="/resources/css/user.css" />
 
@@ -58,10 +58,11 @@ $(function(){
 						placeholder="Password">
 				</div>
 			</div>
+			
 			<div class="form-group" id="divBorder">
 				<div class="col-sm-offset-2 col-sm-10 alignLeft">
-					<a href="/head/create">建立新帳號</a> 
-					<a href="findPassWord1.jsp" id="fpwdLink">?忘記密碼</a>
+					<a href="#" id="NewAccount">建立新帳號</a> 
+					<a href="/E715Member/findPassword" id="fpwdLink" >?忘記密碼</a>
 					<div class="checkbox">
 						<label> <input type="checkbox"> Remember me</label>
 					</div>
