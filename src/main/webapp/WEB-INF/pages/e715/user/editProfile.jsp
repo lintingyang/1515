@@ -36,6 +36,71 @@
 }
 </style>
 
+<script>
+window.onload = function () {
+    for (var i = 1; i <= 12; i++) {
+        var opt = window.document.createElement("option");
+        opt.value = i;
+        opt.innerHTML = i;
+        document.getElementById('month').appendChild(opt);
+    }
+    //取得現在年份
+    var nowYear = new Date().getFullYear();
+    
+    //最多活不超過100歲
+    var deadYear = nowYear-100;
+    
+    for (var i = deadYear; i <= nowYear; i++) {
+        var opt = window.document.createElement("option");
+        opt.value = i;
+        opt.innerHTML = i;
+        document.getElementById('year').appendChild(opt);
+    }
+
+
+    document.getElementById("day").onfocus = Datefocus;
+    document.getElementById("day").onblur = Dateblur;
+
+    document.getElementById("day").onchange = function () {
+        document.getElementById("day").onfocus = function () { };
+        document.getElementById("day").onblur = function () { };
+    };
+
+    document.getElementById("year").onchange = function () {
+        document.getElementById("day").onfocus = Datefocus;
+        document.getElementById("day").onblur = Dateblur();
+    }
+
+    document.getElementById("month").onchange = function () {
+        document.getElementById("day").onfocus = Datefocus;
+        document.getElementById("day").onblur = Dateblur();
+    }
+   
+}
+
+var tempdate;
+function Datefocus() {
+    document.getElementById("day").innerHTML = "";
+    tempdate = new Date(document.getElementById("year").value, document.getElementById("month").value, 0).getDate();
+    var opt = window.document.createElement("option");
+    opt.value = ${user.birthday.getDayOfMonth()} ;
+    opt.innerHTML = ${user.birthday.getDayOfMonth()};
+    opt.className= "defaultOption";
+    document.getElementById('day').appendChild(opt);
+    for (var i = 1; i <= tempdate; i++) {
+        var opt = window.document.createElement("option");
+        opt.value = i;
+        opt.innerHTML = i;
+        document.getElementById('day').appendChild(opt);
+    }
+   
+}
+
+function Dateblur() {
+    document.getElementById("day").innerHTML = "";
+}
+</script>
+
 
 
 <div class="container">
@@ -120,13 +185,15 @@
 				<div class="form-group" id="divBorder">
 					<label for="inputPassword3" class="col-sm-2 control-label">生日:</label>
 					<div class="col-sm-10" style="padding-top: 7px">
-					<select name="month" onchange="call()" > 
-					<option value="">select</option> 
-					</select> 月
-					<select name="day" > 
-					<option value="">select</option> </select> 
-					日<select name="year" onchange="call()" >  
-					<option value="">select</option></select>年 
+					<select name="year" id="year">  
+						<option value="${user.birthday.getYear()}" selected="selected" class="defaultOption">${user.birthday.getYear()}</option>
+					</select>年 
+					<select name="month" id="month"> 
+						<option value="${user.birthday.getMonthValue()}" selected="selected" class="defaultOption">${user.birthday.getMonthValue()}</option> 
+					</select>月
+					<select name="day" id="day"> 
+						<option value="${user.birthday.getDayOfMonth()}" selected="selected" class="defaultOption">${user.birthday.getDayOfMonth()}</option>
+					</select> 日
 					</div>
 				</div>
 
@@ -175,8 +242,8 @@
 				<div class="form-group" id="divBorder">
 					<label for="inputPassword3" class="col-sm-2 control-label">關於我</label>
 					<div class="col-sm-10">
-						<textarea rows="10" cols="70" name="aboutMe"
-							onKeyDown='if (this.value.length>=300){event.returnValue=false}'></textarea>
+						<textarea rows="10" cols="70" name="aboutMe" 
+							onKeyDown='if (this.value.length>=300){event.returnValue=false}'>${user.aboutMe}</textarea>
 					</div>
 				</div>
 				<br> <br> <br> <br> <br> <br> <br>
