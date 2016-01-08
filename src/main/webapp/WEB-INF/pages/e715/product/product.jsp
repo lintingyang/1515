@@ -188,9 +188,6 @@ $(function(){
 					 '"></li><li><ul style="list-style: none;"><li><h4>'+
 					 this.productBId.userId.account+'<a href="#"></a></h4></li><li>'+
 					 this.productBId.userId.name +'</li><li>'+this.productBId.userId.schoolName+
-<<<<<<< HEAD
-					 '</li></ul></li><li><span class="glyphicon glyphicon-plus">123</span></li></ul></div></td></tr>')
-=======
 					 '</li></ul></li><li><span class="glyphicon glyphicon-plus">123</span></li></ul></div></td></tr>');
 			 
 			if(this.tradeStatus=="TRUE"){
@@ -207,7 +204,6 @@ $(function(){
 		       dataType: "json",
 		       contentType : "application/json"
 		     });		 
->>>>>>> branch 'master' of https://github.com/lintingyang/1515.git
 		 });
 	}
  	function getImg(img) {
