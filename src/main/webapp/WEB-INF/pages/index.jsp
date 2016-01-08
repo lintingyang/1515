@@ -6,13 +6,13 @@
 	<div class="container">
 		<ul class="nav nav-tabs" id="tabs">
 			<li style="width: 25%; text-align: center;"><a
-				class="categorylist" href="#">熱門</a></li>
+				class="categorylist searchbtn" onclick="changesearch" href="#">熱門</a></li>
 			<li style="width: 25%; text-align: center;"><a
-				class="categorylist" href="#">最新</a></li>
+				class="categorylist searchbtn" onclick="changesearch" href="#">最新</a></li>
 			<li style="width: 25%; text-align: center;"><a
-				class="categorylist" href="#">誠信</a></li>
+				class="categorylist searchbtn" onclick="changesearch" href="#">誠信</a></li>
 			<li style="width: 25%; text-align: center;"><a
-				class="categorylist" href="#">推薦</a></li>
+				class="categorylist searchbtn" onclick="changesearch" href="#">推薦</a></li>
 		</ul>
 	</div>
 	<br>
@@ -33,6 +33,11 @@
 
 <!-- $("#searchbar").text() -->
 <script type="text/javascript">
+var searchType = "熱門";
+function changesearch(){
+	console.log(searchType);
+	$(searchType) = $(this).text();
+}
 
 $(function() { //畫面第一次進入時出現的product list
 	$.ajax({
@@ -71,13 +76,13 @@ $(function() { //畫面第一次進入時出現的product list
 
 		});
 
-	$('.categorylist').click(function() { //點選排列方式後按照順序排列
+	$('.searchbtn').click(function() { //點選排列方式後按照順序排列
 		$.ajax({
 			contentType : "application/json",
 			url : "/query",
 			dataType : "json",
 			type : "get",
-			data : {"orderby" : $(this).text(),"namelike": "${namelike}"},
+			data : {"orderby" : searchType,"namelike": $("#searchbar").val()},
 			success : function(data) {
 // 				console.log(data);
 

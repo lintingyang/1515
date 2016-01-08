@@ -51,7 +51,7 @@
 			<div class="form-group">
 				<input type="text" class="form-control" placeholder="Search" name="namelike" id="searchbar">
 			</div>
-			<button type="button" id="searchbtn"  class="btn btn-default" >Submit</button>
+			<button type="button" id="searchbtn"  class="btn btn-default searchbtn" >Submit</button>
 		</form>
 		<a class="navbar-brand" href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-menu-down"></span></a>
 		
