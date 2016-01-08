@@ -50,6 +50,9 @@ public class ProductController {
 		
 //		model.addAttribute("entity", role);
 		Product product = productService.getOne(id);
+		if(product==null){
+			return "redirect:/";
+		}
 		List<ProductPicture> productPictures = productPictureService.getProductPictures(product);
 		model.addAttribute("product", product);
 		model.addAttribute("productPictures", productPictures);
