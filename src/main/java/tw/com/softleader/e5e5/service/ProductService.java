@@ -58,6 +58,13 @@ public class ProductService extends OurService<Product>{
 		return productDao.findUsersProductsByIsPosted(id, postStatus);
 	}
 	
+	@Transactional
+	public List<Product> findByUserId(Integer id ){
+		return productDao.findByUserId(id);
+	}
+	
+
+	
 	//後台
 	//(1)findOne byId
 	@Transactional

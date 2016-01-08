@@ -44,7 +44,7 @@
 					src="${product.userId.picture}"></li>
 				<li><ul style="list-style: none;">
 						<li><h4>
-								Account: ${product.userId.account} <a href="#"></a>
+								<a href="/E715Member/${product.userId.id}">Account: ${product.userId.account} </a>
 							</h4></li>
 						<li>${product.userId.name}</li>
 						<li>${product.userId.schoolName}<li>
@@ -167,11 +167,8 @@ $(function(){
        contentType : "application/json"
      });
  	 function show(data) {
- 		 //alert("rear"+data[0].tradeStatus);
- 		 var obj = JSON.stringify(data);
  		 var imgId=0;
-//  		alert(obj[3]);
-		 $.each($.parseJSON(obj), function() {
+		 $.each(data, function() {
 			imgId++;
 			var excBtn2='';
 			var loginId="${user.id}";
@@ -188,9 +185,6 @@ $(function(){
 					 '"></li><li><ul style="list-style: none;"><li><h4>'+
 					 this.productBId.userId.account+'<a href="#"></a></h4></li><li>'+
 					 this.productBId.userId.name +'</li><li>'+this.productBId.userId.schoolName+
-<<<<<<< HEAD
-					 '</li></ul></li><li><span class="glyphicon glyphicon-plus">123</span></li></ul></div></td></tr>')
-=======
 					 '</li></ul></li><li><span class="glyphicon glyphicon-plus">123</span></li></ul></div></td></tr>');
 			 
 			if(this.tradeStatus=="TRUE"){
@@ -207,7 +201,6 @@ $(function(){
 		       dataType: "json",
 		       contentType : "application/json"
 		     });		 
->>>>>>> branch 'master' of https://github.com/lintingyang/1515.git
 		 });
 	}
  	function getImg(img) {
