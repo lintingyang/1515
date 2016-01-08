@@ -37,5 +37,10 @@
 	font-size: 16px;
 	letter-spacing: 3px;
 	font-weight: 900;
+}
+
+.defaultOption{
+	background-color:#C4E1FF;
+	color:#FF5151;
 	
 }
