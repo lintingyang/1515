@@ -30,7 +30,11 @@ public class indexController {
 	Logger log = Logger.getLogger(this.getClass());
 
 	@RequestMapping("/")
-	public String home() {
+	public String home(Model model) {
+		List<Product> list= productService.getAll();
+		List<ProductPicture> imglist =productPictureService.getAll();
+		model.addAttribute("products",list);
+		model.addAttribute("productPictures", imglist);
 		return "/index";
 	}
 
