@@ -143,124 +143,7 @@
 
 				<div role="tabpanel" class="tab-pane" id="exchange">
 					exchange
-					<table class="table table-striped" id="testtable">
-<!-- 						<tr> -->
-<!-- 							<td> -->
-<!-- 								<div class="col-md-2"> -->
-<!-- 									<img src="/resources/imgs/phone.jpg" -->
-<!-- 										style="height: 100px;"> -->
-<!-- 								</div> -->
-<!-- 								<div class="col-md-6"> -->
-<!-- 									<h4>星巴克紀念杯款</h4> -->
-<!-- 									物品狀況：九成新 <br>產品描述：j123oi21j3oijelkwjeq;oijaksjd;alkdjsqkje;lqwkej;ls -->
-<!-- 								</div> -->
-<!-- 								<div class="col-md-4" style="border-left: 1px dashed gray;"> -->
-<!-- 									<ul class="nav navbar-nav"> -->
-<!-- 										<li><img class="img-circle" style="height: 80px;" -->
-<!-- 											src="/resources/imgs/noname.jpg"></li> -->
-<!-- 										<li><ul style="list-style: none;"> -->
-<!-- 												<li><h4> -->
-<!-- 														Account <a href="#"></a> -->
-<!-- 													</h4></li> -->
-<!-- 												<li>Name</li> -->
-<!-- 												<li>台灣大學</li> -->
-<!-- 											</ul></li> -->
-<!-- 										<li><span class="glyphicon glyphicon-plus">123</span></li> -->
-
-<!-- 									</ul> -->
-<!-- 								</div> -->
-<!-- 							</td> -->
-<!-- 						</tr> -->
-<!-- 						<tr> -->
-<!-- 							<td> -->
-<!-- 								<div class="col-md-2"> -->
-<!-- 									<img src="/resources/imgs/phone.jpg" -->
-<!-- 										style="height: 100px;"> -->
-<!-- 								</div> -->
-<!-- 								<div class="col-md-6"> -->
-<!-- 									<h4>星巴克紀念杯款</h4> -->
-<!-- 									物品狀況：九成新 <br>產品描述：j123oi21j3oijelkwjeq;oijaksjd;alkdjsqkje;lqwkej;ls -->
-<!-- 									<input type="button" value="我想跟你換"> -->
-<!-- 								</div> -->
-<!-- 								<div class="col-md-4" style="border-left: 1px dashed gray;"> -->
-<!-- 									<ul class="nav navbar-nav"> -->
-<!-- 										<li><img class="img-circle" style="height: 80px;" -->
-<!-- 											src="/resources/imgs/noname.jpg"></li> -->
-<!-- 										<li><ul style="list-style: none;"> -->
-<!-- 												<li><h4> -->
-<!-- 														Account <a href="#"></a> -->
-<!-- 													</h4></li> -->
-<!-- 												<li>Name</li> -->
-<!-- 												<li>台灣大學</li> -->
-<!-- 											</ul></li> -->
-<!-- 										<li><span class="glyphicon glyphicon-plus">123</span></li> -->
-
-<!-- 									</ul> -->
-<!-- 								</div> -->
-<!-- 							</td> -->
-<!-- 						</tr> -->
-<!-- 						<tr> -->
-<!-- 							<td> -->
-<!-- 								<div class="col-md-2"> -->
-<!-- 									<img src="/resources/imgs/phone.jpg" -->
-<!-- 										style="height: 100px;"> -->
-<!-- 								</div> -->
-<!-- 								<div class="col-md-6"> -->
-<!-- 									<h4>星巴克紀念杯款</h4> -->
-<!-- 									物品狀況：九成新 <br>產品描述：j123oi21j3oijelkwjeq;oijaksjd;alkdjsqkje;lqwkej;ls -->
-<!-- 								</div> -->
-<!-- 								<div class="col-md-4" style="border-left: 1px dashed gray;"> -->
-<!-- 									<ul class="nav navbar-nav"> -->
-<!-- 										<li><img class="img-circle" style="height: 80px;" -->
-<!-- 											src="/resources/imgs/noname.jpg"></li> -->
-<!-- 										<li><ul style="list-style: none;"> -->
-<!-- 												<li><h4> -->
-<!-- 														Account <a href="#"></a> -->
-<!-- 													</h4></li> -->
-<!-- 												<li>Name</li> -->
-<!-- 												<li>台灣大學</li> -->
-<!-- 											</ul></li> -->
-<!-- 										<li><span class="glyphicon glyphicon-plus">123</span></li> -->
-
-<!-- 									</ul> -->
-<!-- 								</div> -->
-<!-- 							</td> -->
-<!-- 						</tr> -->
-
-<!-- 						<tr> -->
-<!-- 							<td> -->
-<!-- 								<div class="col-md-2"> -->
-<!-- 									<img src="/resources/imgs/phone.jpg" -->
-<!-- 										style="height: 100px;"> -->
-<!-- 								</div> -->
-<!-- 								<div class="col-md-6"> -->
-<!-- 									<h4>星巴克紀念杯款</h4> -->
-<!-- 									物品狀況：九成新 <br>產品描述：j123oi21j3oijelkwjeq;oijaksjd;alkdjsqkje;lqwkej;ls -->
-<!-- 								</div> -->
-<!-- 								<div class="col-md-4" style="border-left: 1px dashed gray;"> -->
-<!-- 									<ul class="nav navbar-nav"> -->
-<!-- 										<li><img class="img-circle" style="height: 80px;" -->
-<!-- 											src="/resources/imgs/noname.jpg"></li> -->
-<!-- 										<li><ul style="list-style: none;"> -->
-<!-- 												<li><h4> -->
-<!-- 														Account <a href="#"></a> -->
-<!-- 													</h4></li> -->
-<!-- 												<li>Name</li> -->
-<!-- 												<li>台灣大學</li> -->
-<!-- 											</ul></li> -->
-<!-- 										<li><span class="glyphicon glyphicon-plus">123</span></li> -->
-
-<!-- 									</ul> -->
-<!-- 								</div> -->
-<!-- 							</td> -->
-<!-- 						</tr> -->
-
-
-
-					</table>
-	
-
-
+					<table class="table table-striped" id="testtable"></table>
 				</div>
 
 			</div>
@@ -293,11 +176,11 @@ $(function(){
      });
  	 function show(data) {
  		var obj = JSON.stringify(data);
- 		
-//		 document.getElementById("tbody1").innerHTML="";
-// 		 var counter=0;
+ 		var imgId=0;
 		 $.each($.parseJSON(obj), function() {
-			 $("#testtable").append('<tr><td><div class="col-md-8"><h4>'+
+			 imgId++;
+			 console.log("#imgId"+this.productBId.id);
+			 $("#testtable").append('<tr><td><div class="col-md-2"><img id="imgId'+this.productBId.id+'" style="height: 100px;"></div><div class="col-md-6"><h4>'+
 					 this.productBId.name+'</h4>物品狀況：'+this.productBId.status +
 					 '<br>產品描述：'+this.productBId.description+
 					 '</div><div class="col-md-4" style="border-left: 1px dashed gray;"><ul class="nav navbar-nav"><li><img class="img-circle" style="height: 80px;"src="'+
@@ -305,11 +188,25 @@ $(function(){
 					 '"></li><li><ul style="list-style: none;"><li><h4>'+
 					 this.productBId.userId.account+'<a href="#"></a></h4></li><li>'+
 					 this.productBId.userId.name +'</li><li>'+this.productBId.userId.schoolName+
-					 '</li></ul></li><li><span class="glyphicon glyphicon-plus">123</span></li></ul></div></td></tr>')
+					 '</li></ul></li><li><span class="glyphicon glyphicon-plus">123</span></li></ul></div></td></tr>');
 			 
+			var formData={"id":this.productBId.id}
+		    $.ajax({
+		       type: "GET",
+		       url: "http://localhost:8080/product/findproductimg",
+		       data: formData,
+		       success: function(img){
+		    	   getImg(img);
+		       },
+		       dataType: "json",
+		       contentType : "application/json"
+		     });		 
 		 });
 
 	}
+ 	function getImg(img) {
+        $("#imgId"+img.product.id).attr("src", img.picture);
+ 	}
  	
 });
 

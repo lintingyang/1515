@@ -37,70 +37,89 @@ public class ProductController {
 	public ProductPictureService productPictureService;
 	@Autowired
 	public ExchangeService exchangeService;
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String editPage(@PathVariable("id") final int id, final Model model) {
-		
-//		SecRole role = secRoleService.getOne(id);
-		
-//		model.addAttribute("entity", role);
+
+		// SecRole role = secRoleService.getOne(id);
+
+		// model.addAttribute("entity", role);
 		Product product = productService.getOne(id);
 		List<ProductPicture> productPictures = productPictureService.getProductPictures(product);
 		model.addAttribute("product", product);
 		model.addAttribute("productPictures", productPictures);
 		return "/e715/product/product";
 	}
-	
+
 	@RequestMapping(value = "/findexchange")
 	@ResponseBody
-	public List<Exchange> add(@ModelAttribute @RequestParam("id") Integer id, Model model) {
-		List<Exchange> exchanges=exchangeService.findByProductAId(id);
+	public List<Exchange> add(@RequestParam("id") Integer id, Model model) {
+		List<Exchange> exchanges = exchangeService.findByProductAId(id);
 
 		return exchanges;
 	}
-	
-	//銘 新增商品
+
+	@RequestMapping(value = "/findproductimg")
+	@ResponseBody
+	public ProductPicture findProductPicture(@RequestParam("id") Integer id, Model model) {
+		Product product = productService.getOne(id);
+		List<ProductPicture> productPictures = productPictureService.getProductPictures(product);
+		if (productPictures != null) {
+			return productPictures.get(0);
+		}else{
+			return null;
+		}
+	}
+
+	// 銘 新增商品
 	@RequestMapping(value = "/add")
 	public String add(Model model) {
 		return "/e715/product/proAdd";
 	}
-	
-	
-//	@ResponseBody
-//	@RequestMapping(value = "/insert" ) 
-//	public String insert(@RequestBody Product product) {
+
+	// @ResponseBody
+	// @RequestMapping(value = "/insert" )
+	// public String insert(@RequestBody Product product) {
 	@RequestMapping(value = "/insert")
-	public String insert(Model model, @ModelAttribute Product product, @RequestParam("pCategory") int pCategory, @RequestParam("pStatusBad") String pStatusBad) {
+	public String insert(Model model, @ModelAttribute Product product, @RequestParam("pCategory") int pCategory,
+			@RequestParam("pStatusBad") String pStatusBad) {
 		System.out.println("product========================" + product);
-		int number = productService.insert(product.getName(), pCategory, product.getStatus() + pStatusBad, product.getDescription(), product.getDeadline(), product.getTransactionTime(), product.getLocation(), product.getTradeWay(), product.getWishItem(), product.getPostStatus());
+		int number = productService.insert(product.getName(), pCategory, product.getStatus() + pStatusBad,
+				product.getDescription(), product.getDeadline(), product.getTransactionTime(), product.getLocation(),
+				product.getTradeWay(), product.getWishItem(), product.getPostStatus());
 		System.out.println("number========================" + number);
-		if(number == 1){
+		if (number == 1) {
 			return "insert successful !!";
-		}else{
+		} else {
 			return "insert failed !!";
 		}
 	}
-//	@ResponseBody
-//	@RequestMapping(value = "/insert")
-//	public String insert(Model model, @RequestBody Product product) {
-//		int number = productService.insert(product.getName(), 1, product.getDeadline(), product.getLocation(), product.getTradeWay(), product.getWishItem());
-//		if(number == 1){
-//			model.addAttribute("result", "新增成功");
-//		}else{
-//			model.addAttribute("result", "新增失敗");
-//		}
-//		System.out.println("############################"+product);
-//		return "/product/add";
-//	}
-//	@RequestMapping(value = "/insert")
-//	public String insert(Model model, @ModelAttribute Product product, @RequestParam("pCategory") int pCategory) {
-//		int number = productService.insert(product.getName(), pCategory, product.getDeadline(), product.getLocation(), product.getTradeWay(), product.getWishItem());
-//		if(number == 1){
-//			model.addAttribute("result", "新增成功");
-//		}else{
-//			model.addAttribute("result", "新增失敗");
-//		}
-//		return "/product/add";
-//	}
+	// @ResponseBody
+	// @RequestMapping(value = "/insert")
+	// public String insert(Model model, @RequestBody Product product) {
+	// int number = productService.insert(product.getName(), 1,
+	// product.getDeadline(), product.getLocation(), product.getTradeWay(),
+	// product.getWishItem());
+	// if(number == 1){
+	// model.addAttribute("result", "新增成功");
+	// }else{
+	// model.addAttribute("result", "新增失敗");
+	// }
+	// System.out.println("############################"+product);
+	// return "/product/add";
+	// }
+	// @RequestMapping(value = "/insert")
+	// public String insert(Model model, @ModelAttribute Product product,
+	// @RequestParam("pCategory") int pCategory) {
+	// int number = productService.insert(product.getName(), pCategory,
+	// product.getDeadline(), product.getLocation(), product.getTradeWay(),
+	// product.getWishItem());
+	// if(number == 1){
+	// model.addAttribute("result", "新增成功");
+	// }else{
+	// model.addAttribute("result", "新增失敗");
+	// }
+	// return "/product/add";
+	// }
 
-	}
+}
