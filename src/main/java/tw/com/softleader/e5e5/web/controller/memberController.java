@@ -1,5 +1,8 @@
 package tw.com.softleader.e5e5.web.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
@@ -77,14 +80,14 @@ public class memberController {
 			@RequestParam("file") MultipartFile file,
 			@RequestParam("name") String name,
 			@RequestParam("nickname") String nickname, @RequestParam("sex") Sex sex,
-			//@RequestParam("month") String month, @RequestParam("day") String day, @RequestParam("year") String year,
+			@RequestParam("month") String month, @RequestParam("day") String day, @RequestParam("year") String year,
 			@RequestParam("phone") String phone, @RequestParam("email") String email,
 			@RequestParam("subject") String subject, @RequestParam("Addr") String addr,
 			@RequestParam("aboutMe") String aboutMe, HttpSession session) {
 		User user = (User) session.getAttribute("user");
 		
 		//必填欄位不能為空值
-		if (user == null || name == null || nickname == null || phone == null) {
+		if (user == null || name == null || nickname == null || phone == null || year==null || month==null || day==null ) {
 				return "/e715/user/editProfile";
 		} else {
 			
@@ -102,6 +105,23 @@ public class memberController {
 			} else {
 				user.setPhone(phone);
 			}
+			if (!month.equals("") && month.length() < 2) {
+				month = "0" + month;
+			}
+			if (!day.equals("") && day.length() < 2) {
+				day = "0" + day;
+			}
+			String str = year + "-" + month + "-" + day+" 00:00"; //"1986-04-08";			
+			System.out.println(aboutMe);
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+			try {
+				LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
+				user.setBirthday(dateTime);
+			} catch (Exception e) {
+			}
+			
+			
+			
 			user.setSex(sex);
 			user.setSubject(subject);
 			user.setEmail(email);

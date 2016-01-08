@@ -1,9 +1,7 @@
 package tw.com.softleader.e5e5.web.controller;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -39,32 +37,54 @@ public class ProductController {
 	public ProductPictureService productPictureService;
 	@Autowired
 	public ExchangeService exchangeService;
+
 	
 	@Autowired
 	private ServletContext servletContext;
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public String editPage(@PathVariable("id") final int id, final Model model) {
+	public String editPage(@PathVariable("id") final int id, final Model model,
+							HttpSession session) {
 		
 //		SecRole role = secRoleService.getOne(id);
 		
 //		model.addAttribute("entity", role);
 		Product product = productService.getOne(id);
+		if(product==null){
+			return "redirect:/";
+		}
 		List<ProductPicture> productPictures = productPictureService.getProductPictures(product);
 		model.addAttribute("product", product);
 		model.addAttribute("productPictures", productPictures);
+		
+		//銘加的 上面參數session也是
+		session.setAttribute("thisProduct", product);
+		
 		return "/e715/product/product";
 	}
-	
+
 	@RequestMapping(value = "/findexchange")
 	@ResponseBody
-	public List<Exchange> add(@ModelAttribute @RequestParam("id") Integer id, Model model) {
-		List<Exchange> exchanges=exchangeService.findByProductAId(id);
+	public List<Exchange> findExchange(@RequestParam("id") Integer id, Model model) {
+		List<Exchange> exchanges = exchangeService.findByProductAId(id);
 
 		return exchanges;
 	}
-	
-	//新增商品
+
+
+	@RequestMapping(value = "/findproductimg")
+	@ResponseBody
+	public ProductPicture findProductPicture(@RequestParam("id") Integer id, Model model) {
+		Product product = productService.getOne(id);
+		List<ProductPicture> productPictures = productPictureService.getProductPictures(product);
+		if (productPictures != null) {
+			return productPictures.get(0);
+		}else{
+			return null;
+		}
+	}
+
+
 	@RequestMapping(value = "/add")
 	public String add(Model model) {
 		return "/e715/product/proAdd";
@@ -153,5 +173,13 @@ public class ProductController {
 		return "/e715/product/proAdd";
 		
 	}
-
+	
+	//交易進行中頁面
+	@RequestMapping(value = "/exchanging")
+	public String exchanging(Model model, HttpSession session) {
+		
+		
+		return "/e715/product/proExchanging";
 	}
+
+}
