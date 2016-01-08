@@ -1,10 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:import url="/WEB-INF/pages/e715/layout/header.jsp"></c:import>
+<c:import url="/WEB-INF/pages/e715/layout/header.jsp"/>
+<c:import url="/WEB-INF/pages/layout/meta.jsp" />
+<script type="text/javascript">
+	$(function() {
+		$('#btnSend').click(function() {
+			swal({
+				title : "新增成功",
+				text : "您已新增一項商品",
+				type : "success",
+				showCancelButton : false,
+				confirmButtonColor : "#F5A056",
+				closeOnConfirm : true
+			});
+		})
+	})
+</script>
 <div class="container" style="margin: 50px auto;">
-	<p>${result}</p>
-	<form action="/product/insert" method="post">
+	<p>${result} </p>
+	<form action="/product/insert" enctype="multipart/form-data" method="post">
 		<div class="col-md-1"></div>
 		<div class="col-md-5">
 			<div class="row">
@@ -81,7 +96,7 @@
 			<div class="form-group row">
 				<label class="col-sm-3">圖片</label>
 				<div class="col-sm-10">
-					<input type="file" name="picture" multiple>
+					<input type="file" name="pPicture" multiple>
 				</div>
 			</div>
 			<br>

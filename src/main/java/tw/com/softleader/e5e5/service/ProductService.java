@@ -183,7 +183,9 @@ public class ProductService extends OurService<Product>{
 
 	// (14)新增產品
 	@Transactional
-	public int insert(String name,int user, int category, String status ,String description, LocalDateTime deadline,Time transactionTime, String location, String tradeWay, String wishItem, TrueFalse postStatus) {
+	public Product insert(String name,int user, int category, String status, String description, 
+						LocalDateTime deadline,Time transactionTime, String location, 
+						String tradeWay, String wishItem, TrueFalse postStatus) {
 		Product product = new Product();
 		product.setName(name);
 		product.setUserId(userDao.findOne(user));
@@ -198,41 +200,9 @@ public class ProductService extends OurService<Product>{
 		product.setWishItem(wishItem);
 		product.setPostStatus(postStatus);
 		productDao.save(product);
-		return 1;
+		return product;
 
 	}
-	
-	//傳圖
-	@Transactional
-	public String upLoadImage(int id, ServletContext servletContext,MultipartFile file) {
-		BufferedImage src = null;
-		int counter=0;
-		String path = "/resources/productImgs/";
-
-		path = servletContext.getRealPath(path);
-		File destination = null;
-		try {
-			src = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
-			if (!(new File(path)).exists()) {
-				(new File(path)).mkdir();
-			}
-
-			destination = new File(path + String.valueOf(id)+"_"+file.getOriginalFilename());
-			while(destination.exists()){
-				counter++;
-				destination = new File(path+ String.valueOf(id)+"_"+counter+"_"+file.getOriginalFilename());
-			}
-			ImageIO.write(src, "png", destination);
-			String finalP= destination.getAbsolutePath().replace('\\', '/');
-			int cut=finalP.indexOf("webapp");
-			finalP=finalP.substring(cut+6);
-			return finalP;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
 	
 	@Override
 	public OurDao<Product> getDao() {
