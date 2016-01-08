@@ -80,14 +80,6 @@
 			<input id="excBtn" class="btn btn-primary btn-lg" type="button" value="我要交換" onclick="location.href='/WebContent/product/exchangeproduct.jsp'">
 		</div>
 		
-		<!-- 下面這個btn銘要用的 -->
-		<div>
-			<form action="/product/exchanging">
-				<button id="btnExchang" type="submit" class="btn btn-success btn-lg">
-					<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> 轉入交易進行中畫面
-				</button>
-			</form>
-		</div>
 	</div>
 
 	<div class="col-md-12">
@@ -179,13 +171,13 @@ $(function(){
 			var loginId="${user.id}";
 			var prodUserId="${product.userId.account}";
 				if(prodUserId.length!=0 && prodUserId==loginId){
-					excBtn2 = '<button type="button" class="btn btn-primary">交換</button>';
+					excBtn2 = '<button id="cha" type="button" class="btn btn-primary" onclick="javascript:location.href=\'exchanging?id='+ this.id + '\'">交換</button>';
 				}
 			
 			$("#testtable").append('<tr><td><div class="col-md-2"><img id="imgId'+this.productBId.id+'" style="height: 100px;"></div><div class="col-md-6"><h4>'+
 					 this.productBId.name+'</h4>物品狀況：'+this.productBId.status +
 					 '<br>產品描述：'+this.productBId.description+
-					 '<br>'+excBtn2+'</div><div class="col-md-4" style="border-left: 1px dashed gray;"><ul class="nav navbar-nav"><li><img class="img-circle" style="height: 80px;"src="'+
+					 '<br><div name="d1">'+excBtn2+'</div></div><div class="col-md-4" style="border-left: 1px dashed gray;"><ul class="nav navbar-nav"><li><img class="img-circle" style="height: 80px;"src="'+
 					 this.productBId.userId.picture+
 					 '"></li><li><ul style="list-style: none;"><li><h4>'+
 					 this.productBId.userId.account+'<a href="#"></a></h4></li><li>'+
@@ -210,6 +202,9 @@ $(function(){
 		       contentType : "application/json"
 		     });		 
 		 });
+		 if($("#excBtn").val() == "交易結束"){
+			 $('div[name*="d1"]').html("");
+		 }
 	}
  	function getImg(img) {
         $("#imgId"+img.product.id).attr("src", img.picture);
