@@ -84,6 +84,18 @@ public class ProductController {
 		}
 	}
 
+	@RequestMapping(value = "/query")
+	@ResponseBody
+	public List<Product> query(@RequestParam("id") Integer id, HttpSession session) {
+		List<Product> list = null;
+		
+		list = productService.findByUserId(id);
+		
+		return list;
+
+	}
+	
+	
 
 	@RequestMapping(value = "/add")
 	public String add(Model model) {

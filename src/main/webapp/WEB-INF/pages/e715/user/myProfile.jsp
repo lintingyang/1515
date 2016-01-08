@@ -41,13 +41,11 @@
 				<div class="row">
 					<div class="col-md-1"></div>
 					<div class="col-md-5">
-						<a href="#"><span
-							class="glyphicon glyphicon-thumbs-up iconpro">${good}</span><span
-							class="badge"></span></a>
+						<span class="glyphicon glyphicon-thumbs-up iconpro">${good}</span><span
+							class="badge"></span>
 					</div>
 					<div class="col-md-5">
-						<a href="#"><span
-							class="glyphicon glyphicon-thumbs-down iconpro">${bad}</span></a>
+						<span class="glyphicon glyphicon-thumbs-down iconpro">${bad}</span>
 					</div>
 					<div class="col-md-1"></div>
 				</div>
@@ -60,44 +58,70 @@
 	<hr>
 
 	<div class="row">
-		<div class="col-md-1"></div>
-		<div class="col-md-10">
-			<div class="col-md-3">
-				<div class="prolist">
-					<img class="prodimg" src="/resources/imgs/phone.jpg">雙雙的Mac
-				</div>
+			<div id="itemContainer">
+
 			</div>
-			<div class="col-md-3">
-				<div class="prolist">
-					<img class="prodimg" src="/resources/imgs/phone.jpg">雙雙的Mac
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="prolist">
-					<img class="prodimg" src="/resources/imgs/phone.jpg">雙雙的Mac
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="prolist">
-					<img class="prodimg" src="/resources/imgs/phone.jpg">雙雙的Mac
-				</div>
-			</div>
-		</div>
+		<div class="holder"></div>
 	</div>
 
-	<nav style="text-align: center;">
-		<ul class="pagination">
-			<li><a href="#" aria-label="Previous"> <span
-					aria-hidden="true">&laquo;</span>
-			</a></li>
-			<li><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-			</a></li>
-		</ul>
-	</nav>
+
 </div>
+
+<script type="text/javascript">
+
+$(function() {
+	$.ajax({
+		contentType : "application/json",
+		url : "/product/query",
+		dataType : "json",
+		type : "get",
+		data : {"id" : "${user.id}"},
+		success : function(data) {
+			$("#itemContainer").html('');
+			$.each(data,
+				function(i) {
+				var productdiv = $("<div></div>");
+				var aclick = $("<a>").attr("href","/product/" + data[i].id);
+				var productimg = $("<img>").addClass("prodimg");
+				var p = $("<span>").text(data[i].name);
+				$(aclick).append($(productimg)).append($(p));
+				$(productdiv).addClass("proddiv").append($(aclick));
+
+				$("#itemContainer").append(productdiv);
+				getpicture(data[i], productimg);})
+
+				$("div.holder").jPages({
+						containerID : "itemContainer",
+						perPage : 4,
+						fallback : 500,
+						first : "第一頁",
+						previous : "上一頁",
+						next : "下一頁",
+						last : "最後頁",
+					});
+			
+				}
+			});
+
+		});
+function getpicture(prod, prodimg) {
+	var formData = {
+		"id" : prod.id
+	}
+	$.ajax({
+		contentType : "application/json",
+		url : "/queryimg",
+		dataType : "json",
+		type : "get",
+		data : formData,
+		success : function(data) {
+
+			if (data[0] != null) {
+				console.log(data[0].picture);
+				$(prodimg).attr("src", data[0].picture);
+			}
+		}
+	});
+}
+</script>
 <c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>

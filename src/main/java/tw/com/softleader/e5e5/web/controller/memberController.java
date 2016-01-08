@@ -53,26 +53,36 @@ public class memberController {
 		}
 		int good=0;
 		int bad=0;
-		List<Product> products = productService.findByUserId(id);
-		if(products!=null){
-			for (Product product : products) {
-				List<Exchange> exchanges = exchangeService.findByProduct(product);
-				if(exchanges!=null){
-					for (Exchange exchange : exchanges) {
-						if(exchange.getGrade()!=null ){
-							if(Grade.GOOD.equals(exchange.getGrade())){
-								good++;
-							}else if(Grade.BAD.equals(exchange.getGrade())){
-								bad++;
-							}
-						}
+//		List<Product> products = productService.findByUserId(id);
+//		if(products!=null){
+//			for (Product product : products) {
+//				List<Exchange> exchanges = exchangeService.findByProduct(product);
+//				if(exchanges!=null){
+//					for (Exchange exchange : exchanges) {
+//						if(exchange.getGrade()!=null ){
+//							if(Grade.GOOD.equals(exchange.getGrade())){
+//								good++;
+//							}else if(Grade.BAD.equals(exchange.getGrade())){
+//								bad++;
+//							}
+//						}
+//					}
+//				}
+//			}
+//		}
+		List<Exchange> exchanges = exchangeService.findAll();
+		for (Exchange exchange : exchanges) {
+			if(id==exchange.getProductAId().getUserId().getId()){
+				if(exchange.getGrade()!=null ){
+					if(Grade.GOOD.equals(exchange.getGrade())){
+						good++;
+					}else if(Grade.BAD.equals(exchange.getGrade())){
+						bad++;
 					}
 				}
 			}
 		}
-
 		model.addAttribute("user", user);
-		model.addAttribute("products", products);
 		model.addAttribute("good", good);
 		model.addAttribute("bad", bad);
 		
