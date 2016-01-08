@@ -61,10 +61,10 @@
 				class="dropdown-toggle" data-toggle="dropdown" role="button"
 				aria-haspopup="true" aria-expanded="false"> 
 				<img class="img-circle" style="width: 30px;"
-					src="/resources/imgs/user.jpeg">Me ${user.name}
+					src="${user.picture}"> ${user.name}
 					<span class="caret"></span></a>
 				<ul class="dropdown-menu" aria-labelledby="drop3">
-					<li><a class="userlist" href="/WebContent/user/myProfile.jsp">會員資料</a></li>
+					<li><a class="userlist" href="/E715Member/${user.id}">會員資料</a></li>
 					<li><a class="userlist" href="/WebContent/user/userFriendList.jsp">關注名單</a></li>
 					<li><a class="userlist" href="/WebContent/product/productedit.jsp">物品管理</a></li>
 					<li><a class="userlist" href="/product/add">新增物品</a></li>

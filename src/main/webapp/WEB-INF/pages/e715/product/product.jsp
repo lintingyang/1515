@@ -44,7 +44,7 @@
 					src="${product.userId.picture}"></li>
 				<li><ul style="list-style: none;">
 						<li><h4>
-								Account: ${product.userId.account} <a href="#"></a>
+								<a href="/E715Member/${product.userId.id}">Account: ${product.userId.account} </a>
 							</h4></li>
 						<li>${product.userId.name}</li>
 						<li>${product.userId.schoolName}<li>
@@ -97,21 +97,6 @@
 			<div class="tab-content">
 				<div role="tabpanel" class="tab-pane active" id="question">
 					<table class="table table-striped" id="qatable"></table>
-<!-- 						<tr> -->
-<!-- 							<td><h4>Question:</h4>我可以用兩個CityCoffee跟你換嗎 -->
-<!-- 								<hr> -->
-<!-- 								<h4>Answer:</h4>不行喔<br></td> -->
-<!-- 						</tr> -->
-<!-- 						<tr> -->
-<!-- 							<td><h4>Question:</h4> 全新的嗎 -->
-<!-- 								<hr> -->
-<!-- 								<h4>Answer:</h4>九成新<br></td> -->
-<!-- 						</tr> -->
-<!-- 						<tr> -->
-<!-- 							<td><h4>Question:</h4>AAA <br> -->
-<!-- 								<hr> -->
-<!-- 								<h4>Answer:</h4>BBB<br></td> -->
-<!-- 						</tr> -->
 					<div>
 						<!-- 發問區開始 -->
 						<div style="text-align: center;">
@@ -139,6 +124,26 @@
 
 <script>
 $(function(){
+// 	Q&A
+	var formData={"id":${product.id}}
+    $.ajax({
+       type: "GET",
+       url: "http://localhost:8080/qanda/getqanda",
+       data: formData,
+       success: function(data){
+    	   showtable(data);
+       },
+       dataType: "json",
+       contentType : "application/json"
+     });
+     function showtable(data){
+    	 $.each(data, function(){
+     		 $("#qatable").append("<tr><td><h4>問題:</h4>" + this.question + 
+     			"<hr><h4>Answer:</h4>" + this.answer + "<br></td></tr>");
+    	 })	 
+     }
+//	end of Q&A	
+//	小圖示
     $(".thumbnail").click(function(e){
     	e.preventDefault()
         var href = $(this).attr("href");
@@ -146,8 +151,8 @@ $(function(){
         e.preventDefault();
         return false;
     });
-
- 	var formData={"id":${product.id}}
+//	小圖示end
+//	show Exchange
     $.ajax({
        type: "GET",
        url: "http://localhost:8080/product/findexchange",
@@ -159,11 +164,8 @@ $(function(){
        contentType : "application/json"
      });
  	 function show(data) {
- 		 //alert("rear"+data[0].tradeStatus);
- 		 var obj = JSON.stringify(data);
  		 var imgId=0;
-//  		alert(obj[3]);
-		 $.each($.parseJSON(obj), function() {
+		 $.each(data, function() {
 			imgId++;
 			var excBtn2='';
 			var loginId="${user.id}";
@@ -181,10 +183,13 @@ $(function(){
 					 this.productBId.userId.account+'<a href="#"></a></h4></li><li>'+
 					 this.productBId.userId.name +'</li><li>'+this.productBId.userId.schoolName+
 					 '</li></ul></li><li><span class="glyphicon glyphicon-plus">123</span></li></ul></div></td></tr>');
-			 
+//	end of show Exchange 
+//	交易結束鎖定
 			if(this.tradeStatus=="TRUE"){
 				$("#excBtn").val("交易結束").attr('onclick', '');
-			} 
+			}
+//	交易結束鎖定end
+//	Exchange product pic
 			var formData={"id":this.productBId.id}
 		    $.ajax({
 		       type: "GET",
@@ -204,8 +209,9 @@ $(function(){
  	function getImg(img) {
         $("#imgId"+img.product.id).attr("src", img.picture);
  	}
- 	
-});/*end of function*/
+//	end of Exchange product pic
+
+});//end of function onload
 
 </script>
 <c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>
