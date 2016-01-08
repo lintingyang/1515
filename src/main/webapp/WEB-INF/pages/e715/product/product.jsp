@@ -82,7 +82,7 @@
 
 		<div class="container"
 			style="width: 100%; height: 100px; text-align: center;">
-			<input class="btn btn-primary btn-lg" type="button" value="我要交換" onclick="location.href='/WebContent/product/exchangeproduct.jsp'">
+			<input id="excBtn" class="btn btn-primary btn-lg" type="button" value="我要交換" onclick="location.href='/WebContent/product/exchangeproduct.jsp'">
 		</div>
 	</div>
 
@@ -142,7 +142,6 @@
 
 
 				<div role="tabpanel" class="tab-pane" id="exchange">
-					exchange
 					<table class="table table-striped" id="testtable"></table>
 				</div>
 
@@ -178,18 +177,24 @@ $(function(){
  		var obj = JSON.stringify(data);
  		var imgId=0;
 		 $.each($.parseJSON(obj), function() {
-			 imgId++;
-			 //console.log("#imgId"+this.productBId.id);
-			 $("#testtable").append('<tr><td><div class="col-md-2"><img id="imgId'+this.productBId.id+'" style="height: 100px;"></div><div class="col-md-6"><h4>'+
+			imgId++;
+			var excBtn2='';
+			if(${user.id}==this.productBId.userId.id){
+				excBtn2 = '<button type="button" class="btn btn-primary">交換</button>';
+			}
+			$("#testtable").append('<tr><td><div class="col-md-2"><img id="imgId'+this.productBId.id+'" style="height: 100px;"></div><div class="col-md-6"><h4>'+
 					 this.productBId.name+'</h4>物品狀況：'+this.productBId.status +
 					 '<br>產品描述：'+this.productBId.description+
-					 '</div><div class="col-md-4" style="border-left: 1px dashed gray;"><ul class="nav navbar-nav"><li><img class="img-circle" style="height: 80px;"src="'+
+					 '<br>'+excBtn2+'</div><div class="col-md-4" style="border-left: 1px dashed gray;"><ul class="nav navbar-nav"><li><img class="img-circle" style="height: 80px;"src="'+
 					 this.productBId.userId.picture+
 					 '"></li><li><ul style="list-style: none;"><li><h4>'+
 					 this.productBId.userId.account+'<a href="#"></a></h4></li><li>'+
 					 this.productBId.userId.name +'</li><li>'+this.productBId.userId.schoolName+
 					 '</li></ul></li><li><span class="glyphicon glyphicon-plus">123</span></li></ul></div></td></tr>');
 			 
+			if(this.tradeStatus=="TRUE"){
+				$("#excBtn").val("交易結束").attr('onclick', '');
+			} 
 			var formData={"id":this.productBId.id}
 		    $.ajax({
 		       type: "GET",
