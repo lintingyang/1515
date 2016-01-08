@@ -41,48 +41,7 @@
 <!-- 			</div> -->
 	</div>
 </div>
-<!-- 	<nav style="text-align: center;"> -->
-<!-- 		<ul class="pagination"> -->
-<!-- 			<li><a href="#" aria-label="Previous"> <span -->
-<!-- 					aria-hidden="true">&laquo;</span> -->
-<!-- 			</a></li> -->
-<!-- 			<li><a href="#">1</a></li> -->
-<!-- 			<li><a href="#">2</a></li> -->
-<!-- 			<li><a href="#">3</a></li> -->
-<!-- 			<li><a href="#">4</a></li> -->
-<!-- 			<li><a href="#">5</a></li> -->
-<!-- 			<li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span> -->
-<!-- 			</a></li> -->
-<!-- 		</ul> -->
-<!-- 	</nav> -->
-
-<!--
-<script>
-					$.ajax({
-						contentType : 'application/json',
-						url : '/product/query',
-						dataType : 'json',
-						type : 'post',
-						data : JSON.stringify({
-							id : $("#id").val()
-						}),
-						success : function(data) {
-							console.log(data);
-							var mytbody = $('#simpleTable>tbody');
-
-							$.each(data, function(i, datas) {
-								var temp1 = $("<td></td>").text(datas.id);
-								var temp2 = $("<td></td>").text(datas.name);
-								var temp3 = $("<td></td>").text(datas.tradeWay);
-								var temp4 = $("<td></td>").text(datas.description);
-								var maTr = $("<tr></tr>").append(
-										[ temp1, temp2, temp3 , temp4]);
-								$(mytbody).append(maTr);
-							})
-						}
-					});
-	</script>
-	  -->
+	  
 <script type="text/javascript">
 
 $('.list').click(function() {
@@ -97,11 +56,42 @@ $('.list').click(function() {
 		data:{ "query" : $(this).text()},
 		success: function(data){
 			console.log(data);
+			
+		$("#itemContainer").html('');
+		$.each(data,function(i){
+			var productdiv = $("<div></div>");
+			var aclick = $("<a>").attr("href","/product/"+data[i].id);
+			var productimg = $("<img>").addClass("prodimg");
+			$(aclick).text(data[i].name).append($(productimg));
+			$(productdiv).addClass("proddiv").append($(aclick));
+			
+			$("#itemContainer").append(productdiv);
+				
+			})	
+			
 		}
 		
 	});	
 });
 	</script>
+	
+<script>
+	$(function() {
+		$("div.holder").jPages({
+			containerID : "itemContainer",
+			perPage : 8,
+ 			fallback: 500,
+ 			first: "第一頁",
+ 			previous: "上一頁",
+ 			next: "下一頁",
+ 			last: "最後頁",
+		});
+
+	});
+	
+	
+	
+</script>
 </div>
 
 <c:import url="/WebContent/layout/footer.jsp"></c:import>

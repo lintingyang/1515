@@ -1,18 +1,26 @@
 package tw.com.softleader.e5e5.service;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.softleader.e5e5.common.dao.OurDao;
 import tw.com.softleader.e5e5.common.model.Message;
 import tw.com.softleader.e5e5.common.service.OurService;
 import tw.com.softleader.e5e5.dao.ProductCategoryDao;
 import tw.com.softleader.e5e5.dao.ProductDao;
+import tw.com.softleader.e5e5.dao.UserDao;
 import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.entity.enums.Time;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
@@ -21,6 +29,9 @@ import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 public class ProductService extends OurService<Product>{
 	@Autowired
 	private ProductDao productDao;
+	
+	@Autowired
+	private UserDao userDao;
 	
 	@Autowired
 	private ProductCategoryDao productCategoryDao;
@@ -37,16 +48,23 @@ public class ProductService extends OurService<Product>{
 		return list;
 	}
 	
+	//(11)查詢使用者已/未刊登的物品/Enum
 	@Transactional
 	public List<Product> findByUsersProductsIsPosted(Integer id , TrueFalse postStatus){
 		return productDao.findUsersProductsByIsPosted(id, postStatus);
 	}
 	
+	//(11)查詢使用者已/未刊登的物品/String
 	@Transactional
 	public List<Product> findByUsersProductsIsPosted(Integer id , String postStatus){
 		return productDao.findUsersProductsByIsPosted(id, postStatus);
 	}
 	
+	//(12)查詢使用者已/待交換的物品/String
+	public List<Product> findUsersProductsByExchange(Integer id , String post){
+		return productDao.findUsersProductsByExchange(id, post);
+	}
+
 	//後台
 	//(1)findOne byId
 	@Transactional
@@ -172,9 +190,12 @@ public class ProductService extends OurService<Product>{
 
 	// (14)新增產品
 	@Transactional
-	public int insert(String name, int category, String status ,String description, LocalDateTime deadline,Time transactionTime, String location, String tradeWay, String wishItem, TrueFalse postStatus) {
+	public Product insert(String name,int user, int category, String status, String description, 
+						LocalDateTime deadline,Time transactionTime, String location, 
+						String tradeWay, String wishItem, TrueFalse postStatus) {
 		Product product = new Product();
 		product.setName(name);
+		product.setUserId(userDao.findOne(user));
 		product.setProductCategory(productCategoryDao.findOne(category));
 		product.setStatus(status);
 		product.setDescription(description);
@@ -186,10 +207,10 @@ public class ProductService extends OurService<Product>{
 		product.setWishItem(wishItem);
 		product.setPostStatus(postStatus);
 		productDao.save(product);
-		return 1;
+		return product;
 
 	}
-
+	
 	@Override
 	public OurDao<Product> getDao() {
 		return productDao;
