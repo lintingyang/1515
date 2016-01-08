@@ -84,6 +84,15 @@
 			style="width: 100%; height: 100px; text-align: center;">
 			<input id="excBtn" class="btn btn-primary btn-lg" type="button" value="我要交換" onclick="location.href='/WebContent/product/exchangeproduct.jsp'">
 		</div>
+		
+		<!-- 下面這個btn銘要用的 -->
+		<div>
+			<form action="/product/exchanging">
+				<button id="btnExchang" type="submit" class="btn btn-success btn-lg">
+					<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> 轉入交易進行中畫面
+				</button>
+			</form>
+		</div>
 	</div>
 
 
