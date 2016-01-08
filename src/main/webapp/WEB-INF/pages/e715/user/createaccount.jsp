@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/WEB-INF/pages/e715/layout/header.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/meta.jsp"/>
-<link rel="stylesheet" href="/resources/css/user.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/user.css" />
 
 
 <style>
@@ -21,47 +21,69 @@
 </style>
 
 <script>
-// 	$(function() {
-// 		$("#idbuthref").on('click', function() {
-// 			window.location.href = "insertSuccess.jsp";
-// 		});
-// 	});
-	
-	function call(){ 
-		var kcyear = document.getElementsByName("year")[0], 
-		kcmonth = document.getElementsByName("month")[0], 
-		kcday = document.getElementsByName("day")[0]; 
-		var d = new Date(); 
-		var n = d.getFullYear(); 
-		for (var i = n; i >= 1950; i--) { 
-			var opt = new Option(); 
-			opt.value = opt.text = i; 
-			kcyear.add(opt); 
-		} 
+window.onload = function () {
+    for (var i = 1; i <= 12; i++) {
+        var opt = window.document.createElement("option");
+        opt.value = i;
+        opt.innerHTML = i;
+        document.getElementById('month').appendChild(opt);
+    }
+    //取得現在年份
+    var nowYear = new Date().getFullYear();
+    
+    //最多活不超過100歲
+    var deadYear = nowYear-100;
+    
+    for (var i = deadYear; i <= nowYear; i++) {
+        var opt = window.document.createElement("option");
+        opt.value = i;
+        opt.innerHTML = i;
+        document.getElementById('year').appendChild(opt);
+    }
 
-		kcyear.addEventListener("change", validate_date); 
-		kcmonth.addEventListener("change", validate_date); 
-	
-		function validate_date() { 
-			var y = +kcyear.value, 
-			m = kcmonth.value, 
-			d = kcday.value; 
-			if (m === "2") 
-			var mlength = 28 + (!(y & 3) && ((y % 100) !== 0 || !(y & 15))); 
-			else 
-			var mlength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m - 1]; 
-			kcday.length = 0; 
-			for (var i = 1; i <= mlength; i++) { 
-			var opt = new Option(); 
-			opt.value = opt.text = i; 
-			if (i == d) opt.selected = true; 
-			kcday.add(opt); 
-			} 
-		} 
-		validate_date(); 
-	} 
+
+    document.getElementById("day").onfocus = Datefocus;
+    document.getElementById("day").onblur = Dateblur;
+
+    document.getElementById("day").onchange = function () {
+        document.getElementById("day").onfocus = function () { };
+        document.getElementById("day").onblur = function () { };
+    };
+
+    document.getElementById("year").onchange = function () {
+        document.getElementById("day").onfocus = Datefocus;
+        document.getElementById("day").onblur = Dateblur();
+    }
+
+    document.getElementById("month").onchange = function () {
+        document.getElementById("day").onfocus = Datefocus;
+        document.getElementById("day").onblur = Dateblur();
+    }
+   
+}
+
+var tempdate;
+function Datefocus() {
+    document.getElementById("day").innerHTML = "";
+    tempdate = new Date(document.getElementById("year").value, document.getElementById("month").value, 0).getDate();
+    var opt = window.document.createElement("option");
+    opt.value = ${user.birthday.getDayOfMonth()} ;
+    opt.innerHTML = ${user.birthday.getDayOfMonth()};
+    opt.className= "defaultOption";
+    document.getElementById('day').appendChild(opt);
+    for (var i = 1; i <= tempdate; i++) {
+        var opt = window.document.createElement("option");
+        opt.value = i;
+        opt.innerHTML = i;
+        document.getElementById('day').appendChild(opt);
+    }
+   
+}
+
+function Dateblur() {
+    document.getElementById("day").innerHTML = "";
+}
 </script>
-
 <div class="container">
 	<div class="row">
 		<div class="col-xs-6 col-md-3"></div>
@@ -117,25 +139,15 @@
 				<div class="form-group" id="divBorder">
 					<label for="inputPassword3" class="col-sm-2 control-label">生日:</label>
 					<div class="col-sm-10" style="padding-top: 7px">
-					<select name="month" onchange="call()" required> 
-					<option value="">select</option> 
-					<option value="1">Jan</option> 
-					<option value="2">Feb</option> 
-					<option value="3">Mar</option> 
-					<option value="4">Apr</option> 
-					<option value="5">May</option> 
-					<option value="6">Jun</option> 
-					<option value="7">Jul</option> 
-					<option value="8">Aug</option> 
-					<option value="9">Sep</option> 
-					<option value="10">Oct</option> 
-					<option value="11">Nov</option> 
-					<option value="12">Dec</option> 
-					</select> 月
-					<select name="day" required> 
-					<option value="">select</option> </select> 
-					日<select name="year" onchange="call()" required>  
-					<option value="">select</option></select>年 
+									<select name="year" id="year">  
+						<option value="">Select</option>
+					</select>年 
+					<select name="month" id="month"> 
+						<option value="">Select</option> 
+					</select>月
+					<select name="day" id="day"> 
+						<option value="">Select</option>
+					</select> 日
 					</div>
 				</div>
 				<div class="form-group" id="divBorder">

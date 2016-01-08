@@ -4,7 +4,8 @@
 <link
 	href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css"
 	rel="stylesheet">
-<c:import url="/WEB-INF/pages/e715/layout/header.jsp"/>
+<c:import url="/WEB-INF/pages/e715/layout/header.jsp" />
+
 
 
 <div class="container" style="margin: 50px auto;">
@@ -175,4 +176,4 @@
 </div>
 
 
-<c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>
+<c:import url="/WebContent/layout/footer.jsp"></c:import>

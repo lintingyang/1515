@@ -89,6 +89,10 @@
  			next: "下一頁",
  			last: "最後頁",
 		});
+
 	});
+	
+	
+	
 </script>
 <c:import url="/WebContent/layout/footer.jsp"></c:import>

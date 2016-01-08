@@ -77,7 +77,16 @@
 		</div>
 		<div class="container"
 			style="width: 100%; height: 100px; text-align: center;">
-			<input class="btn btn-primary btn-lg" type="button" value="我要交換" onclick="location.href='/WebContent/product/exchangeproduct.jsp'">
+			<input id="excBtn" class="btn btn-primary btn-lg" type="button" value="我要交換" onclick="location.href='/WebContent/product/exchangeproduct.jsp'">
+		</div>
+		
+		<!-- 下面這個btn銘要用的 -->
+		<div>
+			<form action="/product/exchanging">
+				<button id="btnExchang" type="submit" class="btn btn-success btn-lg">
+					<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> 轉入交易進行中畫面
+				</button>
+			</form>
 		</div>
 	</div>
 
@@ -128,119 +137,9 @@
 				</div><!-- 問與答區塊結束 -->
 				<!-- exchange區塊開始 -->
 				<div role="tabpanel" class="tab-pane" id="exchange">
-					<table class="table table-striped" id="testtable">
-<!-- 						<tr> -->
-<!-- 							<td> -->
-<!-- 								<div class="col-md-2"> -->
-<!-- 									<img src="/resources/imgs/phone.jpg" -->
-<!-- 										style="height: 100px;"> -->
-<!-- 								</div> -->
-<!-- 								<div class="col-md-6"> -->
-<!-- 									<h4>星巴克紀念杯款</h4> -->
-<!-- 									物品狀況：九成新 <br>產品描述：j123oi21j3oijelkwjeq;oijaksjd;alkdjsqkje;lqwkej;ls -->
-<!-- 								</div> -->
-<!-- 								<div class="col-md-4" style="border-left: 1px dashed gray;"> -->
-<!-- 									<ul class="nav navbar-nav"> -->
-<!-- 										<li><img class="img-circle" style="height: 80px;" -->
-<!-- 											src="/resources/imgs/noname.jpg"></li> -->
-<!-- 										<li><ul style="list-style: none;"> -->
-<!-- 												<li><h4> -->
-<!-- 														Account <a href="#"></a> -->
-<!-- 													</h4></li> -->
-<!-- 												<li>Name</li> -->
-<!-- 												<li>台灣大學</li> -->
-<!-- 											</ul></li> -->
-<!-- 										<li><span class="glyphicon glyphicon-plus">123</span></li> -->
-
-<!-- 									</ul> -->
-<!-- 								</div> -->
-<!-- 							</td> -->
-<!-- 						</tr> -->
-<!-- 						<tr> -->
-<!-- 							<td> -->
-<!-- 								<div class="col-md-2"> -->
-<!-- 									<img src="/resources/imgs/phone.jpg" -->
-<!-- 										style="height: 100px;"> -->
-<!-- 								</div> -->
-<!-- 								<div class="col-md-6"> -->
-<!-- 									<h4>星巴克紀念杯款</h4> -->
-<!-- 									物品狀況：九成新 <br>產品描述：j123oi21j3oijelkwjeq;oijaksjd;alkdjsqkje;lqwkej;ls -->
-<!-- 									<input type="button" value="我想跟你換"> -->
-<!-- 								</div> -->
-<!-- 								<div class="col-md-4" style="border-left: 1px dashed gray;"> -->
-<!-- 									<ul class="nav navbar-nav"> -->
-<!-- 										<li><img class="img-circle" style="height: 80px;" -->
-<!-- 											src="/resources/imgs/noname.jpg"></li> -->
-<!-- 										<li><ul style="list-style: none;"> -->
-<!-- 												<li><h4> -->
-<!-- 														Account <a href="#"></a> -->
-<!-- 													</h4></li> -->
-<!-- 												<li>Name</li> -->
-<!-- 												<li>台灣大學</li> -->
-<!-- 											</ul></li> -->
-<!-- 										<li><span class="glyphicon glyphicon-plus">123</span></li> -->
-
-<!-- 									</ul> -->
-<!-- 								</div> -->
-<!-- 							</td> -->
-<!-- 						</tr> -->
-<!-- 						<tr> -->
-<!-- 							<td> -->
-<!-- 								<div class="col-md-2"> -->
-<!-- 									<img src="/resources/imgs/phone.jpg" -->
-<!-- 										style="height: 100px;"> -->
-<!-- 								</div> -->
-<!-- 								<div class="col-md-6"> -->
-<!-- 									<h4>星巴克紀念杯款</h4> -->
-<!-- 									物品狀況：九成新 <br>產品描述：j123oi21j3oijelkwjeq;oijaksjd;alkdjsqkje;lqwkej;ls -->
-<!-- 								</div> -->
-<!-- 								<div class="col-md-4" style="border-left: 1px dashed gray;"> -->
-<!-- 									<ul class="nav navbar-nav"> -->
-<!-- 										<li><img class="img-circle" style="height: 80px;" -->
-<!-- 											src="/resources/imgs/noname.jpg"></li> -->
-<!-- 										<li><ul style="list-style: none;"> -->
-<!-- 												<li><h4> -->
-<!-- 														Account <a href="#"></a> -->
-<!-- 													</h4></li> -->
-<!-- 												<li>Name</li> -->
-<!-- 												<li>台灣大學</li> -->
-<!-- 											</ul></li> -->
-<!-- 										<li><span class="glyphicon glyphicon-plus">123</span></li> -->
-
-<!-- 									</ul> -->
-<!-- 								</div> -->
-<!-- 							</td> -->
-<!-- 						</tr> -->
-
-<!-- 						<tr> -->
-<!-- 							<td> -->
-<!-- 								<div class="col-md-2"> -->
-<!-- 									<img src="/resources/imgs/phone.jpg" -->
-<!-- 										style="height: 100px;"> -->
-<!-- 								</div> -->
-<!-- 								<div class="col-md-6"> -->
-<!-- 									<h4>星巴克紀念杯款</h4> -->
-<!-- 									物品狀況：九成新 <br>產品描述：j123oi21j3oijelkwjeq;oijaksjd;alkdjsqkje;lqwkej;ls -->
-<!-- 								</div> -->
-<!-- 								<div class="col-md-4" style="border-left: 1px dashed gray;"> -->
-<!-- 									<ul class="nav navbar-nav"> -->
-<!-- 										<li><img class="img-circle" style="height: 80px;" -->
-<!-- 											src="/resources/imgs/noname.jpg"></li> -->
-<!-- 										<li><ul style="list-style: none;"> -->
-<!-- 												<li><h4> -->
-<!-- 														Account <a href="#"></a> -->
-<!-- 													</h4></li> -->
-<!-- 												<li>Name</li> -->
-<!-- 												<li>台灣大學</li> -->
-<!-- 											</ul></li> -->
-<!-- 										<li><span class="glyphicon glyphicon-plus">123</span></li> -->
-
-<!-- 									</ul> -->
-<!-- 								</div> -->
-<!-- 							</td> -->
-<!-- 						</tr> -->
-					</table>
-				</div><!-- exchange區塊結束 -->
+					<table class="table table-striped" id="testtable"></table>
+				</div>
+				<!-- exchange區塊結束 -->
 			</div>
 		</div>
 	</div>
@@ -268,22 +167,52 @@ $(function(){
        contentType : "application/json"
      });
  	 function show(data) {
- 		var obj = JSON.stringify(data);
- 		
-//		 document.getElementById("tbody1").innerHTML="";
-// 		 var counter=0;
+ 		 //alert("rear"+data[0].tradeStatus);
+ 		 var obj = JSON.stringify(data);
+ 		 var imgId=0;
+//  		alert(obj[3]);
 		 $.each($.parseJSON(obj), function() {
-			 $("#testtable").append('<tr><td><div class="col-md-8"><h4>'+
+			imgId++;
+			var excBtn2='';
+			var loginId="${user.id}";
+			var prodUserId="${product.userId.account}";
+				if(prodUserId.length!=0 && prodUserId==loginId){
+					excBtn2 = '<button type="button" class="btn btn-primary">交換</button>';
+				}
+			
+			$("#testtable").append('<tr><td><div class="col-md-2"><img id="imgId'+this.productBId.id+'" style="height: 100px;"></div><div class="col-md-6"><h4>'+
 					 this.productBId.name+'</h4>物品狀況：'+this.productBId.status +
 					 '<br>產品描述：'+this.productBId.description+
-					 '</div><div class="col-md-4" style="border-left: 1px dashed gray;"><ul class="nav navbar-nav"><li><img class="img-circle" style="height: 80px;"src="'+
+					 '<br>'+excBtn2+'</div><div class="col-md-4" style="border-left: 1px dashed gray;"><ul class="nav navbar-nav"><li><img class="img-circle" style="height: 80px;"src="'+
 					 this.productBId.userId.picture+
 					 '"></li><li><ul style="list-style: none;"><li><h4>'+
 					 this.productBId.userId.account+'<a href="#"></a></h4></li><li>'+
 					 this.productBId.userId.name +'</li><li>'+this.productBId.userId.schoolName+
+<<<<<<< HEAD
 					 '</li></ul></li><li><span class="glyphicon glyphicon-plus">123</span></li></ul></div></td></tr>')
+=======
+					 '</li></ul></li><li><span class="glyphicon glyphicon-plus">123</span></li></ul></div></td></tr>');
+			 
+			if(this.tradeStatus=="TRUE"){
+				$("#excBtn").val("交易結束").attr('onclick', '');
+			} 
+			var formData={"id":this.productBId.id}
+		    $.ajax({
+		       type: "GET",
+		       url: "http://localhost:8080/product/findproductimg",
+		       data: formData,
+		       success: function(img){
+		    	   getImg(img);
+		       },
+		       dataType: "json",
+		       contentType : "application/json"
+		     });		 
+>>>>>>> branch 'master' of https://github.com/lintingyang/1515.git
 		 });
 	}
+ 	function getImg(img) {
+        $("#imgId"+img.product.id).attr("src", img.picture);
+ 	}
  	
 });/*end of function*/
 
