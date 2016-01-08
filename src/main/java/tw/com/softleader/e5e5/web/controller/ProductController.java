@@ -37,6 +37,7 @@ public class ProductController {
 	public ProductPictureService productPictureService;
 	@Autowired
 	public ExchangeService exchangeService;
+
 	
 	@Autowired
 	private ServletContext servletContext;
@@ -53,20 +54,34 @@ public class ProductController {
 		model.addAttribute("product", product);
 		model.addAttribute("productPictures", productPictures);
 		
+		//銘加的 上面參數session也是
 		session.setAttribute("thisProduct", product);
 		
 		return "/e715/product/product";
 	}
-	
+
 	@RequestMapping(value = "/findexchange")
 	@ResponseBody
-	public List<Exchange> add(@ModelAttribute @RequestParam("id") Integer id, Model model) {
-		List<Exchange> exchanges=exchangeService.findByProductAId(id);
+	public List<Exchange> findExchange(@RequestParam("id") Integer id, Model model) {
+		List<Exchange> exchanges = exchangeService.findByProductAId(id);
 
 		return exchanges;
 	}
-	
-	//新增商品
+
+
+	@RequestMapping(value = "/findproductimg")
+	@ResponseBody
+	public ProductPicture findProductPicture(@RequestParam("id") Integer id, Model model) {
+		Product product = productService.getOne(id);
+		List<ProductPicture> productPictures = productPictureService.getProductPictures(product);
+		if (productPictures != null) {
+			return productPictures.get(0);
+		}else{
+			return null;
+		}
+	}
+
+
 	@RequestMapping(value = "/add")
 	public String add(Model model) {
 		return "/e715/product/proAdd";
