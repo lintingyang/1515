@@ -80,14 +80,6 @@
 			<input id="excBtn" class="btn btn-primary btn-lg" type="button" value="我要交換" onclick="location.href='/WebContent/product/exchangeproduct.jsp'">
 		</div>
 		
-		<!-- 下面這個btn銘要用的 -->
-		<div>
-			<form action="/product/exchanging">
-				<button id="btnExchang" type="submit" class="btn btn-success btn-lg">
-					<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> 轉入交易進行中畫面
-				</button>
-			</form>
-		</div>
 	</div>
 
 	<div class="col-md-12">
@@ -105,21 +97,6 @@
 			<div class="tab-content">
 				<div role="tabpanel" class="tab-pane active" id="question">
 					<table class="table table-striped" id="qatable"></table>
-<!-- 						<tr> -->
-<!-- 							<td><h4>Question:</h4>我可以用兩個CityCoffee跟你換嗎 -->
-<!-- 								<hr> -->
-<!-- 								<h4>Answer:</h4>不行喔<br></td> -->
-<!-- 						</tr> -->
-<!-- 						<tr> -->
-<!-- 							<td><h4>Question:</h4> 全新的嗎 -->
-<!-- 								<hr> -->
-<!-- 								<h4>Answer:</h4>九成新<br></td> -->
-<!-- 						</tr> -->
-<!-- 						<tr> -->
-<!-- 							<td><h4>Question:</h4>AAA <br> -->
-<!-- 								<hr> -->
-<!-- 								<h4>Answer:</h4>BBB<br></td> -->
-<!-- 						</tr> -->
 					<div>
 						<!-- 發問區開始 -->
 						<div style="text-align: center;">
@@ -147,6 +124,26 @@
 
 <script>
 $(function(){
+// 	Q&A
+	var formData={"id":${product.id}}
+    $.ajax({
+       type: "GET",
+       url: "http://localhost:8080/qanda/getqanda",
+       data: formData,
+       success: function(data){
+    	   showtable(data);
+       },
+       dataType: "json",
+       contentType : "application/json"
+     });
+     function showtable(data){
+    	 $.each(data, function(){
+     		 $("#qatable").append("<tr><td><h4>問題:</h4>" + this.question + 
+     			"<hr><h4>Answer:</h4>" + this.answer + "<br></td></tr>");
+    	 })	 
+     }
+//	end of Q&A	
+//	小圖示
     $(".thumbnail").click(function(e){
     	e.preventDefault()
         var href = $(this).attr("href");
@@ -154,8 +151,8 @@ $(function(){
         e.preventDefault();
         return false;
     });
-
- 	var formData={"id":${product.id}}
+//	小圖示end
+//	show Exchange
     $.ajax({
        type: "GET",
        url: "http://localhost:8080/product/findexchange",
@@ -174,22 +171,25 @@ $(function(){
 			var loginId="${user.id}";
 			var prodUserId="${product.userId.account}";
 				if(prodUserId.length!=0 && prodUserId==loginId){
-					excBtn2 = '<button type="button" class="btn btn-primary">交換</button>';
+					excBtn2 = '<button id="cha" type="button" class="btn btn-primary" onclick="javascript:location.href=\'exchanging?id='+ this.id + '\'">交換</button>';
 				}
 			
 			$("#testtable").append('<tr><td><div class="col-md-2"><img id="imgId'+this.productBId.id+'" style="height: 100px;"></div><div class="col-md-6"><h4>'+
 					 this.productBId.name+'</h4>物品狀況：'+this.productBId.status +
 					 '<br>產品描述：'+this.productBId.description+
-					 '<br>'+excBtn2+'</div><div class="col-md-4" style="border-left: 1px dashed gray;"><ul class="nav navbar-nav"><li><img class="img-circle" style="height: 80px;"src="'+
+					 '<br><div name="d1">'+excBtn2+'</div></div><div class="col-md-4" style="border-left: 1px dashed gray;"><ul class="nav navbar-nav"><li><img class="img-circle" style="height: 80px;"src="'+
 					 this.productBId.userId.picture+
 					 '"></li><li><ul style="list-style: none;"><li><h4>'+
 					 this.productBId.userId.account+'<a href="#"></a></h4></li><li>'+
 					 this.productBId.userId.name +'</li><li>'+this.productBId.userId.schoolName+
 					 '</li></ul></li><li><span class="glyphicon glyphicon-plus">123</span></li></ul></div></td></tr>');
-			 
+//	end of show Exchange 
+//	交易結束鎖定
 			if(this.tradeStatus=="TRUE"){
 				$("#excBtn").val("交易結束").attr('onclick', '');
-			} 
+			}
+//	交易結束鎖定end
+//	Exchange product pic
 			var formData={"id":this.productBId.id}
 		    $.ajax({
 		       type: "GET",
@@ -202,12 +202,16 @@ $(function(){
 		       contentType : "application/json"
 		     });		 
 		 });
+		 if($("#excBtn").val() == "交易結束"){
+			 $('div[name*="d1"]').html("");
+		 }
 	}
  	function getImg(img) {
         $("#imgId"+img.product.id).attr("src", img.picture);
  	}
- 	
-});/*end of function*/
+//	end of Exchange product pic
+
+});//end of function onload
 
 </script>
 <c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>

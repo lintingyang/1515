@@ -5,6 +5,28 @@
 <c:import url="/WEB-INF/pages/layout/meta.jsp" />
 <script type="text/javascript">
 	$(function() {
+		$('#bad').focusin(function(){
+			$('#pStatusBad').attr('type', 'text');
+		});
+		$('#bad').focusout(function(){
+			$('#pStatusBad').attr('type', 'hidden');
+		});
+		$('#wish').focusin(function(){
+			$('#divWish').attr('style', '');
+		});
+		$('#wish').focusout(function(){
+			$('#divWish').attr('style', 'display:none');
+		});
+		$('#notPost').focusin(function(){
+			$('#divDeadline').attr('style', 'display:none');
+		});
+		$('#notPost').focusout(function(){
+			$('#divDeadline').attr('style', '');
+		});
+		
+		
+		
+		
 		$('#btnSend').click(function() {
 			swal({
 				title : "新增成功",
@@ -58,8 +80,8 @@
 						<div class="radio">
 							<label> <input type="radio" name="status" value="使用過">使用過</label></div>
 						<div class="radio">
-							<label> <input type="radio" name="status" value="破損">破損：
-							<input type="text" class="form" id="pStatusBad" name="pStatusBad" 
+							<label> <input type="radio" name="status" value="破損" id="bad">破損 &nbsp;
+							<input type="hidden" class="form" id="pStatusBad" name="pStatusBad" 
 								placeholder="請敘述破損狀況.."></label></div>
 					</div>
 				</div>
@@ -74,12 +96,11 @@
 				<div class="col-sm-10">
 					<div class="radio">
 						<label> <input type="radio" name="postStatus" value="TRUE" checked>刊登</label> 
-						<label> <input type="radio" name="postStatus" value="FALSE">暫不刊登</label>
+						<label> <input type="radio" name="postStatus" value="FALSE" id="notPost">暫不刊登</label>
 					</div>
 				</div>
-				
-			</div>
-				<div class="form-group row">
+				</div>
+				<div class="form-group row" id="divDeadline">
 					<label for="inputEmail3" class="col-sm-3 form-control-label">交易期限</label>
 					<div class="col-sm-10">
 						西元<input type="text" name="pyyyy" placeholder="2016" size="4" maxlength="4">年
@@ -139,9 +160,11 @@
 				<div class="radio">
 					<label> <input type="radio" name="wishItem" value="NULL">贈送</label></div>
 				<div class="radio">
-					<label> <input type="radio" name="wishItem" value="希望商品">希望商品：</label></div>
-				<textarea name="pWishItem" style="width: 80%;" class="form-control" rows="8"
-					placeholder="詳細敘述想要換到的商品"></textarea></div>
+					<label> <input type="radio" name="wishItem" value="希望商品" id="wish">希望商品</label></div>
+				<div id="divWish" style="display:none">
+					<textarea name="pWishItem" style="width: 80%;" class="form-control" rows="8"
+						placeholder="詳細敘述想要換到的商品"></textarea></div>
+				</div>
 			<div style="text-align: center; margin:50px auto;">
 				<button id="btnSend" type="submit" class="btn btn-success btn-lg">
 					<span class="glyphicon glyphicon-send" aria-hidden="true"></span> 送出
