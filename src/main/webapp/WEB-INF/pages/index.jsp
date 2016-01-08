@@ -22,20 +22,9 @@
 
 			<div class="holder"></div>
 			<div id="itemContainer">
-
 			</div>
 			<div class="holder"></div>
-
-
-
-
 		</div>
-
-
-
-
-
-
 	</div>
 </div>
 

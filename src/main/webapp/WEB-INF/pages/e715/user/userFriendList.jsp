@@ -15,165 +15,99 @@
 			<div class="row">
 				<ul class="nav navbar-nav">
 					<li><img class="img-circle" style="width: 200px;"
-						src="/resources/imgs/noname.jpg"></li>
+						src="${user.picture}"></li>
 					<li><ul style="list-style: none;">
-							<li><h4>
-									Account <a href="#"></a>
-								</h4></li>
-							<li>Name</li>
-							<li>台灣大學</li>
+							<li><h4>${user.account}</h4></li>
+							<li>${user.name}</li>
+							<li>${user.schoolName}</li>
 						</ul></li>
-					<li><span class="glyphicon glyphicon-plus">123</span></li>
+					<!--<li><span class="glyphicon glyphicon-plus">123</span></li> -->
 
 				</ul>
 			</div>
 		</div>
 		<div class="col-md-4"></div>
 	</div>
+	
+	
 	<div class="col-md-12">
 		<div>
 			<!-- Nav tabs -->
 			<br> <br>
 			<ul class="nav nav-tabs" role="tablist">
-				<li role="presentation" class="active"><a href="#friend"
-					aria-controls="home" role="tab" data-toggle="tab">好友名單</a></li>
-				<li role="presentation"><a href="#banlist"
-					aria-controls="profile" role="tab" data-toggle="tab">黑名單</a></li>
+				<li role="presentation" class="active"><a href="#" class="friendShip"
+					aria-controls="home" role="tab" data-toggle="tab" id="123">好友名單</a></li>
+				<li role="presentation"><a href="#" class="friendShip"
+					aria-controls="profile" role="tab" data-toggle="tab" id="456">黑名單</a></li>
 			</ul>
 			<!-- Tab panes -->
-			<div class="tab-content">
-				<div role="tabpanel" class="tab-pane active" id="friend">
-					<br>
-					<div class="row">
-						<div class="col-md-3">
-							<div align="center">
-								<a href="/WebContent/user/myProfile.jsp"> <img class="img-circle" style="height: 80px;"
-									src="/resources/imgs/noname.jpg"></a>
-								<p>Account</p>
-								<p>Name</p>
-								<p>台灣大學</p>
-								<button type="button" class="btn btn-warning btn-lg">
-									<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-									取消關注
-								</button>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div align="center">
-								<a href="/WebContent/user/myProfile.jsp"> <img class="img-circle" style="height: 80px;"
-									src="/resources/imgs/noname.jpg"></a>
-								<p>Account</p>
-								<p>Name</p>
-								<p>台灣大學</p>
-								<button type="button" class="btn btn-warning btn-lg">
-									<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-									取消關注
-								</button>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div align="center">
-								<a href="/WebContent/user/myProfile.jsp"> <img class="img-circle" style="height: 80px;"
-									src="/resources/imgs/noname.jpg"></a>
-								<p>Account</p>
-								<p>Name</p>
-								<p>台灣大學</p>
-								<button type="button" class="btn btn-warning btn-lg">
-									<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-									取消關注
-								</button>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div align="center">
-								<a href="/WebContent/user/myProfile.jsp"> <img class="img-circle" style="height: 80px;"
-									src="/resources/imgs/noname.jpg"></a>
-								<p>Account</p>
-								<p>Name</p>
-								<p>台灣大學</p>
-								<button type="button" class="btn btn-warning btn-lg">
-									<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-									取消關注
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div role="tabpanel" class="tab-pane" id="banlist">
-					<br>
-					<div class="row">
-						<div class="col-md-3">
-							<div align="center">
-								<a href="/WebContent/user/myProfile.jsp"> <img class="img-circle" style="height: 80px;"
-									src="/resources/imgs/noname.jpg"></a>
-								<p>Account</p>
-								<p>Name</p>
-								<p>台灣大學</p>
-								<button type="button" class="btn btn-success btn-lg">
-									<span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
-									取消封鎖
-								</button>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div align="center">
-								<a href="/WebContent/user/myProfile.jsp"> <img class="img-circle" style="height: 80px;"
-									src="/resources/imgs/noname.jpg"></a>
-								<p>Account</p>
-								<p>Name</p>
-								<p>台灣大學</p>
-								<button type="button" class="btn btn-success btn-lg">
-									<span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
-									取消封鎖
-								</button>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div align="center">
-								<a href="/WebContent/user/myProfile.jsp"> <img class="img-circle" style="height: 80px;"
-									src="/resources/imgs/noname.jpg"></a>
-								<p>Account</p>
-								<p>Name</p>
-								<p>台灣大學</p>
-								<button type="button" class="btn btn-success btn-lg">
-									<span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
-									取消封鎖
-								</button>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div align="center">
-								<a href="/WebContent/user/myProfile.jsp"> <img class="img-circle" style="height: 80px;"
-									src="/resources/imgs/noname.jpg"></a>
-								<p>Account</p>
-								<p>Name</p>
-								<p>台灣大學</p>
-								<button type="button" class="btn btn-success btn-lg">
-									<span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
-									取消封鎖
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<div class="holder"></div>
+			<div id="itemContainer"></div>
+			<div class="holder"></div>
 		</div>
 	</div>
-	<nav style="text-align: center;">
-		<ul class="pagination">
-			<li><a href="#" aria-label="Previous"> <span
-					aria-hidden="true">&laquo;</span>
-			</a></li>
-			<li><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">5</a></li>
-			<li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-			</a></li>
-		</ul>
-	</nav>
 </div>
+
+<script type="text/javascript">
+
+$(function() {
+	$.ajax({
+		contentType : "application/json",
+		url : "/E715Member/userFriendList",
+		dataType : "json",
+		type : "post",
+		data : "",
+		success : function(data) {
+			console.log(data);
+ 				}
+ 			});
+		});
+
+
+
+	$('.friendShip').click(function() {
+		if($(this).text().equal("好友名單")){
+		$.ajax({
+			contentType : "application/json",
+			url : "/E715Member/userFriendList",
+			dataType : "json",
+			type : "get",
+			data : "",
+			success : function(data) {
+				console.log(data);
+					}
+				});
+		}else{
+			
+			$.ajax({
+				contentType : "application/json",
+				url : "/E715Member/userBanList",
+				dataType : "json",
+				type : "get",
+				data : "",
+				success : function(data) {
+					console.log(data);
+						}	
+			
+			});
+		}
+		
+			});
+
+
+	$(function() {
+		$("div.holder").jPages({
+			containerID : "itemContainer1",
+			perPage : 20,
+			fallback : 500,
+			first : "第一頁",
+			previous : "上一頁",
+			next : "下一頁",
+			last : "最後頁",
+		});
+	});
+</script>
+
 
 
 <c:import url="/WebContent/layout/footer.jsp"></c:import>

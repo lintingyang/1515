@@ -31,6 +31,13 @@ public class ProductCategory extends OurEntity implements java.io.Serializable {
 		return "ProductCategory [id=" + id + ", name=" + name + "]";
 	}
 
+	public ProductCategory() {
+	}
+
+	public ProductCategory(int id) {
+		this.id = id;
+	}
+	
 	public String getName() {
 		return this.name;
 	}

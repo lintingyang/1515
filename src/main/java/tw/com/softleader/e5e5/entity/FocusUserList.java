@@ -26,12 +26,12 @@ public class FocusUserList extends OurEntity implements java.io.Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_a_id")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private User UserAId;
+	private User userAId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_b_id")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private User UserBId;
+	private User userBId;
 
 	public FocusUserList() {
 	}
@@ -42,8 +42,8 @@ public class FocusUserList extends OurEntity implements java.io.Serializable {
 
 	public FocusUserList(int id, User userByUserAId, User userByUserBId) {
 		this.id = id;
-		this.UserAId = userByUserAId;
-		this.UserBId = userByUserBId;
+		this.userAId = userByUserAId;
+		this.userBId = userByUserBId;
 	}
 	
 	
@@ -51,24 +51,24 @@ public class FocusUserList extends OurEntity implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "FocusUserList [id=" + id + ", userByUserAId=" + UserAId.getId() + ", userByUserBId=" + UserBId.getId()
+		return "FocusUserList [id=" + id + ", userByUserAId=" + userAId.getId() + ", userByUserBId=" + userBId.getId()
 				+ "]";
 	}
 
 	public User getUserAId() {
-		return UserAId;
+		return userAId;
 	}
 
 	public void setUserAId(User userAId) {
-		UserAId = userAId;
+		this.userAId = userAId;
 	}
 
 	public User getUserBId() {
-		return UserBId;
+		return userBId;
 	}
 
 	public void setUserBId(User userBId) {
-		UserBId = userBId;
+		this.userBId = userBId;
 	}
 
 

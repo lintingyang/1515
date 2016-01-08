@@ -37,7 +37,7 @@
 </style>
 
 <script>
-window.onload = function () {
+$(function() {
     for (var i = 1; i <= 12; i++) {
         var opt = window.document.createElement("option");
         opt.value = i;
@@ -75,8 +75,18 @@ window.onload = function () {
         document.getElementById("day").onfocus = Datefocus;
         document.getElementById("day").onblur = Dateblur();
     }
-   
-}
+    
+    $("#submit").click(function() {
+		swal({
+			title : "修改成功",
+			text : "已更新您的會員資料",
+			type : "success",
+			showCancelButton : false,
+			confirmButtonColor : "#F5A056",
+			closeOnConfirm : true
+		});
+	})
+})
 
 var tempdate;
 function Datefocus() {
@@ -100,9 +110,6 @@ function Dateblur() {
     document.getElementById("day").innerHTML = "";
 }
 </script>
-
-
-
 <div class="container">
 	<div class="row">
 		<div class="col-md-12"></div>
@@ -229,13 +236,30 @@ function Dateblur() {
 				<div class="form-group" id="divBorder">
 					<label for="inputPassword3" class="col-sm-2 control-label">喜好商品類別:</label>
 					<div class="col-sm-10">
+						<c:forEach items="${userLikes}" var="userLikes">
+						${userLikes.productCategoryId.name}  
+						</c:forEach>
+					</div>
+				</div>
+				
+				<div class="form-group" id="divBorder">
+					<label for="inputPassword3" class="col-sm-2 control-label">喜好商品類別:</label>
+					<div class="col-sm-10">
+						<c:forEach items="${productCategorys}" var="productCategorys">
+<%-- 						<c:forEach items="${userLikes}" var="userLikes"> --%>
+							
+<%-- 							<c:if test="${(productCategorys.id eq userLikes.productCategoryId.id)}"> --%>
+<!-- 						<label class="checkbox-inline"> <input type="checkbox" -->
+<%-- 							id="inlineCheckbox1" value="${productCategorys.name}" checked="checked"> ${productCategorys.name} --%>
+<!-- 						</label>  -->
+<%-- 						</c:if> --%>
+
+<%-- 						</c:forEach> --%>
 						<label class="checkbox-inline"> <input type="checkbox"
-							id="inlineCheckbox1" value="computer"> 電腦
-						</label> <label class="checkbox-inline"> <input type="checkbox"
-							id="inlineCheckbox2" value="furniture"> 家具
-						</label> <label class="checkbox-inline"> <input type="checkbox"
-							id="inlineCheckbox3" value="stationery"> 文具
-						</label>
+							id="inlineCheckbox1" value="${productCategorys.id}" name="interested"> ${productCategorys.name}
+						</label> 
+						</c:forEach>
+					
 					</div>
 				</div>
 
@@ -259,20 +283,7 @@ function Dateblur() {
 		<div class="col-md-3"></div>
 	</div>
 </div>
-<script type="text/javascript">
-	$(function() {
-		$("#submit").click(function() {
-			swal({
-				title : "修改成功",
-				text : "已更新您的會員資料",
-				type : "success",
-				showCancelButton : false,
-				confirmButtonColor : "#F5A056",
-				closeOnConfirm : true
-			});
-		})
-	})
-</script>
+
 
 
 
