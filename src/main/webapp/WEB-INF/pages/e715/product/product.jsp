@@ -99,16 +99,23 @@
 					<table class="table table-striped" id="qatable"></table>
 					<div>
 						<!-- 發問區開始 -->
+						<c:if test="${empty user}">
 						<div style="text-align: center;">
-							<textarea rows="10" cols="100" placeholder="提出問題..."></textarea>
+						<h3>請先登入才能發問！</h3>
+						</div>
+						</c:if>
+						<c:if test="${not empty user.id}">
+						<div style="text-align: center;">
+							<textarea id="questiontext"　rows="10" cols="100" placeholder="提出問題..."></textarea>
 							<br>
 							<label><input type="checkbox">匿名發言</label>
 							<br>
 							<br> 
-							<input type="button" value="送出" class="btn btn-primary">
+							<input type="button" value="送出" class="btn btn-primary" id="submitquestion">
 							<div class="checkbox">	
 							</div>
 						</div>
+						</c:if>
 						<!-- 發問區結束 -->
 					</div>
 				</div><!-- 問與答區塊結束 -->
@@ -128,7 +135,7 @@ $(function(){
 	var formData={"id":${product.id}}
     $.ajax({
        type: "GET",
-       url: "http://localhost:8080/qanda/getqanda",
+       url: "/qanda/getqanda",
        data: formData,
        success: function(data){
     	   showtable(data);
@@ -143,6 +150,23 @@ $(function(){
     	 })	 
      }
 //	end of Q&A	
+//	submit question
+	$("#submitquestion").click(function(){
+		var questionData = JSON.stringify({"productid":"${product.id}", "question":$("#questiontext").val()});
+		$.ajax({
+			type: "POST",
+			url: "/qanda/question",
+			data: questionData,
+			contentType : "application/json",
+		    dataType: "text",
+		    async: false,
+			success: function(data){
+		    	 location.reload(true);
+		       },
+		       
+		})
+	})
+//	end of submit question
 //	小圖示
     $(".thumbnail").click(function(e){
     	e.preventDefault()
