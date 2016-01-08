@@ -11,90 +11,86 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import tw.com.softleader.e5e5.common.entity.OurEntity;
+
 @Entity
 @Table(name = "question_and_answer", schema = "dbo", catalog = "EEIT82DB")
-public class QuestionAndAnswer implements java.io.Serializable {
+public class QuestionAndAnswer extends OurEntity implements java.io.Serializable {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	private int id;
-	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id")
 	private Product product;
 	
+	@Column(name = "question", length = 200)
+	private String question;
+	
 	@Column(name = "answer", length = 200)
 	private String answer;
 	
-	@Column(name = "edit_time", length = 23)
-	private LocalDateTime editTime;
+	@Column(name = "question_time")
+	private LocalDateTime questionTime;
+	
+	@Column(name = "answer_time")
+	private LocalDateTime answerTime;
 	
 	@Column(name = "is_public", length = 1)
 	private Character isPublic;
 	
-	@Column(name = "question", length = 200)
-	private String question;
-
 	public QuestionAndAnswer() {
 	}
 
 	@Override
 	public String toString() {
-		return "QuestionAndAnswer [id=" + id + ", answer=" + answer + ", editTime=" + editTime + ", isPublic="
-				+ isPublic + ", question=" + question + "]";
+		return "QuestionAndAnswer [question=" + question + ", answer=" + answer + ", questionTime=" + questionTime
+				+ ", answerTime=" + answerTime + ", isPublic=" + isPublic + "]";
 	}
-
-
-	public int getId() {
-		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 
 	public Product getProduct() {
-		return this.product;
+		return product;
 	}
 
 	public void setProduct(Product product) {
 		this.product = product;
 	}
 
-	
+	public String getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(String question) {
+		this.question = question;
+	}
+
 	public String getAnswer() {
-		return this.answer;
+		return answer;
 	}
 
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
 
-	public LocalDateTime getEditTime() {
-		return editTime;
+	public LocalDateTime getQuestionTime() {
+		return questionTime;
 	}
 
-	public void setEditTime(LocalDateTime editTime) {
-		this.editTime = editTime;
+	public void setQuestionTime(LocalDateTime questionTime) {
+		this.questionTime = questionTime;
 	}
 
-	
+	public LocalDateTime getAnswerTime() {
+		return answerTime;
+	}
+
+	public void setAnswerTime(LocalDateTime answerTime) {
+		this.answerTime = answerTime;
+	}
+
 	public Character getIsPublic() {
-		return this.isPublic;
+		return isPublic;
 	}
 
 	public void setIsPublic(Character isPublic) {
 		this.isPublic = isPublic;
-	}
-
-	public String getQuestion() {
-		return this.question;
-	}
-
-	public void setQuestion(String question) {
-		this.question = question;
 	}
 
 }

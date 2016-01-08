@@ -10,12 +10,11 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import tw.com.softleader.e5e5.E5e5App;
+import tw.com.softleader.e5e5.common.AbstractTest;
 import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.entity.QuestionAndAnswer;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = { E5e5App.class })
-public class QuestionAndAnswerDaoTest {
+public class QuestionAndAnswerDaoTest extends AbstractTest{
 
 	private Logger log = Logger.getLogger(this.getClass());
 
@@ -37,16 +36,7 @@ public class QuestionAndAnswerDaoTest {
 //		qandaDao.save(qaa);
 //	}
 	
-//	@Test
-//	public void testFindByProduct() {
-//		Product product = productDao.findOne(3);
-//		log.info(product);
-//		List<QuestionAndAnswer> qandas = qandaDao.findByProduct(product);
-//		for (QuestionAndAnswer qa : qandas) {
-//			log.info(qa);
-//		}
-//	}
-//
+
 //	@Test
 //	public void testFindAll(){
 //		List<QuestionAndAnswer> qandas = qandaDao.findAll();
@@ -69,16 +59,13 @@ public class QuestionAndAnswerDaoTest {
 //	}
 	
 	@Test
-	public void testCount(){
+	public void test(){
 		long count = qandaDao.count();
-		log.info("*****count=" + count);
-	}
-	
-	@Test
-	public void testCountByProduct(){
-		Product product = productDao.findOne(3);
-		int size = qandaDao.findByProduct(product).size();
-		log.info("*****size=" + size);
+		log.info(count);
+		
+		List<QuestionAndAnswer> list = qandaDao.findByProductId(2);
+		log.info(list);
+		
 	}
 
 }
