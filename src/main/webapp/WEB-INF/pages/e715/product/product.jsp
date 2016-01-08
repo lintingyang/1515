@@ -44,7 +44,7 @@
 					src="${product.userId.picture}"></li>
 				<li><ul style="list-style: none;">
 						<li><h4>
-								Account: ${product.userId.account} <a href="#"></a>
+								<a href="/E715Member/${product.userId.id}">Account: ${product.userId.account} </a>
 							</h4></li>
 						<li>${product.userId.name}</li>
 						<li>${product.userId.schoolName}<li>

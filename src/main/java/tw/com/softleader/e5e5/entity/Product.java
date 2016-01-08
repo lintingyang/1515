@@ -52,6 +52,10 @@ public class Product extends OurEntity implements java.io.Serializable {
 	@Column(name = "post_time", length = 23)
 	private LocalDateTime postTime;
 
+	@Column(name = "start_time", length = 23)
+	private LocalDateTime startTime;
+	
+
 	@Column(name = "deadline", length = 23)
 	private LocalDateTime deadline;
 
@@ -157,6 +161,14 @@ public class Product extends OurEntity implements java.io.Serializable {
 
 	public LocalDateTime getDeadline() {
 		return this.deadline;
+	}
+
+	public LocalDateTime getStartTime() {
+		return startTime;
+	}
+	
+	public void setStartTime(LocalDateTime startTime) {
+		this.startTime = startTime;
 	}
 
 	public void setDeadline(LocalDateTime deadline) {
