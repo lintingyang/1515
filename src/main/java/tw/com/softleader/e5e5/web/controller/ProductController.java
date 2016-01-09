@@ -25,6 +25,7 @@ import tw.com.softleader.e5e5.entity.Exchange;
 import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.entity.ProductPicture;
 import tw.com.softleader.e5e5.entity.User;
+import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 import tw.com.softleader.e5e5.service.ProductService;
 
 @Controller
@@ -110,11 +111,7 @@ public class ProductController {
 									  @RequestParam("pStatusBad") String pStatusBad, 
 									  @RequestParam("pWishItem") String pWishItem, 
 									  @RequestParam("pStartTime") String pStartTime, 
-									  @RequestParam("pyyyy") String pyyyy, 
-									  @RequestParam("pMM") String pMM, 
-									  @RequestParam("pdd") String pdd, 
-									  @RequestParam("pHH") String pHH, 
-									  @RequestParam("pmm") String pmm,
+									  @RequestParam("pDeadline") String pDeadline, 
 									  HttpSession session) {
 		
 		//錯誤訊息顯示
@@ -128,11 +125,6 @@ public class ProductController {
 //		}
 //		if(product.getLocation() == null || product.getLocation().trim().length() == 0){
 //			errorMessage.put("description", "請輸入交換地點");
-//		}
-//		try{
-//			LocalDateTime.of(pyyyy, pMM, pdd, pHH, pmm);
-//		}catch(Exception e){
-//			errorMessage.put("transTime", "時間格式不正確");
 //		}
 //		if(errorMessage != null && !errorMessage.isEmpty()) {
 //			return "redirect:/product/insert";
@@ -159,30 +151,29 @@ public class ProductController {
 		
 		//時間處理
 		LocalDateTime startTime =null;
-		String month = pStartTime.substring(0, 2);
-		String day = pStartTime.substring(3, 5);
-		String year = pStartTime.substring(6, 10);
-		String str = year + "-" + month + "-" + day+" 00:00"; //"1986-04-08";
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-		try {
-			startTime = LocalDateTime.parse(str, formatter);
-		} catch (Exception e) {
-		}
 		LocalDateTime deadline =null;
-		
-		
-//		if(pyyyy == null){
-//			dateTime = null;				
-//		}else{
-//			int year = Integer.parseInt(pyyyy);
-//			int month = Integer.parseInt(pMM);
-//			int day = Integer.parseInt(pdd);
-//			int hour = Integer.parseInt(pHH);
-//			int minute = Integer.parseInt(pmm);
-//			dateTime = LocalDateTime.of(year, month, day, hour, minute);
-//		}
-		
-		
+		if(product.getPostStatus() == TrueFalse.TRUE){
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+			String monthS = pStartTime.substring(0, 2);
+			String dayS = pStartTime.substring(3, 5);
+			String yearS = pStartTime.substring(6, 10);
+			String start = yearS + "-" + monthS + "-" + dayS+" 00:00"; //"1986-04-08";
+			try {
+				startTime = LocalDateTime.parse(start, formatter);
+			} catch (Exception e) {
+			}
+			String monthD = pDeadline.substring(0, 2);
+			String dayD = pDeadline.substring(3, 5);
+			String yearD = pDeadline.substring(6, 10);
+			String end = yearD + "-" + monthD + "-" + dayD+" 00:00"; //"1986-04-08";
+			try {
+				deadline = LocalDateTime.parse(end, formatter);
+			} catch (Exception e) {
+			}
+		}else{
+			startTime =null;
+			deadline =null;
+		}
 		
 		//存入資料
 		Product newProduct = productService.insert(product.getName(),
