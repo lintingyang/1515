@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,19 +13,20 @@
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
 <!-- <script src="//cdn.jsdelivr.net/jquery.shadow-animation/1/mainfile"></script> -->
 <!-- CDN -->
-<script src="/resources/js/jquery-1.11.3.js"></script>
-<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="/resources/css/bootstrap-theme.min.css" >
-<script src="/resources/js/bootstrap.min.js" ></script> 
 <%-- <c:import url="/WEB-INF/pages/layout/meta.jsp"></c:import> --%>
 <%-- <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import> --%>
 <%-- <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import> --%>
 
+<script src="/resources/js/jquery-1.11.3.js"></script>
+<script src="/resources/js/bootstrap.min.js" ></script> 
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/css/bootstrap-theme.min.css" >
+
+<script src="/resources/js/jPages.js"></script>
 <link rel="stylesheet" href="/resources/css/jPages.css">
 <link rel="styleshee" href="/resources/css/user.css" />
 <link rel="stylesheet" href="/resources/css/prodcss.css" />
-<script src="/resources/js/jPages.js"></script>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 
 <title>E715</title>
 
@@ -49,9 +50,10 @@
 		</div>
 		<form class="navbar-form navbar-left" role="search" action="/head/search">
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Search" name="namelike" id="searchbar">
+				<input type="text" class="form-control" placeholder="Search" 
+								name="namelike" id="searchbar">
 			</div>
-			<button type="button" id="searchbtn"  class="btn btn-default searchbtn" >Submit</button>
+			<button type="submit" id="searchbtn"  class="btn btn-default searchbtn" >Submit</button>
 		</form>
 		<a class="navbar-brand" href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-menu-down"></span></a>
 		
