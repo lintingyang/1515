@@ -20,9 +20,11 @@
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-10" id="productlist">
-			<c:if test ="${namelike != '' }" >
+		
+			<c:if test ="${!empty namelike }" >
 				以下為搜尋節果：${ namelike}
 			</c:if>
+			
 			<div class="holder"></div>
 			<div id="itemContainer">
 			</div>
