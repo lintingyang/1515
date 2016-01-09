@@ -2,7 +2,9 @@ package tw.com.softleader.e5e5.web.controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -116,18 +118,32 @@ public class ProductController {
 		
 		//錯誤訊息顯示
 //		Map<String, String> errorMessage = new HashMap<>();
+//		session.removeAttribute("errorMsg");
 //		session.setAttribute("errorMsg", errorMessage);
-//		if(product.getName() == null || product.getName().trim().length() == 0){
-//			errorMessage.put("name", "請輸入商品標題/名稱");
+//		//error1 pStatusBad= null
+//		if(product.getStatus() == "破損"){
+//			if(pStatusBad == null || pStatusBad.trim().length() == 0){
+//				errorMessage.put("status", "請描述損壞情形");
+//			}
 //		}
-//		if(product.getDescription() == null || product.getDescription().trim().length() == 0){
-//			errorMessage.put("description", "請輸入商品描述");
+//		//error3 time = null
+//		if(product.getPostStatus() == TrueFalse.TRUE){
+//			if(pStartTime == null || pStartTime.trim().length() == 0){
+//				errorMessage.put("timeS", "請輸入起始時間");
+//			}
+//			if(pDeadline == null || pDeadline.trim().length() == 0){
+//				errorMessage.put("timeD", "請輸入結束時間");
+//			}
 //		}
-//		if(product.getLocation() == null || product.getLocation().trim().length() == 0){
-//			errorMessage.put("description", "請輸入交換地點");
+//		//error2 wishItem = null
+//		if(product.getWishItem() == "希望商品"){
+//			if(pWishItem == null || pWishItem.trim().length() == 0){
+//				errorMessage.put("wish", "請輸入希望清單");
+//			}
 //		}
+//		//若有錯誤回新增畫面
 //		if(errorMessage != null && !errorMessage.isEmpty()) {
-//			return "redirect:/product/insert";
+//			return "redirect:/product/add";
 //		}
 		
 		//取userId

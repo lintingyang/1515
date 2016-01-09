@@ -8,7 +8,14 @@
 <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="jqueryui/style.css">
-
+<style>
+h4{
+	color:#000079;
+}
+#em{
+	color:red;
+}
+</style>
 <script type="text/javascript">
 	$(function() {
 		//時間
@@ -18,25 +25,27 @@
 		//顯示隱藏表格
 		$('input[name *= "status"]').change(function(){
 			if($(this).val() == "破損"){
-				$('#pStatusBad').attr('type', '');
+				$('#pStatusBad').attr('type', '').attr('required','required');
 	 		}else{
-	 			$('#pStatusBad').attr('type', 'hidden');
+	 			$('#pStatusBad').attr('type', 'hidden').removeAttr('required');
 	 		}
 		});
 		$('input[name *= "postStatus"]').change(function(){
 			if($(this).val() == "TRUE"){
-				$('#pStartTime').attr('type', '');
-				$('#pDeadline').attr('type', '');
+				$('#pStartTime').attr('type', '').attr('required','required');
+				$('#pDeadline').attr('type', '').attr('required','required');
 	 		}else{
-	 			$('#pStartTime').attr('type', 'hidden');
-	 			$('#pDeadline').attr('type', 'hidden');
+	 			$('#pStartTime').attr('type', 'hidden').removeAttr('required');
+	 			$('#pDeadline').attr('type', 'hidden').removeAttr('required');
 	 		}
 		});
 		$('input[name *= "wishItem"]').change(function(){
 			if($(this).val() == "希望商品"){
 				$('#divWish').attr('style', '');
+				$('#pWishItem').attr('required','required');
 	 		}else{
 	 			$('#divWish').attr('style', 'display:none');
+	 			$('#pWishItem').removeAttr('required');
 	 		}
 		});
 		
@@ -59,14 +68,14 @@
 		<div class="col-md-5">
 			<div class="row">
 				<div class="form-group row">
-					<label class="col-sm-3 form-control-label">商品標題/名稱</label>
+					<label class="col-sm-4 form-control-label"><h4>商品標題/名稱</h4></label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" name="name"
-							placeholder="Title or Name" style="width: 80%;">${errorMsg.name}
+							placeholder="Title or Name" style="width: 80%;" required="required">
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-sm-3 form-control-label">商品種類</label>
+					<label class="col-sm-4 form-control-label"><h4>商品種類</h4></label>
 					<div class="col-sm-10">
 						<select id="pCategory" name="pCategory">
 							<option value="1">3C產品</option>
@@ -84,7 +93,7 @@
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-sm-3">商品狀態</label>
+					<label class="col-sm-4 form-control-label"><h4>商品狀態</h4></label>
 					<div class="col-sm-10">
 						<div class="radio">
 							<label> <input type="radio" name="status" value="全新" checked>全新</label></div>
@@ -95,17 +104,20 @@
 						<div class="radio">
 							<label> <input type="radio" name="status" value="破損" id="bad">破損 &nbsp;
 							<input type="hidden" class="form" id="pStatusBad" name="pStatusBad" 
-								placeholder="請敘述破損狀況.."></label></div>
+								placeholder="請敘述破損狀況.." required="required"></label>
+<%-- 							<span id="em">${errorMsg.status}</span> --%>
+						</div>
 					</div>
 				</div>
-				<div>
-					<label>商品描述</label>
-					<textarea name="description" style="width: 80%;" 
-						class="form-control" rows="8" placeholder="商品描述..."></textarea>
-				</div>
-				<br>
 				<div class="form-group row">
-					<label class="col-sm-4 form-control-label">上架與否</label>
+					<label class="col-sm-4 form-control-label"><h4>商品描述</h4></label>
+					<div class="col-sm-10">
+						<textarea name="description" style="width: 80%;" 
+							class="form-control" rows="8" placeholder="商品描述..." required="required"></textarea>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-4 form-control-label"><h4>上架與否</h4></label>
 					<div class="col-sm-10">
 						<div class="radio">
 							<label> <input type="radio" name="postStatus" value="TRUE" id="yesPost" checked>刊登</label> 
@@ -115,10 +127,14 @@
 				</div>
 				<div>
 					<div>
-						<p>刊登日期：<input type="text" id="pStartTime" name="pStartTime"></p>
+						<p>刊登日期：<input type="text" id="pStartTime" name="pStartTime" required="required">
+<%-- 						<span id="em">${errorMsg.timeS}</span> --%>
+						</p>
 					</div>
 					<div>
-						<p>截止日期：<input type="text" id="pDeadline" name="pDeadline"></p>
+						<p>截止日期：<input type="text" id="pDeadline" name="pDeadline" required="required">
+<%-- 						<span id="em">${errorMsg.timsD}</span> --%>
+						</p>
 					</div>
 				</div>
 			</div>
@@ -126,14 +142,14 @@
 
 		<div class="col-md-5">
 			<div class="form-group row">
-				<label class="col-sm-3">圖片</label>
+				<label class="col-sm-4 form-control-label"><h4>圖片</h4></label>
 				<div class="col-sm-10">
-					<input type="file" name="pPicture" multiple>
+					<input type="file" name="pPicture" multiple  required="required">
 				</div>
 			</div>
 			<br>
 			<div class="form-group row">
-				<label class="col-sm-3">交易時段</label>
+				<label class="col-sm-4 form-control-label"><h4>交易時段</h4></label>
 				<div class="col-sm-10">
 					<div class="radio">
 						<label><input type="radio" name="transactionTime" value="上午" checked>上午</label>
@@ -143,17 +159,16 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-3 form-control-label">交易地點</label>
+				<label class="col-sm-4 form-control-label"><h4>交易地點</h4></label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="location"
 						name="location" placeholder="ex : 地址/捷運站名/地標/學校"
-						style="width: 80%;">
+						style="width: 80%;" required="required">
 				</div>
 			</div>
 			<br>
 			<div class="form-group row">
-				<label class="col-sm-10 form-control-label">交易方式
-					(寄件費用，收件者自付)</label>
+				<label class="col-sm-10 form-control-label"><h4>交易方式 (寄件費用，收件者自付)</h4></label>
 				<div class="col-sm-10">
 					<select name="tradeWay">
 						<option value="面交">面交</option>
@@ -164,17 +179,20 @@
 				</div>
 			</div>
 			<br>
-			<div>
-				<label>希望換到商品</label>
-				<div class="radio">
-					<label> <input type="radio" name="wishItem" value="隨機" checked>隨機</label></div>
-				<div class="radio">
-					<label> <input type="radio" name="wishItem" value="免費">贈送</label></div>
-				<div class="radio">
-					<label> <input type="radio" name="wishItem" value="希望商品" id="wish">希望商品</label></div>
-				<div id="divWish" style="display:none">
-					<textarea id="pWishItem" name="pWishItem" style="width: 80%;" class="form-control" rows="8"
-						placeholder="詳細敘述想要換到的商品" ></textarea></div>
+			<div class="form-group row">
+				<label class="col-sm-4 form-control-label"><h4>希望換到商品</h4></label>
+				<div class="col-sm-10">
+					<div class="radio">
+						<label> <input type="radio" name="wishItem" value="隨機">隨機</label></div>
+					<div class="radio">
+						<label> <input type="radio" name="wishItem" value="免費">贈送</label></div>
+					<div class="radio">
+						<label> <input type="radio" name="wishItem" value="希望商品" id="wish" checked>希望商品</label></div>
+					<div id="divWish">
+						<textarea id="pWishItem" name="pWishItem" style="width: 90%;" class="form-control" rows="8"
+							placeholder="詳細敘述想要換到的商品" required="required"></textarea>
+<%-- 							<span id="em">${errorMsg.wish}</span> --%>
+					</div>
 				</div>
 			<div style="text-align: center; margin:50px auto;">
 				<button id="btnSend" type="submit" class="btn btn-success btn-lg">
@@ -182,6 +200,7 @@
 					<span class="glyphicon glyphicon-send" aria-hidden="true"></span>
 				</button>
 			</div>
+		</div>
 		</div>
 	</form>
 </div>
