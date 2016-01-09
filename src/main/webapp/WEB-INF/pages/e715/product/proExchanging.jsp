@@ -2,90 +2,121 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/WebContent/layout/header.jsp"></c:import>
-
+<style>
+h4{
+	text-align: center;
+	color: #000079;
+	font-weight: 600;
+	font-size: large;
+}
+#p1{
+	text-align: center;
+	color: #7B7B7B;
+	font-size: x-small;
+}
+p{
+	font-size: medium;
+}
+span{
+	font-size: x-large;
+}
+#d1{
+	border: 1px dashed #7B7B7B;
+	border-bottom: none;
+}
+#d2{
+	border: 1px dashed #7B7B7B;
+	border-right: none;
+	border-top: none;
+}
+#d3{
+	border: 1px dashed #7B7B7B;
+	border-left: none;
+	border-top: none;
+}
+</style>
 <div class="container" style="margin: 50px auto;">
 	<div class="row">
 		<div class="col-md-3">
-			<div class="row">
-				<div>
-					<img src="${exchange.productBId.userId.picture}"
-						style="width:250px;" class="img-circle">
-				</div>
-				<div align="center">
-					<ul style="list-style: none;">
-						<li><h2>${exchange.productBId.userId.account}</h2></li>
-						<li>${exchange.productBId.userId.name}</li>
-						<li>${exchange.productBId.userId.nickname}</li>
-						<li>${exchange.productBId.userId.phone}</li>
-						<li>${exchange.productBId.userId.sex}</li>
-						<li>${exchange.productBId.userId.email}</li>
-						<li>${exchange.productBId.userId.schoolName}</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-md-6">
-			<div class="col-md-6">
+   		 	<div class="thumbnail">
+     	 		<img data-src="holder.js/300x300" alt="..." 
+     	 			src="${exchange.productBId.userId.picture}" class="img-thumbnail">
+      			<div class="caption" align="center">
+						<h2>${exchange.productBId.userId.account}</h2>
+						<p>${exchange.productBId.userId.name}(名字)</p>
+						<p>${exchange.productBId.userId.nickname}(暱稱)</p>
+						<p>${exchange.productBId.userId.phone}</p>
+						<p>${exchange.productBId.userId.sex}</p>
+						<p>${exchange.productBId.userId.email}</p>
+						<p>${exchange.productBId.userId.schoolName}</p>
+<!--         			<p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p> -->
+      			</div>
+    		</div>
+  		</div>
+  		<div class="col-md-6">
+  			<div class="col-md-6">
 				<blockquote>
-				  <p>${exchange.productBId.description}</p>
-				  <footer>A${exchange.productBId.name}</footer>
+					<div align="center" style="margin: 5px auto;">
+						<span class="glyphicon glyphicon-hand-left" aria-hidden="true"></span>
+					</div>
+					<h4>${exchange.productBId.name}</h4>
+				  	<p id="p1">${exchange.productBId.description}</p>
 				</blockquote>
 			</div>
-			<div class="col-md-6">
+  			<div class="col-md-6">
 				<blockquote>
-				  <p>${thisProduct.description}</p>
-				  <footer>${thisProduct.name}</footer>
+					<div align="center" style="margin: 5px auto;">
+						<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
+					</div>
+					<h4>${exchange.productAId.name}</h4>
+				  	<p id="p1">${exchange.productAId.description}</p>
 				</blockquote>
-			</div><br>
+			</div>
 			<div class="col-md-12">
-				<h4><dl>
-				  <dt>交易剩餘時間:</dt>
-				  <dd>A????????????????????????????????</dd>
-				  <dt>交易方式:</dt>
-				  <dd>${thisProduct.tradeWay}</dd>
-				  <dt>交易時間:</dt>
-				  <dd>${exchange.tradeFinishedTime}</dd>
-				  <dt>交易地點:</dt>
-				  <dd>${thisProduct.location}</dd>
-				</dl></h4>
-				
-				<br>
-
-
-			</div>
-		</div>
-
-
-		<div class="col-md-3">
-			<div class="row">
-				<div>
-					<img src="${thisProduct.userId.picture}"
-						style="width: 250px;" class="img-circle">
+				<div id="d1" align="center">
+						<h3><span class="label label-danger">交易剩餘時間</span></h3>
+						<p>????????????</p>
+						<h3><span class="label label-success">交易時間</span></h3>
+						<p>${exchange.tradeFinishedTime}</p>
 				</div>
 				<div align="center">
-					<ul style="list-style: none;">
-						<li><h2>${thisProduct.userId.account}</h2></li>
-						<li>${thisProduct.userId.name}</li>
-						<li>${thisProduct.userId.nickname}</li>
-						<li>${thisProduct.userId.phone}</li>
-						<li>${thisProduct.userId.sex}</li>
-						<li>${thisProduct.userId.email}</li>
-						<li>${thisProduct.userId.schoolName}</li>
-					</ul>
+						<div id="d2" class="col-md-6">
+							<h3><span class="label label-warning">交易地點</span></h3>
+							<p>${exchange.productAId.location}</p>
+						</div>
+						<div id="d3" class="col-md-6">
+							<h3><span class="label label-warning">交易方式</span></h3>
+							<p>${exchange.productAId.tradeWay}</p>
+						</div>
 				</div>
 			</div>
-		</div>
-	</div>
-	<div style="text-align: center;">
-		<button id="btnExchang" type="button" class="btn btn-success btn-lg">
-			<span class="glyphicon glyphicon-gift" aria-hidden="true"></span>  已經收到商品囉~
-		</button>
-	</div>
-	<br>
-	<div style="text-align: center;">
-		<p><button type="button" class="btn btn-primary btn-lg"
-			onclick="javascript:location.href='${thisProduct.id}'">回您交易的商品頁</button></p>
+			<div class="col-md-12">
+				<div style="text-align: center; margin: 10px auto">
+					<button id="btnExchang" type="button" class="btn btn-success btn-lg">
+					<span class="glyphicon glyphicon-gift" aria-hidden="true"></span>  已經收到商品囉~</button>
+				</div>
+				<div style="text-align: center;">
+					<button type="button" class="btn btn-primary btn-lg"
+						onclick="javascript:location.href='${thisProduct.id}'">回您交易的商品頁</button>
+				</div>
+			</div>
+  		</div>
+  		<div class="col-md-3">
+  			<div class="thumbnail">
+     	 		<img data-src="holder.js/300x300" alt="..." 
+     	 			src="${exchange.productAId.userId.picture}" class="img-thumbnail">
+      			<div class="caption" align="center">
+						<h2>${exchange.productAId.userId.account}</h2>
+						<p>${exchange.productAId.userId.name}(名字)</p>
+						<p>${exchange.productAId.userId.nickname}(暱稱)</p>
+						<p>${exchange.productAId.userId.phone}</p>
+						<p>${exchange.productAId.userId.sex}</p>
+						<p>${exchange.productAId.userId.email}</p>
+						<p>${exchange.productAId.userId.schoolName}</p>
+<!--         			<p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p> -->
+      			</div>
+    		</div>
+  		</div>
 	</div>
 </div>
 

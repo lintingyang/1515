@@ -41,8 +41,6 @@ public class ProductController {
 	public ProductPictureService productPictureService;
 	@Autowired
 	public ExchangeService exchangeService;
-
-	
 	@Autowired
 	private ServletContext servletContext;
 	
@@ -98,8 +96,6 @@ public class ProductController {
 		return list;
 
 	}
-	
-	
 
 	@RequestMapping(value = "/add")
 	public String add(Model model) {
@@ -192,12 +188,9 @@ public class ProductController {
 		}
 		
 		//存入資料
-		Product newProduct = productService.insert(product.getName(),
-					userData.getId(), pCategory, productStatus, 
-					product.getDescription(), deadline, startTime,
-					product.getTransactionTime(), product.getLocation(), 
-					product.getTradeWay(), productWish, 
-					product.getPostStatus());
+		Product newProduct = productService.insert(product.getName(), userData.getId(), pCategory, 
+					productStatus, product.getDescription(), deadline, startTime, product.getTransactionTime(), 
+					product.getLocation(), product.getTradeWay(), productWish, product.getPostStatus());
 		System.out.println("newProduct========================" + newProduct);
 		if(newProduct != null){
 			model.addAttribute("result", "恭喜您新增商品成功！！");
