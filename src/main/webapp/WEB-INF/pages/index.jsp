@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -149,6 +150,3 @@ $(function() { //畫面第一次進入時出現的product list
 	});
 </script>
 <c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>
-
-
-

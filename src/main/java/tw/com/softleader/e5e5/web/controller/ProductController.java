@@ -2,7 +2,9 @@ package tw.com.softleader.e5e5.web.controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -25,6 +27,7 @@ import tw.com.softleader.e5e5.entity.Exchange;
 import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.entity.ProductPicture;
 import tw.com.softleader.e5e5.entity.User;
+import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 import tw.com.softleader.e5e5.service.ProductService;
 
 @Controller
@@ -110,32 +113,37 @@ public class ProductController {
 									  @RequestParam("pStatusBad") String pStatusBad, 
 									  @RequestParam("pWishItem") String pWishItem, 
 									  @RequestParam("pStartTime") String pStartTime, 
-									  @RequestParam("pyyyy") String pyyyy, 
-									  @RequestParam("pMM") String pMM, 
-									  @RequestParam("pdd") String pdd, 
-									  @RequestParam("pHH") String pHH, 
-									  @RequestParam("pmm") String pmm,
+									  @RequestParam("pDeadline") String pDeadline, 
 									  HttpSession session) {
 		
 		//錯誤訊息顯示
 //		Map<String, String> errorMessage = new HashMap<>();
+//		session.removeAttribute("errorMsg");
 //		session.setAttribute("errorMsg", errorMessage);
-//		if(product.getName() == null || product.getName().trim().length() == 0){
-//			errorMessage.put("name", "請輸入商品標題/名稱");
+//		//error1 pStatusBad= null
+//		if(product.getStatus() == "破損"){
+//			if(pStatusBad == null || pStatusBad.trim().length() == 0){
+//				errorMessage.put("status", "請描述損壞情形");
+//			}
 //		}
-//		if(product.getDescription() == null || product.getDescription().trim().length() == 0){
-//			errorMessage.put("description", "請輸入商品描述");
+//		//error3 time = null
+//		if(product.getPostStatus() == TrueFalse.TRUE){
+//			if(pStartTime == null || pStartTime.trim().length() == 0){
+//				errorMessage.put("timeS", "請輸入起始時間");
+//			}
+//			if(pDeadline == null || pDeadline.trim().length() == 0){
+//				errorMessage.put("timeD", "請輸入結束時間");
+//			}
 //		}
-//		if(product.getLocation() == null || product.getLocation().trim().length() == 0){
-//			errorMessage.put("description", "請輸入交換地點");
+//		//error2 wishItem = null
+//		if(product.getWishItem() == "希望商品"){
+//			if(pWishItem == null || pWishItem.trim().length() == 0){
+//				errorMessage.put("wish", "請輸入希望清單");
+//			}
 //		}
-//		try{
-//			LocalDateTime.of(pyyyy, pMM, pdd, pHH, pmm);
-//		}catch(Exception e){
-//			errorMessage.put("transTime", "時間格式不正確");
-//		}
+//		//若有錯誤回新增畫面
 //		if(errorMessage != null && !errorMessage.isEmpty()) {
-//			return "redirect:/product/insert";
+//			return "redirect:/product/add";
 //		}
 		
 		//取userId
@@ -159,30 +167,29 @@ public class ProductController {
 		
 		//時間處理
 		LocalDateTime startTime =null;
-		String month = pStartTime.substring(0, 2);
-		String day = pStartTime.substring(3, 5);
-		String year = pStartTime.substring(6, 10);
-		String str = year + "-" + month + "-" + day+" 00:00"; //"1986-04-08";
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-		try {
-			startTime = LocalDateTime.parse(str, formatter);
-		} catch (Exception e) {
-		}
 		LocalDateTime deadline =null;
-		
-		
-//		if(pyyyy == null){
-//			dateTime = null;				
-//		}else{
-//			int year = Integer.parseInt(pyyyy);
-//			int month = Integer.parseInt(pMM);
-//			int day = Integer.parseInt(pdd);
-//			int hour = Integer.parseInt(pHH);
-//			int minute = Integer.parseInt(pmm);
-//			dateTime = LocalDateTime.of(year, month, day, hour, minute);
-//		}
-		
-		
+		if(product.getPostStatus() == TrueFalse.TRUE){
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+			String monthS = pStartTime.substring(0, 2);
+			String dayS = pStartTime.substring(3, 5);
+			String yearS = pStartTime.substring(6, 10);
+			String start = yearS + "-" + monthS + "-" + dayS+" 00:00"; //"1986-04-08";
+			try {
+				startTime = LocalDateTime.parse(start, formatter);
+			} catch (Exception e) {
+			}
+			String monthD = pDeadline.substring(0, 2);
+			String dayD = pDeadline.substring(3, 5);
+			String yearD = pDeadline.substring(6, 10);
+			String end = yearD + "-" + monthD + "-" + dayD+" 00:00"; //"1986-04-08";
+			try {
+				deadline = LocalDateTime.parse(end, formatter);
+			} catch (Exception e) {
+			}
+		}else{
+			startTime =null;
+			deadline =null;
+		}
 		
 		//存入資料
 		Product newProduct = productService.insert(product.getName(),
@@ -193,7 +200,7 @@ public class ProductController {
 					product.getPostStatus());
 		System.out.println("newProduct========================" + newProduct);
 		if(newProduct != null){
-			model.addAttribute("result", "新增成功");
+			model.addAttribute("result", "恭喜您新增商品成功！！");
 			session.setAttribute("new", newProduct);
 		}else{
 			model.addAttribute("result", "新增失敗");
@@ -208,7 +215,7 @@ public class ProductController {
 			model.addAttribute("picResult", "圖片新增失敗");
 		}
 		
-		return "/e715/product/proAdd";
+		return "/e715/product/productedit";
 		
 	}
 	
