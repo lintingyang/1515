@@ -56,13 +56,13 @@ public class headerController {
 		return "/index";
 	}
 	
-//	@RequestMapping(value = "/search")
-//	public String searchproduct(@RequestParam("namelike")String like,Model model){
-//		log.error(like);
-//		model.addAttribute("namelike",like);
-//		return "/index";
-//	}
-//	
+	@RequestMapping(value = "/search")
+	public String searchproduct(@RequestParam("namelike")String like,Model model){
+		log.error(like);
+		model.addAttribute("namelike",like);
+		return "/index";
+	}
+	
 	
 	
 	
