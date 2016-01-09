@@ -4,22 +4,25 @@
 <c:import url="/WEB-INF/pages/e715/layout/header.jsp"></c:import>
 <div class="container" style="margin: 50px auto;">
 	<div class="container">
+
 		<ul class="nav nav-tabs" id="tabs">
 			<li style="width: 25%; text-align: center;"><a
-				class="categorylist searchbtn" onclick="changesearch" href="#">熱門</a></li>
+				class="categorylist searchbtn" href="#">熱門</a></li>
 			<li style="width: 25%; text-align: center;"><a
-				class="categorylist searchbtn" onclick="changesearch" href="#">最新</a></li>
+				class="categorylist searchbtn"  href="#">最新</a></li>
 			<li style="width: 25%; text-align: center;"><a
-				class="categorylist searchbtn" onclick="changesearch" href="#">誠信</a></li>
+				class="categorylist searchbtn"  href="#">誠信</a></li>
 			<li style="width: 25%; text-align: center;"><a
-				class="categorylist searchbtn" onclick="changesearch" href="#">推薦</a></li>
+				class="categorylist searchbtn"  href="#">推薦</a></li>
 		</ul>
 	</div>
 	<br>
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-10" id="productlist">
-
+			<c:if test ="${namelike != '' }" >
+				以下為搜尋節果：${ namelike}
+			</c:if>
 			<div class="holder"></div>
 			<div id="itemContainer">
 			</div>
@@ -32,11 +35,11 @@
 
 <!-- $("#searchbar").text() -->
 <script type="text/javascript">
-var searchType = "熱門";
-function changesearch(){
-	console.log(searchType);
-	$(searchType) = $(this).text();
-}
+// var searchType = "熱門";
+// function changesearch(){
+// 	console.log(searchType);
+// 	$(searchType) = $(this).text();
+// }
 
 $(function() { //畫面第一次進入時出現的product list
 	$.ajax({
@@ -75,13 +78,13 @@ $(function() { //畫面第一次進入時出現的product list
 
 		});
 
-	$('.searchbtn').click(function() { //點選排列方式後按照順序排列
+	$('.categorylist').click(function() { //點選排列方式後按照順序排列
 		$.ajax({
 			contentType : "application/json",
 			url : "/query",
 			dataType : "json",
 			type : "get",
-			data : {"orderby" : searchType,"namelike": $("#searchbar").val()},
+			data : {"orderby" : $(this).text(),"namelike": "${namelike}"},
 			success : function(data) {
 // 				console.log(data);
 

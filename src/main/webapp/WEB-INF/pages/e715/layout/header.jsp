@@ -49,9 +49,10 @@
 		</div>
 		<form class="navbar-form navbar-left" role="search" action="/head/search">
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Search" name="namelike" id="searchbar">
+				<input type="text" class="form-control" placeholder="Search" 
+								name="namelike" id="searchbar">
 			</div>
-			<button type="button" id="searchbtn"  class="btn btn-default searchbtn" >Submit</button>
+			<button type="submit" id="searchbtn"  class="btn btn-default searchbtn" >Submit</button>
 		</form>
 		<a class="navbar-brand" href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-menu-down"></span></a>
 		
