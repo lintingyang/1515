@@ -62,7 +62,10 @@ h4{
 	})
 </script>
 <div class="container" style="margin: 50px auto;">
-	<p>${result} </p>
+	<div class="alert alert-warning alert-dismissible" role="alert">
+  		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  		以下<strong>所有欄位</strong>都是<strong>必填</strong>的喔！      別忘了上傳一張精美照片～
+	</div>
 	<form action="/product/insert" enctype="multipart/form-data" method="post">
 		<div class="col-md-1"></div>
 		<div class="col-md-5">

@@ -8,6 +8,7 @@
 
 <div class="container" style="margin: 50px auto;">
 	<div class="container">
+		<div><h3 style="color:#000079">${result}</h3></div>		<!-- 銘加的 -->
 		<ul class="nav nav-tabs" id="tabs">
 			<li style="width: 25%; text-align: center;"><a class="list" href="#">已刊登</a></li>
 			<li style="width: 25%; text-align: center;"><a class="list" href="#">未刊登</a></li>

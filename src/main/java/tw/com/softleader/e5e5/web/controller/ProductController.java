@@ -200,7 +200,7 @@ public class ProductController {
 					product.getPostStatus());
 		System.out.println("newProduct========================" + newProduct);
 		if(newProduct != null){
-			model.addAttribute("result", "新增成功");
+			model.addAttribute("result", "恭喜您新增商品成功！！");
 			session.setAttribute("new", newProduct);
 		}else{
 			model.addAttribute("result", "新增失敗");
@@ -215,7 +215,7 @@ public class ProductController {
 			model.addAttribute("picResult", "圖片新增失敗");
 		}
 		
-		return "/e715/product/proAdd";
+		return "/e715/product/productedit";
 		
 	}
 	
