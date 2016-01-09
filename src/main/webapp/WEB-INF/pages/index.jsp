@@ -20,7 +20,6 @@
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-10" id="productlist">
-		
 			<c:if test ="${!empty namelike }" >
 				以下為搜尋節果：${ namelike}
 			</c:if>
@@ -49,7 +48,7 @@ $(function() { //畫面第一次進入時出現的product list
 		url : "/query",
 		dataType : "json",
 		type : "get",
-		data : {"orderby" : "熱門","namelike": "${namelike}" },
+		data : {"orderby" : "熱門","namelike": "${namelike}" ,"categoryname":"${categoryname}"},
 		success : function(data) {
 			console.log(data);
 
@@ -86,7 +85,7 @@ $(function() { //畫面第一次進入時出現的product list
 			url : "/query",
 			dataType : "json",
 			type : "get",
-			data : {"orderby" : $(this).text(),"namelike": "${namelike}"},
+			data : {"orderby" : $(this).text(),"namelike": "${namelike}","categoryname":"${categoryname}"},
 			success : function(data) {
 // 				console.log(data);
 

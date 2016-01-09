@@ -74,4 +74,12 @@ public interface ProductDao extends OurDao<Product> {
 	@Query(value = "SELECT p.* FROM product p JOIN product_category pc ON p.category_id = pc.id WHERE p.name LIKE %?1% AND pc.name = ?2 order by post_time DESC", nativeQuery = true)
 	public List<Product> findByProductOrderByPostTime(String productName,String categoryName );
 	
+	//查詢名稱並按照最高點擊率排序
+	@Query(value ="SELECT * FROM product WHERE name LIKE %?1% order by click_times DESC", nativeQuery = true)
+	public List<Product> findAllByNameOrderbyByClickTimes(String name);
+	
+	//查詢名稱並按照最新發文排序
+	@Query(value ="SELECT * FROM product WHERE name LIKE %?1% order by click_times DESC", nativeQuery = true)
+	public List<Product> findAllByNameOrderbyByPostTime(String name);
+	
 }

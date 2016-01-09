@@ -54,9 +54,10 @@
 			</div>
 			<button type="submit" id="searchbtn"  class="btn btn-default searchbtn" >Submit</button>
 		</form>
-		<a class="navbar-brand" href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-menu-down"></span></a>
+		<a class="navbar-brand" href="#" data-toggle="modal" data-target="#myModal">
+			<span id="categoryname">${ categoryname }<c:if test="${empty categoryname }" >全部</c:if></span>
+			<span class="glyphicon glyphicon-menu-down"></span></a>
 		
-	
 		<ul class="nav navbar-nav navbar-right">
 			<li id="fat-menu" class="dropdown"><a id="drop3" href="#"
 				class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -95,28 +96,24 @@
       <h5 id="myModalLabel">請選擇類別</h5>
       		<table style=" margin:auto;">
       			<tr>
-      				<td class="productcategory" ><img alt="123546"></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">服飾</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">皮件</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">電玩</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">玩具</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">書籍</button></td>
+					
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg "data-dismiss="modal">全部</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg"data-dismiss="modal">課本書籍</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">遊戲影音</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">日常用品</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">文具用品</button></td>
       			</tr>
       			<tr>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">文具</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">服飾</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">皮件</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">電玩</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">玩具</button></td>
-     				<td class="productcategory" ><button class=" btn btn-default btn-lg">書籍</button></td>		      			
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">傢俱</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">家電</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">服飾</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">食品</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">票券</button></td>
+     					      			
       			</tr>
       			<tr>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">文具</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">服飾</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">皮件</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">電玩</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">玩具</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">書籍</button></td>
+      			<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">3C產品</button></td>
+      			<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">化妝保養用品</button></td>
       			</tr>
       		</table>
       		<br>
@@ -130,5 +127,18 @@
     </div>
   </div>
 </div>
-
+<script>
+	$(".productcategory").click(function(){
+		
+		$.ajax({
+			contentType : "application/json",
+			url : "/head/categoryhchange",
+			type : "get",
+			async :false,
+			data : { "categoryname" : $(this).text() },
+		});
+ 		$("#categoryname").text($(this).text());
+		
+	})
+</script>
 
