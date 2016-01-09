@@ -79,7 +79,7 @@ public interface ProductDao extends OurDao<Product> {
 	public List<Product> findAllByNameOrderbyByClickTimes(String name);
 	
 	//查詢名稱並按照最新發文排序
-	@Query(value ="SELECT * FROM product WHERE name LIKE %?1% order by click_times DESC", nativeQuery = true)
+	@Query(value ="SELECT * FROM product WHERE name LIKE %?1% order by post_time DESC", nativeQuery = true)
 	public List<Product> findAllByNameOrderbyByPostTime(String name);
 	
 }
