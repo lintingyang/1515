@@ -254,18 +254,27 @@ public class memberController {
 	public List<FocusUserList> userFriendList(HttpSession session) {
 		User user = (User) session.getAttribute("user");
 		List<FocusUserList> focus = focusUserListService.findOneUser(user.getId());
-		System.out.println("====================================="+focus);
 		return focus;
 	}
 	
-	@RequestMapping(value = "/userBanList", method = RequestMethod.GET)
+	@RequestMapping(value = "/userBanList")
 	@ResponseBody
 	public List<UserBanList> userBanList(HttpSession session) {
 		User user = (User) session.getAttribute("user");
-			List<UserBanList> bans =userBanListService.findOneUser(user.getId());
-			return bans;
+		List<UserBanList> bans =userBanListService.findOneUser(user.getId());
+		return bans;
 
 		}
+	@RequestMapping(value="/userFriendListCancel")
+	@ResponseBody
+	public void userFriendListCancel(@RequestParam("userBId") String userBId,HttpSession session){
 		
+		
+		User user = (User) session.getAttribute("user");
+		System.out.println(user.getId()+"----------------------------"+userBId);
+		focusUserListService.deletOne(user.getId(), Integer.parseInt(userBId));
+		System.out.println(user.getId()+"----------------------------"+userBId);
+		}
+	
 
 }

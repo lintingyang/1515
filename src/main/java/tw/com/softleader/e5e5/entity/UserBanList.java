@@ -45,22 +45,22 @@ public class UserBanList  extends OurEntity implements java.io.Serializable {
 		this.id = id;
 	}
 
-
-	public User getUserByUserAId() {
-		return this.userAId;
+	public User getUserAId() {
+		return userAId;
 	}
 
-	public void setUserByUserAId(User userByUserAId) {
-		this.userAId = userByUserAId;
+	public void setUserAId(User userAId) {
+		this.userAId = userAId;
+	}
+
+	public User getUserBId() {
+		return userBId;
+	}
+
+	public void setUserBId(User userBId) {
+		this.userBId = userBId;
 	}
 
 
-	public User getUserByUserBId() {
-		return this.userBId;
-	}
-
-	public void setUserByUserBId(User userByUserBId) {
-		this.userBId = userByUserBId;
-	}
-
+	
 }
