@@ -35,6 +35,29 @@ span{
 	border-top: none;
 }
 </style>
+<script type="text/javascript">
+var startDate = new Date(${long1});
+var endDate = new Date(${long2});
+var spantime = (endDate - startDate)/1000;
+ 
+function cal(){
+    spantime --;
+    var d = Math.floor(spantime / (24 * 3600));
+    var h = Math.floor((spantime % (24*3600))/3600);
+    var m = Math.floor((spantime % 3600)/(60));
+    var s = Math.floor(spantime%60);
+    if(spantime > 0){
+	    str = d + "天 " + h + "時 " + m + "分 " + s + "秒 ";
+    }else{
+	    str = 0 + "天 " + 0 + "時 " + 0 + "分 " + 0 + "秒 ";
+    }
+    document.getElementById("pad").innerHTML = str;
+}
+ 
+window.onload = function(){
+    setInterval(cal, 1000);
+}
+</script>
 <div class="container" style="margin: 50px auto;">
 	<div class="row">
 		<div class="col-md-3">
@@ -75,9 +98,9 @@ span{
 			<div class="col-md-12">
 				<div id="d1" align="center">
 						<h3><span class="label label-danger">交易剩餘時間</span></h3>
-						<p>????????????</p>
+						<span id="pad" style="background-color: yellow ;font-size: medium;"></span>
 						<h3><span class="label label-success">交易時間</span></h3>
-						<p>${exchange.tradeFinishedTime}</p>
+						<p>${finalTradeTime}</p>
 				</div>
 				<div align="center">
 						<div id="d2" class="col-md-6">

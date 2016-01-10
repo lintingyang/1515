@@ -1,7 +1,9 @@
 package tw.com.softleader.e5e5.web.controller;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -217,6 +219,26 @@ public class ProductController {
 	public String exchanging(Model model,@RequestParam("id") int exId , HttpSession session) {
 		Exchange exchange = exchangeService.finishTrade(exId);
 		session.setAttribute("exchange", exchange);
+		
+		//時間顯示（年月日分秒）
+		String tradeTime = exchange.getTradeFinishedTime().toString();
+		String year = tradeTime.substring(0, 4);
+		String month = tradeTime.substring(5, 7);
+		String day = tradeTime.substring(8, 10);
+		String hour = tradeTime.substring(11, 13);
+		String minute = tradeTime.substring(14, 16);
+		String second = tradeTime.substring(17, 19);
+		String finalTradeTime = year+ "年"+ month+ "月"+ day+ "日"+ hour+ "時"+ minute+ "分"+ second+ "秒";
+		session.setAttribute("finalTradeTime", finalTradeTime);
+		
+		//倒數時間計算
+		Date d1 = Date.from(exchange.getTradeFinishedTime().atZone(ZoneId.systemDefault()).toInstant());
+		Long long1 =d1.getTime();
+		LocalDateTime l1 = exchange.getProductAId().getDeadline();
+		Date d2 = Date.from(l1.atZone(ZoneId.systemDefault()).toInstant());
+		Long long2 =d2.getTime();
+		session.setAttribute("long1", long1);
+		session.setAttribute("long2", long2);
 		
 		return "/e715/product/proExchanging";
 	}
