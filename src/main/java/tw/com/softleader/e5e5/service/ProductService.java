@@ -1,19 +1,13 @@
 package tw.com.softleader.e5e5.service;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.imageio.ImageIO;
-import javax.servlet.ServletContext;
 import javax.transaction.Transactional;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.softleader.e5e5.common.dao.OurDao;
 import tw.com.softleader.e5e5.common.model.Message;
@@ -27,6 +21,7 @@ import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 
 @Service
 public class ProductService extends OurService<Product> {
+	Logger log = Logger.getLogger(this.getClass());
 	@Autowired
 	private ProductDao productDao;
 
@@ -35,6 +30,54 @@ public class ProductService extends OurService<Product> {
 
 	@Autowired
 	private ProductCategoryDao productCategoryDao;
+
+	@Transactional
+	public List<Product> indexsearch(String namelike, String category, String orderby) {
+		List<Product> list = null;
+
+		if (orderby.equals("熱門")) {
+			if (category.equals("全部")) {
+				list = productDao.findAllByNameOrderbyByClickTimes(namelike);
+				log.error(list);
+			}else {
+				list = productDao.findByProdcutOrderByClickTimes(namelike, category);
+			}
+		} else if (orderby.equals("最新")) {
+			if (category.equals("全部")) {
+				list = productDao.findAllByNameOrderbyByPostTime(namelike);
+			}else {
+				list = productDao.findByProductOrderByPostTime(namelike, category);
+			}
+		} else if (orderby.equals("推薦")) {
+
+		} else if (orderby.equals("誠信")){
+			
+		}
+		// if (orderby.equals("熱門")) {
+		//
+		// if (namelike == null || namelike.equals("")) {
+		// list = productService.getProductsOrderByClickTimes();
+		// } else {
+		// list = productService.findeOrderByClickTime(namelike,categoryname);
+		// }
+		// } else if (orderby.equals("最新")) {
+		//
+		// if (namelike == null || namelike.equals("")) {
+		// list = productService.getProductsOrderByPostTime();
+		// } else {
+		// list =
+		// productService.findByProductOrderByPostTime(namelike,categoryname);
+		// }
+		//
+		// } else if (orderby.equals("誠信")) {
+		//
+		// } else if (orderby.equals("推薦")) {
+		//
+		// }
+		// return list;
+
+		return list;
+	}
 
 	@Transactional
 	public List<Product> findeOrderByClickTime(String productName, String categoryName) {
