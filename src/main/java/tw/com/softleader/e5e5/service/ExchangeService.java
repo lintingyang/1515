@@ -55,13 +55,16 @@ public class ExchangeService {
 		ex.setTradeStatus(TrueFalse.TRUE);
 		ex = exchangeDao.save(ex);
 		
-		//物品刊登狀態改為FALSE
+		//物品刊登狀態改為FALSE、交易狀態狀態改為TRUE
 		Product a = ex.getProductAId();
 		a.setPostStatus(TrueFalse.FALSE);
+		a.setTradeStatus(TrueFalse.TRUE);
 		a = productDao.save(a);
 		Product b =ex.getProductBId();
 		b.setPostStatus(TrueFalse.FALSE);
+		b.setTradeStatus(TrueFalse.TRUE);
 		b = productDao.save(b);
+		
 		return ex ;
 	}
 	

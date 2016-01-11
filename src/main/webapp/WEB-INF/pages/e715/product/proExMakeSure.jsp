@@ -54,36 +54,6 @@ h3{
 	padding-right:5px;
 	font-size: medium;
 }
-/* h4{ */
-/* 	text-align: center; */
-/* 	font-weight: 600; */
-/* 	font-size: large; */
-/* } */
-/* #p1{ */
-/* 	text-align: center; */
-/* 	color: #7B7B7B; */
-/* 	font-size: x-small; */
-/* } */
-/* p{ */
-/* 	font-size: medium; */
-/* } */
-/* span{ */
-/* 	font-size: x-large; */
-/* } */
-/* #d1{ */
-/* 	border: 1px dashed #7B7B7B; */
-/* 	border-bottom: none; */
-/* } */
-/* #d2{ */
-/* 	border: 1px dashed #7B7B7B; */
-/* 	border-right: none; */
-/* 	border-top: none; */
-/* } */
-/* #d3{ */
-/* 	border: 1px dashed #7B7B7B; */
-/* 	border-left: none; */
-/* 	border-top: none; */
-/* } */
 </style>
 <div class="container" style="margin: 50px auto;">
 	<div class="row">
