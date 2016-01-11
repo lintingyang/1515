@@ -65,7 +65,15 @@
 				class="dropdown-toggle" data-toggle="dropdown" role="button"
 				aria-haspopup="true" aria-expanded="false"> 
 				<img class="img-circle" style="width: 30px;"
-					src="${user.picture}"> ${user.name}
+					src="${user.picture}"> 
+					<c:if test ="${!empty user.name}" >
+				       ${user.name}
+					</c:if>
+					<c:if test ="${empty user.name}" >
+				       	登入
+					</c:if>
+					
+					
 					<span class="caret"></span></a>
 				<ul class="dropdown-menu" aria-labelledby="drop3">
 

@@ -21,6 +21,18 @@ public class ExchangeService {
 	private ExchangeDao exchangeDao;
 	@Autowired
 	private ProductDao productDao;
+	
+	@Transactional
+	public void addexchange(int productAId,int productBId){
+		Exchange exchange = new Exchange();
+		Product prodcutA = productDao.findOne(productAId);
+		Product productB = productDao.findOne(productBId);
+		exchange.setProductAId(prodcutA);
+		exchange.setProductBId(productB);
+		exchange.setTradeStatus(TrueFalse.FALSE);
+		exchange.setExchangeTime(LocalDateTime.now());
+		exchangeDao.save(exchange);
+	}
 
 	@Transactional
 	public Product findMostPopularProduct(){
@@ -42,6 +54,14 @@ public class ExchangeService {
 		ex.setTradeFinishedTime(LocalDateTime.now());
 		ex.setTradeStatus(TrueFalse.TRUE);
 		ex = exchangeDao.save(ex);
+		
+		//物品刊登狀態改為FALSE
+		Product a = ex.getProductAId();
+		a.setPostStatus(TrueFalse.FALSE);
+		a = productDao.save(a);
+		Product b =ex.getProductBId();
+		b.setPostStatus(TrueFalse.FALSE);
+		b = productDao.save(b);
 		return ex ;
 	}
 	
@@ -56,6 +76,13 @@ public class ExchangeService {
 	public List<Exchange> findByProductAId(int productAId){
 		Product product = productDao.findOne(productAId);
 		List<Exchange> list = exchangeDao.findByProductAId(product);
+		return list;
+	}
+	
+	@Transactional
+	public List<Exchange> findByProductBId(int productBId){
+		Product product = productDao.findOne(productBId);
+		List<Exchange> list = exchangeDao.findByProductBId(product);
 		return list;
 	}
 	

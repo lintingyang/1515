@@ -277,12 +277,21 @@ public class memberController {
 		return divClass;
 	}
 	
+	@RequestMapping(value="/userFriendListAdd")
+	@ResponseBody
+	public String Add(@RequestParam("userBId") User userBId,HttpSession session){
+		User user = (User) session.getAttribute("user");
+		String divClass= ".userShelf"+userBId.getId();
+		focusUserListService.deletOne(user.getId(), userBId.getId());
+		return divClass;
+	}
+	
 	@RequestMapping(value="/userBanListCancel")
 	@ResponseBody
 	public String userBanListCancel(@RequestParam("userBId") User userBId,HttpSession session){
 		User user = (User) session.getAttribute("user");
 		String divClass= ".userShelf"+userBId.getId();
-		userBanListService.deletOne(user.getId(), userBId.getId());
+		userBanListService.insert(user.getId(), userBId.getId());
 		return divClass;
 	}
 	
