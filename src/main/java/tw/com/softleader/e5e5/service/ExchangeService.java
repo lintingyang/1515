@@ -29,6 +29,8 @@ public class ExchangeService {
 		Product productB = productDao.findOne(productBId);
 		exchange.setProductAId(prodcutA);
 		exchange.setProductBId(productB);
+		exchange.setTradeStatus(TrueFalse.FALSE);
+		exchange.setExchangeTime(LocalDateTime.now());
 		exchangeDao.save(exchange);
 	}
 

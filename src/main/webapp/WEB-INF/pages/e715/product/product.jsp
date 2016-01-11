@@ -302,15 +302,19 @@ $(function(){
 				var td = $("<td></td>").append($(div));
 				
 				getpicture(data[i], prodimg);
-				$(".exc").on("click",function(){ location.href="/product/exchange/"+data[i].id+"/"+${product.id}})
+				
 				$(tr).append($(td));
 				$("#userAProduct").append($(tr));
+				$(".exc").bind("click",addexchange);
+// 				$(".exc").bind("click",function(){ location.href="/product/exchange/"+$(this).attr("name")+"/"+${product.id}})
 			})
 		}
 	})
 
 });//end of function onload
-
+function addexchange(){
+	location.href="/product/exchange/"+$(this).attr("name")+"/"+${product.id};
+	}
 function getpicture(prod, prodimg) { //取得每一個商品的物件
 	var formData = {
 		"id" : prod.id

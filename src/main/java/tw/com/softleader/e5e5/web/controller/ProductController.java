@@ -315,10 +315,7 @@ public class ProductController {
 
 		return "/e715/product/proExchanging";
 	}
-//	
-//	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-//	public String editPage(@PathVariable("id") final int id, final Model model, HttpSession session) {
-
+	//by雙 我要交換按鈕
 	@RequestMapping(value="/exchange/{Bid}/{Aid}", method = RequestMethod.GET)
 	public String exchangeproduct(@PathVariable("Bid")final int bid,@PathVariable("Aid")final int aid){
 		log.error("Aid="+aid+"Bid ======"+bid);
