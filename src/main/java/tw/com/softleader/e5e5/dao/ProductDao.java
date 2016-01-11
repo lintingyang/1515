@@ -18,11 +18,11 @@ public interface ProductDao extends OurDao<Product> {
 	
 	
 	//(1)最新商品列：fineAll byPostTime
-	@Query(value ="SELECT * FROM product WHERE post_time IS NOT NULL ORDER BY post_time DESC", nativeQuery = true)
+	@Query(value ="SELECT * FROM product WHERE post_time IS NOT NULL AND post_status = 'TRUE' ORDER BY post_time DESC", nativeQuery = true)
 	public List<Product> findAllByPostTime();
 	
 	//(2)點擊次數排序商品列：findAll byClickTimes
-	@Query(value ="SELECT * FROM product WHERE click_times IS NOT NULL ORDER BY click_times DESC", nativeQuery = true)
+	@Query(value ="SELECT * FROM product WHERE click_times IS NOT NULL AND post_status = 'TRUE' ORDER BY click_times DESC", nativeQuery = true)
 	public List<Product> findAllByClickTimes();
 	
 	//(3)依商品名稱搜尋：findAll byName 
@@ -68,18 +68,18 @@ public interface ProductDao extends OurDao<Product> {
 	@Query(value = "SELECT p.* FROM product p JOIN exchange e ON e.producta_id = p.id OR e.productb_id = p.id  WHERE e.producta_id = ?1 OR e.productb_id = ?1 AND e.trade_status = ?2 order by exchange_time", nativeQuery = true)
 	public List<Product> findUsersProductsByExchange(Integer id , String post);
 		
-	@Query(value = "SELECT p.* FROM product p JOIN product_category pc ON p.category_id = pc.id WHERE p.name LIKE %?1% AND pc.name = ?2 order by click_times DESC", nativeQuery = true)
+	@Query(value = "SELECT p.* FROM product p JOIN product_category pc ON p.category_id = pc.id WHERE p.name LIKE %?1% AND pc.name = ?2  AND p.post_status = 'TRUE' order by click_times DESC", nativeQuery = true)
 	public List<Product> findByProdcutOrderByClickTimes(String productName,String categoryName );
 
-	@Query(value = "SELECT p.* FROM product p JOIN product_category pc ON p.category_id = pc.id WHERE p.name LIKE %?1% AND pc.name = ?2 order by post_time DESC", nativeQuery = true)
+	@Query(value = "SELECT p.* FROM product p JOIN product_category pc ON p.category_id = pc.id WHERE p.name  LIKE %?1% AND pc.name = ?2 AND p.post_status = 'TRUE' order by post_time DESC", nativeQuery = true)
 	public List<Product> findByProductOrderByPostTime(String productName,String categoryName );
 	
 	//查詢名稱並按照最高點擊率排序
-	@Query(value ="SELECT * FROM product WHERE name LIKE %?1% order by click_times DESC", nativeQuery = true)
+	@Query(value ="SELECT * FROM product WHERE name LIKE %?1% AND post_status = 'TRUE' order by click_times DESC", nativeQuery = true)
 	public List<Product> findAllByNameOrderbyByClickTimes(String name);
 	
 	//查詢名稱並按照最新發文排序
-	@Query(value ="SELECT * FROM product WHERE name LIKE %?1% order by post_time DESC", nativeQuery = true)
+	@Query(value ="SELECT * FROM product WHERE name LIKE %?1% AND post_status = 'TRUE' order by post_time DESC", nativeQuery = true)
 	public List<Product> findAllByNameOrderbyByPostTime(String name);
 	
 }

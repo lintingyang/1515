@@ -21,6 +21,18 @@ public class ExchangeService {
 	private ExchangeDao exchangeDao;
 	@Autowired
 	private ProductDao productDao;
+	
+	@Transactional
+	public void addexchange(int productAId,int productBId){
+		Exchange exchange = new Exchange();
+		Product prodcutA = productDao.findOne(productAId);
+		Product productB = productDao.findOne(productBId);
+		exchange.setProductAId(prodcutA);
+		exchange.setProductBId(productB);
+		exchange.setTradeStatus(TrueFalse.FALSE);
+		exchange.setExchangeTime(LocalDateTime.now());
+		exchangeDao.save(exchange);
+	}
 
 	@Transactional
 	public Product findMostPopularProduct(){

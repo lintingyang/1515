@@ -51,38 +51,47 @@ public class ProductController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String editPage(@PathVariable("id") final int id, final Model model, HttpSession session) {
 
-		
-//		SecRole role = secRoleService.getOne(id);
-		
-//		model.addAttribute("entity", role);
-		
-		User user = (User)session.getAttribute("user");
-		if(user!=null){
-			List<Product> productList = productService.findByUserId(user.getId());
-			model.addAttribute("productList",productList);
-		}
-//			Map<String,String> map = new HashMap<String,String>();
-//			for(Product prod:productList){
-//				List<ProductPicture> productPictures = productPictureService.getProductPictures(prod);
-//				if(productPictures!=null){
-//					map.put("img"+prod.getId(), productPictures.get(0).getPicture());
-//					log.error(map.get("img"+prod.getId()));
-//				}
-//			}
-//			model.addAttribute("picturemap", map);
-
 		Product product = productService.getOne(id);
 		if (product == null) {
 			return "redirect:/";
 		}
-		List<ProductPicture> productPictures = productPictureService.getProductPictures(product);
-		model.addAttribute("product", product);
-		model.addAttribute("productPictures", productPictures);
-		
-		//銘加的 上面參數session也是
-		session.setAttribute("thisProduct", product);
+		//已公開
+		if (TrueFalse.TRUE == product.getPostStatus()) {
+			User user = (User) session.getAttribute("user");
+			if (user != null) {
+				List<Product> productList = productService.findByUserId(user.getId());
+				model.addAttribute("productList", productList);
+			}
 
-		return "/e715/product/product";
+			List<ProductPicture> productPictures = productPictureService.getProductPictures(product);
+			model.addAttribute("product", product);
+			model.addAttribute("productPictures", productPictures);
+
+			// 銘加的 上面參數session也是
+			session.setAttribute("thisProduct", product);
+
+			return "/e715/product/product";
+		} 
+		//未公開
+		else {
+			User user = (User) session.getAttribute("user");
+			if (user != null && product.getUserId().getId() == user.getId()) {
+				List<Product> productList = productService.findByUserId(user.getId());
+				model.addAttribute("productList", productList);
+
+				List<ProductPicture> productPictures = productPictureService.getProductPictures(product);
+				model.addAttribute("product", product);
+				model.addAttribute("productPictures", productPictures);
+
+				// 銘加的 上面參數session也是
+				session.setAttribute("thisProduct", product);
+
+				return "/e715/product/product";
+			} else {
+				return "redirect:/";
+			}
+		}
+
 	}
 
 	@RequestMapping(value = "/findexchange")
@@ -122,7 +131,6 @@ public class ProductController {
 					}
 				}
 			}
-			
 
 			if (exchangesCheck != null) {
 				for (Exchange check : exchangesCheck) {
@@ -133,7 +141,7 @@ public class ProductController {
 					// dfsfdasfsdf: 14
 					// dfsfdasfsdf: 10
 					// dfsfdasfsdf: 15
-					//確認ProductB是否已交易過
+					// 確認ProductB是否已交易過
 					if (TrueFalse.TRUE == check.getTradeStatus()) {
 						for (Exchange exchange : exchanges) {
 							if (exchange.getProductBId().getId() == check.getProductAId().getId()) {
@@ -347,6 +355,13 @@ public class ProductController {
 		session.setAttribute("long2", long2);
 
 		return "/e715/product/proExchanging";
+	}
+	//by雙 我要交換按鈕
+	@RequestMapping(value="/exchange/{Bid}/{Aid}", method = RequestMethod.GET)
+	public String exchangeproduct(@PathVariable("Bid")final int bid,@PathVariable("Aid")final int aid){
+		log.error("Aid="+aid+"Bid ======"+bid);
+		exchangeService.addexchange(aid, bid);
+		return "/e715/product/product";
 	}
 
 }
