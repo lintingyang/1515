@@ -216,7 +216,7 @@ $(function(){
 			imgId++;
 			var excBtn2='';
 			var loginId="${user.id}";
-			var prodUserId="${product.userId.account}";
+			var prodUserId="${product.userId.id}";
 				if(prodUserId.length!=0 && prodUserId==loginId){
 					excBtn2 = '<button id="cha" name="cha" type="button" class="btn btn-primary" onclick="javascript:location.href=\'exchanging?id='+ this.id + '\'">交換</button>';
 				}
@@ -226,7 +226,7 @@ $(function(){
 					 +this.productBId.id+'"><img id="imgId'+this.productBId.id+'" style="height: 100px;"></a></div><div class="col-md-6"><h4>'+
 					 this.productBId.name+'</h4>物品狀況：'+this.productBId.status +
 					 '<br>產品描述：'+this.productBId.description+
-					 '<br><div name="d1">'+excBtn2+'</div></div><div class="col-md-4" style="border-left: 1px dashed gray;"><ul class="nav navbar-nav"><li><img class="img-circle" style="height: 80px;"src="'+
+					 '<br><div name="d1">'+excBtn2+'</div><div name="pp" >'+this.id +'</div></div><div class="col-md-4" style="border-left: 1px dashed gray;"><ul class="nav navbar-nav"><li><img class="img-circle" style="height: 80px;"src="'+
 					 this.productBId.userId.picture+
 					 '"></li><li><ul style="list-style: none;"><li><h4>'+
 					 this.productBId.userId.account+'</h4></li><li>'+
@@ -305,9 +305,6 @@ $(function(){
 				}
 			}
 		});}
-
-	
-
 
 });//end of function onload
 

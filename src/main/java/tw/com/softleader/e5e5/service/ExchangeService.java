@@ -42,6 +42,14 @@ public class ExchangeService {
 		ex.setTradeFinishedTime(LocalDateTime.now());
 		ex.setTradeStatus(TrueFalse.TRUE);
 		ex = exchangeDao.save(ex);
+		
+		//物品刊登狀態改為FALSE
+		Product a = ex.getProductAId();
+		a.setPostStatus(TrueFalse.FALSE);
+		a = productDao.save(a);
+		Product b =ex.getProductBId();
+		b.setPostStatus(TrueFalse.FALSE);
+		b = productDao.save(b);
 		return ex ;
 	}
 	
