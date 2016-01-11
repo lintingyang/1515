@@ -16,6 +16,9 @@ import tw.com.softleader.e5e5.dao.ProductCategoryDao;
 import tw.com.softleader.e5e5.dao.ProductDao;
 import tw.com.softleader.e5e5.dao.UserDao;
 import tw.com.softleader.e5e5.entity.Product;
+import tw.com.softleader.e5e5.entity.ProductCategory;
+import tw.com.softleader.e5e5.entity.User;
+import tw.com.softleader.e5e5.entity.UserLike;
 import tw.com.softleader.e5e5.entity.enums.Time;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 
@@ -30,11 +33,13 @@ public class ProductService extends OurService<Product> {
 
 	@Autowired
 	private ProductCategoryDao productCategoryDao;
+	@Autowired
+	private UserLikeService userLikeService;
 
 	@Transactional
-	public List<Product> indexsearch(String namelike, String category, String orderby) {
+	public List<Product> indexsearch(String namelike, String category, String orderby,User user) {
 		List<Product> list = null;
-
+		
 		if (orderby.equals("熱門")) {
 			if (category.equals("全部")) {
 				list = productDao.findAllByNameOrderbyByClickTimes(namelike);
@@ -49,7 +54,24 @@ public class ProductService extends OurService<Product> {
 				list = productDao.findByProductOrderByPostTime(namelike, category);
 			}
 		} else if (orderby.equals("推薦")) {
-
+			if(user!=null){
+				List<UserLike> userLike = userLikeService.findUserLike(user.getId());				
+				for(UserLike likelist :userLike){
+					ProductCategory productCategory = productCategoryDao.findOne(likelist.getProductCategoryId().getId());
+					
+					
+					if (category.equals("全部")) {
+						list = productDao.findAllByNameOrderbyByClickTimes(namelike);
+						log.error(list);
+					}else {
+						list = productDao.findByProdcutOrderByClickTimes(namelike, category);
+					}
+					
+					
+				}
+				
+				
+			}
 		} else if (orderby.equals("誠信")){
 			
 		}

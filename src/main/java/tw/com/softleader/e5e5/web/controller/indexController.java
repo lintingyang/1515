@@ -8,14 +8,13 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.entity.ProductPicture;
+import tw.com.softleader.e5e5.entity.User;
 import tw.com.softleader.e5e5.service.ProductPictureService;
 import tw.com.softleader.e5e5.service.ProductService;
 
@@ -43,13 +42,15 @@ public class indexController {
 	public List<Product> query(@RequestParam("orderby") String orderby,@RequestParam("namelike")String namelike,
 				@RequestParam("categoryname")String category,HttpSession session) {
 		log.error("orderby =====================" + orderby);
+		
+		User user = (User)session.getAttribute("user");
 		if(session.getAttribute("categoryname") == null ||category.equals("")){
 			session.setAttribute("categoryname", "全部");
 			category = "全部";
 		}
 		log.error("query categoryname==========="+category);
 		
-		List<Product> list = productService.indexsearch(namelike, category, orderby);
+		List<Product> list = productService.indexsearch(namelike, category, orderby,user);
 		
 		return list;
 
