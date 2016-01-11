@@ -11,10 +11,10 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.com.softleader.e5e5.entity.User;
 import tw.com.softleader.e5e5.entity.enums.Sex;
@@ -28,6 +28,13 @@ public class headerController {
 	private UserService userService;
 	
 	Logger log = Logger.getLogger(this.getClass());
+	
+	@RequestMapping(value= "/categoryhchange")
+	@ResponseBody
+	public void changecategory(@RequestParam("categoryname")String categoryname,HttpSession session){
+		log.error("categoryname ========="+ categoryname);
+		session.setAttribute("categoryname", categoryname);
+	}
 	
 	
 	@RequestMapping(value="/logout")
@@ -56,13 +63,13 @@ public class headerController {
 		return "/index";
 	}
 	
-//	@RequestMapping(value = "/search")
-//	public String searchproduct(@RequestParam("namelike")String like,Model model){
-//		log.error(like);
-//		model.addAttribute("namelike",like);
-//		return "/index";
-//	}
-//	
+	@RequestMapping(value = "/search")
+	public String searchproduct(@RequestParam("namelike")String like,Model model){
+		log.error(like);
+		model.addAttribute("namelike",like);
+		return "/index";
+	}
+	
 	
 	
 	
@@ -148,3 +155,4 @@ public class headerController {
 
 	
 }
+

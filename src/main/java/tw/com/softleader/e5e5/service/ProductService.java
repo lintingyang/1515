@@ -1,19 +1,13 @@
 package tw.com.softleader.e5e5.service;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.imageio.ImageIO;
-import javax.servlet.ServletContext;
 import javax.transaction.Transactional;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.softleader.e5e5.common.dao.OurDao;
 import tw.com.softleader.e5e5.common.model.Message;
@@ -26,66 +20,113 @@ import tw.com.softleader.e5e5.entity.enums.Time;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 
 @Service
-public class ProductService extends OurService<Product>{
+public class ProductService extends OurService<Product> {
+	Logger log = Logger.getLogger(this.getClass());
 	@Autowired
 	private ProductDao productDao;
-	
+
 	@Autowired
 	private UserDao userDao;
-	
+
 	@Autowired
 	private ProductCategoryDao productCategoryDao;
 
-	
 	@Transactional
-	public List<Product> findeOrderByClickTime(String productName,String categoryName ){
+	public List<Product> indexsearch(String namelike, String category, String orderby) {
+		List<Product> list = null;
+
+		if (orderby.equals("熱門")) {
+			if (category.equals("全部")) {
+				list = productDao.findAllByNameOrderbyByClickTimes(namelike);
+				log.error(list);
+			}else {
+				list = productDao.findByProdcutOrderByClickTimes(namelike, category);
+			}
+		} else if (orderby.equals("最新")) {
+			if (category.equals("全部")) {
+				list = productDao.findAllByNameOrderbyByPostTime(namelike);
+			}else {
+				list = productDao.findByProductOrderByPostTime(namelike, category);
+			}
+		} else if (orderby.equals("推薦")) {
+
+		} else if (orderby.equals("誠信")){
+			
+		}
+		// if (orderby.equals("熱門")) {
+		//
+		// if (namelike == null || namelike.equals("")) {
+		// list = productService.getProductsOrderByClickTimes();
+		// } else {
+		// list = productService.findeOrderByClickTime(namelike,categoryname);
+		// }
+		// } else if (orderby.equals("最新")) {
+		//
+		// if (namelike == null || namelike.equals("")) {
+		// list = productService.getProductsOrderByPostTime();
+		// } else {
+		// list =
+		// productService.findByProductOrderByPostTime(namelike,categoryname);
+		// }
+		//
+		// } else if (orderby.equals("誠信")) {
+		//
+		// } else if (orderby.equals("推薦")) {
+		//
+		// }
+		// return list;
+
+		return list;
+	}
+
+	@Transactional
+	public List<Product> findeOrderByClickTime(String productName, String categoryName) {
 		List<Product> list = productDao.findByProdcutOrderByClickTimes(productName, categoryName);
 		return list;
 	}
+
 	@Transactional
-	public List<Product> findByProductOrderByPostTime(String productName,String categoryName ){
+	public List<Product> findByProductOrderByPostTime(String productName, String categoryName) {
 		List<Product> list = productDao.findByProductOrderByPostTime(productName, categoryName);
 		return list;
 	}
-	
-	//(11)查詢使用者已/未刊登的物品/Enum
-		@Transactional
-		public List<Product> findByUsersProductsIsPosted(Integer id , TrueFalse postStatus){
-			return productDao.findUsersProductsByIsPosted(id, postStatus);
-		}
-		
-		//(11)查詢使用者已/未刊登的物品/String
-		@Transactional
-		public List<Product> findByUsersProductsIsPosted(Integer id , String postStatus){
-			return productDao.findUsersProductsByIsPosted(id, postStatus);
-		}
-		
 
-		//(12)查詢使用者已/待交換的物品/String
-		public List<Product> findUsersProductsByExchange(Integer id , String post){
-			return productDao.findUsersProductsByExchange(id, post);
-		}
+	// (11)查詢使用者已/未刊登的物品/Enum/yao
 	@Transactional
-	public List<Product> findByUserId(Integer id ){
+	public List<Product> findByUsersProductsIsPosted(Integer id, TrueFalse postStatus) {
+		return productDao.findUsersProductsByIsPosted(id, postStatus);
+	}
+
+	// (11)查詢使用者已/未刊登的物品/String/yao
+	@Transactional
+	public List<Product> findByUsersProductsIsPosted(Integer id, String postStatus) {
+		return productDao.findUsersProductsByIsPosted(id, postStatus);
+	}
+
+	// (12)查詢使用者已/待交換的物品/String/yao
+	public List<Product> findUsersProductsByExchange(Integer id, String post) {
+		return productDao.findUsersProductsByExchange(id, post);
+	}
+
+	@Transactional
+	public List<Product> findByUserId(Integer id) {
 		return productDao.findByUserId(id);
 	}
-	
 
-	
-	//後台
-	//(1)findOne byId
+	// 後台
+	// (1)findOne byId
 	@Transactional
 	public Product getOneById(Integer id) {
 		return productDao.findOne(id);
 	}
-	
-	//(2)findAll
+
+	// (2)findAll
 	@Transactional
 	public List<Product> getAllProducts() {
 		return productDao.findAll();
 	}
-	
-	//(3)update product's post_status
+
+	// (3)update product's post_status
 	@Transactional
 	public Product update(Integer id, TrueFalse postStatus) {
 		Product product = productDao.findOne(id);
@@ -93,24 +134,20 @@ public class ProductService extends OurService<Product>{
 		productDao.save(product);
 		return productDao.findOne(id);
 	}
-	
-	//(4)update product's post_status return int
-		@Transactional
-		public int updateStatus(Integer id, TrueFalse postStatus) {
-			Product product = productDao.findOne(id);
-			if(product != null){
-//				product.setPostStatus(postStatus);
-				productDao.save(product);
-				return 1;
-			}else{
-				return 0;
-			}
+
+	// (4)update product's post_status return int
+	@Transactional
+	public int updateStatus(Integer id, TrueFalse postStatus) {
+		Product product = productDao.findOne(id);
+		if (product != null) {
+			 product.setPostStatus(postStatus);//yao打開此行註解
+			productDao.save(product);
+			return 1;
+		} else {
+			return 0;
 		}
-	
-	
-	
-	
-	
+	}
+
 	// (1)最新商品列：fineAll byPostTime
 	@Transactional
 	public List<Product> getProductsOrderByPostTime() {
@@ -158,20 +195,19 @@ public class ProductService extends OurService<Product>{
 		return productDao.findAllByProductCategory(productCategory);
 	}
 
-//	// (8)查詢商品是否交易成功：findOne byTradeStatus
-//	@Transactional
-//	public String getProductTradeStaus(String name) {
-//		try {
-//			if (productDao.findOneByTradeStatus(name).equals("T")) {
-//				return "交易成功";
-//			} else {
-//				return "尚未交易";
-//			}
-//		} catch (Exception e) {
-//			return "查無此商品";
-//		}
-//	}
-
+	// // (8)查詢商品是否交易成功：findOne byTradeStatus
+	// @Transactional
+	// public String getProductTradeStaus(String name) {
+	// try {
+	// if (productDao.findOneByTradeStatus(name).equals("T")) {
+	// return "交易成功";
+	// } else {
+	// return "尚未交易";
+	// }
+	// } catch (Exception e) {
+	// return "查無此商品";
+	// }
+	// }
 
 	// (10) 關鍵字搜尋:產品名稱、交換地、使用者名稱、產品類別
 	@Transactional
@@ -197,11 +233,9 @@ public class ProductService extends OurService<Product>{
 
 	// (14)新增產品
 	@Transactional
-	public Product insert(String name,int user, int category, String status, 
-							String description, LocalDateTime deadline, 
-							LocalDateTime startTime, Time transactionTime, 
-							String location, String tradeWay, String wishItem, 
-							TrueFalse postStatus) {
+	public Product insert(String name, int user, int category, String status, String description,
+			LocalDateTime deadline, LocalDateTime startTime, Time transactionTime, String location, String tradeWay,
+			String wishItem, TrueFalse postStatus) {
 		Product product = new Product();
 		product.setName(name);
 		product.setUserId(userDao.findOne(user));
@@ -220,7 +254,29 @@ public class ProductService extends OurService<Product>{
 		return product;
 
 	}
-	
+	// (14)編輯產品
+	@Transactional
+	public Product update(String name, int user, int category, String status, String description,
+			LocalDateTime deadline, LocalDateTime startTime, Time transactionTime, String location, String tradeWay,
+			String wishItem, TrueFalse postStatus) {
+		Product product = new Product();
+		product.setName(name);
+		product.setUserId(userDao.findOne(user));
+		product.setProductCategory(productCategoryDao.findOne(category));
+		product.setStatus(status);
+		product.setDescription(description);
+		product.setPostTime(LocalDateTime.now());
+		product.setStartTime(startTime);
+		product.setDeadline(deadline);
+		product.setTransactionTime(transactionTime);
+		product.setLocation(location);
+		product.setTradeWay(tradeWay);
+		product.setWishItem(wishItem);
+		product.setPostStatus(postStatus);
+		productDao.save(product);
+		return product;
+
+	}
 	@Override
 	public OurDao<Product> getDao() {
 		return productDao;

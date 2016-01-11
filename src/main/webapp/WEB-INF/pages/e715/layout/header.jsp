@@ -49,23 +49,34 @@
 		</div>
 		<form class="navbar-form navbar-left" role="search" action="/head/search">
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Search" name="namelike" id="searchbar">
+				<input type="text" class="form-control" placeholder="Search" 
+								name="namelike" id="searchbar">
 			</div>
-			<button type="button" id="searchbtn"  class="btn btn-default searchbtn" >Submit</button>
+			<button type="submit" id="searchbtn"  class="btn btn-default searchbtn" >Submit</button>
 		</form>
-		<a class="navbar-brand" href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-menu-down"></span></a>
+		<a class="navbar-brand" href="#" data-toggle="modal" data-target="#myModal">
+			<span id="categoryname">${ categoryname }<c:if test="${empty categoryname }" >全部</c:if></span>
+			<span class="glyphicon glyphicon-menu-down"></span></a>
 		
-	
 		<ul class="nav navbar-nav navbar-right">
 			<li id="fat-menu" class="dropdown"><a id="drop3" href="#"
 				class="dropdown-toggle" data-toggle="dropdown" role="button"
 				aria-haspopup="true" aria-expanded="false"> 
 				<img class="img-circle" style="width: 30px;"
-					src="${user.picture}"> ${user.name}
+					src="${user.picture}"> 
+					<c:if test ="${!empty user.name}" >
+				       ${user.name}
+					</c:if>
+					<c:if test ="${empty user.name}" >
+				       	登入
+					</c:if>
+					
+					
 					<span class="caret"></span></a>
 				<ul class="dropdown-menu" aria-labelledby="drop3">
+
 					<li><a class="userlist" href="/E715Member/${user.id}">會員資料</a></li>
-					<li><a class="userlist" href="/WebContent/user/userFriendList.jsp">關注名單</a></li>
+					<li><a class="userlist" href="/E715Member/userFriend">關注名單</a></li>
 					<li><a class="userlist" href="/product/list">物品管理</a></li><!-- yao -->
 					<li><a class="userlist" href="/product/add">新增物品</a></li>
 					<li><a class="userlist" href="/E715Member/modifyFileAsk">帳號修改</a></li>
@@ -93,28 +104,24 @@
       <h5 id="myModalLabel">請選擇類別</h5>
       		<table style=" margin:auto;">
       			<tr>
-      				<td class="productcategory" ><img alt="123546"></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">服飾</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">皮件</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">電玩</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">玩具</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">書籍</button></td>
+					
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg "data-dismiss="modal">全部</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg"data-dismiss="modal">課本書籍</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">遊戲影音</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">日常用品</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">文具用品</button></td>
       			</tr>
       			<tr>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">文具</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">服飾</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">皮件</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">電玩</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">玩具</button></td>
-     				<td class="productcategory" ><button class=" btn btn-default btn-lg">書籍</button></td>		      			
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">傢俱</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">家電</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">服飾</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">食品</button></td>
+      				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">票券</button></td>
+     					      			
       			</tr>
       			<tr>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">文具</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">服飾</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">皮件</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">電玩</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">玩具</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg">書籍</button></td>
+      			<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">3C產品</button></td>
+      			<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">化妝保養用品</button></td>
       			</tr>
       		</table>
       		<br>
@@ -128,5 +135,18 @@
     </div>
   </div>
 </div>
-
+<script>
+	$(".productcategory").click(function(){
+		
+		$.ajax({
+			contentType : "application/json",
+			url : "/head/categoryhchange",
+			type : "get",
+			async :false,
+			data : { "categoryname" : $(this).text() },
+		});
+ 		$("#categoryname").text($(this).text());
+		
+	})
+</script>
 

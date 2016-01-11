@@ -40,29 +40,17 @@ public class indexController {
 
 	@RequestMapping(value = "/query")
 	@ResponseBody
-	public List<Product> query(@RequestParam("orderby") String orderby,@RequestParam("namelike")String namelike, HttpSession session) {
-		log.error("orderby = " + orderby);
-		List<Product> list = null;
-		if (orderby.equals("熱門")) {
-
-			if (namelike == null || namelike.equals("")) {
-				list = productService.getProductsOrderByClickTimes();
-			} else {
-				list = productService.findeOrderByClickTime(namelike, "文具用品");
-			}
-		} else if (orderby.equals("最新")) {
-
-			if (namelike == null || namelike.equals("")) {
-				list = productService.getProductsOrderByPostTime();
-			} else {
-				list = productService.findByProductOrderByPostTime(namelike, "文具用品");
-			}
-
-		} else if (orderby.equals("誠信")) {
-
-		} else if (orderby.equals("推薦")) {
-
+	public List<Product> query(@RequestParam("orderby") String orderby,@RequestParam("namelike")String namelike,
+				@RequestParam("categoryname")String category,HttpSession session) {
+		log.error("orderby =====================" + orderby);
+		if(session.getAttribute("categoryname") == null ||category.equals("")){
+			session.setAttribute("categoryname", "全部");
+			category = "全部";
 		}
+		log.error("query categoryname==========="+category);
+		
+		List<Product> list = productService.indexsearch(namelike, category, orderby);
+		
 		return list;
 
 	}

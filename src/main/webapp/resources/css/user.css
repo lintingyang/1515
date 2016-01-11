@@ -44,3 +44,22 @@
 	color:#FF5151;
 	
 }
+.userdiv{
+	display: inline-block;
+	height: 260px;
+	width: 200px;
+	text-align: center; 
+	color:gray;
+	margin:15px;
+	cursor :pointer;
+}
+.userdiv > a{
+	color:gray;
+	text-decoration:none;
+}
+
+#friendShipContainer { 
+/*  min-height: 400px; */
+width: 1000px;
+margin: auto;
+} 
