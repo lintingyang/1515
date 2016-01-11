@@ -217,9 +217,12 @@ $(function(){
 			var excBtn2='';
 			var loginId="${user.id}";
 			var prodUserId="${product.userId.id}";
-				if(prodUserId.length!=0 && prodUserId==loginId){
-					excBtn2 = '<button id="cha" name="cha" type="button" class="btn btn-primary" onclick="javascript:location.href=\'exchanging?id='+ this.id + '\'">交換</button>';
-				}
+			//關閉我要交換鈕
+			//顯示交換物品欄的交換鈕
+			if(prodUserId.length!=0 && prodUserId==loginId){
+				$("#excBtn").val("").attr('data-target', '');
+				excBtn2 = '<button id="cha" name="cha" type="button" class="btn btn-primary" onclick="javascript:location.href=\'exchanging?id='+ this.id + '\'">交換</button>';
+			}
 			
 			$("#testtable").append('<tr><td><div class="col-md-2">'+
 					'<a href="/product/'
