@@ -254,7 +254,29 @@ public class ProductService extends OurService<Product> {
 		return product;
 
 	}
+	// (14)編輯產品
+	@Transactional
+	public Product update(String name, int user, int category, String status, String description,
+			LocalDateTime deadline, LocalDateTime startTime, Time transactionTime, String location, String tradeWay,
+			String wishItem, TrueFalse postStatus) {
+		Product product = new Product();
+		product.setName(name);
+		product.setUserId(userDao.findOne(user));
+		product.setProductCategory(productCategoryDao.findOne(category));
+		product.setStatus(status);
+		product.setDescription(description);
+		product.setPostTime(LocalDateTime.now());
+		product.setStartTime(startTime);
+		product.setDeadline(deadline);
+		product.setTransactionTime(transactionTime);
+		product.setLocation(location);
+		product.setTradeWay(tradeWay);
+		product.setWishItem(wishItem);
+		product.setPostStatus(postStatus);
+		productDao.save(product);
+		return product;
 
+	}
 	@Override
 	public OurDao<Product> getDao() {
 		return productDao;

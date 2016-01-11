@@ -2,38 +2,36 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/WEB-INF/pages/e715/layout/header.jsp"></c:import>
-<c:import url="/WEB-INF/pages/layout/meta.jsp"/>
+<c:import url="/WEB-INF/pages/layout/meta.jsp" />
 <link rel="stylesheet" href="/resources/css/user.css" />
 
 <div class="container" style="margin: 50px auto;">
 	<div class="col-md-6">
 		<div class="row">
 			<div id="big-image">
-				<img src="${productPictures[0].picture}"
-					style="width: 400px;">
+				<img src="${productPictures[0].picture}" style="width: 400px;">
 			</div>
 		</div>
 		<div class="row">
 			<ul class="nav navbar-nav">
 				<c:if test="${not empty productPictures[0].picture}">
-				<li><a class="thumbnail" href="${productPictures[0].picture}">
-				<img class="smaimg"
-						src="${productPictures[0].picture}"></a></a></li>
+					<li><a class="thumbnail" href="${productPictures[0].picture}">
+							<img class="smaimg" src="${productPictures[0].picture}">
+					</a></a></li>
 				</c:if>
 				<c:if test="${not empty productPictures[1].picture}">
-				<li><a class="thumbnail" href="${productPictures[1].picture}">
-				<img class="smaimg"
-						src="${productPictures[1].picture}"></a></li>
+					<li><a class="thumbnail" href="${productPictures[1].picture}">
+							<img class="smaimg" src="${productPictures[1].picture}">
+					</a></li>
 				</c:if>
 				<c:if test="${not empty productPictures[2].picture}">
-				<li>
-				<a class="thumbnail" href="${productPictures[2].picture}">
-				<img class="smaimg"
-						src="${productPictures[2].picture}"></a></li>
+					<li><a class="thumbnail" href="${productPictures[2].picture}">
+							<img class="smaimg" src="${productPictures[2].picture}">
+					</a></li>
 				</c:if>
 				<c:if test="${not empty productPictures[3].picture}">
-				<li><a class="thumbnail" href="${productPictures[3].picture}"><img class="smaimg"
-						src="${productPictures[3].picture}"></a></li>
+					<li><a class="thumbnail" href="${productPictures[3].picture}"><img
+							class="smaimg" src="${productPictures[3].picture}"></a></li>
 				</c:if>
 			</ul>
 		</div>
@@ -44,10 +42,12 @@
 					src="${product.userId.picture}"></li>
 				<li><ul style="list-style: none;">
 						<li><h4>
-								<a href="/E715Member/${product.userId.id}">Account: ${product.userId.account} </a>
+								<a href="/E715Member/${product.userId.id}">Account:
+									${product.userId.account} </a>
 							</h4></li>
 						<li>${product.userId.name}</li>
-						<li>${product.userId.schoolName}<li>
+						<li>${product.userId.schoolName}
+						<li>
 					</ul></li>
 				<li><span class="glyphicon glyphicon-plus">123</span></li>
 
@@ -63,25 +63,28 @@
 		<hr>
 		<div>
 			<h5>描述：</h5>
-			<br>${product.description} 
+			<br>${product.description}
 		</div>
 		<hr>
 		<div>
-			<h5>交易地點：${product.location} </h5>
-			<h5>交易期限：${product.deadline} </h5>
-			<h5>交易時段：${product.transactionTime} </h5>
+			<h5>交易地點：${product.location}</h5>
+			<h5>交易期限：${product.deadline}</h5>
+			<h5>交易時段：${product.transactionTime}</h5>
 		</div>
 		<hr>
 		<div>
-			<h5>交易方式：${product.tradeWay} </h5>
+			<h5>交易方式：${product.tradeWay}</h5>
 		</div>
-		<div class="container" style="width: 100%; height: 100px; text-align: center;">		
-			<input id="excBtn" class="btn btn-primary btn-lg" type="button" value="我要交換" data-toggle="modal" data-target="#myProductList">
+		<div class="container"
+			style="width: 100%; height: 100px; text-align: center;">
+			<input id="excBtn" class="btn btn-primary btn-lg" type="button"
+				value="我要交換" data-toggle="modal" data-target="#myProductList">
 		</div>
-		
+
 	</div>
 
 	<div class="col-md-12">
+		<a name="qBookmark"></a>
 		<div>
 			<!-- 功能選單 -->
 			<br> <br>
@@ -99,25 +102,26 @@
 					<div>
 						<!-- 發問區開始 -->
 						<c:if test="${empty user}">
-						<div style="text-align: center;">
-						<h3>請先登入才能發問！</h3>
-						</div>
-						</c:if>
-						<c:if test="${not empty user.id}">
-						<div style="text-align: center;">
-							<textarea id="questiontext"　rows="10" cols="100" placeholder="提出問題..."></textarea>
-							<br>
-							<label><input type="checkbox">匿名發言</label>
-							<br>
-							<br> 
-							<input type="button" value="送出" class="btn btn-primary" id="submitquestion">
-							<div class="checkbox">	
+						<!-- 要求先登入才能發問 -->
+							<div style="text-align: center;">
+								<h3>請先登入才能發問！</h3>
 							</div>
-						</div>
+						</c:if>
+						<c:if test="${not empty user.id && user.id != product.userId.id}">
+						<!-- 已登入而且不是product的擁有者才能發問 -->	
+							<div style="text-align: center;">
+								<textarea id="questiontext" 　rows="10" cols="100"
+									placeholder="提出問題..."></textarea>
+								<br> <label><input type="checkbox">匿名發言</label> <br>
+								<br> <input type="button" value="送出"
+									class="btn btn-primary" id="submitquestion">
+								<div class="checkbox"></div>
+							</div>
 						</c:if>
 						<!-- 發問區結束 -->
 					</div>
-				</div><!-- 問與答區塊結束 -->
+				</div>
+				<!-- 問與答區塊結束 -->
 				<!-- exchange區塊開始 -->
 				<div role="tabpanel" class="tab-pane" id="exchange">
 					<table class="table table-striped" id="testtable"></table>
@@ -129,22 +133,22 @@
 </div>
 
 <!-- 我要交換扭的下拉選單 -->
-<div class="modal fade" id="myProductList" tabindex="-1" role="dialog" aria-labelledby="myProductList" aria-hidden="true">
-  <div class="modal-dialog" style="background-color: gray;">
-    <div class="modal-content">
-      <div class="modal-body alignCenter">
-      <h5 id="myProductList">請選擇類別</h5>
-      		<table style=" margin:auto;">
-      			<tr><td class="productcategory" >
-					
-      			</td></tr>
-      		</table>
-      		<br>
-      		<br>
-       <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
+<div class="modal fade" id="myProductList" tabindex="-1" role="dialog"
+	aria-labelledby="myProductList" aria-hidden="true">
+	<div class="modal-dialog" style="background-color: gray;">
+		<div class="modal-content">
+			<div class="modal-body alignCenter">
+				<h5 id="myProductList">請選擇類別</h5>
+				<table style="margin: auto;">
+					<tr>
+						<td class="productcategory"></td>
+					</tr>
+				</table>
+				<br> <br>
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
 </div>
 <script>
 
@@ -168,8 +172,15 @@ $(function(){
      });
      function showtable(data){
     	 $.each(data, function(){
-     		 $("#qatable").append("<tr><td><h4>問題:</h4>" + this.question + 
-     			"<hr><h4>Answer:</h4>" + this.answer + "<br></td></tr>");
+    		 if(this.answer == null){
+    			 console.log(this.questionTime);
+    			$("#qatable").append("<tr><td><h4>問題:</h4>" + "(<a href='/E715Member/"+ this.questionerId.id +"'>"+this.questionerId.account + "</a>)" + 
+    					this.question + "<br>" + this.questionTime.year + "/" + this.questionTime.monthValue +"/" + this.questionTime.dayOfMonth + "<br></td></tr>");
+    		 } else {
+     		 $("#qatable").append("<tr><td><h4>問題:</h4>" + "(<a href='/E715Member/"+ this.questionerId.id + "'>" + this.questionerId.account + "</a>)" + 
+ 					this.question + "<br>" + this.questionTime.year + "/" + this.questionTime.monthValue +"/" + this.questionTime.dayOfMonth + 
+     			"<hr><h4>答覆:</h4>" + this.answer + "<br></td></tr>");
+    		 }
     	 })	 
      }
 //	end of Q&A	
@@ -184,7 +195,10 @@ $(function(){
 		    dataType: "text",
 		    async: false,
 			success: function(data){
-		    	 location.reload(true);
+				location.reload(true);
+				window.location="#qBookmark";
+				
+				
 		       },
 		       
 		})
@@ -230,7 +244,7 @@ $(function(){
 					 +this.productBId.id+'"><img id="imgId'+this.productBId.id+'" style="height: 100px;"></a></div><div class="col-md-6"><h4>'+
 					 this.productBId.name+'</h4>物品狀況：'+this.productBId.status +
 					 '<br>產品描述：'+this.productBId.description+
-					 '<br><div name="d1">'+excBtn2+'</div></div><div class="col-md-4" style="border-left: 1px dashed gray;"><ul class="nav navbar-nav"><li><img class="img-circle" style="height: 80px;"src="'+
+					 '<br><div name="d1">'+excBtn2+'</div><div name="pp" >'+this.id +'</div></div><div class="col-md-4" style="border-left: 1px dashed gray;"><ul class="nav navbar-nav"><li><img class="img-circle" style="height: 80px;"src="'+
 					 this.productBId.userId.picture+
 					 '"></li><li><ul style="list-style: none;"><li><h4>'+
 					 this.productBId.userId.account+'</h4></li><li>'+
@@ -309,12 +323,7 @@ $(function(){
 				}
 			}
 		});}
-
-	
-
-
 });//end of function onload
-
 
 </script>
 
