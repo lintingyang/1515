@@ -77,8 +77,9 @@
 		</div>
 		<div class="container"
 			style="width: 100%; height: 100px; text-align: center;">
-			<input id="excBtn" class="btn btn-primary btn-lg" type="button"
-				value="我要交換" data-toggle="modal" data-target="#myProductList">
+				<input id="excBtn" class="btn btn-primary btn-lg" type="button"
+					value="我要交換" data-toggle="modal" data-target="#myProductList">
+
 		</div>
 
 	</div>
@@ -133,25 +134,30 @@
 </div>
 
 <!-- 我要交換扭的下拉選單 -->
-<div class="modal fade" id="myProductList" tabindex="-1" role="dialog"
-	aria-labelledby="myProductList" aria-hidden="true">
-	<div class="modal-dialog" style="background-color: gray;">
-		<div class="modal-content">
-			<div class="modal-body alignCenter">
-				<h5 id="myProductList">請選擇類別</h5>
-				<table style="margin: auto;">
-					<tr>
-						<td class="productcategory"></td>
-					</tr>
-				</table>
-				<br> <br>
-				<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
+<div class="modal fade" id="myProductList" tabindex="-1" role="dialog" aria-labelledby="myProductList" aria-hidden="true">
+  <div class="modal-dialog" style="background-color: gray;">
+    <div class="modal-content">
+      <div class="modal-body alignCenter">
+      <h5 id="myProductList">請選擇物品</h5>
+      		<table style=" margin:auto;" id="userAProduct">
+      			<tr><td class="productcategory" >
+					
+      			</td></tr>
+      		</table>
+      		<br>
+      		<br>
+       <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 <script>
 
+$("#excBtn").click(function(){
+	if( ${empty user} ){
+		location.href="/head/login"
+	}
+})
 $(function(){
 // 	顯示Q&A列表
 	var formData={"id":${product.id}}
@@ -247,18 +253,19 @@ $(function(){
      });
  	 function show(data) {
  		 var imgId=0;
+		 var loginId="${user.id}";
+		 var prodUserId="${product.userId.id}";
+		//關閉我要交換鈕(本人登入時)
+		 if(prodUserId.length!=0 && prodUserId==loginId){
+				$("#excBtn").val("").attr('data-target', '').hide();;
+	     }
 		 $.each(data, function() {
 			imgId++;
 			var excBtn2='';
-			var loginId="${user.id}";
-			var prodUserId="${product.userId.id}";
-			//關閉我要交換鈕
 			//顯示交換物品欄的交換鈕
 			if(prodUserId.length!=0 && prodUserId==loginId){
-				$("#excBtn").val("").attr('data-target', '');
-				excBtn2 = '<button id="cha" name="cha" type="button" class="btn btn-primary" onclick="javascript:location.href=\'exchanging?id='+ this.id + '\'">交換</button>';
+				excBtn2 = '<button id="cha" name="cha" type="button" class="btn btn-primary" onclick="javascript:location.href=\'makeSure?id='+ this.id + '\'">交換</button>';
 			}
-			
 			$("#testtable").append('<tr><td><div class="col-md-2">'+
 					'<a href="/product/'
 					 +this.productBId.id+'"><img id="imgId'+this.productBId.id+'" style="height: 100px;"></a></div><div class="col-md-6"><h4>'+
@@ -322,26 +329,73 @@ $(function(){
         $("#imgId"+img.product.id).attr("src", img.picture);
  	}
 //	end of Exchange product pic
-
-
-	function getpicture(prod) { //取得每一個商品的物件
-		var formData = {
-			"id" : prod.id
+	
+	$.ajax({
+		contentType : "application/json",
+		url : "/product/query",
+		dataType : "json",
+		type : "get",
+		data : {"id" : "${user.id}"},
+		success : function(data){
+			$.each(data,function(i) {
+				var tr = $("<tr></tr>");
+				var prodimg = $("<img>").addClass("prodimgsm");
+				var namespan = $("<h5>").text(data[i].name);
+				var div = $("<div></div>").append($(namespan)).append($(prodimg)).addClass("btn").addClass(" btn-default")
+				.addClass("exc").attr("name",data[i].id);
+				var td = $("<td></td>").append($(div));
+				
+				getpicture(data[i], prodimg);
+				
+				$(tr).append($(td));
+				$("#userAProduct").append($(tr));
+				$(".exc").bind("click",addexchange);
+// 				$(".exc").bind("click",function(){ location.href="/product/exchange/"+$(this).attr("name")+"/"+${product.id}})
+			})
 		}
-		$.ajax({
-			contentType : "application/json",
-			url : "/queryimg",
-			dataType : "json",
-			type : "get",
-			data : formData,
-			success : function(data) {
-				if (data[0] != null) {
-					console.log(data[0].picture);
-					$(prodimg).attr("src", data[0].picture);
-				}
-			}
-		});}
+	})
+
+
+
 });//end of function onload
+
+function getpicture(prod) { //取得每一個商品的物件
+	var formData = {
+		"id" : prod.id
+	}
+	$.ajax({
+		contentType : "application/json",
+		url : "/queryimg",
+		dataType : "json",
+		type : "get",
+		data : formData,
+		success : function(data) {
+			if (data[0] != null) {
+				$(prodimg).attr("src", data[0].picture);
+			}
+		}
+	});
+}
+function addexchange(){
+	location.href="/product/exchange/"+$(this).attr("name")+"/"+${product.id};
+}
+function getpicture(prod, prodimg) { //取得每一個商品的物件
+	var formData = {
+		"id" : prod.id
+	}
+	$.ajax({
+		contentType : "application/json",
+		url : "/queryimg",
+		dataType : "json",
+		type : "get",
+		data : formData,
+		success : function(data) {
+			if (data[0] != null) {
+				$(prodimg).attr("src", data[0].picture);
+			}
+		}
+	});
+}
 
 </script>
 

@@ -30,7 +30,7 @@ window.onload = function () {
     }
     //取得現在年份
     var nowYear = new Date().getFullYear();
-    
+    console.log(nowYear);
     //最多活不超過100歲
     var deadYear = nowYear-100;
     
@@ -61,16 +61,10 @@ window.onload = function () {
     }
    
 }
-
 var tempdate;
 function Datefocus() {
     document.getElementById("day").innerHTML = "";
     tempdate = new Date(document.getElementById("year").value, document.getElementById("month").value, 0).getDate();
-    var opt = window.document.createElement("option");
-    opt.value = ${user.birthday.getDayOfMonth()} ;
-    opt.innerHTML = ${user.birthday.getDayOfMonth()};
-    opt.className= "defaultOption";
-    document.getElementById('day').appendChild(opt);
     for (var i = 1; i <= tempdate; i++) {
         var opt = window.document.createElement("option");
         opt.value = i;
@@ -79,6 +73,9 @@ function Datefocus() {
     }
    
 }
+
+   
+
 
 function Dateblur() {
     document.getElementById("day").innerHTML = "";
@@ -139,14 +136,14 @@ function Dateblur() {
 				<div class="form-group" id="divBorder">
 					<label for="inputPassword3" class="col-sm-2 control-label">生日:</label>
 					<div class="col-sm-10" style="padding-top: 7px">
-									<select name="year" id="year">  
-						<option value="">Select</option>
+				<select name="year" id="year">  
+					<option class="defaultOption">Select</option>
 					</select>年 
 					<select name="month" id="month"> 
-						<option value="">Select</option> 
+						<option  class="defaultOption">Select</option> 
 					</select>月
 					<select name="day" id="day"> 
-						<option value="">Select</option>
+						<option class="defaultOption">Select</option>
 					</select> 日
 					</div>
 				</div>

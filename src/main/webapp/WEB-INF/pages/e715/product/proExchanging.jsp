@@ -99,24 +99,26 @@ window.onload = function(){
 				<div id="d1" align="center">
 						<h3><span class="label label-danger">交易剩餘時間</span></h3>
 						<span id="pad" style="background-color: yellow ;font-size: medium;"></span>
-						<h3><span class="label label-success">交易時間</span></h3>
+						<h4>交易時間</h4>
 						<p>${finalTradeTime}</p>
 				</div>
 				<div align="center">
 						<div id="d2" class="col-md-6">
-							<h3><span class="label label-warning">交易地點</span></h3>
+							<h4>交易地點</h4>
 							<p>${exchange.productAId.location}</p>
 						</div>
 						<div id="d3" class="col-md-6">
-							<h3><span class="label label-warning">交易方式</span></h3>
+							<h4>交易方式</h4>
 							<p>${exchange.productAId.tradeWay}</p>
 						</div>
 				</div>
 			</div>
 			<div class="col-md-12">
 				<div style="text-align: center; margin: 10px auto">
-					<button id="btnExchang" type="button" class="btn btn-success btn-lg">
-					<span class="glyphicon glyphicon-gift" aria-hidden="true"></span>  已經收到商品囉~</button>
+					<button type="button" class="btn btn-success btn-lg" data-toggle="modal" 
+						data-target="#myModal2"><span class="glyphicon glyphicon-gift" aria-hidden="true"></span>
+						我已經收到商品，要進行評分~
+					</button>
 				</div>
 				<div style="text-align: center;">
 					<button type="button" class="btn btn-primary btn-lg"
@@ -140,6 +142,30 @@ window.onload = function(){
       			</div>
     		</div>
   		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="myModalLabel">為商品評分</h4>
+	      </div>
+	      <div class="modal-body">
+	        <button type="button" class="btn btn-default btn-lg">
+  				<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Good
+			</button>&bnsp;
+	        <button type="button" class="btn btn-default btn-lg">
+  				<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Bad
+			</button>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+<!-- 	        <button type="button" class="btn btn-primary">Save changes</button> -->
+	      </div>
+	    </div>
+	  </div>
 	</div>
 </div>
 

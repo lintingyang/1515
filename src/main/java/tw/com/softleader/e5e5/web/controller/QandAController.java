@@ -95,6 +95,5 @@ public class QandAController {
 		qandaservice.updateAnswer(answer.getAnswer(), answer.getId());
 		return "/e715/product/product";
 	}
-	
 }
 

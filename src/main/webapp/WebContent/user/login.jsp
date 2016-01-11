@@ -12,6 +12,17 @@
 			window.location.href = "/WebContent/index.jsp";
 		});
 	});
+	
+	$(function() {
+		$(".three").on('click', function() {
+			$('#inputEmail3').val('changethree');
+			$('#inputPassword3').val('aaa');
+		});
+	});
+	
+	
+	
+	
 </script>
 
 
@@ -76,6 +87,24 @@
 							in</button>
 					</div>
 				</div>
+				<button type="button" class="btn btn-default three" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+  張三
+</button>
+
+<button type="button" class="btn btn-default four" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+  李四
+</button>
+
+<button type="button" class="btn btn-default five" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
+sagittis lacus vel augue laoreet rutrum faucibus.">
+  王五
+</button>
+
+<button type="button" class="btn btn-default six" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+  老六
+</button>
+				
+				
 			</form>
 		</div>
 	</div>

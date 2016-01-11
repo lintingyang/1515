@@ -16,6 +16,9 @@ import tw.com.softleader.e5e5.dao.ProductCategoryDao;
 import tw.com.softleader.e5e5.dao.ProductDao;
 import tw.com.softleader.e5e5.dao.UserDao;
 import tw.com.softleader.e5e5.entity.Product;
+import tw.com.softleader.e5e5.entity.ProductCategory;
+import tw.com.softleader.e5e5.entity.User;
+import tw.com.softleader.e5e5.entity.UserLike;
 import tw.com.softleader.e5e5.entity.enums.Time;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 
@@ -30,11 +33,13 @@ public class ProductService extends OurService<Product> {
 
 	@Autowired
 	private ProductCategoryDao productCategoryDao;
+	@Autowired
+	private UserLikeService userLikeService;
 
 	@Transactional
-	public List<Product> indexsearch(String namelike, String category, String orderby) {
+	public List<Product> indexsearch(String namelike, String category, String orderby,User user) {
 		List<Product> list = null;
-
+		
 		if (orderby.equals("熱門")) {
 			if (category.equals("全部")) {
 				list = productDao.findAllByNameOrderbyByClickTimes(namelike);
@@ -49,43 +54,43 @@ public class ProductService extends OurService<Product> {
 				list = productDao.findByProductOrderByPostTime(namelike, category);
 			}
 		} else if (orderby.equals("推薦")) {
-
+			if(user!=null){
+				List<UserLike> userLike = userLikeService.findUserLike(user.getId());				
+				for(UserLike likelist :userLike){
+					ProductCategory productCategory = productCategoryDao.findOne(likelist.getProductCategoryId().getId());
+					
+					
+					if (category.equals("全部")) {
+						list = productDao.findAllByNameOrderbyByClickTimes(namelike);
+						log.error(list);
+					}else {
+						list = productDao.findByProdcutOrderByClickTimes(namelike, category);
+					}
+					
+					
+				}
+				
+				
+			}
 		} else if (orderby.equals("誠信")){
 			
 		}
-		// if (orderby.equals("熱門")) {
-		//
-		// if (namelike == null || namelike.equals("")) {
-		// list = productService.getProductsOrderByClickTimes();
-		// } else {
-		// list = productService.findeOrderByClickTime(namelike,categoryname);
-		// }
-		// } else if (orderby.equals("最新")) {
-		//
-		// if (namelike == null || namelike.equals("")) {
-		// list = productService.getProductsOrderByPostTime();
-		// } else {
-		// list =
-		// productService.findByProductOrderByPostTime(namelike,categoryname);
-		// }
-		//
-		// } else if (orderby.equals("誠信")) {
-		//
-		// } else if (orderby.equals("推薦")) {
-		//
-		// }
-		// return list;
 
 		return list;
 	}
-
-	@Transactional
+	@Transactional//shuang
+	public List<Product> findByNameAndStatus(int id){
+		List<Product> list = productDao.findByUserIdAndStatue(id);
+		
+		return list;
+	}
+	@Transactional//shuang
 	public List<Product> findeOrderByClickTime(String productName, String categoryName) {
 		List<Product> list = productDao.findByProdcutOrderByClickTimes(productName, categoryName);
 		return list;
 	}
 
-	@Transactional
+	@Transactional//shuang
 	public List<Product> findByProductOrderByPostTime(String productName, String categoryName) {
 		List<Product> list = productDao.findByProductOrderByPostTime(productName, categoryName);
 		return list;
@@ -256,12 +261,11 @@ public class ProductService extends OurService<Product> {
 	}
 	// (14)編輯產品
 	@Transactional
-	public Product update(String name, int user, int category, String status, String description,
+	public Product update(int id ,String name, int category, String status, String description,
 			LocalDateTime deadline, LocalDateTime startTime, Time transactionTime, String location, String tradeWay,
 			String wishItem, TrueFalse postStatus) {
-		Product product = new Product();
+		Product product = productDao.findOne(id);
 		product.setName(name);
-		product.setUserId(userDao.findOne(user));
 		product.setProductCategory(productCategoryDao.findOne(category));
 		product.setStatus(status);
 		product.setDescription(description);
