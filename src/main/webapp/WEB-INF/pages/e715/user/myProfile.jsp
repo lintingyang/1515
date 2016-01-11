@@ -19,7 +19,7 @@
 				<br> 
 				<ul style="list-style: none;">
 					<li><a href="#"><span class="glyphicon glyphicon-envelope iconpme" ></span></a> 
-						<a href="#"><span class="glyphicon glyphicon-plus iconpme"  style="margin-left: 20px;"></span></a></li>
+						<a href="#" onclick="addFriend(event);"><span class="glyphicon glyphicon-plus iconpme"  style="margin-left: 20px;"></span></a></li>
 					<li><h4>${currUser.name}</h4></li>
 					<li><span style="color: gray;">${currUser.schoolName}</span><br></li>
 
@@ -120,6 +120,23 @@ function getpicture(prod, prodimg) {
 				console.log(data[0].picture);
 				$(prodimg).attr("src", data[0].picture);
 			}
+		}
+	});
+}
+
+function addFriend (e) {
+    e.preventDefault();
+    var formData = {
+			"id" : "${currUser.id}"
+		}
+    $.ajax({
+		contentType : "application/json",
+		url : "/E715Member/userFriendListAdd",
+		dataType : "json",
+		type : "get",
+		data : formData,
+		success : function(data) {
+			alert(data);
 		}
 	});
 }

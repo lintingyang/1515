@@ -24,7 +24,9 @@
 <link rel="stylesheet" href="/resources/css/jPages.css">
 <link rel="styleshee" href="/resources/css/user.css" />
 <link rel="stylesheet" href="/resources/css/prodcss.css" />
+<link rel="stylesheet" href="/resources/css/jquery-ui.css" />
 <script src="/resources/js/jPages.js"></script>
+<script src="/resources/js/jquery-ui.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <title>E715</title>

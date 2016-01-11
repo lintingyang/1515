@@ -78,7 +78,7 @@ public class indexController {
 		// }
 
 		for(ProductPicture result : list){
-			log.error("================================================="+result);
+//			log.error("================================================="+result);
 		}
 		return list;
 
