@@ -37,15 +37,15 @@ public class UserBanListService  extends OurService<UserBanList>{
 		boolean temp = false;
 		
 		for(UserBanList ubs : ubss){
-			if((int)ubs.getUserByUserBId().getId() != userBId ){
+			if((int)ubs.getUserBId().getId() != userBId ){
 				temp=true;
 				break;
 			}
 		}
 		if(temp){
 			UserBanList ub = new UserBanList();
-			ub.setUserByUserAId(new User(userAId));
-			ub.setUserByUserBId(new User(userBId));
+			ub.setUserAId(new User(userAId));
+			ub.setUserBId(new User(userBId));
 			ublDao.save(ub);
 			return 1;	
 		}
