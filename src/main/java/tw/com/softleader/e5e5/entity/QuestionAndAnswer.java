@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import tw.com.softleader.e5e5.common.entity.OurEntity;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 
@@ -27,8 +29,10 @@ public class QuestionAndAnswer extends OurEntity implements java.io.Serializable
 	@Column(name = "question", length = 200)
 	private String question;
 	
-	@Column(name = "questioner_id")
-	private Integer questionerId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "questioner_id", referencedColumnName = "id")
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	private User questionerId;
 	
 	@Column(name = "answer", length = 200)
 	private String answer;
@@ -68,11 +72,11 @@ public class QuestionAndAnswer extends OurEntity implements java.io.Serializable
 		this.question = question;
 	}
 	
-	public Integer getQuestionerId() {
+	public User getQuestionerId() {
 		return questionerId;
 	}
 
-	public void setQuestionerId(Integer questionerId) {
+	public void setQuestionerId(User questionerId) {
 		this.questionerId = questionerId;
 	}
 

@@ -23,6 +23,7 @@ import javax.transaction.Transactional;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import tw.com.softleader.e5e5.common.entity.OurEntity;
+import tw.com.softleader.e5e5.entity.enums.Grade;
 import tw.com.softleader.e5e5.entity.enums.Time;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 
@@ -86,6 +87,29 @@ public class Product extends OurEntity implements java.io.Serializable {
 
 	@Column(name = "click_times")
 	private Integer clickTimes;
+	
+	@Column(name = "grade_time", length = 23)
+	private LocalDateTime gradeTime;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "grade", length = 10)
+	private Grade grade;
+
+	public LocalDateTime getGradeTime() {
+		return gradeTime;
+	}
+
+	public void setGradeTime(LocalDateTime gradeTime) {
+		this.gradeTime = gradeTime;
+	}
+
+	public Grade getGrade() {
+		return grade;
+	}
+
+	public void setGrade(Grade grade) {
+		this.grade = grade;
+	}
 
 	@Override
 	public String toString() {
