@@ -3,10 +3,9 @@ package tw.com.softleader.e5e5.web.controller;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -55,7 +54,7 @@ public class ProductController {
 		if (product == null) {
 			return "redirect:/";
 		}
-		//已公開
+		// 已公開
 		if (TrueFalse.TRUE == product.getPostStatus()) {
 			User user = (User) session.getAttribute("user");
 			if (user != null) {
@@ -71,8 +70,8 @@ public class ProductController {
 			session.setAttribute("thisProduct", product);
 
 			return "/e715/product/product";
-		} 
-		//未公開
+		}
+		// 未公開
 		else {
 			User user = (User) session.getAttribute("user");
 			if (user != null && product.getUserId().getId() == user.getId()) {
@@ -103,13 +102,16 @@ public class ProductController {
 			List<Exchange> exchangesBB = null;
 
 			List<Exchange> exchangesCheck = null;
+			List<Exchange> exchangesRemove = new ArrayList<Exchange>();
+			
+			
 			// 列出ProductB有關的所有交易
 			for (Exchange exchange : exchanges) {
 				exchangesBA = exchangeService.findByProductAId(exchange.getProductBId().getId());
 				if (exchangesBA != null) {
-					// for (Exchange sd : exchangesBA) {
-					// log.debug("exchangesBA: " + sd.getId());
-					// }
+//					 for (Exchange sd : exchangesBA) {
+//					 log.error("exchangesBA: " + sd.getId());
+//					 }
 					// exchangesBA: 11
 					// exchangesBA: 12
 					if (exchangesCheck != null) {
@@ -120,9 +122,9 @@ public class ProductController {
 				}
 				exchangesBB = exchangeService.findByProductBId(exchange.getProductBId().getId());
 				if (exchangesBB != null) {
-					// for (Exchange sb : exchangesBB) {
-					// log.debug("exchangesBB: " + sb.getId());
-					// }
+//					 for (Exchange sb : exchangesBB) {
+//					 log.error("exchangesBB: " + sb.getId());
+//					 }
 					// exchangesBB: 14
 					if (exchangesCheck != null) {
 						exchangesCheck.addAll(exchangesBB);
@@ -134,21 +136,27 @@ public class ProductController {
 
 			if (exchangesCheck != null) {
 				for (Exchange check : exchangesCheck) {
-					// log.debug("dfsfdasfsdf: " + check.getId());
-					// dfsfdasfsdf: 13
-					// dfsfdasfsdf: 11
-					// dfsfdasfsdf: 12
-					// dfsfdasfsdf: 14
-					// dfsfdasfsdf: 10
-					// dfsfdasfsdf: 15
+					 log.error("dfsfdasfsdf: " + check.getId());
+//					 dfsfdasfsdf: 16
+//					 dfsfdasfsdf: 17
+//					 dfsfdasfsdf: 16
+//					 dfsfdasfsdf: 17
+//					 dfsfdasfsdf: 1
+//					 dfsfdasfsdf: 2
+//					 dfsfdasfsdf: 3
+//					 dfsfdasfsdf: 18
+//					 dfsfdasfsdf: 19
 					// 確認ProductB是否已交易過
 					if (TrueFalse.TRUE == check.getTradeStatus()) {
 						for (Exchange exchange : exchanges) {
 							if (exchange.getProductBId().getId() == check.getProductAId().getId()) {
-								// 移除交易過的ProductB
-								exchanges.remove(exchange);
+//								log.error("hdghfa"+check.getProductAId().getId());
+//								// 移除交易過的ProductB
+								exchangesRemove.add(exchange);
+//								exchanges.remove(exchange);
 							}
 						}
+						exchanges.removeAll(exchangesRemove);
 					}
 				}
 			}
@@ -356,10 +364,11 @@ public class ProductController {
 
 		return "/e715/product/proExchanging";
 	}
-	//by雙 我要交換按鈕
-	@RequestMapping(value="/exchange/{Bid}/{Aid}", method = RequestMethod.GET)
-	public String exchangeproduct(@PathVariable("Bid")final int bid,@PathVariable("Aid")final int aid){
-		log.error("Aid="+aid+"Bid ======"+bid);
+
+	// by雙 我要交換按鈕
+	@RequestMapping(value = "/exchange/{Bid}/{Aid}", method = RequestMethod.GET)
+	public String exchangeproduct(@PathVariable("Bid") final int bid, @PathVariable("Aid") final int aid) {
+		log.error("Aid=" + aid + "Bid ======" + bid);
 		exchangeService.addexchange(aid, bid);
 		return "/e715/product/product";
 	}
