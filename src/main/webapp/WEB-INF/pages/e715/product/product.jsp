@@ -294,15 +294,15 @@ $(function(){
 		success : function(data){
 			$.each(data,function(i) {
 				console.log(data[i].name)
-				var btn = aå 
 				var tr = $("<tr></tr>");
 				var prodimg = $("<img>").addClass("prodimgsm");
-				var namespan = $("<h5>").text(data[i].name)
-				var div = $("<div></div>").append($(namespan)).append($(prodimg));
+				var namespan = $("<h5>").text(data[i].name);
+				var div = $("<div></div>").append($(namespan)).append($(prodimg)).addClass("btn").addClass(" btn-default")
+				.addClass("exc").attr("name",data[i].id);
 				var td = $("<td></td>").append($(div));
 				
 				getpicture(data[i], prodimg);
-				
+				$(".exc").on("click",function(){ location.href="/product/exchange/"+data[i].id})
 				$(tr).append($(td));
 				$("#userAProduct").append($(tr));
 			})

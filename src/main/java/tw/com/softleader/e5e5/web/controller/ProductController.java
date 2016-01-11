@@ -315,5 +315,14 @@ public class ProductController {
 
 		return "/e715/product/proExchanging";
 	}
+//	
+//	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+//	public String editPage(@PathVariable("id") final int id, final Model model, HttpSession session) {
+
+	@RequestMapping(value="/exchange/{id}", method = RequestMethod.GET)
+	public String exchangeproduct(@PathVariable("id")final int id){
+		
+		return "/e715/product/product";
+	}
 
 }
