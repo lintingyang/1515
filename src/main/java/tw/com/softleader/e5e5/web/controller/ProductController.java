@@ -327,12 +327,24 @@ public class ProductController {
 
 		return "/e715/product/proExchanging";
 	}
+	
+	
+	@RequestMapping(value = "/querytradstatus")
+	@ResponseBody
+	public List<Product> querytradstatus(@RequestParam("id") Integer id, HttpSession session) {
+		List<Product> list = null;
+		
+		list = productService.findByNameAndStatus(id);
+
+		return list;
+
+	}
 	//by雙 我要交換按鈕
 	@RequestMapping(value="/exchange/{Bid}/{Aid}", method = RequestMethod.GET)
 	public String exchangeproduct(@PathVariable("Bid")final int bid,@PathVariable("Aid")final int aid){
 		log.error("Aid="+aid+"Bid ======"+bid);
 		exchangeService.addexchange(aid, bid);
-		return "/e715/product/product";
+		return "redirect:/product/"+aid;
 	}
 
 }

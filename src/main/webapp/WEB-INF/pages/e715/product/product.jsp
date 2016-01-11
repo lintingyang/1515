@@ -308,7 +308,6 @@ $(function(){
 		data : {"id" : "${user.id}"},
 		success : function(data){
 			$.each(data,function(i) {
-				console.log(data[i].name)
 				var tr = $("<tr></tr>");
 				var prodimg = $("<img>").addClass("prodimgsm");
 				var namespan = $("<h5>").text(data[i].name);
@@ -342,7 +341,6 @@ function getpicture(prod) { //取得每一個商品的物件
 		data : formData,
 		success : function(data) {
 			if (data[0] != null) {
-				console.log(data[0].picture);
 				$(prodimg).attr("src", data[0].picture);
 			}
 		}
@@ -350,7 +348,7 @@ function getpicture(prod) { //取得每一個商品的物件
 }
 function addexchange(){
 	location.href="/product/exchange/"+$(this).attr("name")+"/"+${product.id};
-	}
+}
 function getpicture(prod, prodimg) { //取得每一個商品的物件
 	var formData = {
 		"id" : prod.id
@@ -363,7 +361,6 @@ function getpicture(prod, prodimg) { //取得每一個商品的物件
 		data : formData,
 		success : function(data) {
 			if (data[0] != null) {
-				console.log(data[0].picture);
 				$(prodimg).attr("src", data[0].picture);
 			}
 		}
