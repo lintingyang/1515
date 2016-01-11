@@ -24,7 +24,9 @@
 <link rel="stylesheet" href="/resources/css/jPages.css">
 <link rel="styleshee" href="/resources/css/user.css" />
 <link rel="stylesheet" href="/resources/css/prodcss.css" />
+<link rel="stylesheet" href="/resources/css/jquery-ui.css" />
 <script src="/resources/js/jPages.js"></script>
+<script src="/resources/js/jquery-ui.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <title>E715</title>
@@ -59,32 +61,41 @@
 			<span class="glyphicon glyphicon-menu-down"></span></a>
 		
 		<ul class="nav navbar-nav navbar-right">
-			<li id="fat-menu" class="dropdown"><a id="drop3" href="#"
+			<li id="fat-menu" class="dropdown">
+			<c:choose>
+					<c:when test="${!empty user.id}">
+			
+			<a id="drop3" href="#"
 				class="dropdown-toggle" data-toggle="dropdown" role="button"
 				aria-haspopup="true" aria-expanded="false"> 
 				<img class="img-circle" style="width: 30px;"
 					src="${user.picture}"> 
-					<c:if test ="${!empty user.name}" >
 				       ${user.name}
-					</c:if>
-					<c:if test ="${empty user.name}" >
-				       	登入
-					</c:if>
+				
 					
 					
 					<span class="caret"></span></a>
 				<ul class="dropdown-menu" aria-labelledby="drop3">
-
+					
 					<li><a class="userlist" href="/E715Member/${user.id}">會員資料</a></li>
 					<li><a class="userlist" href="/E715Member/userFriend">關注名單</a></li>
 					<li><a class="userlist" href="/product/list">物品管理</a></li><!-- yao -->
 					<li><a class="userlist" href="/product/add">新增物品</a></li>
 					<li><a class="userlist" href="/E715Member/modifyFileAsk">帳號修改</a></li>
 					<li><a class="userlist" href="/head/logout">登出</a></li>
-					<li><a class="userlist" href="/head/login">登入</a></li>
-					
-	
-				</ul></li>
+<!-- 				<li><a class="userlist" href="/head/login">登入</a></li> -->
+					</ul>
+					</c:when>
+					<c:otherwise>
+						<a  href="/head/login"
+				> 
+<!-- 				<img class="img-circle" style="width: 30px;" -->
+<%-- 					src="${user.picture}">  --%>
+				       	登入
+					<span class="caret"></span></a>
+					</c:otherwise>
+					</c:choose>
+				</li>
 		</ul>
 	</div>
 

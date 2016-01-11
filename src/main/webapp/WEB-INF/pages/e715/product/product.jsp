@@ -77,8 +77,9 @@
 		</div>
 		<div class="container"
 			style="width: 100%; height: 100px; text-align: center;">
-			<input id="excBtn" class="btn btn-primary btn-lg" type="button"
-				value="我要交換" data-toggle="modal" data-target="#myProductList">
+				<input id="excBtn" class="btn btn-primary btn-lg" type="button"
+					value="我要交換" data-toggle="modal" data-target="#myProductList">
+
 		</div>
 
 	</div>
@@ -137,7 +138,7 @@
   <div class="modal-dialog" style="background-color: gray;">
     <div class="modal-content">
       <div class="modal-body alignCenter">
-      <h5 id="myProductList">請選擇類別</h5>
+      <h5 id="myProductList">請選擇物品</h5>
       		<table style=" margin:auto;" id="userAProduct">
       			<tr><td class="productcategory" >
 					
@@ -151,7 +152,11 @@
   </div>
 </div>
 <script>
-
+$("#excBtn").click(function(){
+	if( ${empty user} ){
+		location.href="/head/login"
+	}
+})
 $(function(){
 // 	Q&A
 	var formData={"id":${product.id}}
@@ -308,7 +313,6 @@ $(function(){
 		data : {"id" : "${user.id}"},
 		success : function(data){
 			$.each(data,function(i) {
-				console.log(data[i].name)
 				var tr = $("<tr></tr>");
 				var prodimg = $("<img>").addClass("prodimgsm");
 				var namespan = $("<h5>").text(data[i].name);
@@ -342,7 +346,6 @@ function getpicture(prod) { //取得每一個商品的物件
 		data : formData,
 		success : function(data) {
 			if (data[0] != null) {
-				console.log(data[0].picture);
 				$(prodimg).attr("src", data[0].picture);
 			}
 		}
@@ -350,7 +353,7 @@ function getpicture(prod) { //取得每一個商品的物件
 }
 function addexchange(){
 	location.href="/product/exchange/"+$(this).attr("name")+"/"+${product.id};
-	}
+}
 function getpicture(prod, prodimg) { //取得每一個商品的物件
 	var formData = {
 		"id" : prod.id
@@ -363,7 +366,6 @@ function getpicture(prod, prodimg) { //取得每一個商品的物件
 		data : formData,
 		success : function(data) {
 			if (data[0] != null) {
-				console.log(data[0].picture);
 				$(prodimg).attr("src", data[0].picture);
 			}
 		}
