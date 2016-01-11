@@ -307,6 +307,35 @@ public class ProductController {
 
 	}
 
+	// 交易確認頁面
+	@RequestMapping(value = "/makeSure")
+	public String exchangeMakeSure(Model model, @RequestParam("id") int exId, HttpSession session) {
+		Exchange exchange = exchangeService.findOne(exId);
+		session.setAttribute("makeSure", exchange);
+		
+		String s = exchange.getProductBId().getDeadline().toString();
+		String ss = s.substring(0, 10);
+		session.setAttribute("ss", ss);
+		
+		List<ProductPicture> pa = productPictureService.getProductPictures(exchange.getProductAId());
+		List<ProductPicture> pb = productPictureService.getProductPictures(exchange.getProductBId());
+		model.addAttribute("pa", pa);
+		model.addAttribute("pb", pb);
+		
+		// 時間顯示（年月日分秒）
+//		String tradeTime = exchange.getTradeFinishedTime().toString();
+//		String year = tradeTime.substring(0, 4);
+//		String month = tradeTime.substring(5, 7);
+//		String day = tradeTime.substring(8, 10);
+//		String hour = tradeTime.substring(11, 13);
+//		String minute = tradeTime.substring(14, 16);
+//		String second = tradeTime.substring(17, 19);
+//		String finalTradeTime = year + "年" + month + "月" + day + "日" + hour + "時" + minute + "分" + second + "秒";
+//		session.setAttribute("finalTradeTime", finalTradeTime);
+		
+		return "/e715/product/proExMakeSure";
+	}
+	
 	// 交易進行中頁面
 	@RequestMapping(value = "/exchanging")
 	public String exchanging(Model model, @RequestParam("id") int exId, HttpSession session) {
