@@ -1,4 +1,6 @@
 package tw.com.softleader.e5e5.service;
+import static org.junit.Assert.assertEquals;
+
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -23,9 +25,12 @@ public class QuestionAndAnswerServiceTest extends AbstractTest{
 	
 	@Test
 	public void test() {
-		List<QuestionAndAnswer> list = qandaService.findByProductId(2);
-		log.info(list);
-		}
+//		List<QuestionAndAnswer> list = qandaService.findByProductId(2);
+//		log.info(list);
+//		}
+		
+		int result = qandaService.updateAnswer("測試", 31);
+		assertEquals(1, result);
 	}
 
-
+}

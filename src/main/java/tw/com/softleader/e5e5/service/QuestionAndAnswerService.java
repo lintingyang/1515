@@ -1,5 +1,6 @@
 package tw.com.softleader.e5e5.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,18 @@ public class QuestionAndAnswerService extends OurService<QuestionAndAnswer> {
 			return questionandanswerDao.findByProductId(id);
 		}
 		return null;
+	}
+	
+	@Transactional
+	public int updateAnswer(String answer, int id){
+		QuestionAndAnswer theQuestion = questionandanswerDao.findOne(id);
+		if (theQuestion != null){
+		theQuestion.setAnswer(answer);
+		theQuestion.setAnswerTime(LocalDateTime.now());
+		questionandanswerDao.save(theQuestion);
+		return 1;
+		}
+		return 0;
 	}
 
 	@Override

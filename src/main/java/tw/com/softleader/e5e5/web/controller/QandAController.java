@@ -73,5 +73,28 @@ public class QandAController {
 		return "/e715/product/product";
 	}
 	
+	public static class Answer{
+		private int id;
+		private String answer;
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
+		public String getAnswer() {
+			return answer;
+		}
+		public void setAnswer(String answer) {
+			this.answer = answer;
+		}
+	}
+	
+	@RequestMapping(value="/answer", method= RequestMethod.POST)
+	public String postanswer(@RequestBody Answer answer){
+		qandaservice.updateAnswer(answer.getAnswer(), answer.getId());
+		return "/e715/product/product";
+	}
+	
 }
 
