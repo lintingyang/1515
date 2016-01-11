@@ -39,7 +39,7 @@ public class FocusUserListService  extends OurService<FocusUserList>{
 		List<FocusUserList> fuls = focusUserListDao.findByOneUser(userAId);
 		boolean temp = false;
 		for(FocusUserList ful : fuls){
-			if((int)ful.getUserBId().getId()!= userBId ){
+			if((int)ful.getUserBId().getId()== userBId ){
 				temp=true;
 			}
 		}
