@@ -55,8 +55,9 @@ $('.list').click(function() {
 			if(type == "未刊登"){
 			//update button
 			var updateBtn = $("<span></span>").addClass("btn btn-sm btn-success glyphicon glyphicon-pencil")
-			.attr("onclick","editProduct("+data[i].id+")");
-			//delete button
+			.attr("onclick","location.href='/product/edit/"+data[i].id+"'");
+			//.attr("onclick","editProduct("+data[i].id+")");
+
 			var delBtn = $("<span></span>").addClass("btn btn-sm btn-danger glyphicon glyphicon-trash delBtn")
 			.attr("onclick","deleteProduct("+data[i].id+")");	
 			}
@@ -98,20 +99,20 @@ $('.list').click(function() {
 	});	//ajax
 });//click
 
-function editProduct(id){
-	var data ={
-			"id":id
-	}
-	$.ajax({
-		url : "/product/edit",
-		dataType : "html",
-		type : "post",
-		data : data,
-		success:function(data) {
-			alert("前往編輯商品頁面");
-		}
-	});
-}//edit
+// function editProduct(id){
+// 	var data ={
+// 			"id":id
+// 	}
+// 	$.ajax({
+// 		url : "/product/edit/"+id,
+// 		dataType : "html",
+// 		type : "post",
+// 		data : data,
+// 		success:function(data) {
+// 			alert("前往編輯商品頁面");
+// 		}
+// 	});
+// }//edit
 
 function removeProduct(id){
 	var data ={
