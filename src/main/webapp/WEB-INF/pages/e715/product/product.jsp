@@ -216,7 +216,7 @@ $(function(){
 			imgId++;
 			var excBtn2='';
 			var loginId="${user.id}";
-			var prodUserId="${product.userId.account}";
+			var prodUserId="${product.userId.id}";
 				if(prodUserId.length!=0 && prodUserId==loginId){
 					excBtn2 = '<button id="cha" name="cha" type="button" class="btn btn-primary" onclick="javascript:location.href=\'exchanging?id='+ this.id + '\'">交換</button>';
 				}
