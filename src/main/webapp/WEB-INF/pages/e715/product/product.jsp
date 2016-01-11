@@ -327,25 +327,27 @@ $(function(){
 	})
 
 
-	function getpicture(prod) { //取得每一個商品的物件
-		var formData = {
-			"id" : prod.id
-		}
-		$.ajax({
-			contentType : "application/json",
-			url : "/queryimg",
-			dataType : "json",
-			type : "get",
-			data : formData,
-			success : function(data) {
-				if (data[0] != null) {
-					console.log(data[0].picture);
-					$(prodimg).attr("src", data[0].picture);
-				}
-			}
-		});}
+
 });//end of function onload
 
+function getpicture(prod) { //取得每一個商品的物件
+	var formData = {
+		"id" : prod.id
+	}
+	$.ajax({
+		contentType : "application/json",
+		url : "/queryimg",
+		dataType : "json",
+		type : "get",
+		data : formData,
+		success : function(data) {
+			if (data[0] != null) {
+				console.log(data[0].picture);
+				$(prodimg).attr("src", data[0].picture);
+			}
+		}
+	});
+}
 function addexchange(){
 	location.href="/product/exchange/"+$(this).attr("name")+"/"+${product.id};
 	}
