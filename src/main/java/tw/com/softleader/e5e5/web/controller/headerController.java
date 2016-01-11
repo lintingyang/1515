@@ -11,12 +11,14 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.com.softleader.e5e5.entity.User;
+import tw.com.softleader.e5e5.entity.UserBanList;
 import tw.com.softleader.e5e5.entity.enums.Sex;
 import tw.com.softleader.e5e5.service.UserService;
 
@@ -49,18 +51,29 @@ public class headerController {
 	}
 	
 	//輸入完帳號密碼並按下登入鍵 進行登入檢查
-	@RequestMapping(value = "/logincheck" ,method = RequestMethod.POST)
-	public String loginCheck(Model model,@RequestParam("account")String account,
+	@RequestMapping(value = "/logincheck", produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String loginCheck(Model model,
+			@RequestParam("account")String account,
 			@RequestParam("password")String password
 			,HttpSession session){
+		System.out.println("---------------"+account);
+		System.out.println("----------------"+password);
 		User user = userService.login(account, password);
 		if(user == null){
-			log.error("找不到該帳號");
-		}else if(user != null){
+			Map<String, String> errorMessage = new HashMap<>();
+			session.removeAttribute("errorMsg");
+			session.setAttribute("errorMsg", errorMessage);
+			errorMessage.put("loginfalse","就叫你用一鍵登入來開發了還硬要打字");
+			String temp ="就叫你用一鍵登入來開發了還硬要打字";
+			return temp;
+		}else {
+			System.out.println(user);
 			session.setAttribute("user", user);
-			log.error("登入成功");
+			
+			return "";
 		}
-		return "/index";
+		
 	}
 	
 	@RequestMapping(value = "/search")
