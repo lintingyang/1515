@@ -195,23 +195,27 @@ $(function(){
 			var loginId="${user.id}";
 			var prodUserId="${product.userId.account}";
 				if(prodUserId.length!=0 && prodUserId==loginId){
-					excBtn2 = '<button id="cha" type="button" class="btn btn-primary" onclick="javascript:location.href=\'exchanging?id='+ this.id + '\'">交換</button>';
+					excBtn2 = '<button id="cha" name="cha" type="button" class="btn btn-primary" onclick="javascript:location.href=\'exchanging?id='+ this.id + '\'">交換</button>';
 				}
 			
-			$("#testtable").append('<tr><td><div class="col-md-2"><img id="imgId'+this.productBId.id+'" style="height: 100px;"></div><div class="col-md-6"><h4>'+
+			$("#testtable").append('<tr><td><div class="col-md-2">'+
+					'<a href="/product/'
+					 +this.productBId.id+'"><img id="imgId'+this.productBId.id+'" style="height: 100px;"></a></div><div class="col-md-6"><h4>'+
 					 this.productBId.name+'</h4>物品狀況：'+this.productBId.status +
 					 '<br>產品描述：'+this.productBId.description+
 					 '<br><div name="d1">'+excBtn2+'</div></div><div class="col-md-4" style="border-left: 1px dashed gray;"><ul class="nav navbar-nav"><li><img class="img-circle" style="height: 80px;"src="'+
 					 this.productBId.userId.picture+
 					 '"></li><li><ul style="list-style: none;"><li><h4>'+
-					 this.productBId.userId.account+'<a href="#"></a></h4></li><li>'+
+					 this.productBId.userId.account+'</h4></li><li>'+
 					 this.productBId.userId.name +'</li><li>'+this.productBId.userId.schoolName+
 					 '</li></ul></li><li><span class="glyphicon glyphicon-plus">123</span></li></ul></div></td></tr>');
-//	end of show Exchange 
+//	end of show Exchange (A->B)
 //	交易結束鎖定
 			if(this.tradeStatus=="TRUE"){
 				$("#excBtn").val("交易結束").attr('onclick', '');
 			}
+
+	
 //	交易結束鎖定end
 //	Exchange product pic
 			var formData={"id":this.productBId.id}
@@ -230,6 +234,31 @@ $(function(){
 			 $('div[name*="d1"]').html("");
 		 }
 	}
+ 	//確認Exchange (B->A)		
+	var formData={"id":${product.id}}
+	 $.ajax({
+	       type: "GET",
+	       url: "http://localhost:8080/product/findexchanged",
+	       data: formData,
+	       success: function(data){
+	    	   checkExchanged(data);
+	       },
+	       dataType: "json",
+	       contentType : "application/json"
+	     });
+	//確認Exchange (B->A)
+	//如果交易結束(B->A) 關閉按鈕
+ 	 function checkExchanged(data) {
+		 $.each(data, function() {
+			 if(this.tradeStatus=="TRUE"){
+					$("#excBtn").val("交易結束").attr('onclick', '');
+			}
+		 });
+		 if($("#excBtn").val() == "交易結束"){
+			 $('div[name*="d1"]').html("");
+		 }
+ 	 }
+ 	 
  	function getImg(img) {
         $("#imgId"+img.product.id).attr("src", img.picture);
  	}
