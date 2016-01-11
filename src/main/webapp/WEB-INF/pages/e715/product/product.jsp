@@ -130,6 +130,24 @@
 	</div>
 </div>
 
+<!-- 我要交換扭的下拉選單 -->
+<div class="modal fade" id="myProductList" tabindex="-1" role="dialog" aria-labelledby="myProductList" aria-hidden="true">
+  <div class="modal-dialog" style="background-color: gray;">
+    <div class="modal-content">
+      <div class="modal-body alignCenter">
+      <h5 id="myProductList">請選擇類別</h5>
+      		<table style=" margin:auto;">
+      			<tr><td class="productcategory" >
+					
+      			</td></tr>
+      		</table>
+      		<br>
+      		<br>
+       <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
 
 
@@ -137,9 +155,6 @@ $("#excBtn").click(function(){
 	
 	
 })
-
-
-
 $(function(){
 // 	Q&A
 	var formData={"id":${product.id}}
@@ -263,60 +278,14 @@ $(function(){
 					$(prodimg).attr("src", data[0].picture);
 				}
 			}
-		});
-}
+		});}
+
 	
 
 
 });//end of function onload
-function productapicture(prodid) { //取得每一個商品的物件
-	var formData = {
-		"id" : prodid
-	}
-	$.ajax({
-		contentType : "application/json",
-		url : "/queryimg",
-		dataType : "json",
-		type : "get",
-		data : formData,
-		success : function(data) {
-			if (data[0] != null) {
-				console.log("test2: "+$(this));
-				console.log(data[0].picture);
-				$("#img"+prodid).attr("src",data[0].picture);
-
-			}
-		}
-	});
-}
-
-
 
 </script>
-<!-- Modal -->
-<div class="modal fade" id="myProductList" tabindex="-1" role="dialog" aria-labelledby="myProductList" aria-hidden="true">
-  <div class="modal-dialog" style="background-color: gray;">
-    <div class="modal-content">
-      <div class="modal-body alignCenter">
-      <h5 id="myProductList">請選擇類別</h5>
-      		<table style=" margin:auto;">
-      			<tr><td class="productcategory" >
-      			<c:forEach items="${productList}" var="productlist">
-      				<div class="col-md-2">
-						<img id="img${ productlist.id}" src="/resources/imgs/phone.jpg" style="height: 100px;" onload="productapicture(${productlist.id})">
-					</div>
-					<div class="col-md-10">
-						<div style="board:1px;">${productlist.name}</div>
-					</div>
-					
-      			</c:forEach>
-      		</table>
-      		<br>
-      		<br>
-       <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 <c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>

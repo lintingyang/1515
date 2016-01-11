@@ -4,7 +4,9 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -54,12 +56,20 @@ Logger log = Logger.getLogger(this.getClass());
 //		model.addAttribute("entity", role);
 		
 		User user = (User)session.getAttribute("user");
-		List<ProductPicture> picturelist = productPictureService.getAll();
 		if(user!=null){
-			List<Product> productList = productService.findByUserId(user.getId());	
+			List<Product> productList = productService.findByUserId(user.getId());
 			model.addAttribute("productList",productList);
-			model.addAttribute("pictureList",picturelist);
 		}
+//			Map<String,String> map = new HashMap<String,String>();
+//			for(Product prod:productList){
+//				List<ProductPicture> productPictures = productPictureService.getProductPictures(prod);
+//				if(productPictures!=null){
+//					map.put("img"+prod.getId(), productPictures.get(0).getPicture());
+//					log.error(map.get("img"+prod.getId()));
+//				}
+//			}
+//			model.addAttribute("picturemap", map);
+		
 		
 		
 		Product product = productService.getOne(id);
