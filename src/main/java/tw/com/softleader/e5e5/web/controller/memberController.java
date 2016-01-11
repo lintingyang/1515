@@ -1,7 +1,3 @@
-
-
-
-	
 package tw.com.softleader.e5e5.web.controller;
 
 import java.time.LocalDateTime;
@@ -42,7 +38,6 @@ import tw.com.softleader.e5e5.service.UserService;
 @RequestMapping(value = "/E715Member")
 public class memberController {
 
-
 	@Autowired
 	private ServletContext servletContext;
 	@Autowired
@@ -55,54 +50,52 @@ public class memberController {
 	private UserBanListService userBanListService;
 	@Autowired
 	private FocusUserListService focusUserListService;
- 	
-	
+
 	@Autowired
 	private ProductService productService;
 	@Autowired
 	private ExchangeService exchangeService;
 
 	Logger log = Logger.getLogger(this.getClass());
-	
+
 	@RequestMapping("/")
 	public String home(Model model) {
 		return "redirect:/";
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String showUserPage(@PathVariable("id") final int id, final Model model) {
-		
 
 		User user = userService.getOne(id);
-		if(user==null){
+		if (user == null) {
 			return "redirect:/";
 		}
-		int good=0;
-		int bad=0;
-//		List<Product> products = productService.findByUserId(id);
-//		if(products!=null){
-//			for (Product product : products) {
-//				List<Exchange> exchanges = exchangeService.findByProduct(product);
-//				if(exchanges!=null){
-//					for (Exchange exchange : exchanges) {
-//						if(exchange.getGrade()!=null ){
-//							if(Grade.GOOD.equals(exchange.getGrade())){
-//								good++;
-//							}else if(Grade.BAD.equals(exchange.getGrade())){
-//								bad++;
-//							}
-//						}
-//					}
-//				}
-//			}
-//		}
+		int good = 0;
+		int bad = 0;
+		// List<Product> products = productService.findByUserId(id);
+		// if(products!=null){
+		// for (Product product : products) {
+		// List<Exchange> exchanges = exchangeService.findByProduct(product);
+		// if(exchanges!=null){
+		// for (Exchange exchange : exchanges) {
+		// if(exchange.getGrade()!=null ){
+		// if(Grade.GOOD.equals(exchange.getGrade())){
+		// good++;
+		// }else if(Grade.BAD.equals(exchange.getGrade())){
+		// bad++;
+		// }
+		// }
+		// }
+		// }
+		// }
+		// }
 		List<Exchange> exchanges = exchangeService.findAll();
 		for (Exchange exchange : exchanges) {
-			if(id==exchange.getProductAId().getUserId().getId()){
-				if(exchange.getGrade()!=null ){
-					if(Grade.GOOD.equals(exchange.getGrade())){
+			if (id == exchange.getProductAId().getUserId().getId()) {
+				if (exchange.getGrade() != null) {
+					if (Grade.GOOD.equals(exchange.getGrade())) {
 						good++;
-					}else if(Grade.BAD.equals(exchange.getGrade())){
+					} else if (Grade.BAD.equals(exchange.getGrade())) {
 						bad++;
 					}
 				}
@@ -111,9 +104,7 @@ public class memberController {
 		model.addAttribute("currUser", user);
 		model.addAttribute("good", good);
 		model.addAttribute("bad", bad);
-		
-		
-		
+
 		return "/e715/user/myProfile";
 	}
 
@@ -126,12 +117,10 @@ public class memberController {
 	public String modifyFileAsk(HttpSession session) {
 		User user = (User) session.getAttribute("user");
 		if (user != null) {
-		return "/e715/user/modifyFileAsk";
+			return "/e715/user/modifyFileAsk";
 		}
 		return "/e715/user/login";
 	}
-	
-	
 
 	@RequestMapping(value = "/changePwd", method = RequestMethod.GET)
 	public String changePwd(HttpSession session) {
@@ -165,33 +154,33 @@ public class memberController {
 	@RequestMapping(value = "/editProfile", method = RequestMethod.GET)
 	public String editProfile(Model model, HttpSession session) {
 		User user = (User) session.getAttribute("user");
-		if(user!=null){
-		List<ProductCategory> productCategory = productCategoryService.getAll();
-		List<UserLike> userLike = userLikeService.findUserLike(user.getId());
-		model.addAttribute("userLikes", userLike);
-		model.addAttribute("productCategorys", productCategory);
-		return "/e715/user/editProfile";}
+		if (user != null) {
+			List<ProductCategory> productCategory = productCategoryService.getAll();
+			List<UserLike> userLike = userLikeService.findUserLike(user.getId());
+			model.addAttribute("userLikes", userLike);
+			model.addAttribute("productCategorys", productCategory);
+			return "/e715/user/editProfile";
+		}
 		return "/e715/user/login";
 	}
 
 	@RequestMapping(value = "/updataInfo")
-	public String updataInfo(Model model, 
-			@RequestParam("file") MultipartFile file,
-			@RequestParam("name") String name,
+	public String updataInfo(Model model, @RequestParam("file") MultipartFile file, @RequestParam("name") String name,
 			@RequestParam("nickname") String nickname, @RequestParam("sex") Sex sex,
 			@RequestParam("month") String month, @RequestParam("day") String day, @RequestParam("year") String year,
 			@RequestParam("phone") String phone, @RequestParam("email") String email,
 			@RequestParam("subject") String subject, @RequestParam("Addr") String addr,
-			@RequestParam("interested") List<Integer> interested,
-			@RequestParam("aboutMe") String aboutMe, HttpSession session) {
+			@RequestParam("interested") List<Integer> interested, @RequestParam("aboutMe") String aboutMe,
+			HttpSession session) {
 		User user = (User) session.getAttribute("user");
-		
-		//必填欄位不能為空值
-		if (user == null || name == null || nickname == null || phone == null || year==null || month==null || day==null ) {
-				return "/e715/user/editProfile";
+
+		// 必填欄位不能為空值
+		if (user == null || name == null || nickname == null || phone == null || year == null || month == null
+				|| day == null) {
+			return "/e715/user/editProfile";
 		} else {
-			
-			//讀取新圖跟砍檔(別忘記jsp的enctype
+
+			// 讀取新圖跟砍檔(別忘記jsp的enctype
 			if (!file.isEmpty()) {
 				String path = userService.upLoadImage(user.getId(), servletContext, file);
 				user.setPicture(path);
@@ -199,7 +188,7 @@ public class memberController {
 
 			user.setName(name);
 			user.setNickname(nickname);
-			//判斷是手機還是家電(基礎判斷)
+			// 判斷是手機還是家電(基礎判斷)
 			if (phone.substring(0, 1).equals("09")) {
 				user.setCellphone(phone);
 			} else {
@@ -211,7 +200,7 @@ public class memberController {
 			if (!day.equals("") && day.length() < 2) {
 				day = "0" + day;
 			}
-			String str = year + "-" + month + "-" + day+" 00:00"; //"1986-04-08";			
+			String str = year + "-" + month + "-" + day + " 00:00"; // "1986-04-08";
 			System.out.println(aboutMe);
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 			try {
@@ -219,8 +208,7 @@ public class memberController {
 				user.setBirthday(dateTime);
 			} catch (Exception e) {
 			}
-		
-			
+
 			user.setSex(sex);
 			user.setSubject(subject);
 			user.setEmail(email);
@@ -228,11 +216,11 @@ public class memberController {
 			user.setAboutMe(aboutMe);
 			userService.update(user);
 			List<UserLike> u3 = userLikeService.findUserLike(user.getId());
-			for (UserLike u2 : u3){
+			for (UserLike u2 : u3) {
 				userLikeService.delete(u2.getId());
 			}
-			
-			for (Integer i : interested){
+
+			for (Integer i : interested) {
 				UserLike u = new UserLike();
 				u.setProductCategoryId(new ProductCategory(i));
 				u.setUserId(new User(user.getId()));
@@ -243,15 +231,14 @@ public class memberController {
 	}
 
 	@RequestMapping(value = "/userFriend")
-	public String userFriend(Model model  , HttpSession session) {
+	public String userFriend(Model model, HttpSession session) {
 		User user = (User) session.getAttribute("user");
-		if(user!=null){
-		return "/e715/user/userFriendList";
+		if (user != null) {
+			return "/e715/user/userFriendList";
 		}
 		return "/e715/user/login";
 	}
-	
-	
+
 	@RequestMapping(value = "/userFriendList")
 	@ResponseBody
 	public List<FocusUserList> userFriendList(HttpSession session) {
@@ -259,41 +246,50 @@ public class memberController {
 		List<FocusUserList> focus = focusUserListService.findOneUser(user.getId());
 		return focus;
 	}
-	
+
 	@RequestMapping(value = "/userBanList")
 	@ResponseBody
 	public List<UserBanList> userBanList(HttpSession session) {
 		User user = (User) session.getAttribute("user");
-		List<UserBanList> bans =userBanListService.findOneUser(user.getId());
+		List<UserBanList> bans = userBanListService.findOneUser(user.getId());
 		return bans;
+	}
+
+	@RequestMapping(value = "/userFriendListCancel")
+	@ResponseBody
+	public String userFriendListCancel(@RequestParam("userBId") User userBId, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		String divClass = ".userShelf" + userBId.getId();
+		focusUserListService.deletOne(user.getId(), userBId.getId());
+		return divClass;
+	}
+
+	@RequestMapping(value = "/userFriendListAdd")
+	@ResponseBody
+	public String Add(@RequestParam("id") int id, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		int i =0;
+		if (user != null) {
+			log.error("fdsafdf"+user.getId()+" : "+ id);
+			i = focusUserListService.insert(user.getId(), id);
 		}
-	
-	@RequestMapping(value="/userFriendListCancel")
+		if(i==1){
+			return "Sucess";
+		}else{
+			return "Already had";
+		}
+	}
+
+	@RequestMapping(value = "/userBanListCancel")
 	@ResponseBody
-	public String userFriendListCancel(@RequestParam("userBId") User userBId,HttpSession session){
+	public String userBanListCancel(@RequestParam("userBId") User userBId, HttpSession session) {
 		User user = (User) session.getAttribute("user");
-		String divClass= ".userShelf"+userBId.getId();
-		focusUserListService.deletOne(user.getId(), userBId.getId());
+		String divClass = ".userShelf" + userBId.getId();
+		if (user != null) {
+			userBanListService.deletOne(user.getId(), userBId.getId());
+		}
 		return divClass;
 	}
-	
-	@RequestMapping(value="/userFriendListAdd")
-	@ResponseBody
-	public String Add(@RequestParam("userBId") User userBId,HttpSession session){
-		User user = (User) session.getAttribute("user");
-		String divClass= ".userShelf"+userBId.getId();
-		focusUserListService.deletOne(user.getId(), userBId.getId());
-		return divClass;
-	}
-	
-	@RequestMapping(value="/userBanListCancel")
-	@ResponseBody
-	public String userBanListCancel(@RequestParam("userBId") User userBId,HttpSession session){
-		User user = (User) session.getAttribute("user");
-		String divClass= ".userShelf"+userBId.getId();
-		userBanListService.insert(user.getId(), userBId.getId());
-		return divClass;
-	}
-	
 
 }
+

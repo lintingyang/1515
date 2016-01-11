@@ -81,5 +81,9 @@ public interface ProductDao extends OurDao<Product> {
 	//查詢名稱並按照最新發文排序
 	@Query(value ="SELECT * FROM product WHERE name LIKE %?1% AND post_status = 'TRUE' order by post_time DESC", nativeQuery = true)
 	public List<Product> findAllByNameOrderbyByPostTime(String name);
+	//查詢名稱並且物品狀態為未被交換  by shuang
+	@Query(value = "SELECT p.* FROM product p WHERE p.user_id = ?1 AND p.trade_status='FALSE'", nativeQuery = true)
+	public List<Product> findByUserIdAndStatue(Integer id);
+	
 	
 }

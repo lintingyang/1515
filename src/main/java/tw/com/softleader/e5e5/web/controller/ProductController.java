@@ -366,38 +366,45 @@ public class ProductController {
 		return "/e715/product/proExchanging";
 	}
 	
-	
 	//評分
-	@RequestMapping(value = "/grade")
-	public String grade(Model model, HttpSession session) {
-		//差前台送來的評比
-		User loginUser = (User) session.getAttribute("user");
-		Exchange exchange = (Exchange) session.getAttribute("exchange");
-		User ua = exchange.getProductAId().getUserId();
-		User ub = exchange.getProductBId().getUserId();
-		int i = 0;
-		if(loginUser == ua){
-			i = exchangeService.gradeProductX(exchange.getProductBId(), Grade.GOOD);
-		}else{
-			i = exchangeService.gradeProductX(exchange.getProductAId(), Grade.GOOD);
+		@RequestMapping(value = "/grade")
+		public String grade(Model model, HttpSession session) {
+			//差前台送來的評比
+			User loginUser = (User) session.getAttribute("user");
+			Exchange exchange = (Exchange) session.getAttribute("exchange");
+			User ua = exchange.getProductAId().getUserId();
+			User ub = exchange.getProductBId().getUserId();
+			int i = 0;
+			if(loginUser == ua){
+				i = exchangeService.gradeProductX(exchange.getProductBId(), Grade.GOOD);
+			}else{
+				i = exchangeService.gradeProductX(exchange.getProductAId(), Grade.GOOD);
+			}
+			if(i == 1){
+				model.addAttribute("ans", "評分成功!");
+			}else{
+				model.addAttribute("ans", "評分失敗");
+			}
+			
+			return "/e715/product/proExchanging";
 		}
-		if(i == 1){
-			model.addAttribute("ans", "評分成功!");
-		}else{
-			model.addAttribute("ans", "評分失敗");
-		}
+	
+	
+	@RequestMapping(value = "/querytradstatus")
+	@ResponseBody
+	public List<Product> querytradstatus(@RequestParam("id") Integer id, HttpSession session) {
+		List<Product> list = null;
 		
-		return "/e715/product/proExchanging";
+		list = productService.findByNameAndStatus(id);
+
+		return list;
+
 	}
-	
-	// by雙 我要交換按鈕
-	@RequestMapping(value = "/exchange/{Bid}/{Aid}", method = RequestMethod.GET)
-	public String exchangeproduct(@PathVariable("Bid") final int bid, @PathVariable("Aid") final int aid) {
-		log.error("Aid=" + aid + "Bid ======" + bid);
+	//by雙 我要交換按鈕
+	@RequestMapping(value="/exchange/{Bid}/{Aid}", method = RequestMethod.GET)
+	public String exchangeproduct(@PathVariable("Bid")final int bid,@PathVariable("Aid")final int aid){
 		exchangeService.addexchange(aid, bid);
-		return "/e715/product/product";
+		return "redirect:/product/"+aid;
 	}
-	
-	
 
 }

@@ -37,7 +37,7 @@ public class UserBanListService  extends OurService<UserBanList>{
 		boolean temp = false;
 		
 		for(UserBanList ubs : ubss){
-			if((int)ubs.getUserBId().getId() != userBId ){
+			if((int)ubs.getUserBId().getId() == userBId ){
 				temp=true;
 				break;
 			}
