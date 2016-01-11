@@ -1,7 +1,12 @@
 package tw.com.softleader.e5e5.web.controller;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -9,10 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import tw.com.softleader.e5e5.entity.Exchange;
 import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.entity.ProductPicture;
 import tw.com.softleader.e5e5.entity.User;
@@ -30,7 +39,9 @@ public class ProductUDController {
 	public ProductService productService;
 	@Autowired
 	private ProductPictureService productPictureService;
-
+	@Autowired
+	private ServletContext servletContext;
+	
 	@RequestMapping(value = "/list")
 	public String list(Model model) {
 		return "/e715/product/productedit";
@@ -75,13 +86,6 @@ public class ProductUDController {
 		return list;
 	}
 
-	@ResponseBody
-	@RequestMapping(value = "/edit")
-	public String edit(@RequestParam("id") Integer id, Model model) {
-		log.debug("&&&&&&&&&&&&&&&&&&&&"+ id);
-		return "/e715/product/proEdit";
-	}
-
 	//刪除未刊登商品
 	@ResponseBody
 	@RequestMapping(value = "/delete")
@@ -99,4 +103,124 @@ public class ProductUDController {
 		status = 1;
 		return "/e715/product/productedit";
 	}
+	
+	@RequestMapping(value = "/edit/{id}")
+	public String edit(@PathVariable("id") final int id, final Model model,HttpSession session) {
+		log.debug("&&&&&&&&&&&&&&&&&&&&"+ id);
+		Product product = productService.getOne(id);
+		model.addAttribute("productY", product);
+		session.setAttribute("productId", id);
+		return "/e715/product/proEdit";
+	}
+
+	@RequestMapping(value = "/update")
+	public String insert(Model model, 
+									  @RequestParam("pCategory") int pCategory,
+									  @RequestParam("pPicture") MultipartFile pPicture,
+									  @RequestParam("pStatusBad") String pStatusBad, 
+									  @RequestParam("pWishItem") String pWishItem, 
+									  @RequestParam("pStartTime") String pStartTime, 
+									  @RequestParam("pDeadline") String pDeadline, 
+									  HttpSession session) {
+		
+		//錯誤訊息顯示
+//		Map<String, String> errorMessage = new HashMap<>();
+//		session.removeAttribute("errorMsg");
+//		session.setAttribute("errorMsg", errorMessage);
+//		//error1 pStatusBad= null
+//		if(product.getStatus() == "破損"){
+//			if(pStatusBad == null || pStatusBad.trim().length() == 0){
+//				errorMessage.put("status", "請描述損壞情形");
+//			}
+//		}
+//		//error3 time = null
+//		if(product.getPostStatus() == TrueFalse.TRUE){
+//			if(pStartTime == null || pStartTime.trim().length() == 0){
+//				errorMessage.put("timeS", "請輸入起始時間");
+//			}
+//			if(pDeadline == null || pDeadline.trim().length() == 0){
+//				errorMessage.put("timeD", "請輸入結束時間");
+//			}
+//		}
+//		//error2 wishItem = null
+//		if(product.getWishItem() == "希望商品"){
+//			if(pWishItem == null || pWishItem.trim().length() == 0){
+//				errorMessage.put("wish", "請輸入希望清單");
+//			}
+//		}
+//		//若有錯誤回新增畫面
+//		if(errorMessage != null && !errorMessage.isEmpty()) {
+//			return "redirect:/product/add";
+//		}
+		
+		//取userId
+		User userData = (User) session.getAttribute("user");
+		
+		Product product = productService.getOne((Integer)session.getAttribute("productId"));
+		//物品狀態 輸入值修改
+		String productStatus = null;
+		if(product.getStatus() == "破損"){
+			productStatus = product.getStatus() +"(" +pStatusBad +")";
+		}else{
+			productStatus = product.getStatus();
+		}
+		
+		//希望清單 輸入值判斷
+		String productWish = null;
+		if(product.getWishItem() == "希望商品"){
+			productWish = pWishItem;
+		}else{
+			productWish = product.getWishItem();
+		}
+		
+		//時間處理
+		LocalDateTime startTime =null;
+		LocalDateTime deadline =null;
+		if(product.getPostStatus() == TrueFalse.TRUE){
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+			String monthS = pStartTime.substring(0, 2);
+			String dayS = pStartTime.substring(3, 5);
+			String yearS = pStartTime.substring(6, 10);
+			String start = yearS + "-" + monthS + "-" + dayS+" 00:00"; //"1986-04-08";
+			try {
+				startTime = LocalDateTime.parse(start, formatter);
+			} catch (Exception e) {
+			}
+			String monthD = pDeadline.substring(0, 2);
+			String dayD = pDeadline.substring(3, 5);
+			String yearD = pDeadline.substring(6, 10);
+			String end = yearD + "-" + monthD + "-" + dayD+" 00:00"; //"1986-04-08";
+			try {
+				deadline = LocalDateTime.parse(end, formatter);
+			} catch (Exception e) {
+			}
+		}else{
+			startTime =null;
+			deadline =null;
+		}
+		
+		//存入資料
+		product = productService.update(product.getName(), userData.getId(), pCategory, 
+					productStatus, product.getDescription(), deadline, startTime, product.getTransactionTime(), 
+					product.getLocation(), product.getTradeWay(), productWish, product.getPostStatus());
+		System.out.println("newProduct========================" + product);
+		if(product != null){
+			model.addAttribute("result", "恭喜您編輯商品成功！！");
+//			session.setAttribute("new", newProduct);
+		}else{
+			model.addAttribute("result", "編輯失敗");
+		}
+		
+//		//存取productPicture
+//		String path = productPictureService.upLoadImage(newProduct.getId(), servletContext, pPicture);
+//		int numPicture = productPictureService.insertImage(newProduct.getId(), path);
+//		if(numPicture == 1){
+//			model.addAttribute("picResult", "圖片新增成功");
+//		}else{
+//			model.addAttribute("picResult", "圖片新增失敗");
+//		}
+		
+		return "/e715/product/productedit";	
+	}
+	
 }

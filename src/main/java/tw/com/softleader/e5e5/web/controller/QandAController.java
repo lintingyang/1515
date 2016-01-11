@@ -41,6 +41,7 @@ public class QandAController {
 		return qandas;
 	}
 
+	//inner class for postquestion
 	public static class Question{
 		private int productid;
 		private String question;
@@ -56,20 +57,16 @@ public class QandAController {
 		public void setQuestion(String question) {
 			this.question = question;
 		}
-	}
+	}//end of inner class
 	
 	@RequestMapping(value= "/question", method = RequestMethod.POST)
 	public String postquestion(@RequestBody Question question, HttpSession session, Model model){
 		QuestionAndAnswer newquestion = new QuestionAndAnswer();
 		//取得提問者的id
 		User user = (User)session.getAttribute("user");
-		int questioner = 0;
-		if (user != null){
-			questioner = user.getId();
-		}
 		newquestion.setProduct(productservice.getOneById(question.getProductid()));
 		newquestion.setQuestion(question.getQuestion());
-		newquestion.setQuestionerId(questioner);
+		newquestion.setQuestionerId(user);
 		newquestion.setQuestionTime(LocalDateTime.now());
 		newquestion.setIsPublic(TrueFalse.TRUE);
 		qandaservice.insert(newquestion);
