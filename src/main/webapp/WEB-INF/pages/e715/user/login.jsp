@@ -20,7 +20,7 @@ $(function(){
 					type : "get",
 					data : temp,
 					success : function(data) {
-						if(data!=null || !"".equals(data)){
+						if("TRUE" != data){
 						var msg = $("<p>").text(data);
 						$( "#dialog-message" ).html('');
 						$( "#dialog-message" ).append(msg);
@@ -32,10 +32,8 @@ $(function(){
 						        }
 						      }
 						    });
-						}else{
- 					        window.location.replace("/");
 						}
-						
+ 					        window.location.replace("/");
 					}
 				});
 			});

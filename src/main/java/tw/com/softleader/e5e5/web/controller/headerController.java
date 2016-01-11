@@ -46,8 +46,12 @@ public class headerController {
 	}
 	
 	@RequestMapping(value = "/login" ,method = RequestMethod.GET)
-	public String loginPage(){
+	public String loginPage(HttpSession session){
+		User user = (User) session.getAttribute("user");
+		if(user==null){
 		return "/e715/user/login";
+		}
+		return "redirect:/";
 	}
 	
 	//輸入完帳號密碼並按下登入鍵 進行登入檢查
@@ -57,21 +61,15 @@ public class headerController {
 			@RequestParam("account")String account,
 			@RequestParam("password")String password
 			,HttpSession session){
-		System.out.println("---------------"+account);
-		System.out.println("----------------"+password);
 		User user = userService.login(account, password);
 		if(user == null){
-			Map<String, String> errorMessage = new HashMap<>();
-			session.removeAttribute("errorMsg");
-			session.setAttribute("errorMsg", errorMessage);
-			errorMessage.put("loginfalse","就叫你用一鍵登入來開發了還硬要打字");
 			String temp ="就叫你用一鍵登入來開發了還硬要打字";
 			return temp;
 		}else {
 			System.out.println(user);
 			session.setAttribute("user", user);
 			
-			return "";
+			return "TRUE";
 		}
 		
 	}
