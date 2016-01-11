@@ -58,7 +58,13 @@ window.onload = function(){
     setInterval(cal, 1000);
 }
 
-
+$(function(){
+// 	$('#btnG').click(function(){
+// 		$('#btnG').attr('onclick',);
+// 	});
+	alert($('#btnG').text());
+	
+});
 
 
 
