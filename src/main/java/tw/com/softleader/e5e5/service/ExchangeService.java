@@ -60,6 +60,13 @@ public class ExchangeService {
 	}
 	
 	@Transactional
+	public List<Exchange> findByProductBId(int productBId){
+		Product product = productDao.findOne(productBId);
+		List<Exchange> list = exchangeDao.findByProductBId(product);
+		return list;
+	}
+	
+	@Transactional
 	public List<Exchange> findByProduct(Product product){
 		List<Exchange> list = exchangeDao.findByProductAId(product);
 		return list;

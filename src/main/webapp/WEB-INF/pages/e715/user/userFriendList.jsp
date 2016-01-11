@@ -87,7 +87,7 @@
 							var pSchoolName = $("<p>").text(
 									data[i].userBId.schoolName);
 							var pbtn = $('<button>').prop('type', 'button')
-									.addClass('btn btn-warning btn-lg test'+data[i].userBId.id);
+									.addClass('btn btn-warning btn-lg userShelf'+data[i].userBId.id);
 							var pbtnSpan = $('<span>').addClass(
 									'glyphicon glyphicon-remove').prop(
 									'aria-hidden', true).text(
@@ -116,21 +116,19 @@
 							//.jpages的下括弧↓
 							});
 							//增加取消好友功能(完成)
-							$("#friendShipContainer > div").on('click','.test'+data[i].userBId.id,function(){
+							$("#friendShipContainer > div").on('click','.userShelf'+data[i].userBId.id,function(){
 								console.log({'userBId' :data[i].userBId.id});
 								var formData={'userBId' :data[i].userBId.id}
 								$.ajax({
 									contentType : "application/json",
 									url : "/E715Member/userFriendListCancel",
-									dataType : "json",
+									dataType : "text",
 									type : "get",
 									data : formData,
 									success : function(data) {
-										 location.reload();
-										
+										$(data).parent().remove();
 									}
-							});
-								location.reload();
+								});
 							});
 							//.each的下括弧
 						});
@@ -169,7 +167,7 @@
 							var pSchoolName = $("<p>").text(
 									data[i].userBId.schoolName);
 							var pbtn = $('<button>').prop('type', 'button')
-									.addClass('btn btn-warning btn-lg test'+data[i].userBId.id);
+									.addClass('btn btn-warning btn-lg userShelf'+data[i].userBId.id);
 							var pbtnSpan = $('<span>').addClass(
 									'glyphicon glyphicon-remove').prop(
 									'aria-hidden', true).text(
@@ -192,18 +190,18 @@
 							//.jpages的下括弧↓
 							});
 							//增加取消好友功能(完成)
-							$("#friendShipContainer > div").on('click','.test'+data[i].userBId.id,function(){
+							$("#friendShipContainer > div").on('click','.userShelf'+data[i].userBId.id,function(){
 								var formData={'userBId' :data[i].userBId.id}
 								$.ajax({
 									contentType : "application/json",
 									url : "/E715Member/userFriendListCancel",
-									dataType : "json",
+									dataType : "text",
 									type : "get",
 									data : formData,
 									success : function(data) {
+										$(data).parent().remove();
 									}
-							});
-								location.reload();
+								});
 							});
 							//.each的下括弧
 						});
@@ -225,6 +223,7 @@
 					success : function(data) {
 						$("#friendShipContainer").html('');
 						$.each(data, function(i) {
+							
 							var friendShipdiv = $("<div></div>");
 							var aclick = $("<a>").attr("href",
 									"/E715Member/" + data[i].userBId.id);
@@ -240,7 +239,7 @@
 							var pSchoolName = $("<p>").text(
 									data[i].userBId.schoolName);
 							var pbtn = $('<button>').prop('type', 'button')
-									.addClass('btn btn-success btn-lg test'+data[i].userBId.id);
+									.addClass('btn btn-success btn-lg userShelf'+data[i].userBId.id);
 							var pbtnSpan = $('<span>').addClass(
 									'glyphicon glyphicon-repeat').prop(
 									'aria-hidden', true).text(
@@ -263,18 +262,20 @@
 							//.jpages的下括弧↓
 							});
 							//增加取消黑名單功能(完成)
-							$("#friendShipContainer > div").on('click','.test'+data[i].userBId.id,function(){
+							$("#friendShipContainer > div").on('click','.userShelf'+data[i].userBId.id,function(){
 								var formData={'userBId' :data[i].userBId.id}
 								$.ajax({
 									contentType : "application/json",
 									url : "/E715Member/userBanListCancel",
-									dataType : "json",
+									dataType : "text",
 									type : "get",
 									data : formData,
 									success : function(data) {
+										//動態移除黑名單
+										$(data).parent().remove();
 									}
 							});
-								location.reload();
+// 								location.reload();
 							});
 							//.each的下括弧
 						});
