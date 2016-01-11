@@ -302,7 +302,7 @@ $(function(){
 				var td = $("<td></td>").append($(div));
 				
 				getpicture(data[i], prodimg);
-				$(".exc").on("click",function(){ location.href="/product/exchange/"+data[i].id})
+				$(".exc").on("click",function(){ location.href="/product/exchange/"+data[i].id+"/"+${product.id}})
 				$(tr).append($(td));
 				$("#userAProduct").append($(tr));
 			})
