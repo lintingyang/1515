@@ -94,6 +94,10 @@ public class Product extends OurEntity implements java.io.Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "grade", length = 10)
 	private Grade grade;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "tradeStatus", length = 10)
+	private TrueFalse tradeStatus;
 
 	public LocalDateTime getGradeTime() {
 		return gradeTime;
@@ -239,4 +243,13 @@ public class Product extends OurEntity implements java.io.Serializable {
 		this.clickTimes = clickTimes;
 	}
 
+	public TrueFalse getTradeStatus() {
+		return tradeStatus;
+	}
+
+	public void setTradeStatus(TrueFalse tradeStatus) {
+		this.tradeStatus = tradeStatus;
+	}
+	
+	
 }

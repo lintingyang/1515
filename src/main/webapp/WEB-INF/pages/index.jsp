@@ -51,8 +51,6 @@ $(function() { //畫面第一次進入時出現的product list
 		type : "get",
 		data : {"orderby" : "熱門","namelike": "${namelike}" ,"categoryname":"${categoryname}"},
 		success : function(data) {
-			console.log(data);
-
 			$("#itemContainer").html('');
 			$.each(data,function(i) {
 				var productdiv = $("<div></div>");
@@ -130,7 +128,6 @@ $(function() { //畫面第一次進入時出現的product list
 			success : function(data) {
 
 				if (data[0] != null) {
-					console.log(data[0].picture);
 					$(prodimg).attr("src", data[0].picture);
 				}
 			}
