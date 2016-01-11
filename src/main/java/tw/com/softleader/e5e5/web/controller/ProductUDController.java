@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.entity.ProductPicture;
 import tw.com.softleader.e5e5.entity.User;
+import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 import tw.com.softleader.e5e5.service.ProductPictureService;
 import tw.com.softleader.e5e5.service.ProductService;
 
@@ -34,7 +35,7 @@ public class ProductUDController {
 	public String list(Model model) {
 		return "/e715/product/productedit";
 	}
-
+	
 	// 切換已刊登/未刊登/待交換/已交換
 	@ResponseBody
 	@RequestMapping(value = "/query1")
@@ -64,7 +65,7 @@ public class ProductUDController {
 
 		return products;
 	}
-	
+
 	//物品圖片
 	@ResponseBody
 	@RequestMapping(value = "/queryimg")
@@ -74,10 +75,11 @@ public class ProductUDController {
 		return list;
 	}
 
-	
-	@RequestMapping(value = "/update")
-	public String add(Model model) {
-		return "/e715/product/productedit";
+	@ResponseBody
+	@RequestMapping(value = "/edit")
+	public String edit(@RequestParam("id") Integer id, Model model) {
+		log.debug("&&&&&&&&&&&&&&&&&&&&"+ id);
+		return "/e715/product/proEdit";
 	}
 
 	//刪除未刊登商品
@@ -88,12 +90,13 @@ public class ProductUDController {
 		status = 2;
 		return "/e715/product/productedit";
 	}
+	
 	//下架已刊登商品
 	@ResponseBody
 	@RequestMapping(value = "/remove")
 	public String remove(@RequestParam("id") Integer id, Model model) {
+		productService.updateStatus(id, TrueFalse.FALSE);
 		status = 1;
-		log.debug("$$$$$$$$$$$$$$$$$$$$$$$$$$$"+id);
 		return "/e715/product/productedit";
 	}
 }
