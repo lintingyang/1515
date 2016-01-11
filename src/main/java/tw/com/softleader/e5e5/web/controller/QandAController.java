@@ -64,13 +64,9 @@ public class QandAController {
 		QuestionAndAnswer newquestion = new QuestionAndAnswer();
 		//取得提問者的id
 		User user = (User)session.getAttribute("user");
-		int questioner = 0;
-		if (user != null){
-			questioner = user.getId();
-		}
 		newquestion.setProduct(productservice.getOneById(question.getProductid()));
 		newquestion.setQuestion(question.getQuestion());
-		newquestion.setQuestionerId(questioner);
+		newquestion.setQuestionerId(user);
 		newquestion.setQuestionTime(LocalDateTime.now());
 		newquestion.setIsPublic(TrueFalse.TRUE);
 		qandaservice.insert(newquestion);
