@@ -1,5 +1,8 @@
 package tw.com.softleader.e5e5.dao;
 
+import static org.junit.Assert.assertEquals;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -21,8 +24,6 @@ public class QuestionAndAnswerDaoTest extends AbstractTest{
 	@Autowired
 	private QuestionAndAnswerDao qandaDao;
 
-	@Autowired
-	private ProductDao productDao;
 
 //	@Test
 //	public void testInsert(){
@@ -66,6 +67,7 @@ public class QuestionAndAnswerDaoTest extends AbstractTest{
 		List<QuestionAndAnswer> list = qandaDao.findByProductId(2);
 		log.info(list);
 		
+	
 	}
 
 }
