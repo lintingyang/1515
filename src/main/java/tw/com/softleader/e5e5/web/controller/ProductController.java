@@ -47,6 +47,7 @@ Logger log = Logger.getLogger(this.getClass());
 	@Autowired
 	private ServletContext servletContext;
 	
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String editPage(@PathVariable("id") final int id, final Model model,
 							HttpSession session) {
@@ -54,22 +55,6 @@ Logger log = Logger.getLogger(this.getClass());
 //		SecRole role = secRoleService.getOne(id);
 		
 //		model.addAttribute("entity", role);
-		
-		User user = (User)session.getAttribute("user");
-		if(user!=null){
-			List<Product> productList = productService.findByUserId(user.getId());
-			model.addAttribute("productList",productList);
-		}
-//			Map<String,String> map = new HashMap<String,String>();
-//			for(Product prod:productList){
-//				List<ProductPicture> productPictures = productPictureService.getProductPictures(prod);
-//				if(productPictures!=null){
-//					map.put("img"+prod.getId(), productPictures.get(0).getPicture());
-//					log.error(map.get("img"+prod.getId()));
-//				}
-//			}
-//			model.addAttribute("picturemap", map);
-		
 		
 		
 		Product product = productService.getOne(id);

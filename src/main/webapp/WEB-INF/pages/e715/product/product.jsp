@@ -134,7 +134,7 @@
     <div class="modal-content">
       <div class="modal-body alignCenter">
       <h5 id="myProductList">請選擇類別</h5>
-      		<table style=" margin:auto;">
+      		<table style=" margin:auto;" id="userAProduct">
       			<tr><td class="productcategory" >
 					
       			</td></tr>
@@ -148,11 +148,6 @@
 </div>
 <script>
 
-
-$("#excBtn").click(function(){
-	
-	
-})
 $(function(){
 // 	Q&A
 	var formData={"id":${product.id}}
@@ -257,32 +252,51 @@ $(function(){
         $("#imgId"+img.product.id).attr("src", img.picture);
  	}
 //	end of Exchange product pic
-
-
-	function getpicture(prod) { //取得每一個商品的物件
-		var formData = {
-			"id" : prod.id
-		}
-		$.ajax({
-			contentType : "application/json",
-			url : "/queryimg",
-			dataType : "json",
-			type : "get",
-			data : formData,
-			success : function(data) {
-				if (data[0] != null) {
-					console.log(data[0].picture);
-					$(prodimg).attr("src", data[0].picture);
-				}
-			}
-		});}
-
 	
-
+	$.ajax({
+		contentType : "application/json",
+		url : "/product/query",
+		dataType : "json",
+		type : "get",
+		data : {"id" : "${user.id}"},
+		success : function(data){
+			$.each(data,function(i) {
+				console.log(data[i].name)
+				var btn = aå 
+				var tr = $("<tr></tr>");
+				var prodimg = $("<img>").addClass("prodimgsm");
+				var namespan = $("<h5>").text(data[i].name)
+				var div = $("<div></div>").append($(namespan)).append($(prodimg));
+				var td = $("<td></td>").append($(div));
+				
+				getpicture(data[i], prodimg);
+				
+				$(tr).append($(td));
+				$("#userAProduct").append($(tr));
+			})
+		}
+	})
 
 });//end of function onload
 
-
+function getpicture(prod, prodimg) { //取得每一個商品的物件
+	var formData = {
+		"id" : prod.id
+	}
+	$.ajax({
+		contentType : "application/json",
+		url : "/queryimg",
+		dataType : "json",
+		type : "get",
+		data : formData,
+		success : function(data) {
+			if (data[0] != null) {
+				console.log(data[0].picture);
+				$(prodimg).attr("src", data[0].picture);
+			}
+		}
+	});
+}
 </script>
 
 
