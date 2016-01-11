@@ -82,6 +82,7 @@
 	</div>
 
 	<div class="col-md-12">
+	<a name="qBookmark"></a>
 		<div>
 			<!-- 功能選單 -->
 			<br> <br>
@@ -116,6 +117,7 @@
 						</div>
 						</c:if>
 						<!-- 發問區結束 -->
+						<a href="#qBookmark">bookmark test</a>
 					</div>
 				</div><!-- 問與答區塊結束 -->
 				<!-- exchange區塊開始 -->
@@ -169,7 +171,8 @@ $(function(){
 		    dataType: "text",
 		    async: false,
 			success: function(data){
-		    	 location.reload(true);
+				window.location="#qBookmark"
+// 		    	 location.reload(true);
 		       },
 		       
 		})
@@ -278,7 +281,7 @@ function productapicture(prodid) { //取得每一個商品的物件
 		data : formData,
 		success : function(data) {
 			if (data[0] != null) {
-				console.log($(this));
+				console.log("test2: "+$(this));
 				console.log(data[0].picture);
 				$("#img"+prodid).attr("src",data[0].picture);
 
