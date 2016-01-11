@@ -12,6 +12,8 @@ public interface ExchangeDao extends JpaRepository<Exchange, Integer> {
 	
 	public List<Exchange> findByProductAId (Product productAId);
 	
+	public List<Exchange> findByProductBId (Product productBId);
+	
 	//find the most popular item(productA)
 	@Query(value="SELECT TOP 1 productA_id FROM exchange GROUP BY productA_id ORDER BY COUNT (*) DESC", nativeQuery = true)
 	public int findTopOrderByCount();
