@@ -4,13 +4,12 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -23,20 +22,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import tw.com.softleader.e5e5.service.ExchangeService;
-import tw.com.softleader.e5e5.service.ProductPictureService;
 import tw.com.softleader.e5e5.entity.Exchange;
 import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.entity.ProductPicture;
 import tw.com.softleader.e5e5.entity.User;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
+import tw.com.softleader.e5e5.service.ExchangeService;
+import tw.com.softleader.e5e5.service.ProductPictureService;
 import tw.com.softleader.e5e5.service.ProductService;
 
 @Controller
 @RequestMapping(value = "/product")
 @Service
 public class ProductController {
-
+Logger log = Logger.getLogger(this.getClass());
 	@Autowired
 	public ProductService productService;
 	@Autowired
@@ -53,6 +52,16 @@ public class ProductController {
 //		SecRole role = secRoleService.getOne(id);
 		
 //		model.addAttribute("entity", role);
+		
+		User user = (User)session.getAttribute("user");
+		List<ProductPicture> picturelist = productPictureService.getAll();
+		if(user!=null){
+			List<Product> productList = productService.findByUserId(user.getId());	
+			model.addAttribute("productList",productList);
+			model.addAttribute("pictureList",picturelist);
+		}
+		
+		
 		Product product = productService.getOne(id);
 		if(product==null){
 			return "redirect:/";
@@ -60,6 +69,7 @@ public class ProductController {
 		List<ProductPicture> productPictures = productPictureService.getProductPictures(product);
 		model.addAttribute("product", product);
 		model.addAttribute("productPictures", productPictures);
+	
 		
 		//銘加的 上面參數session也是
 		session.setAttribute("thisProduct", product);
