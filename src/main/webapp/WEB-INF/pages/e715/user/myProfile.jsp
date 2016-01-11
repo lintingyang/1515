@@ -128,7 +128,23 @@ function addFriend (e) {
     e.preventDefault();
     var formData = {
 			"id" : "${currUser.id}"
-		}
+    }
+    
+    swal({
+		title: "Are you sure?",
+		text: "是否確定刪除此筆資料？",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#F5A056",
+		closeOnConfirm: true
+	}, function() {
+		$delBtn.button('loading');
+		$.delete_(url+ "/" + row.id, function() {
+			$delBtn.button('reset');
+			$("#slGrid").trigger('reloadGrid');
+		});
+	});
+    
     $.ajax({
 		contentType : "application/json",
 		url : "/E715Member/userFriendListAdd",
