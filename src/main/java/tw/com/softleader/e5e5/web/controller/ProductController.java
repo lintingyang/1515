@@ -24,13 +24,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import tw.com.softleader.e5e5.service.ExchangeService;
-import tw.com.softleader.e5e5.service.ProductPictureService;
 import tw.com.softleader.e5e5.entity.Exchange;
 import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.entity.ProductPicture;
 import tw.com.softleader.e5e5.entity.User;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
+import tw.com.softleader.e5e5.service.ExchangeService;
+import tw.com.softleader.e5e5.service.ProductPictureService;
 import tw.com.softleader.e5e5.service.ProductService;
 
 @Controller
@@ -51,9 +51,26 @@ public class ProductController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String editPage(@PathVariable("id") final int id, final Model model, HttpSession session) {
 
-		// SecRole role = secRoleService.getOne(id);
+		
+//		SecRole role = secRoleService.getOne(id);
+		
+//		model.addAttribute("entity", role);
+		
+		User user = (User)session.getAttribute("user");
+		if(user!=null){
+			List<Product> productList = productService.findByUserId(user.getId());
+			model.addAttribute("productList",productList);
+		}
+//			Map<String,String> map = new HashMap<String,String>();
+//			for(Product prod:productList){
+//				List<ProductPicture> productPictures = productPictureService.getProductPictures(prod);
+//				if(productPictures!=null){
+//					map.put("img"+prod.getId(), productPictures.get(0).getPicture());
+//					log.error(map.get("img"+prod.getId()));
+//				}
+//			}
+//			model.addAttribute("picturemap", map);
 
-		// model.addAttribute("entity", role);
 		Product product = productService.getOne(id);
 		if (product == null) {
 			return "redirect:/";
@@ -61,8 +78,9 @@ public class ProductController {
 		List<ProductPicture> productPictures = productPictureService.getProductPictures(product);
 		model.addAttribute("product", product);
 		model.addAttribute("productPictures", productPictures);
+		
+		//銘加的 上面參數session也是
 
-		// 銘加的 上面參數session也是
 		session.setAttribute("thisProduct", product);
 
 		return "/e715/product/product";

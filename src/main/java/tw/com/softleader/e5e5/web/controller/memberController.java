@@ -123,8 +123,12 @@ public class memberController {
 	}
 
 	@RequestMapping(value = "/modifyFileAsk", method = RequestMethod.GET)
-	public String modifyFileAsk() {
+	public String modifyFileAsk(HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		if (user != null) {
 		return "/e715/user/modifyFileAsk";
+		}
+		return "/e715/user/login";
 	}
 	
 	
@@ -161,11 +165,13 @@ public class memberController {
 	@RequestMapping(value = "/editProfile", method = RequestMethod.GET)
 	public String editProfile(Model model, HttpSession session) {
 		User user = (User) session.getAttribute("user");
+		if(user!=null){
 		List<ProductCategory> productCategory = productCategoryService.getAll();
 		List<UserLike> userLike = userLikeService.findUserLike(user.getId());
 		model.addAttribute("userLikes", userLike);
 		model.addAttribute("productCategorys", productCategory);
-		return "/e715/user/editProfile";
+		return "/e715/user/editProfile";}
+		return "/e715/user/login";
 	}
 
 	@RequestMapping(value = "/updataInfo")
@@ -213,8 +219,6 @@ public class memberController {
 				user.setBirthday(dateTime);
 			} catch (Exception e) {
 			}
-			
-			System.out.println("================================="+interested);
 		
 			
 			user.setSex(sex);
@@ -240,12 +244,11 @@ public class memberController {
 
 	@RequestMapping(value = "/userFriend")
 	public String userFriend(Model model  , HttpSession session) {
-//		User user = (User) session.getAttribute("user");
-//		List<FocusUserList> focus = focusUserListService.findOneUser(user.getId());
-//		List<UserBanList> bans =userBanListService.findOneUser(user.getId());
-//		model.addAttribute("focus", focus);
-//		model.addAttribute("bans", bans);
+		User user = (User) session.getAttribute("user");
+		if(user!=null){
 		return "/e715/user/userFriendList";
+		}
+		return "/e715/user/login";
 	}
 	
 	
@@ -263,25 +266,24 @@ public class memberController {
 		User user = (User) session.getAttribute("user");
 		List<UserBanList> bans =userBanListService.findOneUser(user.getId());
 		return bans;
-
 		}
 	
 	@RequestMapping(value="/userFriendListCancel")
 	@ResponseBody
 	public String userFriendListCancel(@RequestParam("userBId") User userBId,HttpSession session){
 		User user = (User) session.getAttribute("user");
-		System.out.println(user.getId()+"----------------------------"+userBId);
+		String divClass= ".userShelf"+userBId.getId();
 		focusUserListService.deletOne(user.getId(), userBId.getId());
-		return "/e715/user/userFriendList";
+		return divClass;
 	}
 	
 	@RequestMapping(value="/userBanListCancel")
 	@ResponseBody
 	public String userBanListCancel(@RequestParam("userBId") User userBId,HttpSession session){
 		User user = (User) session.getAttribute("user");
-		System.out.println(user.getId()+"----------------------------"+userBId);
-		focusUserListService.deletOne(user.getId(), userBId.getId());
-		return "/e715/user/userFriendList";
+		String divClass= ".userShelf"+userBId.getId();
+		userBanListService.deletOne(user.getId(), userBId.getId());
+		return divClass;
 	}
 	
 

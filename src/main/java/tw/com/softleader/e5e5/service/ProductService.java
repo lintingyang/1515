@@ -140,7 +140,7 @@ public class ProductService extends OurService<Product> {
 	public int updateStatus(Integer id, TrueFalse postStatus) {
 		Product product = productDao.findOne(id);
 		if (product != null) {
-			// product.setPostStatus(postStatus);
+			 product.setPostStatus(postStatus);//yao打開此行註解
 			productDao.save(product);
 			return 1;
 		} else {
