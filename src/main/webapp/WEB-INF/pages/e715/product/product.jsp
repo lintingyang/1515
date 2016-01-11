@@ -212,18 +212,19 @@ $(function(){
      });
  	 function show(data) {
  		 var imgId=0;
+		 var loginId="${user.id}";
+		 var prodUserId="${product.userId.id}";
+		//關閉我要交換鈕(本人登入時)
+		 if(prodUserId.length!=0 && prodUserId==loginId){
+				$("#excBtn").val("").attr('data-target', '').hide();;
+	     }
 		 $.each(data, function() {
 			imgId++;
 			var excBtn2='';
-			var loginId="${user.id}";
-			var prodUserId="${product.userId.id}";
-			//關閉我要交換鈕
 			//顯示交換物品欄的交換鈕
 			if(prodUserId.length!=0 && prodUserId==loginId){
-				$("#excBtn").val("").attr('data-target', '');
 				excBtn2 = '<button id="cha" name="cha" type="button" class="btn btn-primary" onclick="javascript:location.href=\'exchanging?id='+ this.id + '\'">交換</button>';
 			}
-			
 			$("#testtable").append('<tr><td><div class="col-md-2">'+
 					'<a href="/product/'
 					 +this.productBId.id+'"><img id="imgId'+this.productBId.id+'" style="height: 100px;"></a></div><div class="col-md-6"><h4>'+
