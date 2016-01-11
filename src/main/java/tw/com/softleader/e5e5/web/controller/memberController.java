@@ -269,13 +269,16 @@ public class memberController {
 	@ResponseBody
 	public String Add(@RequestParam("id") int id, HttpSession session) {
 		User user = (User) session.getAttribute("user");
-		String divClass = ".userShelf" + id;
+		int i =0;
 		if (user != null) {
 			log.error("fdsafdf"+user.getId()+" : "+ id);
-			int i = focusUserListService.insert(user.getId(), id);
-			System.out.println(i);
+			i = focusUserListService.insert(user.getId(), id);
 		}
-		return divClass;
+		if(i==1){
+			return "Sucess";
+		}else{
+			return "Already had";
+		}
 	}
 
 	@RequestMapping(value = "/userBanListCancel")
