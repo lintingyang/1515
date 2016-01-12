@@ -158,7 +158,8 @@
   <div class="modal-dialog" style="background-color: gray;">
     <div class="modal-content">
       <div class="modal-body alignCenter">
-      <h5 id="myProductList">請選擇物品</h5>
+      <h4 style=""id="myProductList"><small>請選擇想要交換的物品</small></h4>
+      <hr>
       		<table style=" margin:auto;" id="userAProduct">
       			<tr><td class="productcategory" >
 					
@@ -166,11 +167,10 @@
       		</table>
       		<br>
       		<br>
-       <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+       <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
-  <div class="map"></div>
 </div>
 <script>
 $("#excBtn").click(function(){
@@ -180,7 +180,7 @@ $("#excBtn").click(function(){
 })
 $(function(){
 	//地圖是也
-	var mapLoc= "台灣 "+"${product.location}";
+	var mapLoc= "台灣"+"${product.location}";
 	$('.map').tinyMap({
 	    'center': mapLoc,
 	    'zoom'  : 14
@@ -416,18 +416,52 @@ $(function(){
 				var div = $("<div></div>").append($(namespan)).append($(prodimg)).addClass("btn").addClass(" btn-default")
 				.addClass("exc").attr("name",data[i].id);
 				getpicture(data[i], prodimg);
-
+				var nameid= data[i].id;
 				$("#userAProduct").append($(div));
-				$(".exc").bind("click",addexchange);
+ 				$(".exc[name="+nameid+"]").bind("click",{id: data[i].id},addexchange);
 // 				$(".exc").bind("click",function(){ location.href="/product/exchange/"+$(this).attr("name")+"/"+${product.id}})
 			})
 		}
 	})
 });//end of function onload
 
-// 物品放入待交換區
-function addexchange(){
-	location.href="/product/exchange/"+$(this).attr("name")+"/"+${product.id};
+// 物品放入待交換區 不會重覆交換
+function addexchange(event){
+	$.ajax({
+		contentType : "application/json",
+		url : "/product/checkexchanged",
+		dataType : "json",
+		type : "get",
+		data : {"bid" : event.data.id,"aid":${product.id}},
+		success : function(data){
+			console.log(data);
+			if(data == true){
+				console.log("aaaaaa");
+			 	swal({  title: "Are you sure?", 
+		 		text: "你確定要與此物件提出交換?",  
+		 		type: "warning",   
+		 		showCancelButton: true,   
+		 		confirmButtonColor: "#DD6B55",  
+		 		confirmButtonText: "是, 我要交換此物件",  
+		 		cancelButtonText: "不, 再讓我考慮一下",   
+		 		closeOnConfirm: false,   closeOnCancel: false }, 
+		 		function(isConfirm){   
+		 			if (isConfirm) {    
+		 			swal("提出交換!", "已經幫您提出交換請求", "success");  
+		 		 	location.href="/product/exchange/"+event.data.id+"/"+${product.id};
+		 		} else { 
+		 			swal("", "取消交換", "error"); 
+		 				}
+		 		});
+
+			}else if(data == false){
+				swal("", "您已經使用此物品交換過了", "error"); 
+			}
+		}
+	})
+	
+
+
 }
 function getpicture(prod, prodimg) { //取得每一個商品的物件
 	var formData = {
