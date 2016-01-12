@@ -53,19 +53,19 @@ public interface ProductDao extends OurDao<Product> {
 	@Query(value ="SELECT p.* FROM product p JOIN product_category pc ON p.category_id = pc.id JOIN [user] u ON p.user_id = u.id WHERE pc.name LIKE %?1% OR p.name LIKE %?1% OR p.location LIKE %?1% OR u.name LIKE %?1%", nativeQuery = true)
 	public List<Product> findAllByKeywords(String keywords);
 
-	//(11)查詢使用者已/未刊登的物品/Enum
+	//(11)查詢使用者已/未刊登的物品/Enum/yao
 	@Query(value = "SELECT p.* FROM product p WHERE p.user_id = ?1 AND p.post_status = ?2 order by post_time", nativeQuery = true)
 	public List<Product> findUsersProductsByIsPosted(Integer id , TrueFalse postStatus);
 	
-	//(11)查詢使用者已/未刊登的物品/String
+	//(11)查詢使用者已/未刊登的物品/String/yao
 	@Query(value = "SELECT p.* FROM product p WHERE p.user_id = ?1 AND p.post_status = ?2 order by post_time", nativeQuery = true)
 	public List<Product> findUsersProductsByIsPosted(Integer id , String post);
 
 	@Query(value = "SELECT p.* FROM product p WHERE p.user_id = ?1", nativeQuery = true)
 	public List<Product> findByUserId(Integer id);
 	
-	//(12)查詢使用者已/待交換的物品/String
-	@Query(value = "SELECT p.* FROM product p JOIN exchange e ON e.producta_id = p.id OR e.productb_id = p.id  WHERE e.producta_id = ?1 OR e.productb_id = ?1 AND e.trade_status = ?2 order by exchange_time", nativeQuery = true)
+	//(12)查詢使用者已/待交換的物品/String/yao
+	@Query(value = "SELECT p.* FROM product p JOIN exchange e ON e.productb_id = p.id  WHERE e.producta_id = ?1 AND e.trade_status = ?2 order by exchange_time", nativeQuery = true)
 	public List<Product> findUsersProductsByExchange(Integer id , String post);
 		
 	@Query(value = "SELECT p.* FROM product p JOIN product_category pc ON p.category_id = pc.id WHERE p.name LIKE %?1% AND pc.name = ?2  AND p.post_status = 'TRUE' order by click_times DESC", nativeQuery = true)
@@ -85,5 +85,7 @@ public interface ProductDao extends OurDao<Product> {
 	@Query(value = "SELECT p.* FROM product p WHERE p.user_id = ?1 AND p.trade_status='FALSE'", nativeQuery = true)
 	public List<Product> findByUserIdAndStatue(Integer id);
 	
-	
+	//查詢別人想跟我交換的物品總數
+	@Query(value = "SELECT count (productb_id) FROM exchange WHERE producta_id = ?1", nativeQuery = true)
+	public int findCountByProductBId(Integer id);
 }
