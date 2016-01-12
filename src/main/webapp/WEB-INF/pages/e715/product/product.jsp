@@ -94,8 +94,8 @@
 		<div class="container"
 			style="width: 100%; height: 100px; text-align: center;">
 			<c:if test="${product.userId.id != user.id}">
-				<input id="excBtn" class="btn btn-primary btn-lg" type="button"
-					value="我要交換" data-toggle="modal" data-target="#myProductList">
+				<input id="excBtn" class="btn btn-primary btn-lg" type="button" value="我要交換" data-toggle="modal" 
+				data-target="#myProductList">
 			</c:if>
 		</div>
 
@@ -115,7 +115,7 @@
 
 			<!-- 問與答區塊開始 -->
 			<div class="tab-content">
-				<div role="tabpanel" class="tab-pane active" id="question">
+				<div role="tabpanel" class="tab-pane active" id="question" name="question">
 					<table class="table table-striped" id="qatable"></table>
 					<div>
 						<!-- 發問區開始 -->
@@ -175,7 +175,19 @@
 <script>
 $("#excBtn").click(function(){
 	if( ${empty user} ){
-		location.href="/head/login"
+		swal({   
+			title: "尚未登入",   
+			text: "您尚未登入,無法使用交換功能!使否導入登入頁面?",   
+			type: "warning",   showCancelButton: true,   
+			confirmButtonColor: "#DD6B55",   
+			confirmButtonText: "Yes, delete it!",   
+			closeOnConfirm: false }, 
+			function(){   
+				location.href="/head/login"
+			});
+		
+	}else{
+		console.log("click");
 	}
 })
 $(function(){
@@ -185,24 +197,24 @@ $(function(){
 	    'center': mapLoc,
 	    'zoom'  : 14
 	});
-	
-	
-	
-	
-// 	顯示Q&A列表
+	// 	顯示Q&A列表
 	var formData={"id":${product.id}}
-    $.ajax({
-       type: "GET",
-       url: "/qanda/getqanda",
-       data: formData,
-       success: function(data){
-    	   showtable(data);
-       },
-       dataType: "json",
-       contentType : "application/json"
-     });
-     function showtable(data){
-    	 $("#qablock").append("("+data.length+")");//顯示問與答數量
+	function getqanda(){
+    	$.ajax({
+       		type: "GET",
+       		url: "/qanda/getqanda",
+      		data: formData,
+       		success: function(data){
+    		showtable(data);
+    		},
+    	dataType: "json",
+   	 	contentType : "application/json"
+    	});
+	}
+	getqanda();
+	  function showtable(data){
+    	 $("#qacount").remove();
+    	 $("#qablock").append("<span id='qacount'>("+data.length+")</span>");//顯示問與答數量
     	 var index = 0;
     	 var questions = data;
     	 var loginId = "${user.id}";
@@ -248,17 +260,21 @@ $(function(){
 			 	$("#submitanswer"+currentindex).on("click", function(){
 			 		var theId = questions[currentindex].id;
 					var theAnswer = $("#answertext"+currentindex).val();
-					var answerData = JSON.stringify({"id":theId, "answer":theAnswer});
-					    $.ajax({
+					var answerData = JSON.stringify({"id":theId, "answer":theAnswer, "productid":${product.id}});
+// 					console.log(answerData);    
+					$.ajax({
     					type: "POST",
     					url: "/qanda/answer/",
     					data: answerData,
     					contentType : "application/json",
-    					dataType: "text",
+    					dataType: "json",
     					async: false,
-    					success: function(data){
-    						location.reload(true);
+    					success: function(data2){
+//     						console.log(data2);
+    						$("#qatable").empty();
+    						showtable(data2);
     						window.location="#qBookmark";
+//     						location.reload(true);
     					},
     				})
 			 	})//end回答問題
@@ -285,16 +301,18 @@ $(function(){
 		notPublic = $("#notPublic").prop("checked");
 	})	
 	$("#submitquestion").click(function(){
-		var questionData = JSON.stringify({"productid":"${product.id}", "question":$("#questiontext").val(), "notPublic":notPublic});
+		var questionData = JSON.stringify({"productid":${product.id}, "question":$("#questiontext").val(), "notPublic":notPublic});
 		$.ajax({
 			type: "POST",
 			url: "/qanda/question",
 			data: questionData,
 			contentType : "application/json",
-		    dataType: "text",
+		    dataType: "json",
 		    async: false,
 			success: function(data){
-				location.reload(true);
+// 				console.log(data);
+				 $("#qatable").empty();
+				 showtable(data);
 				window.location="#qBookmark";
 		       },
 		})
@@ -327,7 +345,6 @@ $(function(){
        contentType : "application/json"
      });
  	 function show(data) {
- 		 $("#exgblock").append("("+data.length+")");
  		 var imgId=0;
 		 var loginId="${user.id}";
 		 var prodUserId="${product.userId.id}";
@@ -401,8 +418,6 @@ $(function(){
         $("#imgId"+img.product.id).attr("src", img.picture);
  	}
 //	end of Exchange product pic
-
-
 //  按下我要交換後出現的物品選單
 	$.ajax({
 		contentType : "application/json",

@@ -23,7 +23,6 @@ public class QuestionAndAnswerService extends OurService<QuestionAndAnswer> {
 	@Autowired
 	public ProductDao productDao;
 
-	@Transactional
 	public List<QuestionAndAnswer> findByProductId(int id) {
 		if(productDao.findOne(id) != null){
 			return questionandanswerDao.findByProductId(id);
