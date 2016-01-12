@@ -329,7 +329,9 @@ $(function(){
         $("#imgId"+img.product.id).attr("src", img.picture);
  	}
 //	end of Exchange product pic
-	
+
+
+//  按下我要交換後出現的物品選單
 	$.ajax({
 		contentType : "application/json",
 		url : "/product/query",
@@ -359,23 +361,7 @@ $(function(){
 
 });//end of function onload
 
-function getpicture(prod) { //取得每一個商品的物件
-	var formData = {
-		"id" : prod.id
-	}
-	$.ajax({
-		contentType : "application/json",
-		url : "/queryimg",
-		dataType : "json",
-		type : "get",
-		data : formData,
-		success : function(data) {
-			if (data[0] != null) {
-				$(prodimg).attr("src", data[0].picture);
-			}
-		}
-	});
-}
+// 物品放入待交換區
 function addexchange(){
 	location.href="/product/exchange/"+$(this).attr("name")+"/"+${product.id};
 }

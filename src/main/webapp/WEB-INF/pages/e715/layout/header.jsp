@@ -13,10 +13,12 @@
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
 <!-- <script src="//cdn.jsdelivr.net/jquery.shadow-animation/1/mainfile"></script> -->
 <!-- CDN -->
+
 <script src="/resources/js/jquery-1.11.3.js"></script>
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/css/bootstrap-theme.min.css" >
 <script src="/resources/js/bootstrap.min.js" ></script> 
+<script src="/resources/js/jquery.lazyload.js"></script>
 <%-- <c:import url="/WEB-INF/pages/layout/meta.jsp"></c:import> --%>
 <%-- <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import> --%>
 <%-- <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import> --%>
