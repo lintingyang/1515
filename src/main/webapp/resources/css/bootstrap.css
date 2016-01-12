@@ -3377,6 +3377,7 @@ a.btn.disabled, fieldset[disabled] a.btn {
 	color: #333;
 	background-color: #e6e6e6;
 	border-color: #8c8c8c;
+	
 }
 
 .btn-default:hover {
