@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:import url="/WebContent/layout/header.jsp"></c:import>
+<c:import url="/WEB-INF/pages/e715/layout/header.jsp"></c:import>
 <style>
 h4{
 	text-align: center;
@@ -57,19 +57,47 @@ function cal(){
 window.onload = function(){
     setInterval(cal, 1000);
 }
-
 $(function(){
-// 	$('#btnG').click(function(){
-// 		$('#btnG').attr('onclick',);
-// 	});
-	alert($('#btnG').text());
+	var ans = "${ans}";
+	if(ans == "success"){
+		$('#thx').removeAttr('style');
+	}
 	
-});
-
-
+	var loginUser = "${user.id}";
+	var productAUser = "${exchange.productAId.userId.id}";
+	var productBUser = "${exchange.productBId.userId.id}";
+	var productAGrade = "${exchange.productAId.grade}";
+	var productBGrade = "${exchange.productBId.grade}";
+	
+	//登入者是雙方產品擁有者，才可有(評分跟回商品業按鈕)
+	if(loginUser == productAUser || loginUser == productBUser){
+		
+		//登入者是A
+		if(loginUser == productAUser){
+			
+			//已評過分則不可再評
+			if(productBGrade == "GOOD" || productBGrade == "BAD" ){
+				$('#makeGrade').attr('style', ' display: none');
+				$('#thx').removeAttr('style');
+			}
+		}else{
+			if(productAGrade == "GOOD" || productAGrade == "BAD" ){
+				$('#makeGrade').attr('style', ' display: none');
+			}
+		}
+	}else{
+		console.log("You can't pass!!");
+		$('#makeGrade').attr('style', ' display: none');
+		$('#backToProduct').attr('style', ' display: none');
+	}
+})
 
 </script>
 <div class="container" style="margin: 50px auto;">
+	<div class="alert alert-success alert-dismissible" role="alert" id="thx" style="display: none;">
+  		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  		謝謝您的評分~    <strong>    交換愉快    : )</strong>
+	</div>
 	<div class="row">
 		<div class="col-md-3">
    		 	<div class="thumbnail">
@@ -125,13 +153,13 @@ $(function(){
 				</div>
 			</div>
 			<div class="col-md-12">
-				<div style="text-align: center; margin: 10px auto">
+				<div style="text-align: center; margin: 10px auto" id="makeGrade">
 					<button type="button" class="btn btn-success btn-lg" data-toggle="modal" 
 						data-target="#myModal2"><span class="glyphicon glyphicon-gift" aria-hidden="true"></span>
 						我已經收到商品，要進行評分~
 					</button>
 				</div>
-				<div style="text-align: center;">
+				<div style="text-align: center; margin: 10px auto" id="backToProduct">
 					<button type="button" class="btn btn-primary btn-lg"
 						onclick="javascript:location.href='${thisProduct.id}'">回您交易的商品頁</button>
 				</div>
@@ -166,10 +194,12 @@ $(function(){
 	      <div class="modal-body" >
 	        <p style="padding-left:50px;">我覺得此商品:</p>
 	        <div style="width: 300px; margin: 0 auto;" align="center">
-		        <button id="btnG" type="button" class="btn btn-success btn-lg">
+		        <button id="btnG" type="button" class="btn btn-success btn-lg"
+		        	onclick="javascript:location.href='grade?g=5'">
 	  				<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> GOOD
 				</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		        <button id="btnB" type="button" class="btn btn-danger btn-lg">
+		        <button id="btnB" type="button" class="btn btn-danger btn-lg"
+		        	onclick="javascript:location.href='grade?g=1'">
 	  				<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> BAD
 				</button>
 			</div>

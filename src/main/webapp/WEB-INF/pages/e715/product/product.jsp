@@ -357,7 +357,9 @@ $(function(){
         $("#imgId"+img.product.id).attr("src", img.picture);
  	}
 //	end of Exchange product pic
-	
+
+
+//  按下我要交換後出現的物品選單
 	$.ajax({
 		contentType : "application/json",
 		url : "/product/query",
@@ -366,17 +368,13 @@ $(function(){
 		data : {"id" : "${user.id}"},
 		success : function(data){
 			$.each(data,function(i) {
-				var tr = $("<tr></tr>");
 				var prodimg = $("<img>").addClass("prodimgsm");
 				var namespan = $("<h5>").text(data[i].name);
 				var div = $("<div></div>").append($(namespan)).append($(prodimg)).addClass("btn").addClass(" btn-default")
 				.addClass("exc").attr("name",data[i].id);
-				var td = $("<td></td>").append($(div));
-				
 				getpicture(data[i], prodimg);
-				
-				$(tr).append($(td));
-				$("#userAProduct").append($(tr));
+
+				$("#userAProduct").append($(div));
 				$(".exc").bind("click",addexchange);
 // 				$(".exc").bind("click",function(){ location.href="/product/exchange/"+$(this).attr("name")+"/"+${product.id}})
 			})
@@ -384,23 +382,7 @@ $(function(){
 	})
 });//end of function onload
 
-function getpicture(prod) { //取得每一個商品的物件
-	var formData = {
-		"id" : prod.id
-	}
-	$.ajax({
-		contentType : "application/json",
-		url : "/queryimg",
-		dataType : "json",
-		type : "get",
-		data : formData,
-		success : function(data) {
-			if (data[0] != null) {
-				$(prodimg).attr("src", data[0].picture);
-			}
-		}
-	});
-}
+// 物品放入待交換區
 function addexchange(){
 	location.href="/product/exchange/"+$(this).attr("name")+"/"+${product.id};
 }
