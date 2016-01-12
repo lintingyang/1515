@@ -107,7 +107,7 @@
 				<li role="presentation" class="active"><a href="#question"
 					aria-controls="home" role="tab" data-toggle="tab" id="qablock">問與答</a></li>
 				<li role="presentation"><a href="#exchange"
-					aria-controls="profile" role="tab" data-toggle="tab">交換物品</a></li>
+					aria-controls="profile" role="tab" data-toggle="tab" id="exgblock">交換物品</a></li>
 			</ul>
 
 			<!-- 問與答區塊開始 -->
@@ -199,7 +199,7 @@ $(function(){
        contentType : "application/json"
      });
      function showtable(data){
-    	 $("#qablock").append("("+data.length+")");
+    	 $("#qablock").append("("+data.length+")");//顯示問與答數量
     	 var index = 0;
     	 var questions = data;
     	 var loginId = "${user.id}";
@@ -235,6 +235,7 @@ $(function(){
     		 	$("#answer"+currentindex).empty();
 			 	$("#answer"+currentindex).append("<br><textarea id='answertext" + currentindex + "' rows='10' cols='100' placeholder='撰寫回覆...'></textarea>" + 
 						"<br><input type='button' value='送出' id='submitanswer" + currentindex + "'><input type='button' id='resetanswer" + currentindex + "' value='清除'>");	
+			 	//回答問題
 			 	$("#submitanswer"+currentindex).on("click", function(){
 					var theId = questions[currentindex].id;
 					var theAnswer = $("#answertext"+currentindex).val();
@@ -251,7 +252,7 @@ $(function(){
     						window.location="#qBookmark";
     					},
     				})
-			 	})
+			 	})//end回答問題
 			 	$("#resetanswer"+currentindex).on("click", function(){
 			 		$("#answertext"+currentindex).val("");
 			 	})
@@ -307,6 +308,7 @@ $(function(){
        contentType : "application/json"
      });
  	 function show(data) {
+ 		 $("#exgblock").append("("+data.length+")");
  		 var imgId=0;
 		 var loginId="${user.id}";
 		 var prodUserId="${product.userId.id}";
