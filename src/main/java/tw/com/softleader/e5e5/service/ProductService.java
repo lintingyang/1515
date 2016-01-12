@@ -64,7 +64,7 @@ public class ProductService extends OurService<Product> {
 						list = productDao.findAllByNameOrderbyByClickTimes(namelike);
 						log.error(list);
 					}else {
-						list = productDao.findByProdcutOrderByClickTimes(namelike, category);
+						list = productDao.findByProdcutOrderByClickTimes(namelike, productCategory.getName());
 					}
 					
 					

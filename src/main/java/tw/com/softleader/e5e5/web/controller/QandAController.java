@@ -45,6 +45,7 @@ public class QandAController {
 	public static class Question{
 		private int productid;
 		private String question;
+		private boolean notPublic;
 		public int getProductid() {
 			return productid;
 		}
@@ -57,6 +58,12 @@ public class QandAController {
 		public void setQuestion(String question) {
 			this.question = question;
 		}
+		public boolean isNotPublic() {
+			return notPublic;
+		}
+		public void setNotPublic(boolean notPublic) {
+			this.notPublic = notPublic;
+		}
 	}//end of inner class
 	
 	@RequestMapping(value= "/question", method = RequestMethod.POST)
@@ -68,11 +75,16 @@ public class QandAController {
 		newquestion.setQuestion(question.getQuestion());
 		newquestion.setQuestionerId(user);
 		newquestion.setQuestionTime(LocalDateTime.now());
-		newquestion.setIsPublic(TrueFalse.TRUE);
+		if(question.notPublic){
+			newquestion.setIsPublic(TrueFalse.FALSE);
+		} else {
+			newquestion.setIsPublic(TrueFalse.TRUE);
+		}
 		qandaservice.insert(newquestion);
 		return "/e715/product/product";
 	}
 	
+	//inner class for postanswer
 	public static class Answer{
 		private int id;
 		private String answer;
@@ -88,11 +100,12 @@ public class QandAController {
 		public void setAnswer(String answer) {
 			this.answer = answer;
 		}
-	}
+	}//end of inner class
 	
 	@RequestMapping(value="/answer", method= RequestMethod.POST)
-	public String postanswer(@RequestBody Answer answer){
-		qandaservice.updateAnswer(answer.getAnswer(), answer.getId());
+	public String postanswer(@RequestBody Answer answer, Model model){
+		if (answer.getAnswer().length() > 0){
+		qandaservice.updateAnswer(answer.getAnswer(), answer.getId());}
 		return "/e715/product/product";
 	}
 }
