@@ -3,9 +3,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/WEB-INF/pages/e715/layout/header.jsp"></c:import>
-
 <div class="container" style="margin: 50px auto;">
 	<div class="container">
+
 
 		<ul class="nav nav-tabs" id="tabs">
 			<li style="width: 50%; text-align: center;"><a
@@ -15,20 +15,26 @@
 		</ul>
 	</div>
 	<br>
+
+
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-10" id="productlist">
 			<c:if test ="${!empty namelike }" >
 				以下為搜尋結果：${ namelike}
 			</c:if>
+			<div class="holder"></div>
+			<div id="itemContainer" >
+			</div>
 			
 			<div class="holder"></div>
-			<div id="itemContainer">
-			</div>
-			<div class="holder"></div>
+
 		</div>
 	</div>
 </div>
+	
+	
+
 
 
 
@@ -84,6 +90,7 @@
 
 			});
 $(function() { //畫面第一次進入時出現的product list
+	
 	$.ajax({
 		contentType : "application/json",
 		url : "/query",
