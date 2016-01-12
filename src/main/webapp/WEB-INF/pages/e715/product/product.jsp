@@ -63,17 +63,23 @@
 		<hr>
 		<div>
 			<h5>描述：</h5>
-			<br>${product.description}
+			<br> ${product.description}
 		</div>
 		<hr>
 		<div>
-			<h5>交易地點：${product.location}</h5>
-			<h5>交易期限：${product.deadline}</h5>
-			<h5>交易時段：${product.transactionTime}</h5>
+			<h5>交易地點： ${product.location}</h5>
+			<h5>交易期限： ${product.deadline}</h5>
+			<h5>交易時段： ${product.transactionTime}</h5>
 		</div>
 		<hr>
 		<div>
-			<h5>交易方式：${product.tradeWay}</h5>
+			<h5>交易方式： ${product.tradeWay}</h5>
+			<h5>交易狀態：
+			<c:choose>
+			    <c:when test="${product.tradeStatus=='FALSE'}">等待交易中 </c:when>
+			    <c:otherwise>交易完成</c:otherwise>
+			</c:choose>
+			</h5>
 		</div>
 		<div class="container"
 			style="width: 100%; height: 100px; text-align: center;">
