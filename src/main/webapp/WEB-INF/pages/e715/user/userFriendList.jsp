@@ -9,12 +9,11 @@
 
 
 <div class="container" style="margin: 50px auto;">
-	<div class="row">
-		<div style="height: 250px">
-			<div class="col-md-4"></div>
-			<div class="col-md-4">
-
-				<ul class="nav navbar-nav">
+<%-- 		<div style="height: 250px"> --%>
+<div class="row">
+<div class="col-md-4"></div>
+  <div class="col-md-4">
+	<ul class="nav navbar-nav">
 					<li><img class="img-circle" style="width: 200px;"
 						src="${user.picture}"></li>
 					<li><ul style="list-style: none;">
@@ -22,33 +21,48 @@
 							<li>${user.name}</li>
 							<li>${user.schoolName}</li>
 						</ul></li>
-					<!--<li><span class="glyphicon glyphicon-plus">123</span></li> -->
-
+					<%--<li><span class="glyphicon glyphicon-plus">123</span></li> --%>
+			
 				</ul>
+</div>
+  <%-- 		</div> --%>
+  <div class="col-md-4"></div>
+  
+</div>
 
-			</div>
-			<div class="col-md-4"></div>
-		</div>
-	</div>
-	<div class="container">
-		<div>
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+  <span class="alignCenter">
+  <h1>好友名單</h1>
+  
+  </span>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+<%-- 黑名單功能暫時取消2016/01/12
+<-- 	<div class="container"> -->
+<!-- 		<div> -->
 			<!-- Nav tabs -->
-			<br> <br>
-			<ul class="nav nav-tabs" role="tablist">
-				<li role="presentation" class="active"><a href="#"
-					class="goodfriendShip" aria-controls="home" role="tab"
-					data-toggle="tab" id="123">好友名單</a></li>
-				<li role="presentation"><a href="#" class="friendShip"
-					aria-controls="profile" role="tab" data-toggle="tab" id="456">黑名單</a></li>
-			</ul>
-			<!-- Tab panes -->
-		</div>
-	</div>
+<!-- 			<br> <br> -->
+<!-- 			<ul class="nav nav-tabs" role="tablist"> -->
+<!-- 				<li role="presentation" class="active"><a href="#" -->
+<!-- 					class="goodfriendShip" aria-controls="home" role="tab" -->
+<!-- 					data-toggle="tab" id="123">好友名單</a></li> -->
+<!-- 				<li role="presentation"><a href="#" class="friendShip" -->
+<!-- 					aria-controls="profile" role="tab" data-toggle="tab" id="456">黑名單</a></li> -->
+<!-- 			</ul> -->
+<!-- Tab panes -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+--%>
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-10">
-		<div class="holder"></div>
-
+		<%-- 上頁面分頁功能(排版不好移除
+<!-- 		<div class="holder"></div> -->
+--%>
 		<div id="friendShipContainer"></div>
 		<div class="holder"></div>
 		</div>
@@ -140,6 +154,7 @@
 	});
 	
 	
+	/* 黑名單功能暫時取消2016/01/12(-揚)
 //好友名單click開始
 	$('.goodfriendShip').click(
 			function() {
@@ -283,7 +298,7 @@
 					}
 				});
 			});
-
+	*//*
 	$(function() {
 		$("div.holder").jPages({
 			containerID : "itemContainer1",
@@ -294,7 +309,7 @@
 			next : "下一頁",
 			last : "最後頁",
 		});
-	});
+	});*/
 </script>
 
 

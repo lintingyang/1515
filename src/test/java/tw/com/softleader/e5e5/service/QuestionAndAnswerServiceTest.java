@@ -29,8 +29,11 @@ public class QuestionAndAnswerServiceTest extends AbstractTest{
 //		log.info(list);
 //		}
 		
-		int result = qandaService.updateAnswer("測試", 31);
-		assertEquals(1, result);
+//		int result = qandaService.updateAnswer("測試", 31);
+//		assertEquals(1, result);
+		
+		int count = qandaService.countByProduct(39);
+		assertEquals(4, count);
 	}
 
 }

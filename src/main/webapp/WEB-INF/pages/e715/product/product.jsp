@@ -3,8 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/WEB-INF/pages/e715/layout/header.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/meta.jsp" />
+<script src="/resources/js/jquery.tinyMap.min.js"></script>
 <link rel="stylesheet" href="/resources/css/user.css" />
-
+<style>
+.map {
+    width: 540px;
+    height: 180px;
+}
+</style>
 <div class="container" style="margin: 50px auto;">
 	<div class="col-md-6">
 		<div class="row">
@@ -68,6 +74,8 @@
 		<hr>
 		<div>
 			<h5>交易地點： ${product.location}</h5>
+			<div class="map"></div>
+			
 			<h5>交易期限： ${product.deadline}</h5>
 			<h5>交易時段： ${product.transactionTime}</h5>
 		</div>
@@ -97,7 +105,7 @@
 			<br> <br>
 			<ul class="nav nav-tabs" role="tablist">
 				<li role="presentation" class="active"><a href="#question"
-					aria-controls="home" role="tab" data-toggle="tab">問與答</a></li>
+					aria-controls="home" role="tab" data-toggle="tab" id="qablock">問與答</a></li>
 				<li role="presentation"><a href="#exchange"
 					aria-controls="profile" role="tab" data-toggle="tab">交換物品</a></li>
 			</ul>
@@ -120,7 +128,7 @@
 								<textarea id="questiontext" 　rows="10" cols="100"
 									placeholder="提出問題..."></textarea>
 								<br> 
-								<label><input type="checkbox">匿名發言</label> <br>
+								<label><input type="checkbox" id="notPublic">不公開提問</label> <br>
 								<br> 
 								<input type="button" value="送出" class="btn btn-primary" id="submitquestion">
 								<input type="button" value="清除" class="btn btn-warning" id="resetquestion">
@@ -141,6 +149,7 @@
 	</div>
 </div>
 
+
 <!-- 我要交換扭的下拉選單 -->
 <div class="modal fade" id="myProductList" tabindex="-1" role="dialog" aria-labelledby="myProductList" aria-hidden="true">
   <div class="modal-dialog" style="background-color: gray;">
@@ -158,6 +167,7 @@
       </div>
     </div>
   </div>
+  <div class="map"></div>
 </div>
 <script>
 $("#excBtn").click(function(){
@@ -166,6 +176,16 @@ $("#excBtn").click(function(){
 	}
 })
 $(function(){
+	//地圖是也
+	var mapLoc= "台灣 "+"${product.location}";
+	$('.map').tinyMap({
+	    'center': mapLoc,
+	    'zoom'  : 14
+	});
+	
+	
+	
+	
 // 	顯示Q&A列表
 	var formData={"id":${product.id}}
     $.ajax({
@@ -179,28 +199,39 @@ $(function(){
        contentType : "application/json"
      });
      function showtable(data){
+    	 $("#qablock").append("("+data.length+")");
     	 var index = 0;
     	 var questions = data;
+    	 var loginId = "${user.id}";
+		 var productOwnerId = "${product.userId.id}";
     	 $.each(data, function(){
-    		 var loginId = "${user.id}";
-    		 var productOwnerId = "${product.userId.id}";
     		 var qtime = this.questionTime.year + "/" + this.questionTime.monthValue +"/" + this.questionTime.dayOfMonth
 				+ ", " + this.questionTime.hour + ":" + this.questionTime.minute;
-    		 $("#qatable").append("<tr><td>問題:<span id='ansbtn" + index + "'></span>" + 
-						"<br>(<a href='/E715Member/"+ this.questionerId.id +"'>"+this.questionerId.account + "</a>)" + 
-						this.question + "<br>" + qtime + "<span id='answer"+index+"'></span></td></tr>");
-    		 if(productOwnerId == loginId && this.answer == null){
-    			 $("#ansbtn"+index).append("<input type='button' value='回答' id='writeanswer"+index+"'>");
+    		 var questionPart = "<tr><td>問題" + (index+1) + " / <span id='ansbtn" + index + "'></span>" + 
+				this.questionerId.nickname + "(<a href='/E715Member/"+ this.questionerId.id +"'>"+this.questionerId.account + "</a>)" + 
+				qtime + "<br>" + this.question + "<span id='answer"+index+"'></span></td></tr>"
+    		 if(this.questionerId.id == loginId || productOwnerId == loginId){
+    				$("#qatable").append(questionPart);
+    		 } else {
+    				if(this.isPublic == "TRUE"){
+    	    			 $("#qatable").append(questionPart);
+    				} else {
+        			$("#qatable").append("<tr><td>問題" + (index+1) + " / <br>這是一則隱藏的提問!</td></tr>");
+        			}
     		 }
+    		 if (productOwnerId == loginId) {
+    			 	if (this.answer == null){
+    			 	$("#ansbtn"+index).append("<input type='button' value='回答' id='writeanswer"+index+"'>");
+    			 	}
+    		 } 
     		 if(this.answer != null){
     			var atime = this.answerTime.year + "/" + this.answerTime.monthValue + "/" + this.answerTime.dayOfMonth
   				+ ", " + this.answerTime.hour + ":" + this.answerTime.minute;
-    			$("#answer"+index).append("<br>答覆:" + this.answer + "<br>" + atime + "<br>"); 
+    			$("#answer"+index).append("<hr>答覆  " + atime + "<br>" + this.answer + "<br>"); 
     		 }
     		 $("#writeanswer"+index).on("click", function(){
     			 var thisindex = this.id; 
     			 var currentindex = thisindex.substring(11);
-//     			 console.log(currentindex);
     		 	$("#answer"+currentindex).empty();
 			 	$("#answer"+currentindex).append("<br><textarea id='answertext" + currentindex + "' rows='10' cols='100' placeholder='撰寫回覆...'></textarea>" + 
 						"<br><input type='button' value='送出' id='submitanswer" + currentindex + "'><input type='button' id='resetanswer" + currentindex + "' value='清除'>");	
@@ -208,7 +239,6 @@ $(function(){
 					var theId = questions[currentindex].id;
 					var theAnswer = $("#answertext"+currentindex).val();
 					var answerData = JSON.stringify({"id":theId, "answer":theAnswer});
-// 					console.log(answerData);
     				$.ajax({
     					type: "POST",
     					url: "/qanda/answer/",
@@ -231,8 +261,12 @@ $(function(){
      }//end of showtable()
 //	end顯示Q&A列表	
 //	提問功能
+	var notPublic = false;
+    $("#notPublic").click(function(){
+		notPublic = $("#notPublic").prop("checked");
+	})	
 	$("#submitquestion").click(function(){
-		var questionData = JSON.stringify({"productid":"${product.id}", "question":$("#questiontext").val()});
+		var questionData = JSON.stringify({"productid":"${product.id}", "question":$("#questiontext").val(), "notPublic":notPublic});
 		$.ajax({
 			type: "POST",
 			url: "/qanda/question",
@@ -349,7 +383,9 @@ $(function(){
         $("#imgId"+img.product.id).attr("src", img.picture);
  	}
 //	end of Exchange product pic
-	
+
+
+//  按下我要交換後出現的物品選單
 	$.ajax({
 		contentType : "application/json",
 		url : "/product/query",
@@ -358,17 +394,13 @@ $(function(){
 		data : {"id" : "${user.id}"},
 		success : function(data){
 			$.each(data,function(i) {
-				var tr = $("<tr></tr>");
 				var prodimg = $("<img>").addClass("prodimgsm");
 				var namespan = $("<h5>").text(data[i].name);
 				var div = $("<div></div>").append($(namespan)).append($(prodimg)).addClass("btn").addClass(" btn-default")
 				.addClass("exc").attr("name",data[i].id);
-				var td = $("<td></td>").append($(div));
-				
 				getpicture(data[i], prodimg);
-				
-				$(tr).append($(td));
-				$("#userAProduct").append($(tr));
+
+				$("#userAProduct").append($(div));
 				$(".exc").bind("click",addexchange);
 // 				$(".exc").bind("click",function(){ location.href="/product/exchange/"+$(this).attr("name")+"/"+${product.id}})
 			})
@@ -376,23 +408,7 @@ $(function(){
 	})
 });//end of function onload
 
-function getpicture(prod) { //取得每一個商品的物件
-	var formData = {
-		"id" : prod.id
-	}
-	$.ajax({
-		contentType : "application/json",
-		url : "/queryimg",
-		dataType : "json",
-		type : "get",
-		data : formData,
-		success : function(data) {
-			if (data[0] != null) {
-				$(prodimg).attr("src", data[0].picture);
-			}
-		}
-	});
-}
+// 物品放入待交換區
 function addexchange(){
 	location.href="/product/exchange/"+$(this).attr("name")+"/"+${product.id};
 }
