@@ -162,21 +162,6 @@
 		<div class="holder"></div>
 	</div>
 
-<div class='bb'></div>
-<div class='message'>
-  <div class='check'>
-    &#10004;
-  </div>
-  <p>
-    	成功
-  </p>
-  <p>
-    	成功加入關注清單！
-  </p>
-  <button id='ok'>
-    OK
-  </button>
-</div>
 
 </div>
 
@@ -254,13 +239,14 @@ function addFriend (e) {
 			data : formData,
 			success : function(data) {
 				if(data=="Sucess"){
-					go(50);
-					$('#ok').click(function(){go(50)});
-					function go(nr) {
-					  $('.message').toggleClass('comein');
-					  $('.check').toggleClass('scaledown');
-					  $('#go').fadeToggle(nr);
-					}
+// 					go(50);
+// 					$('#ok').click(function(){go(50)});
+// 					function go(nr) {
+// 					  $('.message').toggleClass('comein');
+// 					  $('.check').toggleClass('scaledown');
+// 					  $('#go').fadeToggle(nr);
+// 					}
+					swal("成功!", "成功加入關注清單！", "success")
 				}
 			}
 		});

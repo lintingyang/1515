@@ -12,6 +12,7 @@ import tw.com.softleader.e5e5.common.model.Message;
 import tw.com.softleader.e5e5.common.service.OurService;
 import tw.com.softleader.e5e5.dao.ProductDao;
 import tw.com.softleader.e5e5.dao.QuestionAndAnswerDao;
+import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.entity.QuestionAndAnswer;
 
 @Service
@@ -28,6 +29,14 @@ public class QuestionAndAnswerService extends OurService<QuestionAndAnswer> {
 			return questionandanswerDao.findByProductId(id);
 		}
 		return null;
+	}
+	
+	public int countByProduct(int id){
+		if(productDao.findOne(id) != null){
+			int count = questionandanswerDao.findByProductId(id).size();
+		return count;
+		}
+		return 0;
 	}
 	
 	@Transactional
