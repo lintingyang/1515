@@ -9,7 +9,7 @@
 <div class="container" style="margin: 50px auto;">
 	<div class="container">
 		<div><h3 style="color:#000079">${result}</h3></div>		<!-- 銘加的 -->
-		<ul class="nav nav-tabs" id="tabs">
+		<ul class="nav nav-tabs " id="tabs">
 			<li style="width: 25%; text-align: center;"><a
 				class="list searchbtn" href="#">已刊登</a></li>
 			<li style="width: 25%; text-align: center;"><a
@@ -54,17 +54,17 @@ $('.list').click(function() {
 			
 			if(type == "未刊登"){
 			//update button
-			var updateBtn = $("<span></span>").addClass("btn btn-sm btn-success glyphicon glyphicon-pencil")
+			var updateBtn = $("<span></span>").addClass("btn btn-sm btn-success glyphicon glyphicon-pencil ")
 			.attr("onclick","location.href='/product/edit/"+data[i].id+"'");
 			//.attr("onclick","editProduct("+data[i].id+")");
 
-			var delBtn = $("<span></span>").addClass("btn btn-sm btn-danger glyphicon glyphicon-trash delBtn")
+			var delBtn = $("<span></span>").addClass("btn btn-sm btn-danger glyphicon glyphicon-trash delBtn delete" +data[i].id)
 			.attr("onclick","deleteProduct("+data[i].id+")");	
 			}
 
 			if(type == "已刊登"){
 			//remove button
-			var removeBtn = $("<span></span>").addClass("btn-sm btn-warning glyphicon glyphicon-download-alt")
+			var removeBtn = $("<span></span>").addClass("btn-sm btn-warning glyphicon glyphicon-download-alt remove" +data[i].id)
 			.attr("onclick","removeProduct("+data[i].id+")");
 			}
 			
@@ -99,50 +99,35 @@ $('.list').click(function() {
 	});	//ajax
 });//click
 
-// function editProduct(id){
-// 	var data ={
-// 			"id":id
-// 	}
-// 	$.ajax({
-// 		url : "/product/edit/"+id,
-// 		dataType : "html",
-// 		type : "post",
-// 		data : data,
-// 		success:function(data) {
-// 			alert("前往編輯商品頁面");
-// 		}
-// 	});
-// }//edit
-
 function removeProduct(id){
-	var data ={
+	var formData ={
 			"id":id
 	}
 	$.ajax({
 		url : "/product/remove",
 		dataType : "html",
 		type : "post",
-		data : data,
-		success:function(data) {
+		data : formData,
+		success:function() {
 			alert("已下架");
-			$('.list').trigger('click');
+			$(".remove"+id).parent().remove();
 		}
 	});
 }//remove
 
 function deleteProduct(id){
-	var data ={
+	var formData ={
 			"id":id
 	}
 	$.ajax({
 		url : "/product/delete",
 		dataType : "html",
 		type : "post",
-		data : data,
-		success:function(data) {
-			
+		data : formData,
+		success:function() {
 			alert("deleted");
-			$('.list').trigger('click');
+			$(".delete"+id).parent().remove();
+// 			$('.list').trigger('click');
 		}
 	});
 }//delete

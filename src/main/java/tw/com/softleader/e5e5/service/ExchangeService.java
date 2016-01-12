@@ -12,6 +12,7 @@ import tw.com.softleader.e5e5.dao.ExchangeDao;
 import tw.com.softleader.e5e5.dao.ProductDao;
 import tw.com.softleader.e5e5.entity.Exchange;
 import tw.com.softleader.e5e5.entity.Product;
+import tw.com.softleader.e5e5.entity.enums.Grade;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 
 @Service
@@ -68,6 +69,19 @@ public class ExchangeService {
 		return ex ;
 	}
 	
+	
+	//評比
+	@Transactional
+	public int gradeProductX(Product productX, Grade grade){
+		if(productX != null){
+			productX.setGrade(grade);
+			productX = productDao.save(productX);
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+
 	
 	@Transactional
 	public List<Exchange> findAll(){

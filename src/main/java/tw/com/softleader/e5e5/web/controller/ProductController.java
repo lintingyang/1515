@@ -27,6 +27,7 @@ import tw.com.softleader.e5e5.entity.Exchange;
 import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.entity.ProductPicture;
 import tw.com.softleader.e5e5.entity.User;
+import tw.com.softleader.e5e5.entity.enums.Grade;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 import tw.com.softleader.e5e5.service.ExchangeService;
 import tw.com.softleader.e5e5.service.ProductPictureService;
@@ -364,6 +365,30 @@ public class ProductController {
 
 		return "/e715/product/proExchanging";
 	}
+	
+	//評分
+		@RequestMapping(value = "/grade")
+		public String grade(Model model, HttpSession session) {
+			//差前台送來的評比
+			User loginUser = (User) session.getAttribute("user");
+			Exchange exchange = (Exchange) session.getAttribute("exchange");
+			User ua = exchange.getProductAId().getUserId();
+			User ub = exchange.getProductBId().getUserId();
+			int i = 0;
+			if(loginUser == ua){
+				i = exchangeService.gradeProductX(exchange.getProductBId(), Grade.GOOD);
+			}else{
+				i = exchangeService.gradeProductX(exchange.getProductAId(), Grade.GOOD);
+			}
+			if(i == 1){
+				model.addAttribute("ans", "評分成功!");
+			}else{
+				model.addAttribute("ans", "評分失敗");
+			}
+			
+			return "/e715/product/proExchanging";
+		}
+	
 	
 	@RequestMapping(value = "/querytradstatus")
 	@ResponseBody
