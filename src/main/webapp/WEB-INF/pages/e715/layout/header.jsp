@@ -74,7 +74,7 @@
 				class="dropdown-toggle" data-toggle="dropdown" role="button"
 				aria-haspopup="true" aria-expanded="false"> 
 				<img class="img-circle" style="width: 30px;"
-					src="${user.picture}"> 
+					src="${user.picture}">
 				       ${user.name}
 				
 					
@@ -92,8 +92,7 @@
 					</ul>
 					</c:when>
 					<c:otherwise>
-						<a  href="/head/login"
-				> 
+						<a  href="/head/login"> 
 <!-- 				<img class="img-circle" style="width: 30px;" -->
 <%-- 					src="${user.picture}">  --%>
 				       	登入
