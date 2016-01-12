@@ -73,6 +73,7 @@ public class QandAController {
 		return "/e715/product/product";
 	}
 	
+	//inner class for postanswer
 	public static class Answer{
 		private int id;
 		private String answer;
@@ -88,11 +89,12 @@ public class QandAController {
 		public void setAnswer(String answer) {
 			this.answer = answer;
 		}
-	}
+	}//end of inner class
 	
 	@RequestMapping(value="/answer", method= RequestMethod.POST)
-	public String postanswer(@RequestBody Answer answer){
-		qandaservice.updateAnswer(answer.getAnswer(), answer.getId());
+	public String postanswer(@RequestBody Answer answer, Model model){
+		if (answer.getAnswer().length() > 0){
+		qandaservice.updateAnswer(answer.getAnswer(), answer.getId());}
 		return "/e715/product/product";
 	}
 }
