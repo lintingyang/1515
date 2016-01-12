@@ -261,12 +261,11 @@ public class ProductService extends OurService<Product> {
 	}
 	// (14)編輯產品
 	@Transactional
-	public Product update(String name, int user, int category, String status, String description,
+	public Product update(int id ,String name, int category, String status, String description,
 			LocalDateTime deadline, LocalDateTime startTime, Time transactionTime, String location, String tradeWay,
 			String wishItem, TrueFalse postStatus) {
-		Product product = new Product();
+		Product product = productDao.findOne(id);
 		product.setName(name);
-		product.setUserId(userDao.findOne(user));
 		product.setProductCategory(productCategoryDao.findOne(category));
 		product.setStatus(status);
 		product.setDescription(description);

@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
 <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script src="/resources/js/preview.image.js"></script>
 <!-- <link rel="stylesheet" href="jqueryui/style.css"> -->
 
 <style>
@@ -16,6 +17,18 @@ h4{
 #em{
 	color:red;
 }
+/* 預覽圖片 */
+.preview > div {
+  display: inline-block;
+  text-align:center;
+}
+/* Hide file input */
+#id_image_large {
+ display: none;
+}
+/* Custom upload button appearance*/
+#upload {
+}
 </style>
 
 <div class="container" style="margin: 50px auto;">
@@ -24,17 +37,19 @@ h4{
   		以下<strong>所有欄位</strong>都是<strong>必填</strong>的喔！      別忘了上傳一張精美照片～
 	</div>
 	
-	<form action="/product/update enctype="multipart/form-data" method="post">
+	<form action="/product/update" enctype="multipart/form-data" method="post">
 		<div class="col-md-1"></div>
 		<div class="col-md-5">
 			<div class="row">
+			
 				<div class="form-group row">
 					<label class="col-sm-4 form-control-label"><h4>商品標題/名稱</h4></label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="name" value="${productY.name}"
+						<input type="text" class="form-control" name="name" id="productName"
 							placeholder="Title or Name" style="width: 80%;" required="required">
 					</div>
 				</div>
+				
 				<div class="form-group row">
 					<label class="col-sm-4 form-control-label"><h4>商品種類</h4></label>
 					<div class="col-sm-10">
@@ -53,6 +68,7 @@ h4{
 						</select>
 					</div>
 				</div>
+				
 				<div class="form-group row">
 					<label class="col-sm-4 form-control-label"><h4>商品狀態</h4></label>
 					<div class="col-sm-10">
@@ -73,8 +89,8 @@ h4{
 				<div class="form-group row">
 					<label class="col-sm-4 form-control-label"><h4>商品描述</h4></label>
 					<div class="col-sm-10">
-						<textarea name="description" style="width: 80%;" 
-							class="form-control" rows="8" placeholder="商品描述..." required="required" >${productY.description}</textarea>
+						<textarea name="description" style="width: 80%;" id = "description"
+							class="form-control" rows="8" placeholder="商品描述..." required="required" ></textarea>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -106,6 +122,10 @@ h4{
 				<label class="col-sm-4 form-control-label"><h4>圖片</h4></label>
 				<div class="col-sm-10">
 <!-- 					<input type="file" name="pPicture" multiple  required="required"> -->
+						<div class="preview"></div>
+<!-- 						<img width = "" id="myImage"/> -->
+						<label class="choose-file btn btn-sm btn-primary glyphicon glyphicon-open" id="upload" for="id_image_large"></label>
+						<input type="file" id="id_image_large" name="pPicture" multiple  required="required">
 				</div>
 			</div>
 			<br>
@@ -167,26 +187,44 @@ h4{
 </div>
 
 <script type="text/javascript">
+$(function () {
+	$("input[name=pPicture]").previewimage({
+		div: ".preview",
+		imgwidth: 90,
+		imgheight: 90
+	});
+});
+
+// function loadImage(e) {
+//     var image = document.getElementById('myImage');
+//  	image.src = e.target.result;
+//  	console.log("loadImage");
+// }
+// function previewImage() {
+// 	var reader = new FileReader();
+// 	var file = document.getElementById("id_image_large").files[0];
+// 	reader.readAsDataURL(file);
+// 	reader.onload = loadImage;
+//  console.log("previewImage");
+// }
+// $("#id_image_large").change(previewImage);
+
 	$(function() {
 		
 		$('.isPosted').attr('style', 'display:none');
 		$('#divWish').attr('style', 'display:none');
 
-		//預設的分類
-		$('#pCategory').val('${productY.productCategory.id}');
-		//預設的物品狀態
-		$("input[name=status][value='${productY.status}']").attr('checked',true);
-		//預設刊登與否
-		$("input[name=postStatus][value='${productY.postStatus}']").attr('checked',true);
-		//預設交易時間
-		$("input[name=transactionTime][value='${productY.transactionTime}']").attr('checked',true);
-		//預設交易地點
-		$('#location').val('${productY.location}');
-		//預設交易方式
-		$("input[name=tradeWay][value='${productY.tradeWay}']").attr('checked',true);
-		//預設希望物品
-		$("input[name=wishItem][value='${productY.wishItem}']").attr('checked',true);
-		//預設希望商品
+		
+		$('#productName').val('${productY.name}');//預設的商品名稱
+		$('#description').val('${productY.description}');//預設的商品描述
+		$('#pCategory').val('${productY.productCategory.id}');//預設的分類
+		$("input[name=status][value='${productY.status}']").attr('checked',true);//預設的物品狀態
+		$("input[name=postStatus][value='${productY.postStatus}']").attr('checked',true);//預設刊登與否
+		$("input[name=transactionTime][value='${productY.transactionTime}']").attr('checked',true);//預設交易時間
+		$('#location').val('${productY.location}');//預設交易地點
+		$("input[name=tradeWay][value='${productY.tradeWay}']").attr('checked',true);//預設交易方式
+		$("input[name=wishItem][value='${productY.wishItem}']").attr('checked',true);//預設希望物品
+		$('#pWishItem').removeAttr('required');//預設希望商品
 		var wishItem = "${productY.wishItem}";
 		if( wishItem != ("隨機" || "贈送")){
 		$('#divWish').attr('style', '');
@@ -199,6 +237,9 @@ h4{
 		$('#pStartTime').datepicker();
 		$('#pDeadline').datepicker();
 		
+		$('#pStartTime').attr('type', 'hidden').removeAttr('required');
+ 		$('#pDeadline').attr('type', 'hidden').removeAttr('required');
+ 		
 		//顯示隱藏表格
 		$('input[name *= "status"]').change(function(){
 			if($(this).val() == "破損"){

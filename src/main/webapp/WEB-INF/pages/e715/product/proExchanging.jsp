@@ -57,6 +57,17 @@ function cal(){
 window.onload = function(){
     setInterval(cal, 1000);
 }
+
+$(function(){
+// 	$('#btnG').click(function(){
+// 		$('#btnG').attr('onclick',);
+// 	});
+	alert($('#btnG').text());
+	
+});
+
+
+
 </script>
 <div class="container" style="margin: 50px auto;">
 	<div class="row">
@@ -152,13 +163,16 @@ window.onload = function(){
 	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 	        <h4 class="modal-title" id="myModalLabel">為商品評分</h4>
 	      </div>
-	      <div class="modal-body">
-	        <button type="button" class="btn btn-default btn-lg">
-  				<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Good
-			</button>&bnsp;
-	        <button type="button" class="btn btn-default btn-lg">
-  				<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Bad
-			</button>
+	      <div class="modal-body" >
+	        <p style="padding-left:50px;">我覺得此商品:</p>
+	        <div style="width: 300px; margin: 0 auto;" align="center">
+		        <button id="btnG" type="button" class="btn btn-success btn-lg">
+	  				<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> GOOD
+				</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		        <button id="btnB" type="button" class="btn btn-danger btn-lg">
+	  				<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> BAD
+				</button>
+			</div>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
