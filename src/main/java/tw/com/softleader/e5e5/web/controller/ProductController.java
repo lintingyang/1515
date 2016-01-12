@@ -401,16 +401,25 @@ public class ProductController {
 	@ResponseBody
 	public List<Product> querytradstatus(@RequestParam("id") Integer id, HttpSession session) {
 		List<Product> list = null;
-		
 		list = productService.findByNameAndStatus(id);
 
 		return list;
 
 	}
+	@RequestMapping(value="/checkexchanged")
+	@ResponseBody
+	public String checkexchanged(@RequestParam("bid")int bid,@RequestParam("aid")int aid){
+		if(exchangeService.findByProductAANDProductB(aid, bid).size()==0){
+			return "true";
+		}else{
+			return "false";
+		}
+	}
+	
 	//by雙 我要交換按鈕
 	@RequestMapping(value="/exchange/{Bid}/{Aid}", method = RequestMethod.GET)
-	public String exchangeproduct(@PathVariable("Bid")final int bid,@PathVariable("Aid")final int aid){
-		exchangeService.addexchange(aid, bid);
+	public String exchangeproduct(@PathVariable("Bid")final int bid,@PathVariable("Aid")final int aid){	
+			exchangeService.addexchange(aid, bid);
 		return "redirect:/product/"+aid;
 	}
 

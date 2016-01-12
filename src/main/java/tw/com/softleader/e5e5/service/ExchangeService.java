@@ -4,6 +4,7 @@ package tw.com.softleader.e5e5.service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,11 +18,24 @@ import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 
 @Service
 public class ExchangeService {
+	Logger log = Logger.getLogger(this.getClass());
 
 	@Autowired
 	private ExchangeDao exchangeDao;
 	@Autowired
 	private ProductDao productDao;
+	
+	@Transactional
+	public List<Exchange> findByProductAANDProductB(int productAId,int productBId){
+		
+		Product productA = productDao.getOne(productAId);
+		Product productB = productDao.getOne(productBId);
+		log.error("productA================================"+productA);
+		log.error("productB================================"+productB);
+		List<Exchange> list = exchangeDao.findByProductAANDProductB(productA,productB);
+		log.error("productList================================"+list);
+		return list;
+	}
 	
 	@Transactional
 	public void addexchange(int productAId,int productBId){
