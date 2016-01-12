@@ -95,7 +95,7 @@
 			style="width: 100%; height: 100px; text-align: center;">
 			<c:if test="${product.userId.id != user.id}">
 				<input id="excBtn" class="btn btn-primary btn-lg" type="button"
-					value="我要交換" data-toggle="modal" data-target="#myProductList">
+					value="我要交換" data-toggle="modal" >
 			</c:if>
 		</div>
 
@@ -175,7 +175,17 @@
 <script>
 $("#excBtn").click(function(){
 	if( ${empty user} ){
-		location.href="/head/login"
+		swal({   
+			title: "尚未登入",   
+			text: "您尚未登入,無法使用交換功能!使否導入登入頁面?",   
+			type: "warning",   showCancelButton: true,   
+			confirmButtonColor: "#DD6B55",   
+			confirmButtonText: "Yes, delete it!",   
+			closeOnConfirm: false }, 
+			function(){   
+				location.href="/head/login"
+				});
+		
 	}
 })
 $(function(){
