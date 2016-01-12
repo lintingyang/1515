@@ -32,11 +32,9 @@ $(function(){
 						        }
 						      }
 						    });
-						} else{
-							console.log("else");
-							window.location.replace("/");
-							}
- 					    
+
+						}else{window.location.replace("/");}
+ 					        
 					}
 				});
 			});
