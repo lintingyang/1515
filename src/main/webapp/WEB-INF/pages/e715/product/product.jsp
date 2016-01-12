@@ -93,9 +93,10 @@
 		</div>
 		<div class="container"
 			style="width: 100%; height: 100px; text-align: center;">
+			<c:if test="${product.userId.id != user.id}">
 				<input id="excBtn" class="btn btn-primary btn-lg" type="button"
 					value="我要交換" data-toggle="modal" data-target="#myProductList">
-
+			</c:if>
 		</div>
 
 	</div>
@@ -314,10 +315,7 @@ $(function(){
  		 var imgId=0;
 		 var loginId="${user.id}";
 		 var prodUserId="${product.userId.id}";
-		//關閉我要交換鈕(本人登入時)
-		 if(prodUserId.length!=0 && prodUserId==loginId){
-				$("#excBtn").val("").attr('data-target', '').hide();;
-	     }
+
 		 $.each(data, function() {
 			imgId++;
 			var excBtn2='';
