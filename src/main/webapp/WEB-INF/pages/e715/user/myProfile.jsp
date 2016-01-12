@@ -10,7 +10,7 @@
 /*   font-size: 20px; */
 /*   font-family: Source Sans Pro; */
 /* } */
-
+/* http://jsfiddle.net/i_heart_php/x8f0dqun/ */
 #go {
   position: absolute;
   top: 30px;
@@ -266,7 +266,6 @@ function addFriend (e) {
 		data : formData,
 		success : function(data) {
 			if(data=="Sucess"){
-				
 				go(50);
 				$('#ok').click(function(){go(50)});
 				function go(nr) {
