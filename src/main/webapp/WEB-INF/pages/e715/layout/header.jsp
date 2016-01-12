@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="/resources/css/bootstrap-theme.min.css" >
 <script src="/resources/js/bootstrap.min.js" ></script> 
 <script src="/resources/js/jquery.lazyload.js"></script>
+<script src="/resources/js/sweetalert.min.js"></script>
 <%-- <c:import url="/WEB-INF/pages/layout/meta.jsp"></c:import> --%>
 <%-- <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import> --%>
 <%-- <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import> --%>
@@ -27,8 +28,10 @@
 <link rel="styleshee" href="/resources/css/user.css" />
 <link rel="stylesheet" href="/resources/css/prodcss.css" />
 <link rel="stylesheet" href="/resources/css/jquery-ui.css" />
+<link rel="stylesheet" href="/resources/css/sweetalert.css" />
 <script src="/resources/js/jPages.js"></script>
 <script src="/resources/js/jquery-ui.js"></script>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <title>E715</title>

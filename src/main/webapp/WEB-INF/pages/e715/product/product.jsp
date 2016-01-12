@@ -354,17 +354,13 @@ $(function(){
 		data : {"id" : "${user.id}"},
 		success : function(data){
 			$.each(data,function(i) {
-				var tr = $("<tr></tr>");
 				var prodimg = $("<img>").addClass("prodimgsm");
 				var namespan = $("<h5>").text(data[i].name);
 				var div = $("<div></div>").append($(namespan)).append($(prodimg)).addClass("btn").addClass(" btn-default")
 				.addClass("exc").attr("name",data[i].id);
-				var td = $("<td></td>").append($(div));
-				
 				getpicture(data[i], prodimg);
-				
-				$(tr).append($(td));
-				$("#userAProduct").append($(tr));
+
+				$("#userAProduct").append($(div));
 				$(".exc").bind("click",addexchange);
 // 				$(".exc").bind("click",function(){ location.href="/product/exchange/"+$(this).attr("name")+"/"+${product.id}})
 			})
