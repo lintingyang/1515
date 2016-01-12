@@ -111,12 +111,12 @@
 						<c:if test="${not empty user.id && user.id != product.userId.id}">
 						<!-- 已登入而且不是product的擁有者才能發問 -->	
 							<div style="text-align: center;">
-								<textarea id="questiontext" 　rows="10" cols="100"
+								<textarea id="questiontext"  class="form-control"　rows="10"
 									placeholder="提出問題..."></textarea>
 								<br> 
 								<label><input type="checkbox" id="notPublic">不公開提問</label> <br>
 								<br> 
-								<input type="button" value="送出" class="btn btn-primary" id="submitquestion">
+								<input type="button" value="送出" class="btn btn-primary" id="submitquestion" disabled>
 								<input type="button" value="清除" class="btn btn-warning" id="resetquestion">
 								<div class="checkbox"></div>
 							</div>
@@ -181,9 +181,9 @@ $(function(){
     	 $.each(data, function(){
     		 var qtime = this.questionTime.year + "/" + this.questionTime.monthValue +"/" + this.questionTime.dayOfMonth
 				+ ", " + this.questionTime.hour + ":" + this.questionTime.minute;
-    		 var questionPart = "<tr><td>問題" + (index+1) + " / <span id='ansbtn" + index + "'></span>" + 
+    		 var questionPart = "<tr><td>問題" + (index+1) + " / " + 
 				this.questionerId.nickname + "(<a href='/E715Member/"+ this.questionerId.id +"'>"+this.questionerId.account + "</a>)" + 
-				qtime + "<br>" + this.question + "<span id='answer"+index+"'></span></td></tr>"
+				qtime + " <span id='ansbtn" + index + "'></span><br>" + this.question + "<span id='answer"+index+"'></span></td></tr>"
     		 if(this.questionerId.id == loginId || productOwnerId == loginId){
     				$("#qatable").append(questionPart);
     		 } else {
@@ -195,7 +195,7 @@ $(function(){
     		 }
     		 if (productOwnerId == loginId) {
     			 	if (this.answer == null){
-    			 	$("#ansbtn"+index).append("<input type='button' value='回答' id='writeanswer"+index+"'>");
+    			 	$("#ansbtn"+index).append("<input type='button' class='btn btn-default' value='回答' id='writeanswer"+index+"'>");
     			 	}
     		 } 
     		 if(this.answer != null){
@@ -207,14 +207,20 @@ $(function(){
     			 var thisindex = this.id; 
     			 var currentindex = thisindex.substring(11);
     		 	$("#answer"+currentindex).empty();
-			 	$("#answer"+currentindex).append("<br><textarea id='answertext" + currentindex + "' rows='10' cols='100' placeholder='撰寫回覆...'></textarea>" + 
-						"<br><input type='button' value='送出' id='submitanswer" + currentindex + "'><input type='button' id='resetanswer" + currentindex + "' value='清除'>");	
+			 	$("#answer"+currentindex).append("<br><textarea id='answertext" + currentindex + "' class='form-control' rows='10' autofocus placeholder='撰寫回覆...'></textarea>" + 
+						"<br><input type='button' value='送出' class='btn btn-default' id='submitanswer" + currentindex + "' disabled><input type='button' class='btn btn-default' id='resetanswer" + currentindex + "' value='清除'>");	
 			 	//回答問題
+			 	$("#answertext" + currentindex).on("keydown", function(){
+			 		var answerLength = $("#answertext"+currentindex).val().length;
+				 	if(answerLength != 0){
+				 		$("#submitanswer"+currentindex).removeAttr("disabled");
+				 	}
+			 	})
 			 	$("#submitanswer"+currentindex).on("click", function(){
-					var theId = questions[currentindex].id;
+			 		var theId = questions[currentindex].id;
 					var theAnswer = $("#answertext"+currentindex).val();
 					var answerData = JSON.stringify({"id":theId, "answer":theAnswer});
-    				$.ajax({
+					    $.ajax({
     					type: "POST",
     					url: "/qanda/answer/",
     					data: answerData,
@@ -227,15 +233,24 @@ $(function(){
     					},
     				})
 			 	})//end回答問題
+			 	//清除回覆欄
 			 	$("#resetanswer"+currentindex).on("click", function(){
 			 		$("#answertext"+currentindex).val("");
+			 		$("#submitanswer"+currentindex).attr("disabled", true);
 			 	})
+			 	//end清除回覆欄
     		 })
     		 index ++;
     	 })//end of each	 
      }//end of showtable()
 //	end顯示Q&A列表	
 //	提問功能
+	$("#questiontext").keydown(function(){
+		var questionLength = $("#questiontext").val().length;
+		if(questionLength != 0){
+			$("#submitquestion").removeAttr("disabled");
+		}
+	})
 	var notPublic = false;
     $("#notPublic").click(function(){
 		notPublic = $("#notPublic").prop("checked");
@@ -259,6 +274,7 @@ $(function(){
 //	清除問題
 	$("#resetquestion").click(function(){
 		$("#questiontext").val("");
+		$("#submitquestion").attr("disabled", true);
 	})
 // 	end清除問題
 //	小圖示
