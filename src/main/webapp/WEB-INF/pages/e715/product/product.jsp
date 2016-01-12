@@ -94,8 +94,8 @@
 		<div class="container"
 			style="width: 100%; height: 100px; text-align: center;">
 			<c:if test="${product.userId.id != user.id}">
-				<input id="excBtn" class="btn btn-primary btn-lg" type="button"
-					value="我要交換" data-toggle="modal" >
+				<input id="excBtn" class="btn btn-primary btn-lg" type="button" value="我要交換" data-toggle="modal" 
+				data-target="#myProductList">
 			</c:if>
 		</div>
 
@@ -184,8 +184,10 @@ $("#excBtn").click(function(){
 			closeOnConfirm: false }, 
 			function(){   
 				location.href="/head/login"
-				});
+			});
 		
+	}else{
+		console.log("click");
 	}
 })
 $(function(){
