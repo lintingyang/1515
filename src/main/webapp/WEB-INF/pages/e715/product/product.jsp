@@ -115,7 +115,7 @@
 
 			<!-- 問與答區塊開始 -->
 			<div class="tab-content">
-				<div role="tabpanel" class="tab-pane active" id="question">
+				<div role="tabpanel" class="tab-pane active" id="question" name="question">
 					<table class="table table-striped" id="qatable"></table>
 					<div>
 						<!-- 發問區開始 -->
@@ -291,11 +291,12 @@ $(function(){
 			url: "/qanda/question",
 			data: questionData,
 			contentType : "application/json",
-		    dataType: "text",
+		    dataType: "json",
 		    async: false,
 			success: function(data){
-// 				$("#question").load(location.href + "#question", getqanda);
-				location.reload(true);
+// 				console.log(data);
+				 $("#qatable").empty();
+				 showtable(data);
 				window.location="#qBookmark";
 		       },
 		})
@@ -328,7 +329,6 @@ $(function(){
        contentType : "application/json"
      });
  	 function show(data) {
- 		 $("#exgblock").append("("+data.length+")");
  		 var imgId=0;
 		 var loginId="${user.id}";
 		 var prodUserId="${product.userId.id}";

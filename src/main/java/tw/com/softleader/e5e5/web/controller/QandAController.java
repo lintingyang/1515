@@ -67,7 +67,8 @@ public class QandAController {
 	}//end of inner class
 	
 	@RequestMapping(value= "/question", method = RequestMethod.POST)
-	public String postquestion(@RequestBody Question question, HttpSession session, Model model){
+	@ResponseBody
+	public List<QuestionAndAnswer> postquestion(@RequestBody Question question, HttpSession session, Model model){
 		QuestionAndAnswer newquestion = new QuestionAndAnswer();
 		//取得提問者的id
 		User user = (User)session.getAttribute("user");
@@ -81,7 +82,8 @@ public class QandAController {
 			newquestion.setIsPublic(TrueFalse.TRUE);
 		}
 		qandaservice.insert(newquestion);
-		return "/e715/product/product";
+		List<QuestionAndAnswer> qandas = qandaservice.findByProductId(question.getProductid());
+		return qandas;
 	}
 	
 	//inner class for postanswer
