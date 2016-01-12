@@ -93,7 +93,8 @@ public class QandAController {
 	
 	@RequestMapping(value="/answer", method= RequestMethod.POST)
 	public String postanswer(@RequestBody Answer answer, Model model){
-		qandaservice.updateAnswer(answer.getAnswer(), answer.getId());
+		if (answer.getAnswer().length() > 0){
+		qandaservice.updateAnswer(answer.getAnswer(), answer.getId());}
 		return "/e715/product/product";
 	}
 }
