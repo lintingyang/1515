@@ -259,7 +259,7 @@ public class ProductService extends OurService<Product> {
 		return product;
 
 	}
-	// (14)編輯產品
+	// (14)編輯產品/yao
 	@Transactional
 	public Product update(int id ,String name, int category, String status, String description,
 			LocalDateTime deadline, LocalDateTime startTime, Time transactionTime, String location, String tradeWay,
@@ -281,6 +281,13 @@ public class ProductService extends OurService<Product> {
 		return product;
 
 	}
+	
+	//查詢別人想跟我交換的物品總數
+	@Transactional
+	public int findCountByProductBId(Integer id){
+		return productDao.findCountByProductBId(id);
+	}
+	
 	@Override
 	public OurDao<Product> getDao() {
 		return productDao;

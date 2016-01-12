@@ -15,13 +15,13 @@
 		</div>
 		<ul class="nav nav-tabs " id="tabs">
 			<li style="width: 25%; text-align: center;"><a
-				class="list searchbtn" href="#">已刊登</a></li>
+				class="categorylist searchbtn" id = "posted" href="#">已刊登<span class="badge" id ="totalCount"></span></a></li>
 			<li style="width: 25%; text-align: center;"><a
-				class="list searchbtn" href="#">未刊登</a></li>
+				class="categorylist searchbtn" id = "notPost" href="#">未刊登</a></li>
 			<li style="width: 25%; text-align: center;"><a
-				class="list searchbtn" href="#">待交換</a></li>
+				class="categorylist searchbtn" id = "btnC" href="#">我想跟別人交換</a></li>
 			<li style="width: 25%; text-align: center;"><a
-				class="list searchbtn" href="#">已交換</a></li>
+				class="categorylist searchbtn" id = "btnD" href="#">已交換</a></li>
 		</ul>
 	</div>
 	<div class="row">
@@ -36,6 +36,7 @@
 </div>
 
 <script type="text/javascript">
+var total = 0;
 
 //銘新增的
 $(function(){
@@ -46,10 +47,10 @@ $(function(){
 })
 
 
-$('.list').click(function() {
+$('.categorylist').click(function() {
 	
-	console.log("list = "+ $(this).text());
-	var type = $(this).text();
+	console.log("categorylist = "+ $(this).val("id"));
+	var type = $(this).attr("id");
 
 	$.ajax({
 		contentType:"application/json",
@@ -61,10 +62,10 @@ $('.list').click(function() {
 		success: function(data){
 
 		$("#itemContainer").html('');
-		  
+
+		
 		$.each(data,function(i){
-			
-			if(type == "未刊登"){
+			if(type == "notPost"){ //未刊登
 			//update button
 			var updateBtn = $("<span></span>").addClass("btn btn-sm btn-success glyphicon glyphicon-pencil ")
 			.attr("onclick","location.href='/product/edit/"+data[i].id+"'");
@@ -74,19 +75,27 @@ $('.list').click(function() {
 			.attr("onclick","deleteProduct("+data[i].id+")");	
 			}
 
-			if(type == "已刊登"){
+			if(type == "posted"){ //已刊登
 			//remove button
 			var removeBtn = $("<span></span>").addClass("btn-sm btn-warning glyphicon glyphicon-download-alt remove" +data[i].id)
 			.attr("onclick","removeProduct("+data[i].id+")");
+			total = 0;
 			}
+			
 			
 			var productdiv = $("<div></div>");
 			var aclick = $("<a>").attr("href","/product/"+data[i].id);
 			var productimg = $("<img>").addClass("prodimg");
 			var p = $("<span>").text(data[i].name);
+			var badgePost = $("<span>").addClass("badge pCount");
+			$(p).append($(badgePost));
 			$(aclick).append($(productimg)).append($(p));
 			$(productdiv).addClass("proddiv").append($(aclick));
 			
+			if(type == "posted"){
+				getProductCount(data[i].id , type , badgePost);
+			}
+
 			getpicture(data[i], productimg);//productPic
 			
 			$(productdiv).append($(updateBtn));
@@ -97,6 +106,7 @@ $('.list').click(function() {
 			
 			})//each		
 			
+		
 			$("div.holder").jPages({
 				containerID : "itemContainer",
 				perPage : 8,
@@ -110,6 +120,26 @@ $('.list').click(function() {
 		}//success
 	});	//ajax
 });//click
+
+function getProductCount(id , type ,badgePost){
+	var data ={
+			"id" : id ,
+			"query" : type
+	}
+	$.ajax({
+		url : "/product/queryCount",
+		dataType : "json",
+		type : "post",
+		data : data,
+		success:function(count) {
+				if(count>0){
+					$(badgePost).text(count);
+					total += count;
+					$('#totalCount').text(total);
+				}
+		}//success
+	});//ajax
+}//get
 
 function removeProduct(id){
 	var formData ={
@@ -139,7 +169,7 @@ function deleteProduct(id){
 		success:function() {
 			alert("deleted");
 			$(".delete"+id).parent().remove();
-// 			$('.list').trigger('click');
+// 			$('.categorylist').trigger('click');
 		}
 	});
 }//delete
@@ -165,7 +195,7 @@ function deleteProduct(id){
 // 			success:function(data) {
 				
 // 				alert("deleted");
-// 				$('.list').trigger('click');
+// 				$('.categorylist').trigger('click');
 // 			}
 // 		});
 // 	});	

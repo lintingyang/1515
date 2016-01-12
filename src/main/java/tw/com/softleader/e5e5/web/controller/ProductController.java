@@ -98,70 +98,66 @@ public class ProductController {
 	@ResponseBody
 	public List<Exchange> findExchange(@RequestParam("id") Integer id, Model model) {
 		List<Exchange> exchanges = exchangeService.findByProductAId(id);
-		if (exchanges != null) {
-			List<Exchange> exchangesBA = null;
-			List<Exchange> exchangesBB = null;
-
-			List<Exchange> exchangesCheck = null;
-			List<Exchange> exchangesRemove = new ArrayList<Exchange>();
-			
-			
-			// 列出ProductB有關的所有交易
-			for (Exchange exchange : exchanges) {
-				exchangesBA = exchangeService.findByProductAId(exchange.getProductBId().getId());
-				if (exchangesBA != null) {
-//					 for (Exchange sd : exchangesBA) {
-//					 log.error("exchangesBA: " + sd.getId());
-//					 }
-					// exchangesBA: 11
-					// exchangesBA: 12
-					if (exchangesCheck != null) {
-						exchangesCheck.addAll(exchangesBA);
-					} else {
-						exchangesCheck = exchangesBA;
-					}
-				}
-				exchangesBB = exchangeService.findByProductBId(exchange.getProductBId().getId());
-				if (exchangesBB != null) {
-//					 for (Exchange sb : exchangesBB) {
-//					 log.error("exchangesBB: " + sb.getId());
-//					 }
-					// exchangesBB: 14
-					if (exchangesCheck != null) {
-						exchangesCheck.addAll(exchangesBB);
-					} else {
-						exchangesCheck = exchangesBB;
-					}
-				}
-			}
-
-			if (exchangesCheck != null) {
-				for (Exchange check : exchangesCheck) {
-					 log.error("dfsfdasfsdf: " + check.getId());
-//					 dfsfdasfsdf: 16
-//					 dfsfdasfsdf: 17
-//					 dfsfdasfsdf: 16
-//					 dfsfdasfsdf: 17
-//					 dfsfdasfsdf: 1
-//					 dfsfdasfsdf: 2
-//					 dfsfdasfsdf: 3
-//					 dfsfdasfsdf: 18
-//					 dfsfdasfsdf: 19
-					// 確認ProductB是否已交易過
-					if (TrueFalse.TRUE == check.getTradeStatus()) {
-						for (Exchange exchange : exchanges) {
-							if (exchange.getProductBId().getId() == check.getProductAId().getId()) {
-//								log.error("hdghfa"+check.getProductAId().getId());
-//								// 移除交易過的ProductB
-								exchangesRemove.add(exchange);
-//								exchanges.remove(exchange);
-							}
-						}
-						exchanges.removeAll(exchangesRemove);
-					}
-				}
-			}
+		for (Exchange exchange : exchanges) {
+			log.error("agagsfsdf"+exchange.getProductBId().getName());
 		}
+		
+		List<Exchange> exchangesRemove = new ArrayList<Exchange>();
+		if (exchanges != null) {
+			for (Exchange exchange : exchanges) {
+				if(TrueFalse.TRUE == exchange.getProductBId().getTradeStatus() &&
+						exchange.getTradeStatus()!=TrueFalse.TRUE){
+					exchangesRemove.add(exchange);
+				}
+			}
+			exchanges.removeAll(exchangesRemove);
+		}
+//		for (Exchange exchange : exchanges) {
+//			log.error("fdasfasdf"+exchange.getProductBId().getName());
+//		}
+		
+		
+//		if (exchanges != null) {
+//			List<Exchange> exchangesBA = null;
+//			List<Exchange> exchangesBB = null;
+//			List<Exchange> exchangesCheck = null;
+//			List<Exchange> exchangesRemove = new ArrayList<Exchange>();
+//			
+//			// 列出ProductB有關的所有交易
+//			for (Exchange exchange : exchanges) {
+//				exchangesBA = exchangeService.findByProductAId(exchange.getProductBId().getId());
+//				if (exchangesBA != null) {
+//					if (exchangesCheck != null) {
+//						exchangesCheck.addAll(exchangesBA);
+//					} else {
+//						exchangesCheck = exchangesBA;
+//					}
+//				}
+//				exchangesBB = exchangeService.findByProductBId(exchange.getProductBId().getId());
+//				if (exchangesBB != null) {
+//					if (exchangesCheck != null) {
+//						exchangesCheck.addAll(exchangesBB);
+//					} else {
+//						exchangesCheck = exchangesBB;
+//					}
+//				}
+//			}
+//
+//			if (exchangesCheck != null) {
+//				for (Exchange check : exchangesCheck) {
+//					// 確認ProductB是否已交易過
+//					if (TrueFalse.TRUE == check.getTradeStatus()) {
+//						for (Exchange exchange : exchanges) {
+//							if (exchange.getProductBId().getId() == check.getProductAId().getId()) {
+////								// 移除交易過的ProductB
+//								exchangesRemove.add(exchange);
+//							}
+//						}
+//						exchanges.removeAll(exchangesRemove);
+//					}
+//				}
+//			}
+//		}
 		return exchanges;
 	}
 

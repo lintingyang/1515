@@ -28,6 +28,10 @@
 	text-align:center;
 }
 
+.userlineCenter{
+	line-height:250px;
+}
+
 .warmFontColor{
 	font-size: 16px;
 	color: red;
