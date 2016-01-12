@@ -32,8 +32,9 @@ $(function(){
 						        }
 						      }
 						    });
-						}
- 					        window.location.replace("/");
+
+						}else{window.location.replace("/");}
+ 					        
 					}
 				});
 			});

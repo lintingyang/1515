@@ -113,9 +113,11 @@
 							<div style="text-align: center;">
 								<textarea id="questiontext" 　rows="10" cols="100"
 									placeholder="提出問題..."></textarea>
-								<br> <label><input type="checkbox">匿名發言</label> <br>
-								<br> <input type="button" value="送出"
-									class="btn btn-primary" id="submitquestion">
+								<br> 
+								<label><input type="checkbox">匿名發言</label> <br>
+								<br> 
+								<input type="button" value="送出" class="btn btn-primary" id="submitquestion">
+								<input type="button" value="清除" class="btn btn-warning" id="resetquestion">
 								<div class="checkbox"></div>
 							</div>
 						</c:if>
@@ -158,7 +160,7 @@ $("#excBtn").click(function(){
 	}
 })
 $(function(){
-// 	Q&A
+// 	顯示Q&A列表
 	var formData={"id":${product.id}}
     $.ajax({
        type: "GET",
@@ -171,20 +173,58 @@ $(function(){
        contentType : "application/json"
      });
      function showtable(data){
+    	 var index = 0;
+    	 var questions = data;
     	 $.each(data, function(){
-    		 if(this.answer == null){
-    			 console.log(this.questionTime);
-    			$("#qatable").append("<tr><td><h4>問題:</h4>" + "(<a href='/E715Member/"+ this.questionerId.id +"'>"+this.questionerId.account + "</a>)" + 
-    					this.question + "<br>" + this.questionTime.year + "/" + this.questionTime.monthValue +"/" + this.questionTime.dayOfMonth + "<br></td></tr>");
-    		 } else {
-     		 $("#qatable").append("<tr><td><h4>問題:</h4>" + "(<a href='/E715Member/"+ this.questionerId.id + "'>" + this.questionerId.account + "</a>)" + 
- 					this.question + "<br>" + this.questionTime.year + "/" + this.questionTime.monthValue +"/" + this.questionTime.dayOfMonth + 
-     			"<hr><h4>答覆:</h4>" + this.answer + "<br></td></tr>");
+    		 var loginId = "${user.id}";
+    		 var productOwnerId = "${product.userId.id}";
+    		 var qtime = this.questionTime.year + "/" + this.questionTime.monthValue +"/" + this.questionTime.dayOfMonth
+				+ ", " + this.questionTime.hour + ":" + this.questionTime.minute;
+    		 $("#qatable").append("<tr><td>問題:<span id='ansbtn" + index + "'></span>" + 
+						"<br>(<a href='/E715Member/"+ this.questionerId.id +"'>"+this.questionerId.account + "</a>)" + 
+						this.question + "<br>" + qtime + "<span id='answer"+index+"'></span></td></tr>");
+    		 if(productOwnerId == loginId && this.answer == null){
+    			 $("#ansbtn"+index).append("<input type='button' value='回答' id='writeanswer"+index+"'>");
     		 }
-    	 })	 
-     }
-//	end of Q&A	
-//	submit question
+    		 if(this.answer != null){
+    			var atime = this.answerTime.year + "/" + this.answerTime.monthValue + "/" + this.answerTime.dayOfMonth
+  				+ ", " + this.answerTime.hour + ":" + this.answerTime.minute;
+    			$("#answer"+index).append("<br>答覆:" + this.answer + "<br>" + atime + "<br>"); 
+    		 }
+    		 $("#writeanswer"+index).on("click", function(){
+    			 var thisindex = this.id; 
+    			 var currentindex = thisindex.substring(11);
+//     			 console.log(currentindex);
+    		 	$("#answer"+currentindex).empty();
+			 	$("#answer"+currentindex).append("<br><textarea id='answertext" + currentindex + "' rows='10' cols='100' placeholder='撰寫回覆...'></textarea>" + 
+						"<br><input type='button' value='送出' id='submitanswer" + currentindex + "'><input type='button' id='resetanswer" + currentindex + "' value='清除'>");	
+			 	$("#submitanswer"+currentindex).on("click", function(){
+					var theId = questions[currentindex].id;
+					var theAnswer = $("#answertext"+currentindex).val();
+					var answerData = JSON.stringify({"id":theId, "answer":theAnswer});
+// 					console.log(answerData);
+    				$.ajax({
+    					type: "POST",
+    					url: "/qanda/answer/",
+    					data: answerData,
+    					contentType : "application/json",
+    					dataType: "text",
+    					async: false,
+    					success: function(data){
+    						location.reload(true);
+    						window.location="#qBookmark";
+    					},
+    				})
+			 	})
+			 	$("#resetanswer"+currentindex).on("click", function(){
+			 		$("#answertext"+currentindex).val("");
+			 	})
+    		 })
+    		 index ++;
+    	 })//end of each	 
+     }//end of showtable()
+//	end顯示Q&A列表	
+//	提問功能
 	$("#submitquestion").click(function(){
 		var questionData = JSON.stringify({"productid":"${product.id}", "question":$("#questiontext").val()});
 		$.ajax({
@@ -197,13 +237,15 @@ $(function(){
 			success: function(data){
 				location.reload(true);
 				window.location="#qBookmark";
-				
-				
 		       },
-		       
 		})
 	})
-//	end of submit question
+//	end 提問功能
+//	清除問題
+	$("#resetquestion").click(function(){
+		$("#questiontext").val("");
+	})
+// 	end清除問題
 //	小圖示
     $(".thumbnail").click(function(e){
     	e.preventDefault()
@@ -255,8 +297,6 @@ $(function(){
 			if(this.tradeStatus=="TRUE"){
 				$("#excBtn").val("交易結束").attr('onclick', '');
 			}
-
-	
 //	交易結束鎖定end
 //	Exchange product pic
 			var formData={"id":this.productBId.id}
@@ -299,12 +339,13 @@ $(function(){
 			 $('div[name*="d1"]').html("");
 		 }
  	 }
- 	 
  	function getImg(img) {
         $("#imgId"+img.product.id).attr("src", img.picture);
  	}
 //	end of Exchange product pic
-	
+
+
+//  按下我要交換後出現的物品選單
 	$.ajax({
 		contentType : "application/json",
 		url : "/product/query",
@@ -329,28 +370,9 @@ $(function(){
 			})
 		}
 	})
-
-
-
 });//end of function onload
 
-function getpicture(prod) { //取得每一個商品的物件
-	var formData = {
-		"id" : prod.id
-	}
-	$.ajax({
-		contentType : "application/json",
-		url : "/queryimg",
-		dataType : "json",
-		type : "get",
-		data : formData,
-		success : function(data) {
-			if (data[0] != null) {
-				$(prodimg).attr("src", data[0].picture);
-			}
-		}
-	});
-}
+// 物品放入待交換區
 function addexchange(){
 	location.href="/product/exchange/"+$(this).attr("name")+"/"+${product.id};
 }
@@ -373,6 +395,5 @@ function getpicture(prod, prodimg) { //取得每一個商品的物件
 }
 
 </script>
-
 
 <c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>
