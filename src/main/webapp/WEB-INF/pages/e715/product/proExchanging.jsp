@@ -34,6 +34,9 @@ span{
 	border-left: none;
 	border-top: none;
 }
+#img1, #img2, #img3, #img4, #img5{
+	background-color: #cccccc;
+}
 </style>
 <script type="text/javascript">
 var startDate = new Date(${long1});
@@ -57,7 +60,33 @@ function cal(){
 window.onload = function(){
     setInterval(cal, 1000);
 }
+
+//star0~5
+function s0(){
+	$('#img1,#img2,#img3,#img4,#img5').css('background-color', '#cccccc');
+}
+function s1(){
+	$('#img2,#img3,#img4,#img5').css('background-color', '#cccccc');
+	$('#img1').css('background-color', '#ffcc1c');
+}
+function s2(){
+	$('#img3,#img4,#img5').css('background-color', '#cccccc');
+	$('#img1,#img2').css('background-color', '#ffcc1c');
+}
+function s3(){
+	$('#img4,#img5').css('background-color', '#cccccc');
+	$('#img1,#img2,#img3').css('background-color', '#ffcc1c');
+}
+function s4(){
+	$('#img5').css('background-color', '#cccccc');
+	$('#img1,#img2,#img3,#img4').css('background-color', '#ffcc1c');
+}
+function s5(){
+	$('#img1,#img2,#img3,#img4,#img5').css('background-color', '#ffcc1c');
+}
+
 $(function(){
+	//評分完成
 	var ans = "${ans}";
 	if(ans == "success"){
 		$('#thx').removeAttr('style');
@@ -90,6 +119,109 @@ $(function(){
 		$('#makeGrade').attr('style', ' display: none');
 		$('#backToProduct').attr('style', ' display: none');
 	}
+	
+	//星星1
+	$('#img1').mouseover(function(){
+		s1();
+		$('#img1').mouseout(function(){
+			s0();
+		});
+	});
+	$('#img1').click(function(){
+		s1();
+		$('#final').attr("onclick", "javascript:location.href='grade?g=1'");
+		$('#img1').mouseout(function(){
+			s1();
+		});
+		$('#img1,#img2,#img3,#img4,#img5').mouseover(function(){
+			s1();
+			$('#img1,#img2,#img3,#img4,#img5').mouseout(function(){
+				s1();
+			});
+		});
+	});
+	//星星2
+	$('#img2').mouseover(function(){
+		s2();
+		$('#img2').mouseout(function(){
+			s0();
+		});
+	});
+	$('#img2').click(function(){
+		s2();
+		$('#final').attr("onclick", "javascript:location.href='grade?g=2'");
+		$('#img2').mouseout(function(){
+			s2();
+		});
+		$('#img1,#img2,#img3,#img4,#img5').mouseover(function(){
+			s2();
+			$('#img1,#img2,#img3,#img4,#img5').mouseout(function(){
+				s2();
+			});
+		});
+	});
+	//星星3
+	$('#img3').mouseover(function(){
+		s3();
+		$('#img3').mouseout(function(){
+			s0();
+		});
+	});
+	$('#img3').click(function(){
+		s3();
+		$('#final').attr("onclick", "javascript:location.href='grade?g=3'");
+		$('#img3').mouseout(function(){
+			s3();
+		});
+		$('#img1,#img2,#img3,#img4,#img5').mouseover(function(){
+			s3();
+			$('#img1,#img2,#img3,#img4,#img5').mouseout(function(){
+				s3();
+			});
+		});
+	});
+	//星星4
+	$('#img4').mouseover(function(){
+		s4();
+		$('#img4').mouseout(function(){
+			s0();
+		});
+	});
+	$('#img4').click(function(){
+		s4();
+		$('#final').attr("onclick", "javascript:location.href='grade?g=4'");
+		$('#img4').mouseout(function(){
+			s4();
+		});
+		$('#img1,#img2,#img3,#img4,#img5').mouseover(function(){
+			s4();
+			$('#img1,#img2,#img3,#img4,#img5').mouseout(function(){
+				s4();
+			});
+		});
+	});
+	//星星5
+	$('#img5').mouseover(function(){
+		s5();
+		$('#img5').mouseout(function(){
+			s0();
+		});
+	});
+	$('#img5').click(function(){
+		s5();
+		$('#final').attr("onclick", "javascript:location.href='grade?g=5'");
+		$('#img5').mouseout(function(){
+			s5();
+		});
+		$('#img1,#img2,#img3,#img4,#img5').mouseover(function(){
+			s5();
+			$('#img1,#img2,#img3,#img4,#img5').mouseout(function(){
+				s5();
+			});
+		});
+	});
+	
+	
 })
 
 </script>
@@ -193,20 +325,31 @@ $(function(){
 	      </div>
 	      <div class="modal-body" >
 	        <p style="padding-left:50px;">我覺得此商品:</p>
-	        <div style="width: 300px; margin: 0 auto;" align="center">
-		        <button id="btnG" type="button" class="btn btn-success btn-lg"
-		        	onclick="javascript:location.href='grade?g=5'">
-	  				<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> GOOD
-				</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		        <button id="btnB" type="button" class="btn btn-danger btn-lg"
-		        	onclick="javascript:location.href='grade?g=1'">
-	  				<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> BAD
-				</button>
+	        
+	     	<!-- 原本的GOOD BAD -->
+<!-- 	        <div style="width: 300px; margin: 0 auto;" align="center"> -->
+<!-- 		        <button id="btnG" type="button" class="btn btn-success btn-lg" -->
+<!-- 		        	onclick="javascript:location.href='grade?g=5'"> -->
+<!-- 	  				<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> GOOD -->
+<!-- 				</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+<!-- 		        <button id="btnB" type="button" class="btn btn-danger btn-lg" -->
+<!-- 		        	onclick="javascript:location.href='grade?g=1'"> -->
+<!-- 	  				<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> BAD -->
+<!-- 				</button> -->
+<!-- 			</div> -->
+
+			<div id="star" style="width: 300px; margin: 0 auto;" align="center">
+				<img id="img1" name="1" src="/resources/imgs/star.png" />
+                <img id="img2" name="2" src="/resources/imgs/star.png" />
+                <img id="img3" name="3" src="/resources/imgs/star.png" />
+                <img id="img4" name="4" src="/resources/imgs/star.png" />
+                <img id="img5" name="5" src="/resources/imgs/star.png" />
+                <p style="font-size: small; ">小提示：若要更改，請直接點選星星來修正</p>
 			</div>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-<!-- 	        <button type="button" class="btn btn-primary">Save changes</button> -->
+	        <button type="button" class="btn btn-default" data-dismiss="modal">待會在評分</button>
+	        <button type="button" class="btn btn-primary" id="final">確定送出</button>
 	      </div>
 	    </div>
 	  </div>

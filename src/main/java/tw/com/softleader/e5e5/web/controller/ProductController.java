@@ -374,9 +374,15 @@ public class ProductController {
 		User ua = exchange.getProductAId().getUserId();
 		Grade point = null;
 		if(g == 1){
+			point = Grade.DAMN;
+		}else if (g == 2){
 			point = Grade.BAD;
+		}else if (g == 3){
+			point = Grade.SOSO;
 		}else if (g == 5){
 			point = Grade.GOOD;
+		}else if (g == 5){
+			point = Grade.GREAT;
 		}else{
 			point = null;
 		}
