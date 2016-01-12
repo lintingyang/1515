@@ -170,7 +170,6 @@
       </div>
     </div>
   </div>
-  <div class="map"></div>
 </div>
 <script>
 $("#excBtn").click(function(){
@@ -180,7 +179,7 @@ $("#excBtn").click(function(){
 })
 $(function(){
 	//地圖是也
-	var mapLoc= "台灣 "+"${product.location}";
+	var mapLoc= "台灣"+"${product.location}";
 	$('.map').tinyMap({
 	    'center': mapLoc,
 	    'zoom'  : 14
