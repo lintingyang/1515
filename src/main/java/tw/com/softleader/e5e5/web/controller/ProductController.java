@@ -289,10 +289,10 @@ public class ProductController {
 				product.getTradeWay(), productWish, product.getPostStatus());
 		System.out.println("newProduct========================" + newProduct);
 		if (newProduct != null) {
-			model.addAttribute("result", "恭喜您新增商品成功！！");
+			model.addAttribute("result", "success");
 			session.setAttribute("new", newProduct);
 		} else {
-			model.addAttribute("result", "新增失敗");
+			model.addAttribute("result", "fail");
 		}
 
 		// 存取productPicture
@@ -388,9 +388,9 @@ public class ProductController {
 			i = exchangeService.gradeProductX(exchange.getProductAId(), point);
 		}
 		if(i == 1){
-			model.addAttribute("ans", "評分成功!");
+			model.addAttribute("ans", "success");
 		}else{
-			model.addAttribute("ans", "評分失敗");
+			model.addAttribute("ans", "fail");
 		}
 			
 		return "/e715/product/proExchanging";

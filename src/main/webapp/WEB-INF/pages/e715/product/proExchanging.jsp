@@ -59,7 +59,7 @@ window.onload = function(){
 }
 $(function(){
 	var ans = "${ans}";
-	if(ans == "評分成功!"){
+	if(ans == "success"){
 		$('#thx').removeAttr('style');
 	}
 	
@@ -99,7 +99,6 @@ $(function(){
   		謝謝您的評分~    <strong>    交換愉快    : )</strong>
 	</div>
 	<div class="row">
-		<div><h3 style="color:#000079">${ans}</h3></div>
 		<div class="col-md-3">
    		 	<div class="thumbnail">
      	 		<img data-src="holder.js/300x300" alt="..." 
