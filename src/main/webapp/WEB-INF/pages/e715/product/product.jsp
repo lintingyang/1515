@@ -173,6 +173,7 @@ $(function(){
      });
      function showtable(data){
     	 var index = 0;
+    	 var questions = data;
     	 $.each(data, function(){
     		 var loginId = "${user.id}";
     		 var productOwnerId = "${product.userId.id}";
@@ -192,28 +193,34 @@ $(function(){
     		 $("#writeanswer"+index).on("click", function(){
     			 var thisindex = this.id; 
     			 var currentindex = thisindex.substring(11);
-    			 console.log(currentindex);
-				$("#answer"+currentindex).append("<br><textarea id='answertext" + currentindex + "' rows='10' cols='100' placeholder='撰寫回覆...'></textarea>" + 
+//     			 console.log(currentindex);
+    		 	$("#answer"+currentindex).empty();
+			 	$("#answer"+currentindex).append("<br><textarea id='answertext" + currentindex + "' rows='10' cols='100' placeholder='撰寫回覆...'></textarea>" + 
 						"<br><input type='button' value='送出' id='submitanswer" + currentindex + "'><input type='button' value='清除'>");	
-    			 
-//     			 var answerData = JSON.stringify({"id":, "answer":""});
-//     				$.ajax({
-//     					type: "POST",
-//     					url: "/qanda/answer/",
-//     					data: answerData,
-//     					contentType : "application/json",
-//     				    dataType: "text",
-//     				    async: false,
-//     					success: function(data){
-//     						location.reload(true);
-//     						window.location="#qBookmark";
-//     				       },
-//     				})
+			 	$("#submitanswer"+currentindex).on("click", function(){
+					var theId = questions[currentindex].id;
+					var theAnswer = $("#answertext"+currentindex).val();
+					var answerData = JSON.stringify({"id":theId, "answer":theAnswer});
+// 					console.log(answerData);
+    				$.ajax({
+    					type: "POST",
+    					url: "/qanda/answer/",
+    					data: answerData,
+    					contentType : "application/json",
+    					dataType: "text",
+    					async: false,
+    					success: function(data){
+    						location.reload(true);
+    						window.location="#qBookmark";
+    					},
+    				})
+			 	})
     		 })
     		 index ++;
     	 })//end of each	 
      }//end of showtable()
-//	end of 顯示Q&A列表	
+//	end顯示Q&A列表	
+
 //	提問功能
 	$("#submitquestion").click(function(){
 		var questionData = JSON.stringify({"productid":"${product.id}", "question":$("#questiontext").val()});
