@@ -61,7 +61,7 @@
 		</div>
 	</div>
 	<div class="col-md-6">
-		<h3>${product.name}</h3>
+		<h2>${product.name}</h2>
 		<div>
 			<h5>希望交易商品：</h5>
 			<br> ${product.wishItem}
@@ -75,7 +75,9 @@
 		<div>
 			<h5>交易地點： ${product.location}</h5>
 			<div class="map"></div>
-			
+		</div>
+		<hr>
+		<div>
 			<h5>交易期限： ${product.deadline}</h5>
 			<h5>交易時段： ${product.transactionTime}</h5>
 		</div>
