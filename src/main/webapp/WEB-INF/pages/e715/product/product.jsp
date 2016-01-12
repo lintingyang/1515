@@ -185,24 +185,24 @@ $(function(){
 	    'center': mapLoc,
 	    'zoom'  : 14
 	});
-	
-	
-	
-	
-// 	顯示Q&A列表
+	// 	顯示Q&A列表
 	var formData={"id":${product.id}}
-    $.ajax({
-       type: "GET",
-       url: "/qanda/getqanda",
-       data: formData,
-       success: function(data){
-    	   showtable(data);
-       },
-       dataType: "json",
-       contentType : "application/json"
-     });
-     function showtable(data){
-    	 $("#qablock").append("("+data.length+")");//顯示問與答數量
+	function getqanda(){
+    	$.ajax({
+       		type: "GET",
+       		url: "/qanda/getqanda",
+      		data: formData,
+       		success: function(data){
+    		showtable(data);
+    		},
+    	dataType: "json",
+   	 	contentType : "application/json"
+    	});
+	}
+	getqanda();
+	  function showtable(data){
+    	 $("#qacount").remove();
+    	 $("#qablock").append("<span id='qacount'>("+data.length+")</span>");//顯示問與答數量
     	 var index = 0;
     	 var questions = data;
     	 var loginId = "${user.id}";
@@ -294,6 +294,7 @@ $(function(){
 		    dataType: "text",
 		    async: false,
 			success: function(data){
+// 				$("#question").load(location.href + "#question", getqanda);
 				location.reload(true);
 				window.location="#qBookmark";
 		       },
@@ -401,8 +402,6 @@ $(function(){
         $("#imgId"+img.product.id).attr("src", img.picture);
  	}
 //	end of Exchange product pic
-
-
 //  按下我要交換後出現的物品選單
 	$.ajax({
 		contentType : "application/json",
