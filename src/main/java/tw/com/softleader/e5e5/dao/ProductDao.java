@@ -64,10 +64,14 @@ public interface ProductDao extends OurDao<Product> {
 	@Query(value = "SELECT p.* FROM product p WHERE  p.user_id = ?1 AND p.trade_status='FALSE' " , nativeQuery = true)
 	public List<Product> findByUserId(Integer id);
 	
-	//(12)查詢使用者已/待交換的物品/String/yao
-	@Query(value = "SELECT p.* FROM product p JOIN exchange e ON e.productb_id = p.id  WHERE e.producta_id = ?1 AND e.trade_status = ?2 order by exchange_time", nativeQuery = true)
+	//(12)查詢我想跟別人交換/String/yao
+	@Query(value = "select distinct p.* from product p JOIN exchange e ON e.productA_id = p.id where p.post_status = 'TRUE' and productA_id IN (select productA_id from exchange where productB_id in (select productB_id from exchange e Join product p ON e.productB_id = p.id where p.[user_id] = ?1 and e.trade_status = ?2))", nativeQuery = true)
 	public List<Product> findUsersProductsByExchange(Integer id , String post);
 		
+	//(12)查詢我想跟別人交換/String/yao
+//	@Query(value = "")
+//	public List<Product> findUserPostedProductsByExchanged(Integer id);
+	
 	@Query(value = "SELECT p.* FROM product p JOIN product_category pc ON p.category_id = pc.id WHERE p.name LIKE %?1% AND pc.name = ?2  AND p.post_status = 'TRUE' AND p.trade_status='FALSE' order by click_times DESC", nativeQuery = true)
 	public List<Product> findByProdcutOrderByClickTimes(String productName,String categoryName );
 
