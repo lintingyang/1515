@@ -258,17 +258,21 @@ $(function(){
 			 	$("#submitanswer"+currentindex).on("click", function(){
 			 		var theId = questions[currentindex].id;
 					var theAnswer = $("#answertext"+currentindex).val();
-					var answerData = JSON.stringify({"id":theId, "answer":theAnswer});
-					    $.ajax({
+					var answerData = JSON.stringify({"id":theId, "answer":theAnswer, "productid":${product.id}});
+// 					console.log(answerData);    
+					$.ajax({
     					type: "POST",
     					url: "/qanda/answer/",
     					data: answerData,
     					contentType : "application/json",
-    					dataType: "text",
+    					dataType: "json",
     					async: false,
-    					success: function(data){
-    						location.reload(true);
+    					success: function(data2){
+//     						console.log(data2);
+    						$("#qatable").empty();
+    						showtable(data2);
     						window.location="#qBookmark";
+//     						location.reload(true);
     					},
     				})
 			 	})//end回答問題
@@ -295,7 +299,7 @@ $(function(){
 		notPublic = $("#notPublic").prop("checked");
 	})	
 	$("#submitquestion").click(function(){
-		var questionData = JSON.stringify({"productid":"${product.id}", "question":$("#questiontext").val(), "notPublic":notPublic});
+		var questionData = JSON.stringify({"productid":${product.id}, "question":$("#questiontext").val(), "notPublic":notPublic});
 		$.ajax({
 			type: "POST",
 			url: "/qanda/question",

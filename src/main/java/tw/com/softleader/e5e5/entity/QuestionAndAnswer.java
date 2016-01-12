@@ -24,6 +24,7 @@ public class QuestionAndAnswer extends OurEntity implements java.io.Serializable
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id")
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Product product;
 	
 	@Column(name = "question", length = 200)
