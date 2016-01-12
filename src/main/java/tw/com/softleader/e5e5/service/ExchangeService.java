@@ -75,6 +75,8 @@ public class ExchangeService {
 	public int gradeProductX(Product productX, Grade grade){
 		if(productX != null){
 			productX.setGrade(grade);
+			System.out.println("--------------------------"+grade);
+			productX.setGradeTime(LocalDateTime.now());
 			productX = productDao.save(productX);
 			return 1;
 		}else{
