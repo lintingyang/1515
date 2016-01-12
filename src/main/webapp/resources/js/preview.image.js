@@ -6,7 +6,7 @@
 			imgheight: 90,
 			imgsize: "",
 			imgdel: true,
-			delname: "erer",
+			delname: "X",
 			position: "after",
 			ext: "jpg/jpeg/png"
 		}, setting);

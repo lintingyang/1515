@@ -67,7 +67,7 @@ public class ProductUDController {
 		} else if (query.equals("notPost")) { // 未刊登
 			products = productService.findByUsersProductsIsPosted(user.getId(), "FALSE");
 			// session.setAttribute("query", query);
-		} else if (query.equals("btnC")) { // 我想跟別人交換(待改)
+		} else if (query.equals("btnC")) { // 我想跟別人交換 沒排序
 			products = productService.findUsersProductsByExchange(user.getId(), "FALSE");
 		} else if (query.equals("btnD")) { // 已交換(待改)
 			products = productService.findUsersProductsByExchange(user.getId(), "TRUE");
@@ -80,26 +80,12 @@ public class ProductUDController {
 	@ResponseBody
 	@RequestMapping(value = "/queryCount")
 	public int productCount(@RequestParam("id") Integer id, @RequestParam("query") String query , Model model) {
-		log.debug("######################" + id +"query"+ query);
 		if (query.equals("posted")) { 
-			log.debug("######################" + productService.findCountByProductBId(id));
 			return productService.findCountByProductBId(id);
 		}
 		return -1;
 	}
-	// 已刊登的物品別人想交換的總數
-//	@ResponseBody
-//	@RequestMapping(value = "/queryCount")
-//	public List<Integer> productCount(@RequestParam("id") Integer id, @RequestParam("query") String query , Model model) {
-//		log.debug("######################" + id +"query"+ query);
-//		if (query.equals("posted")) { 
-//			log.debug("######################" + productService.findCountByProductBId(id));
-//			List<Integer> count = null;
-//			count.add(productService.findCountByProductBId(id));
-//			return count;
-//		}
-//		return null;
-//	}
+	
 	// 物品圖片
 	@ResponseBody
 	@RequestMapping(value = "/queryimg")
