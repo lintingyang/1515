@@ -137,7 +137,7 @@ public class ProductController {
 
 			if (exchangesCheck != null) {
 				for (Exchange check : exchangesCheck) {
-					 log.error("dfsfdasfsdf: " + check.getId());
+//					 log.error("dfsfdasfsdf: " + check.getId());
 //					 dfsfdasfsdf: 16
 //					 dfsfdasfsdf: 17
 //					 dfsfdasfsdf: 16
