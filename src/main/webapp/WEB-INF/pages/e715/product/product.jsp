@@ -173,6 +173,7 @@
   </div>
 </div>
 <script>
+//按下我要交換按鈕
 $("#excBtn").click(function(){
 	if( ${empty user} ){
 		swal({   
@@ -180,14 +181,35 @@ $("#excBtn").click(function(){
 			text: "您尚未登入,無法使用交換功能!使否導入登入頁面?",   
 			type: "warning",   showCancelButton: true,   
 			confirmButtonColor: "#DD6B55",   
-			confirmButtonText: "Yes, delete it!",   
+			confirmButtonText: "是的！我要登入",   
 			closeOnConfirm: false }, 
 			function(){   
-				location.href="/head/login"
+				location.href="/head/login";
 			});
 		
-	}else{
-		console.log("click");
+	}else {
+		$.ajax({
+			contentType : "application/json",
+			url : "/product/query",
+			dataType : "json",
+			type : "get",
+			data : {"id" : "${user.id}"},
+			success : function(data) {
+				console.log(data);
+				if(data == ""){
+					swal({   
+						title: "沒有物品可交換",   
+						text: "您目前沒有上傳任何物品 是否要新增一樣商品呢",   
+						type: "warning",   showCancelButton: true,   
+						confirmButtonColor: "#DD6B55",   
+						confirmButtonText: "好的",   
+						closeOnConfirm: false }, 
+						function(){   
+							location.href="/product/add";
+						});
+				}	
+			}
+		});
 	}
 })
 $(function(){
@@ -426,6 +448,9 @@ $(function(){
 		type : "get",
 		data : {"id" : "${user.id}"},
 		success : function(data){
+			if(data==""){ 
+				$("#excBtn").attr("data-target","");
+				}
 			$.each(data,function(i) {
 				var prodimg = $("<img>").addClass("prodimgsm");
 				var namespan = $("<h5>").text(data[i].name);
