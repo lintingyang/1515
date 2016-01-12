@@ -3,8 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/WEB-INF/pages/e715/layout/header.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/meta.jsp" />
+<script src="/resources/js/jquery.tinyMap.min.js"></script>
 <link rel="stylesheet" href="/resources/css/user.css" />
-
+<style>
+.map {
+    width: 540px;
+    height: 180px;
+}
+</style>
 <div class="container" style="margin: 50px auto;">
 	<div class="col-md-6">
 		<div class="row">
@@ -55,7 +61,7 @@
 		</div>
 	</div>
 	<div class="col-md-6">
-		<h3>${product.name}</h3>
+		<h2>${product.name}</h2>
 		<div>
 			<h5>希望交易商品：</h5>
 			<br> ${product.wishItem}
@@ -63,23 +69,34 @@
 		<hr>
 		<div>
 			<h5>描述：</h5>
-			<br>${product.description}
+			<br> ${product.description}
 		</div>
 		<hr>
 		<div>
-			<h5>交易地點：${product.location}</h5>
-			<h5>交易期限：${product.deadline}</h5>
-			<h5>交易時段：${product.transactionTime}</h5>
+			<h5>交易地點： ${product.location}</h5>
+			<div class="map"></div>
 		</div>
 		<hr>
 		<div>
-			<h5>交易方式：${product.tradeWay}</h5>
+			<h5>交易期限： ${product.deadline}</h5>
+			<h5>交易時段： ${product.transactionTime}</h5>
+		</div>
+		<hr>
+		<div>
+			<h5>交易方式： ${product.tradeWay}</h5>
+			<h5>交易狀態：
+			<c:choose>
+			    <c:when test="${product.tradeStatus=='FALSE'}">等待交易中 </c:when>
+			    <c:otherwise>交易完成</c:otherwise>
+			</c:choose>
+			</h5>
 		</div>
 		<div class="container"
 			style="width: 100%; height: 100px; text-align: center;">
+			<c:if test="${product.userId.id != user.id}">
 				<input id="excBtn" class="btn btn-primary btn-lg" type="button"
 					value="我要交換" data-toggle="modal" data-target="#myProductList">
-
+			</c:if>
 		</div>
 
 	</div>
@@ -135,6 +152,7 @@
 	</div>
 </div>
 
+
 <!-- 我要交換扭的下拉選單 -->
 <div class="modal fade" id="myProductList" tabindex="-1" role="dialog" aria-labelledby="myProductList" aria-hidden="true">
   <div class="modal-dialog" style="background-color: gray;">
@@ -152,6 +170,7 @@
       </div>
     </div>
   </div>
+  <div class="map"></div>
 </div>
 <script>
 $("#excBtn").click(function(){
@@ -160,6 +179,16 @@ $("#excBtn").click(function(){
 	}
 })
 $(function(){
+	//地圖是也
+	var mapLoc= "台灣 "+"${product.location}";
+	$('.map').tinyMap({
+	    'center': mapLoc,
+	    'zoom'  : 14
+	});
+	
+	
+	
+	
 // 	顯示Q&A列表
 	var formData={"id":${product.id}}
     $.ajax({
@@ -302,10 +331,7 @@ $(function(){
  		 var imgId=0;
 		 var loginId="${user.id}";
 		 var prodUserId="${product.userId.id}";
-		//關閉我要交換鈕(本人登入時)
-		 if(prodUserId.length!=0 && prodUserId==loginId){
-				$("#excBtn").val("").attr('data-target', '').hide();;
-	     }
+
 		 $.each(data, function() {
 			imgId++;
 			var excBtn2='';
