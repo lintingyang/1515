@@ -30,11 +30,11 @@ h4{
 <script type="text/javascript">
 	$(function() {
 		//圖片
-		$("input[name=pPicture]").previewimage({
-			div: ".preview",
-			imgwidth: 90,
-			imgheight: 90
-		});
+// 		$("input[name=pPicture]").previewimage({
+// 			div: ".preview",
+// 			imgwidth: 90,
+// 			imgheight: 90
+// 		});
 		
 		
 		
@@ -167,11 +167,11 @@ h4{
 			<div class="form-group row">
 				<label class="col-sm-4 form-control-label"><h4>圖片</h4></label>
 				<div class="col-sm-10">
-<!-- 					<input type="file" name="pPicture" multiple  required="required"> -->
-					<div class="preview"></div>
+					<input type="file" name="pPicture" multiple  required="required">
+<!-- 					<div class="preview"></div> -->
 <!-- 						<img width = "" id="myImage"/> -->
-						<label class="choose-file btn btn-sm btn-primary glyphicon glyphicon-open" id="upload" for="id_image_large"></label>
-						<input type="file" id="id_image_large" name="pPicture" multiple  required="required">
+<!-- 						<label class="choose-file btn btn-sm btn-primary glyphicon glyphicon-open" id="upload" for="id_image_large"></label> -->
+<!-- 						<input type="file" id="id_image_large" name="pPicture" multiple  required="required"> -->
 				</div>
 			</div>
 			<br>
