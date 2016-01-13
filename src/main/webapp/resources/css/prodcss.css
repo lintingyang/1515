@@ -127,3 +127,13 @@ div.holder{
   margin:5px;
   
   }
+  
+  .demo6 {
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	background-color:#ECFFFF;
+	border: 1px none red;
+	border-radius: 40px;	/* 高度 */
+	text-align: center;
+}
