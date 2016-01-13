@@ -186,7 +186,7 @@ $("#excBtn").click(function(){
 			confirmButtonText: "是的！我要登入",   
 			closeOnConfirm: false }, 
 			function(){   
-				location.href="/head/login";
+				location.href="/head/login";s
 			});
 		
 	}else {

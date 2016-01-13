@@ -260,6 +260,7 @@ public class ProductService extends OurService<Product> {
 		product.setTradeWay(tradeWay);
 		product.setWishItem(wishItem);
 		product.setPostStatus(postStatus);
+		product.setTradeStatus(TrueFalse.FALSE);
 		productDao.save(product);
 		return product;
 
@@ -283,7 +284,6 @@ public class ProductService extends OurService<Product> {
 		product.setTradeWay(tradeWay);
 		product.setWishItem(wishItem);
 		product.setPostStatus(postStatus);
-		product.setTradeStatus(TrueFalse.FALSE);
 		productDao.save(product);
 		return product;
 

@@ -64,12 +64,16 @@ public class memberController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public String showUserPage(@PathVariable("id") final int id, final Model model) {
-
+	public String showUserPage(@PathVariable("id") final int id, final Model model,HttpSession session) {
+		User myself = (User) session.getAttribute("user");
 		User user = userService.getOne(id);
 		if (user == null) {
 			return "redirect:/";
 		}
+		log.error("==============================="+myself.getId());
+		log.error("==============================="+user.getId());
+		
+		boolean relation = focusUserListService.findRelation(myself.getId(), user.getId());
 		int good = 0;
 		int bad = 0;
 		// List<Product> products = productService.findByUserId(id);
@@ -101,6 +105,8 @@ public class memberController {
 				}
 			}
 		}
+		System.out.println("------------------------------------"+relation);
+		model.addAttribute("relation", relation);
 		model.addAttribute("currUser", user);
 		model.addAttribute("good", good);
 		model.addAttribute("bad", bad);
