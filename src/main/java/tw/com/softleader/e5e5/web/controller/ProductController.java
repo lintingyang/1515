@@ -5,7 +5,9 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -28,6 +30,7 @@ import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.entity.ProductPicture;
 import tw.com.softleader.e5e5.entity.User;
 import tw.com.softleader.e5e5.entity.enums.Grade;
+import tw.com.softleader.e5e5.entity.enums.Time;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 import tw.com.softleader.e5e5.service.ExchangeService;
 import tw.com.softleader.e5e5.service.ProductPictureService;
@@ -201,13 +204,13 @@ public class ProductController {
 	@RequestMapping(value = "/insert")
 	public String insert(Model model, @ModelAttribute Product product, @RequestParam("pCategory") int pCategory,
 			@RequestParam("pPicture") MultipartFile pPicture, @RequestParam("pStatusBad") String pStatusBad,
-			@RequestParam("pWishItem") String pWishItem, @RequestParam("pStartTime") String pStartTime,
-			@RequestParam("pDeadline") String pDeadline, HttpSession session) {
-
+			@RequestParam("pWishItem") String pWishItem, @RequestParam("pDeadline") String pDeadline, 
+			HttpSession session) {
+		
 		// 錯誤訊息顯示
-		// Map<String, String> errorMessage = new HashMap<>();
-		// session.removeAttribute("errorMsg");
-		// session.setAttribute("errorMsg", errorMessage);
+		 Map<String, String> errorMessage = new HashMap<>();
+		 session.removeAttribute("errorMsg");
+		 session.setAttribute("errorMsg", errorMessage);
 		// //error1 pStatusBad= null
 		// if(product.getStatus() == "破損"){
 		// if(pStatusBad == null || pStatusBad.trim().length() == 0){
@@ -239,50 +242,64 @@ public class ProductController {
 
 		// 物品狀態 輸入值修改
 		String productStatus = null;
-		if (product.getStatus() == "破損") {
+		if (product.getStatus().equals("破損")) {
 			productStatus = product.getStatus() + "(" + pStatusBad + ")";
 		} else {
 			productStatus = product.getStatus();
 		}
 
-		// 希望清單 輸入值判斷
-		String productWish = null;
-		if (product.getWishItem() == "希望商品") {
-			productWish = pWishItem;
-		} else {
-			productWish = product.getWishItem();
-		}
-
 		// 時間處理
 		LocalDateTime startTime = null;
 		LocalDateTime deadline = null;
+		
+		//時段、地點、方式、希望清單
+		Time tradeTime = null;
+		String location = null;
+		String tradeWay = null;
+		String productWish = null;
+		
 		if (product.getPostStatus() == TrueFalse.TRUE) {
+			startTime = LocalDateTime.now();
+
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-			String monthS = pStartTime.substring(0, 2);
-			String dayS = pStartTime.substring(3, 5);
-			String yearS = pStartTime.substring(6, 10);
-			String start = yearS + "-" + monthS + "-" + dayS + " 00:00"; // "1986-04-08";
-			try {
-				startTime = LocalDateTime.parse(start, formatter);
-			} catch (Exception e) {
-			}
 			String monthD = pDeadline.substring(0, 2);
 			String dayD = pDeadline.substring(3, 5);
 			String yearD = pDeadline.substring(6, 10);
 			String end = yearD + "-" + monthD + "-" + dayD + " 00:00"; // "1986-04-08";
-			try {
-				deadline = LocalDateTime.parse(end, formatter);
-			} catch (Exception e) {
+			deadline = LocalDateTime.parse(end, formatter);
+			
+			if(deadline.isBefore(startTime)){
+				errorMessage.put("timeD", "截止日期一定要比今天晚喔！！");
+				if(errorMessage != null && !errorMessage.isEmpty()) {
+					return "redirect:/product/add";
+				}
 			}
+			
+			
+			
+			tradeTime = product.getTransactionTime();
+			location = product.getLocation();
+			tradeWay = product.getTradeWay();
+			// 希望清單 輸入值判斷
+			if (product.getWishItem().equals("希望商品")) {
+				productWish = pWishItem;
+			} else {
+				productWish = product.getWishItem();
+			}
+			
 		} else {
 			startTime = null;
 			deadline = null;
+			tradeTime = null;
+			location = null;
+			tradeWay = null;
+			productWish = null;
 		}
 
 		// 存入資料
 		Product newProduct = productService.insert(product.getName(), userData.getId(), pCategory, productStatus,
-				product.getDescription(), deadline, startTime, product.getTransactionTime(), product.getLocation(),
-				product.getTradeWay(), productWish, product.getPostStatus());
+				product.getDescription(), deadline, startTime, tradeTime, location,
+				tradeWay, productWish, product.getPostStatus());
 		System.out.println("newProduct========================" + newProduct);
 		if (newProduct != null) {
 			model.addAttribute("result", "success");

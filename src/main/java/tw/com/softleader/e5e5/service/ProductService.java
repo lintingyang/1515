@@ -276,7 +276,6 @@ public class ProductService extends OurService<Product> {
 		product.setProductCategory(productCategoryDao.findOne(category));
 		product.setStatus(status);
 		product.setDescription(description);
-		product.setPostTime(LocalDateTime.now());
 		product.setStartTime(startTime);
 		product.setDeadline(deadline);
 		product.setTransactionTime(transactionTime);

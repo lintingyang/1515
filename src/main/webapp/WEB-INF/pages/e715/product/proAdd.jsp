@@ -15,15 +15,15 @@ h4{
 #em{
 	color:red;
 }
-/* 預覽圖片 */
-.preview > div {
-  display: inline-block;
-  text-align:center;
-}
-/* Hide file input */
-#id_image_large {
- display: none;
-}
+/* /* 預覽圖片 */ */
+/* .preview > div { */
+/*   display: inline-block; */
+/*   text-align:center; */
+/* } */
+/* /* Hide file input */ */
+/* #id_image_large { */
+/*  display: none; */
+/* } */
 
 
 </style>
@@ -36,10 +36,7 @@ h4{
 // 			imgheight: 90
 // 		});
 		
-		
-		
 		//時間
-		$('#pStartTime').datepicker();
 		$('#pDeadline').datepicker();
 		
 		//顯示隱藏表格
@@ -52,11 +49,15 @@ h4{
 		});
 		$('input[name *= "postStatus"]').change(function(){
 			if($(this).val() == "TRUE"){
-				$('#pStartTime').attr('type', '').attr('required','required');
-				$('#pDeadline').attr('type', '').attr('required','required');
+				$('#rightSide').attr('style', '');
+				$('#pDeadline').attr('required','required');
+				$('#location').attr('required','required');
+				$('#pWishItem').attr('required','required');
 	 		}else{
-	 			$('#pStartTime').attr('type', 'hidden').removeAttr('required');
-	 			$('#pDeadline').attr('type', 'hidden').removeAttr('required');
+	 			$('#rightSide').attr('style', 'display: none');
+	 			$('#pDeadline').removeAttr('required');
+	 			$('#location').removeAttr('required');
+	 			$('#pWishItem').removeAttr('required');
 	 		}
 		});
 		$('input[name *= "wishItem"]').change(function(){
@@ -69,16 +70,6 @@ h4{
 	 		}
 		});
 		
-// 		$('#btnSend').click(function() {
-// 			swal({
-// 				title : "新增成功",
-// 				text : "您已新增一項商品",
-// 				type : "success",
-// 				showCancelButton : false,
-// 				confirmButtonColor : "#F5A056",
-// 				closeOnConfirm : true
-// 			});
-// 		});
 	})
 </script>
 <div class="container" style="margin: 50px auto;">
@@ -112,6 +103,10 @@ h4{
 							<option value="9">食品</option>
 							<option value="10">票劵</option>
 							<option value="11">化妝保養用品</option>
+							<option value="12">運動用品</option>
+							<option value="13">男生</option>
+							<option value="14">女生</option>
+							<option value="15">裝飾品</option>
 						</select>
 					</div>
 				</div>
@@ -140,24 +135,13 @@ h4{
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-sm-4 form-control-label"><h4>上架與否</h4></label>
+					<label class="col-sm-4 form-control-label"><h4>圖片</h4></label>
 					<div class="col-sm-10">
-						<div class="radio">
-							<label> <input type="radio" name="postStatus" value="TRUE" id="yesPost" checked>刊登</label> 
-							<label> <input type="radio" name="postStatus" value="FALSE" id="notPost" >暫不刊登</label>
-						</div>
-					</div>
-				</div>
-				<div>
-					<div>
-						<p>刊登日期：<input type="text" id="pStartTime" name="pStartTime" required="required">
-<%-- 						<span id="em">${errorMsg.timeS}</span> --%>
-						</p>
-					</div>
-					<div>
-						<p>截止日期：<input type="text" id="pDeadline" name="pDeadline" required="required">
-<%-- 						<span id="em">${errorMsg.timsD}</span> --%>
-						</p>
+						<input type="file" name="pPicture" multiple  required="required">
+	<!-- 					<div class="preview"></div> -->
+	<!-- 						<img width = "" id="myImage"/> -->
+	<!-- 						<label class="choose-file btn btn-sm btn-primary glyphicon glyphicon-open" id="upload" for="id_image_large"></label> -->
+	<!-- 						<input type="file" id="id_image_large" name="pPicture" multiple  required="required"> -->
 					</div>
 				</div>
 			</div>
@@ -165,69 +149,76 @@ h4{
 
 		<div class="col-md-5">
 			<div class="form-group row">
-				<label class="col-sm-4 form-control-label"><h4>圖片</h4></label>
-				<div class="col-sm-10">
-					<input type="file" name="pPicture" multiple  required="required">
-<!-- 					<div class="preview"></div> -->
-<!-- 						<img width = "" id="myImage"/> -->
-<!-- 						<label class="choose-file btn btn-sm btn-primary glyphicon glyphicon-open" id="upload" for="id_image_large"></label> -->
-<!-- 						<input type="file" id="id_image_large" name="pPicture" multiple  required="required"> -->
-				</div>
-			</div>
-			<br>
-			<div class="form-group row">
-				<label class="col-sm-4 form-control-label"><h4>交易時段</h4></label>
+				<label class="col-sm-4 form-control-label"><h4>上架與否</h4></label>
 				<div class="col-sm-10">
 					<div class="radio">
-						<label><input type="radio" name="transactionTime" value="上午" checked>上午</label>
-						<label><input type="radio" name="transactionTime" value="下午">下午</label>
-						<label><input type="radio" name="transactionTime" value="晚上">晚上</label>
+						<label> <input type="radio" name="postStatus" value="TRUE" id="yesPost" checked>刊登</label> 
+						<label> <input type="radio" name="postStatus" value="FALSE" id="notPost" >暫不刊登</label>
 					</div>
 				</div>
 			</div>
-			<div class="form-group row">
-				<label class="col-sm-4 form-control-label"><h4>交易地點</h4></label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" id="location"
-						name="location" placeholder="ex : 地址/捷運站名/地標/學校"
-						style="width: 80%;" required="required">
+			<div id="rightSide" >
+				<div>
+					<p>截止日期：<input type="text" id="pDeadline" name="pDeadline" required="required">
+<%-- 					<span id="em">${errorMsg.timsD}</span> --%>
+					</p>
 				</div>
-			</div>
-			<br>
-			<div class="form-group row">
-				<label class="col-sm-10 form-control-label"><h4>交易方式 (寄件費用，收件者自付)</h4></label>
-				<div class="col-sm-10">
-					<select name="tradeWay">
-						<option value="面交">面交</option>
-						<option value="宅急便">宅急便</option>
-						<option value="超商">超商</option>
-						<option value="郵寄">郵寄</option>
-					</select>
-				</div>
-			</div>
-			<br>
-			<div class="form-group row">
-				<label class="col-sm-4 form-control-label"><h4>希望換到商品</h4></label>
-				<div class="col-sm-10">
-					<div class="radio">
-						<label> <input type="radio" name="wishItem" value="隨機">隨機</label></div>
-					<div class="radio">
-						<label> <input type="radio" name="wishItem" value="免費">贈送</label></div>
-					<div class="radio">
-						<label> <input type="radio" name="wishItem" value="希望商品" id="wish" checked>希望商品</label></div>
-					<div id="divWish">
-						<textarea id="pWishItem" name="pWishItem" style="width: 90%;" class="form-control" rows="8"
-							placeholder="詳細敘述想要換到的商品" required="required"></textarea>
-<%-- 							<span id="em">${errorMsg.wish}</span> --%>
+				<br>
+				<div class="form-group row">
+					<label class="col-sm-4 form-control-label"><h4>交易時段</h4></label>
+					<span style="color: red">${errorMsg.timeD}</span>
+					<div class="col-sm-10">
+						<div class="radio">
+							<label><input type="radio" name="transactionTime" value="上午" checked>上午</label>
+							<label><input type="radio" name="transactionTime" value="下午">下午</label>
+							<label><input type="radio" name="transactionTime" value="晚上">晚上</label>
+						</div>
 					</div>
 				</div>
+				<div class="form-group row">
+					<label class="col-sm-4 form-control-label"><h4>交易地點</h4></label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="location"
+							name="location" placeholder="ex : 地址/捷運站名/地標/學校"
+							style="width: 80%;" required="required">
+					</div>
+				</div>
+				<br>
+				<div class="form-group row">
+					<label class="col-sm-10 form-control-label"><h4>交易方式 (寄件費用，收件者自付)</h4></label>
+					<div class="col-sm-10">
+						<select name="tradeWay">
+							<option value="面交">面交</option>
+							<option value="宅急便">宅急便</option>
+							<option value="超商">超商</option>
+							<option value="郵寄">郵寄</option>
+						</select>
+					</div>
+				</div>
+				<br>
+				<div class="form-group row">
+					<label class="col-sm-4 form-control-label"><h4>希望換到商品</h4></label>
+					<div class="col-sm-10">
+						<div class="radio">
+							<label> <input type="radio" name="wishItem" value="隨機">隨機</label></div>
+						<div class="radio">
+							<label> <input type="radio" name="wishItem" value="免費">贈送</label></div>
+						<div class="radio">
+							<label> <input type="radio" name="wishItem" value="希望商品" id="wish" checked>希望商品</label></div>
+						<div id="divWish">
+							<textarea id="pWishItem" name="pWishItem" style="width: 90%;" class="form-control" rows="8"
+								placeholder="詳細敘述想要換到的商品" required="required"></textarea>
+	<%-- 							<span id="em">${errorMsg.wish}</span> --%>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div style="text-align: center; margin:50px auto;">
 				<button id="btnSend" type="submit" class="btn btn-success btn-lg">
 					<span class="glyphicon glyphicon-send" aria-hidden="true"></span> 送出
 					<span class="glyphicon glyphicon-send" aria-hidden="true"></span>
 				</button>
 			</div>
-		</div>
 		</div>
 	</form>
 </div>
