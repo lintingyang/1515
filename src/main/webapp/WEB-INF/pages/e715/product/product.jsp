@@ -485,11 +485,21 @@ function addexchange(event){
 		 		confirmButtonColor: "#DD6B55",  
 		 		confirmButtonText: "是, 我要交換此物件",  
 		 		cancelButtonText: "不, 再讓我考慮一下",   
-		 		closeOnConfirm: false,   closeOnCancel: false }, 
+		 		closeOnConfirm: false,  
+		 		closeOnCancel: false }, 
 		 		function(isConfirm){   
 		 			if (isConfirm) {    
-		 			swal("提出交換!", "已經幫您提出交換請求", "success");  
-		 		 	location.href="/product/exchange/"+event.data.id+"/"+${product.id};
+		 				swal({
+	 					type : "success",
+	 					title: "修改成功",  
+	 					text: "兩秒後會自動跳回",  
+	 					timer: 2000,   
+	 					showConfirmButton: false
+	 				});
+// 		 			swal("提出交換!", "已經幫您提出交換請求", "success");  
+		 			setTimeout(function(){
+		 				location.href="/product/exchange/"+event.data.id+"/"+${product.id}; }, 1500);
+		 		 	
 		 		} else { 
 		 			swal("", "取消交換", "error"); 
 		 				}

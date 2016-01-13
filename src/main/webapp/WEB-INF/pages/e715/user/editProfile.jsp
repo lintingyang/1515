@@ -312,16 +312,13 @@ $("#upUserData").click(
 			showLoaderOnConfirm: true,
 			},function() {
 				swal({
-// 					"Deleted!",
-// 					"Your imaginary file has been deleted.",
-// 					"success"
+					type : "success",
 					title: "修改成功",  
-					text: "兩秒後會自動跳回",  
+					text: "",  
 					timer: 2000,   
 					showConfirmButton: false
-				
 				});
-				
+
 				setTimeout(function(){
 					$('#upUserDataForm').submit(); }, 1500);
 					
