@@ -170,7 +170,8 @@ public class memberController {
 			@RequestParam("month") String month, @RequestParam("day") String day, @RequestParam("year") String year,
 			@RequestParam("phone") String phone, @RequestParam("email") String email,
 			@RequestParam("subject") String subject, @RequestParam("Addr") String addr,
-			@RequestParam("interested") List<Integer> interested, @RequestParam("aboutMe") String aboutMe,
+			//@RequestParam("interested") List<Integer> interested,
+			@RequestParam("aboutMe") String aboutMe,
 			HttpSession session) {
 		User user = (User) session.getAttribute("user");
 
@@ -215,17 +216,16 @@ public class memberController {
 			user.setAddress(addr);
 			user.setAboutMe(aboutMe);
 			userService.update(user);
-			List<UserLike> u3 = userLikeService.findUserLike(user.getId());
-			for (UserLike u2 : u3) {
-				userLikeService.delete(u2.getId());
-			}
-
-			for (Integer i : interested) {
-				UserLike u = new UserLike();
-				u.setProductCategoryId(new ProductCategory(i));
-				u.setUserId(new User(user.getId()));
-				userLikeService.insert(u);
-			}
+//			List<UserLike> u3 = userLikeService.findUserLike(user.getId());
+//			for (UserLike u2 : u3) {
+//				userLikeService.delete(u2.getId());
+//			}
+//			for (Integer i : interested) {
+//				UserLike u = new UserLike();
+//				u.setProductCategoryId(new ProductCategory(i));
+//				u.setUserId(new User(user.getId()));
+//				userLikeService.insert(u);
+//			}
 			return "/e715/user/modifyFileAsk";
 		}
 	}
