@@ -317,12 +317,24 @@ $("#upUserData").click(
 			//confirmButtonColor : "#DD6B55",
 			confirmButtonText : "YES",
 			closeOnConfirm : false,
+			showLoaderOnConfirm: true,
 			},function() {
-				swal(
-					"Deleted!",
-					"Your imaginary file has been deleted.",
-					"success");
-					$('#upUserDataForm').submit();
+				swal({
+// 					"Deleted!",
+// 					"Your imaginary file has been deleted.",
+// 					"success"
+					title: "修改成功",  
+					text: "兩秒後會自動跳回",  
+					timer: 2000,   
+					showConfirmButton: false
+				
+				});
+				
+				setTimeout(function(){
+					$('#upUserDataForm').submit(); }, 1500);
+					
+					
+					
 					}
 			);
 				})

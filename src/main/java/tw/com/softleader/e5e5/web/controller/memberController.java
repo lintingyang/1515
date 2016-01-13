@@ -127,9 +127,10 @@ public class memberController {
 		User user = (User) session.getAttribute("user");
 		if (user != null) {
 			return "/e715/user/changePassWord";
-		}
+		}else{
 
 		return "/e715/user/login";
+		}
 
 	}
 
@@ -138,7 +139,7 @@ public class memberController {
 			@RequestParam("newPwdCheck") String newPwdCheck, HttpSession session) {
 		User user = (User) session.getAttribute("user");
 
-		if (user == null || !oldPwd.equals(user.getPassword())) {
+		if (user == null || !oldPwd.equals(user.getPassword()) || newPwd==null || newPwd.length()==0) {
 			return "/e715/user/login";
 		} else {
 			if (newPwdCheck.equals(newPwd)) {
