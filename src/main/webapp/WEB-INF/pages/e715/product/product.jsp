@@ -94,8 +94,10 @@
 		<div class="container"
 			style="width: 100%; height: 100px; text-align: center;">
 			<c:if test="${product.userId.id != user.id}">
-				<input id="excBtn" class="btn btn-primary btn-lg" type="button" value="我要交換" data-toggle="modal" 
-				data-target="#myProductList">
+				<c:if test="${product.tradeStatus== 'FALSE'}">
+					<input id="excBtn" class="btn btn-primary btn-lg" type="button" value="我要交換" data-toggle="modal" 
+					data-target="#myProductList">
+				</c:if>
 			</c:if>
 		</div>
 
@@ -370,12 +372,12 @@ $(function(){
  		 var imgId=0;
 		 var loginId="${user.id}";
 		 var prodUserId="${product.userId.id}";
-		 var prodTrad="{product.tradeStatus}";
+		 var prodTrad="${product.tradeStatus}";
 		 $.each(data, function() {
 			imgId++;
 			var excBtn2='';
 			//顯示交換物品欄的交換鈕
-			if(prodUserId.length!=0 && prodUserId==loginId &&prodTrad=="FLASE"){
+			if(prodUserId.length!=0 && prodUserId==loginId &&prodTrad=="FALSE"){
 				excBtn2 = '<button id="cha" name="cha" type="button" class="btn btn-primary" onclick="javascript:location.href=\'makeSure?id='+ this.id + '\'">交換</button>';
 			}
 			$("#testtable").append('<tr><td><div class="col-md-2">'+
