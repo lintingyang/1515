@@ -67,6 +67,8 @@ div.holder{
 .productcategory{
 	width: 90px;
 	height:60px;
+	padding: auto;
+	text-align: center;
 }
 
 
@@ -136,4 +138,6 @@ div.holder{
 	border: 1px none red;
 	border-radius: 40px;	/* 高度 */
 	text-align: center;
+	margin: 0 auto;
+	
 }
