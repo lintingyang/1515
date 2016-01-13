@@ -253,6 +253,7 @@ $(function(){
 					<div align="center" style="margin: 5px auto;">
 						<span class="glyphicon glyphicon-hand-left" aria-hidden="true"></span>
 					</div>
+					<img data-src="holder.js/300x300" alt="..." src="${pb[0].picture}" class="img-thumbnail">
 					<h4>${exchange.productBId.name}</h4>
 				  	<p id="p1">${exchange.productBId.description}</p>
 				</blockquote>
@@ -262,6 +263,7 @@ $(function(){
 					<div align="center" style="margin: 5px auto;">
 						<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
 					</div>
+					<img data-src="holder.js/300x300" alt="..." src="${pa[0].picture}" class="img-thumbnail">
 					<h4>${exchange.productAId.name}</h4>
 				  	<p id="p1">${exchange.productAId.description}</p>
 				</blockquote>
