@@ -153,7 +153,7 @@ public class headerController {
 		
 		if(login!=null){
 			session.setAttribute("user", login);
-			return "redirect:/";
+			return "redirect:/head/success";
 		}else{
 //			return "/e715/user/createaccount";
 			return "redirect:/head/create";
@@ -161,7 +161,12 @@ public class headerController {
 
 	}
 
+	@RequestMapping(value = "/success" ,method = RequestMethod.GET)
+	public String createSuccess(HttpSession session){
 
+		return "/e715/user/insertSuccess";
+
+	}
 	
 
 	

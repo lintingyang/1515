@@ -309,12 +309,21 @@ $("#upUserData").click(
 			//confirmButtonColor : "#DD6B55",
 			confirmButtonText : "YES",
 			closeOnConfirm : false,
+			showLoaderOnConfirm: true,
 			},function() {
-				swal(
-					"Deleted!",
-					"Your imaginary file has been deleted.",
-					"success");
-					$('#upUserDataForm').submit();
+				swal({
+					type : "success",
+					title: "修改成功",  
+					text: "",  
+					timer: 2000,   
+					showConfirmButton: false
+				});
+
+				setTimeout(function(){
+					$('#upUserDataForm').submit(); }, 1500);
+					
+					
+					
 					}
 			);
 				})
