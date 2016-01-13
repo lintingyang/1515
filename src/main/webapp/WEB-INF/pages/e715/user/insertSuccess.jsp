@@ -33,7 +33,7 @@
 		});
 		
 		$("#perfectData").on('click', function() {
-			window.location.href = "editProfile.jsp";
+			window.location.href = "/E715Member/editProfile";
 		});
 		
 	});
@@ -44,14 +44,14 @@
 <div class="container">
 	<div>
 		<div id="successImg">
-			<img src="/resources/imgs/wallpaper.jpg" width="600" id="img1">
+			<img src="/resources/imgs/wallpaper.jpg" width="400" id="img1">
 		</div>
 		<p id="successInsert">恭喜您新增帳號成功</p>
 
 		<div class="row">
 			<div class="col-md-6" id="btnGoTop">
 
-				<button type="button" class="btn btn-default" id="goTop" >回首頁</button>
+				<button type="button" class="btn btn-default" id="goTop">回首頁</button>
 
 			</div>
 			<div class="col-md-6">

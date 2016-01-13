@@ -94,8 +94,10 @@
 		<div class="container"
 			style="width: 100%; height: 100px; text-align: center;">
 			<c:if test="${product.userId.id != user.id}">
-				<input id="excBtn" class="btn btn-primary btn-lg" type="button" value="我要交換" data-toggle="modal" 
-				data-target="#myProductList">
+				<c:if test="${product.tradeStatus== 'FALSE'}">
+					<input id="excBtn" class="btn btn-primary btn-lg" type="button" value="我要交換" data-toggle="modal" 
+					data-target="#myProductList">
+				</c:if>
 			</c:if>
 		</div>
 
@@ -373,12 +375,12 @@ $(function(){
  		 var imgId=0;
 		 var loginId="${user.id}";
 		 var prodUserId="${product.userId.id}";
-		 var prodTrad="{product.tradeStatus}";
+		 var prodTrad="${product.tradeStatus}";
 		 $.each(data, function() {
 			imgId++;
 			var excBtn2='';
 			//顯示交換物品欄的交換鈕
-			if(prodUserId.length!=0 && prodUserId==loginId &&prodTrad=="FLASE"){
+			if(prodUserId.length!=0 && prodUserId==loginId &&prodTrad=="FALSE"){
 				excBtn2 = '<button id="cha" name="cha" type="button" class="btn btn-primary" onclick="javascript:location.href=\'makeSure?id='+ this.id + '\'">交換</button>';
 			}
 			$("#testtable").append('<tr><td><div class="col-md-2">'+
@@ -488,11 +490,21 @@ function addexchange(event){
 		 		confirmButtonColor: "#DD6B55",  
 		 		confirmButtonText: "是, 我要交換此物件",  
 		 		cancelButtonText: "不, 再讓我考慮一下",   
-		 		closeOnConfirm: false,   closeOnCancel: false }, 
+		 		closeOnConfirm: false,  
+		 		closeOnCancel: false }, 
 		 		function(isConfirm){   
 		 			if (isConfirm) {    
-		 			swal("提出交換!", "已經幫您提出交換請求", "success");  
-		 		 	location.href="/product/exchange/"+event.data.id+"/"+${product.id};
+		 				swal({
+	 					type : "success",
+	 					title: "修改成功",  
+	 					text: "兩秒後會自動跳回",  
+	 					timer: 2000,   
+	 					showConfirmButton: false
+	 				});
+// 		 			swal("提出交換!", "已經幫您提出交換請求", "success");  
+		 			setTimeout(function(){
+		 				location.href="/product/exchange/"+event.data.id+"/"+${product.id}; }, 1500);
+		 		 	
 		 		} else { 
 		 			swal("", "取消交換", "error"); 
 		 				}
