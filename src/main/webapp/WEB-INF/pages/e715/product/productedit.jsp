@@ -177,7 +177,7 @@ function getExchangedProduct(productId){
 	console.log(productId);
 // 	$.post("/product/exchangedProduct",{ "id" : productId } ,function(exchangeId) {
 // 		console.log("exchangeId"+exchangeId);
-		location.href="/product/exchanging?id=16";
+// 		location.href="/product/exchanging?id=16";
 // 	})
 }
 function getProductCount(id , type ,badgePost){ // 已刊登欲交換數量
