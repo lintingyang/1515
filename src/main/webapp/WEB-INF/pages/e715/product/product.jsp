@@ -312,10 +312,13 @@ $(function(){
      }//end of showtable()
 //	end顯示Q&A列表	
 //	提問功能
-	$("#questiontext").keydown(function(){
+	$("#questiontext").on("input", function(){
 		var questionLength = $("#questiontext").val().length;
 		if(questionLength != 0){
 			$("#submitquestion").removeAttr("disabled");
+		} else if(questionLength == 0){
+			$("#submitquestion").removeAttr("disabled");
+			$("#submitquestion").attr("disabled", true);
 		}
 	})
 	var notPublic = false;
