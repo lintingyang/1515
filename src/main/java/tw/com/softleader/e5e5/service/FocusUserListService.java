@@ -34,6 +34,20 @@ public class FocusUserListService  extends OurService<FocusUserList>{
 		return null;
 	}
 	
+	public boolean findRelation (Integer userAId , Integer userBId){
+		boolean result = false;
+		
+		FocusUserList focusUser = focusUserListDao.findByOnly(userAId, userBId);
+		if(focusUser!=null){
+			result = true;
+		}
+		
+		
+		
+		return result;
+	}
+	
+	
 	@Transactional
 	public int insert (int userAId , int userBId){
 		List<FocusUserList> fuls = focusUserListDao.findByOneUser(userAId);
@@ -43,6 +57,8 @@ public class FocusUserListService  extends OurService<FocusUserList>{
 				temp=true;
 			}
 		}
+		
+		
 		
 		if(!temp){
 			FocusUserList fulNew = new FocusUserList();
