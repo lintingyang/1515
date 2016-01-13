@@ -52,6 +52,7 @@
 			threshold : 200,
 			failure_limit : 10
 		});
+
 		$.ajax({
 			contentType : "application/json",
 			url : "/query",
