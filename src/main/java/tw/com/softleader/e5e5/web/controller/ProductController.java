@@ -310,7 +310,7 @@ public class ProductController {
 		Exchange exchange = exchangeService.findOne(exId);
 		session.setAttribute("makeSure", exchange);
 		
-		String s = exchange.getProductBId().getDeadline().toString();
+		String s = exchange.getProductAId().getDeadline().toString();
 		String ss = s.substring(0, 10);
 		session.setAttribute("ss", ss);
 		
@@ -376,15 +376,11 @@ public class ProductController {
 		User ua = exchange.getProductAId().getUserId();
 		Grade point = null;
 		if(g == 1){
-			point = Grade.DAMN;
-		}else if (g == 2){
 			point = Grade.BAD;
-		}else if (g == 3){
+		}else if (g == 2){
 			point = Grade.SOSO;
-		}else if (g == 5){
+		}else if (g == 3){
 			point = Grade.GOOD;
-		}else if (g == 5){
-			point = Grade.GREAT;
 		}else{
 			point = null;
 		}
@@ -400,7 +396,14 @@ public class ProductController {
 		}else{
 			model.addAttribute("ans", "fail");
 		}
-			
+		
+		List<ProductPicture> pa = productPictureService.getProductPictures(exchange.getProductAId());
+		List<ProductPicture> pb = productPictureService.getProductPictures(exchange.getProductBId());
+		model.addAttribute("pa", pa);
+		model.addAttribute("pb", pb);
+		
+		
+		
 		return "/e715/product/proExchanging";
 	}
 	
