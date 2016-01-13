@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
 <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="jqueryui/style.css">
+<script src="/resources/js/preview.image.js"></script>
 <style>
 h4{
 	color:#000079;
@@ -15,9 +15,29 @@ h4{
 #em{
 	color:red;
 }
+/* 預覽圖片 */
+.preview > div {
+  display: inline-block;
+  text-align:center;
+}
+/* Hide file input */
+#id_image_large {
+ display: none;
+}
+
+
 </style>
 <script type="text/javascript">
 	$(function() {
+		//圖片
+		$("input[name=pPicture]").previewimage({
+			div: ".preview",
+			imgwidth: 90,
+			imgheight: 90
+		});
+		
+		
+		
 		//時間
 		$('#pStartTime').datepicker();
 		$('#pDeadline').datepicker();
@@ -147,7 +167,11 @@ h4{
 			<div class="form-group row">
 				<label class="col-sm-4 form-control-label"><h4>圖片</h4></label>
 				<div class="col-sm-10">
-					<input type="file" name="pPicture" multiple  required="required">
+<!-- 					<input type="file" name="pPicture" multiple  required="required"> -->
+					<div class="preview"></div>
+<!-- 						<img width = "" id="myImage"/> -->
+						<label class="choose-file btn btn-sm btn-primary glyphicon glyphicon-open" id="upload" for="id_image_large"></label>
+						<input type="file" id="id_image_large" name="pPicture" multiple  required="required">
 				</div>
 			</div>
 			<br>
