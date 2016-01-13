@@ -114,7 +114,8 @@ public class ProductUDController {
 		status = 1;
 		return "/e715/product/productedit";
 	}
-
+	
+	//點選編輯
 	@RequestMapping(value = "/edit/{id}")
 	public String edit(@PathVariable("id") final int id, final Model model, HttpSession session) {
 		Product product = productService.getOne(id);
@@ -122,7 +123,18 @@ public class ProductUDController {
 		session.setAttribute("productId", id);
 		return "/e715/product/proEdit";
 	}
-
+	//exchange
+	@RequestMapping(value = "/exchangedProduct")
+	public int exchangedProduct(@RequestParam ("id") int productId ){
+		log.debug("##############"+productId);
+		int exchangeId = productService.findExchangeIdByProductId(48);
+		String ddc = Integer.toString(exchangeId);
+		log.debug("##############exchangeId "+exchangeId);
+		log.debug("##############ddc "+ddc);
+		
+		return 16;
+	}
+	//編輯物品
 	@RequestMapping(value = "/update")
 	public String insert(Model model, @ModelAttribute Product product, @RequestParam("pCategory") int pCategory,
 			@RequestParam("pPicture") MultipartFile pPicture, @RequestParam("pStatusBad") String pStatusBad,
@@ -159,8 +171,9 @@ public class ProductUDController {
 		// return "redirect:/product/add";
 		// }
 		// 返回頁面
-		status = 2;
-		// 物品狀態 輸入值修改
+		
+//		status = 2;
+		// 物品實體狀態 輸入值修改
 		String productStatus = null;
 		if (product.getStatus() == "破損") {
 			productStatus = product.getStatus() + "(" + pStatusBad + ")";

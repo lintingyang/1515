@@ -130,10 +130,14 @@ $('.queryBtn').click(function() { //點選排列方式後按照順序排列
 			.attr("onclick","removeProduct("+data[i].id+")");
 			total = 0;
 			}
+			var aclick = $("<a>").attr("href","/product/"+data[i].id);
 			
+			if(type == "OthersExchanged" || type == "myExchanged"){
+				console.log("exchangedif")
+				aclick = $("<a>").attr("href",getExchangedProduct(data[i].id));
+			}
 			
 			var productdiv = $("<div></div>");
-			var aclick = $("<a>").attr("href","/product/"+data[i].id);
 			var productimg = $("<img>").addClass("prodimg");
 			var p = $("<span>").text(data[i].name);
 			var badgePost = $("<span>").addClass("badge pCount");
@@ -169,7 +173,13 @@ $('.queryBtn').click(function() { //點選排列方式後按照順序排列
 		}//success
 	});	//ajax
 });//click
-
+function getExchangedProduct(productId){
+	console.log(productId);
+// 	$.post("/product/exchangedProduct",{ "id" : productId } ,function(exchangeId) {
+// 		console.log("exchangeId"+exchangeId);
+		location.href="/product/exchanging?id=16";
+// 	})
+}
 function getProductCount(id , type ,badgePost){ // 已刊登欲交換數量
 	var data ={
 			"id" : id ,

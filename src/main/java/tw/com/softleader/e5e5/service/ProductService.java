@@ -293,7 +293,11 @@ public class ProductService extends OurService<Product> {
 	public int findCountByProductBId(Integer id) {
 		return productDao.findCountByProductBId(id);
 	}
-
+	
+	@Transactional
+	public int findExchangeIdByProductId(int productId){
+		return productDao.findExchangeIdByProductId(productId);
+	}
 	@Override
 	public OurDao<Product> getDao() {
 		return productDao;
