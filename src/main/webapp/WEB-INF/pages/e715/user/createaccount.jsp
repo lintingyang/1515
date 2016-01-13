@@ -119,16 +119,16 @@ function Dateblur() {
 					<label for="inputPassword3" class="col-sm-2 control-label">暱稱:</label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control textSize" name="nickname"
-							id="nickname" placeholder="nickname">
+							id="nickname" placeholder="nickname" required>
 					</div>
 				</div>
 
 				<div class="form-group" id="divBorder">
 					<label for="inputEmail3" class="col-sm-2 control-label">性別:</label>
 					<div class="col-sm-10">	
-						<input type="radio" value="MALE" id="sex" name="sex" checked="checked">
+						<input type="radio" value="MALE" id="sex" name="sex" checked="checked" required>
 						<span>男</span> 
-						<input type="radio" value="FEMALE" id="sex" name="sex">
+						<input type="radio" value="FEMALE" id="sex" name="sex" >
 						<span>女</span>
 					</div>
 				</div>
@@ -136,14 +136,14 @@ function Dateblur() {
 				<div class="form-group" id="divBorder">
 					<label for="inputPassword3" class="col-sm-2 control-label">生日:</label>
 					<div class="col-sm-10" style="padding-top: 7px">
-				<select name="year" id="year">  
-					<option class="defaultOption">Select</option>
+					<select name="year" id="year" required>  
+					<option class="defaultOption">2000</option>
 					</select>年 
-					<select name="month" id="month"> 
-						<option  class="defaultOption">Select</option> 
+					<select name="month" id="month" required> 
+						<option  class="defaultOption">1</option> 
 					</select>月
-					<select name="day" id="day"> 
-						<option class="defaultOption">Select</option>
+					<select name="day" id="day" required> 
+						<option class="defaultOption">1</option>
 					</select> 日
 					</div>
 				</div>
@@ -151,7 +151,7 @@ function Dateblur() {
 					<label for="inputPassword3" class="col-sm-2 control-label">電話:</label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control textSize"
-							placeholder="phone" id="phone" name="phone">
+							placeholder="phone" id="phone" name="phone" required>
 					</div>
 				</div>
 				<div class="form-group" id="divBorder">
