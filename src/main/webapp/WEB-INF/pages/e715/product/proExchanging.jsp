@@ -77,13 +77,6 @@ function s3(){
 	$('#img4,#img5').css('background-color', '#cccccc');
 	$('#img1,#img2,#img3').css('background-color', '#ffcc1c');
 }
-function s4(){
-	$('#img5').css('background-color', '#cccccc');
-	$('#img1,#img2,#img3,#img4').css('background-color', '#ffcc1c');
-}
-function s5(){
-	$('#img1,#img2,#img3,#img4,#img5').css('background-color', '#ffcc1c');
-}
 
 $(function(){
 	//評分完成
@@ -97,6 +90,8 @@ $(function(){
 	var productBUser = "${exchange.productBId.userId.id}";
 	var productAGrade = "${exchange.productAId.grade}";
 	var productBGrade = "${exchange.productBId.grade}";
+	alert(productAGrade);
+	alert(productBGrade);
 	
 	//登入者是雙方產品擁有者，才可有(評分跟回商品業按鈕)
 	if(loginUser == productAUser || loginUser == productBUser){
@@ -105,13 +100,14 @@ $(function(){
 		if(loginUser == productAUser){
 			
 			//已評過分則不可再評
-			if(productBGrade == "GOOD" || productBGrade == "BAD" ){
+			if(productBGrade == "GOOD" || productBGrade == "BAD" || productBGrade == "SOSO"){
 				$('#makeGrade').attr('style', ' display: none');
 				$('#thx').removeAttr('style');
 			}
-		}else{
-			if(productAGrade == "GOOD" || productAGrade == "BAD" ){
+		}else {
+			if(productAGrade == "GOOD" || productAGrade == "BAD" || productAGrade == "SOSO"){
 				$('#makeGrade').attr('style', ' display: none');
+				$('#thx').removeAttr('style');
 			}
 		}
 	}else{
@@ -180,48 +176,6 @@ $(function(){
 			});
 		});
 	});
-	//星星4
-	$('#img4').mouseover(function(){
-		s4();
-		$('#img4').mouseout(function(){
-			s0();
-		});
-	});
-	$('#img4').click(function(){
-		s4();
-		$('#final').attr("onclick", "javascript:location.href='grade?g=4'");
-		$('#img4').mouseout(function(){
-			s4();
-		});
-		$('#img1,#img2,#img3,#img4,#img5').mouseover(function(){
-			s4();
-			$('#img1,#img2,#img3,#img4,#img5').mouseout(function(){
-				s4();
-			});
-		});
-	});
-	//星星5
-	$('#img5').mouseover(function(){
-		s5();
-		$('#img5').mouseout(function(){
-			s0();
-		});
-	});
-	$('#img5').click(function(){
-		s5();
-		$('#final').attr("onclick", "javascript:location.href='grade?g=5'");
-		$('#img5').mouseout(function(){
-			s5();
-		});
-		$('#img1,#img2,#img3,#img4,#img5').mouseover(function(){
-			s5();
-			$('#img1,#img2,#img3,#img4,#img5').mouseout(function(){
-				s5();
-			});
-		});
-	});
-	
-	
 })
 
 </script>
@@ -344,8 +298,6 @@ $(function(){
 				<img id="img1" name="1" src="/resources/imgs/star.png" />
                 <img id="img2" name="2" src="/resources/imgs/star.png" />
                 <img id="img3" name="3" src="/resources/imgs/star.png" />
-                <img id="img4" name="4" src="/resources/imgs/star.png" />
-                <img id="img5" name="5" src="/resources/imgs/star.png" />
                 <p style="font-size: small; ">小提示：若要更改，請直接點選星星來修正</p>
 			</div>
 	      </div>
