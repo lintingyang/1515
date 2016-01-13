@@ -96,16 +96,8 @@
 		tempdate = new Date(document.getElementById("year").value, document
 				.getElementById("month").value, 0).getDate();
 		var opt = window.document.createElement("option");
-		opt.value = $
-		{
-			user.birthday.getDayOfMonth()
-		}
-		;
-		opt.innerHTML = $
-		{
-			user.birthday.getDayOfMonth()
-		}
-		;
+		opt.value = ${user.birthday.getDayOfMonth()};
+		opt.innerHTML = ${user.birthday.getDayOfMonth()};
 		opt.className = "defaultOption";
 		document.getElementById('day').appendChild(opt);
 		for (var i = 1; i <= tempdate; i++) {
@@ -317,12 +309,21 @@ $("#upUserData").click(
 			//confirmButtonColor : "#DD6B55",
 			confirmButtonText : "YES",
 			closeOnConfirm : false,
+			showLoaderOnConfirm: true,
 			},function() {
-				swal(
-					"Deleted!",
-					"Your imaginary file has been deleted.",
-					"success");
-					$('#upUserDataForm').submit();
+				swal({
+					type : "success",
+					title: "修改成功",  
+					text: "",  
+					timer: 2000,   
+					showConfirmButton: false
+				});
+
+				setTimeout(function(){
+					$('#upUserDataForm').submit(); }, 1500);
+					
+					
+					
 					}
 			);
 				})
