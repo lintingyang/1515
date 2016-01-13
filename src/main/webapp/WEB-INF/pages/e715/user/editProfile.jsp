@@ -96,16 +96,8 @@
 		tempdate = new Date(document.getElementById("year").value, document
 				.getElementById("month").value, 0).getDate();
 		var opt = window.document.createElement("option");
-		opt.value = $
-		{
-			user.birthday.getDayOfMonth()
-		}
-		;
-		opt.innerHTML = $
-		{
-			user.birthday.getDayOfMonth()
-		}
-		;
+		opt.value = ${user.birthday.getDayOfMonth()};
+		opt.innerHTML = ${user.birthday.getDayOfMonth()};
 		opt.className = "defaultOption";
 		document.getElementById('day').appendChild(opt);
 		for (var i = 1; i <= tempdate; i++) {
