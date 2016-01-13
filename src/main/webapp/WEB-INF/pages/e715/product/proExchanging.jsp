@@ -90,8 +90,6 @@ $(function(){
 	var productBUser = "${exchange.productBId.userId.id}";
 	var productAGrade = "${exchange.productAId.grade}";
 	var productBGrade = "${exchange.productBId.grade}";
-	alert(productAGrade);
-	alert(productBGrade);
 	
 	//登入者是雙方產品擁有者，才可有(評分跟回商品業按鈕)
 	if(loginUser == productAUser || loginUser == productBUser){

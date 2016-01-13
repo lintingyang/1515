@@ -310,7 +310,7 @@ public class ProductController {
 		Exchange exchange = exchangeService.findOne(exId);
 		session.setAttribute("makeSure", exchange);
 		
-		String s = exchange.getProductBId().getDeadline().toString();
+		String s = exchange.getProductAId().getDeadline().toString();
 		String ss = s.substring(0, 10);
 		session.setAttribute("ss", ss);
 		
@@ -396,7 +396,14 @@ public class ProductController {
 		}else{
 			model.addAttribute("ans", "fail");
 		}
-			
+		
+		List<ProductPicture> pa = productPictureService.getProductPictures(exchange.getProductAId());
+		List<ProductPicture> pb = productPictureService.getProductPictures(exchange.getProductBId());
+		model.addAttribute("pa", pa);
+		model.addAttribute("pb", pb);
+		
+		
+		
 		return "/e715/product/proExchanging";
 	}
 	

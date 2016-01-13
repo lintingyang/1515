@@ -74,18 +74,6 @@ h3{
 							<label class="title">商品描述：</label>
 							<label id="simple">${makeSure.productBId.description}</label>
 						</div>
-						<div class="st1">
-							<label class="title">交易地點：</label>
-							<label id="simple">${makeSure.productBId.location}</label>
-						</div>
-						<div class="st1">
-							<label class="title">交易期限：</label>
-							<label id="simple">${ss}</label>
-						</div>
-						<div class="st1">
-							<label class="title">交易方式：</label>
-							<label id="simple">${makeSure.productBId.tradeWay}</label>
-						</div>
 						<hr>
 						<p align="center">< 擁有者明細 ></p>
 						<div class="st1">
@@ -133,6 +121,20 @@ h3{
 						<div class="st2">
 							<label class="title2">描述：</label>
 							<label id="simple2">${makeSure.productAId.description}</label>
+						</div>
+						<hr>
+						<p align="center">< 我的交換資訊 ></p>
+						<div class="st2">
+							<label class="title2">交易地點：</label>
+							<label id="simple">${makeSure.productAId.location}</label>
+						</div>
+						<div class="st2">
+							<label class="title2">交易期限：</label>
+							<label id="simple">${ss}</label>
+						</div>
+						<div class="st2">
+							<label class="title2">交易方式：</label>
+							<label id="simple">${makeSure.productAId.tradeWay}</label>
 						</div>
       			</div>
     		</div>
