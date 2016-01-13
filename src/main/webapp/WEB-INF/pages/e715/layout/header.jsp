@@ -120,23 +120,44 @@
       		<table style=" margin:auto;">
       			<tr>
 					
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg "data-dismiss="modal">全部</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg"data-dismiss="modal">課本書籍</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">遊戲影音</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">日常用品</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">文具用品</button></td>
+      				<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/house.png"></div>全部</td>
+      				
+      				<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/books.png"></div>課本書籍</td>
+      				
+      				<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/videogame.png"></div>遊戲影音</td>
+      				
+      				<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/play.png"></div>日常用品</td>
+      				
+      				<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/pencil.png"></div>文具用品</td>
+<!--       				<td class="productcategory" ><button class=" btn btn-default btn-lg "data-dismiss="modal">全部</button></td> -->
+<!--       				<td class="productcategory" ><button class=" btn btn-default btn-lg"data-dismiss="modal">課本書籍</button></td> -->
+<!--       				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">遊戲影音</button></td> -->
+<!--       				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">日常用品</button></td> -->
+<!--       				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">文具用品</button></td> -->
       			</tr>
       			<tr>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">傢俱</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">家電</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">服飾</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">食品</button></td>
-      				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">票券</button></td>
+      			<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/sofa.png"></div>家俱</td>
+      			
+      			<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/televisions.png"></div>家電</td>
+      			
+      			<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/clothes.png"></div>服飾</td>
+      				
+      			<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/snake.png"></div>食品</td>
+      				
+      			<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/play.png" name="票券"></div>票券</td>
+<!--       				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">傢俱</button></td> -->
+<!--       				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">家電</button></td> -->
+<!--       				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">服飾</button></td> -->
+<!--       				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">食品</button></td> -->
+<!--       				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">票券</button></td> -->
      					      			
       			</tr>
       			<tr>
-      			<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">3C產品</button></td>
-      			<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">化妝保養用品</button></td>
+      			   			<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/pc.png"></div>3C產品</td>
+      			
+      			   			<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/kiss.png"></div>化妝保養用品</td>
+<!--       			<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">3C產品</button></td> -->
+<!--       			<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">化妝保養用品</button></td> -->
       			</tr>
       		</table>
       		<br>
@@ -151,17 +172,29 @@
   </div>
 </div>
 <script>
-	$(".productcategory").click(function(){
-		
+	$(".productcategory").bind("click",function(){
 		$.ajax({
 			contentType : "application/json",
 			url : "/head/categoryhchange",
 			type : "get",
 			async :false,
-			data : { "categoryname" : $(this).text() },
+			data : { "categoryname" : $(this).text()},
+			
 		});
  		$("#categoryname").text($(this).text());
 		
 	})
+	
+// 	$("#book").on("click",function(){
+// 		$.ajax({
+// 			contentType : "application/json",
+// 			url : "/head/categoryhchange",
+// 			type : "get",
+// 			async :false,
+// 			data : { "categoryname" : $('#test').text() },
+// 		});
+//  		$("#categoryname").text($('#test').text());
+		
+// 	})
 </script>
 

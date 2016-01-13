@@ -37,7 +37,7 @@
 </style>
 
 <script>
-//月曆功能
+	//月曆功能
 	$(function() {
 		for (var i = 1; i <= 12; i++) {
 			var opt = window.document.createElement("option");
@@ -78,16 +78,16 @@
 			document.getElementById("day").onblur = Dateblur();
 		}
 
-		$("#submit").click(function() {
-			swal({
-				title : "修改成功",
-				text : "已更新您的會員資料",
-				type : "success",
-				showCancelButton : false,
-				confirmButtonColor : "#F5A056",
-				closeOnConfirm : true
-			});
-		})
+// 		$("#submit").click(function() {
+// 			swal({
+// 				title : "修改成功",
+// 				text : "已更新您的會員資料",
+// 				type : "success",
+// 				showCancelButton : false,
+// 				confirmButtonColor : "#F5A056",
+// 				closeOnConfirm : true
+// 			});
+// 		})
 	})
 
 	var tempdate;
@@ -120,6 +120,7 @@
 	function Dateblur() {
 		document.getElementById("day").innerHTML = "";
 	}
+
 </script>
 <div class="container">
 	<div class="row">
@@ -137,7 +138,7 @@
 
 			<h3>修改個人資料</h3>
 
-			<form class="form-horizontal" action="/E715Member/updataInfo"
+			<form class="form-horizontal" action="/E715Member/updataInfo" id="upUserDataForm"
 				enctype="multipart/form-data" method="post">
 
 				<div class="form-group" id="divBorder">
@@ -294,7 +295,7 @@
 
 				<div class="form-group">
 					<div class="col-md-offset-2 col-md-10">
-						<button type="submit" class="btn btn-default" id="submit">修改</button>
+						<input type="button" class="btn btn-default" id="upUserData" value="修改">
 						<button type="button" class="btn btn-warning" id="clear">取消</button>
 					</div>
 				</div>
@@ -304,7 +305,28 @@
 	</div>
 </div>
 
+<script>
 
+$("#upUserData").click(
+	function(){
+		swal({
+			title : "確定要修改資料嗎?",
+			text : "",
+			type : "info",
+			showCancelButton : true,
+			//confirmButtonColor : "#DD6B55",
+			confirmButtonText : "YES",
+			closeOnConfirm : false,
+			},function() {
+				swal(
+					"Deleted!",
+					"Your imaginary file has been deleted.",
+					"success");
+					$('#upUserDataForm').submit();
+					}
+			);
+				})
+</script>
 
 
 
