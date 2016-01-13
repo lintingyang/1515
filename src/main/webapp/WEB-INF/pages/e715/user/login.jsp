@@ -62,6 +62,10 @@ $(function(){
 		$("input[name='password']").val('ddd');
 	});
 // 	yao
+	$(".sen").on('click', function() {
+		$("input[name='account']").val('fantsen');
+		$("input[name='password']").val('eee');
+	});	
 	$(".snoopy").on('click', function() {
 		$("input[name='account']").val('snoopy');
 		$("input[name='password']").val('snoopy');
@@ -151,6 +155,9 @@ $(function(){
   			老六
 			</button>
 <!-- 			yao -->
+			<button type="button" class="btn btn-default sen" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+  			藩曾
+			</button>
 			<button type="button" class="btn btn-default snoopy" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
   			snoopy
 			</button>

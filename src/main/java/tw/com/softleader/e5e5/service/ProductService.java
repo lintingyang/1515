@@ -296,7 +296,7 @@ public class ProductService extends OurService<Product> {
 	}
 	
 	@Transactional
-	public int findExchangeIdByProductId(int productId){
+	public int findExchangeIdByProductId(Integer productId){
 		return productDao.findExchangeIdByProductId(productId);
 	}
 	@Override

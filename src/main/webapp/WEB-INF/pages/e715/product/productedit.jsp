@@ -132,9 +132,10 @@ $('.queryBtn').click(function() { //點選排列方式後按照順序排列
 			}
 			var aclick = $("<a>").attr("href","/product/"+data[i].id);
 			
-			if(type == "OthersExchanged" || type == "myExchanged"){
+			if(type == "OthersExchanged" || type == "myExchanged"){ //已交換
 				console.log("exchangedif")
-				aclick = $("<a>").attr("href",getExchangedProduct(data[i].id));
+// 				aclick = $("<a>").bind("onclick", getExchangedProduct(data[i].id)); //會直接跳轉
+				aclick = $("<a>").attr("onclick", "getExchangedProduct("+data[i].id+")");
 			}
 			
 			var productdiv = $("<div></div>");
@@ -173,13 +174,14 @@ $('.queryBtn').click(function() { //點選排列方式後按照順序排列
 		}//success
 	});	//ajax
 });//click
-function getExchangedProduct(productId){
+
+function getExchangedProduct(productId){ //傳入productId 跳轉交易完成頁面
 	console.log(productId);
-// 	$.post("/product/exchangedProduct",{ "id" : productId } ,function(exchangeId) {
-// 		console.log("exchangeId"+exchangeId);
-// 		location.href="/product/exchanging?id=16";
-// 	})
+	$.post("/product/exchangedProduct",{ "id" : productId } ,function(exchangeId) {
+		location.href="/product/exchanging?id="+exchangeId;
+	})
 }
+
 function getProductCount(id , type ,badgePost){ // 已刊登欲交換數量
 	var data ={
 			"id" : id ,

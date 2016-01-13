@@ -67,11 +67,11 @@ public class ProductUDController {
 		} else if (query.equals("notPost")) { // 未刊登
 			products = productService.findByUsersProductsIsPosted(user.getId(), "FALSE");
 			// session.setAttribute("query", query);
-		} else if (query.equals("exchanging")) { // 我想跟別人交換 沒排序
-			products = productService.findUsersProductsByExchange(user.getId(), "TRUE" , "FALSE");
-		} else if (query.equals("OthersExchanged")) { // 已交換(待改)
+		} else if (query.equals("exchanging")) { // 我想跟別人交換 沒排序 是錯的
 			products = productService.findUsersProductsByExchange(user.getId(), "FALSE" , "TRUE");
-		} else if (query.equals("myExchanged")) { // 已交換(待改)
+		} else if (query.equals("OthersExchanged")) { // 原本是別人的，現在是我的。 已交換(待改)
+			products = productService.findUsersProductsByExchange(user.getId(), "TRUE" , "FALSE");
+		} else if (query.equals("myExchanged")) { // 原本是我的，現在是別人的。 已交換(待改)
 			products = productService.findUserPostedProductsByExchanged(user.getId());
 		}
 
@@ -123,17 +123,14 @@ public class ProductUDController {
 		session.setAttribute("productId", id);
 		return "/e715/product/proEdit";
 	}
-	//exchange
+	
+	//顯示交易完成頁面
+	@ResponseBody
 	@RequestMapping(value = "/exchangedProduct")
-	public int exchangedProduct(@RequestParam ("id") int productId ){
-		log.debug("##############"+productId);
-		int exchangeId = productService.findExchangeIdByProductId(48);
-		String ddc = Integer.toString(exchangeId);
-		log.debug("##############exchangeId "+exchangeId);
-		log.debug("##############ddc "+ddc);
-		
-		return 16;
+	public int exchangedProduct(@RequestParam ("id") Integer productId ){
+		return productService.findExchangeIdByProductId(productId);
 	}
+	
 	//編輯物品
 	@RequestMapping(value = "/update")
 	public String insert(Model model, @ModelAttribute Product product, @RequestParam("pCategory") int pCategory,
