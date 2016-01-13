@@ -115,7 +115,14 @@
 				<br> 
 				<ul style="list-style: none;">
 					<li><a href="#"><span class="glyphicon glyphicon-envelope iconpme" ></span></a> 
-						<a href="#" onclick="addFriend(event);"><span class="glyphicon glyphicon-plus iconpme"  style="margin-left: 20px;"></span></a></li>
+						<c:if test="${currUser.id ne user.id}">
+							<c:if test="${!relation}">
+								<a href="#" onclick="addFriend(event);" class="addFriend"><span class="glyphicon glyphicon-plus iconpme"  style="margin-left: 20px;"></span></a>
+							</c:if>
+						</c:if>
+					</li>
+					
+					
 					<li><h4>${currUser.name}</h4></li>
 					<li><span style="color: gray;">${currUser.schoolName}</span><br></li>
 
@@ -247,12 +254,34 @@ function addFriend (e) {
 // 					  $('#go').fadeToggle(nr);
 // 					}
 					swal("成功!", "成功加入關注清單！", "success")
+					$('.addFriend').remove();
+					
+					
 				}
 			}
 		});
     }
 }
+</script>
+
+<script>
+// $(".productcategory").bind("click",function(){
+// 	$.ajax({
+// 		contentType : "application/json",
+// 		url : "/head/categoryhchange",
+// 		type : "get",
+// 		async :false,
+// 		data : { "categoryname" : $(this).text()},
+		
+// 	});
+// 		$("#categoryname").text($(this).text());
+	
+// })
+
+
 
 
 </script>
+
+
 <c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>
