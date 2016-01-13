@@ -339,6 +339,12 @@ public class ProductController {
 		Exchange exchange = exchangeService.finishTrade(exId);
 		session.setAttribute("exchange", exchange);
 
+		List<ProductPicture> pa = productPictureService.getProductPictures(exchange.getProductAId());
+		List<ProductPicture> pb = productPictureService.getProductPictures(exchange.getProductBId());
+		model.addAttribute("pa", pa);
+		model.addAttribute("pb", pb);
+		
+		
 		// 時間顯示（年月日分秒）
 		String tradeTime = exchange.getTradeFinishedTime().toString();
 		String year = tradeTime.substring(0, 4);
