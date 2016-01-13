@@ -173,7 +173,7 @@
   </div>
 </div>
 <script>
-//按下我要交換按鈕
+/**按下我要交換按鈕**/
 $("#excBtn").click(function(){
 	if( ${empty user} ){
 		swal({   
@@ -342,7 +342,7 @@ $(function(){
 		       },
 		})
 	})
-//	end 提問功能
+// 	end 提問功能
 //	清除問題
 	$("#resetquestion").click(function(){
 		$("#questiontext").val("");
@@ -373,12 +373,12 @@ $(function(){
  		 var imgId=0;
 		 var loginId="${user.id}";
 		 var prodUserId="${product.userId.id}";
-
+		 var prodTrad="{product.tradeStatus}";
 		 $.each(data, function() {
 			imgId++;
 			var excBtn2='';
 			//顯示交換物品欄的交換鈕
-			if(prodUserId.length!=0 && prodUserId==loginId){
+			if(prodUserId.length!=0 && prodUserId==loginId &&prodTrad=="FLASE"){
 				excBtn2 = '<button id="cha" name="cha" type="button" class="btn btn-primary" onclick="javascript:location.href=\'makeSure?id='+ this.id + '\'">交換</button>';
 			}
 			$("#testtable").append('<tr><td><div class="col-md-2">'+
