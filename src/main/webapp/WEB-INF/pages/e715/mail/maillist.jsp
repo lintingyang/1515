@@ -16,7 +16,6 @@
 }
 .deletebtn{
 
-
 }
 .deletebtn >span{
 	line-height:40px;
@@ -74,9 +73,23 @@
 $(".importentkbox").click(function(){
 	$(this).html("<span class='glyphicon glyphicon-star'>");
 })
+//onload
+$(function(){
+	var formData={"id":${product.id}}
+    	$.ajax({
+       		type: "GET",
+       		url: "/qanda/getqanda",
+      		data: formData,
+       		success: function(data){
+    		showtable(data);
+    		},
+    	dataType: "json",
+   	 	contentType : "application/json"
+    	});
+
+})
 
 </script>
-
 
 
 
