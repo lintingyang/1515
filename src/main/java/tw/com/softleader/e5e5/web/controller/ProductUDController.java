@@ -170,6 +170,7 @@ public class ProductUDController {
 		// 返回頁面
 		
 //		status = 2;
+		
 		// 物品實體狀態 輸入值修改
 		String productStatus = null;
 		if (product.getStatus() == "破損") {

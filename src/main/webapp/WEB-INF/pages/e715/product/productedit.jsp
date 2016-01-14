@@ -23,8 +23,8 @@
 			<li style="width: 25%; text-align: center;" class = "dropdown" ><a
 				class="categorylist searchbtn dropdown-toggle" data-toggle="dropdown" href="#">已交換<span class="caret"></span></a>
 				<ul class="dropdown-menu">
-   			   		<li><a href="#" class = "queryBtn" id = "OthersExchanged">原本是別人的，現在是我的。</a></li>
-     				<li><a href="#" class = "queryBtn" id = "myExchanged">原本是我的，現在是別人的。</a></li>
+   			   		<li><a href="#" class = "queryBtn" id = "OthersExchanged">別人刊登的，現在是我的。</a></li>
+     				<li><a href="#" class = "queryBtn" id = "myExchanged">我刊登的，現在是別人的。</a></li>
     			</ul>	
 			</li>
 		</ul>
