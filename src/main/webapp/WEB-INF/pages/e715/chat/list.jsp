@@ -16,17 +16,29 @@ $(function(){
            success: function(data){
         	   $.each(data,function(i) {
         		   if (!($("#"+data[i].id).length)){  
-	        		   var $tr1 = $("<tr></tr>");
+        			   var $tr1 = $("<tr></tr>");
 	        		   var $td1 = $("<td hidden></td>");
 	        		   var $td2 = $("<td width='5%'></td>");
-	        		   var $td3 = $("<td width='95%'></td>");;
+	        		   var $td3 = $("<td width='95%'></td>");
+	        		   if(data[i].picture!=null && count<3){
+	        			   count++;
+	        			   var $pic = $("<img width='300'></img>");
+	        			   var $txt = $("<p></p>");
+	        			   $txt.text(data[i].user.name+"的圖片");
+	        			   $pic.attr('src', data[i].picture);
+	        			   $("#pic1").append($txt).append($pic);
+	        		   }
 	        		   $tr1.attr('id', data[i].id);
 	        		   $td1.text(data[i].id);
-	        		   $td2.text(data[i].user.name);
+	        		   $a1= $("<a>"+data[i].user.name+"</a>")
+	        		   $td2.append($a1);
+	        		   $a1.click(function(){
+	        			   $("#messages").val("@"+data[i].user.name+"　");						
+	        			});
 	        		   var $time=getTime(data[i].sendTime);
 	        		   $td3.html(data[i].messages + "<font color='grey'> "+$time + "</font>");
 	        		   $tr1.append($td1).append($td2).append($td3);
-	        		   $("#tb1").prepend($tr1);
+	        		   $("#tb1").append($tr1);
         		   }
         	   });
            },
@@ -58,7 +70,11 @@ $(function(){
 		        		   }
 		        		   $tr1.attr('id', data[i].id);
 		        		   $td1.text(data[i].id);
-		        		   $td2.text(data[i].user.name);
+		        		   $a1= $("<a>"+data[i].user.name+"</a>")
+		        		   $td2.append($a1);
+		        		   $a1.click(function(){
+		        			   $("#messages").val("@"+data[i].user.name)						
+		        			});
 		        		   var $time=getTime(data[i].sendTime);
 		        		   $td3.html(data[i].messages + "<font color='grey'> "+$time + "</font>");
 		        		   $tr1.append($td1).append($td2).append($td3);
@@ -75,6 +91,10 @@ $(function(){
 		var ans = "@"+data.hour+":" +data.minute;
 		return ans
 	}
+	
+
+	
+	
 	$("#clear").click(function(){
 		$("#messages").val("");	
 	});
@@ -85,7 +105,7 @@ $(function(){
 		$("#pic1").toggle();	
 	});
 	getMessages();
- 	setInterval(getMessages, 1000);
+ 	//setInterval(getMessages, 1000);
 });
 </script>
 
@@ -123,7 +143,11 @@ $(function(){
 					<th width="90%">messages</th>
 				</tr>
 			</thead>
-			<tbody id="tb1"></tbody>
+			<tbody id="tb1">
+			
+			
+			
+			</tbody>
 		</table>
 		</div>
 	</div>
