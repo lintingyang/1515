@@ -11,7 +11,7 @@
 		<!-- 這個div 銘 -->
 		<div class="alert alert-success alert-dismissible" role="alert" id="thx" style="display: none;">
   			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  			<strong>恭喜您新增商品成功！！</strong>    祝您有美好的一天    ^^
+  			<strong>恭喜您編輯商品成功！！</strong>    祝您有美好的一天    ^^
 		</div>
 		<ul class="nav nav-tabs " id="tabs">
 			<li style="width: 25%; text-align: center;"><a
