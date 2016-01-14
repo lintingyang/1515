@@ -81,8 +81,11 @@ $(function(){
 	$("#upImgBtn").click(function(){
 		$("#upImg1").toggle();	
 	});
+	$("#showImgBtn").click(function(){
+		$("#pic1").toggle();	
+	});
 	getMessages();
-//  	setInterval(getMessages, 1000);
+ 	setInterval(getMessages, 1000);
 });
 </script>
 
@@ -97,7 +100,7 @@ $(function(){
 			<input type="submit" id="btn" value="輸入" class="btn btn-success" style="float:right">
 		</form>
 			<button type="button" id="upImgBtn" class="btn btn-info" >
-				<span class="glyphicon glyphicon-picture" aria-hidden="true">上傳圖片</span>
+				<span class="glyphicon glyphicon-picture" aria-hidden="true"> 上傳圖片</span>
 			</button>
 		</div>
 		
@@ -129,9 +132,12 @@ $(function(){
 	<div class="col-md-4">
 		<div class="row">
 
-				<div id="pic1">
-				
-				</div>
+			<button type="button" id="showImgBtn" class="btn btn-info" >
+				<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"> 展開圖片</span>
+			</button>
+			<div id="pic1" hidden>
+			
+			</div>
 		</div>
 	</div>
 </div>
