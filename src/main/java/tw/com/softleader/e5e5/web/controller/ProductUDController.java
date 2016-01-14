@@ -71,9 +71,9 @@ public class ProductUDController {
 			products = productService.findByUsersProductsIsPosted(user.getId(), "FALSE");
 			// session.setAttribute("query", query);
 		} else if (query.equals("exchanging")) { // 我想跟別人交換 沒排序 是錯的
-			products = productService.findUsersProductsByExchange(user.getId(), "FALSE" , "TRUE");
+			products = productService.findUsersProductsByExchange(user.getId(), "FALSE", "TRUE");
 		} else if (query.equals("OthersExchanged")) { // 原本是別人的，現在是我的。 已交換(待改)
-			products = productService.findUsersProductsByExchange(user.getId(), "TRUE" , "FALSE");
+			products = productService.findUsersProductsByExchange(user.getId(), "TRUE", "FALSE");
 		} else if (query.equals("myExchanged")) { // 原本是我的，現在是別人的。 已交換(待改)
 			products = productService.findUserPostedProductsByExchanged(user.getId());
 		}
@@ -84,13 +84,13 @@ public class ProductUDController {
 	// 已刊登的物品別人想交換的總數
 	@ResponseBody
 	@RequestMapping(value = "/queryCount")
-	public int productCount(@RequestParam("id") Integer id, @RequestParam("query") String query , Model model) {
-		if (query.equals("posted")) { 
+	public int productCount(@RequestParam("id") Integer id, @RequestParam("query") String query, Model model) {
+		if (query.equals("posted")) {
 			return productService.findCountByProductBId(id);
 		}
 		return -1;
 	}
-	
+
 	// 物品圖片
 	@ResponseBody
 	@RequestMapping(value = "/queryimg")
@@ -117,39 +117,38 @@ public class ProductUDController {
 		status = 1;
 		return "/e715/product/productedit";
 	}
-	
-	//點選編輯
+
+	// 點選編輯
 	@RequestMapping(value = "/edit/{id}")
 	public String edit(@PathVariable("id") final int id, final Model model, HttpSession session) {
 		Product product = productService.getOne(id);
 		model.addAttribute("productY", product);
 		session.setAttribute("productId", id);
-		//抓物品圖片
+		// 抓物品圖片
 		List<ProductPicture> productPictures = productPictureService.getProductPictures(product);
 		model.addAttribute("productPicturesY", productPictures);
 		return "/e715/product/proEdit";
 	}
-	
-	//顯示交易完成頁面
+
+	// 顯示交易完成頁面
 	@ResponseBody
 	@RequestMapping(value = "/exchangedProduct")
-	public int exchangedProduct(@RequestParam ("id") Integer productId ){
+	public int exchangedProduct(@RequestParam("id") Integer productId) {
 		return productService.findExchangeIdByProductId(productId);
 	}
-	
-	//編輯物品
+
+	// 編輯物品
 	@RequestMapping(value = "/update")
 	public String insert(Model model, @ModelAttribute Product product, @RequestParam("pCategory") int pCategory,
-			@RequestParam("pPicture") MultipartFile pPicture, @RequestParam("pPicture1") MultipartFile pPicture1, 
+			@RequestParam("pPicture") MultipartFile pPicture, @RequestParam("pPicture1") MultipartFile pPicture1,
 			@RequestParam("pPicture2") MultipartFile pPicture2, @RequestParam("pPicture3") MultipartFile pPicture3,
-			@RequestParam("pStatusBad") String pStatusBad,
-			@RequestParam("pWishItem") String pWishItem, @RequestParam("pDeadline") String pDeadline, 
-			HttpSession session) {
-		
+			@RequestParam("pStatusBad") String pStatusBad, @RequestParam("pWishItem") String pWishItem,
+			@RequestParam("pDeadline") String pDeadline, HttpSession session) {
+
 		// 錯誤訊息顯示
-		 Map<String, String> errorMessage = new HashMap<>();
-		 session.removeAttribute("errorMsg");
-		 session.setAttribute("errorMsg", errorMessage);
+		Map<String, String> errorMessage = new HashMap<>();
+		session.removeAttribute("errorMsg");
+		session.setAttribute("errorMsg", errorMessage);
 
 		// 物品狀態 輸入值修改
 		String productStatus = null;
@@ -162,13 +161,13 @@ public class ProductUDController {
 		// 時間處理
 		LocalDateTime startTime = null;
 		LocalDateTime deadline = null;
-		
-		//時段、地點、方式、希望清單
+
+		// 時段、地點、方式、希望清單
 		Time tradeTime = null;
 		String location = null;
 		String tradeWay = null;
 		String productWish = null;
-		
+
 		if (product.getPostStatus() == TrueFalse.TRUE) {
 			startTime = LocalDateTime.now();
 
@@ -178,14 +177,14 @@ public class ProductUDController {
 			String yearD = pDeadline.substring(6, 10);
 			String end = yearD + "-" + monthD + "-" + dayD + " 00:00"; // "1986-04-08";
 			deadline = LocalDateTime.parse(end, formatter);
-			
-			if(deadline.isBefore(startTime)){
+
+			if (deadline.isBefore(startTime)) {
 				errorMessage.put("timeD", "截止日期一定要比今天晚喔！！");
-				if(errorMessage != null && !errorMessage.isEmpty()) {
+				if (errorMessage != null && !errorMessage.isEmpty()) {
 					return "redirect:/product/add";
 				}
 			}
-			
+
 			tradeTime = product.getTransactionTime();
 			location = product.getLocation();
 			tradeWay = product.getTradeWay();
@@ -195,7 +194,7 @@ public class ProductUDController {
 			} else {
 				productWish = product.getWishItem();
 			}
-			
+
 		} else {
 			startTime = null;
 			deadline = null;
@@ -206,37 +205,42 @@ public class ProductUDController {
 		}
 
 		// 存入資料
-		Product editProduct = productService.update((Integer) session.getAttribute("productId") ,product.getName(), pCategory, productStatus,
-				product.getDescription(), deadline, startTime, tradeTime, location,
-				tradeWay, productWish, product.getPostStatus());
+		Product editProduct = productService.update((Integer) session.getAttribute("productId"), product.getName(),
+				pCategory, productStatus, product.getDescription(), deadline, startTime, tradeTime, location, tradeWay,
+				productWish, product.getPostStatus());
 		if (editProduct != null) {
 			model.addAttribute("result", "success");
-//			session.setAttribute("new", editProduct);
+			// session.setAttribute("new", editProduct);
 		} else {
 			model.addAttribute("result", "fail");
 		}
-		// 存取productPicture 
-				String path = productPictureService.upLoadImage(editProduct.getId(), servletContext, pPicture);
-				int numPicture = productPictureService.insertImage(editProduct.getId(), path);
-				if(!pPicture1.isEmpty()){
-					String path1 = productPictureService.upLoadImage(editProduct.getId(), servletContext, pPicture1);
-					int numPicture1 = productPictureService.insertImage(editProduct.getId(), path1);
-				}
-				if(!pPicture2.isEmpty()){
-					String path2 = productPictureService.upLoadImage(editProduct.getId(), servletContext, pPicture2);
-					int numPicture2 = productPictureService.insertImage(editProduct.getId(), path2);
-				}
-				if(!pPicture3.isEmpty()){
-					String path3 = productPictureService.upLoadImage(editProduct.getId(), servletContext, pPicture3);
-					int numPicture3 = productPictureService.insertImage(editProduct.getId(), path3);
-				}
-				if (numPicture == 1) {
-					model.addAttribute("picResult", "圖片新增成功");
-				} else {
-					model.addAttribute("picResult", "圖片新增失敗");
-				}
+		// 存取productPicture 讀取新圖跟砍檔(別忘記jsp的enctype
+		if (!pPicture.isEmpty()) {
+			boolean del = productService.deleteImage(editProduct.getId(), 0, servletContext);
+			String path = productPictureService.upLoadImage(editProduct.getId(), servletContext, pPicture);
+			log.debug("###############del"+del);
+			int numPicture = productPictureService.insertImage(editProduct.getId(), path);
+		}
+		if (!pPicture1.isEmpty()) {
+			boolean del = productService.deleteImage(editProduct.getId(), 1, servletContext);
+			String path1 = productPictureService.upLoadImage(editProduct.getId(), servletContext, pPicture1);
+			log.debug("###############del"+del);
+			int numPicture1 = productPictureService.insertImage(editProduct.getId(), path1);
+		}
 
-				return "/e715/product/productedit";
+		if (!pPicture2.isEmpty()) {
+			productService.deleteImage(editProduct.getId(), 2, servletContext);
+			String path2 = productPictureService.upLoadImage(editProduct.getId(), servletContext, pPicture2);
+			int numPicture2 = productPictureService.insertImage(editProduct.getId(), path2);
+		}
+
+		if (!pPicture3.isEmpty()) {
+			productService.deleteImage(editProduct.getId(), 3, servletContext);
+			String path3 = productPictureService.upLoadImage(editProduct.getId(), servletContext, pPicture3);
+			int numPicture3 = productPictureService.insertImage(editProduct.getId(), path3);
+		}
+
+		return "/e715/product/productedit";
 
 	}
 

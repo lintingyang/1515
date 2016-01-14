@@ -63,7 +63,7 @@ h4{
    						<img id="blah0" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 200px; height: 200px;"/>
    						<div>
    							<label class="col-md-offset-2 col-sm-8 choose-file btn btn-sm btn-default glyphicon glyphicon-open" id="upload" for="id_image_large">
-							<input type="file" id="id_image_large" class = "pPicture" name="pPicture" multiple required="required"></label>
+							<input type="file" id="id_image_large" class ="pPicture" name="pPicture" multiple required="required"></label>
    						</div>
 					</div>
 				</div>
@@ -91,10 +91,6 @@ h4{
 								<label class="col-md-offset-2 col-sm-2 choose-file btn btn-sm btn-default glyphicon glyphicon-open" id="upload" for="id_image_large3">
 								<input type="file" id="id_image_large3" class ="pPicture3" name="pPicture3" multiple required="required"></label>
 							</div>
-						
-<!--   						<input type='file' id="pPicture1" name="pPicture1" style="width: 170px"/> -->
-<!--   						<input type='file' id="pPicture2" name="pPicture2" style="width: 170px"/> -->
-<!--   						<input type='file' id="pPicture3" name="pPicture3" style="width: 170px"/> -->
 					</div>
 				</div>
 				
@@ -244,8 +240,10 @@ h4{
 		
 // 		$('#divWish').attr('style', 'display:none');
 
-		if(${not empty productPicturesY[0].picture})
-		$('#blah0').attr('src' , "${productPicturesY[0].picture}");//預設的商品圖片
+		if(${not empty productPicturesY[0].picture}){
+			$('#blah0').attr('src' , "${productY.primaryPicture}");//預設的商品圖片
+			$(".pPicture").removeAttr('required');
+		}
 		if(${not empty productPicturesY[1].picture})
 		$('#blah1').attr('src' , "${productPicturesY[1].picture}");//預設的商品圖片1
 		if(${not empty productPicturesY[2].picture})

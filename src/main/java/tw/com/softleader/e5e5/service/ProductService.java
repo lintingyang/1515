@@ -1,8 +1,11 @@
 package tw.com.softleader.e5e5.service;
 
+import java.io.File;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
@@ -17,6 +20,7 @@ import tw.com.softleader.e5e5.dao.ProductDao;
 import tw.com.softleader.e5e5.dao.UserDao;
 import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.entity.ProductCategory;
+import tw.com.softleader.e5e5.entity.ProductPicture;
 import tw.com.softleader.e5e5.entity.User;
 import tw.com.softleader.e5e5.entity.UserLike;
 import tw.com.softleader.e5e5.entity.enums.Time;
@@ -35,6 +39,8 @@ public class ProductService extends OurService<Product> {
 	private ProductCategoryDao productCategoryDao;
 	@Autowired
 	private UserLikeService userLikeService;
+	@Autowired
+	private ProductPictureService productPictureService;
 
 	@Transactional
 	public List<Product> indexsearch(String namelike, String category, String orderby, User user) {
@@ -112,9 +118,9 @@ public class ProductService extends OurService<Product> {
 	public List<Product> findUsersProductsByExchange(Integer userId, String tradeStatus, String postStatus) {
 		return productDao.findUsersProductsByExchange(userId, tradeStatus, postStatus);
 	}
-	
+
 	// (13)查詢自己刊登的已交換/String/yao
-	public List<Product> findUserPostedProductsByExchanged(Integer userId){
+	public List<Product> findUserPostedProductsByExchanged(Integer userId) {
 		return productDao.findUserPostedProductsByExchanged(userId);
 	}
 
@@ -261,16 +267,24 @@ public class ProductService extends OurService<Product> {
 		product.setWishItem(wishItem);
 		product.setPostStatus(postStatus);
 		product.setTradeStatus(TrueFalse.FALSE);
+
 		productDao.save(product);
 		return product;
 
 	}
+	@Transactional
+	public Product insertPrimaryPic (int productId ,String primaryPicture){
+		Product product = productDao.findOne(productId);
+		product.setPrimaryPicture(primaryPicture);
+		productDao.save(product);
+		return product;
+	}
 
 	// (14)編輯產品/yao
 	@Transactional
-	public Product update(int productId, String name, int category, String status, String description, LocalDateTime deadline,
-			LocalDateTime startTime, Time transactionTime, String location, String tradeWay, String wishItem,
-			TrueFalse postStatus) {
+	public Product update(int productId, String name, int category, String status, String description,
+			LocalDateTime deadline, LocalDateTime startTime, Time transactionTime, String location, String tradeWay,
+			String wishItem, TrueFalse postStatus) {
 		Product product = productDao.findOne(productId);
 		product.setName(name);
 		product.setProductCategory(productCategoryDao.findOne(category));
@@ -293,11 +307,31 @@ public class ProductService extends OurService<Product> {
 	public int findCountByProductBId(Integer id) {
 		return productDao.findCountByProductBId(id);
 	}
-	
+
+	// 刪除物品圖片/yao
 	@Transactional
-	public int findExchangeIdByProductId(Integer productId){
+	public boolean deleteImage(int id, int index, ServletContext servletContext) {
+		Product product = productDao.findOne(id);
+		List<ProductPicture> productPictures = productPictureService.getProductPictures(product);
+		ProductPicture productPicture = productPictures.get(index);
+		log.debug("###############" + productPicture);
+		String productPath = productPicture.getPicture();
+		String realPath = servletContext.getRealPath(productPath).replace('/', '\\');
+		File destination = null;
+		try {
+			destination.delete();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Transactional
+	public int findExchangeIdByProductId(Integer productId) {
 		return productDao.findExchangeIdByProductId(productId);
 	}
+
 	@Override
 	public OurDao<Product> getDao() {
 		return productDao;
