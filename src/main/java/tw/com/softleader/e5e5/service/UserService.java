@@ -6,8 +6,17 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Properties;
 
 import javax.imageio.ImageIO;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +25,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.softleader.e5e5.common.dao.OurDao;
-import tw.com.softleader.e5e5.common.model.Message;
 import tw.com.softleader.e5e5.common.service.OurService;
 import tw.com.softleader.e5e5.dao.UserDao;
 import tw.com.softleader.e5e5.entity.User;
@@ -55,6 +63,76 @@ public class UserService extends OurService<User> {
 		return allUser;
 	}
 
+	//新增school-email
+	@Transactional
+	public int sendVerificationCode(String schoolEmail){
+		//確認學校信箱有無進資料庫
+		
+		User user =  userDao.findBySchoolEmail(schoolEmail);
+		if(user==null){
+			user = new User();
+		}
+			user.setSchoolEmail(schoolEmail);
+		//發送驗證碼
+		String host = "smtp.gmail.com";  
+        int port = 587;  
+        final String username = "e715number01@gmail.com";  
+        final String password = "EEIT82DB";  
+        final Integer newVerificationCode = (int)(Math.random()*9999);
+        Properties props = new Properties();  
+        props.put("mail.smtp.host", host);  
+        props.put("mail.smtp.auth", "true");  
+        props.put("mail.smtp.starttls.enable", "true");  
+        props.put("mail.smtp.port", port);  
+          
+        Session session = Session.getInstance(props,new Authenticator(){  
+              protected PasswordAuthentication getPasswordAuthentication() {  
+                  return new PasswordAuthentication(username, password);  
+              }} );  
+           
+        try {  
+  
+        Message message = new MimeMessage(session);  
+        message.setFrom(new InternetAddress("e715number01@gmail.com"));  
+        message.setRecipients(Message.RecipientType.TO,   
+                        InternetAddress.parse(schoolEmail));  
+        message.setSubject("E715學校信箱確認信(請勿回信)");  
+        message.setText("您的驗證碼為 :"+newVerificationCode);  
+  
+        Transport transport = session.getTransport("smtp");  
+        transport.connect(host, port, username, password);  
+  
+        Transport.send(message);  
+  
+        System.out.println("Done");  
+  
+        } catch (MessagingException e) {  
+            throw new RuntimeException(e);  
+        }
+		user.setVerificationCode(newVerificationCode);
+		userDao.save(user);
+		if (userDao.findBySchoolEmail(schoolEmail)!=null){
+			return 1;
+		}else{
+		return 0;
+		}
+		}
+		
+	
+	@Transactional
+	public boolean checkVerificationCode(String schoolEmail ,Integer verificationCode){
+		boolean result = false;
+		User userCheck = userDao.findBySchoolEmail(schoolEmail);
+		Integer check =  userCheck.getVerificationCode();
+		boolean temp = (check.equals(verificationCode));
+		if(temp){
+			result = true;
+		}
+		return result;
+	}
+	
+	
+	
 	
 	
 //	@Transactional
@@ -246,21 +324,23 @@ public class UserService extends OurService<User> {
 	}
 
 	@Override
-	protected List<Message> validateInsert(User entity) {
+	protected List<tw.com.softleader.e5e5.common.model.Message> validateInsert(User entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected List<Message> validateUpdate(User entity) {
+	protected List<tw.com.softleader.e5e5.common.model.Message> validateUpdate(User entity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected List<Message> validateDelete(int id) {
+	protected List<tw.com.softleader.e5e5.common.model.Message> validateDelete(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 }

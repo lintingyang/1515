@@ -82,14 +82,64 @@ public class headerController {
 	}
 	
 	
-	
-	
+	//進入信箱確認
+	@RequestMapping(value = "/emailCheck" ,method = RequestMethod.GET)
+	public String emailCheckPage(){
+		return "/e715/user/emailCheck";
+	}
 	
 	//進入註冊帳號頁
 	@RequestMapping(value = "/create" ,method = RequestMethod.GET)
 	public String createAccountPage(){
 		return "/e715/user/createaccount";
 	}
+	
+	//送驗證碼
+	@RequestMapping(value = "/verificationCodeSend")
+	@ResponseBody
+	public boolean userVerificationCodeSend(@RequestParam("userSchoolEmail") String schoolEmail) {
+		boolean result = false;
+		int temp = userService.sendVerificationCode(schoolEmail);
+		if(temp==1){
+			result = true;
+		}
+		return result;
+	}
+	
+	//確認驗證碼
+	@RequestMapping(value = "/verificationCodeCheck")
+	public String userSchoolEmailCheck(
+			@RequestParam("userSchoolEmail") String schoolEmail,
+			@RequestParam("userVerificationCode") String userVerificationCode,
+			HttpSession session
+			) {
+		Map<String, String> errors = new HashMap<String, String>();
+		session.setAttribute("checkError", errors);
+		
+		Integer verificationCode = null;
+		try {
+			verificationCode = Integer.parseInt(userVerificationCode);
+			log.error(verificationCode+"----------------------------------------------------"+schoolEmail);
+			boolean temp = userService.checkVerificationCode(schoolEmail, verificationCode);
+			
+			log.error("----------------------------------------------------"+temp);
+			if(temp){
+				return "/e715/user/createaccount";
+			}else{
+				
+				errors.put("checkFault", "驗證碼輸入錯誤，請重新輸入");
+				return "/e715/user/emailCheck";
+			}
+		} catch (NumberFormatException e) {
+			errors.put("numberFault", "驗證碼請輸入數字");
+			return "/e715/user/emailCheck";
+		}
+		
+		
+
+	}
+	
+	
 
 	//註冊帳號
 	@RequestMapping(value = "/insert")

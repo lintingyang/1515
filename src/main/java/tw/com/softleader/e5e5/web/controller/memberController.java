@@ -64,15 +64,12 @@ public class memberController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public String showUserPage(@PathVariable("id") final int id, final Model model,HttpSession session) {
+	public String showUserPage(@PathVariable("id") final int id, final Model model, HttpSession session) {
 		User myself = (User) session.getAttribute("user");
 		User user = userService.getOne(id);
 		if (user == null) {
 			return "redirect:/";
 		}
-		log.error("==============================="+myself.getId());
-		log.error("==============================="+user.getId());
-		
 		boolean relation = focusUserListService.findRelation(myself.getId(), user.getId());
 		int good = 0;
 		int bad = 0;
@@ -105,7 +102,6 @@ public class memberController {
 				}
 			}
 		}
-		System.out.println("------------------------------------"+relation);
 		model.addAttribute("relation", relation);
 		model.addAttribute("currUser", user);
 		model.addAttribute("good", good);
@@ -133,9 +129,9 @@ public class memberController {
 		User user = (User) session.getAttribute("user");
 		if (user != null) {
 			return "/e715/user/changePassWord";
-		}else{
+		} else {
 
-		return "/e715/user/login";
+			return "/e715/user/login";
 		}
 
 	}
@@ -145,7 +141,7 @@ public class memberController {
 			@RequestParam("newPwdCheck") String newPwdCheck, HttpSession session) {
 		User user = (User) session.getAttribute("user");
 
-		if (user == null || !oldPwd.equals(user.getPassword()) || newPwd==null || newPwd.length()==0) {
+		if (user == null || !oldPwd.equals(user.getPassword()) || newPwd == null || newPwd.length() == 0) {
 			return "/e715/user/login";
 		} else {
 			if (newPwdCheck.equals(newPwd)) {
@@ -171,15 +167,15 @@ public class memberController {
 		return "/e715/user/login";
 	}
 
+	
 	@RequestMapping(value = "/updataInfo")
 	public String updataInfo(Model model, @RequestParam("file") MultipartFile file, @RequestParam("name") String name,
 			@RequestParam("nickname") String nickname, @RequestParam("sex") Sex sex,
 			@RequestParam("month") String month, @RequestParam("day") String day, @RequestParam("year") String year,
 			@RequestParam("phone") String phone, @RequestParam("email") String email,
 			@RequestParam("subject") String subject, @RequestParam("Addr") String addr,
-			//@RequestParam("interested") List<Integer> interested,
-			@RequestParam("aboutMe") String aboutMe,
-			HttpSession session) {
+			// @RequestParam("interested") List<Integer> interested,
+			@RequestParam("aboutMe") String aboutMe, HttpSession session) {
 		User user = (User) session.getAttribute("user");
 
 		// 必填欄位不能為空值
@@ -190,7 +186,11 @@ public class memberController {
 
 			// 讀取新圖跟砍檔(別忘記jsp的enctype
 			if (!file.isEmpty()) {
-				userService.deleteImage(user.getId(), servletContext);
+				//使用者有圖片的話就砍黨
+				if (!user.getPicture().isEmpty()) {
+					userService.deleteImage(user.getId(), servletContext);
+
+				}
 				String path = userService.upLoadImage(user.getId(), servletContext, file);
 				user.setPicture(path);
 			}
@@ -224,16 +224,16 @@ public class memberController {
 			user.setAddress(addr);
 			user.setAboutMe(aboutMe);
 			userService.update(user);
-//			List<UserLike> u3 = userLikeService.findUserLike(user.getId());
-//			for (UserLike u2 : u3) {
-//				userLikeService.delete(u2.getId());
-//			}
-//			for (Integer i : interested) {
-//				UserLike u = new UserLike();
-//				u.setProductCategoryId(new ProductCategory(i));
-//				u.setUserId(new User(user.getId()));
-//				userLikeService.insert(u);
-//			}
+			// List<UserLike> u3 = userLikeService.findUserLike(user.getId());
+			// for (UserLike u2 : u3) {
+			// userLikeService.delete(u2.getId());
+			// }
+			// for (Integer i : interested) {
+			// UserLike u = new UserLike();
+			// u.setProductCategoryId(new ProductCategory(i));
+			// u.setUserId(new User(user.getId()));
+			// userLikeService.insert(u);
+			// }
 			return "/e715/user/modifyFileAsk";
 		}
 	}
@@ -276,14 +276,14 @@ public class memberController {
 	@ResponseBody
 	public String Add(@RequestParam("id") int id, HttpSession session) {
 		User user = (User) session.getAttribute("user");
-		int i =0;
+		int i = 0;
 		if (user != null) {
-			log.error("fdsafdf"+user.getId()+" : "+ id);
+			log.error("fdsafdf" + user.getId() + " : " + id);
 			i = focusUserListService.insert(user.getId(), id);
 		}
-		if(i==1){
+		if (i == 1) {
 			return "Sucess";
-		}else{
+		} else {
 			return "Already had";
 		}
 	}
@@ -300,4 +300,3 @@ public class memberController {
 	}
 
 }
-
