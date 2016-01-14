@@ -276,7 +276,6 @@ public class ProductService extends OurService<Product> {
 		product.setProductCategory(productCategoryDao.findOne(category));
 		product.setStatus(status);
 		product.setDescription(description);
-		product.setPostTime(LocalDateTime.now());
 		product.setStartTime(startTime);
 		product.setDeadline(deadline);
 		product.setTransactionTime(transactionTime);
@@ -294,7 +293,11 @@ public class ProductService extends OurService<Product> {
 	public int findCountByProductBId(Integer id) {
 		return productDao.findCountByProductBId(id);
 	}
-
+	
+	@Transactional
+	public int findExchangeIdByProductId(Integer productId){
+		return productDao.findExchangeIdByProductId(productId);
+	}
 	@Override
 	public OurDao<Product> getDao() {
 		return productDao;

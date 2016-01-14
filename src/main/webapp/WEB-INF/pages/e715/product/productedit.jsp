@@ -23,8 +23,8 @@
 			<li style="width: 25%; text-align: center;" class = "dropdown" ><a
 				class="categorylist searchbtn dropdown-toggle" data-toggle="dropdown" href="#">已交換<span class="caret"></span></a>
 				<ul class="dropdown-menu">
-   			   		<li><a href="#" class = "queryBtn" id = "OthersExchanged">原本是別人的，現在是我的。</a></li>
-     				<li><a href="#" class = "queryBtn" id = "myExchanged">原本是我的，現在是別人的。</a></li>
+   			   		<li><a href="#" class = "queryBtn" id = "OthersExchanged">別人刊登的，現在是我的。</a></li>
+     				<li><a href="#" class = "queryBtn" id = "myExchanged">我刊登的，現在是別人的。</a></li>
     			</ul>	
 			</li>
 		</ul>
@@ -130,10 +130,15 @@ $('.queryBtn').click(function() { //點選排列方式後按照順序排列
 			.attr("onclick","removeProduct("+data[i].id+")");
 			total = 0;
 			}
+			var aclick = $("<a>").attr("href","/product/"+data[i].id);
 			
+			if(type == "OthersExchanged" || type == "myExchanged"){ //已交換
+				console.log("exchangedif")
+// 				aclick = $("<a>").bind("onclick", getExchangedProduct(data[i].id)); //會直接跳轉
+				aclick = $("<a>").attr("onclick", "getExchangedProduct("+data[i].id+")");
+			}
 			
 			var productdiv = $("<div></div>");
-			var aclick = $("<a>").attr("href","/product/"+data[i].id);
 			var productimg = $("<img>").addClass("prodimg");
 			var p = $("<span>").text(data[i].name);
 			var badgePost = $("<span>").addClass("badge pCount");
@@ -169,6 +174,13 @@ $('.queryBtn').click(function() { //點選排列方式後按照順序排列
 		}//success
 	});	//ajax
 });//click
+
+function getExchangedProduct(productId){ //傳入productId 跳轉交易完成頁面
+	console.log(productId);
+	$.post("/product/exchangedProduct",{ "id" : productId } ,function(exchangeId) {
+		location.href="/product/exchanging?id="+exchangeId;
+	})
+}
 
 function getProductCount(id , type ,badgePost){ // 已刊登欲交換數量
 	var data ={

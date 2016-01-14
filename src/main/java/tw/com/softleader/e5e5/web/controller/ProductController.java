@@ -5,7 +5,9 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -28,6 +30,7 @@ import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.entity.ProductPicture;
 import tw.com.softleader.e5e5.entity.User;
 import tw.com.softleader.e5e5.entity.enums.Grade;
+import tw.com.softleader.e5e5.entity.enums.Time;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 import tw.com.softleader.e5e5.service.ExchangeService;
 import tw.com.softleader.e5e5.service.ProductPictureService;
@@ -200,100 +203,100 @@ public class ProductController {
 	// 新增商品
 	@RequestMapping(value = "/insert")
 	public String insert(Model model, @ModelAttribute Product product, @RequestParam("pCategory") int pCategory,
-			@RequestParam("pPicture") MultipartFile pPicture, @RequestParam("pStatusBad") String pStatusBad,
-			@RequestParam("pWishItem") String pWishItem, @RequestParam("pStartTime") String pStartTime,
-			@RequestParam("pDeadline") String pDeadline, HttpSession session) {
-
+			@RequestParam("pPicture") MultipartFile pPicture, @RequestParam("pPicture1") MultipartFile pPicture1, 
+			@RequestParam("pPicture2") MultipartFile pPicture2, @RequestParam("pPicture3") MultipartFile pPicture3,
+			@RequestParam("pStatusBad") String pStatusBad,
+			@RequestParam("pWishItem") String pWishItem, @RequestParam("pDeadline") String pDeadline, 
+			HttpSession session) {
+		
 		// 錯誤訊息顯示
-		// Map<String, String> errorMessage = new HashMap<>();
-		// session.removeAttribute("errorMsg");
-		// session.setAttribute("errorMsg", errorMessage);
-		// //error1 pStatusBad= null
-		// if(product.getStatus() == "破損"){
-		// if(pStatusBad == null || pStatusBad.trim().length() == 0){
-		// errorMessage.put("status", "請描述損壞情形");
-		// }
-		// }
-		// //error3 time = null
-		// if(product.getPostStatus() == TrueFalse.TRUE){
-		// if(pStartTime == null || pStartTime.trim().length() == 0){
-		// errorMessage.put("timeS", "請輸入起始時間");
-		// }
-		// if(pDeadline == null || pDeadline.trim().length() == 0){
-		// errorMessage.put("timeD", "請輸入結束時間");
-		// }
-		// }
-		// //error2 wishItem = null
-		// if(product.getWishItem() == "希望商品"){
-		// if(pWishItem == null || pWishItem.trim().length() == 0){
-		// errorMessage.put("wish", "請輸入希望清單");
-		// }
-		// }
-		// //若有錯誤回新增畫面
-		// if(errorMessage != null && !errorMessage.isEmpty()) {
-		// return "redirect:/product/add";
-		// }
+		 Map<String, String> errorMessage = new HashMap<>();
+		 session.removeAttribute("errorMsg");
+		 session.setAttribute("errorMsg", errorMessage);
 
 		// 取userId
 		User userData = (User) session.getAttribute("user");
 
 		// 物品狀態 輸入值修改
 		String productStatus = null;
-		if (product.getStatus() == "破損") {
+		if (product.getStatus().equals("破損")) {
 			productStatus = product.getStatus() + "(" + pStatusBad + ")";
 		} else {
 			productStatus = product.getStatus();
 		}
 
-		// 希望清單 輸入值判斷
-		String productWish = null;
-		if (product.getWishItem() == "希望商品") {
-			productWish = pWishItem;
-		} else {
-			productWish = product.getWishItem();
-		}
-
 		// 時間處理
 		LocalDateTime startTime = null;
 		LocalDateTime deadline = null;
+		
+		//時段、地點、方式、希望清單
+		Time tradeTime = null;
+		String location = null;
+		String tradeWay = null;
+		String productWish = null;
+		
 		if (product.getPostStatus() == TrueFalse.TRUE) {
+			startTime = LocalDateTime.now();
+
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-			String monthS = pStartTime.substring(0, 2);
-			String dayS = pStartTime.substring(3, 5);
-			String yearS = pStartTime.substring(6, 10);
-			String start = yearS + "-" + monthS + "-" + dayS + " 00:00"; // "1986-04-08";
-			try {
-				startTime = LocalDateTime.parse(start, formatter);
-			} catch (Exception e) {
-			}
 			String monthD = pDeadline.substring(0, 2);
 			String dayD = pDeadline.substring(3, 5);
 			String yearD = pDeadline.substring(6, 10);
 			String end = yearD + "-" + monthD + "-" + dayD + " 00:00"; // "1986-04-08";
-			try {
-				deadline = LocalDateTime.parse(end, formatter);
-			} catch (Exception e) {
+			deadline = LocalDateTime.parse(end, formatter);
+			
+			if(deadline.isBefore(startTime)){
+				errorMessage.put("timeD", "截止日期一定要比今天晚喔！！");
+				if(errorMessage != null && !errorMessage.isEmpty()) {
+					return "redirect:/product/add";
+				}
 			}
+			
+			tradeTime = product.getTransactionTime();
+			location = product.getLocation();
+			tradeWay = product.getTradeWay();
+			// 希望清單 輸入值判斷
+			if (product.getWishItem().equals("希望商品")) {
+				productWish = pWishItem;
+			} else {
+				productWish = product.getWishItem();
+			}
+			
 		} else {
 			startTime = null;
 			deadline = null;
+			tradeTime = null;
+			location = null;
+			tradeWay = null;
+			productWish = null;
 		}
 
 		// 存入資料
 		Product newProduct = productService.insert(product.getName(), userData.getId(), pCategory, productStatus,
-				product.getDescription(), deadline, startTime, product.getTransactionTime(), product.getLocation(),
-				product.getTradeWay(), productWish, product.getPostStatus());
-		System.out.println("newProduct========================" + newProduct);
+				product.getDescription(), deadline, startTime, tradeTime, location,
+				tradeWay, productWish, product.getPostStatus());
 		if (newProduct != null) {
 			model.addAttribute("result", "success");
 			session.setAttribute("new", newProduct);
 		} else {
 			model.addAttribute("result", "fail");
 		}
-
+		
 		// 存取productPicture
 		String path = productPictureService.upLoadImage(newProduct.getId(), servletContext, pPicture);
 		int numPicture = productPictureService.insertImage(newProduct.getId(), path);
+		if(!pPicture1.isEmpty()){
+			String path1 = productPictureService.upLoadImage(newProduct.getId(), servletContext, pPicture1);
+			int numPicture1 = productPictureService.insertImage(newProduct.getId(), path1);
+		}
+		if(!pPicture2.isEmpty()){
+			String path2 = productPictureService.upLoadImage(newProduct.getId(), servletContext, pPicture2);
+			int numPicture2 = productPictureService.insertImage(newProduct.getId(), path2);
+		}
+		if(!pPicture3.isEmpty()){
+			String path3 = productPictureService.upLoadImage(newProduct.getId(), servletContext, pPicture3);
+			int numPicture3 = productPictureService.insertImage(newProduct.getId(), path3);
+		}
 		if (numPicture == 1) {
 			model.addAttribute("picResult", "圖片新增成功");
 		} else {

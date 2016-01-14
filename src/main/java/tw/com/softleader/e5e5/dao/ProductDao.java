@@ -92,4 +92,8 @@ public interface ProductDao extends OurDao<Product> {
 	//查詢別人想跟我交換的物品總數/yao
 	@Query(value = "SELECT count (productb_id) FROM exchange WHERE producta_id = ?1", nativeQuery = true)
 	public int findCountByProductBId(Integer id);
+	
+	//查詢exchange
+	@Query(value = "SELECT DISTINCT e.id FROM exchange e JOIN product p ON e.productA_id = p .id OR e.productB_id = p.id WHERE e.trade_status = 'TRUE' AND (productA_id = ?1 OR productB_id = ?1)", nativeQuery = true)
+	public int findExchangeIdByProductId(Integer productId);
 }
