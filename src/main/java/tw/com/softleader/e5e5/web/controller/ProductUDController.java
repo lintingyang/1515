@@ -148,9 +148,6 @@ public class ProductUDController {
 		 session.removeAttribute("errorMsg");
 		 session.setAttribute("errorMsg", errorMessage);
 
-		// 取userId
-		User userData = (User) session.getAttribute("user");
-
 		// 物品狀態 輸入值修改
 		String productStatus = null;
 		if (product.getStatus().equals("破損")) {
@@ -206,20 +203,20 @@ public class ProductUDController {
 		}
 
 		// 存入資料
-		Product newProduct = productService.insert(product.getName(), userData.getId(), pCategory, productStatus,
+		Product editProduct = productService.update((Integer) session.getAttribute("productId") ,product.getName(), pCategory, productStatus,
 				product.getDescription(), deadline, startTime, tradeTime, location,
 				tradeWay, productWish, product.getPostStatus());
-		if (newProduct != null) {
+		if (editProduct != null) {
 			model.addAttribute("result", "success");
-			session.setAttribute("new", newProduct);
+//			session.setAttribute("new", editProduct);
 		} else {
 			model.addAttribute("result", "fail");
 		}
 
 		// 存取productPicture
-		String path = productPictureService.upLoadImage((Integer) session.getAttribute("productId"), servletContext,
+		String path = productPictureService.upLoadImage(editProduct.getId(), servletContext,
 				pPicture);
-		int numPicture = productPictureService.insertImage((Integer) session.getAttribute("productId"), path);
+		int numPicture = productPictureService.insertImage(editProduct.getId(), path);
 		if (numPicture == 1) {
 			model.addAttribute("picResult", "圖片新增成功");
 		} else {

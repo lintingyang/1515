@@ -268,10 +268,10 @@ public class ProductService extends OurService<Product> {
 
 	// (14)編輯產品/yao
 	@Transactional
-	public Product update(int id, String name, int category, String status, String description, LocalDateTime deadline,
+	public Product update(int productId, String name, int category, String status, String description, LocalDateTime deadline,
 			LocalDateTime startTime, Time transactionTime, String location, String tradeWay, String wishItem,
 			TrueFalse postStatus) {
-		Product product = productDao.findOne(id);
+		Product product = productDao.findOne(productId);
 		product.setName(name);
 		product.setProductCategory(productCategoryDao.findOne(category));
 		product.setStatus(status);
@@ -283,9 +283,9 @@ public class ProductService extends OurService<Product> {
 		product.setTradeWay(tradeWay);
 		product.setWishItem(wishItem);
 		product.setPostStatus(postStatus);
+		product.setTradeStatus(TrueFalse.FALSE);
 		productDao.save(product);
 		return product;
-
 	}
 
 	// 查詢別人想跟我交換的物品總數/yao
