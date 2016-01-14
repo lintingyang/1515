@@ -21,13 +21,14 @@
 	line-height:40px;
 	font-size:17px;
 }
+
 </style>
 
 <div class="container">
 	<div><!-- 	功能列表欄位 -->
 		<br>
 		<ul class="nav nav-pills maillist">
-		  <li role="presentation" class="active"><a href="#">寄件</a></li>
+		  <li role="presentation" class="active"><button type="button" class="btn btn-danger"><span >撰寫</span></button></li>
 		  <li role="presentation"><a href="#">收件匣</a></li>
 		  <li role="presentation"><a href="#">重要信件</a></li>
 		  <li role="presentation"><a href="#">草稿</a></li>
