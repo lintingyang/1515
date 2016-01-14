@@ -247,7 +247,7 @@ $(function(){
 				</div>
 				<div style="text-align: center; margin: 10px auto" id="backToProduct">
 					<button type="button" class="btn btn-primary btn-lg"
-						onclick="javascript:location.href='${thisProduct.id}'">回您交易的商品頁</button>
+						onclick="javascript:location.href='/product/list'">回到您的物品管理</button>
 				</div>
 			</div>
   		</div>

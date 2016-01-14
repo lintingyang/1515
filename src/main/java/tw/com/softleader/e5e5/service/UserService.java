@@ -170,6 +170,8 @@ public class UserService extends OurService<User> {
 		String path = "/resources/userimgs/";
 
 		path = servletContext.getRealPath(path);
+		System.out.println("---------------------------"+path);
+		
 		File destination = null;
 		try {
 			src = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
@@ -192,6 +194,26 @@ public class UserService extends OurService<User> {
 		}
 		return null;
 	}
+	
+	@Transactional
+	public boolean deleteImage(int id, ServletContext servletContext) {
+		User user = userDao.findById(id);
+		String userPath = user.getPicture();
+		String path = servletContext.getRealPath(userPath).replace('/' , '\\');
+		File destination = null;
+		destination = new File(path);
+		
+		try {
+			destination.delete();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+	
+	
 	
 	@Transactional
 	public int updataInfo(User user) {

@@ -5,14 +5,6 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/css/user.css" />
 
-<script>
-	$(function() {
-		$("#idbuthref").on('click', function() {
-			window.location.href = "login.jsp";
-		});
-	});
-</script>
-
 <div class="container">
 	<div class="row">
 		<div class="col-xs-6 col-md-3"></div>
@@ -46,7 +38,7 @@
 
 				<div class="form-group" id="divBorder">
 					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-default" id="idbuthref">確定</button>
+						<button type="button" class="btn btn-default" id="idbuthref">確定</button>
 					</div>
 				</div>
 
@@ -58,5 +50,32 @@
 		<div class="col-xs-6 col-md-2"></div>
 	</div>
 </div>
+<script>
+
+$("#idbuthref").click(
+	function(){
+		swal({
+			title : "確定要修改密碼嗎?",
+			text : "",
+			type : "info",
+			showCancelButton : true,
+			//confirmButtonColor : "#DD6B55",
+			confirmButtonText : "YES",
+			closeOnConfirm : false,
+			showLoaderOnConfirm: true,
+			},function() {
+				swal({
+					type : "success",
+					title: "修改成功",  
+					text: "",  
+					timer: 2000,   
+					showConfirmButton: false
+				});
+				setTimeout(function(){
+					$('#formCenter').submit(); }, 1500);
+						}
+					);
+				})
+</script>
 
 <c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>
