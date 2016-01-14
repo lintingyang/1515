@@ -26,6 +26,15 @@ h4{
 #id_image_large {
  display: none;
 }
+#id_image_large1 {
+ display: none;
+}
+#id_image_large2 {
+ display: none;
+}
+#id_image_large3 {
+ display: none;
+}
 /* Custom upload button appearance*/
 #upload {
 }
@@ -34,19 +43,54 @@ h4{
 <div class="container" style="margin: 50px auto;">
 	<div class="alert alert-warning alert-dismissible" role="alert">
   		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  		以下<strong>所有欄位</strong>都是<strong>必填</strong>的喔！      別忘了上傳一張精美照片～
+  		<strong>「除了補充圖片以外」</strong>   以下<strong>所有欄位</strong>都是<strong>必填</strong>的喔！
 	</div>
 	
 	<form action="/product/update" enctype="multipart/form-data" method="post" novalidate>
-		<div class="col-md-1"></div>
-		<div class="col-md-5">
-			<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-4">
 			
 				<div class="form-group row">
-					<label class="col-sm-4 form-control-label"><h4>商品標題/名稱</h4></label>
+					<label class="col-sm-6 form-control-label"><h4>商品標題/名稱</h4></label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" name="name" id="productName"
-							placeholder="Title or Name" style="width: 80%;" required="required">
+							placeholder="Title or Name" style="width: 300px;" required="required">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-4 form-control-label"><h4>圖片</h4></label>
+					<div class="col-sm-10" align="center">
+   						<img id="blah0" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 200px; height: 200px;"/>
+   						<div>
+   							<label class="col-md-offset-2 col-sm-8 choose-file btn btn-sm btn-default glyphicon glyphicon-open" id="upload" for="id_image_large">
+							<input type="file" id="id_image_large" class ="pPicture" name="pPicture" multiple required="required"></label>
+   						</div>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div><label class="col-sm-7 form-control-label"><h4>補充圖片  (可免填)</h4></label></div>
+					<div class="col-sm-10" align="center">
+						<div class="row">
+							<div class = " col-sm-4">
+   								<img id="blah1" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; "/>
+   							</div>
+   							<div class = " col-sm-4">
+   								<img id="blah2" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; "/>
+   							</div>
+   							<div class = " col-sm-4">
+   								<img id="blah3" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; "/>
+							</div>
+							</div>
+							<div class="row">
+								<label class="col-md-offset-1 col-sm-2 choose-file btn btn-sm btn-default glyphicon glyphicon-open" id="upload" for="id_image_large1">
+								<input type="file" id="id_image_large1" class ="pPicture1" name="pPicture1" multiple required="required"></label>
+
+								<label class="col-md-offset-2 col-sm-2 choose-file btn btn-sm btn-default glyphicon glyphicon-open" id="upload" for="id_image_large2">
+								<input type="file" id="id_image_large2" class ="pPicture2" name="pPicture2" multiple required="required"></label>
+		
+								<label class="col-md-offset-2 col-sm-2 choose-file btn btn-sm btn-default glyphicon glyphicon-open" id="upload" for="id_image_large3">
+								<input type="file" id="id_image_large3" class ="pPicture3" name="pPicture3" multiple required="required"></label>
+							</div>
 					</div>
 				</div>
 				
@@ -68,6 +112,8 @@ h4{
 							<option value="12">運動用品</option>
 							<option value="13">女生</option>
 							<option value="14">男生</option>
+							<option value="15">裝飾品</option>
+							<option value="16">其他</option>
 						</select>
 					</div>
 				</div>
@@ -85,53 +131,34 @@ h4{
 							<label> <input type="radio" name="status" value="破損" id="bad">破損 &nbsp;
 							<input type="hidden" class="form" id="pStatusBad" name="pStatusBad" 
 								placeholder="請敘述破損狀況.." required="required"></label>
-<%-- 							<span id="em">${errorMsg.status}</span> --%>
 						</div>
 					</div>
 				</div>
 				<div class="form-group row">
 					<label class="col-sm-4 form-control-label"><h4>商品描述</h4></label>
 					<div class="col-sm-10">
-						<textarea name="description" style="width: 80%;" id = "description"
+						<textarea name="description" style="width: 300px;" id = "description"
 							class="form-control" rows="8" placeholder="商品描述..." required="required" ></textarea>
 					</div>
 				</div>
+			</div>
+			
+			<div class="col-md-4">
 				<div class="form-group row">
 					<label class="col-sm-4 form-control-label "><h4>上架與否</h4></label>
 					<div class="col-sm-10">
 						<div class="radio">
-							<label> <input type="radio" name="postStatus" value="TRUE" id="yesPost" checked>刊登</label> 
-							<label> <input type="radio" name="postStatus" value="FALSE" id="notPost" >暫不刊登</label>
+							<label> <input type="radio" name="postStatus" value="FALSE" id="notPost" CHECKED >暫不刊登</label>
+							<label> <input type="radio" name="postStatus" value="TRUE" id="yesPost" >刊登</label> 
 						</div>
 					</div>
 				</div>
-				<div class="isPosted">
+				<div id="rightSide" style = "display: none;">
 					<div>
-						<p>刊登日期：<input type="text" id="pStartTime" name="pStartTime" required="required">
-<%-- 						<span id="em">${errorMsg.timeS}</span> --%>
-						</p>
+						<p>截止日期：<input type="text" id="pDeadline" name="pDeadline"></p>
+						<p style="color: red;text-align: center;">${errorMsg.timeD}</p>
 					</div>
-					<div>
-						<p>截止日期：<input type="text" id="pDeadline" name="pDeadline" required="required">
-<%-- 						<span id="em">${errorMsg.timsD}</span> --%>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-md-5">
-			<div class="form-group row">
-				<label class="col-sm-4 form-control-label"><h4>圖片</h4></label>
-				<div class="col-sm-10">
-<!-- 					<input type="file" name="pPicture" multiple  required="required"> -->
-						<div class="preview"></div>
-<!-- 						<img width = "" id="myImage"/> -->
-						<label class="choose-file btn btn-sm btn-primary glyphicon glyphicon-open" id="upload" for="id_image_large"></label>
-						<input type="file" id="id_image_large" name="pPicture" multiple required="required">
-				</div>
-			</div>
-			<br>
+					<br>
 			<div class="form-group row">
 				<label class="col-sm-4 form-control-label"><h4>交易時段</h4></label>
 				<div class="col-sm-10">
@@ -147,7 +174,7 @@ h4{
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="location"
 						name="location" placeholder="ex : 地址/捷運站名/地標/學校"
-						style="width: 80%;" required="required">
+						style="width: 300px;" >
 				</div>
 			</div>
 			<br>
@@ -164,7 +191,7 @@ h4{
 			</div>
 			<br>
 			<div class="form-group row">
-				<label class="col-sm-4 form-control-label"><h4>希望換到商品</h4></label>
+				<label class="col-sm-6 form-control-label"><h4>希望換到商品</h4></label>
 				<div class="col-sm-10">
 					<div class="radio">
 						<label> <input type="radio" name="wishItem" value="隨機">隨機</label></div>
@@ -173,36 +200,32 @@ h4{
 					<div class="radio">
 						<label> <input type="radio" name="wishItem" value="希望商品" id="wish" checked>希望商品</label></div>
 					<div id="divWish">
-						<textarea id="pWishItem" name="pWishItem" style="width: 90%;" class="form-control" rows="8"
-							placeholder="詳細敘述想要換到的商品" required="required"></textarea>
+						<textarea id="pWishItem" name="pWishItem" style="width: 300px;" class="form-control" rows="8"
+							placeholder="詳細敘述想要換到的商品" ></textarea>
 <%-- 							<span id="em">${errorMsg.wish}</span> --%>
+						</div>
 					</div>
 				</div>
+			</div>
 			<div style="text-align: center; margin:50px auto;">
 				<button id="btnSend" type="submit" class="btn btn-success btn-lg">
-					<span class="glyphicon glyphicon-send" aria-hidden="true"></span> 確認更改
+					<span class="glyphicon glyphicon-send" aria-hidden="true"></span> 確認編輯
 					<span class="glyphicon glyphicon-send" aria-hidden="true"></span>
 				</button>
 			</div>
 		</div>
-		</div>
+		<div class="col-md-2"></div>
 	</form>
 </div>
 
 <script type="text/javascript">
-$(function () {
-	$("input[name=pPicture]").previewimage({
-		div: ".preview",
-		imgwidth: 90,
-		imgheight: 90
-	});
-});
-
-// function loadImage(e) {
-//     var image = document.getElementById('myImage');
-//  	image.src = e.target.result;
-//  	console.log("loadImage");
-// }
+// $(function () {
+// 	$("input[name=pPicture]").previewimage({
+// 		div: ".preview",
+// 		imgwidth: 90,
+// 		imgheight: 90
+// 	});
+// });
 
 // function previewImage() {
 // 	var reader = new FileReader();
@@ -215,9 +238,18 @@ $(function () {
 
 	$(function() {
 		
-		$('.isPosted').attr('style', 'display:none');
-		$('#divWish').attr('style', 'display:none');
+// 		$('#divWish').attr('style', 'display:none');
 
+		if(${not empty productPicturesY[0].picture}){
+			$('#blah0').attr('src' , "${productY.primaryPicture}");//預設的商品圖片
+			$(".pPicture").removeAttr('required');
+		}
+		if(${not empty productPicturesY[1].picture})
+		$('#blah1').attr('src' , "${productPicturesY[1].picture}");//預設的商品圖片1
+		if(${not empty productPicturesY[2].picture})
+		$('#blah2').attr('src' , "${productPicturesY[2].picture}");//預設的商品圖片2
+		if(${not empty productPicturesY[3].picture})
+		$('#blah3').attr('src' , "${productPicturesY[3].picture}");//預設的商品圖片3	
 		
 		$('#productName').val('${productY.name}');//預設的商品名稱
 		$('#description').val('${productY.description}');//預設的商品描述
@@ -230,19 +262,14 @@ $(function () {
 		$("input[name=wishItem][value='${productY.wishItem}']").attr('checked',true);//預設希望物品
 		$('#pWishItem').removeAttr('required');//預設希望商品
 		var wishItem = "${productY.wishItem}";
-		if( wishItem != ("隨機" || "贈送")){
-		$('#divWish').attr('style', '');
-		$('#pWishItem').val('${productY.wishItem}');
-		}
+		
+// 		if( wishItem != ("隨機" || "贈送")){
+// 		$('#divWish').attr('style', '');
+// 		$('#pWishItem').val('${productY.wishItem}');
+// 		}
 
-		
-		
 		//時間
-		$('#pStartTime').datepicker();
 		$('#pDeadline').datepicker();
-		
-		$('#pStartTime').attr('type', 'hidden').removeAttr('required');
- 		$('#pDeadline').attr('type', 'hidden').removeAttr('required');
  		
 		//顯示隱藏表格
 		$('input[name *= "status"]').change(function(){
@@ -252,17 +279,22 @@ $(function () {
 	 			$('#pStatusBad').attr('type', 'hidden').removeAttr('required');
 	 		}
 		});
+		
 		$('input[name *= "postStatus"]').change(function(){
 			if($(this).val() == "TRUE"){
-				$('.isPosted').attr('style', '');
-				$('#pStartTime').attr('type', '').attr('required','required');
-				$('#pDeadline').attr('type', '').attr('required','required');
+				console.log("ddfsdf");
+				$('#rightSide').css('display', 'inline');
+				$('#pDeadline').attr('required','required');
+				$('#location').attr('required','required');
+				$('#pWishItem').attr('required','required');
 	 		}else{
-	 			$('.isPosted').attr('style', 'display:none');
-	 			$('#pStartTime').attr('type', 'hidden').removeAttr('required');
-	 			$('#pDeadline').attr('type', 'hidden').removeAttr('required');
+	 			$('#rightSide').css('display', 'none');
+	 			$('#pDeadline').removeAttr('required');
+	 			$('#location').removeAttr('required');
+	 			$('#pWishItem').removeAttr('required');
 	 		}
 		});
+		
 		$('input[name *= "wishItem"]').change(function(){
 			if($(this).val() == "希望商品"){
 				$('#divWish').attr('style', '');
@@ -273,16 +305,56 @@ $(function () {
 	 		}
 		});
 		
-// 		$('#btnSend').click(function() {
-// 			swal({
-// 				title : "新增成功",
-// 				text : "您已新增一項商品",
-// 				type : "success",
-// 				showCancelButton : false,
-// 				confirmButtonColor : "#F5A056",
-// 				closeOnConfirm : true
-// 			});
-// 		});
-	})
+		//picture
+			function readURL(input) {
+			    if (input.files && input.files[0]) {
+			        var reader = new FileReader();
+			        reader.onload = function (e) {
+				    	$('#blah0').attr('src', e.target.result);
+			        }
+			        reader.readAsDataURL(input.files[0]);
+			    }
+			}
+			function readURL1(input) {
+			    if (input.files && input.files[0]) {
+			        var reader = new FileReader();
+			        reader.onload = function (e) {
+				    	$('#blah1').attr('src', e.target.result);
+			        }
+			        reader.readAsDataURL(input.files[0]);
+			    }
+			}
+			function readURL2(input) {
+			    if (input.files && input.files[0]) {
+			        var reader = new FileReader();
+			        reader.onload = function (e) {
+				    	$('#blah2').attr('src', e.target.result);
+			        }
+			        reader.readAsDataURL(input.files[0]);
+			    }
+			}
+			function readURL3(input) {
+			    if (input.files && input.files[0]) {
+			        var reader = new FileReader();
+			        reader.onload = function (e) {
+				    	$('#blah3').attr('src', e.target.result);
+			        }
+			        reader.readAsDataURL(input.files[0]);
+			    }
+			}
+			$(".pPicture").change(function(){
+			    readURL(this);
+			});
+			$(".pPicture1").change(function(){
+			    readURL1(this);
+			});
+			$(".pPicture2").change(function(){
+			    readURL2(this);
+			});
+			$(".pPicture3").change(function(){
+			    readURL3(this);
+			});
+			
+	})//$(function()
 </script>
 <c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>

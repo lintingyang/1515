@@ -98,7 +98,21 @@ public class Product extends OurEntity implements java.io.Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "tradeStatus", length = 10)
 	private TrueFalse tradeStatus;
+	
+	@Column(name = "primary_picture")
+	private String primaryPicture;
+	
+	
+	public String getPrimaryPicture() {
+		return primaryPicture;
+	}
 
+	public void setPrimaryPicture(String primaryPicture) {
+		this.primaryPicture = primaryPicture;
+	}
+
+
+	
 	public LocalDateTime getGradeTime() {
 		return gradeTime;
 	}
@@ -250,6 +264,8 @@ public class Product extends OurEntity implements java.io.Serializable {
 	public void setTradeStatus(TrueFalse tradeStatus) {
 		this.tradeStatus = tradeStatus;
 	}
+
+
 	
 	
 }

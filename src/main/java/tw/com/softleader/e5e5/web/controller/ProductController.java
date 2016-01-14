@@ -102,65 +102,67 @@ public class ProductController {
 	public List<Exchange> findExchange(@RequestParam("id") Integer id, Model model) {
 		List<Exchange> exchanges = exchangeService.findByProductAId(id);
 		for (Exchange exchange : exchanges) {
-			log.error("agagsfsdf"+exchange.getProductBId().getName());
+			log.error("agagsfsdf" + exchange.getProductBId().getName());
 		}
-		
+
 		List<Exchange> exchangesRemove = new ArrayList<Exchange>();
 		if (exchanges != null) {
 			for (Exchange exchange : exchanges) {
-				if(TrueFalse.TRUE == exchange.getProductBId().getTradeStatus() &&
-						exchange.getTradeStatus()!=TrueFalse.TRUE){
+				if (TrueFalse.TRUE == exchange.getProductBId().getTradeStatus()
+						&& exchange.getTradeStatus() != TrueFalse.TRUE) {
 					exchangesRemove.add(exchange);
 				}
 			}
 			exchanges.removeAll(exchangesRemove);
 		}
-//		for (Exchange exchange : exchanges) {
-//			log.error("fdasfasdf"+exchange.getProductBId().getName());
-//		}
-		
-		
-//		if (exchanges != null) {
-//			List<Exchange> exchangesBA = null;
-//			List<Exchange> exchangesBB = null;
-//			List<Exchange> exchangesCheck = null;
-//			List<Exchange> exchangesRemove = new ArrayList<Exchange>();
-//			
-//			// 列出ProductB有關的所有交易
-//			for (Exchange exchange : exchanges) {
-//				exchangesBA = exchangeService.findByProductAId(exchange.getProductBId().getId());
-//				if (exchangesBA != null) {
-//					if (exchangesCheck != null) {
-//						exchangesCheck.addAll(exchangesBA);
-//					} else {
-//						exchangesCheck = exchangesBA;
-//					}
-//				}
-//				exchangesBB = exchangeService.findByProductBId(exchange.getProductBId().getId());
-//				if (exchangesBB != null) {
-//					if (exchangesCheck != null) {
-//						exchangesCheck.addAll(exchangesBB);
-//					} else {
-//						exchangesCheck = exchangesBB;
-//					}
-//				}
-//			}
-//
-//			if (exchangesCheck != null) {
-//				for (Exchange check : exchangesCheck) {
-//					// 確認ProductB是否已交易過
-//					if (TrueFalse.TRUE == check.getTradeStatus()) {
-//						for (Exchange exchange : exchanges) {
-//							if (exchange.getProductBId().getId() == check.getProductAId().getId()) {
-////								// 移除交易過的ProductB
-//								exchangesRemove.add(exchange);
-//							}
-//						}
-//						exchanges.removeAll(exchangesRemove);
-//					}
-//				}
-//			}
-//		}
+		// for (Exchange exchange : exchanges) {
+		// log.error("fdasfasdf"+exchange.getProductBId().getName());
+		// }
+
+		// if (exchanges != null) {
+		// List<Exchange> exchangesBA = null;
+		// List<Exchange> exchangesBB = null;
+		// List<Exchange> exchangesCheck = null;
+		// List<Exchange> exchangesRemove = new ArrayList<Exchange>();
+		//
+		// // 列出ProductB有關的所有交易
+		// for (Exchange exchange : exchanges) {
+		// exchangesBA =
+		// exchangeService.findByProductAId(exchange.getProductBId().getId());
+		// if (exchangesBA != null) {
+		// if (exchangesCheck != null) {
+		// exchangesCheck.addAll(exchangesBA);
+		// } else {
+		// exchangesCheck = exchangesBA;
+		// }
+		// }
+		// exchangesBB =
+		// exchangeService.findByProductBId(exchange.getProductBId().getId());
+		// if (exchangesBB != null) {
+		// if (exchangesCheck != null) {
+		// exchangesCheck.addAll(exchangesBB);
+		// } else {
+		// exchangesCheck = exchangesBB;
+		// }
+		// }
+		// }
+		//
+		// if (exchangesCheck != null) {
+		// for (Exchange check : exchangesCheck) {
+		// // 確認ProductB是否已交易過
+		// if (TrueFalse.TRUE == check.getTradeStatus()) {
+		// for (Exchange exchange : exchanges) {
+		// if (exchange.getProductBId().getId() ==
+		// check.getProductAId().getId()) {
+		//// // 移除交易過的ProductB
+		// exchangesRemove.add(exchange);
+		// }
+		// }
+		// exchanges.removeAll(exchangesRemove);
+		// }
+		// }
+		// }
+		// }
 		return exchanges;
 	}
 
@@ -203,16 +205,15 @@ public class ProductController {
 	// 新增商品
 	@RequestMapping(value = "/insert")
 	public String insert(Model model, @ModelAttribute Product product, @RequestParam("pCategory") int pCategory,
-			@RequestParam("pPicture") MultipartFile pPicture, @RequestParam("pPicture1") MultipartFile pPicture1, 
+			@RequestParam("pPicture") MultipartFile pPicture, @RequestParam("pPicture1") MultipartFile pPicture1,
 			@RequestParam("pPicture2") MultipartFile pPicture2, @RequestParam("pPicture3") MultipartFile pPicture3,
-			@RequestParam("pStatusBad") String pStatusBad,
-			@RequestParam("pWishItem") String pWishItem, @RequestParam("pDeadline") String pDeadline, 
-			HttpSession session) {
-		
+			@RequestParam("pStatusBad") String pStatusBad, @RequestParam("pWishItem") String pWishItem,
+			@RequestParam("pDeadline") String pDeadline, HttpSession session) {
+
 		// 錯誤訊息顯示
-		 Map<String, String> errorMessage = new HashMap<>();
-		 session.removeAttribute("errorMsg");
-		 session.setAttribute("errorMsg", errorMessage);
+		Map<String, String> errorMessage = new HashMap<>();
+		session.removeAttribute("errorMsg");
+		session.setAttribute("errorMsg", errorMessage);
 
 		// 取userId
 		User userData = (User) session.getAttribute("user");
@@ -228,13 +229,13 @@ public class ProductController {
 		// 時間處理
 		LocalDateTime startTime = null;
 		LocalDateTime deadline = null;
-		
-		//時段、地點、方式、希望清單
+
+		// 時段、地點、方式、希望清單
 		Time tradeTime = null;
 		String location = null;
 		String tradeWay = null;
 		String productWish = null;
-		
+
 		if (product.getPostStatus() == TrueFalse.TRUE) {
 			startTime = LocalDateTime.now();
 
@@ -244,14 +245,14 @@ public class ProductController {
 			String yearD = pDeadline.substring(6, 10);
 			String end = yearD + "-" + monthD + "-" + dayD + " 00:00"; // "1986-04-08";
 			deadline = LocalDateTime.parse(end, formatter);
-			
-			if(deadline.isBefore(startTime)){
+
+			if (deadline.isBefore(startTime)) {
 				errorMessage.put("timeD", "截止日期一定要比今天晚喔！！");
-				if(errorMessage != null && !errorMessage.isEmpty()) {
+				if (errorMessage != null && !errorMessage.isEmpty()) {
 					return "redirect:/product/add";
 				}
 			}
-			
+
 			tradeTime = product.getTransactionTime();
 			location = product.getLocation();
 			tradeWay = product.getTradeWay();
@@ -261,7 +262,7 @@ public class ProductController {
 			} else {
 				productWish = product.getWishItem();
 			}
-			
+
 		} else {
 			startTime = null;
 			deadline = null;
@@ -271,10 +272,14 @@ public class ProductController {
 			productWish = null;
 		}
 
+		
+		// String path = productPictureService.upLoadImage(newProduct.getId(),
+		// servletContext, pPicture);
+
 		// 存入資料
 		Product newProduct = productService.insert(product.getName(), userData.getId(), pCategory, productStatus,
-				product.getDescription(), deadline, startTime, tradeTime, location,
-				tradeWay, productWish, product.getPostStatus());
+				product.getDescription(), deadline, startTime, tradeTime, location, tradeWay, productWish,
+				product.getPostStatus());
 		if (newProduct != null) {
 			model.addAttribute("result", "success");
 			session.setAttribute("new", newProduct);
@@ -282,25 +287,21 @@ public class ProductController {
 			model.addAttribute("result", "fail");
 		}
 		
-		// 存取productPicture
+		// 存取productPicture/yao
 		String path = productPictureService.upLoadImage(newProduct.getId(), servletContext, pPicture);
-		int numPicture = productPictureService.insertImage(newProduct.getId(), path);
-		if(!pPicture1.isEmpty()){
+		productService.insertPrimaryPic(newProduct.getId(), path);
+		// 存取productPicture
+		if (!pPicture1.isEmpty()) {
 			String path1 = productPictureService.upLoadImage(newProduct.getId(), servletContext, pPicture1);
-			int numPicture1 = productPictureService.insertImage(newProduct.getId(), path1);
+			productPictureService.insertImage(newProduct.getId(), path1);
 		}
-		if(!pPicture2.isEmpty()){
+		if (!pPicture2.isEmpty()) {
 			String path2 = productPictureService.upLoadImage(newProduct.getId(), servletContext, pPicture2);
-			int numPicture2 = productPictureService.insertImage(newProduct.getId(), path2);
+			productPictureService.insertImage(newProduct.getId(), path2);
 		}
-		if(!pPicture3.isEmpty()){
+		if (!pPicture3.isEmpty()) {
 			String path3 = productPictureService.upLoadImage(newProduct.getId(), servletContext, pPicture3);
-			int numPicture3 = productPictureService.insertImage(newProduct.getId(), path3);
-		}
-		if (numPicture == 1) {
-			model.addAttribute("picResult", "圖片新增成功");
-		} else {
-			model.addAttribute("picResult", "圖片新增失敗");
+			productPictureService.insertImage(newProduct.getId(), path3);
 		}
 
 		return "/e715/product/productedit";
@@ -312,30 +313,31 @@ public class ProductController {
 	public String exchangeMakeSure(Model model, @RequestParam("id") int exId, HttpSession session) {
 		Exchange exchange = exchangeService.findOne(exId);
 		session.setAttribute("makeSure", exchange);
-		
+
 		String s = exchange.getProductAId().getDeadline().toString();
 		String ss = s.substring(0, 10);
 		session.setAttribute("ss", ss);
-		
+
 		List<ProductPicture> pa = productPictureService.getProductPictures(exchange.getProductAId());
 		List<ProductPicture> pb = productPictureService.getProductPictures(exchange.getProductBId());
 		model.addAttribute("pa", pa);
 		model.addAttribute("pb", pb);
-		
+
 		// 時間顯示（年月日分秒）
-//		String tradeTime = exchange.getTradeFinishedTime().toString();
-//		String year = tradeTime.substring(0, 4);
-//		String month = tradeTime.substring(5, 7);
-//		String day = tradeTime.substring(8, 10);
-//		String hour = tradeTime.substring(11, 13);
-//		String minute = tradeTime.substring(14, 16);
-//		String second = tradeTime.substring(17, 19);
-//		String finalTradeTime = year + "年" + month + "月" + day + "日" + hour + "時" + minute + "分" + second + "秒";
-//		session.setAttribute("finalTradeTime", finalTradeTime);
-		
+		// String tradeTime = exchange.getTradeFinishedTime().toString();
+		// String year = tradeTime.substring(0, 4);
+		// String month = tradeTime.substring(5, 7);
+		// String day = tradeTime.substring(8, 10);
+		// String hour = tradeTime.substring(11, 13);
+		// String minute = tradeTime.substring(14, 16);
+		// String second = tradeTime.substring(17, 19);
+		// String finalTradeTime = year + "年" + month + "月" + day + "日" + hour +
+		// "時" + minute + "分" + second + "秒";
+		// session.setAttribute("finalTradeTime", finalTradeTime);
+
 		return "/e715/product/proExMakeSure";
 	}
-	
+
 	// 交易進行中頁面
 	@RequestMapping(value = "/exchanging")
 	public String exchanging(Model model, @RequestParam("id") int exId, HttpSession session) {
@@ -346,8 +348,7 @@ public class ProductController {
 		List<ProductPicture> pb = productPictureService.getProductPictures(exchange.getProductBId());
 		model.addAttribute("pa", pa);
 		model.addAttribute("pb", pb);
-		
-		
+
 		// 時間顯示（年月日分秒）
 		String tradeTime = exchange.getTradeFinishedTime().toString();
 		String year = tradeTime.substring(0, 4);
@@ -370,47 +371,44 @@ public class ProductController {
 
 		return "/e715/product/proExchanging";
 	}
-	
-	//評分
+
+	// 評分
 	@RequestMapping(value = "/grade")
 	public String grade(Model model, @RequestParam("g") int g, HttpSession session) {
 		User loginUser = (User) session.getAttribute("user");
 		Exchange exchange = (Exchange) session.getAttribute("exchange");
 		User ua = exchange.getProductAId().getUserId();
 		Grade point = null;
-		if(g == 1){
+		if (g == 1) {
 			point = Grade.BAD;
-		}else if (g == 2){
+		} else if (g == 2) {
 			point = Grade.SOSO;
-		}else if (g == 3){
+		} else if (g == 3) {
 			point = Grade.GOOD;
-		}else{
+		} else {
 			point = null;
 		}
 		int i = 0;
-		if(loginUser.getId() == ua.getId()){
-			
+		if (loginUser.getId() == ua.getId()) {
+
 			i = exchangeService.gradeProductX(exchange.getProductBId(), point);
-		}else{
+		} else {
 			i = exchangeService.gradeProductX(exchange.getProductAId(), point);
 		}
-		if(i == 1){
+		if (i == 1) {
 			model.addAttribute("ans", "success");
-		}else{
+		} else {
 			model.addAttribute("ans", "fail");
 		}
-		
+
 		List<ProductPicture> pa = productPictureService.getProductPictures(exchange.getProductAId());
 		List<ProductPicture> pb = productPictureService.getProductPictures(exchange.getProductBId());
 		model.addAttribute("pa", pa);
 		model.addAttribute("pb", pb);
-		
-		
-		
+
 		return "/e715/product/proExchanging";
 	}
-	
-	
+
 	@RequestMapping(value = "/querytradstatus")
 	@ResponseBody
 	public List<Product> querytradstatus(@RequestParam("id") Integer id, HttpSession session) {
@@ -420,21 +418,22 @@ public class ProductController {
 		return list;
 
 	}
-	@RequestMapping(value="/checkexchanged")
+
+	@RequestMapping(value = "/checkexchanged")
 	@ResponseBody
-	public String checkexchanged(@RequestParam("bid")int bid,@RequestParam("aid")int aid){
-		if(exchangeService.findByProductAANDProductB(aid, bid).size()==0){
+	public String checkexchanged(@RequestParam("bid") int bid, @RequestParam("aid") int aid) {
+		if (exchangeService.findByProductAANDProductB(aid, bid).size() == 0) {
 			return "true";
-		}else{
+		} else {
 			return "false";
 		}
 	}
-	
-	//by雙 我要交換按鈕
-	@RequestMapping(value="/exchange/{Bid}/{Aid}", method = RequestMethod.GET)
-	public String exchangeproduct(@PathVariable("Bid")final int bid,@PathVariable("Aid")final int aid){	
-			exchangeService.addexchange(aid, bid);
-		return "redirect:/product/"+aid;
+
+	// by雙 我要交換按鈕
+	@RequestMapping(value = "/exchange/{Bid}/{Aid}", method = RequestMethod.GET)
+	public String exchangeproduct(@PathVariable("Bid") final int bid, @PathVariable("Aid") final int aid) {
+		exchangeService.addexchange(aid, bid);
+		return "redirect:/product/" + aid;
 	}
 
 }
