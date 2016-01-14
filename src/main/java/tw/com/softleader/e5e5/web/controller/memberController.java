@@ -190,6 +190,7 @@ public class memberController {
 
 			// 讀取新圖跟砍檔(別忘記jsp的enctype
 			if (!file.isEmpty()) {
+				userService.deleteImage(user.getId(), servletContext);
 				String path = userService.upLoadImage(user.getId(), servletContext, file);
 				user.setPicture(path);
 			}
