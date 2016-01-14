@@ -17,7 +17,7 @@ public interface ChatDao extends OurDao<Chat> {
 	
 	//find last 3 chat message by post time
 //	@Query(value ="select top 3 * from Chat c where send_time is not null order by send_time desc", nativeQuery = true)
-	@Query(value ="select * from Chat c where send_time is not null order by send_time desc", nativeQuery = true)
+	@Query(value ="select top 300 * from Chat c where send_time is not null order by send_time desc", nativeQuery = true)
 	public List<Chat> findAllOrderBySendTime();
 
 }

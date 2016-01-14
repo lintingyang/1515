@@ -66,12 +66,12 @@ public class memberController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String showUserPage(@PathVariable("id") final int id, final Model model,HttpSession session) {
 		User myself = (User) session.getAttribute("user");
-		User user = userService.getOne(id);
-		if (user == null) {
+		if (myself == null) {
 			return "redirect:/";
 		}
-		log.error("==============================="+myself.getId());
-		log.error("==============================="+user.getId());
+		User user = userService.getOne(id);
+//		log.error("==============================="+myself.getId());
+//		log.error("==============================="+user.getId());
 		
 		boolean relation = focusUserListService.findRelation(myself.getId(), user.getId());
 		int good = 0;
