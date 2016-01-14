@@ -83,33 +83,31 @@ public class ProductService extends OurService<Product> {
 		return list;
 	}
 
-	@Transactional // shuang
+	// shuang
 	public List<Product> findByNameAndStatus(int id) {
 		List<Product> list = productDao.findByUserIdAndStatue(id);
 
 		return list;
 	}
 
-	@Transactional // shuang
+	// shuang
 	public List<Product> findeOrderByClickTime(String productName, String categoryName) {
 		List<Product> list = productDao.findByProdcutOrderByClickTimes(productName, categoryName);
 		return list;
 	}
 
-	@Transactional // shuang
+	// shuang
 	public List<Product> findByProductOrderByPostTime(String productName, String categoryName) {
 		List<Product> list = productDao.findByProductOrderByPostTime(productName, categoryName);
 		return list;
 	}
 
 	// (11)查詢使用者已/未刊登的物品/Enum/yao
-	@Transactional
 	public List<Product> findByUsersProductsIsPosted(Integer id, TrueFalse postStatus) {
 		return productDao.findUsersProductsByIsPosted(id, postStatus);
 	}
 
 	// (11)查詢使用者已/未刊登的物品/String/yao
-	@Transactional
 	public List<Product> findByUsersProductsIsPosted(Integer id, String postStatus) {
 		return productDao.findUsersProductsByIsPosted(id, postStatus);
 	}
@@ -124,20 +122,20 @@ public class ProductService extends OurService<Product> {
 		return productDao.findUserPostedProductsByExchanged(userId);
 	}
 
-	@Transactional
+	
 	public List<Product> findByUserId(Integer id) {
 		return productDao.findByUserId(id);
 	}
 
 	// 後台
 	// (1)findOne byId
-	@Transactional
+	
 	public Product getOneById(Integer id) {
 		return productDao.findOne(id);
 	}
 
 	// (2)findAll
-	@Transactional
+	
 	public List<Product> getAllProducts() {
 		return productDao.findAll();
 	}
@@ -165,47 +163,47 @@ public class ProductService extends OurService<Product> {
 	}
 
 	// (1)最新商品列：fineAll byPostTime
-	@Transactional
+	
 	public List<Product> getProductsOrderByPostTime() {
 		return productDao.findAllByPostTime();
 	}
 
 	// (2)點擊次數排序商品列：findAll byClickTimes
-	@Transactional
+	
 	public List<Product> getProductsOrderByClickTimes() {
 		return productDao.findAllByClickTimes();
 	}
 
 	// (3)依商品名稱搜尋：findAll byName
-	@Transactional
+	
 	public List<Product> getProductsByName(String productKeywords) {
 		//
 		return productDao.findAllByName(productKeywords);
 	}
 
 	// (4)依商品交換地搜尋：findAll byLocation
-	@Transactional
+	
 	public List<Product> getProductsByLocation(String locationKeywords) {
 		//
 		return productDao.findAllByLocation(locationKeywords);
 	}
 
 	// (5)依會員名稱搜尋：findAll byUserName
-	@Transactional
+	
 	public List<Product> getProductsByUserName(String userName) {
 		//
 		return productDao.findAllByUserName(userName);
 	}
 
 	// (6)依會員學校搜尋：findAll byUserSchoolName
-	@Transactional
+	
 	public List<Product> getProductsByUserSchoolName(String userSchoolName) {
 		//
 		return productDao.findAllByUserSchoolName(userSchoolName);
 	}
 
 	// (7)依商品種類搜尋：findAll byProductCategory
-	@Transactional
+	
 	public List<Product> getProductsByProductCategory(String productCategory) {
 		//
 		return productDao.findAllByProductCategory(productCategory);
@@ -226,7 +224,7 @@ public class ProductService extends OurService<Product> {
 	// }
 
 	// (10) 關鍵字搜尋:產品名稱、交換地、使用者名稱、產品類別
-	@Transactional
+	
 	public List<Product> getAllByKeywords(String keywords) {
 		if (keywords.isEmpty()) {
 			return productDao.findAll();
@@ -272,6 +270,8 @@ public class ProductService extends OurService<Product> {
 		return product;
 
 	}
+	
+	//存primaryPicture(第一張圖) in product 的 primaryPicture column/yao
 	@Transactional
 	public Product insertPrimaryPic (int productId ,String primaryPicture){
 		Product product = productDao.findOne(productId);
@@ -332,17 +332,34 @@ public class ProductService extends OurService<Product> {
 		}
 	}
 	
+	// 刪除product的primaryPic的物品圖片/yao
+	@Transactional
+	public boolean deletePrimaryPic(int productId ,ServletContext servletContext){
+		Product product = productDao.findOne(productId);
+		String productPath = product.getPrimaryPicture();
+		String realPath = servletContext.getRealPath(productPath).replace('/', '\\');
+		File destination = null;
+		destination = new File(realPath);
+		try {
+			destination.delete();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 	
-	// 刪除物品圖片/yao
+	// 刪除product_picture的物品圖片/yao
 	@Transactional
 	public boolean deleteImage(int id, int index, ServletContext servletContext) {
 		Product product = productDao.findOne(id);
 		List<ProductPicture> productPictures = productPictureService.getProductPictures(product);
 		ProductPicture productPicture = productPictures.get(index);
-		log.debug("###############" + productPicture);
+		productPictureService.delete(productPicture.getId());
 		String productPath = productPicture.getPicture();
 		String realPath = servletContext.getRealPath(productPath).replace('/', '\\');
 		File destination = null;
+		destination = new File(realPath);
 		try {
 			destination.delete();
 			return true;

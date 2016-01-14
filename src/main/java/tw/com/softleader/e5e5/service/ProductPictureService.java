@@ -30,7 +30,7 @@ public class ProductPictureService extends OurService<ProductPicture>{
 	@Autowired
 	private ProductDao productDao;
 	
-	@Transactional
+	
 	public List<ProductPicture> getProductPictures(Product product) {
 		List<ProductPicture> productPictures = productPictureDao.findByProduct(product);
 		return productPictures;
