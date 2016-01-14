@@ -124,6 +124,9 @@ public class ProductUDController {
 		Product product = productService.getOne(id);
 		model.addAttribute("productY", product);
 		session.setAttribute("productId", id);
+		//抓物品圖片
+		List<ProductPicture> productPictures = productPictureService.getProductPictures(product);
+		model.addAttribute("productPicturesY", productPictures);
 		return "/e715/product/proEdit";
 	}
 	
@@ -212,18 +215,29 @@ public class ProductUDController {
 		} else {
 			model.addAttribute("result", "fail");
 		}
+		// 存取productPicture 
+				String path = productPictureService.upLoadImage(editProduct.getId(), servletContext, pPicture);
+				int numPicture = productPictureService.insertImage(editProduct.getId(), path);
+				if(!pPicture1.isEmpty()){
+					String path1 = productPictureService.upLoadImage(editProduct.getId(), servletContext, pPicture1);
+					int numPicture1 = productPictureService.insertImage(editProduct.getId(), path1);
+				}
+				if(!pPicture2.isEmpty()){
+					String path2 = productPictureService.upLoadImage(editProduct.getId(), servletContext, pPicture2);
+					int numPicture2 = productPictureService.insertImage(editProduct.getId(), path2);
+				}
+				if(!pPicture3.isEmpty()){
+					String path3 = productPictureService.upLoadImage(editProduct.getId(), servletContext, pPicture3);
+					int numPicture3 = productPictureService.insertImage(editProduct.getId(), path3);
+				}
+				if (numPicture == 1) {
+					model.addAttribute("picResult", "圖片新增成功");
+				} else {
+					model.addAttribute("picResult", "圖片新增失敗");
+				}
 
-		// 存取productPicture
-		String path = productPictureService.upLoadImage(editProduct.getId(), servletContext,
-				pPicture);
-		int numPicture = productPictureService.insertImage(editProduct.getId(), path);
-		if (numPicture == 1) {
-			model.addAttribute("picResult", "圖片新增成功");
-		} else {
-			model.addAttribute("picResult", "圖片新增失敗");
-		}
+				return "/e715/product/productedit";
 
-		return "/e715/product/productedit";
 	}
 
 }
