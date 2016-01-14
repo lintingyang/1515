@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
 <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-<!-- <script src="/resources/js/preview.image.js"></script> -->
 <style>
 h4{
 	color:#000079;
@@ -15,26 +14,58 @@ h4{
 #em{
 	color:red;
 }
-/* /* 預覽圖片 */ */
-/* .preview > div { */
-/*   display: inline-block; */
-/*   text-align:center; */
-/* } */
-/* /* Hide file input */ */
-/* #id_image_large { */
-/*  display: none; */
-/* } */
-
-
 </style>
 <script type="text/javascript">
+	//picture
 	$(function() {
-		//圖片
-// 		$("input[name=pPicture]").previewimage({
-// 			div: ".preview",
-// 			imgwidth: 90,
-// 			imgheight: 90
-// 		});
+		function readURL(input) {
+		    if (input.files && input.files[0]) {
+		        var reader = new FileReader();
+		        reader.onload = function (e) {
+			    	$('#blah').attr('src', e.target.result);
+		        }
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		}
+		function readURL1(input) {
+		    if (input.files && input.files[0]) {
+		        var reader = new FileReader();
+		        reader.onload = function (e) {
+			    	$('#blah1').attr('src', e.target.result);
+		        }
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		}
+		function readURL2(input) {
+		    if (input.files && input.files[0]) {
+		        var reader = new FileReader();
+		        reader.onload = function (e) {
+			    	$('#blah2').attr('src', e.target.result);
+		        }
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		}
+		function readURL3(input) {
+		    if (input.files && input.files[0]) {
+		        var reader = new FileReader();
+		        reader.onload = function (e) {
+			    	$('#blah3').attr('src', e.target.result);
+		        }
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		}
+		$("#pPicture").change(function(){
+		    readURL(this);
+		});
+		$("#pPicture1").change(function(){
+		    readURL1(this);
+		});
+		$("#pPicture2").change(function(){
+		    readURL2(this);
+		});
+		$("#pPicture3").change(function(){
+		    readURL3(this);
+		});
 		
 		//時間
 		$('#pDeadline').datepicker();
@@ -69,23 +100,40 @@ h4{
 	 			$('#pWishItem').removeAttr('required');
 	 		}
 		});
-		
 	})
+	
 </script>
 <div class="container" style="margin: 50px auto;">
 	<div class="alert alert-warning alert-dismissible" role="alert">
   		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  		以下<strong>所有欄位</strong>都是<strong>必填</strong>的喔！      別忘了上傳一張精美照片～
+  		<strong>「除了補充圖片以外」</strong>   以下<strong>所有欄位</strong>都是<strong>必填</strong>的喔！      
 	</div>
 	<form action="/product/insert" enctype="multipart/form-data" method="post">
-		<div class="col-md-1"></div>
-		<div class="col-md-5">
-			<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-4" >
 				<div class="form-group row">
-					<label class="col-sm-4 form-control-label"><h4>商品標題/名稱</h4></label>
+					<label class="col-sm-6 form-control-label"><h4>商品標題/名稱</h4></label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" name="name"
-							placeholder="Title or Name" style="width: 80%;" required="required">
+							placeholder="Title or Name" style="width: 300px;" required="required">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-4 form-control-label"><h4>圖片</h4></label>
+					<div class="col-sm-10" align="center">
+   						<img id="blah" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 200px; height: 200px;"/>
+  						<input type='file' id="pPicture" name="pPicture" style="width: 170px" required="required"/>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-7 form-control-label"><h4>補充圖片  (可免填)</h4></label>
+					<div class="col-sm-10" align="center">
+   						<img id="blah1" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; margin: 0 5px;"/>
+   						<img id="blah2" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; margin: 0 5px;"/>
+   						<img id="blah3" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; margin: 0 5px;"/>
+  						<input type='file' id="pPicture1" name="pPicture1" style="width: 170px"/>
+  						<input type='file' id="pPicture2" name="pPicture2" style="width: 170px"/>
+  						<input type='file' id="pPicture3" name="pPicture3" style="width: 170px"/>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -123,31 +171,20 @@ h4{
 							<label> <input type="radio" name="status" value="破損" id="bad">破損 &nbsp;
 							<input type="hidden" class="form" id="pStatusBad" name="pStatusBad" 
 								placeholder="請敘述破損狀況.." required="required"></label>
-<%-- 							<span id="em">${errorMsg.status}</span> --%>
 						</div>
 					</div>
 				</div>
 				<div class="form-group row">
 					<label class="col-sm-4 form-control-label"><h4>商品描述</h4></label>
 					<div class="col-sm-10">
-						<textarea name="description" style="width: 80%;" 
+						<textarea name="description" style="width: 300px;" 
 							class="form-control" rows="8" placeholder="商品描述..." required="required"></textarea>
 					</div>
 				</div>
-				<div class="form-group row">
-					<label class="col-sm-4 form-control-label"><h4>圖片</h4></label>
-					<div class="col-sm-10">
-						<input type="file" name="pPicture" multiple  required="required">
-	<!-- 					<div class="preview"></div> -->
-	<!-- 						<img width = "" id="myImage"/> -->
-	<!-- 						<label class="choose-file btn btn-sm btn-primary glyphicon glyphicon-open" id="upload" for="id_image_large"></label> -->
-	<!-- 						<input type="file" id="id_image_large" name="pPicture" multiple  required="required"> -->
-					</div>
-				</div>
-			</div>
+				
 		</div>
 
-		<div class="col-md-5">
+		<div class="col-md-4">
 			<div class="form-group row">
 				<label class="col-sm-4 form-control-label"><h4>上架與否</h4></label>
 				<div class="col-sm-10">
@@ -160,13 +197,12 @@ h4{
 			<div id="rightSide" >
 				<div>
 					<p>截止日期：<input type="text" id="pDeadline" name="pDeadline" required="required">
-<%-- 					<span id="em">${errorMsg.timsD}</span> --%>
 					</p>
+					<p style="color: red;text-align: center;">${errorMsg.timeD}</p>
 				</div>
 				<br>
 				<div class="form-group row">
 					<label class="col-sm-4 form-control-label"><h4>交易時段</h4></label>
-					<span style="color: red">${errorMsg.timeD}</span>
 					<div class="col-sm-10">
 						<div class="radio">
 							<label><input type="radio" name="transactionTime" value="上午" checked>上午</label>
@@ -180,7 +216,7 @@ h4{
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="location"
 							name="location" placeholder="ex : 地址/捷運站名/地標/學校"
-							style="width: 80%;" required="required">
+							style="width: 300px;" required="required">
 					</div>
 				</div>
 				<br>
@@ -197,7 +233,7 @@ h4{
 				</div>
 				<br>
 				<div class="form-group row">
-					<label class="col-sm-4 form-control-label"><h4>希望換到商品</h4></label>
+					<label class="col-sm-6 form-control-label"><h4>希望換到商品</h4></label>
 					<div class="col-sm-10">
 						<div class="radio">
 							<label> <input type="radio" name="wishItem" value="隨機">隨機</label></div>
@@ -206,7 +242,7 @@ h4{
 						<div class="radio">
 							<label> <input type="radio" name="wishItem" value="希望商品" id="wish" checked>希望商品</label></div>
 						<div id="divWish">
-							<textarea id="pWishItem" name="pWishItem" style="width: 90%;" class="form-control" rows="8"
+							<textarea id="pWishItem" name="pWishItem" style="width: 300px;" class="form-control" rows="8"
 								placeholder="詳細敘述想要換到的商品" required="required"></textarea>
 	<%-- 							<span id="em">${errorMsg.wish}</span> --%>
 						</div>
@@ -220,6 +256,7 @@ h4{
 				</button>
 			</div>
 		</div>
+		<div class="col-md-2"></div>
 	</form>
 </div>
 <c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>

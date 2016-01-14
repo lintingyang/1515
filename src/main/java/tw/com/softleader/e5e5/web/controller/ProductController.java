@@ -203,7 +203,9 @@ public class ProductController {
 	// 新增商品
 	@RequestMapping(value = "/insert")
 	public String insert(Model model, @ModelAttribute Product product, @RequestParam("pCategory") int pCategory,
-			@RequestParam("pPicture") MultipartFile pPicture, @RequestParam("pStatusBad") String pStatusBad,
+			@RequestParam("pPicture") MultipartFile pPicture, @RequestParam("pPicture1") MultipartFile pPicture1, 
+			@RequestParam("pPicture2") MultipartFile pPicture2, @RequestParam("pPicture3") MultipartFile pPicture3,
+			@RequestParam("pStatusBad") String pStatusBad,
 			@RequestParam("pWishItem") String pWishItem, @RequestParam("pDeadline") String pDeadline, 
 			HttpSession session) {
 		
@@ -307,10 +309,23 @@ public class ProductController {
 		} else {
 			model.addAttribute("result", "fail");
 		}
-
+		System.out.println("aaaaaa========================" + pPicture1.getOriginalFilename());
+		System.out.println("bbbbb========================" + pPicture1.isEmpty());
 		// 存取productPicture
 		String path = productPictureService.upLoadImage(newProduct.getId(), servletContext, pPicture);
 		int numPicture = productPictureService.insertImage(newProduct.getId(), path);
+		if(!pPicture1.isEmpty()){
+			String path1 = productPictureService.upLoadImage(newProduct.getId(), servletContext, pPicture1);
+			int numPicture1 = productPictureService.insertImage(newProduct.getId(), path1);
+		}
+		if(!pPicture2.isEmpty()){
+			String path2 = productPictureService.upLoadImage(newProduct.getId(), servletContext, pPicture2);
+			int numPicture2 = productPictureService.insertImage(newProduct.getId(), path2);
+		}
+		if(!pPicture3.isEmpty()){
+			String path3 = productPictureService.upLoadImage(newProduct.getId(), servletContext, pPicture3);
+			int numPicture3 = productPictureService.insertImage(newProduct.getId(), path3);
+		}
 		if (numPicture == 1) {
 			model.addAttribute("picResult", "圖片新增成功");
 		} else {
