@@ -293,6 +293,31 @@ public class ProductService extends OurService<Product> {
 	public int findCountByProductBId(Integer id) {
 		return productDao.findCountByProductBId(id);
 	}
+
+	
+	// 後台修改刊登狀態/ming
+	@Transactional
+	public Product updateBackPostStatus(Integer id, TrueFalse updateResult) {
+		Product product = productDao.findOne(id);
+		if(updateResult.equals(TrueFalse.TRUE)){
+			product.setPostStatus(updateResult);
+			product = productDao.save(product);
+			return product;
+		}else if(updateResult.equals(TrueFalse.FALSE)){
+			product.setPostStatus(updateResult);
+			product.setStartTime(null);
+			product.setDeadline(null);
+			product.setTransactionTime(null);
+			product.setLocation(null);
+			product.setTradeWay(null);
+			product.setWishItem(null);
+			product = productDao.save(product);
+			return product;
+		}else{
+			return product;
+		}
+	}
+	
 	
 	@Transactional
 	public int findExchangeIdByProductId(Integer productId){

@@ -3,6 +3,7 @@ package tw.com.softleader.e5e5.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,48 +23,88 @@ import tw.com.softleader.e5e5.common.ajax.GridResponse;
 import tw.com.softleader.e5e5.common.dao.CommonCriterion;
 import tw.com.softleader.e5e5.common.dao.QueryOpType;
 import tw.com.softleader.e5e5.entity.Product;
-import tw.com.softleader.e5e5.entity.User;
-import tw.com.softleader.e5e5.security.entity.SecRole;
-import tw.com.softleader.e5e5.security.service.SecRoleService;
 import tw.com.softleader.e5e5.service.ProductService;
 
 @Controller
-@RequestMapping(value="/admin/products")
+@RequestMapping(value = "/admin/products")
 public class ProductManageController {
-	
+
 	private Logger log = LoggerFactory.getLogger(this.getClass());
-	
+
 	@Autowired
 	private ProductService productService;
-	
-	@RequestMapping(value="/list",  method = RequestMethod.GET)
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String listPage() {
-		return "/product/productManageList";
+		return "/product/proManList";
 	}
-	
+
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public String editPage(@PathVariable("id") final int id, final Model model) {
+
+		Product oneProduct = productService.getOne(id);
+		model.addAttribute("entity", oneProduct);
+
+		return "/product/proManEdit";
+	}
+
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public GridResponse<Product> query(final Model model, final Product product, final Pageable pageable) {
-//		Page<Product> page;
-		List<Product> list;
-		log.debug("++++++++"+product);
-		log.debug("====="+pageable);
-		
+		Page<Product> page;
 		try {
 			final List<CommonCriterion> criterions = new ArrayList<CommonCriterion>();
+//			if (StringUtils.isNotEmpty(product.getId())) {
+//				log.debug("============================" );
+//				criterions.add(new CommonCriterion(QueryOpType.EQ, "id", product.getId()));
+//			}
+			if (StringUtils.isNotEmpty(product.getName())) {
+				criterions.add(new CommonCriterion(QueryOpType.LIKE, "name", "%" + product.getName() + "%"));
+			}
 
-//			 if (StringUtils.isNotEmpty(user.getAccount())) {
-//			 criterions.add(new CommonCriterion(QueryOpType.LIKE, "account", "%"
-//			 + user.getAccount() + "%"));
-//			 }
+			page = productService.getByCondition(criterions, pageable);
 
-//			page = productService.getByCondition(criterions, pageable);
-			list = productService.getAll();
 		} catch (final Exception e) {
 			return new GridResponse<Product>(e);
 		}
 
-		return new GridResponse<Product>(list);
+		return new GridResponse<Product>(page);
+	}
+
+
+
+	@RequestMapping(method = RequestMethod.PUT)
+	@ResponseBody
+	public AjaxResponse<Product> update(final Model model, @RequestBody final Product form) {
+		final AjaxResponse<Product> response = new AjaxResponse<Product>();
+
+		try {
+
+			if (response.isMessagesEmpty()) {
+				final Product updateResult = productService.updateBackPostStatus(form.getId(), form.getPostStatus());
+				response.setData(updateResult);
+			}
+		} catch (final Exception e) {
+			response.addException(e);
+		}
+		return response;
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public AjaxResponse<Product> delete(@PathVariable(value = "id") final int id) {
+		log.debug("{}", id);
+		final AjaxResponse<Product> response = new AjaxResponse<Product>();
+
+		try {
+			if (response.isMessagesEmpty()) {
+				productService.delete(id);
+			}
+		} catch (final Exception e) {
+			return new AjaxResponse<>(e);
+		}
+		return response;
 	}
 
 }
