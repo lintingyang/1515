@@ -73,6 +73,18 @@ public class ChatService extends OurService<Chat> {
 		return result;
 	}
 	@Transactional
+	public Chat postImage(int userId,String picture) {
+		Chat result = null;
+		Chat chat = new Chat();
+		User user = (User) userDao.findOne(userId);
+		chat.setUser(user);
+		chat.setPicture(picture);
+		chat.setSendTime(LocalDateTime.now());
+		result = chatDao.save(chat);
+		
+		return result;
+	}
+	@Transactional
 	public Chat update(int id, String messages) {
 		Chat chat = new Chat();
 		chat =  chatDao.findOne(id);
@@ -86,7 +98,7 @@ public class ChatService extends OurService<Chat> {
 	public String upLoadImage(int id, ServletContext servletContext,MultipartFile file) {
 		BufferedImage src = null;
 		int counter=0;
-		String path = "/resources/userimgs/";
+		String path = "/resources/chatimgs/";
 
 		path = servletContext.getRealPath(path);
 		File destination = null;
