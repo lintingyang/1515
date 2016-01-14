@@ -121,6 +121,4 @@ public class QuestionAndAnswer extends OurEntity implements java.io.Serializable
 //		this.isPublic = isPublic;
 //	}
 
-
-
 }
