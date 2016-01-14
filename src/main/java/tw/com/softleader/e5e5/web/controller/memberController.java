@@ -66,12 +66,12 @@ public class memberController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String showUserPage(@PathVariable("id") final int id, final Model model,HttpSession session) {
 		User myself = (User) session.getAttribute("user");
-		User user = userService.getOne(id);
-		if (user == null) {
+		if (myself == null) {
 			return "redirect:/";
 		}
-		log.error("==============================="+myself.getId());
-		log.error("==============================="+user.getId());
+		User user = userService.getOne(id);
+//		log.error("==============================="+myself.getId());
+//		log.error("==============================="+user.getId());
 		
 		boolean relation = focusUserListService.findRelation(myself.getId(), user.getId());
 		int good = 0;
@@ -190,6 +190,7 @@ public class memberController {
 
 			// 讀取新圖跟砍檔(別忘記jsp的enctype
 			if (!file.isEmpty()) {
+				userService.deleteImage(user.getId(), servletContext);
 				String path = userService.upLoadImage(user.getId(), servletContext, file);
 				user.setPicture(path);
 			}

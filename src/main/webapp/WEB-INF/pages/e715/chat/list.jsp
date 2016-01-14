@@ -7,57 +7,164 @@
 $(function(){    
 	$("#btn").click(function(){
 		event.preventDefault();
-	 	var formData={"id":$("#id").val(),"message":$("#message").val()}
+		var userId="${user.id}";
+		var formData={"id":userId,"messages":$("#messages").val()};
         $.ajax({
            type: "GET",
-           url: "http://localhost:8080/chats/insertM",
+           url: "http://localhost:8080/chatroom/insertM",
            data: formData,
            success: function(data){
-        	   alert(data);
+        	   $.each(data,function(i) {
+        		   if (!($("#"+data[i].id).length)){  
+        			   var $tr1 = $("<tr></tr>");
+	        		   var $td1 = $("<td hidden></td>");
+	        		   var $td2 = $("<td width='5%'></td>");
+	        		   var $td3 = $("<td width='95%'></td>");
+	        		   if(data[i].picture!=null && count<3){
+	        			   count++;
+	        			   var $pic = $("<img width='300'></img>");
+	        			   var $txt = $("<p></p>");
+	        			   $txt.text(data[i].user.name+"的圖片");
+	        			   $pic.attr('src', data[i].picture);
+	        			   $("#pic1").append($txt).append($pic);
+	        		   }
+	        		   $tr1.attr('id', data[i].id);
+	        		   $td1.text(data[i].id);
+	        		   $a1= $("<a>"+data[i].user.name+"</a>")
+	        		   $td2.append($a1);
+	        		   $a1.click(function(){
+	        			   $("#messages").val("@"+data[i].user.name+"　");						
+	        			});
+	        		   var $time=getTime(data[i].sendTime);
+	        		   $td3.html(data[i].messages + "<font color='grey'> "+$time + "</font>");
+	        		   $tr1.append($td1).append($td2).append($td3);
+	        		   $("#tb1").append($tr1);
+        		   }
+        	   });
            },
            dataType: "json",
            contentType : "application/json"
          });
     });
-	 
+
+	function getMessages(){
+		$.ajax({
+	           type: "GET",
+	           url: "http://localhost:8080/chatroom/list",
+	           data: "",
+	           success: function(data){
+	        	   var count = 0;
+	        	   $.each(data,function(i) {
+	        		   if (!($("#"+data[i].id).length)){  
+		        		   var $tr1 = $("<tr></tr>");
+		        		   var $td1 = $("<td hidden></td>");
+		        		   var $td2 = $("<td width='5%'></td>");
+		        		   var $td3 = $("<td width='95%'></td>");
+		        		   if(data[i].picture!=null && count<3){
+		        			   count++;
+		        			   var $pic = $("<img width='300'></img>");
+		        			   var $txt = $("<p></p>");
+		        			   $txt.text(data[i].user.name+"的圖片");
+		        			   $pic.attr('src', data[i].picture);
+		        			   $("#pic1").append($txt).append($pic);
+		        		   }
+		        		   $tr1.attr('id', data[i].id);
+		        		   $td1.text(data[i].id);
+		        		   $a1= $("<a>"+data[i].user.name+"</a>")
+		        		   $td2.append($a1);
+		        		   $a1.click(function(){
+		        			   $("#messages").val("@"+data[i].user.name)						
+		        			});
+		        		   var $time=getTime(data[i].sendTime);
+		        		   $td3.html(data[i].messages + "<font color='grey'> "+$time + "</font>");
+		        		   $tr1.append($td1).append($td2).append($td3);
+		        		   $("#tb1").append($tr1);
+	        		   }
+	        	   });
+	           },
+	           dataType: "json",
+	           contentType : "application/json"
+	         });
+		
+	}
+	function getTime(data){
+		var ans = "@"+data.hour+":" +data.minute;
+		return ans
+	}
+	
+
+	
+	
+	$("#clear").click(function(){
+		$("#messages").val("");	
+	});
+	$("#upImgBtn").click(function(){
+		$("#upImg1").toggle();	
+	});
+	$("#showImgBtn").click(function(){
+		$("#pic1").toggle();	
+	});
+	getMessages();
+ 	//setInterval(getMessages, 1000);
 });
 </script>
 
+<div class="container" style="margin: 50px auto;">
+	<div class="col-md-7">
+		<div class="row">
 
-<form  action="/chats/insert" method="post" enctype="multipart/form-data">
-	<input type="text" name="id" size="5" placeholder="使用者ID" required>
-	<input type="text" name="message" required><br>
-	<input type="file" name="file"  required/><br>
-	<input type="submit" value="輸入">
-</form>
-<br>
-<form id="myForm" enctype="multipart/form-data">
-	<input type="text" id="id" name="id" size="5" placeholder="使用者ID" required>
-	<input type="text" id="message" name="message" required><br>
-	<input type="submit" id="btn" value="輸入">
-</form>
-	<c:if test="${!empty beans}">
-		<table>
+		<br>
+		<form id="myForm" method="get">
+			<input type="text" id="messages" name="messages" value=" " maxlength="199" class="form-control">
+			<input type="button" id="clear" value="清除" class="btn btn-warning" style="float:right">
+			<input type="submit" id="btn" value="輸入" class="btn btn-success" style="float:right">
+		</form>
+			<button type="button" id="upImgBtn" class="btn btn-info" >
+				<span class="glyphicon glyphicon-picture" aria-hidden="true"> 上傳圖片</span>
+			</button>
+		</div>
+		
+			
+		<div class="row">	
+			<div id="upImg1" hidden>
+				<form  action="/chatroom/insert" method="post" enctype="multipart/form-data">
+				    <input type="text" name="id" size="5" placeholder="使用者ID" value="${user.id}" hidden>
+					<input type="file" name="file"  required/>
+					<input type="submit" value="上傳">
+				</form>
+			</div>
+		</div>
+		<div class="row">
+		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>id</th>
-					<th>user</th>
-					<th>messages</th>
-					<th>picture</th>
+					<th hidden>id</th>
+					<th width="10%">user</th>
+					<th width="90%">messages</th>
 				</tr>
 			</thead>
-			<tbody>
-				<c:forEach var="s" items="${beans}">
-					<tr>
-						<td>${s.id}</td>
-						<td>${s.user.name}</td>
-						<td>${s.messages}</td>
-						<td><img src="${s.picture}"/></td>
-					</tr>
-				</c:forEach>
+			<tbody id="tb1">
+			
+			
+			
 			</tbody>
 		</table>
-	</c:if>
+		</div>
+	</div>
+	<div class="col-md-1">
+	</div>
+	<div class="col-md-4">
+		<div class="row">
+
+			<button type="button" id="showImgBtn" class="btn btn-info" >
+				<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"> 展開圖片</span>
+			</button>
+			<div id="pic1" hidden>
+			
+			</div>
+		</div>
+	</div>
+</div>
 
 
 <c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>

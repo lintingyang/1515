@@ -264,24 +264,6 @@ function addFriend (e) {
 }
 </script>
 
-<script>
-// $(".productcategory").bind("click",function(){
-// 	$.ajax({
-// 		contentType : "application/json",
-// 		url : "/head/categoryhchange",
-// 		type : "get",
-// 		async :false,
-// 		data : { "categoryname" : $(this).text()},
-		
-// 	});
-// 		$("#categoryname").text($(this).text());
-	
-// })
-
-
-
-
-</script>
 
 
 <c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>

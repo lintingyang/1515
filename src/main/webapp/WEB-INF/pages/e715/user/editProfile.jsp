@@ -320,7 +320,7 @@ $("#upUserData").click(
 				});
 
 				setTimeout(function(){
-					$('#upUserDataForm').submit(); }, 1500);
+					$('#upUserDataForm').submit(); }, 1000);
 					
 					
 					
