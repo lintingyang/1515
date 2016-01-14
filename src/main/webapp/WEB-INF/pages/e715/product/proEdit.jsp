@@ -37,7 +37,7 @@ h4{
   		以下<strong>所有欄位</strong>都是<strong>必填</strong>的喔！      別忘了上傳一張精美照片～
 	</div>
 	
-	<form action="/product/update" enctype="multipart/form-data" method="post">
+	<form action="/product/update" enctype="multipart/form-data" method="post" novalidate>
 		<div class="col-md-1"></div>
 		<div class="col-md-5">
 			<div class="row">
@@ -65,6 +65,9 @@ h4{
 							<option value="9">食品</option>
 							<option value="10">票劵</option>
 							<option value="11">化妝保養用品</option>
+							<option value="12">運動用品</option>
+							<option value="13">女生</option>
+							<option value="14">男生</option>
 						</select>
 					</div>
 				</div>
@@ -125,7 +128,7 @@ h4{
 						<div class="preview"></div>
 <!-- 						<img width = "" id="myImage"/> -->
 						<label class="choose-file btn btn-sm btn-primary glyphicon glyphicon-open" id="upload" for="id_image_large"></label>
-						<input type="file" id="id_image_large" name="pPicture" multiple  required="required">
+						<input type="file" id="id_image_large" name="pPicture" multiple required="required">
 				</div>
 			</div>
 			<br>
@@ -200,6 +203,7 @@ $(function () {
 //  	image.src = e.target.result;
 //  	console.log("loadImage");
 // }
+
 // function previewImage() {
 // 	var reader = new FileReader();
 // 	var file = document.getElementById("id_image_large").files[0];

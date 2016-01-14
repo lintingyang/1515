@@ -158,6 +158,9 @@
       			   			<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/kiss.png"></div>化妝保養用品</td>
 <!--       			<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">3C產品</button></td> -->
 <!--       			<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">化妝保養用品</button></td> -->
+   							<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/kiss.png"></div>運動用品</td>
+   			   				<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/kiss.png"></div>女生</td>
+   			   			   	<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/kiss.png"></div>男生</td>
       			</tr>
       		</table>
       		<br>

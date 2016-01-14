@@ -61,10 +61,21 @@ $(function(){
 		$("input[name='account']").val('laosix');
 		$("input[name='password']").val('ddd');
 	});
+// 	yao
+	$(".sen").on('click', function() {
+		$("input[name='account']").val('fantsen');
+		$("input[name='password']").val('eee');
+	});	
+	$(".snoopy").on('click', function() {
+		$("input[name='account']").val('snoopy');
+		$("input[name='password']").val('snoopy');
+	});
 	
-	
-	
-	
+	$(".527788").on('click', function() {
+		$("input[name='account']").val('527788');
+		$("input[name='password']").val('527788');
+	});
+// 	end
 	});	
 	
 
@@ -143,8 +154,18 @@ $(function(){
 			<button type="button" class="btn btn-default six" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
   			老六
 			</button>
+<!-- 			yao -->
+			<button type="button" class="btn btn-default sen" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+  			藩曾
+			</button>
+			<button type="button" class="btn btn-default snoopy" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+  			snoopy
+			</button>
+			<button type="button" class="btn btn-default 527788" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+  			527788
+			</button>
 			
-			
+<!-- 			  end -->
 		</form>
 		
 		<div id="dialog-message" title="Download complete"></div>
