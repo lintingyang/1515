@@ -75,20 +75,20 @@ $(".importentkbox").click(function(){
 	$(this).html("<span class='glyphicon glyphicon-star'>");
 })
 //onload
-$(function(){
-	var formData={"id":${product.id}}
-    	$.ajax({
-       		type: "GET",
-       		url: "/qanda/getqanda",
-      		data: formData,
-       		success: function(data){
-    		showtable(data);
-    		},
-    	dataType: "json",
-   	 	contentType : "application/json"
-    	});
+// $(function(){
+// 	var formData=${user.id}
+//     	$.ajax({
+//        		type: "GET",
+//        		url: "/mail/getmail",
+//       		data: formData,
+//        		success: function(data){
+//     		console.log(data);
+//     		},
+//     	dataType: "text",
+//    	 	contentType : "application/json"
+//     	});
 
-})
+// })
 
 </script>
 
