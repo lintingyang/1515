@@ -213,31 +213,6 @@ public class ProductController {
 		 Map<String, String> errorMessage = new HashMap<>();
 		 session.removeAttribute("errorMsg");
 		 session.setAttribute("errorMsg", errorMessage);
-		// //error1 pStatusBad= null
-		// if(product.getStatus() == "破損"){
-		// if(pStatusBad == null || pStatusBad.trim().length() == 0){
-		// errorMessage.put("status", "請描述損壞情形");
-		// }
-		// }
-		// //error3 time = null
-		// if(product.getPostStatus() == TrueFalse.TRUE){
-		// if(pStartTime == null || pStartTime.trim().length() == 0){
-		// errorMessage.put("timeS", "請輸入起始時間");
-		// }
-		// if(pDeadline == null || pDeadline.trim().length() == 0){
-		// errorMessage.put("timeD", "請輸入結束時間");
-		// }
-		// }
-		// //error2 wishItem = null
-		// if(product.getWishItem() == "希望商品"){
-		// if(pWishItem == null || pWishItem.trim().length() == 0){
-		// errorMessage.put("wish", "請輸入希望清單");
-		// }
-		// }
-		// //若有錯誤回新增畫面
-		// if(errorMessage != null && !errorMessage.isEmpty()) {
-		// return "redirect:/product/add";
-		// }
 
 		// 取userId
 		User userData = (User) session.getAttribute("user");
@@ -277,8 +252,6 @@ public class ProductController {
 				}
 			}
 			
-			
-			
 			tradeTime = product.getTransactionTime();
 			location = product.getLocation();
 			tradeWay = product.getTradeWay();
@@ -302,15 +275,13 @@ public class ProductController {
 		Product newProduct = productService.insert(product.getName(), userData.getId(), pCategory, productStatus,
 				product.getDescription(), deadline, startTime, tradeTime, location,
 				tradeWay, productWish, product.getPostStatus());
-		System.out.println("newProduct========================" + newProduct);
 		if (newProduct != null) {
 			model.addAttribute("result", "success");
 			session.setAttribute("new", newProduct);
 		} else {
 			model.addAttribute("result", "fail");
 		}
-		System.out.println("aaaaaa========================" + pPicture1.getOriginalFilename());
-		System.out.println("bbbbb========================" + pPicture1.isEmpty());
+		
 		// 存取productPicture
 		String path = productPictureService.upLoadImage(newProduct.getId(), servletContext, pPicture);
 		int numPicture = productPictureService.insertImage(newProduct.getId(), path);
