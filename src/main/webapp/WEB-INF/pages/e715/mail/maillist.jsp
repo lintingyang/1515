@@ -47,29 +47,31 @@
 	
 	
 	<div><!-- 	EMAIL列表 -->
-	<table class="table table-hover">
-		<tr class="mailclick">
-			<td class="mailcheckbox"><input type="checkbox"></td><td class="importentkbox"><span class="glyphicon glyphicon-star-empty"></span></td>
-			<td>寄件人</td><td>寄件主旨</td><td style="text-align: right;">收件日期</td>
-		</tr>
-		<tr class="mailclick">
-			<td class="mailcheckbox"><input type="checkbox"></td><td class="importentkbox"><span class="glyphicon glyphicon-star-empty"></span></td>
-			<td>寄件人</td><td>寄件主旨</td><td style="text-align: right;">收件日期</td>
-		</tr>
-		<tr class="mailclick">
-			<td class="mailcheckbox"><input type="checkbox"></td><td class="importentkbox"><span class="glyphicon glyphicon-star-empty"></span></td>
-			<td>寄件人</td><td>寄件主旨</td><td style="text-align: right;">收件日期</td>
-		</tr>
-		<tr class="mailclick">
-			<td class="mailcheckbox"><input type="checkbox"></td><td class="importentkbox"><span class="glyphicon glyphicon-star-empty"></span></td>
-			<td>寄件人</td><td>寄件主旨</td><td style="text-align: right;">收件日期</td>
-		</tr>
-	
-	
+	<table class="table table-hover" id="mailtable">
 	</table>
 	</div><!-- 	EMAIL列表END -->
-	
 </div>
+
+<!-- 顯示郵件內文畫面 -->
+<div class="modal fade" id="readmail" tabindex="-1" role="dialog" aria-labelledby="readmail" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"></span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title"><!-- 信件title --></h4>
+      </div>
+      <div class="modal-body">
+        <p><!-- 寄件人，時間，內文 --></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+        <button type="button" class="btn btn-primary">回覆此信件</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 險是郵件內文畫面END -->
+
 <!-- 編輯郵件畫面 -->
 <div class="modal fade" id="editemail" tabindex="-1" role="dialog" aria-labelledby="editmail" aria-hidden="true">
   <div class="modal-dialog">
@@ -90,7 +92,10 @@
 			    <input type="text" class="form-control drop_down_btn" id="receiver" name="receiver" placeholder="收件人帳號">
 				<div class="input_select_block" style="z-index:3;position: fixed;width:100%;">  
 				        <ul class="dropdownfriendlist" >  
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/lintingyang/1515.git
 				        </ul>  
 				    </div>  
 			  </div>
@@ -159,9 +164,7 @@ $(function(){
 })
 //好友的下拉選單 END
 
-$(".importentkbox").click(function(){
-	$(this).html("<span class='glyphicon glyphicon-star'>");//改變星星樣式
-})
+
 
 //按下寄出郵件
 $("#submitmail").click(function(){
@@ -186,7 +189,7 @@ $("#submitmail").click(function(){
 			});
 			location.href="/mail/list";
 		})
-	
+
 })//按下寄出郵件END
 
 //按下儲存草稿
@@ -213,23 +216,47 @@ $("#savedraft").click(function(){
 	
 })//按下儲存草稿END
 
-
-
 //onload
-// $(function(){
-// 	var formData=${user.id}
-//     	$.ajax({
-//        		type: "GET",
-//        		url: "/mail/getmail",
-//       		data: formData,
-//        		success: function(data){
-//     		console.log(data);
-//     		},
-//     	dataType: "text",
-//    	 	contentType : "application/json"
-//     	});
+$(function(){
+	var formData={"id":${user.id}};
+    	$.ajax({
+       		type: "GET",
+       		url: "/mail/getmail",
+      		data: formData,
+       		success: function(data){
+       			console.log(data);
+    			showmail(data);
+    		},
+    	dataType: "json",
+   	 	contentType : "application/json"
+    	});
+})//end of onload
 
-// })
+//顯示收件匣
+function showmail(data){
+	$.each(data, function(){
+		var mailNo = this.id;
+		var sendTime = this.sendTime.year + "/" + this.sendTime.monthValue + "/" + this.sendTime.dayOfMonth;
+		var mailRow = "<tr class='mailrow' id='mailno" + mailNo + "'>" +
+						"<td class='mailcheckbox'><input type='checkbox'></td>" + 
+						"<td class='importantbox'><span class='glyphicon glyphicon-star-empty'></span></td>" +
+						"<td>" + this.sender.nickname + "(" + this.sender.account + ")</td>" + 
+						"<td>" + this.title + "//" + this.article + "</td>" +
+						"<td style='text-align: right;'>" + sendTime + "</td>" +
+						"</tr>";
+		$("#mailtable").append(mailRow);
+	})//end of .each
+	//改變星星樣式
+	$(".importantbox").on("click", function(){
+		$(this).html("<span class='glyphicon glyphicon-star'>");
+	})
+	$(".mailrow").on("click", function(){
+// 		var mailId = $(this).attr("id").substring(6);
+		$("#readmail").modal();
+// 		$(".modaltitle")
+	});
+}
+
 
 </script>
 

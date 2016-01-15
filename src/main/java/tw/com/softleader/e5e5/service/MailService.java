@@ -1,6 +1,7 @@
 package tw.com.softleader.e5e5.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,12 @@ public class MailService {
 	private UserDao userDao;
 	@Autowired 
 	private LogMailDao logMailDao;
+	
+	public List<Mail> getAllMailByReceiver(int id){
+		List<Mail> mails = mailDao.findByReceiverOrderBySendTimeDesc(userDao.findOne(id));
+		return mails;
+	}
+	
 	@Transactional
 	public void sendNewMail(int senderId,String receiverAccount,String title,String article,String saveAsLog){
 		Mail mail = new Mail();

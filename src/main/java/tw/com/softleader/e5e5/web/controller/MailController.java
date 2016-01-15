@@ -1,12 +1,17 @@
 package tw.com.softleader.e5e5.web.controller;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import tw.com.softleader.e5e5.service.LogMailService;
+import tw.com.softleader.e5e5.entity.Mail;
 import tw.com.softleader.e5e5.service.MailService;
 
 @Controller
@@ -22,6 +27,13 @@ public class MailController {
 	@RequestMapping("/list")
 	public String maillist(){		
 		return "/e715/mail/maillist";
+	}
+	
+	@RequestMapping("/getmail")
+	@ResponseBody
+	public List<Mail> getmail(@RequestParam("id")int id){
+		List<Mail> mails = mailService.getAllMailByReceiver(id);
+		return mails;
 	}
 	
 	
