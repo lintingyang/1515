@@ -84,11 +84,11 @@ public class headerController {
 		return "/e715/user/emailCheck";
 	}
 
-	// 進入註冊帳號頁
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public String createAccountPage() {
-		return "/e715/user/createaccount";
-	}
+//	// 進入註冊帳號頁
+//	@RequestMapping(value = "/create", method = RequestMethod.GET)
+//	public String createAccountPage() {
+//		return "/e715/user/createaccount";
+//	}
 
 	// 送驗證碼
 	@RequestMapping(value = "/verificationCodeSend")
@@ -105,15 +105,19 @@ public class headerController {
 	// 確認驗證碼
 	@RequestMapping(value = "/verificationCodeCheck")
 	public String userSchoolEmailCheck(@RequestParam("userSchoolEmail") String schoolEmail,
-			@RequestParam("userVerificationCode") String userVerificationCode, HttpSession session) {
+		@RequestParam("userVerificationCode") String userVerificationCode, HttpSession session) {
 		Map<String, String> errors = new HashMap<String, String>();
 		session.setAttribute("checkError", errors);
+		
 		errors.clear();
 		Integer verificationCode = null;
 		try {
 			verificationCode = Integer.parseInt(userVerificationCode);
 			boolean temp = userService.checkVerificationCode(schoolEmail, verificationCode);
 			if (temp) {
+				// 進入註冊帳號頁
+				session.removeAttribute("userSchoolEmail");
+				session.setAttribute("userSchoolEmail", schoolEmail);
 				return "/e715/user/createaccount";
 			} else {
 				errors.put("checkFault", "驗證碼輸入錯誤，請重新輸入");
@@ -135,7 +139,10 @@ public class headerController {
 			@RequestParam("phone") String phone, @RequestParam("email") String email, HttpSession session) {
 		Map<String, String> errors = new HashMap<String, String>();
 		session.setAttribute("errors", errors);
-		User user = new User();
+		
+		String schoolEmail = (String)session.getAttribute("userSchoolEmail");
+		//用學校信箱完善資料
+		User user = userService.loginBySchoolEmail(schoolEmail);
 		if (account == null || account.length() == 0) {
 			errors.put("account", "請輸入帳號");
 		}
@@ -171,8 +178,8 @@ public class headerController {
 		}
 		user.setPhone(phone);
 		user.setEmail(email);
-		User login = userService.insert(user);
-
+		userService.update(user);
+		User login = userService.login(account, password);
 		if (login != null) {
 			session.setAttribute("user", login);
 			return "redirect:/head/success";

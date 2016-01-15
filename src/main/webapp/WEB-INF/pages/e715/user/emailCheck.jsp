@@ -125,13 +125,13 @@
 					<button type="button" class="btn btn-default" id="sendSchoolEmil">
 					送出
 					</button>
-					<button type="button" class="btn btn-default" id="haveSchoolEmil">
+					
+				</div>
+				<div id="btnCenter">
+				<button type="button" class="btn btn-default" id="haveSchoolEmil">
 					我已有驗證碼
 					</button>
-				</div>
-				
-				
-					
+					</div>
 				
 				<div id="checkVerificationCodeDiv" ></div>
 				

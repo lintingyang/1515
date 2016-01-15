@@ -255,9 +255,11 @@ public class memberController {
 			// @RequestParam("interested") List<Integer> interested,
 			@RequestParam("aboutMe") String aboutMe, HttpSession session) {
 		User user = (User) session.getAttribute("user");
-
+		if(user == null ){
+			return "/e715/user/login";
+		}else{
 		// 必填欄位不能為空值
-		if (user == null || name == null || nickname == null || phone == null || year == null || month == null
+		if (name == null || nickname == null || phone == null || year == null || month == null
 				|| day == null) {
 			return "/e715/user/editProfile";
 		} else {
@@ -267,7 +269,6 @@ public class memberController {
 				//使用者有圖片的話就砍黨
 				if (!user.getPicture().isEmpty()) {
 					userService.deleteImage(user.getId(), servletContext);
-
 				}
 				String path = userService.upLoadImage(user.getId(), servletContext, file);
 				user.setPicture(path);
@@ -313,6 +314,7 @@ public class memberController {
 			// userLikeService.insert(u);
 			// }
 			return "/e715/user/modifyFileAsk";
+			}
 		}
 	}
 
