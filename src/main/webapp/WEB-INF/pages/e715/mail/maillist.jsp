@@ -237,10 +237,17 @@ $(function(){
 function showmail(data){
 	var index = 0;
 	$.each(data, function(){
+		var star = null;
+		console.log(this.isImportant);
+		if (this.isImportant == "TRUE"){
+			star = "<span class='glyphicon glyphicon-star'></span>";
+		} else {
+			star = "<span class='glyphicon glyphicon-star-empty'></span>";
+		}
 		var sendTime = this.sendTime.year + "/" + this.sendTime.monthValue + "/" + this.sendTime.dayOfMonth;
 		var mailRow = "<tr class='mailrow'>" +
 						"<td><input type='checkbox' class='mailcheckbox'></td>" + 
-						"<td class='importantbox'><span class='glyphicon glyphicon-star-empty'></span></td>" +
+						"<td class='importantbox'>" + star + "</td>" +
 						"<td>" + this.sender.nickname + "(" + this.sender.account + ")</td>" + 
 						"<td class='mailBody' id='mailno" + index + "' style='cursor:pointer'>" + this.title + "//" + this.article + "</td>" +
 						"<td style='text-align: right;'>" + sendTime + "</td>" +
