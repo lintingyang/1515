@@ -102,12 +102,17 @@ $(function() { //畫面第一次進入時出現的product list
 		success : function(data) {
 			$("#itemContainer").html('');
 			$.each(data,function(i) {
-				var productdiv = $("<div></div>");
+				var productdiv = $("<div class='panel panel-danger'></div>");
+				var productdiv2 = $("<div class='panel-body'></div>");
+				var productdiv3 = $("<div class='panel-footer'></div>");
 				var aclick = $("<a>").attr("href","/product/" + data[i].id);
-				var productimg = $("<img>").addClass("prodimg").attr("src",data[i].primaryPicture);
-				var p = $("<span>").text(data[i].name);
-				$(aclick).append($(productimg)).append($(p));
-				$(productdiv).addClass("proddiv").append($(aclick));
+				var productimg = $("<img style='max-width:100%;'>").addClass("prodimg").attr("src",data[i].primaryPicture);
+				var p = $("<span></span>").text(data[i].name);
+				$(aclick).append($(productimg));
+				$(productdiv2).append($(aclick));
+				$(productdiv3).append($(p));
+				
+				$(productdiv).addClass("proddiv").append($(productdiv2)).append($(productdiv3));
 
 				$("#itemContainer").append(productdiv);
 // 				getpicture(data[i], productimg);
