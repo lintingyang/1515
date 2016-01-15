@@ -41,7 +41,7 @@ tr.mailrow:hover td{
 		  <li role="presentation" id="allmailbox"><a href="#">收件匣</a></li>
 		  <li role="presentation"><a href="#">重要信件</a></li>
 		  <li role="presentation" id="draftbox"><a href="#" >草稿</a></li>
-		  <li role="presentation"><a href="#">寄件備份</a></li>
+		  <li role="presentation" id="backupbox"><a href="#">寄件備份</a></li>
 		  <li role="presentation"><a href="#">垃圾桶</a></li>
 		</ul>
 		<hr>
@@ -126,6 +126,52 @@ tr.mailrow:hover td{
   </div>
 </div>
 <!-- 編輯郵件畫面END -->
+
+<!-- 編輯草稿畫面 -->
+<div class="modal fade" id="draftemail" tabindex="-1" role="dialog" aria-labelledby="editmail" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"> </span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="editmail">編輯郵件</h4>
+      </div>
+      <form role="form"><!--  FORM撰寫EMAIL表單 -->
+	      <div class="modal-body">
+			  <div class="form-group">
+			  	<label for="exampleInputEmail1">主旨</label>
+			    <input type="email" class="form-control" id="drafttitle" name="title" placeholder="輸入主旨">
+			  </div>
+			  
+			  <div class="form-group">
+			    <label for="reciver">收件人</label>
+			    <input type="text" class="form-control drop_down_btn" id="draftreceiver" name="receiver" placeholder="收件人帳號">
+				<div class="input_select_block" style="z-index:3;position: fixed;width:100%;">  
+				        <ul class="dropdownfriendlist" >  
+						 </ul>  
+				    </div>  
+			  </div>
+			  
+			  <div class="form-group">
+			    <label for="exampleInputFile">內文</label>
+			    <textarea  class= "form-control" rows="10" cols="" name="article" id="draftarticle"></textarea>
+			    <p class="help-block">請輸入1000字以內的內文</p>
+			  </div>
+			  
+			  <div class="checkbox">
+			    <label>
+			      <input type="checkbox" checked="checked" name="saveaslog" id="saveaslog"> 儲存寄件備份
+			    </label>
+			  </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal" id="submitbackup">送出</button>
+	        <button type="button" class="btn btn-primary" data-dismiss="modal" id="savedraft">儲存為草稿</button>
+	      </div>
+     </form> <!--  FORM撰寫EMAIL表單END -->
+    </div>
+  </div>
+</div>
+<!-- 編輯草稿畫面 END -->
   
 <script>
 //onload
@@ -317,7 +363,7 @@ function showdraft(data){
 	$("#mailtable").html("");
 	$.each(data, function(){
 		var sendTime = this.draftTime.year + "/" + this.draftTime.monthValue + "/" + this.draftTime.dayOfMonth;
-		var draftRow = "<tr class='mailrow' id='mailno" + index + "'>" +
+		var draftRow = "<tr class='mailrow' id='draft" + index + "'>" +
 			"<td class='mailcheckbox'><input type='checkbox'></td>" + 
 			"<td class='importantbox'><span class='glyphicon glyphicon-star-empty'></span></td>" +
 			"<td class='namebox'>" + this.sender.nickname + "(" + this.sender.account + ")</td>" + 
@@ -327,27 +373,15 @@ function showdraft(data){
 		$("#mailtable").append(draftRow);
 		index ++;
 	})//end of .each
-	//改變星星樣式
-	$(".importantbox").on("click", function(){
-		$(this).html("<span class='glyphicon glyphicon-star'>");
-	})
-// 	$(".mailrow").on("click", function(){
-// 		var mailIndex = $(this).attr("id").substring(6);
-// //   	console.log(mailIndex);
-// // 		console.log(data);
-// 		var mailTitle = data[mailIndex].title;
-// 		var mailSender = data[mailIndex].sender.nickname + "&nbsp;(" + data[mailIndex].sender.account + ")";
-// 		var mailSendTime = data[mailIndex].sendTime.year + "年" + data[mailIndex].sendTime.monthValue + "月" + data[mailIndex].sendTime.dayOfMonth + "日" +
-// 							"&nbsp" + data[mailIndex].sendTime.hour + ":" + data[mailIndex].sendTime.minute;
-// 		var mailArticle = data[mailIndex].article;
-// 		$("#readmail").modal();
-// 		$("#mail-title").empty();
-// 		$("#mail-body").empty();
-// 		$("#mail-title").append("<h4>"+mailTitle+"<h4>" + 
-// 								"<div style='font-size: 12px;display: inline-block;'>" + mailSender + "</div>" + 
-// 								"<div style='font-size: 12px; float: right;'>" + mailSendTime + "</div>");
-// 		$("#mail-body").append("<p>"+mailArticle+"</p>");
-// 	});
+
+
+	$(".mailrow").on("click", function(){
+		var mailIndex = $(this).attr("id").substring(5);
+		$("#drafttitle").text(data[mailIndex].title);
+		$("#draftreceiver").text(data[mailIndex].receiver.account);
+		$("#draftarticle").text(data[mailIndex].article);
+
+	});
 }
 //按下草稿列表END
 </script>

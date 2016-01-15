@@ -26,6 +26,12 @@ public class LogMailService {
 		List<LogMail> draft = logMailDao.findBySenderAndIsDraftOrderByDraftTimeDesc(userDao.getOne(sender), TrueFalse.TRUE);
 		return draft;
 	}
+	
+	public List<LogMail> getAllBackBySender(int sender){
+		List<LogMail> draft = logMailDao.findBySenderAndIsBackupOrderBySendTimeDesc(userDao.getOne(sender), TrueFalse.TRUE);
+		return draft;
+	}
+	
 	@Transactional
 	public void saveDraft(int senderId,String receiverAccount,String title,String article){
 		LogMail logMail = new LogMail();
