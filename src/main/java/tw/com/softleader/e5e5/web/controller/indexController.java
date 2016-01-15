@@ -68,21 +68,21 @@ public class indexController {
 //	 return list;
 //	 }
 	
-	//換成下面那個/yao
-//	@RequestMapping(value = "/queryimg")
-//	@ResponseBody
-//	public List<ProductPicture> imglist(@RequestParam("id") Integer id, Model model){
-//		Product product = productService.getOne(id);
-//		List<ProductPicture> list = productPictureService.getProductPictures(product);
-//		for(ProductPicture result : list){
-//		}
-//		return list;
-//	}
-	
-	// 換抓 product 物品圖片
-	@ResponseBody
+	//抓 product_picture list物品圖片
 	@RequestMapping(value = "/queryimg")
-	public Product imglist(@RequestParam("id") Integer id, Model model) {
+	@ResponseBody
+	public List<ProductPicture> imglist(@RequestParam("id") Integer id, Model model){
+		Product product = productService.getOne(id);
+		List<ProductPicture> list = productPictureService.getProductPictures(product);
+		for(ProductPicture result : list){
+		}
+		return list;
+	}
+	
+	// 抓 product 物品圖片
+	@ResponseBody
+	@RequestMapping(value = "/queryproductimg")
+	public Product img(@RequestParam("id") Integer id, Model model) {
 		return productService.getOne(id);
 	}
 	
