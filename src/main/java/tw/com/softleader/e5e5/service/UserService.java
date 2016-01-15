@@ -316,7 +316,17 @@ public class UserService extends OurService<User> {
 		}
 		return 0;
 	}
-
+	
+	//後台更新狀態isolated
+	@Transactional
+	public User updateIsolated(Integer id, TrueFalse updateResult) {
+		User user = userDao.findOne(id);
+		user.setIsolated(updateResult);
+		user = userDao.save(user);
+		return user;
+	}
+	
+	
 	@Override
 	public OurDao<User> getDao() {
 		// TODO Auto-generated method stub
