@@ -273,7 +273,7 @@ $(function(){
 			 	$("#answer"+currentindex).append("<br><textarea id='answertext" + currentindex + "' class='form-control' rows='10' autofocus placeholder='撰寫回覆...'></textarea>" + 
 						"<br><input type='button' value='送出' class='btn btn-default' id='submitanswer" + currentindex + "' disabled><input type='button' class='btn btn-default' id='resetanswer" + currentindex + "' value='清除'>");	
 			 	//回答問題
-			 	$("#answertext" + currentindex).on("keydown", function(){
+			 	$("#answertext" + currentindex).on("input", function(){
 			 		var answerLength = $("#answertext"+currentindex).val().length;
 				 	if(answerLength != 0){
 				 		$("#submitanswer"+currentindex).removeAttr("disabled");

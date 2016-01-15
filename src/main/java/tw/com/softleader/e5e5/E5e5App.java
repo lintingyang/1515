@@ -13,6 +13,7 @@ public class E5e5App {
 	
 	public static void main(final String[] args) {
 		SpringApplication.run(E5e5App.class, args);
+		log.error("start up success!!!");
 	}
 
 }
