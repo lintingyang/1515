@@ -15,6 +15,18 @@ h4{
 #em{
 	color:red;
 }
+#id_image_large {
+ display: none;
+}
+#id_image_large1 {
+ display: none;
+}
+#id_image_large2 {
+ display: none;
+}
+#id_image_large3 {
+ display: none;
+}
 </style>
 <script type="text/javascript">
 	//picture
@@ -23,7 +35,7 @@ h4{
 		    if (input.files && input.files[0]) {
 		        var reader = new FileReader();
 		        reader.onload = function (e) {
-			    	$('#blah').attr('src', e.target.result);
+			    	$('#blah0').attr('src', e.target.result); //blah改blah0 by yao
 		        }
 		        reader.readAsDataURL(input.files[0]);
 		    }
@@ -55,16 +67,16 @@ h4{
 		        reader.readAsDataURL(input.files[0]);
 		    }
 		}
-		$("#pPicture").change(function(){
+		$(".pPicture").change(function(){
 		    readURL(this);
 		});
-		$("#pPicture1").change(function(){
+		$(".pPicture1").change(function(){
 		    readURL1(this);
 		});
-		$("#pPicture2").change(function(){
+		$(".pPicture2").change(function(){
 		    readURL2(this);
 		});
-		$("#pPicture3").change(function(){
+		$(".pPicture3").change(function(){
 		    readURL3(this);
 		});
 		
@@ -122,19 +134,44 @@ h4{
 				<div class="form-group row">
 					<label class="col-sm-4 form-control-label"><h4>圖片</h4></label>
 					<div class="col-sm-10" align="center">
-   						<img id="blah" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 200px; height: 200px;"/>
-  						<input type='file' id="pPicture" name="pPicture" style="width: 170px" required="required"/>
+   						<img id="blah0" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 200px; height: 200px;"/>
+  						<div>
+   							<label class="col-md-offset-2 col-sm-8 choose-file btn btn-sm btn-default glyphicon glyphicon-open" id="upload" for="id_image_large">
+							<input type="file" id="id_image_large" class ="pPicture" name="pPicture" multiple required="required"></label>
+   						</div>
+<!--   						<input type='file' id="pPicture" name="pPicture" style="width: 170px" required="required"/> -->
 					</div>
 				</div>
 				<div class="form-group row">
 					<label class="col-sm-7 form-control-label"><h4>補充圖片  (可免填)</h4></label>
 					<div class="col-sm-10" align="center">
-   						<img id="blah1" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; margin: 0 5px;"/>
-   						<img id="blah2" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; margin: 0 5px;"/>
-   						<img id="blah3" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; margin: 0 5px;"/>
-  						<input type='file' id="pPicture1" name="pPicture1" style="width: 170px"/>
-  						<input type='file' id="pPicture2" name="pPicture2" style="width: 170px"/>
-  						<input type='file' id="pPicture3" name="pPicture3" style="width: 170px"/>
+											<div class="row">
+							<div class = " col-sm-4">
+   								<img id="blah1" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; "/>
+   							</div>
+   							<div class = " col-sm-4">
+   								<img id="blah2" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; "/>
+   							</div>
+   							<div class = " col-sm-4">
+   								<img id="blah3" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; "/>
+							</div>
+							</div>
+							<div class="row">
+								<label class="col-md-offset-1 col-sm-2 choose-file btn btn-sm btn-default glyphicon glyphicon-open" id="upload1" for="id_image_large1">
+								<input type="file" id="id_image_large1" class ="pPicture1" name="pPicture1" multiple ></label>
+
+								<label class="col-md-offset-2 col-sm-2 choose-file btn btn-sm btn-default glyphicon glyphicon-open" id="upload2" for="id_image_large2">
+								<input type="file" id="id_image_large2" class ="pPicture2" name="pPicture2" multiple "></label>
+		
+								<label class="col-md-offset-2 col-sm-2 choose-file btn btn-sm btn-default glyphicon glyphicon-open" id="upload3" for="id_image_large3">
+								<input type="file" id="id_image_large3" class ="pPicture3" name="pPicture3" multiple "></label>
+							</div>
+<!--    						<img id="blah1" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; margin: 0 5px;"/> -->
+<!--    						<img id="blah2" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; margin: 0 5px;"/> -->
+<!--    						<img id="blah3" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; margin: 0 5px;"/> -->
+<!--   						<input type='file' id="pPicture1" name="pPicture1" style="width: 170px"/> -->
+<!--   						<input type='file' id="pPicture2" name="pPicture2" style="width: 170px"/> -->
+<!--   						<input type='file' id="pPicture3" name="pPicture3" style="width: 170px"/> -->
 					</div>
 				</div>
 				<div class="form-group row">
