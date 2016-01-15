@@ -91,7 +91,6 @@
 				<div class="input_select_block" style="z-index:3;position: fixed;width:100%;">  
 				        <ul class="dropdownfriendlist" >  
 
-
 				        </ul>  
 				    </div>  
 			  </div>
@@ -119,7 +118,8 @@
 <!-- 編輯郵件畫面END -->
   
 <script>
-$(".drop_down_btn").click(function(e){  //好友的下拉選單 
+//好友的下拉選單 
+$(".drop_down_btn").click(function(e){  
     e.stopPropagation();   
     $dropList=$(".input_select_block ul");   
     if($dropList.is(":visible")){   
@@ -129,22 +129,45 @@ $(".drop_down_btn").click(function(e){  //好友的下拉選單
     };   
 });   
  
-$(".input_select_block ul li").click(function(e){   
+$(".friendli").click(function(e){   
     e.stopPropagation();   
     $("#receiver").val($(this).text());   
     $(".input_select_block ul").hide();   
 }); 
-$(".input_select_block").
+$(function(){
+	$.ajax({
+		contentType : "application/json",
+		url : "/E715Member/userFriendList",
+		dataType : "json",
+		type : "post",
+		data : "",
+		success :function(data){
+			console.log(data);
+			$.each(data,function(i){
+				console.log(data[i].userBId.account);
+				var name = $("<small style='color:gray'>("+data[i].userBId.nickname+")</small>")
+				var friend = $("<li></li>").text(data[i].userBId.account).addClass("friendli")
+				.attr("name",data[i].userBId.account).append(name);
+				$(".dropdownfriendlist").append(friend);
+				$(".friendli[name="+data[i].userBId.account+"]").bind("click",function(e){   
+				    e.stopPropagation();   
+				    $("#receiver").val($(this).attr("name"));   
+				    $(".input_select_block ul").hide();   
+				}); 
+			})
+		}
+	})
+})
 //好友的下拉選單 END
 
 $(".importentkbox").click(function(){
 	$(this).html("<span class='glyphicon glyphicon-star'>");//改變星星樣式
 })
 
-$("#submitmail").click(function(){//按下寄出郵件
+//按下寄出郵件
+$("#submitmail").click(function(){
 	$.ajax({
 		dataType: "json",
-		contentType : "application/json",
 		type: "get",
 		url: "/mail/newmail",
 		data: {
@@ -152,7 +175,8 @@ $("#submitmail").click(function(){//按下寄出郵件
 			receiverAccount : $("#receiver").val(),
 			title : $("#title").val(),
 			article : $("#article").val(),
-			saveAsLog :$("#saveaslog").prop("checked")}
+			saveAsLog :$("#saveaslog").prop("checked")},
+			
 	});
 	swal("郵件寄出", "已經幫您寄出郵件!", "success")
 })//按下寄出郵件END
