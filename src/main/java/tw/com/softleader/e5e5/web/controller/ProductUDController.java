@@ -114,7 +114,7 @@ public class ProductUDController {
 	@ResponseBody
 	@RequestMapping(value = "/remove")
 	public String remove(@RequestParam("id") Integer id, Model model) {
-		productService.updateStatus(id, TrueFalse.FALSE);
+		productService.updateBackPostStatus(id, TrueFalse.FALSE);
 		status = 1;
 		return "/e715/product/productedit";
 	}
@@ -182,7 +182,7 @@ public class ProductUDController {
 			if (deadline.isBefore(startTime)) {
 				errorMessage.put("timeD", "截止日期一定要比今天晚喔！！");
 				if (errorMessage != null && !errorMessage.isEmpty()) {
-					return "redirect:/product/add";
+					return "redirect:/product/update"; // 重新導向update
 				}
 			}
 
@@ -219,7 +219,9 @@ public class ProductUDController {
 		// 存取productPicture 讀取新圖跟砍檔(別忘記jsp的enctype
 		// pPicture 是 primaryPicture in product
 		if (!pPicture.isEmpty()) {
-			productService.deletePrimaryPic(editProduct.getId(), servletContext);
+			Product productPrimaryPic = productService.getOne(editProduct.getId());
+			if (productPrimaryPic.getPrimaryPicture() != null)
+				productService.deletePrimaryPic(editProduct.getId(), servletContext);
 			String path = productPictureService.upLoadImage(editProduct.getId(), servletContext, pPicture);
 			productService.insertPrimaryPic(editProduct.getId(), path);
 		}

@@ -48,10 +48,10 @@
 
 
 	$('.categorylist').click(function() { //點選排列方式後按照順序排列
-		$("img.lazy").lazyload({
-			threshold : 200,
-			failure_limit : 10
-		});
+// 		$("img.lazy").lazyload({
+// 			threshold : 200,
+// 			failure_limit : 10
+// 		});
 
 		$.ajax({
 			contentType : "application/json",
@@ -63,21 +63,22 @@
 // 				console.log(data);
 
 				$("#itemContainer").html('');
-				$("img.lazy").lazyload({
-					threshold : 200,
-					failure_limit : 10
-				});
+// 				$("img.lazy").lazyload({
+// 					threshold : 200,
+// 					failure_limit : 10
+// 				});
 				$.each(data,
 					function(i) {
 					var productdiv = $("<div></div>");
 					var aclick = $("<a>").attr("href","/product/" + data[i].id);
-					var productimg = $("<img>").addClass("prodimg");
+					var productimg = $("<img>").addClass("prodimg").attr("src",data[i].primaryPicture);
 					var p = $("<span>").text(data[i].name);
 					$(aclick).append($(productimg)).append($(p));
 					$(productdiv).addClass("proddiv").append($(aclick));
 
 					$("#itemContainer").append(productdiv);
-					getpicture(data[i], productimg);})
+// 					getpicture(data[i], productimg)
+					})
 					$("div.holder").jPages({
 							containerID : "itemContainer",
 							perPage : 20,
@@ -103,13 +104,13 @@ $(function() { //畫面第一次進入時出現的product list
 			$.each(data,function(i) {
 				var productdiv = $("<div></div>");
 				var aclick = $("<a>").attr("href","/product/" + data[i].id);
-				var productimg = $("<img>").addClass("prodimg").addClass("lazy");
+				var productimg = $("<img>").addClass("prodimg").attr("src",data[i].primaryPicture);
 				var p = $("<span>").text(data[i].name);
 				$(aclick).append($(productimg)).append($(p));
 				$(productdiv).addClass("proddiv").append($(aclick));
 
 				$("#itemContainer").append(productdiv);
-				getpicture(data[i], productimg);
+// 				getpicture(data[i], productimg);
 				}
 			)
 		
@@ -141,28 +142,28 @@ $(function() { //畫面第一次進入時出現的product list
 		
 		
 	});
-function getpicture(prod, prodimg) { //取得每一個商品的物件
-		var formData = {
-			"id" : prod.id
-		}
-		$.ajax({
-			contentType : "application/json",
-			url : "/queryimg",
-			dataType : "json",
-			type : "get",
-			data : formData,
-			success : function(data) {
-				if (data[0] != null) { 
-					$(prodimg).attr("data-original", data[0].picture);
-					$("img.lazy").lazyload({
-						threshold : 200,
-						failure_limit : 10
-					});
+// function getpicture(prod, prodimg) { //取得每一個商品的物件
+// 		var formData = {
+// 			"id" : prod.id
+// 		}
+// 		$.ajax({
+// 			contentType : "application/json",
+// 			url : "/queryimg",
+// 			dataType : "json",
+// 			type : "get",
+// 			data : formData,
+// 			success : function(data) {
+// 				if (data != null) { 
+// 					$(prodimg).attr("data-original", data.primaryPicture);
+// 					$("img.lazy").lazyload({
+// 						threshold : 200,
+// 						failure_limit : 10
+// 					});
 
- 					$(prodimg).attr("src", data[0].picture);
-				}
-			}
-		});
-}
+//  					$(prodimg).attr("src", data.primaryPicture);
+// 				}
+// 			}
+// 		});
+// }
 </script>
 <c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>
