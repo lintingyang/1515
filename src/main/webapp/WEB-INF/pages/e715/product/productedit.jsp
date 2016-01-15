@@ -194,6 +194,8 @@ function getProductCount(id , type ,badgePost){ // 已刊登欲交換數量
 		data : data,
 		success:function(count) {
 				if(count>0){
+					if(count>10)
+						$(badgePost).text('10+');
 					$(badgePost).text(count);
 					total += count;
 					$('#totalCount').text(total);
@@ -262,9 +264,9 @@ function getpicture(prod, prodimg) {
 		type : "get",
 		data : formData,
 		success : function(data) {
-			if (data[0] != null) {
-// 				console.log(data[0].picture);
-				$(prodimg).attr("src", data[0].picture);
+			if (data != null) {
+// 				console.log(data);
+				$(prodimg).attr("src", data.primaryPicture);
 			}
 		}
 	});

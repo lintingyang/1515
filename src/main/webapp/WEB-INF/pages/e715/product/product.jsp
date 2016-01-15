@@ -15,30 +15,28 @@
 	<div class="col-md-6">
 		<div class="row">
 			<div id="big-image">
-				<img src="${productPictures[0].picture}" style="width: 400px;">
+				<img src="${product.primaryPicture}" style="width: 400px;">
 			</div>
 		</div>
 		<div class="row">
 			<ul class="nav navbar-nav">
+				<c:if test="${not empty product.primaryPicture}">
+					<li><a class="thumbnail" href="${product.primaryPicture}">
+							<img class="smaimg" src="${product.primaryPicture}"></a></li>
+				</c:if>
 				<c:if test="${not empty productPictures[0].picture}">
 					<li><a class="thumbnail" href="${productPictures[0].picture}">
-							<img class="smaimg" src="${productPictures[0].picture}">
-					</a></a></li>
+							<img class="smaimg" src="${productPictures[0].picture}"></a></li>
 				</c:if>
 				<c:if test="${not empty productPictures[1].picture}">
 					<li><a class="thumbnail" href="${productPictures[1].picture}">
-							<img class="smaimg" src="${productPictures[1].picture}">
-					</a></li>
+							<img class="smaimg" src="${productPictures[1].picture}"></a></li>
 				</c:if>
 				<c:if test="${not empty productPictures[2].picture}">
 					<li><a class="thumbnail" href="${productPictures[2].picture}">
-							<img class="smaimg" src="${productPictures[2].picture}">
-					</a></li>
+							<img class="smaimg" src="${productPictures[2].picture}"></a></li>
 				</c:if>
-				<c:if test="${not empty productPictures[3].picture}">
-					<li><a class="thumbnail" href="${productPictures[3].picture}"><img
-							class="smaimg" src="${productPictures[3].picture}"></a></li>
-				</c:if>
+
 			</ul>
 		</div>
 		<div class="row">

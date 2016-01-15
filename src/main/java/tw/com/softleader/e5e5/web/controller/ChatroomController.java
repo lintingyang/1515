@@ -50,21 +50,23 @@ public class ChatroomController {
 	@RequestMapping(value = "/insertM")
 	@ResponseBody
 	public List<Chat> insertM(@RequestParam("id") Integer id, 
-			@RequestParam("messages") String messages) {
-			chatService.postChat(id, messages);
+			@RequestParam("messages") String messages, 
+			@RequestParam("showUserInfo") Character showUserInfo) {
+			chatService.postChat(id, messages,showUserInfo);
 			List<Chat> chats = chatService.getLastThreeChats();
 			return chats;
 	}
 	
 	@RequestMapping(value = "/insert")
-	public String insert(Model model, @RequestParam("id") Integer id,
+	public String insert(Model model, @RequestParam("id") Integer id, 
 			@RequestParam("file") MultipartFile file) {
 			String path = chatService.upLoadImage(id, servletContext, file);
 			User user = userService.getOne(id);
 			String message = user.getName()+"上傳了一張圖片";
-			
-			Chat chat = chatService.postChat(id,message,path);
+			Chat chat = chatService.postChat(id,message,path,'T');
 			List<Chat> chats = chatService.getLastThreeChats();
 			return "redirect:/chatroom";
 	}
+	
+
 }

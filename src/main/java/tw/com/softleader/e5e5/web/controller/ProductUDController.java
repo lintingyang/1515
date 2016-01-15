@@ -91,13 +91,14 @@ public class ProductUDController {
 		return -1;
 	}
 
-	// 物品圖片
+	// query載入物品圖片
 	@ResponseBody
 	@RequestMapping(value = "/queryimg")
-	public List<ProductPicture> imglist(@RequestParam("id") Integer id, Model model) {
-		Product product = productService.getOne(id);
-		List<ProductPicture> list = productPictureService.getProductPictures(product);
-		return list;
+	public Product imglist(@RequestParam("id") Integer id, Model model) {
+		// Product product = productService.getOne(id);
+		// List<ProductPicture> list =
+		// productPictureService.getProductPictures(product);
+		return productService.getOne(id);
 	}
 
 	// 刪除未刊登商品
@@ -113,9 +114,16 @@ public class ProductUDController {
 	@ResponseBody
 	@RequestMapping(value = "/remove")
 	public String remove(@RequestParam("id") Integer id, Model model) {
-		productService.updateStatus(id, TrueFalse.FALSE);
+		productService.updateBackPostStatus(id, TrueFalse.FALSE);
 		status = 1;
 		return "/e715/product/productedit";
+	}
+
+	// 顯示交易完成頁面
+	@ResponseBody
+	@RequestMapping(value = "/exchangedProduct")
+	public int exchangedProduct(@RequestParam("id") Integer productId) {
+		return productService.findExchangeIdByProductId(productId);
 	}
 
 	// 點選編輯
@@ -130,16 +138,9 @@ public class ProductUDController {
 		return "/e715/product/proEdit";
 	}
 
-	// 顯示交易完成頁面
-	@ResponseBody
-	@RequestMapping(value = "/exchangedProduct")
-	public int exchangedProduct(@RequestParam("id") Integer productId) {
-		return productService.findExchangeIdByProductId(productId);
-	}
-
 	// 編輯物品
 	@RequestMapping(value = "/update")
-	public String insert(Model model, @ModelAttribute Product product, @RequestParam("pCategory") int pCategory,
+	public String update(Model model, @ModelAttribute Product product, @RequestParam("pCategory") int pCategory,
 			@RequestParam("pPicture") MultipartFile pPicture, @RequestParam("pPicture1") MultipartFile pPicture1,
 			@RequestParam("pPicture2") MultipartFile pPicture2, @RequestParam("pPicture3") MultipartFile pPicture3,
 			@RequestParam("pStatusBad") String pStatusBad, @RequestParam("pWishItem") String pWishItem,
@@ -181,7 +182,7 @@ public class ProductUDController {
 			if (deadline.isBefore(startTime)) {
 				errorMessage.put("timeD", "截止日期一定要比今天晚喔！！");
 				if (errorMessage != null && !errorMessage.isEmpty()) {
-					return "redirect:/product/add";
+					return "redirect:/product/update"; // 重新導向update
 				}
 			}
 
@@ -214,30 +215,39 @@ public class ProductUDController {
 		} else {
 			model.addAttribute("result", "fail");
 		}
+
 		// 存取productPicture 讀取新圖跟砍檔(別忘記jsp的enctype
+		// pPicture 是 primaryPicture in product
 		if (!pPicture.isEmpty()) {
-			boolean del = productService.deleteImage(editProduct.getId(), 0, servletContext);
+			Product productPrimaryPic = productService.getOne(editProduct.getId());
+			if (productPrimaryPic.getPrimaryPicture() != null)
+				productService.deletePrimaryPic(editProduct.getId(), servletContext);
 			String path = productPictureService.upLoadImage(editProduct.getId(), servletContext, pPicture);
-			log.debug("###############del"+del);
-			int numPicture = productPictureService.insertImage(editProduct.getId(), path);
+			productService.insertPrimaryPic(editProduct.getId(), path);
 		}
 		if (!pPicture1.isEmpty()) {
-			boolean del = productService.deleteImage(editProduct.getId(), 1, servletContext);
+			List<ProductPicture> productPic = productPictureService.getProductPictures(editProduct);
+			if (productPic.size() > 0) {
+				productService.deleteImage(editProduct.getId(), 0, servletContext);
+			}
 			String path1 = productPictureService.upLoadImage(editProduct.getId(), servletContext, pPicture1);
-			log.debug("###############del"+del);
-			int numPicture1 = productPictureService.insertImage(editProduct.getId(), path1);
+			productPictureService.insertImage(editProduct.getId(), path1);
 		}
 
 		if (!pPicture2.isEmpty()) {
-			productService.deleteImage(editProduct.getId(), 2, servletContext);
+			List<ProductPicture> productPic = productPictureService.getProductPictures(editProduct);
+			if (productPic.size() > 1)
+				productService.deleteImage(editProduct.getId(), 1, servletContext);
 			String path2 = productPictureService.upLoadImage(editProduct.getId(), servletContext, pPicture2);
-			int numPicture2 = productPictureService.insertImage(editProduct.getId(), path2);
+			productPictureService.insertImage(editProduct.getId(), path2);
 		}
 
 		if (!pPicture3.isEmpty()) {
-			productService.deleteImage(editProduct.getId(), 3, servletContext);
+			List<ProductPicture> productPic = productPictureService.getProductPictures(editProduct);
+			if (productPic.size() > 2)
+				productService.deleteImage(editProduct.getId(), 2, servletContext);
 			String path3 = productPictureService.upLoadImage(editProduct.getId(), servletContext, pPicture3);
-			int numPicture3 = productPictureService.insertImage(editProduct.getId(), path3);
+			productPictureService.insertImage(editProduct.getId(), path3);
 		}
 
 		return "/e715/product/productedit";

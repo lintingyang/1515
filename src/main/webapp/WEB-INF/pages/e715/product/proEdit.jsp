@@ -7,8 +7,6 @@
 <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
 <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-<script src="/resources/js/preview.image.js"></script>
-<!-- <link rel="stylesheet" href="jqueryui/style.css"> -->
 
 <style>
 h4{
@@ -16,11 +14,6 @@ h4{
 }
 #em{
 	color:red;
-}
-/* 預覽圖片 */
-.preview > div {
-  display: inline-block;
-  text-align:center;
 }
 /* Hide file input */
 #id_image_large {
@@ -39,14 +32,14 @@ h4{
 #upload {
 }
 </style>
-
+<div id ="back">
 <div class="container" style="margin: 50px auto;">
 	<div class="alert alert-warning alert-dismissible" role="alert">
   		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   		<strong>「除了補充圖片以外」</strong>   以下<strong>所有欄位</strong>都是<strong>必填</strong>的喔！
 	</div>
 	
-	<form action="/product/update" enctype="multipart/form-data" method="post" novalidate>
+	<form action="/product/update" enctype="multipart/form-data" method="post">
 		<div class="col-md-2"></div>
 		<div class="col-md-4">
 			
@@ -82,14 +75,14 @@ h4{
 							</div>
 							</div>
 							<div class="row">
-								<label class="col-md-offset-1 col-sm-2 choose-file btn btn-sm btn-default glyphicon glyphicon-open" id="upload" for="id_image_large1">
-								<input type="file" id="id_image_large1" class ="pPicture1" name="pPicture1" multiple required="required"></label>
+								<label class="col-md-offset-1 col-sm-2 choose-file btn btn-sm btn-default glyphicon glyphicon-open" id="upload1" for="id_image_large1">
+								<input type="file" id="id_image_large1" class ="pPicture1" name="pPicture1" multiple ></label>
 
-								<label class="col-md-offset-2 col-sm-2 choose-file btn btn-sm btn-default glyphicon glyphicon-open" id="upload" for="id_image_large2">
-								<input type="file" id="id_image_large2" class ="pPicture2" name="pPicture2" multiple required="required"></label>
+								<label class="col-md-offset-2 col-sm-2 choose-file btn btn-sm btn-default glyphicon glyphicon-open" id="upload2" for="id_image_large2">
+								<input type="file" id="id_image_large2" class ="pPicture2" name="pPicture2" multiple "></label>
 		
-								<label class="col-md-offset-2 col-sm-2 choose-file btn btn-sm btn-default glyphicon glyphicon-open" id="upload" for="id_image_large3">
-								<input type="file" id="id_image_large3" class ="pPicture3" name="pPicture3" multiple required="required"></label>
+								<label class="col-md-offset-2 col-sm-2 choose-file btn btn-sm btn-default glyphicon glyphicon-open" id="upload3" for="id_image_large3">
+								<input type="file" id="id_image_large3" class ="pPicture3" name="pPicture3" multiple "></label>
 							</div>
 					</div>
 				</div>
@@ -217,51 +210,37 @@ h4{
 		<div class="col-md-2"></div>
 	</form>
 </div>
-
+</div>
 <script type="text/javascript">
-// $(function () {
-// 	$("input[name=pPicture]").previewimage({
-// 		div: ".preview",
-// 		imgwidth: 90,
-// 		imgheight: 90
-// 	});
-// });
-
-// function previewImage() {
-// 	var reader = new FileReader();
-// 	var file = document.getElementById("id_image_large").files[0];
-// 	reader.readAsDataURL(file);
-// 	reader.onload = loadImage;
-//  console.log("previewImage");
-// }
-// $("#id_image_large").change(previewImage);
 
 	$(function() {
 		
 // 		$('#divWish').attr('style', 'display:none');
 
-		if(${not empty productPicturesY[0].picture}){
+		if(${not empty productY.primaryPicture}){
+			console.log("hello"); 
 			$('#blah0').attr('src' , "${productY.primaryPicture}");//預設的商品圖片
 			$(".pPicture").removeAttr('required');
 		}
+		if(${not empty productPicturesY[0].picture})
+			$('#blah1').attr('src' , "${productPicturesY[0].picture}");//預設的商品圖片1
 		if(${not empty productPicturesY[1].picture})
-		$('#blah1').attr('src' , "${productPicturesY[1].picture}");//預設的商品圖片1
+			$('#blah2').attr('src' , "${productPicturesY[1].picture}");//預設的商品圖片2
 		if(${not empty productPicturesY[2].picture})
-		$('#blah2').attr('src' , "${productPicturesY[2].picture}");//預設的商品圖片2
-		if(${not empty productPicturesY[3].picture})
-		$('#blah3').attr('src' , "${productPicturesY[3].picture}");//預設的商品圖片3	
-		
+			$('#blah3').attr('src' , "${productPicturesY[2].picture}");//預設的商品圖片3	
+
+			
 		$('#productName').val('${productY.name}');//預設的商品名稱
 		$('#description').val('${productY.description}');//預設的商品描述
 		$('#pCategory').val('${productY.productCategory.id}');//預設的分類
 		$("input[name=status][value='${productY.status}']").attr('checked',true);//預設的物品狀態
-		$("input[name=postStatus][value='${productY.postStatus}']").attr('checked',true);//預設刊登與否
-		$("input[name=transactionTime][value='${productY.transactionTime}']").attr('checked',true);//預設交易時間
-		$('#location').val('${productY.location}');//預設交易地點
-		$("input[name=tradeWay][value='${productY.tradeWay}']").attr('checked',true);//預設交易方式
-		$("input[name=wishItem][value='${productY.wishItem}']").attr('checked',true);//預設希望物品
-		$('#pWishItem').removeAttr('required');//預設希望商品
-		var wishItem = "${productY.wishItem}";
+// 		$("input[name=postStatus][value='${productY.postStatus}']").attr('checked',true);//預設刊登與否
+// 		$("input[name=transactionTime][value='${productY.transactionTime}']").attr('checked',true);//預設交易時間
+// 		$('#location').val('${productY.location}');//預設交易地點
+// 		$("input[name=tradeWay][value='${productY.tradeWay}']").attr('checked',true);//預設交易方式
+// 		$("input[name=wishItem][value='${productY.wishItem}']").attr('checked',true);//預設希望物品
+// 		$('#pWishItem').removeAttr('required');//預設希望商品
+// 		var wishItem = "${productY.wishItem}";
 		
 // 		if( wishItem != ("隨機" || "贈送")){
 // 		$('#divWish').attr('style', '');
@@ -280,9 +259,9 @@ h4{
 	 		}
 		});
 		
+		//按下刊登/不刊登
 		$('input[name *= "postStatus"]').change(function(){
 			if($(this).val() == "TRUE"){
-				console.log("ddfsdf");
 				$('#rightSide').css('display', 'inline');
 				$('#pDeadline').attr('required','required');
 				$('#location').attr('required','required');

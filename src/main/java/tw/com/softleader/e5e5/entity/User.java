@@ -86,6 +86,9 @@ public class User extends OurEntity implements java.io.Serializable {
 	@Column(name="about_me")
 	private String aboutMe;
 
+	@Column(name = "verification_code", length = 4)
+	private Integer verificationCode;
+	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "email_check", length = 10)
 	private TrueFalse emailCheck;
@@ -272,6 +275,14 @@ public class User extends OurEntity implements java.io.Serializable {
 
 	public void setAboutMe(String aboutMe) {
 		this.aboutMe = aboutMe;
+	}
+	
+	public Integer getVerificationCode() {
+		return verificationCode;
+	}
+
+	public void setVerificationCode(Integer verificationCode) {
+		this.verificationCode = verificationCode;
 	}
 
 	public String getSubject() {

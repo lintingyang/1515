@@ -78,46 +78,88 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"> </span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="editmail">編輯郵件</h4>
       </div>
-      <div class="modal-body">
-		<form role="form">
-		
-		  <div class="form-group">
-		  	<label for="exampleInputEmail1">主旨</label>
-		    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="輸入主旨">
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="reciver">收件人</label>
-		    <input type="密碼" class="form-control" id="reciver" placeholder="收件人帳號">
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="exampleInputFile">內文</label>
-		    <textarea  class= "form-control" rows="10" cols=""></textarea>
-		    <p class="help-block">請輸入1000字以內的內文</p>
-		  </div>
-		  
-		  <div class="checkbox">
-		    <label>
-		      <input type="checkbox" checked="checked"> 儲存寄件備份
-		    </label>
-		  </div>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-default" data-dismiss="modal">送出</button>
-        <button type="button" class="btn btn-primary">儲存為草稿</button>
-        </form>
-      </div>
+      <form role="form"><!--  FORM撰寫EMAIL表單 -->
+	      <div class="modal-body">
+			  <div class="form-group">
+			  	<label for="exampleInputEmail1">主旨</label>
+			    <input type="email" class="form-control" id="title" name="title" placeholder="輸入主旨">
+			  </div>
+			  
+			  <div class="form-group">
+			    <label for="reciver">收件人</label>
+			    <input type="text" class="form-control drop_down_btn" id="receiver" name="receiver" placeholder="收件人帳號">
+				<div class="input_select_block" style="z-index:3;position: fixed;width:100%;">  
+				        <ul class="dropdownfriendlist" >  
+
+
+				        </ul>  
+				    </div>  
+			  </div>
+			  
+			  <div class="form-group">
+			    <label for="exampleInputFile">內文</label>
+			    <textarea  class= "form-control" rows="10" cols="" name="article" id="article"></textarea>
+			    <p class="help-block">請輸入1000字以內的內文</p>
+			  </div>
+			  
+			  <div class="checkbox">
+			    <label>
+			      <input type="checkbox" checked="checked" name="saveaslog" id="saveaslog"> 儲存寄件備份
+			    </label>
+			  </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal" id="submitmail">送出</button>
+	        <button type="button" class="btn btn-primary" data-dismiss="modal">儲存為草稿</button>
+	      </div>
+     </form> <!--  FORM撰寫EMAIL表單END -->
     </div>
   </div>
 </div>
 <!-- 編輯郵件畫面END -->
-
+  
 <script>
+$(".drop_down_btn").click(function(e){  //好友的下拉選單 
+    e.stopPropagation();   
+    $dropList=$(".input_select_block ul");   
+    if($dropList.is(":visible")){   
+        $dropList.hide();   
+    }else{   
+        $dropList.show();   
+    };   
+});   
+ 
+$(".input_select_block ul li").click(function(e){   
+    e.stopPropagation();   
+    $("#receiver").val($(this).text());   
+    $(".input_select_block ul").hide();   
+}); 
+$(".input_select_block").
+//好友的下拉選單 END
+
 $(".importentkbox").click(function(){
-	$(this).html("<span class='glyphicon glyphicon-star'>");
+	$(this).html("<span class='glyphicon glyphicon-star'>");//改變星星樣式
 })
-// onload
+
+$("#submitmail").click(function(){//按下寄出郵件
+	$.ajax({
+		dataType: "json",
+		contentType : "application/json",
+		type: "get",
+		url: "/mail/newmail",
+		data: {
+			senderId : ${user.id},
+			receiverAccount : $("#receiver").val(),
+			title : $("#title").val(),
+			article : $("#article").val(),
+			saveAsLog :$("#saveaslog").prop("checked")}
+	});
+	swal("郵件寄出", "已經幫您寄出郵件!", "success")
+})//按下寄出郵件END
+
+
+
+//onload
 // $(function(){
 // 	var formData=${user.id}
 //     	$.ajax({
@@ -134,6 +176,8 @@ $(".importentkbox").click(function(){
 // })
 
 </script>
+
+
 
 
 <c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>

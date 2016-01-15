@@ -128,7 +128,7 @@ $(function(){
 			
 			<div class="form-group" id="divBorder">
 				<div class="col-sm-offset-2 col-sm-10 alignLeft">
-					<a href="/head/create" id="NewAccount">建立新帳號</a> 
+					<a href="/head/emailCheck" id="NewAccount">建立新帳號</a> 
 					<a href="/E715Member/findPassword" id="fpwdLink" >?忘記密碼</a>
 					<div class="checkbox">
 						<label> <input type="checkbox"> Remember me</label>
