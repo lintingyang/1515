@@ -20,7 +20,7 @@ tr.mailrow:hover td{
 .mailcheckbox{
 	width:30px;
 }
-.importentkbox{
+.importantbox{
 	width:30px;
 }
 .deletebtn{
@@ -249,12 +249,20 @@ function showmail(data){
 	var index = 0;
 	$("#mailtable").html("");
 	$.each(data, function(){
+		var star = null;
+		console.log(this.isImportant);
+		if (this.isImportant == "TRUE"){
+			star = "<span class='glyphicon glyphicon-star'></span>";
+		} else {
+			star = "<span class='glyphicon glyphicon-star-empty'></span>";
+		}
 		var sendTime = this.sendTime.year + "/" + this.sendTime.monthValue + "/" + this.sendTime.dayOfMonth;
+
 		var mailRow = "<tr class='mailrow'>" +
-						"<td class='mailcheckbox'><input type='checkbox'></td>" + 
-						"<td class='importantbox'><span class='glyphicon glyphicon-star-empty'></span></td>" +
-						"<td class='namebox'>" + this.sender.nickname + "(" + this.sender.account + ")</td>" + 
-						"<td class='mailBody titlebox' id='mailno" + index + "' style='cursor:pointer'>" + this.title + "//" + this.article + "</td>" +
+						"<td  class='mailcheckbox'><input type='checkbox'></td>" + 
+						"<td class='importantbox'>" + star + "</td>" +
+						"<td>" + this.sender.nickname + "(" + this.sender.account + ")</td>" + 
+						"<td class='mailBody' id='mailno" + index + "' style='cursor:pointer'>" + this.title + "//" + this.article + "</td>" +
 						"<td style='text-align: right;'>" + sendTime + "</td>" +
 						"</tr>";
 		$("#mailtable").append(mailRow);

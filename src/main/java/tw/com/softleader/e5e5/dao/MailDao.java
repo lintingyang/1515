@@ -13,7 +13,7 @@ public interface MailDao extends OurDao<Mail> {
 public List<Mail> findByReceiverOrderBySendTimeDesc(User receiver);
 
 //列出重要信件
-public List<Mail> findByIsImportantOrderBySendTimeDesc(TrueFalse isImportant);
+public List<Mail> findByReceiverAndIsImportantOrderBySendTimeDesc(User receiver, TrueFalse isImportant);
 
 //列出垃圾信件
 public List<Mail> findByIsTrashOrderBySendTimeDesc(TrueFalse isTrash);
