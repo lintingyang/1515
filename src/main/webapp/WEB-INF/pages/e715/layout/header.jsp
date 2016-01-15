@@ -56,6 +56,12 @@
 		<a class="navbar-brand" href="#" data-toggle="modal" data-target="#myModal">
 			<span id="categoryname">${ categoryname }<c:if test="${empty categoryname }" >全部</c:if></span>
 			<span class="glyphicon glyphicon-menu-down"></span></a>
+		<ul class="nav navbar-nav">
+	      <li><a href="/chatroom">聊天室</a></li>
+
+	    </ul>
+		
+		
 		
 		<ul class="nav navbar-nav navbar-right">
 			<li id="fat-menu" class="dropdown">
@@ -65,7 +71,7 @@
 			<a id="drop3" href="#"
 				class="dropdown-toggle" data-toggle="dropdown" role="button"
 				aria-haspopup="true" aria-expanded="false"> 
-				<img class="img-circle" style="width: 30px;"
+				<img class="img-circle" style="height: 20px;"
 					src="${user.picture}">
 				       ${user.name}
 				
