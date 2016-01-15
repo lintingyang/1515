@@ -116,9 +116,11 @@
 $(".importentkbox").click(function(){
 	$(this).html("<span class='glyphicon glyphicon-star'>");//改變星星樣式
 })
-
+// $("#saveaslog").click(function(){
+// 	alert($(this).prop("checked"));
+	
+// })
 $("#submitmail").click(function(){//按下寄出郵件
-
 	$.ajax({
 		dataType: "json",
 		contentType : "application/json",
@@ -129,12 +131,9 @@ $("#submitmail").click(function(){//按下寄出郵件
 			receiverAccount : $("#receiver").val(),
 			title : $("#title").val(),
 			article : $("#article").val(),
-			saveAsLog :$("#saveaslog").attr("checked")},
-		success: function(data){
-			console.log(data);
-		}
+			saveAsLog :$("#saveaslog").prop("checked")}
 	});
-
+	swal("郵件寄出", "已經幫您寄出郵件!", "success")
 })//按下寄出郵件END
 
 

@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import tw.com.softleader.e5e5.dao.LogMailDao;
 import tw.com.softleader.e5e5.dao.MailDao;
 import tw.com.softleader.e5e5.dao.UserDao;
+import tw.com.softleader.e5e5.entity.LogMail;
 import tw.com.softleader.e5e5.entity.Mail;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 
@@ -20,6 +22,8 @@ public class MailService {
 	private MailDao mailDao;
 	@Autowired
 	private UserDao userDao;
+	@Autowired 
+	private LogMailDao logMailDao;
 	@Transactional
 	public void sendNewMail(int senderId,String receiverAccount,String title,String article,String saveAsLog){
 		Mail mail = new Mail();
@@ -32,6 +36,18 @@ public class MailService {
 		mail.setIsImportant(TrueFalse.FALSE);
 		mail.setIsTrash(TrueFalse.FALSE);
 		mailDao.save(mail);
+		if(saveAsLog.equals("true")){
+			LogMail logMail = new LogMail();
+			logMail.setSender(userDao.getOne(senderId));
+			logMail.setReceiver(userDao.findByAccount(receiverAccount));
+			logMail.setTitle(title);
+			logMail.setArticle(article);
+			logMail.setSendTime(LocalDateTime.now());
+			logMail.setIsBackup(TrueFalse.TRUE);
+			logMail.setIsTrash(TrueFalse.FALSE);
+			logMail.setIsDraft(TrueFalse.FALSE);
+			logMailDao.save(logMail);
+		}
 		
 	}
 }
