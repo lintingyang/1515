@@ -58,10 +58,10 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"></span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title"><!-- 信件title --></h4>
+        <h4 class="modal-title" id="mail-title"><!-- 信件title --></h4>
       </div>
-      <div class="modal-body">
-        <p><!-- 寄件人，時間，內文 --></p>
+      <div class="modal-body" id="mail-body">
+        <!-- 寄件人，時間，內文 -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
@@ -156,26 +156,28 @@ $("#submitmail").click(function(){//按下寄出郵件
 
 //onload
 $(function(){
+	
 	var formData={"id":${user.id}};
     	$.ajax({
        		type: "GET",
        		url: "/mail/getmail",
       		data: formData,
        		success: function(data){
-       			console.log(data);
-    			showmail(data);
+       		
+    			showmail(data);	
     		},
     	dataType: "json",
    	 	contentType : "application/json"
     	});
+   
 })//end of onload
 
 //顯示收件匣
 function showmail(data){
+	var index = 0;
 	$.each(data, function(){
-		var mailNo = this.id;
 		var sendTime = this.sendTime.year + "/" + this.sendTime.monthValue + "/" + this.sendTime.dayOfMonth;
-		var mailRow = "<tr class='mailrow' id='mailno" + mailNo + "'>" +
+		var mailRow = "<tr class='mailrow' id='mailno" + index + "'>" +
 						"<td class='mailcheckbox'><input type='checkbox'></td>" + 
 						"<td class='importantbox'><span class='glyphicon glyphicon-star-empty'></span></td>" +
 						"<td>" + this.sender.nickname + "(" + this.sender.account + ")</td>" + 
@@ -183,15 +185,28 @@ function showmail(data){
 						"<td style='text-align: right;'>" + sendTime + "</td>" +
 						"</tr>";
 		$("#mailtable").append(mailRow);
+		index ++;
 	})//end of .each
 	//改變星星樣式
 	$(".importantbox").on("click", function(){
 		$(this).html("<span class='glyphicon glyphicon-star'>");
 	})
 	$(".mailrow").on("click", function(){
-// 		var mailId = $(this).attr("id").substring(6);
+		var mailIndex = $(this).attr("id").substring(6);
+//   	console.log(mailIndex);
+// 		console.log(data);
+		var mailTitle = data[mailIndex].title;
+		var mailSender = data[mailIndex].sender.nickname + "&nbsp;(" + data[mailIndex].sender.account + ")";
+		var mailSendTime = data[mailIndex].sendTime.year + "年" + data[mailIndex].sendTime.monthValue + "月" + data[mailIndex].sendTime.dayOfMonth + "日" +
+							"&nbsp" + data[mailIndex].sendTime.hour + ":" + data[mailIndex].sendTime.minute;
+		var mailArticle = data[mailIndex].article;
 		$("#readmail").modal();
-// 		$(".modaltitle")
+		$("#mail-title").empty();
+		$("#mail-body").empty();
+		$("#mail-title").append("<h4>"+mailTitle+"<h4>" + 
+								"<div style='font-size: 12px;display: inline-block;'>" + mailSender + "</div>" + 
+								"<div style='font-size: 12px; float: right;'>" + mailSendTime + "</div>");
+		$("#mail-body").append("<p>"+mailArticle+"</p>");
 	});
 }
 
