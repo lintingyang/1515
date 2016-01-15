@@ -287,7 +287,7 @@ public class ProductController {
 			model.addAttribute("result", "fail");
 		}
 		
-		// 存取productPicture/yao
+		// 存取productPrimaryPicture in product/yao
 		String path = productPictureService.upLoadImage(newProduct.getId(), servletContext, pPicture);
 		productService.insertPrimaryPic(newProduct.getId(), path);
 		// 存取productPicture

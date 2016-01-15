@@ -52,7 +52,7 @@ public class ChatController {
 	public String insert(Model model, @RequestParam("id") Integer id, @RequestParam("message") String message,
 			@RequestParam("file") MultipartFile file) {
 			String path = chatService.upLoadImage(id, servletContext, file);
-			Chat chat = chatService.postChat(id, message,path);
+			Chat chat = chatService.postChat(id, message,path,'T');
 			List<Chat> chats = chatService.getLastThreeChats();
 			model.addAttribute("beans", chats);
 			return "redirect:/chats/list";

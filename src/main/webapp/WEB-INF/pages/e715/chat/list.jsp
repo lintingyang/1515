@@ -8,39 +8,21 @@ $(function(){
 	$("#btn").click(function(){
 		event.preventDefault();
 		var userId="${user.id}";
-		var formData={"id":userId,"messages":$("#messages").val()};
+		var showUserInfo;
+		if($("#showUserInfo").prop("checked")){
+			showUserInfo='F';
+		}else{
+			showUserInfo='T';
+		}
+		var formData={"id":userId,
+				"messages":$("#messages").val(),
+				"showUserInfo":showUserInfo};
         $.ajax({
            type: "GET",
            url: "http://localhost:8080/chatroom/insertM",
            data: formData,
            success: function(data){
-        	   $.each(data,function(i) {
-        		   if (!($("#"+data[i].id).length)){  
-        			   var $tr1 = $("<tr></tr>");
-	        		   var $td1 = $("<td hidden></td>");
-	        		   var $td2 = $("<td width='5%'></td>");
-	        		   var $td3 = $("<td width='95%'></td>");
-	        		   if(data[i].picture!=null && count<3){
-	        			   count++;
-	        			   var $pic = $("<img width='300'></img>");
-	        			   var $txt = $("<p></p>");
-	        			   $txt.text(data[i].user.name+"的圖片");
-	        			   $pic.attr('src', data[i].picture);
-	        			   $("#pic1").append($txt).append($pic);
-	        		   }
-	        		   $tr1.attr('id', data[i].id);
-	        		   $td1.text(data[i].id);
-	        		   $a1= $("<a>"+data[i].user.name+"</a>")
-	        		   $td2.append($a1);
-	        		   $a1.click(function(){
-	        			   $("#messages").val("@"+data[i].user.name+"　");						
-	        			});
-	        		   var $time=getTime(data[i].sendTime);
-	        		   $td3.html(data[i].messages + "<font color='grey'> "+$time + "</font>");
-	        		   $tr1.append($td1).append($td2).append($td3);
-	        		   $("#tb1").append($tr1);
-        		   }
-        	   });
+        	   display(data,"prepend");
            },
            dataType: "json",
            contentType : "application/json"
@@ -53,34 +35,7 @@ $(function(){
 	           url: "http://localhost:8080/chatroom/list",
 	           data: "",
 	           success: function(data){
-	        	   var count = 0;
-	        	   $.each(data,function(i) {
-	        		   if (!($("#"+data[i].id).length)){  
-		        		   var $tr1 = $("<tr></tr>");
-		        		   var $td1 = $("<td hidden></td>");
-		        		   var $td2 = $("<td width='5%'></td>");
-		        		   var $td3 = $("<td width='95%'></td>");
-		        		   if(data[i].picture!=null && count<3){
-		        			   count++;
-		        			   var $pic = $("<img width='300'></img>");
-		        			   var $txt = $("<p></p>");
-		        			   $txt.text(data[i].user.name+"的圖片");
-		        			   $pic.attr('src', data[i].picture);
-		        			   $("#pic1").append($txt).append($pic);
-		        		   }
-		        		   $tr1.attr('id', data[i].id);
-		        		   $td1.text(data[i].id);
-		        		   $a1= $("<a>"+data[i].user.name+"</a>")
-		        		   $td2.append($a1);
-		        		   $a1.click(function(){
-		        			   $("#messages").val("@"+data[i].user.name)						
-		        			});
-		        		   var $time=getTime(data[i].sendTime);
-		        		   $td3.html(data[i].messages + "<font color='grey'> "+$time + "</font>");
-		        		   $tr1.append($td1).append($td2).append($td3);
-		        		   $("#tb1").append($tr1);
-	        		   }
-	        	   });
+	        	   display(data,"appand");
 	           },
 	           dataType: "json",
 	           contentType : "application/json"
@@ -91,7 +46,48 @@ $(function(){
 		var ans = "@"+data.hour+":" +data.minute;
 		return ans
 	}
-	
+	function display(data,type){
+	   var count = 0;
+  	   $.each(data,function(i) {
+  		   if (!($("#"+data[i].id).length)){  
+      		   var $tr1 = $("<tr></tr>");
+      		   var $td1 = $("<td hidden></td>");
+      		   var $td2 = $("<td width='5%'></td>");
+      		   var $td3 = $("<td width='95%'></td>");
+      		   if(data[i].showUserInfo=='T'){
+      			   var $name=data[i].user.name;
+  		  	   }else{
+  		  		   var $name="匿名";
+  		  	   }
+      		   if(data[i].picture!=null && count<3){
+      			   count++;
+      			   var $pic = $("<img width='300'></img>");
+      			   var $txt = $("<p></p>");
+      			   $txt.text($name+"的圖片");
+      			   $pic.attr('src', data[i].picture);
+      			   $("#pic1").append($txt).append($pic);
+      		   }
+      		   $tr1.attr('id', data[i].id);
+      		   $td1.text(data[i].id);
+      		   $a1= $("<a>"+$name+"</a>")
+      		   $td2.append($a1);
+      		   $a1.click(function(){
+      			   $("#messages").val("@"+$name)						
+      			});
+      		   var $time=getTime(data[i].sendTime);
+      		   $td3.html(data[i].messages + "<font color='grey'> "+$time + "</font>");
+      		   $tr1.append($td1).append($td2).append($td3);
+
+      		   if(type=="appand"){
+      			   $("#tb1").append($tr1);
+      		   }else if(type=="prepend"){
+      			 $("#tb1").prepend($tr1);
+      		   }
+  		   }
+  	   });
+		
+		
+	}
 
 	
 	
@@ -105,7 +101,8 @@ $(function(){
 		$("#pic1").toggle();	
 	});
 	getMessages();
- 	//setInterval(getMessages, 1000);
+	$("[data-toggle=popover]").popover();
+//  	setInterval(getMessages, 1000);
 });
 </script>
 
@@ -118,16 +115,21 @@ $(function(){
 			<input type="text" id="messages" name="messages" value=" " maxlength="199" class="form-control">
 			<input type="button" id="clear" value="清除" class="btn btn-warning" style="float:right">
 			<input type="submit" id="btn" value="輸入" class="btn btn-success" style="float:right">
+			<input type="checkbox" id="showUserInfo" name="showUserInfo" value="TRUE"> 匿名發文
 		</form>
 			<button type="button" id="upImgBtn" class="btn btn-info" >
 				<span class="glyphicon glyphicon-picture" aria-hidden="true"> 上傳圖片</span>
-			</button>
+			</button> 
+			<img src="/resources/imgs/symbol_questionmark.jpg" width="15" 
+			 data-container="body" data-toggle="popover" data-placement="right" data-content="上傳圖片時不能匿名喔">
+			  
 		</div>
 		
 			
 		<div class="row">	
 			<div id="upImg1" hidden>
 				<form  action="/chatroom/insert" method="post" enctype="multipart/form-data">
+<!-- 					<input type="checkbox" id="showUserInfo" name="showUserInfo"> 匿名上傳 -->
 				    <input type="text" name="id" size="5" placeholder="使用者ID" value="${user.id}" hidden>
 					<input type="file" name="file"  required/>
 					<input type="submit" value="上傳">
@@ -143,11 +145,7 @@ $(function(){
 					<th width="90%">messages</th>
 				</tr>
 			</thead>
-			<tbody id="tb1">
-			
-			
-			
-			</tbody>
+			<tbody id="tb1"></tbody>
 		</table>
 		</div>
 	</div>
@@ -158,7 +156,7 @@ $(function(){
 
 			<button type="button" id="showImgBtn" class="btn btn-info" >
 				<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"> 展開圖片</span>
-			</button>
+			</button><br><br>
 			<div id="pic1" hidden>
 			
 			</div>
