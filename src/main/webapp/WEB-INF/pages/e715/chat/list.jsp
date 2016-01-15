@@ -8,7 +8,16 @@ $(function(){
 	$("#btn").click(function(){
 		event.preventDefault();
 		var userId="${user.id}";
-		var formData={"id":userId,"messages":$("#messages").val()};
+		var showUserInfo;
+		if($("#showUserInfo").prop("checked")){
+			showUserInfo='F';
+		}else{
+			showUserInfo='T';
+		}
+		var formData={"id":userId,
+				"messages":$("#messages").val(),
+				"showUserInfo":showUserInfo};
+		$("#messages").val("")
         $.ajax({
            type: "GET",
            url: "http://localhost:8080/chatroom/insertM",
@@ -34,6 +43,19 @@ $(function(){
 	         });
 		
 	}
+	function freshPage(){
+		$.ajax({
+	           type: "GET",
+	           url: "http://localhost:8080/chatroom/list",
+	           data: "",
+	           success: function(data){
+	        	   display(data,"prepend");
+	           },
+	           dataType: "json",
+	           contentType : "application/json"
+	         });
+		
+	}
 	function getTime(data){
 		var ans = "@"+data.hour+":" +data.minute;
 		return ans
@@ -46,20 +68,29 @@ $(function(){
       		   var $td1 = $("<td hidden></td>");
       		   var $td2 = $("<td width='5%'></td>");
       		   var $td3 = $("<td width='95%'></td>");
+      		   if(data[i].showUserInfo=='T'){
+      			   var $name=data[i].user.name;
+  		  	   }else{
+  		  		   var $name="匿名";
+  		  	   }
       		   if(data[i].picture!=null && count<3){
       			   count++;
       			   var $pic = $("<img width='300'></img>");
       			   var $txt = $("<p></p>");
-      			   $txt.text(data[i].user.name+"的圖片");
+      			   $txt.text($name+"的圖片");
       			   $pic.attr('src', data[i].picture);
-      			   $("#pic1").append($txt).append($pic);
+      			 	if(type=="appand"){
+           			   $("#pic1").append($txt).append($pic);
+        		   }else if(type=="prepend"){
+          			   $("#pic1").prepend($txt).prepend($pic);
+        		   }
       		   }
       		   $tr1.attr('id', data[i].id);
       		   $td1.text(data[i].id);
-      		   $a1= $("<a>"+data[i].user.name+"</a>")
+      		   $a1= $("<a>"+$name+"</a>")
       		   $td2.append($a1);
       		   $a1.click(function(){
-      			   $("#messages").val("@"+data[i].user.name)						
+      			   $("#messages").val("@"+$name)						
       			});
       		   var $time=getTime(data[i].sendTime);
       		   $td3.html(data[i].messages + "<font color='grey'> "+$time + "</font>");
@@ -88,7 +119,8 @@ $(function(){
 		$("#pic1").toggle();	
 	});
 	getMessages();
-//  	setInterval(getMessages, 1000);
+	$("[data-toggle=popover]").popover();
+//  	setInterval(freshPage, 1000);
 });
 </script>
 
@@ -101,16 +133,21 @@ $(function(){
 			<input type="text" id="messages" name="messages" value=" " maxlength="199" class="form-control">
 			<input type="button" id="clear" value="清除" class="btn btn-warning" style="float:right">
 			<input type="submit" id="btn" value="輸入" class="btn btn-success" style="float:right">
+			<input type="checkbox" id="showUserInfo" name="showUserInfo" value="TRUE"> 匿名發文
 		</form>
 			<button type="button" id="upImgBtn" class="btn btn-info" >
 				<span class="glyphicon glyphicon-picture" aria-hidden="true"> 上傳圖片</span>
-			</button>
+			</button> 
+			<img src="/resources/imgs/symbol_questionmark.jpg" width="15" 
+			 data-container="body" data-toggle="popover" data-placement="right" data-content="上傳圖片時不能匿名喔">
+			  
 		</div>
 		
 			
 		<div class="row">	
 			<div id="upImg1" hidden>
 				<form  action="/chatroom/insert" method="post" enctype="multipart/form-data">
+<!-- 					<input type="checkbox" id="showUserInfo" name="showUserInfo"> 匿名上傳 -->
 				    <input type="text" name="id" size="5" placeholder="使用者ID" value="${user.id}" hidden>
 					<input type="file" name="file"  required/>
 					<input type="submit" value="上傳">

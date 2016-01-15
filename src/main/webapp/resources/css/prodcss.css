@@ -178,3 +178,7 @@ div.holder{
 *{
 	font-family: Microsoft JhengHei;
 }
+
+body{
+	background-image: url("/resources/background/fabric_of_squares_gray.png");
+}
