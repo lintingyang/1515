@@ -276,6 +276,7 @@ function showmail(data){
 								"<div style='font-size: 12px; float: right;'>" + mailSendTime + "</div>");
 		$("#mail-body").append("<p>"+mailArticle+"</p>");
 	});
+	//全選
 	$("#checkAll").change(function(){
 	    $("input:checkbox").prop('checked', $(this).prop("checked"));
 	});
