@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
+import tw.com.softleader.e5e5.service.LogMailService;
 import tw.com.softleader.e5e5.entity.Mail;
 import tw.com.softleader.e5e5.service.MailService;
 
@@ -19,6 +21,8 @@ public class MailController {
 	
 	@Autowired
 	private MailService mailService;
+	@Autowired
+	private LogMailService logMailService;
 	
 	@RequestMapping("/list")
 	public String maillist(){		
@@ -34,10 +38,16 @@ public class MailController {
 	
 	
 	@RequestMapping("/newmail")
-	public String newmail(@RequestParam("senderId")int senderId,@RequestParam("receiverAccount")String receiverAccount,
+	public String newMail(@RequestParam("senderId")int senderId,@RequestParam("receiverAccount")String receiverAccount,
 			@RequestParam("title")String title,@RequestParam("article")String article,@RequestParam("saveAsLog")String saveAsLog){
 		mailService.sendNewMail(senderId, receiverAccount, title, article, saveAsLog);
 		log.error(saveAsLog);
+		return "redirect:/mail/list";
+	}
+	@RequestMapping("/savedraft")
+	public String saveDraft(@RequestParam("senderId")int senderId,@RequestParam("receiverAccount")String receiverAccount,
+			@RequestParam("title")String title,@RequestParam("article")String article){
+		logMailService.saveDraft(senderId, receiverAccount, title, article);
 		return "redirect:/mail/list";
 	}
 	

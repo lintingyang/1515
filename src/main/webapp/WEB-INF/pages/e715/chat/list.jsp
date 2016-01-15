@@ -3,6 +3,11 @@
 <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/WEB-INF/pages/e715/layout/header.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/meta.jsp"/>
+<style>
+#id_image_large {
+ display: none;
+}
+</style>
 <script>
 $(function(){    
 	$("#btn").click(function(){
@@ -102,11 +107,17 @@ $(function(){
       			 $("#tb1").prepend($tr1);
       		   }
   		   }
-  	   });
-		
-		
+  	   });	
 	}
-
+ 	function readURL(input) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+		    	$('#blah0').attr('src', e.target.result); //blah改blah0 by yao
+	        }
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
 	
 	
 	$("#clear").click(function(){
@@ -118,6 +129,12 @@ $(function(){
 	$("#showImgBtn").click(function(){
 		$("#pic1").toggle();	
 	});
+	$(".pPicture").change(function(){
+	    readURL(this);
+	});
+	
+	
+	
 	getMessages();
 	$("[data-toggle=popover]").popover();
  	setInterval(freshPage, 1000);
@@ -139,18 +156,25 @@ $(function(){
 				<span class="glyphicon glyphicon-picture" aria-hidden="true"> 上傳圖片</span>
 			</button> 
 			<img src="/resources/imgs/symbol_questionmark.jpg" width="15" 
-			 data-container="body" data-toggle="popover" data-placement="right" data-content="上傳圖片時不能匿名喔">
-			  
+			 data-container="body" data-toggle="popover" data-placement="right" data-content="上傳圖片時不能匿名喔">		
 		</div>
-		
-			
+
 		<div class="row">	
-			<div id="upImg1" hidden>
+			<div id="upImg1" class="col-md-12" hidden>
+			<hr>
+			<img id="blah0" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 200px; height: 200px;"/>
 				<form  action="/chatroom/insert" method="post" enctype="multipart/form-data">
-<!-- 					<input type="checkbox" id="showUserInfo" name="showUserInfo"> 匿名上傳 -->
+
 				    <input type="text" name="id" size="5" placeholder="使用者ID" value="${user.id}" hidden>
-					<input type="file" name="file"  required/>
-					<input type="submit" value="上傳">
+				    <div  style="width:200px;">
+						<label class="col-sm-9 choose-file btn btn-sm btn-default glyphicon glyphicon-open" 
+						id="upload" for="id_image_large" >
+						<input type="file" id="id_image_large" class ="pPicture " 
+						name="file"  required="required" ></label>
+						<input class="col-sm-3 btn btn-sm btn-default glyphicon glyphicon-cloud-upload"type="submit" value="上傳">
+					</div>
+					
+					
 				</form>
 			</div>
 		</div>

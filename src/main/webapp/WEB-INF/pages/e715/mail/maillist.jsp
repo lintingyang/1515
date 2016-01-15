@@ -92,6 +92,10 @@
 			    <input type="text" class="form-control drop_down_btn" id="receiver" name="receiver" placeholder="收件人帳號">
 				<div class="input_select_block" style="z-index:3;position: fixed;width:100%;">  
 				        <ul class="dropdownfriendlist" >  
+<<<<<<< HEAD
+
+=======
+>>>>>>> branch 'master' of https://github.com/lintingyang/1515.git
 				        </ul>  
 				    </div>  
 			  </div>
@@ -110,7 +114,7 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal" id="submitmail">送出</button>
-	        <button type="button" class="btn btn-primary" data-dismiss="modal">儲存為草稿</button>
+	        <button type="button" class="btn btn-primary" data-dismiss="modal" id="savedraft">儲存為草稿</button>
 	      </div>
      </form> <!--  FORM撰寫EMAIL表單END -->
     </div>
@@ -119,7 +123,8 @@
 <!-- 編輯郵件畫面END -->
   
 <script>
-$(".drop_down_btn").click(function(e){  //好友的下拉選單 
+//好友的下拉選單 
+$(".drop_down_btn").click(function(e){  
     e.stopPropagation();   
     $dropList=$(".input_select_block ul");   
     if($dropList.is(":visible")){   
@@ -129,30 +134,87 @@ $(".drop_down_btn").click(function(e){  //好友的下拉選單
     };   
 });   
  
-$(".input_select_block ul li").click(function(e){   
+$(".friendli").click(function(e){   
     e.stopPropagation();   
     $("#receiver").val($(this).text());   
     $(".input_select_block ul").hide();   
 }); 
+$(function(){
+	$.ajax({
+		contentType : "application/json",
+		url : "/E715Member/userFriendList",
+		dataType : "json",
+		type : "post",
+		data : "",
+		success :function(data){
+			$.each(data,function(i){
+				console.log(data[i].userBId.account);
+				var name = $("<small style='color:gray'>("+data[i].userBId.nickname+")</small>")
+				var friend = $("<li></li>").text(data[i].userBId.account).addClass("friendli")
+				.attr("name",data[i].userBId.account).append(name);
+				$(".dropdownfriendlist").append(friend);
+				$(".friendli[name="+data[i].userBId.account+"]").bind("click",function(e){   
+				    e.stopPropagation();   
+				    $("#receiver").val($(this).attr("name"));   
+				    $(".input_select_block ul").hide();   
+				}); 
+			})
+		}
+	})
+})
 //好友的下拉選單 END
 
 
 
-$("#submitmail").click(function(){//按下寄出郵件
-	$.ajax({
-		dataType: "json",
-		contentType : "application/json",
-		type: "get",
-		url: "/mail/newmail",
-		data: {
-			senderId : ${user.id},
-			receiverAccount : $("#receiver").val(),
-			title : $("#title").val(),
-			article : $("#article").val(),
-			saveAsLog :$("#saveaslog").prop("checked")}
-	});
-	swal("郵件寄出", "已經幫您寄出郵件!", "success")
+//按下寄出郵件
+$("#submitmail").click(function(){
+	swal({
+			type : "success",
+			title: "郵件寄出",  
+			text: "成功幫您寄出郵件!",  
+			timer: 1000,   
+			showConfirmButton: false
+		},function(){
+			$.ajax({
+				dataType: "json",
+				type: "get",
+				url: "/mail/newmail",
+				data: {
+					senderId : ${user.id},
+					receiverAccount : $("#receiver").val(),
+					title : $("#title").val(),
+					article : $("#article").val(),
+					saveAsLog :$("#saveaslog").prop("checked")},
+					
+			});
+			location.href="/mail/list";
+		})
+
 })//按下寄出郵件END
+
+//按下儲存草稿
+$("#savedraft").click(function(){
+	swal({
+			type : "success",
+			title: "儲存草稿",  
+			text: "成功幫您儲存為草稿!",  
+			timer: 1000,   
+			showConfirmButton: false
+		},function(){
+			$.ajax({
+				dataType: "json",
+				type: "get",
+				url: "/mail/savedraft",
+				data: {
+					senderId : ${user.id},
+					receiverAccount : $("#receiver").val(),
+					title : $("#title").val(),
+					article : $("#article").val()},
+			});
+			location.href="/mail/list";
+		})
+	
+})//按下儲存草稿END
 
 //onload
 $(function(){
