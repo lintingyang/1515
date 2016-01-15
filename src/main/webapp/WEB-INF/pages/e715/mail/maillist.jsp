@@ -117,7 +117,7 @@
 $(".importentkbox").click(function(){
 	$(this).html("<span class='glyphicon glyphicon-star'>");
 })
-//onload
+// onload
 // $(function(){
 // 	var formData=${user.id}
 //     	$.ajax({
