@@ -109,7 +109,7 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal" id="submitmail">送出</button>
-	        <button type="button" class="btn btn-primary" data-dismiss="modal">儲存為草稿</button>
+	        <button type="button" class="btn btn-primary" data-dismiss="modal" id="savedraft">儲存為草稿</button>
 	      </div>
      </form> <!--  FORM撰寫EMAIL表單END -->
     </div>
@@ -142,7 +142,6 @@ $(function(){
 		type : "post",
 		data : "",
 		success :function(data){
-			console.log(data);
 			$.each(data,function(i){
 				console.log(data[i].userBId.account);
 				var name = $("<small style='color:gray'>("+data[i].userBId.nickname+")</small>")
@@ -189,6 +188,30 @@ $("#submitmail").click(function(){
 		})
 	
 })//按下寄出郵件END
+
+//按下儲存草稿
+$("#savedraft").click(function(){
+	swal({
+			type : "success",
+			title: "儲存草稿",  
+			text: "成功幫您儲存為草稿!",  
+			timer: 1000,   
+			showConfirmButton: false
+		},function(){
+			$.ajax({
+				dataType: "json",
+				type: "get",
+				url: "/mail/savedraft",
+				data: {
+					senderId : ${user.id},
+					receiverAccount : $("#receiver").val(),
+					title : $("#title").val(),
+					article : $("#article").val()},
+			});
+			location.href="/mail/list";
+		})
+	
+})//按下儲存草稿END
 
 
 
