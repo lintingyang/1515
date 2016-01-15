@@ -43,7 +43,7 @@ tr.mailrow:hover td{
 	
 	<div><!-- 全選與刪除欄位 -->
 		<div class="checkbox col-md-1" >
-    		<label><input type="checkbox"> 全部</label>
+    		<label><input type="checkbox" id="checkAll">&nbsp;全選</label>
 		</div>
 		<div class ="col-md-1 deletebtn"><span class="glyphicon glyphicon-trash"></span></div>
 	</div><!-- 全選與刪除欄位END -->
@@ -239,7 +239,7 @@ function showmail(data){
 	$.each(data, function(){
 		var sendTime = this.sendTime.year + "/" + this.sendTime.monthValue + "/" + this.sendTime.dayOfMonth;
 		var mailRow = "<tr class='mailrow'>" +
-						"<td class='mailcheckbox'><input type='checkbox'></td>" + 
+						"<td><input type='checkbox' class='mailcheckbox'></td>" + 
 						"<td class='importantbox'><span class='glyphicon glyphicon-star-empty'></span></td>" +
 						"<td>" + this.sender.nickname + "(" + this.sender.account + ")</td>" + 
 						"<td class='mailBody' id='mailno" + index + "' style='cursor:pointer'>" + this.title + "//" + this.article + "</td>" +
@@ -269,7 +269,10 @@ function showmail(data){
 								"<div style='font-size: 12px; float: right;'>" + mailSendTime + "</div>");
 		$("#mail-body").append("<p>"+mailArticle+"</p>");
 	});
-}
+	$("#checkAll").change(function(){
+	    $("input:checkbox").prop('checked', $(this).prop("checked"));
+	});
+}// end of showmail
 $("#draftbox").click(
 	function(){
 		var formData={"id":${user.id}};
