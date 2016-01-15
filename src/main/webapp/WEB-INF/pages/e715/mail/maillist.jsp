@@ -87,7 +87,13 @@
 			  
 			  <div class="form-group">
 			    <label for="reciver">收件人</label>
-			    <input type="text" class="form-control" id="receiver" name="receiver" placeholder="收件人帳號">
+			    <input type="text" class="form-control drop_down_btn" id="receiver" name="receiver" placeholder="收件人帳號">
+				<div class="input_select_block" style="z-index:3;position: fixed;width:100%;">  
+				        <ul class="dropdownfriendlist" >  
+
+
+				        </ul>  
+				    </div>  
 			  </div>
 			  
 			  <div class="form-group">
@@ -111,15 +117,30 @@
   </div>
 </div>
 <!-- 編輯郵件畫面END -->
-
+  
 <script>
+$(".drop_down_btn").click(function(e){  //好友的下拉選單 
+    e.stopPropagation();   
+    $dropList=$(".input_select_block ul");   
+    if($dropList.is(":visible")){   
+        $dropList.hide();   
+    }else{   
+        $dropList.show();   
+    };   
+});   
+ 
+$(".input_select_block ul li").click(function(e){   
+    e.stopPropagation();   
+    $("#receiver").val($(this).text());   
+    $(".input_select_block ul").hide();   
+}); 
+$(".input_select_block").
+//好友的下拉選單 END
+
 $(".importentkbox").click(function(){
 	$(this).html("<span class='glyphicon glyphicon-star'>");//改變星星樣式
 })
-// $("#saveaslog").click(function(){
-// 	alert($(this).prop("checked"));
-	
-// })
+
 $("#submitmail").click(function(){//按下寄出郵件
 	$.ajax({
 		dataType: "json",
@@ -155,6 +176,8 @@ $("#submitmail").click(function(){//按下寄出郵件
 // })
 
 </script>
+
+
 
 
 <c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>
