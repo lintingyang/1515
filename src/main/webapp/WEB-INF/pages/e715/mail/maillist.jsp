@@ -38,7 +38,7 @@ tr.mailrow:hover td{
 		<br>
 		<ul class="nav nav-pills maillist">
 		  <li role="presentation" class="active"><button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#editemail" style="width:100px;"><span >撰寫</span></button></li>
-		  <li role="presentation"><a href="#">收件匣</a></li>
+		  <li role="presentation" id="allmailbox"><a href="#">收件匣</a></li>
 		  <li role="presentation"><a href="#">重要信件</a></li>
 		  <li role="presentation" id="draftbox"><a href="#" >草稿</a></li>
 		  <li role="presentation"><a href="#">寄件備份</a></li>
@@ -49,7 +49,7 @@ tr.mailrow:hover td{
 	
 	<div><!-- 全選與刪除欄位 -->
 		<div class="checkbox col-md-1" >
-    		<label><input type="checkbox"> 全部</label>
+    		<label><input type="checkbox" id="checkAll">&nbsp;全選</label>
 		</div>
 		<div class ="col-md-1 deletebtn"><span class="glyphicon glyphicon-trash"></span></div>
 	</div><!-- 全選與刪除欄位END -->
@@ -128,6 +128,13 @@ tr.mailrow:hover td{
 <!-- 編輯郵件畫面END -->
   
 <script>
+//onload
+$(function(){
+	mailboxlist();//顯示所有郵件
+})//end of onload
+$("#allmailbox").click(function(){
+	mailboxlist();//顯示所有郵件
+})
 //好友的下拉選單 
 $(".drop_down_btn").click(function(e){  
     e.stopPropagation();   
@@ -221,8 +228,8 @@ $("#savedraft").click(function(){
 	
 })//按下儲存草稿END
 
-//onload
-$(function(){
+//顯示收件匣
+function mailboxlist(){
 	
 	var formData={"id":${user.id}};
     	$.ajax({
@@ -235,13 +242,12 @@ $(function(){
     		},
     	dataType: "json",
    	 	contentType : "application/json"
-    	});
+    });
    
-})//end of onload
-
-//顯示收件匣
+}
 function showmail(data){
 	var index = 0;
+	$("#mailtable").html("");
 	$.each(data, function(){
 		var sendTime = this.sendTime.year + "/" + this.sendTime.monthValue + "/" + this.sendTime.dayOfMonth;
 		var mailRow = "<tr class='mailrow'>" +
@@ -275,7 +281,13 @@ function showmail(data){
 								"<div style='font-size: 12px; float: right;'>" + mailSendTime + "</div>");
 		$("#mail-body").append("<p>"+mailArticle+"</p>");
 	});
+
 }
+
+$("#checkAll").change(function(){
+	$("input:checkbox").prop('checked', $(this).prop("checked"));
+});
+// end of showmail
 //按下草稿列表
 $("#draftbox").click(
 	function(){
