@@ -78,36 +78,35 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"> </span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="editmail">編輯郵件</h4>
       </div>
-      <div class="modal-body">
-		<form role="form">
-		
-		  <div class="form-group">
-		  	<label for="exampleInputEmail1">主旨</label>
-		    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="輸入主旨">
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="reciver">收件人</label>
-		    <input type="密碼" class="form-control" id="reciver" placeholder="收件人帳號">
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="exampleInputFile">內文</label>
-		    <textarea  class= "form-control" rows="10" cols=""></textarea>
-		    <p class="help-block">請輸入1000字以內的內文</p>
-		  </div>
-		  
-		  <div class="checkbox">
-		    <label>
-		      <input type="checkbox" checked="checked"> 儲存寄件備份
-		    </label>
-		  </div>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-default" data-dismiss="modal">送出</button>
-        <button type="button" class="btn btn-primary">儲存為草稿</button>
-        </form>
-      </div>
+      <form role="form"><!--  FORM撰寫EMAIL表單 -->
+	      <div class="modal-body">
+			  <div class="form-group">
+			  	<label for="exampleInputEmail1">主旨</label>
+			    <input type="email" class="form-control" id="title" name="title" placeholder="輸入主旨">
+			  </div>
+			  
+			  <div class="form-group">
+			    <label for="reciver">收件人</label>
+			    <input type="text" class="form-control" id="receiver" name="receiver" placeholder="收件人帳號">
+			  </div>
+			  
+			  <div class="form-group">
+			    <label for="exampleInputFile">內文</label>
+			    <textarea  class= "form-control" rows="10" cols="" name="article" id="article"></textarea>
+			    <p class="help-block">請輸入1000字以內的內文</p>
+			  </div>
+			  
+			  <div class="checkbox">
+			    <label>
+			      <input type="checkbox" checked="checked" name="saveaslog" id="saveaslog"> 儲存寄件備份
+			    </label>
+			  </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal" id="submitmail">送出</button>
+	        <button type="button" class="btn btn-primary" data-dismiss="modal">儲存為草稿</button>
+	      </div>
+     </form> <!--  FORM撰寫EMAIL表單END -->
     </div>
   </div>
 </div>
@@ -115,8 +114,31 @@
 
 <script>
 $(".importentkbox").click(function(){
-	$(this).html("<span class='glyphicon glyphicon-star'>");
+	$(this).html("<span class='glyphicon glyphicon-star'>");//改變星星樣式
 })
+
+$("#submitmail").click(function(){//按下寄出郵件
+
+	$.ajax({
+		dataType: "json",
+		contentType : "application/json",
+		type: "get",
+		url: "/mail/newmail",
+		data: {
+			senderId : ${user.id},
+			receiverAccount : $("#receiver").val(),
+			title : $("#title").val(),
+			article : $("#article").val(),
+			saveAsLog :$("#saveaslog").attr("checked")},
+		success: function(data){
+			console.log(data);
+		}
+	});
+
+})//按下寄出郵件END
+
+
+
 //onload
 // $(function(){
 // 	var formData=${user.id}
