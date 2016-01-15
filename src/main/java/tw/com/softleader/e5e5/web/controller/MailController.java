@@ -27,7 +27,7 @@ public class MailController {
 			@RequestParam("title")String title,@RequestParam("article")String article,@RequestParam("saveAsLog")String saveAsLog){
 		mailService.sendNewMail(senderId, receiverAccount, title, article, saveAsLog);
 		log.error(saveAsLog);
-		return "redirect:/e715/mail/list";
+		return "redirect:/mail/list";
 	}
 	
 }

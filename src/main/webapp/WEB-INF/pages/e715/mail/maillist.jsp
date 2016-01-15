@@ -166,19 +166,28 @@ $(".importentkbox").click(function(){
 
 //按下寄出郵件
 $("#submitmail").click(function(){
-	$.ajax({
-		dataType: "json",
-		type: "get",
-		url: "/mail/newmail",
-		data: {
-			senderId : ${user.id},
-			receiverAccount : $("#receiver").val(),
-			title : $("#title").val(),
-			article : $("#article").val(),
-			saveAsLog :$("#saveaslog").prop("checked")},
-			
-	});
-	swal("郵件寄出", "已經幫您寄出郵件!", "success")
+	swal({
+			type : "success",
+			title: "郵件寄出",  
+			text: "成功幫您寄出郵件!",  
+			timer: 1000,   
+			showConfirmButton: false
+		},function(){
+			$.ajax({
+				dataType: "json",
+				type: "get",
+				url: "/mail/newmail",
+				data: {
+					senderId : ${user.id},
+					receiverAccount : $("#receiver").val(),
+					title : $("#title").val(),
+					article : $("#article").val(),
+					saveAsLog :$("#saveaslog").prop("checked")},
+					
+			});
+			location.href="/mail/list";
+		})
+	
 })//按下寄出郵件END
 
 
