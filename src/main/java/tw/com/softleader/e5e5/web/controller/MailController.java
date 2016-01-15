@@ -4,13 +4,16 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import tw.com.softleader.e5e5.entity.LogMail;
 import tw.com.softleader.e5e5.entity.Mail;
+import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 import tw.com.softleader.e5e5.service.LogMailService;
 import tw.com.softleader.e5e5.service.MailService;
 
@@ -42,6 +45,11 @@ public class MailController {
 		return draft;
 	}
 	
+	@RequestMapping("/important")
+	@ResponseStatus(value = HttpStatus.OK)
+	public void updateImportant(@RequestParam("id")int id, @RequestParam("isImportant")String isImportant){
+		mailService.updateIsImportant(id, isImportant);
+	}
 	
 	@RequestMapping("/newmail")
 	public String newMail(@RequestParam("senderId")int senderId,@RequestParam("receiverAccount")String receiverAccount,
@@ -56,5 +64,6 @@ public class MailController {
 		logMailService.saveDraft(senderId, receiverAccount, title, article);
 		return "redirect:/mail/list";
 	}
+	
 	
 }

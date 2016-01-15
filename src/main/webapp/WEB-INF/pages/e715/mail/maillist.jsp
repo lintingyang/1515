@@ -160,7 +160,7 @@ $(function(){
 		data : "",
 		success :function(data){
 			$.each(data,function(i){
-				console.log(data[i].userBId.account);
+// 				console.log(data[i].userBId.account);
 				var name = $("<small style='color:gray'>("+data[i].userBId.nickname+")</small>")
 				var friend = $("<li></li>").text(data[i].userBId.account).addClass("friendli")
 				.attr("name",data[i].userBId.account).append(name);
@@ -247,17 +247,18 @@ function mailboxlist(){
 }
 function showmail(data){
 	var index = 0;
+	var star = null;
+	var light = "<span class='glyphicon glyphicon-star' id='starno" + index + "'></span>";
+	var empty = "<span class='glyphicon glyphicon-star-empty' id='starno" + index + "'></span>"
 	$("#mailtable").html("");
 	$.each(data, function(){
-		var star = null;
-		console.log(this.isImportant);
+// 		console.log(this.isImportant);
 		if (this.isImportant == "TRUE"){
-			star = "<span class='glyphicon glyphicon-star'></span>";
+			star = light;
 		} else {
-			star = "<span class='glyphicon glyphicon-star-empty'></span>";
+			star = empty;
 		}
 		var sendTime = this.sendTime.year + "/" + this.sendTime.monthValue + "/" + this.sendTime.dayOfMonth;
-
 		var mailRow = "<tr class='mailrow'>" +
 						"<td class='mailcheckbox'><input type='checkbox'></td>" + 
 						"<td class='importantbox'>" + star + "</td>" +
@@ -268,14 +269,27 @@ function showmail(data){
 		$("#mailtable").append(mailRow);
 		index ++;
 	})//end of .each
-	//改變星星樣式
-	$(".importantbox").on("click", function(){
-		$(this).html("<span class='glyphicon glyphicon-star'>");
+	//標記重要信件
+	$(".glyphicon-star, .glyphicon-star-empty").on("click", function(){
+		$(this).toggleClass("glyphicon-star glyphicon-star-empty");
+		var isImportant = $(this).hasClass("glyphicon-star").toString();
+		var starIndex = $(this).attr("id").substring(6);
+		var starData = {"id":data[starIndex].id, "isImportant": isImportant};
+// 		console.log(starData);
+		$.ajax({
+	    	dataType: "json",
+// 	   	 	contentType : "application/json",
+       		type: "GET",
+       		url: "/mail/important",
+      		data: starData,
+       		success: function(){
+	       		console.log("success");
+    		},
+    	});
 	})
+	//顯示信件內文
 	$(".mailBody").on("click", function(){
 		var mailIndex = $(this).attr("id").substring(6);
-//   	console.log(mailIndex);
-// 		console.log(data);
 		var mailTitle = data[mailIndex].title;
 		var mailSender = data[mailIndex].sender.nickname + "&nbsp;(" + data[mailIndex].sender.account + ")";
 		var mailSendTime = data[mailIndex].sendTime.year + "年" + data[mailIndex].sendTime.monthValue + "月" + data[mailIndex].sendTime.dayOfMonth + "日" +
@@ -289,12 +303,18 @@ function showmail(data){
 								"<div style='font-size: 12px; float: right;'>" + mailSendTime + "</div>");
 		$("#mail-body").append("<p>"+mailArticle+"</p>");
 	});
-	//全選
+	//checkbox全選
 	$("#checkAll").change(function(){
 	    $("input:checkbox").prop('checked', $(this).prop("checked"));
 	});
 }// end of showmail
 
+
+
+
+
+
+//	=======================	草稿區塊===============================
 $("#draftbox").click(
 	function(){
 		var formData={"id":${user.id}};
@@ -305,7 +325,7 @@ $("#draftbox").click(
 	       		url: "/mail/getdraft",
 	      		data: formData,
 	       		success: function(data){
-	       			console.log(data);
+// 	       			console.log(data);
  	       			showdraft(data);
 	    		},
 
@@ -319,7 +339,6 @@ function showdraft(data){
 		var sendTime = this.draftTime.year + "/" + this.draftTime.monthValue + "/" + this.draftTime.dayOfMonth;
 		var draftRow = "<tr class='mailrow' id='mailno" + index + "'>" +
 			"<td class='mailcheckbox'><input type='checkbox'></td>" + 
-			"<td class='importantbox'><span class='glyphicon glyphicon-star-empty'></span></td>" +
 			"<td class='namebox'>" + this.sender.nickname + "(" + this.sender.account + ")</td>" + 
 			"<td class='titlebox'>" + this.title + "//" + this.article + "</td>" +
 			"<td style='text-align: right;'>" + sendTime + "</td>" +
@@ -327,10 +346,7 @@ function showdraft(data){
 		$("#mailtable").append(draftRow);
 		index ++;
 	})//end of .each
-	//改變星星樣式
-	$(".importantbox").on("click", function(){
-		$(this).html("<span class='glyphicon glyphicon-star'>");
-	})
+
 // 	$(".mailrow").on("click", function(){
 // 		var mailIndex = $(this).attr("id").substring(6);
 // //   	console.log(mailIndex);
