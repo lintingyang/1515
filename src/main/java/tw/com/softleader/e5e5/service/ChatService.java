@@ -59,12 +59,28 @@ public class ChatService extends OurService<Chat> {
 		return result;
 	}
 	@Transactional
-	public Chat postChat(int userId, String messages,String picture) {
+	public Chat postChat(int userId, String messages,Character showUserInfo) {
+		Chat result = null;
+		Chat chat = new Chat();
+		User user = (User) userDao.findOne(userId);
+
+		chat.setMessages(messages);
+		chat.setShowUserInfo(showUserInfo);
+		chat.setUser(user);
+		chat.setSendTime(LocalDateTime.now());
+		result = chatDao.save(chat);
+
+		return result;
+	}
+	
+	@Transactional
+	public Chat postChat(int userId, String messages,String picture,Character showUserInfo) {
 		Chat result = null;
 		Chat chat = new Chat();
 		User user = (User) userDao.findOne(userId);
 		
 		chat.setMessages(messages);
+		chat.setShowUserInfo(showUserInfo);
 		chat.setUser(user);
 		chat.setPicture(picture);
 		chat.setSendTime(LocalDateTime.now());
