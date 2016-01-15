@@ -120,7 +120,7 @@ $(function(){
 	});
 	getMessages();
 	$("[data-toggle=popover]").popover();
-//  	setInterval(freshPage, 1000);
+ 	setInterval(freshPage, 1000);
 });
 </script>
 
