@@ -31,7 +31,7 @@
 		  <li role="presentation" class="active"><button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#editemail" style="width:100px;"><span >撰寫</span></button></li>
 		  <li role="presentation"><a href="#">收件匣</a></li>
 		  <li role="presentation"><a href="#">重要信件</a></li>
-		  <li role="presentation"><a href="#">草稿</a></li>
+		  <li role="presentation" id="draftbox"><a href="#" >草稿</a></li>
 		  <li role="presentation"><a href="#">寄件備份</a></li>
 		  <li role="presentation"><a href="#">垃圾桶</a></li>
 		</ul>
@@ -92,11 +92,7 @@
 			    <input type="text" class="form-control drop_down_btn" id="receiver" name="receiver" placeholder="收件人帳號">
 				<div class="input_select_block" style="z-index:3;position: fixed;width:100%;">  
 				        <ul class="dropdownfriendlist" >  
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/lintingyang/1515.git
-				        </ul>  
+						 </ul>  
 				    </div>  
 			  </div>
 			  
@@ -256,7 +252,45 @@ function showmail(data){
 // 		$(".modaltitle")
 	});
 }
+$("#draftbox").click(
+	function(){
+		var formData={"id":${user.id}};
+	    	$.ajax({
+		    	dataType: "json",
+		   	 	contentType : "application/json",
+	       		type: "GET",
+	       		url: "/mail/getdraft",
+	      		data: formData,
+	       		success: function(data){
+	       			console.log(data);
+// 	       			showdraft(data);
+	    		},
 
+	    	});
+	}
+)
+// function showdraft(data){
+// 	$.each(data, function(){
+// 		var mailNo = this.id;
+// 		var sendTime = this.sendTime.year + "/" + this.sendTime.monthValue + "/" + this.sendTime.dayOfMonth;
+// 		var mailRow = "<tr class='mailrow' id='mailno" + mailNo + "'>" +
+// 						"<td class='mailcheckbox'><input type='checkbox'></td>" + 
+// 						"<td class='importantbox'><span class='glyphicon glyphicon-star-empty'></span></td>" +
+// 						"<td>" + this.sender.nickname + "(" + this.sender.account + ")</td>" + 
+// 						"<td>" + this.title + "//" + this.article + "</td>" +
+// 						"<td style='text-align: right;'>" + sendTime + "</td>" +
+// 						"</tr>";
+// 		$("#mailtable").append(mailRow);
+// 	})//end of .each
+// 	//改變星星樣式
+// 	$(".importantbox").on("click", function(){
+// 		$(this).html("<span class='glyphicon glyphicon-star'>");
+// 	})
+// 	$(".mailrow").on("click", function(){
+// // 		var mailId = $(this).attr("id").substring(6);
+// 		$("#readmail").modal();
+// // 		$(".modaltitle")
+// 	});
 
 </script>
 
