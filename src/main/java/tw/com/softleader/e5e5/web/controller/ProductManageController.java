@@ -1,4 +1,4 @@
-package tw.com.softleader.e5e5.controller;
+package tw.com.softleader.e5e5.web.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,7 @@ public class ProductManageController {
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String listPage() {
-		return "/product/proManList";
+		return "/e715/back/proManList";
 	}
 
 
@@ -46,7 +46,7 @@ public class ProductManageController {
 		Product oneProduct = productService.getOne(id);
 		model.addAttribute("entity", oneProduct);
 
-		return "/product/proManEdit";
+		return "/e715/back/proManEdit";
 	}
 
 	@RequestMapping(method = RequestMethod.GET)

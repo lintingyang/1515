@@ -153,6 +153,32 @@ div.holder{
 	
 }
 
+.dropdownfriendlist{
+	display:none;
+	list-style: none;
+	background-color: white;
+	border:1px solid gray;
+	border-collapse:collapse;
+	width:95%;
+	padding:0px 10px;
+
+	
+}
+.dropdownfriendlist >li{
+	padding:5px 0;
+	margin:0;
+	text-align: left;
+}
+.dropdownfriendlist >li:hover{
+		background-color: #DDDDDD;
+
+
+}
+
 *{
 	font-family: Microsoft JhengHei;
+}
+
+body{
+	background-image: url("/resources/background/fabric_of_squares_gray.png");
 }

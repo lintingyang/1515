@@ -48,12 +48,12 @@
 						<div class="col-xs-6 col-md-3"></div>
 						<div class="col-xs-6 col-md-6">
 							<input type="text" class="form-control" id="schoolEmail" name="schoolEmail"
-								placeholder="學校電子信箱或電話或備用信箱"><span id="notFindSchoolEmail" style="color:red;">${checkError.nullEmail}</span>
+								placeholder="學校電子信箱或電話或備用信箱"><span id="notFindSchoolEmail" style="color:red;"></span>
 						</div>
 						<div class="col-xs-6 col-md-3"></div>
 					</div>
 				</div>
-				<div id="btnCenter">
+				<div id="btnCenter" class="sendSchoolEmailbutton">
 					<button type="button" class="btn btn-default" id="btnCheck">
 						送出</button>
 				</div>
@@ -97,8 +97,10 @@
 
 <script>
 $(function() {
-	$('#btnCheck').on('click',function(){
-		alert('aaaaaa');
+	$('#btnCheck').bind('click','#btnCheck',function(){
+		console.log("hahahahahaha")
+		$('.sendSchoolEmailbutton').hide();
+		$("#notFindSchoolEmail").html('');
 		var schoolemail = {"userSchoolEmail":$("#schoolEmail").val()};
 		console.log(schoolemail);
 		$.ajax({
@@ -109,19 +111,19 @@ $(function() {
 			data : schoolemail,
 			success : function(data) {
 				console.log(data);
-				if(data){
+				if(data == "true"){
 		$("#notFindSchoolEmail").empty();
 		$('#checkFont').empty();
 		$('#checkText').empty();
 		$('.nextStep').empty();
-//  		var errorMsg =$('<span></span>').text('${checkError.checkFault}${checkError.numberFault}').css('color':'red');
+		var errorMsg =$('<span></span>').text('${checkError.checkFault}${checkError.numberFault}');
 		$('#checkFont').append('<p class="alignCenter warmFontColor">輸入驗證碼</p>');
 		$('#checkText').append('<input type="text" class="form-control" name="verificationCode" placeholder="輸入驗證碼" maxlength="4">').append(errorMsg);
 		
 		$('.nextStep').append('<button type="submit" class="btn btn-default" id="findPasswordNextStep">下一步</button>');
 		}else{
-			
 			$("#notFindSchoolEmail").html('');
+			$('.sendSchoolEmailbutton').show();
 			$("#notFindSchoolEmail").text('學校信箱還未申請過')
 		}
 				//success的下括號
@@ -133,6 +135,11 @@ $(function() {
 
 	//onload
 	});
+
+
+
+	
+	
 </script>
 
 

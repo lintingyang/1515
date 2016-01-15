@@ -118,7 +118,8 @@ public class memberController {
 	}
 
 	@RequestMapping(value = "/findPassword", method = RequestMethod.GET)
-	public String findPasswordPage() {
+	public String findPasswordPage(HttpSession session) {
+		session.removeAttribute("schoolEmail");
 		return "/e715/user/findPassWord1";
 	}
 
@@ -128,18 +129,16 @@ public class memberController {
 	public boolean findPasswordStep1(@RequestParam("userSchoolEmail") String schoolEmail, HttpSession session) {
 		Map<String, String> errors = new HashMap<String, String>();
 		session.setAttribute("checkError", errors);
+		session.removeAttribute("schoolEmail");
 		errors.clear();
 		if(schoolEmail!=null){
 		boolean findUser = userService.findBySchoolEmail(schoolEmail);
-		System.out.println("---------------------------------"+schoolEmail);
-		System.out.println("---------------------------------"+findUser);
 		if(findUser){
+			session.setAttribute("schoolEmail", schoolEmail);
 			userService.sendVerificationCode(schoolEmail);
 		}
 		return findUser;
 		}else{
-			
-			errors.put("nullEmail", "信箱不得為空");
 			return false;
 		}
 		
@@ -148,7 +147,7 @@ public class memberController {
 	
 	@RequestMapping(value = "/findPasswordStep2")
 	public String findPasswordStep2(@RequestParam("schoolEmail") String schoolEmail , 
-			@RequestParam("verificationCode") String stVerificationCode, HttpSession session){
+		@RequestParam("verificationCode") String stVerificationCode, HttpSession session){
 		Map<String, String> errors = new HashMap<String, String>();
 		session.setAttribute("checkError", errors);
 		errors.clear();
@@ -157,15 +156,14 @@ public class memberController {
 			verificationCode = Integer.parseInt(stVerificationCode);
 			boolean check = userService.checkVerificationCode(schoolEmail, verificationCode);
 			if(check){
-				session.setAttribute("schoolEmail", schoolEmail);
 				return "/e715/user/findPassWord2";
 			}else{
 				errors.put("checkFault", "驗證碼輸入錯誤，請重新輸入");
-			return "/e715/user/findPassWord1";
+			return "/e715/user/findPassWord1ver";
 			}
 		} catch (NumberFormatException e) {
 			errors.put("numberFault", "驗證碼請輸入數字");
-			return "/e715/user/findPassWord1";
+			return "/e715/user/findPassWord1ver";
 		}
 	}
 	
@@ -183,6 +181,7 @@ public class memberController {
 			User user = userService.loginBySchoolEmail(schoolEmail);
 			user.setPassword(newPassword);
 			userService.update(user);
+			errors.clear();
 			session.removeAttribute("schoolEmail");
 		return "/e715/user/login";
 		}else{

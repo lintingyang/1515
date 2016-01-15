@@ -17,6 +17,7 @@ $(function(){
 		var formData={"id":userId,
 				"messages":$("#messages").val(),
 				"showUserInfo":showUserInfo};
+		$("#messages").val("")
         $.ajax({
            type: "GET",
            url: "http://localhost:8080/chatroom/insertM",
@@ -36,6 +37,19 @@ $(function(){
 	           data: "",
 	           success: function(data){
 	        	   display(data,"appand");
+	           },
+	           dataType: "json",
+	           contentType : "application/json"
+	         });
+		
+	}
+	function freshPage(){
+		$.ajax({
+	           type: "GET",
+	           url: "http://localhost:8080/chatroom/list",
+	           data: "",
+	           success: function(data){
+	        	   display(data,"prepend");
 	           },
 	           dataType: "json",
 	           contentType : "application/json"
@@ -65,7 +79,11 @@ $(function(){
       			   var $txt = $("<p></p>");
       			   $txt.text($name+"的圖片");
       			   $pic.attr('src', data[i].picture);
-      			   $("#pic1").append($txt).append($pic);
+      			 	if(type=="appand"){
+           			   $("#pic1").append($txt).append($pic);
+        		   }else if(type=="prepend"){
+          			   $("#pic1").prepend($txt).prepend($pic);
+        		   }
       		   }
       		   $tr1.attr('id', data[i].id);
       		   $td1.text(data[i].id);
@@ -102,7 +120,7 @@ $(function(){
 	});
 	getMessages();
 	$("[data-toggle=popover]").popover();
- 	setInterval(getMessages, 1000);
+ 	setInterval(freshPage, 1000);
 });
 </script>
 
