@@ -108,7 +108,7 @@ public class headerController {
 			@RequestParam("userVerificationCode") String userVerificationCode, HttpSession session) {
 		Map<String, String> errors = new HashMap<String, String>();
 		session.setAttribute("checkError", errors);
-
+		errors.clear();
 		Integer verificationCode = null;
 		try {
 			verificationCode = Integer.parseInt(userVerificationCode);

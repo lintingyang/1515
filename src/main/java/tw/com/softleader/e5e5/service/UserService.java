@@ -62,6 +62,18 @@ public class UserService extends OurService<User> {
 		List<User> allUser = userDao.findAll();
 		return allUser;
 	}
+	
+	
+	
+	public boolean findBySchoolEmail(String schoolEmail){
+		boolean result = false;
+		User user =userDao.findBySchoolEmail(schoolEmail);
+		//確定學校信箱是否有申請過
+		if(user!=null){
+			result = true;
+		}
+		return result;
+	}
 
 	//新增school-email
 	@Transactional

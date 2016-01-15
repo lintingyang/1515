@@ -2,7 +2,9 @@ package tw.com.softleader.e5e5.web.controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -73,6 +75,8 @@ public class memberController {
 		User user = userService.getOne(id);
 //		log.error("==============================="+myself.getId());
 //		log.error("==============================="+user.getId());
+		
+
 		boolean relation = focusUserListService.findRelation(myself.getId(), user.getId());
 		int good = 0;
 		int bad = 0;
@@ -114,10 +118,44 @@ public class memberController {
 	}
 
 	@RequestMapping(value = "/findPassword", method = RequestMethod.GET)
-	public String findPassword() {
+	public String findPasswordPage() {
 		return "/e715/user/findPassWord1";
 	}
 
+	
+	@RequestMapping(value = "/findPasswordStep1", method = RequestMethod.GET)
+	@ResponseBody
+	public boolean findPasswordStep1(@RequestParam("userSchoolEmail") String schoolEmail) {
+		boolean findUser = userService.findBySchoolEmail(schoolEmail);
+		if(findUser){
+			userService.sendVerificationCode(schoolEmail);
+		}
+		return findUser;
+	}
+	@RequestMapping(value = "/findPasswordStep2")
+	public String findPasswordStep2(@RequestParam("schoolEmail") String schoolEmail , 
+			@RequestParam("verificationCode") String stVerificationCode, HttpSession session){
+		Map<String, String> errors = new HashMap<String, String>();
+		session.setAttribute("checkError", errors);
+		errors.clear();
+		Integer verificationCode = null;
+		try {
+			verificationCode = Integer.parseInt(stVerificationCode);
+			boolean check = userService.checkVerificationCode(schoolEmail, verificationCode);
+			if(check){
+				return "/e715/user/findPassWord2";
+			}else{
+				errors.put("checkFault", "驗證碼輸入錯誤，請重新輸入");
+			return "/e715/user/findPassWord1";
+			}
+		} catch (NumberFormatException e) {
+			errors.put("numberFault", "驗證碼請輸入數字");
+			return "/e715/user/findPassWord1";
+		}
+		
+		
+	}
+	
 	@RequestMapping(value = "/modifyFileAsk", method = RequestMethod.GET)
 	public String modifyFileAsk(HttpSession session) {
 		User user = (User) session.getAttribute("user");
