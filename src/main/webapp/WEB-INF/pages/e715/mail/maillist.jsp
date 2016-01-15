@@ -4,6 +4,12 @@
 <c:import url="/WEB-INF/pages/e715/layout/header.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/meta.jsp" />
 <style>
+.namebox{
+	width:136px;
+}
+.titlebox{
+	width:834px;
+}
 .maillist >li{
 	width:16%;
 	text-align: center;
@@ -238,8 +244,8 @@ function showmail(data){
 		var mailRow = "<tr class='mailrow' id='mailno" + index + "'>" +
 						"<td class='mailcheckbox'><input type='checkbox'></td>" + 
 						"<td class='importantbox'><span class='glyphicon glyphicon-star-empty'></span></td>" +
-						"<td>" + this.sender.nickname + "(" + this.sender.account + ")</td>" + 
-						"<td>" + this.title + "//" + this.article + "</td>" +
+						"<td class='namebox'>" + this.sender.nickname + "(" + this.sender.account + ")</td>" + 
+						"<td class='titlebox'>" + this.title + "//" + this.article + "</td>" +
 						"<td style='text-align: right;'>" + sendTime + "</td>" +
 						"</tr>";
 		$("#mailtable").append(mailRow);
@@ -267,6 +273,7 @@ function showmail(data){
 		$("#mail-body").append("<p>"+mailArticle+"</p>");
 	});
 }
+//按下草稿列表
 $("#draftbox").click(
 	function(){
 		var formData={"id":${user.id}};
@@ -278,35 +285,50 @@ $("#draftbox").click(
 	      		data: formData,
 	       		success: function(data){
 	       			console.log(data);
-// 	       			showdraft(data);
+ 	       			showdraft(data);
 	    		},
 
 	    	});
 	}
 )
-// function showdraft(data){
-// 	$.each(data, function(){
-// 		var mailNo = this.id;
-// 		var sendTime = this.sendTime.year + "/" + this.sendTime.monthValue + "/" + this.sendTime.dayOfMonth;
-// 		var mailRow = "<tr class='mailrow' id='mailno" + mailNo + "'>" +
-// 						"<td class='mailcheckbox'><input type='checkbox'></td>" + 
-// 						"<td class='importantbox'><span class='glyphicon glyphicon-star-empty'></span></td>" +
-// 						"<td>" + this.sender.nickname + "(" + this.sender.account + ")</td>" + 
-// 						"<td>" + this.title + "//" + this.article + "</td>" +
-// 						"<td style='text-align: right;'>" + sendTime + "</td>" +
-// 						"</tr>";
-// 		$("#mailtable").append(mailRow);
-// 	})//end of .each
-// 	//改變星星樣式
-// 	$(".importantbox").on("click", function(){
-// 		$(this).html("<span class='glyphicon glyphicon-star'>");
-// 	})
+function showdraft(data){
+	var index = 0;
+	$("#mailtable").html("");
+	$.each(data, function(){
+		var sendTime = this.draftTime.year + "/" + this.draftTime.monthValue + "/" + this.draftTime.dayOfMonth;
+		var draftRow = "<tr class='mailrow' id='mailno" + index + "'>" +
+			"<td class='mailcheckbox'><input type='checkbox'></td>" + 
+			"<td class='importantbox'><span class='glyphicon glyphicon-star-empty'></span></td>" +
+			"<td class='namebox'>" + this.sender.nickname + "(" + this.sender.account + ")</td>" + 
+			"<td class='titlebox'>" + this.title + "//" + this.article + "</td>" +
+			"<td style='text-align: right;'>" + sendTime + "</td>" +
+			"</tr>";
+		$("#mailtable").append(draftRow);
+		index ++;
+	})//end of .each
+	//改變星星樣式
+	$(".importantbox").on("click", function(){
+		$(this).html("<span class='glyphicon glyphicon-star'>");
+	})
 // 	$(".mailrow").on("click", function(){
-// // 		var mailId = $(this).attr("id").substring(6);
+// 		var mailIndex = $(this).attr("id").substring(6);
+// //   	console.log(mailIndex);
+// // 		console.log(data);
+// 		var mailTitle = data[mailIndex].title;
+// 		var mailSender = data[mailIndex].sender.nickname + "&nbsp;(" + data[mailIndex].sender.account + ")";
+// 		var mailSendTime = data[mailIndex].sendTime.year + "年" + data[mailIndex].sendTime.monthValue + "月" + data[mailIndex].sendTime.dayOfMonth + "日" +
+// 							"&nbsp" + data[mailIndex].sendTime.hour + ":" + data[mailIndex].sendTime.minute;
+// 		var mailArticle = data[mailIndex].article;
 // 		$("#readmail").modal();
-// // 		$(".modaltitle")
+// 		$("#mail-title").empty();
+// 		$("#mail-body").empty();
+// 		$("#mail-title").append("<h4>"+mailTitle+"<h4>" + 
+// 								"<div style='font-size: 12px;display: inline-block;'>" + mailSender + "</div>" + 
+// 								"<div style='font-size: 12px; float: right;'>" + mailSendTime + "</div>");
+// 		$("#mail-body").append("<p>"+mailArticle+"</p>");
 // 	});
-
+}
+//按下草稿列表END
 </script>
 
 
