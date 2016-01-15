@@ -10,6 +10,9 @@
 .titlebox{
 	width:834px;
 }
+tr.mailrow:hover td{
+	background: #ccd9ff;
+}
 .maillist >li{
 	width:16%;
 	text-align: center;
@@ -241,11 +244,13 @@ function showmail(data){
 	var index = 0;
 	$.each(data, function(){
 		var sendTime = this.sendTime.year + "/" + this.sendTime.monthValue + "/" + this.sendTime.dayOfMonth;
-		var mailRow = "<tr class='mailrow' id='mailno" + index + "'>" +
+		var mailRow = "<tr class='mailrow'>" +
 						"<td class='mailcheckbox'><input type='checkbox'></td>" + 
 						"<td class='importantbox'><span class='glyphicon glyphicon-star-empty'></span></td>" +
 						"<td class='namebox'>" + this.sender.nickname + "(" + this.sender.account + ")</td>" + 
-						"<td class='titlebox'>" + this.title + "//" + this.article + "</td>" +
+						"<td class='titlebox '>" + this.title + "//" + this.article + "</td>" +
+						"<td>" + this.sender.nickname + "(" + this.sender.account + ")</td>" + 
+						"<td class='mailBody titlebox' id='mailno" + index + "' style='cursor:pointer'>" + this.title + "//" + this.article + "</td>" +
 						"<td style='text-align: right;'>" + sendTime + "</td>" +
 						"</tr>";
 		$("#mailtable").append(mailRow);
@@ -255,7 +260,7 @@ function showmail(data){
 	$(".importantbox").on("click", function(){
 		$(this).html("<span class='glyphicon glyphicon-star'>");
 	})
-	$(".mailrow").on("click", function(){
+	$(".mailBody").on("click", function(){
 		var mailIndex = $(this).attr("id").substring(6);
 //   	console.log(mailIndex);
 // 		console.log(data);
