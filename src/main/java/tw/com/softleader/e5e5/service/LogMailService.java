@@ -1,6 +1,7 @@
 package tw.com.softleader.e5e5.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,16 @@ public class LogMailService {
 	private LogMailDao logMailDao;
 	@Autowired
 	private UserDao userDao;
+	
+	public List<LogMail> getAllDraftBySender(int sender){
+		List<LogMail> draft = logMailDao.findBySenderAndIsDraftOrderByDraftTimeDesc(userDao.getOne(sender), TrueFalse.TRUE);
+		return draft;
+	}
+	
+	public List<LogMail> getAllBackBySender(int sender){
+		List<LogMail> draft = logMailDao.findBySenderAndIsBackupOrderBySendTimeDesc(userDao.getOne(sender), TrueFalse.TRUE);
+		return draft;
+	}
 	
 	@Transactional
 	public void saveDraft(int senderId,String receiverAccount,String title,String article){
