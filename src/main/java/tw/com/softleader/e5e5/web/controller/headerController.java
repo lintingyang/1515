@@ -34,7 +34,6 @@ public class headerController {
 	@RequestMapping(value = "/categoryhchange")
 	@ResponseBody
 	public void changecategory(@RequestParam("categoryname") String categoryname, HttpSession session) {
-		log.error("categoryname =========" + categoryname);
 		session.setAttribute("categoryname", categoryname);
 	}
 
@@ -63,7 +62,7 @@ public class headerController {
 			String temp = "就叫你用一鍵登入來開發了還硬要打字";
 			return temp;
 		} else {
-			System.out.println(user);
+
 			session.setAttribute("user", user);
 
 			return "TRUE";
@@ -73,7 +72,6 @@ public class headerController {
 
 	@RequestMapping(value = "/search")
 	public String searchproduct(@RequestParam("namelike") String like, Model model) {
-		log.error(like);
 		model.addAttribute("namelike", like);
 		return "/index";
 	}

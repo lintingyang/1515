@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
-import tw.com.softleader.e5e5.service.LogMailService;
+import tw.com.softleader.e5e5.entity.LogMail;
 import tw.com.softleader.e5e5.entity.Mail;
+import tw.com.softleader.e5e5.service.LogMailService;
 import tw.com.softleader.e5e5.service.MailService;
 
 @Controller
@@ -34,6 +34,12 @@ public class MailController {
 	public List<Mail> getmail(@RequestParam("id")int id){
 		List<Mail> mails = mailService.getAllMailByReceiver(id);
 		return mails;
+	}
+	@RequestMapping("/getdraft")
+	@ResponseBody
+	public List<LogMail> getdraft(@RequestParam("id")int senderId){
+		List<LogMail> draft =logMailService.getAllDraftBySender(senderId);
+		return draft;
 	}
 	
 	
