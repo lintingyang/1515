@@ -102,7 +102,7 @@ $(function(){
 	});
 	getMessages();
 	$("[data-toggle=popover]").popover();
-//  	setInterval(getMessages, 1000);
+ 	setInterval(getMessages, 1000);
 });
 </script>
 

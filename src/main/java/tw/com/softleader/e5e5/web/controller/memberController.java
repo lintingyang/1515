@@ -122,16 +122,30 @@ public class memberController {
 		return "/e715/user/findPassWord1";
 	}
 
-	
-	@RequestMapping(value = "/findPasswordStep1", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/findPasswordStep1")
 	@ResponseBody
-	public boolean findPasswordStep1(@RequestParam("userSchoolEmail") String schoolEmail) {
+	public boolean findPasswordStep1(@RequestParam("userSchoolEmail") String schoolEmail, HttpSession session) {
+		Map<String, String> errors = new HashMap<String, String>();
+		session.setAttribute("checkError", errors);
+		errors.clear();
+		if(schoolEmail!=null){
 		boolean findUser = userService.findBySchoolEmail(schoolEmail);
+		System.out.println("---------------------------------"+schoolEmail);
+		System.out.println("---------------------------------"+findUser);
 		if(findUser){
 			userService.sendVerificationCode(schoolEmail);
 		}
 		return findUser;
+		}else{
+			
+			errors.put("nullEmail", "信箱不得為空");
+			return false;
+		}
+		
 	}
+	
+	
 	@RequestMapping(value = "/findPasswordStep2")
 	public String findPasswordStep2(@RequestParam("schoolEmail") String schoolEmail , 
 			@RequestParam("verificationCode") String stVerificationCode, HttpSession session){
@@ -143,6 +157,7 @@ public class memberController {
 			verificationCode = Integer.parseInt(stVerificationCode);
 			boolean check = userService.checkVerificationCode(schoolEmail, verificationCode);
 			if(check){
+				session.setAttribute("schoolEmail", schoolEmail);
 				return "/e715/user/findPassWord2";
 			}else{
 				errors.put("checkFault", "驗證碼輸入錯誤，請重新輸入");
@@ -152,9 +167,32 @@ public class memberController {
 			errors.put("numberFault", "驗證碼請輸入數字");
 			return "/e715/user/findPassWord1";
 		}
-		
-		
 	}
+	
+	@RequestMapping(value = "/findPasswordStep3")
+	public String findPasswordStep3(
+			@RequestParam("newPassword") String newPassword,
+			@RequestParam("newPasswordCheck") String newPasswordCheck, 
+			HttpSession session
+			){
+		Map<String, String> errors = new HashMap<String, String>();
+		session.setAttribute("checkPasswordError", errors);
+		
+		if(newPassword.equals(newPasswordCheck)){
+			String schoolEmail = (String)session.getAttribute("schoolEmail");
+			User user = userService.loginBySchoolEmail(schoolEmail);
+			user.setPassword(newPassword);
+			userService.update(user);
+			session.removeAttribute("schoolEmail");
+		return "/e715/user/login";
+		}else{
+			errors.put("checkFault", "兩者密碼不相符合，請再輸入一次");
+		return "/e715/user/findPassWord2";
+		}
+	}
+	
+	
+	
 	
 	@RequestMapping(value = "/modifyFileAsk", method = RequestMethod.GET)
 	public String modifyFileAsk(HttpSession session) {
