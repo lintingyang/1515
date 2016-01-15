@@ -31,7 +31,7 @@
 		  <li role="presentation" class="active"><button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#editemail" style="width:100px;"><span >撰寫</span></button></li>
 		  <li role="presentation"><a href="#">收件匣</a></li>
 		  <li role="presentation"><a href="#">重要信件</a></li>
-		  <li role="presentation"><a href="#">草稿</a></li>
+		  <li role="presentation" id="draftbox"><a href="#" >草稿</a></li>
 		  <li role="presentation"><a href="#">寄件備份</a></li>
 		  <li role="presentation"><a href="#">垃圾桶</a></li>
 		</ul>
@@ -47,29 +47,31 @@
 	
 	
 	<div><!-- 	EMAIL列表 -->
-	<table class="table table-hover">
-		<tr class="mailclick">
-			<td class="mailcheckbox"><input type="checkbox"></td><td class="importentkbox"><span class="glyphicon glyphicon-star-empty"></span></td>
-			<td>寄件人</td><td>寄件主旨</td><td style="text-align: right;">收件日期</td>
-		</tr>
-		<tr class="mailclick">
-			<td class="mailcheckbox"><input type="checkbox"></td><td class="importentkbox"><span class="glyphicon glyphicon-star-empty"></span></td>
-			<td>寄件人</td><td>寄件主旨</td><td style="text-align: right;">收件日期</td>
-		</tr>
-		<tr class="mailclick">
-			<td class="mailcheckbox"><input type="checkbox"></td><td class="importentkbox"><span class="glyphicon glyphicon-star-empty"></span></td>
-			<td>寄件人</td><td>寄件主旨</td><td style="text-align: right;">收件日期</td>
-		</tr>
-		<tr class="mailclick">
-			<td class="mailcheckbox"><input type="checkbox"></td><td class="importentkbox"><span class="glyphicon glyphicon-star-empty"></span></td>
-			<td>寄件人</td><td>寄件主旨</td><td style="text-align: right;">收件日期</td>
-		</tr>
-	
-	
+	<table class="table table-hover" id="mailtable">
 	</table>
 	</div><!-- 	EMAIL列表END -->
-	
 </div>
+
+<!-- 顯示郵件內文畫面 -->
+<div class="modal fade" id="readmail" tabindex="-1" role="dialog" aria-labelledby="readmail" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"></span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="mail-title"><!-- 信件title --></h4>
+      </div>
+      <div class="modal-body" id="mail-body">
+        <!-- 寄件人，時間，內文 -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+        <button type="button" class="btn btn-primary">回覆此信件</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 險是郵件內文畫面END -->
+
 <!-- 編輯郵件畫面 -->
 <div class="modal fade" id="editemail" tabindex="-1" role="dialog" aria-labelledby="editmail" aria-hidden="true">
   <div class="modal-dialog">
@@ -87,7 +89,11 @@
 			  
 			  <div class="form-group">
 			    <label for="reciver">收件人</label>
-			    <input type="text" class="form-control" id="receiver" name="receiver" placeholder="收件人帳號">
+			    <input type="text" class="form-control drop_down_btn" id="receiver" name="receiver" placeholder="收件人帳號">
+				<div class="input_select_block" style="z-index:3;position: fixed;width:100%;">  
+				        <ul class="dropdownfriendlist" >  
+						 </ul>  
+				    </div>  
 			  </div>
 			  
 			  <div class="form-group">
@@ -104,57 +110,206 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal" id="submitmail">送出</button>
-	        <button type="button" class="btn btn-primary" data-dismiss="modal">儲存為草稿</button>
+	        <button type="button" class="btn btn-primary" data-dismiss="modal" id="savedraft">儲存為草稿</button>
 	      </div>
      </form> <!--  FORM撰寫EMAIL表單END -->
     </div>
   </div>
 </div>
 <!-- 編輯郵件畫面END -->
-
+  
 <script>
-$(".importentkbox").click(function(){
-	$(this).html("<span class='glyphicon glyphicon-star'>");//改變星星樣式
-})
-// $("#saveaslog").click(function(){
-// 	alert($(this).prop("checked"));
-	
-// })
-$("#submitmail").click(function(){//按下寄出郵件
+//好友的下拉選單 
+$(".drop_down_btn").click(function(e){  
+    e.stopPropagation();   
+    $dropList=$(".input_select_block ul");   
+    if($dropList.is(":visible")){   
+        $dropList.hide();   
+    }else{   
+        $dropList.show();   
+    };   
+});   
+ 
+$(".friendli").click(function(e){   
+    e.stopPropagation();   
+    $("#receiver").val($(this).text());   
+    $(".input_select_block ul").hide();   
+}); 
+$(function(){
 	$.ajax({
-		dataType: "json",
 		contentType : "application/json",
-		type: "get",
-		url: "/mail/newmail",
-		data: {
-			senderId : ${user.id},
-			receiverAccount : $("#receiver").val(),
-			title : $("#title").val(),
-			article : $("#article").val(),
-			saveAsLog :$("#saveaslog").prop("checked")}
-	});
-	swal("郵件寄出", "已經幫您寄出郵件!", "success")
+		url : "/E715Member/userFriendList",
+		dataType : "json",
+		type : "post",
+		data : "",
+		success :function(data){
+			$.each(data,function(i){
+				console.log(data[i].userBId.account);
+				var name = $("<small style='color:gray'>("+data[i].userBId.nickname+")</small>")
+				var friend = $("<li></li>").text(data[i].userBId.account).addClass("friendli")
+				.attr("name",data[i].userBId.account).append(name);
+				$(".dropdownfriendlist").append(friend);
+				$(".friendli[name="+data[i].userBId.account+"]").bind("click",function(e){   
+				    e.stopPropagation();   
+				    $("#receiver").val($(this).attr("name"));   
+				    $(".input_select_block ul").hide();   
+				}); 
+			})
+		}
+	})
+})
+//好友的下拉選單 END
+
+
+
+//按下寄出郵件
+$("#submitmail").click(function(){
+	swal({
+			type : "success",
+			title: "郵件寄出",  
+			text: "成功幫您寄出郵件!",  
+			timer: 1000,   
+			showConfirmButton: false
+		},function(){
+			$.ajax({
+				dataType: "json",
+				type: "get",
+				url: "/mail/newmail",
+				data: {
+					senderId : ${user.id},
+					receiverAccount : $("#receiver").val(),
+					title : $("#title").val(),
+					article : $("#article").val(),
+					saveAsLog :$("#saveaslog").prop("checked")},
+					
+			});
+			location.href="/mail/list";
+		})
+
 })//按下寄出郵件END
 
-
+//按下儲存草稿
+$("#savedraft").click(function(){
+	swal({
+			type : "success",
+			title: "儲存草稿",  
+			text: "成功幫您儲存為草稿!",  
+			timer: 1000,   
+			showConfirmButton: false
+		},function(){
+			$.ajax({
+				dataType: "json",
+				type: "get",
+				url: "/mail/savedraft",
+				data: {
+					senderId : ${user.id},
+					receiverAccount : $("#receiver").val(),
+					title : $("#title").val(),
+					article : $("#article").val()},
+			});
+			location.href="/mail/list";
+		})
+	
+})//按下儲存草稿END
 
 //onload
-// $(function(){
-// 	var formData=${user.id}
-//     	$.ajax({
-//        		type: "GET",
-//        		url: "/mail/getmail",
-//       		data: formData,
-//        		success: function(data){
-//     		console.log(data);
-//     		},
-//     	dataType: "text",
-//    	 	contentType : "application/json"
-//     	});
+$(function(){
+	
+	var formData={"id":${user.id}};
+    	$.ajax({
+       		type: "GET",
+       		url: "/mail/getmail",
+      		data: formData,
+       		success: function(data){
+       		
+    			showmail(data);	
+    		},
+    	dataType: "json",
+   	 	contentType : "application/json"
+    	});
+   
+})//end of onload
 
-// })
+//顯示收件匣
+function showmail(data){
+	var index = 0;
+	$.each(data, function(){
+		var sendTime = this.sendTime.year + "/" + this.sendTime.monthValue + "/" + this.sendTime.dayOfMonth;
+		var mailRow = "<tr class='mailrow' id='mailno" + index + "'>" +
+						"<td class='mailcheckbox'><input type='checkbox'></td>" + 
+						"<td class='importantbox'><span class='glyphicon glyphicon-star-empty'></span></td>" +
+						"<td>" + this.sender.nickname + "(" + this.sender.account + ")</td>" + 
+						"<td>" + this.title + "//" + this.article + "</td>" +
+						"<td style='text-align: right;'>" + sendTime + "</td>" +
+						"</tr>";
+		$("#mailtable").append(mailRow);
+		index ++;
+	})//end of .each
+	//改變星星樣式
+	$(".importantbox").on("click", function(){
+		$(this).html("<span class='glyphicon glyphicon-star'>");
+	})
+	$(".mailrow").on("click", function(){
+		var mailIndex = $(this).attr("id").substring(6);
+//   	console.log(mailIndex);
+// 		console.log(data);
+		var mailTitle = data[mailIndex].title;
+		var mailSender = data[mailIndex].sender.nickname + "&nbsp;(" + data[mailIndex].sender.account + ")";
+		var mailSendTime = data[mailIndex].sendTime.year + "年" + data[mailIndex].sendTime.monthValue + "月" + data[mailIndex].sendTime.dayOfMonth + "日" +
+							"&nbsp" + data[mailIndex].sendTime.hour + ":" + data[mailIndex].sendTime.minute;
+		var mailArticle = data[mailIndex].article;
+		$("#readmail").modal();
+		$("#mail-title").empty();
+		$("#mail-body").empty();
+		$("#mail-title").append("<h4>"+mailTitle+"<h4>" + 
+								"<div style='font-size: 12px;display: inline-block;'>" + mailSender + "</div>" + 
+								"<div style='font-size: 12px; float: right;'>" + mailSendTime + "</div>");
+		$("#mail-body").append("<p>"+mailArticle+"</p>");
+	});
+}
+$("#draftbox").click(
+	function(){
+		var formData={"id":${user.id}};
+	    	$.ajax({
+		    	dataType: "json",
+		   	 	contentType : "application/json",
+	       		type: "GET",
+	       		url: "/mail/getdraft",
+	      		data: formData,
+	       		success: function(data){
+	       			console.log(data);
+// 	       			showdraft(data);
+	    		},
+
+	    	});
+	}
+)
+// function showdraft(data){
+// 	$.each(data, function(){
+// 		var mailNo = this.id;
+// 		var sendTime = this.sendTime.year + "/" + this.sendTime.monthValue + "/" + this.sendTime.dayOfMonth;
+// 		var mailRow = "<tr class='mailrow' id='mailno" + mailNo + "'>" +
+// 						"<td class='mailcheckbox'><input type='checkbox'></td>" + 
+// 						"<td class='importantbox'><span class='glyphicon glyphicon-star-empty'></span></td>" +
+// 						"<td>" + this.sender.nickname + "(" + this.sender.account + ")</td>" + 
+// 						"<td>" + this.title + "//" + this.article + "</td>" +
+// 						"<td style='text-align: right;'>" + sendTime + "</td>" +
+// 						"</tr>";
+// 		$("#mailtable").append(mailRow);
+// 	})//end of .each
+// 	//改變星星樣式
+// 	$(".importantbox").on("click", function(){
+// 		$(this).html("<span class='glyphicon glyphicon-star'>");
+// 	})
+// 	$(".mailrow").on("click", function(){
+// // 		var mailId = $(this).attr("id").substring(6);
+// 		$("#readmail").modal();
+// // 		$(".modaltitle")
+// 	});
 
 </script>
+
+
 
 
 <c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>

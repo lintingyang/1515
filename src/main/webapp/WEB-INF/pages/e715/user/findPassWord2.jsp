@@ -1,14 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:import url="/WEB-INF/pages/e715/layout/header.jsp" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/user.css" />
+<c:import url="/WEB-INF/pages/e715/layout/header.jsp"/>
+<c:import url="/WEB-INF/pages/layout/meta.jsp"/>
+<link rel="stylesheet" href="/resources/css/user.css" />
 
 <script>
 	$(function() {
 		$("#idbuthref").on('click', function() {
-			window.location.href = "login.jsp";
+			
+			swal({
+				type : "success",
+				title: "修改成功",  
+				text: "",  
+				timer: 3000,   
+				showConfirmButton: false
+			});
+
+			setTimeout(function(){
+				$('.upUserPasswordForm').submit(); }, 1000);
 		});
 	});
 </script>
@@ -17,19 +27,19 @@
 		<div class="col-xs-6 col-md-3"></div>
 
 		<div class="col-xs-6 col-md-7" id="divCenter">
-			<form class="form-horizontal" id="formCenter">
+			<form class="form-horizontal upUserPasswordForm" id="formCenter" action="/E715Member/findPasswordStep3">
 				<div class="form-group" id="divBorder">
-					<label for="inputPassword3" class="col-sm-2 control-label">輸入新密碼:</label>
+					<label for="inputPassword3" class="col-sm-2 control-label">輸入新密碼:</label><span style="color:red">${checkPasswordError.checkFault}</span>
 					<div class="col-sm-10">
 						<input type="password" class="form-control textSize"
-							id="inputPassword" placeholder="Password" maxlength="15">
+							id="inputPassword" name="newPassword" placeholder="Password" maxlength="15">
 					</div>
 				</div>
 				<div class="form-group" id="divBorder">
 					<label for="inputPassword3" class="col-sm-2 control-label">請再輸入一次:</label>
 					<div class="col-sm-10">
 						<input type="password" class="form-control textSize"
-							id="inputPassword" placeholder="Name">
+							id="inputPassword" name="newPasswordCheck" placeholder="Name"><span style="color:red">${checkPasswordError.checkFault}</span>
 					</div>
 				</div>
 

@@ -2,7 +2,9 @@ package tw.com.softleader.e5e5.web.controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -73,6 +75,8 @@ public class memberController {
 		User user = userService.getOne(id);
 //		log.error("==============================="+myself.getId());
 //		log.error("==============================="+user.getId());
+		
+
 		boolean relation = focusUserListService.findRelation(myself.getId(), user.getId());
 		int good = 0;
 		int bad = 0;
@@ -114,10 +118,81 @@ public class memberController {
 	}
 
 	@RequestMapping(value = "/findPassword", method = RequestMethod.GET)
-	public String findPassword() {
+	public String findPasswordPage(HttpSession session) {
+		session.removeAttribute("schoolEmail");
 		return "/e715/user/findPassWord1";
 	}
 
+
+	@RequestMapping(value = "/findPasswordStep1")
+	@ResponseBody
+	public boolean findPasswordStep1(@RequestParam("userSchoolEmail") String schoolEmail, HttpSession session) {
+		Map<String, String> errors = new HashMap<String, String>();
+		session.setAttribute("checkError", errors);
+		session.removeAttribute("schoolEmail");
+		errors.clear();
+		if(schoolEmail!=null){
+		boolean findUser = userService.findBySchoolEmail(schoolEmail);
+		if(findUser){
+			session.setAttribute("schoolEmail", schoolEmail);
+			userService.sendVerificationCode(schoolEmail);
+		}
+		return findUser;
+		}else{
+			return false;
+		}
+		
+	}
+	
+	
+	@RequestMapping(value = "/findPasswordStep2")
+	public String findPasswordStep2(@RequestParam("schoolEmail") String schoolEmail , 
+		@RequestParam("verificationCode") String stVerificationCode, HttpSession session){
+		Map<String, String> errors = new HashMap<String, String>();
+		session.setAttribute("checkError", errors);
+		errors.clear();
+		Integer verificationCode = null;
+		try {
+			verificationCode = Integer.parseInt(stVerificationCode);
+			boolean check = userService.checkVerificationCode(schoolEmail, verificationCode);
+			if(check){
+				return "/e715/user/findPassWord2";
+			}else{
+				errors.put("checkFault", "驗證碼輸入錯誤，請重新輸入");
+			return "/e715/user/findPassWord1ver";
+			}
+		} catch (NumberFormatException e) {
+			errors.put("numberFault", "驗證碼請輸入數字");
+			return "/e715/user/findPassWord1ver";
+		}
+	}
+	
+	@RequestMapping(value = "/findPasswordStep3")
+	public String findPasswordStep3(
+			@RequestParam("newPassword") String newPassword,
+			@RequestParam("newPasswordCheck") String newPasswordCheck, 
+			HttpSession session
+			){
+		Map<String, String> errors = new HashMap<String, String>();
+		session.setAttribute("checkPasswordError", errors);
+		
+		if(newPassword.equals(newPasswordCheck)){
+			String schoolEmail = (String)session.getAttribute("schoolEmail");
+			User user = userService.loginBySchoolEmail(schoolEmail);
+			user.setPassword(newPassword);
+			userService.update(user);
+			errors.clear();
+			session.removeAttribute("schoolEmail");
+		return "/e715/user/login";
+		}else{
+			errors.put("checkFault", "兩者密碼不相符合，請再輸入一次");
+		return "/e715/user/findPassWord2";
+		}
+	}
+	
+	
+	
+	
 	@RequestMapping(value = "/modifyFileAsk", method = RequestMethod.GET)
 	public String modifyFileAsk(HttpSession session) {
 		User user = (User) session.getAttribute("user");

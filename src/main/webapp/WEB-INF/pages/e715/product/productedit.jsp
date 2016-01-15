@@ -194,6 +194,8 @@ function getProductCount(id , type ,badgePost){ // 已刊登欲交換數量
 		data : data,
 		success:function(count) {
 				if(count>0){
+					if(count>10)
+						$(badgePost).text('10+');
 					$(badgePost).text(count);
 					total += count;
 					$('#totalCount').text(total);

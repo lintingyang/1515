@@ -31,9 +31,9 @@ public class LogMailDaoTest extends AbstractTest{
 	
 //		List<Mail> list = mailDao.findAllByOrderBySendTimeDesc();
 //		log.info(list);
-		
-		List<LogMail> list = logMailDao.findByIsDraftOrderBySendTimeDesc(TrueFalse.TRUE);
-		log.info("****"+list);
+//		
+//		List<LogMail> list = logMailDao.findByIsDraftOrderBySendTimeDesc(TrueFalse.TRUE);
+//		log.info("****"+list);
 		
 	}
 
