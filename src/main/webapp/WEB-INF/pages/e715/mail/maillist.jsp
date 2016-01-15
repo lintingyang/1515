@@ -248,8 +248,6 @@ function showmail(data){
 						"<td class='mailcheckbox'><input type='checkbox'></td>" + 
 						"<td class='importantbox'><span class='glyphicon glyphicon-star-empty'></span></td>" +
 						"<td class='namebox'>" + this.sender.nickname + "(" + this.sender.account + ")</td>" + 
-						"<td class='titlebox '>" + this.title + "//" + this.article + "</td>" +
-						"<td>" + this.sender.nickname + "(" + this.sender.account + ")</td>" + 
 						"<td class='mailBody titlebox' id='mailno" + index + "' style='cursor:pointer'>" + this.title + "//" + this.article + "</td>" +
 						"<td style='text-align: right;'>" + sendTime + "</td>" +
 						"</tr>";
