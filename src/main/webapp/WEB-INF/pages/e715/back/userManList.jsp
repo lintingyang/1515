@@ -8,7 +8,7 @@
 	<c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 	<c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 	
-	<title>E715 以物易物網</title>
+	<title>E715</title>
 </head>
 <body>
 	<div id="wrap">

@@ -23,15 +23,23 @@ public class ReportService extends OurService<Report>{
 
 	@Autowired
 	private ReportDao reportDao;
+	
+	@Transactional
+	public List<Report> findAll(){
+		return reportDao.findAll();
+	}
+	
+	@Transactional
+	public List<Report> findAllByName(String name){
+		return reportDao.findAllByName(name);
+	}
+	
+	
+	
 
 	@Transactional
 	public List<Report> findAllUnread(){
 		return reportDao.findAllUnread();
-	}
-	
-	@Transactional
-	public List<Report> findHistory(){
-		return reportDao.findAllByOrderByReportTimeDesc();
 	}
 	
 	@Transactional
@@ -80,11 +88,6 @@ public class ReportService extends OurService<Report>{
 			return 0;	
 		}
 		
-	//尚未處理之物品
-	@Transactional
-	public List<Report> findAllProductUnread(){
-		return reportDao.findAllProductUnread();
-	}
 
 	@Override
 	public OurDao<Report> getDao() {

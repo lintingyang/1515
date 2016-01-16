@@ -26,11 +26,11 @@ public class ReportController {
 		return "/report/list";//回傳jsp頁面
 	}
 	
-	@RequestMapping(value="/show", method=RequestMethod.GET)
-	@ResponseBody
-	public List<Report> show(Model model){
-		return reportService.findHistory();
-	}
+//	@RequestMapping(value="/show", method=RequestMethod.GET)
+//	@ResponseBody
+//	public List<Report> show(Model model){
+//		return reportService.findHistory();
+//	}
 	
 	@RequestMapping(value = "/unread", method=RequestMethod.GET)
 	@ResponseBody
