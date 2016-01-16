@@ -245,7 +245,7 @@ $("#submitmail").click(function(){
 					title : $("#title").val(),
 					article : $("#article").val(),
 					saveAsLog :$(".saveaslog").prop("checked")},
-// 					logmailid : null
+					logmailid : 0
 					
 			});
 			location.href="/mail/list";
@@ -411,14 +411,15 @@ function showdraft(data){
 		
 		$("#draftmail").modal();
 		var mailIndex = $(this).attr("id").substring(5);
-		$("#drafttitle").val(data[mailIndex].title);		
+		$("#drafttitle").val(data[mailIndex].title).attr("name",data[mailIndex].id);		
 		$("#draftarticle").text(data[mailIndex].article);
 		$("#draftreceiver").val(data[mailIndex].receiver.account);
 
 	});
 	//按下寄出草稿按鈕
-	$("#submitdraft").click(function(){
-		var mailIndex = $(this).attr("id").substring(5);
+	$("#submitdraft").on("click",function(){
+		var mailIndex = $("#drafttitle").attr("name");
+		console.log(mailIndex);
 			swal({
 					type : "success",
 					title: "草稿寄出",  
@@ -435,8 +436,10 @@ function showdraft(data){
 							receiverAccount : $("#draftreceiver").val(),
 							title : $("#drafttitle").val(),
 							article : $("#draftarticle").val(),
-							saveAsLog :$(".saveaslog").prop("checked")},
-// 							logmailid :	mailIndex				
+							saveAsLog :$(".saveaslog").prop("checked"),
+							logmailid :	mailIndex		
+							},
+		
 					});
 					location.href="/mail/list";
 				})

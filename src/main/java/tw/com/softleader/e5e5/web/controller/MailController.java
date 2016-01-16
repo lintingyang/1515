@@ -59,8 +59,10 @@ public class MailController {
 	
 	@RequestMapping("/newmail")
 	public String newMail(@RequestParam("senderId")int senderId,@RequestParam("receiverAccount")String receiverAccount,
-			@RequestParam("title")String title,@RequestParam("article")String article,@RequestParam("saveAsLog")String saveAsLog){
-		mailService.sendNewMail(senderId, receiverAccount, title, article, saveAsLog);
+			@RequestParam("title")String title,@RequestParam("article")String article,@RequestParam("saveAsLog")String saveAsLog,
+			@RequestParam("logmailid")int logMailId){
+		mailService.sendNewMail(senderId, receiverAccount, title, article, saveAsLog,logMailId);
+		
 		
 		return "redirect:/mail/list";
 	}
