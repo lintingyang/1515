@@ -215,21 +215,30 @@ public class memberController {
 	}
 
 	@RequestMapping(value = "/updataPwd", method = RequestMethod.GET)
-	public String updataPwd(@RequestParam("oldPwd") String oldPwd, @RequestParam("newPwd") String newPwd,
+	public String updataPwd(Model model,@RequestParam("oldPwd") String oldPwd, @RequestParam("newPwd") String newPwd,
 			@RequestParam("newPwdCheck") String newPwdCheck, HttpSession session) {
 		User user = (User) session.getAttribute("user");
-
-		if (user == null || !oldPwd.equals(user.getPassword()) || newPwd == null || newPwd.length() == 0) {
+		if(user == null){
 			return "/e715/user/login";
+		}else{if(!oldPwd.equals(user.getPassword())){
+			model.addAttribute("oldPasswodFalse", "舊密碼輸入錯誤");
+			return "/e715/user/changePassWord";
+		}else{
+		if (newPwd == null || newPwd.length() == 0) {
+			model.addAttribute("nullNewPwd", "密碼不可為空值");
+			return "/e715/user/changePassWord";
 		} else {
 			if (newPwdCheck.equals(newPwd)) {
 				userService.updataPwd(user.getAccount(), oldPwd, newPwd);
 				return "/e715/user/modifyFileAsk";
 			}
-			log.error("密碼輸入不同");
+			model.addAttribute("newPwdCheck", "密碼輸入不同");
 			return "/e715/user/changePassWord";
 		}
-
+		
+		}
+		
+		}
 	}
 
 	@RequestMapping(value = "/editProfile", method = RequestMethod.GET)

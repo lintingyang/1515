@@ -151,7 +151,7 @@
 					<label class="col-md-2 control-label">姓名:</label>
 					<div class="col-md-10">
 						<input type="text" class="form-control" id="name" name="name"
-							value="${user.name}" placeholder="輸入姓名">
+							value="${user.name}" placeholder="輸入姓名" required>
 					</div>
 				</div>
 				<div class="form-group" id="divBorder">
@@ -218,14 +218,14 @@
 					<div class="col-md-10">
 						<input type="text" class="form-control" id="inputPhone"
 							value="${user.phone}${cellphone}" name="phone"
-							placeholder="輸入家電或手機">
+							placeholder="輸入家電或手機" required>
 					</div>
 				</div>
 				<div class="form-group" id="divBorder">
 					<label class="col-md-2 control-label">備用Email:</label>
 					<div class="col-md-10">
 						<input type="text" class="form-control" id="inputReservedEmail"
-							name="email" value="${user.email}" placeholder="輸入備用信箱">
+							name="email" value="${user.email}" placeholder="輸入備用信箱" required>
 					</div>
 				</div>
 

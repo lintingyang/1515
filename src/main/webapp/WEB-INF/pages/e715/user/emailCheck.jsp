@@ -118,7 +118,7 @@
 					<label for="inputEmail3" class="col-sm-2 control-label">School_Email</label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="schoolEmail" name="userSchoolEmail"
-							placeholder="Email">
+							placeholder="Email" required>
 					</div>
 				</div>
 				<div id="btnCenter">

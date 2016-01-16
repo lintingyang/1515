@@ -105,7 +105,7 @@ function Dateblur() {
 					<label for="inputPassword3" class="col-sm-2 control-label">密碼:</label>
 					<div class="col-sm-10">
 						<input type="password" class="form-control textSize" name="password"
-							id="password" placeholder="password" maxlength="15" required>${errors.password}
+							id="password" placeholder="password" maxlength="15" required pattern="(?=^[A-Za-z0-9]{6,12}$)((?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]))^.*$" title="密碼：6~12英數字組合，至少有一個大寫、小寫英文字母及數字，如 A12Rd6">${errors.password}
 					</div>
 				</div>
 				<div class="form-group" id="divBorder">
@@ -126,10 +126,12 @@ function Dateblur() {
 				<div class="form-group" id="divBorder">
 					<label for="inputEmail3" class="col-sm-2 control-label">性別:</label>
 					<div class="col-sm-10">	
-						<input type="radio" value="MALE" id="sex" name="sex" checked="checked" required>
+						<input type="radio" value="MALE" id="sex" name="sex" checked="checked">
 						<span>男</span> 
 						<input type="radio" value="FEMALE" id="sex" name="sex" >
 						<span>女</span>
+						<input type="radio" value="OTHER" id="sex" name="sex" >
+						<span>其他</span>
 					</div>
 				</div>
 
