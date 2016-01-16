@@ -19,20 +19,14 @@ import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 @Table(name = "report", schema = "dbo", catalog = "EEIT82DB")
 public class Report extends OurEntity implements java.io.Serializable {
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@JoinColumn(name = "role")
-	private User role;
-	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "is_passed", length = 10)
+	private TrueFalse isPassed;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@JoinColumn(name="product_id", referencedColumnName = "id")
 	private Product product;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@JoinColumn(name = "product_qiestions_id", referencedColumnName = "id")
-	private QuestionAndAnswer productQuestions;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
@@ -42,27 +36,28 @@ public class Report extends OurEntity implements java.io.Serializable {
 	@Column(name = "article", length = 200)
 	private String article;
 	
-	@Enumerated(EnumType.STRING)
-	@Column(name = "is_passed", length = 10)
-	private TrueFalse isPassed;
-	
 	@Column(name = "report_time", length = 23)
 	private LocalDateTime reportTime;
-	
-//	private Reply reply;
-//	private Thread thread;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@JoinColumn(name = "role")
+	private User role;
+	
+	@Column(name = "finish_time", length = 23)
+	private LocalDateTime finishTime;
+	
 	@Override
 	public String toString() {
 		return "Report [article=" + article + ", reportTime=" + reportTime + "]";
 	}
 
-	public User getRole() {
-		return role;
+	public TrueFalse getIsPassed() {
+		return isPassed;
 	}
 
-	public void setRole(User role) {
-		this.role = role;
+	public void setIsPassed(TrueFalse isPassed) {
+		this.isPassed = isPassed;
 	}
 
 	public Product getProduct() {
@@ -71,14 +66,6 @@ public class Report extends OurEntity implements java.io.Serializable {
 
 	public void setProduct(Product product) {
 		this.product = product;
-	}
-
-	public QuestionAndAnswer getProductQuestions() {
-		return productQuestions;
-	}
-
-	public void setProductQuestions(QuestionAndAnswer productQuestions) {
-		this.productQuestions = productQuestions;
 	}
 
 	public User getReporterId() {
@@ -97,14 +84,6 @@ public class Report extends OurEntity implements java.io.Serializable {
 		this.article = article;
 	}
 
-	public TrueFalse getIsPassed() {
-		return isPassed;
-	}
-
-	public void setIsPassed(TrueFalse isPassed) {
-		this.isPassed = isPassed;
-	}
-
 	public LocalDateTime getReportTime() {
 		return reportTime;
 	}
@@ -113,27 +92,21 @@ public class Report extends OurEntity implements java.io.Serializable {
 		this.reportTime = reportTime;
 	}
 
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-//	@JoinColumn(name = "reply_id")
-//	public Reply getReply() {
-//		return this.reply;
-//	}
-//
-//
-//	public void setReply(Reply reply) {
-//		this.reply = reply;
-//	}
+	public User getRole() {
+		return role;
+	}
 
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-//	@JoinColumn(name = "thread_id")
-//	public Thread getThread() {
-//		return this.thread;
-//	}
-//
-//	public void setThread(Thread thread) {
-//		this.thread = thread;
-//	}
+	public void setRole(User role) {
+		this.role = role;
+	}
+
+	public LocalDateTime getFinishTime() {
+		return finishTime;
+	}
+
+	public void setFinishTime(LocalDateTime finishTime) {
+		this.finishTime = finishTime;
+	}
+
 	
 }

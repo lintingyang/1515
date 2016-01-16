@@ -31,6 +31,16 @@ public class MailService {
 		return mails;
 	}
 	
+	public void updateIsImportant(int id, String isImportant){
+		Mail mail = mailDao.findOne(id);
+		if("true".equals(isImportant)){
+		mail.setIsImportant(TrueFalse.TRUE);
+		} else {
+			mail.setIsImportant(TrueFalse.FALSE);
+		}
+		mailDao.save(mail);
+	}
+	
 	@Transactional
 	public void sendNewMail(int senderId,String receiverAccount,String title,String article,String saveAsLog){
 		Mail mail = new Mail();
@@ -55,6 +65,10 @@ public class MailService {
 			logMail.setIsDraft(TrueFalse.FALSE);
 			logMailDao.save(logMail);
 		}
+//		if(logMailId != null){
+//			logMailDao.delete(logMailId);
+//		}
+		
 		
 	}
 }
