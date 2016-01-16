@@ -61,7 +61,7 @@ public class MailController {
 	public String newMail(@RequestParam("senderId")int senderId,@RequestParam("receiverAccount")String receiverAccount,
 			@RequestParam("title")String title,@RequestParam("article")String article,@RequestParam("saveAsLog")String saveAsLog){
 		mailService.sendNewMail(senderId, receiverAccount, title, article, saveAsLog);
-		log.error(saveAsLog);
+		
 		return "redirect:/mail/list";
 	}
 	@RequestMapping("/savedraft")

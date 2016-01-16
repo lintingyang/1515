@@ -65,6 +65,10 @@ public class MailService {
 			logMail.setIsDraft(TrueFalse.FALSE);
 			logMailDao.save(logMail);
 		}
+//		if(logMailId != null){
+//			logMailDao.delete(logMailId);
+//		}
+		
 		
 	}
 }

@@ -113,14 +113,14 @@ tr.mailrow:hover td{
 			  
 			  <div class="checkbox">
 			    <label>
-			      <input type="checkbox" checked="checked" name="saveaslog" id="saveaslog"> 儲存寄件備份
+			      <input type="checkbox" checked="checked" name="saveaslog" class="saveaslog"> 儲存寄件備份
 			    </label>
 			  </div>
 	      </div>
 	      <div class="modal-footer">
      
 	        <button type="button" class="btn btn-default" data-dismiss="modal" id="savedraft">儲存為草稿</button>
-	        <button type="button" class="btn btn-primary" data-dismiss="modal" id="submitbackup">送出</button>
+	        <button type="button" class="btn btn-primary" data-dismiss="modal" id="submitmail">送出</button>
 	      </div>
      </form> <!--  FORM撰寫EMAIL表單END -->
     </div>
@@ -160,14 +160,14 @@ tr.mailrow:hover td{
 			  
 			  <div class="checkbox">
 			    <label>
-			      <input type="checkbox" checked="checked" name="saveaslog" id="saveaslog"> 儲存寄件備份
+			      <input type="checkbox" checked="checked" name="saveaslog" class="saveaslog"> 儲存寄件備份
 			    </label>
 			  </div>
 	      </div>
 	      <div class="modal-footer">
 	        
-	        <button type="button" class="btn btn-default" data-dismiss="modal" id="savedraft">儲存為草稿</button>
-	        <button type="button" class="btn btn-primary" data-dismiss="modal" id="submitbackup">送出</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal" id="updatedraft">儲存為草稿</button>
+	        <button type="button" class="btn btn-primary" data-dismiss="modal" id="submitdraft">送出</button>
 	      </div>
      </form> <!--  FORM撰寫EMAIL表單END -->
     </div>
@@ -244,7 +244,8 @@ $("#submitmail").click(function(){
 					receiverAccount : $("#receiver").val(),
 					title : $("#title").val(),
 					article : $("#article").val(),
-					saveAsLog :$("#saveaslog").prop("checked")},
+					saveAsLog :$(".saveaslog").prop("checked")},
+// 					logmailid : null
 					
 			});
 			location.href="/mail/list";
@@ -415,9 +416,36 @@ function showdraft(data){
 		$("#draftreceiver").val(data[mailIndex].receiver.account);
 
 	});
+	//按下寄出草稿按鈕
+	$("#submitdraft").click(function(){
+		var mailIndex = $(this).attr("id").substring(5);
+			swal({
+					type : "success",
+					title: "草稿寄出",  
+					text: "成功幫您寄出草稿!",  
+					timer: 1000,   
+					showConfirmButton: false
+				},function(){
+					$.ajax({
+						dataType: "json",
+						type: "get",
+						url: "/mail/newmail",
+						data: {
+							senderId : ${user.id},
+							receiverAccount : $("#draftreceiver").val(),
+							title : $("#drafttitle").val(),
+							article : $("#draftarticle").val(),
+							saveAsLog :$(".saveaslog").prop("checked")},
+// 							logmailid :	mailIndex				
+					});
+					location.href="/mail/list";
+				})
+
+	})
 
 }
 //按下草稿列表END
+
 </script>
 
 
