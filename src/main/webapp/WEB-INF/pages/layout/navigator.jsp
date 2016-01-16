@@ -15,7 +15,7 @@
 				<td bgcolor="#FFFFFF" valign="bottom" width="35%">
 					<%-- runtime ENV : <b>${env}</b>(請至系統參數設定調整)<br/> --%>
 					
-					登入者帳號 : <b>${account}</b><br/>
+					登入者帳號 : <b>${user.account}(${user.nickname})</b><br/>
 			
 				</td>
 			</tr>
@@ -31,44 +31,44 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="${pageContext.request.contextPath}/">E5E5 Admin Home</a>
+			<a class="navbar-brand" href="/admin/index">E715 Admin Home</a>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li id="navHome"><a href="${pageContext.request.contextPath}/">首頁</a></li>
+				<li id="navHome"><a href="${pageContext.request.contextPath}/">E715首頁</a></li>
 
-					<li id="navBatches"><a href="#" class="dropdown-toggle" data-toggle="dropdown">安控管理<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li id="navBatches"><a href="${pageContext.request.contextPath}/security/users/list">使用者管理</a></li>
-							<li id="navBatches"><a href="${pageContext.request.contextPath}/security/roles/list">角色管理</a></li>
-						</ul>
-					</li>
+<!-- 					<li id="navBatches"><a href="#" class="dropdown-toggle" data-toggle="dropdown">安控管理<b class="caret"></b></a> -->
+<!-- 						<ul class="dropdown-menu"> -->
+<%-- 							<li id="navBatches"><a href="${pageContext.request.contextPath}/security/users/list">使用者管理</a></li> --%>
+<%-- 							<li id="navBatches"><a href="${pageContext.request.contextPath}/security/roles/list">角色管理</a></li> --%>
+<!-- 						</ul> -->
+<!-- 					</li> -->
 					<li id="navBatches"><a href="#" class="dropdown-toggle" data-toggle="dropdown">管理<b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li id="navBatches"><a href="${pageContext.request.contextPath}/admin/products/list">物品管理</a></li>
 							<li id="navBatches"><a href="${pageContext.request.contextPath}/admin/users/list">會員管理</a></li>
 						</ul>
 					</li>				
-					<li id="navBatches"><a href="#" class="dropdown-toggle" data-toggle="dropdown">檢舉管理<b class="caret"></b></a>
+					<li id="navBatches"><a href="#" class="dropdown-toggle" data-toggle="dropdown">檢舉<b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li id="navBatches"><a href="${pageContext.request.contextPath}/report/products/list">檢舉物品</a></li>
 							<li id="navBatches"><a href="${pageContext.request.contextPath}/report/products/questions/list">檢舉物品的問與答</a></li>
 							<li id="navBatches"><a href="${pageContext.request.contextPath}/report/users/list">檢舉使用者</a></li>
 						</ul>
 					</li>		
-					<li id="navSettings"><a href="#" class="dropdown-toggle" data-toggle="dropdown">系統設定<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li id="navSettings"><a href="${pageContext.request.contextPath}/sysparams/edit">系統參數設定</a></li>
-							<li id="navSettings"><a href="${pageContext.request.contextPath}/settings/currencies/edit">常用貨幣設定</a></li>
-							<li id="navSettings"><a href="${pageContext.request.contextPath}/settings/countries/edit">常用國別設定</a></li>
-							<li id="navResettings"><a href="${pageContext.request.contextPath}/resettings">還原出廠預設值</a></li>
-						</ul>	
-					</li>
+<!-- 					<li id="navSettings"><a href="#" class="dropdown-toggle" data-toggle="dropdown">系統設定<b class="caret"></b></a> -->
+<!-- 						<ul class="dropdown-menu"> -->
+<%-- 							<li id="navSettings"><a href="${pageContext.request.contextPath}/sysparams/edit">系統參數設定</a></li> --%>
+<%-- 							<li id="navSettings"><a href="${pageContext.request.contextPath}/settings/currencies/edit">常用貨幣設定</a></li> --%>
+<%-- 							<li id="navSettings"><a href="${pageContext.request.contextPath}/settings/countries/edit">常用國別設定</a></li> --%>
+<%-- 							<li id="navResettings"><a href="${pageContext.request.contextPath}/resettings">還原出廠預設值</a></li> --%>
+<!-- 						</ul>	 -->
+<!-- 					</li> -->
 
-					<li><a href="#" onclick="$('#logout').submit();"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
-					<form class="hide" id="logout" action="<c:url value="/logout" />" method="post">
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-					</form>
+					<li><a href="/head/logout"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
+<%-- 					<form class="hide" id="logout" action="<c:url value="/logout" />" method="post"> --%>
+<%-- 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> --%>
+<!-- 					</form> -->
 			</ul>
 		</div>
 	</div>

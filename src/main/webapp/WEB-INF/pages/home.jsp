@@ -8,7 +8,7 @@
 	<c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 	<c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 	
-	<title>E5E5 Home</title>
+	<title>E715</title>
 </head>
 <body>
 <div class="wrap">
@@ -17,13 +17,8 @@
 
 	<div class="jumbotron">
 		<div class="container">
-			<h1>E5E5 以物易物網</h1>
-			<p>
-			Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.
-			Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.
-			Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.
-			Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.Some Words.
-			</p>
+			<h1>E715 以物易物網</h1>
+			<p></p>
 		</div>
 	</div>
 	<div class="container">
@@ -51,8 +46,6 @@
 				</p>
 			</div>
 		</div>
-		
-		
 	</div>
 	<c:import url="/WEB-INF/pages/layout/footer.jsp"></c:import>
 </div>

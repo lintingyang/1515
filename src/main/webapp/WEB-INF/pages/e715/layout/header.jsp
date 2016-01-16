@@ -83,7 +83,7 @@
 					<li><a class="userlist" href="/mail/list">站內信</a></li>
 					<li><a class="userlist" href="/product/add">新增物品</a></li>
 					<li><a class="userlist" href="/E715Member/modifyFileAsk">帳號修改</a></li>
-					<li><a class="userlist" href="/admin/products/list" id="back" style="display: none;">後台管理</a></li>
+					<li><a class="userlist" href="/admin/index" id="back" style="display: none;">後台管理</a></li>
 					<li><a class="userlist" href="/head/logout">登出</a></li>
 <!-- 				<li><a class="userlist" href="/head/login">登入</a></li> -->
 					</ul>
