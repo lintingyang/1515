@@ -7,14 +7,12 @@
 	<div class="container">
 
 
-		<ul class="nav nav-tabs" id="tabs">
-			<li style="width: 50%; text-align: center;"><a
-				class="categorylist searchbtn" href="#">熱門</a></li>
-			<li style="width: 50%; text-align: center;"><a
-				class="categorylist searchbtn"  href="#">最新</a></li>
+		<ul class=" nav-tabs" id="tabs" >
+			<li style="width: 50%; text-align: center; "><div class="catrgorybox categorylist searchbtn" id="hot">熱門</div></li>
+			<li style="width: 50%; text-align: center; "><div class="catrgorybox categorylist searchbtn" id="new">最新</div></li>
 		</ul>
 	</div>
-	<br>
+
 
 
 	<div class="row">
@@ -23,8 +21,8 @@
 			<c:if test ="${!empty namelike }" >
 				以下為搜尋結果：${ namelike}
 			</c:if>
-			<div class="holder"></div>
-			<div id="itemContainer" >
+			<div class="holder" style="text-align: center;"></div>
+			<div id="itemContainer"  style="padding:auto;text-align: center">
 			</div>
 			
 			<div class="holder"></div>
@@ -40,18 +38,16 @@
 
 <!-- $("#searchbar").text() -->
 <script type="text/javascript">
-// var searchType = "熱門";
-// function changesearch(){
-// 	console.log(searchType);
-// 	$(searchType) = $(this).text();
-// }
-
-
+$("#hot").click(function(){
+	$("#hot").css("border-bottom","3px solid #009FCC");
+	$("#new").css("border-bottom","");
+})
+$("#new").click(function(){
+	$("#hot").css("border-bottom","");
+	$("#new").css("border-bottom","3px solid #009FCC");
+})
 	$('.categorylist').click(function() { //點選排列方式後按照順序排列
-// 		$("img.lazy").lazyload({
-// 			threshold : 200,
-// 			failure_limit : 10
-// 		});
+		
 
 		$.ajax({
 			contentType : "application/json",
@@ -92,7 +88,7 @@
 
 			});
 $(function() { //畫面第一次進入時出現的product list
-	
+	$("#hot").css("border-bottom","3px solid #009FCC");
 	$.ajax({
 		contentType : "application/json",
 		url : "/query",
@@ -147,28 +143,6 @@ $(function() { //畫面第一次進入時出現的product list
 		
 		
 	});
-// function getpicture(prod, prodimg) { //取得每一個商品的物件
-// 		var formData = {
-// 			"id" : prod.id
-// 		}
-// 		$.ajax({
-// 			contentType : "application/json",
-// 			url : "/queryimg",
-// 			dataType : "json",
-// 			type : "get",
-// 			data : formData,
-// 			success : function(data) {
-// 				if (data != null) { 
-// 					$(prodimg).attr("data-original", data.primaryPicture);
-// 					$("img.lazy").lazyload({
-// 						threshold : 200,
-// 						failure_limit : 10
-// 					});
 
-//  					$(prodimg).attr("src", data.primaryPicture);
-// 				}
-// 			}
-// 		});
-// }
 </script>
 <c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>
