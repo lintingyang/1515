@@ -1,6 +1,7 @@
 package tw.com.softleader.e5e5.service;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +35,6 @@ public class ReportService extends OurService<Report>{
 		return reportDao.findAllByName(name);
 	}
 	
-	
-	
-
 	@Transactional
 	public List<Report> findAllUnread(){
 		return reportDao.findAllUnread();
@@ -66,26 +64,28 @@ public class ReportService extends OurService<Report>{
 	
 	//修改status pass
 	@Transactional
-	public int updateIsPassedPass(int id){
+	public Report updateIsPassedPass(int id){
 		Report temp = reportDao.findOne(id);
 		if(temp != null){
-//			temp.setIsPassed(TrueFalse.TRUE);
-			reportDao.save(temp);
-			return 1;
+			temp.setIsPassed(TrueFalse.TRUE);
+			temp.setFinishTime(LocalDateTime.now());
+			temp = reportDao.save(temp);
+			return temp;	
 		}
-		return 0;	
+		return reportDao.findOne(id);	
 	}
 	
 	//修改status not pass
 		@Transactional
-		public int updateIsPassedNotPass(int id){
+		public Report updateIsPassedNotPass(int id){
 			Report temp = reportDao.findOne(id);
 			if(temp != null){
-//				temp.setIsPassed(TrueFalse.FALSE);
-				reportDao.save(temp);
-				return 1;
+				temp.setIsPassed(TrueFalse.FALSE);
+				temp.setFinishTime(LocalDateTime.now());
+				temp = reportDao.save(temp);
+				return temp;
 			}
-			return 0;	
+			return reportDao.findOne(id);	
 		}
 		
 

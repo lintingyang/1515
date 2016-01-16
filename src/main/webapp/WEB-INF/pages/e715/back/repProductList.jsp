@@ -69,7 +69,7 @@
 $(function() { 
 	$('#resetBtn').click(function(){
 		$("#product").val('');
-	})
+	});
 	
 	$('#searchBtn').click(function(){
 		$.ajax({
@@ -84,14 +84,21 @@ $(function() {
 				$.each(data,function(i) {
 					var tr = $("<tr></tr>");
 					var btn = $("<td></td>");
-					var btnYes = $("<input type='button' value='通過' class='btn btn-success' style='margin-left: 5px;'></input>");
-					var btnNo = $("<input type='button' value='不通過' class='btn btn-danger' style='margin-left: 5px;'></input>");
+					var btnYes = $("<input type='button' value='通過' class='btn btn-success' style='margin-left: 5px;'></input>")
+						.attr('onclick', 'javascript:location.href="updateY?id=' +data[i].id + '"');
+					var btnNo = $("<input type='button' value='不通過' class='btn btn-danger' style='margin-left: 5px;'></input>")
+						.attr('onclick', 'javascript:location.href=\'updateN?id=' +data[i].id + '\'');
 					var rId = $("<td>" +data[i].id +"</td>");
 					if(data[i].isPassed == null){
 						var rIsPassed = $("<td>尚未審核</td>");
 						var rFinishTime = $("<td>尚未審核</td>");
-					}else{
-						var rIsPassed = $("<td>" +data[i].isPassed +"</td>");
+					}else if(data[i].isPassed == "TRUE"){
+						var rIsPassed = $("<td style='color: green'>通過</td>");
+						var rFinishTime = $("<td>" +data[i].finishTime.year +"-" 
+								+data[i].finishTime.monthValue +"-"
+								+data[i].finishTime.dayOfMonth +"</td>");
+					}else if(data[i].isPassed == "FALSE"){
+						var rIsPassed = $("<td style='color: red'>不通過</td>");
 						var rFinishTime = $("<td>" +data[i].finishTime.year +"-" 
 								+data[i].finishTime.monthValue +"-"
 								+data[i].finishTime.dayOfMonth +"</td>");
@@ -134,14 +141,21 @@ $(function() {
 				$.each(data,function(i) {
 					var tr = $("<tr></tr>");
 					var btn = $("<td></td>");
-					var btnYes = $("<input type='button' value='通過' class='btn btn-success' style='margin-left: 5px;'></input>");
-					var btnNo = $("<input type='button' value='不通過' class='btn btn-danger' style='margin-left: 5px;'></input>");
+					var btnYes = $("<input type='button' value='通過' class='btn btn-success' style='margin-left: 5px;'></input>")
+						.attr('onclick', 'javascript:location.href="updateY?id=' +data[i].id + '"');
+					var btnNo = $("<input type='button' value='不通過' class='btn btn-danger' style='margin-left: 5px;'></input>")
+						.attr('onclick', 'javascript:location.href=\'updateN?id=' +data[i].id + '\'');
 					var rId = $("<td>" +data[i].id +"</td>");
 					if(data[i].isPassed == null){
 						var rIsPassed = $("<td>尚未審核</td>");
 						var rFinishTime = $("<td>尚未審核</td>");
-					}else{
-						var rIsPassed = $("<td>" +data[i].isPassed +"</td>");
+					}else if(data[i].isPassed == "TRUE"){
+						var rIsPassed = $("<td style='color: green'>通過</td>");
+						var rFinishTime = $("<td>" +data[i].finishTime.year +"-" 
+								+data[i].finishTime.monthValue +"-"
+								+data[i].finishTime.dayOfMonth +"</td>");
+					}else if(data[i].isPassed == "FALSE"){
+						var rIsPassed = $("<td style='color: red'>不通過</td>");
 						var rFinishTime = $("<td>" +data[i].finishTime.year +"-" 
 								+data[i].finishTime.monthValue +"-"
 								+data[i].finishTime.dayOfMonth +"</td>");
@@ -171,10 +185,6 @@ $(function() {
 		});
 	})
 	
-	
-	
-	
-	
 	$.ajax({
 // 		contentType : "application/json",
 		url : "/report/products/query",
@@ -186,14 +196,21 @@ $(function() {
 			$.each(data,function(i) {
 				var tr = $("<tr></tr>");
 				var btn = $("<td></td>");
-				var btnYes = $("<input type='button' value='通過' class='btn btn-success' style='margin-left: 5px;'></input>");
-				var btnNo = $("<input type='button' value='不通過' class='btn btn-danger' style='margin-left: 5px;'></input>");
+				var btnYes = $("<input type='button' value='通過' class='btn btn-success' style='margin-left: 5px;'></input>")
+					.attr('onclick', 'javascript:location.href="updateY?id=' +data[i].id + '"');
+				var btnNo = $("<input type='button' value='不通過' class='btn btn-danger' style='margin-left: 5px;'></input>")
+					.attr('onclick', 'javascript:location.href=\'updateN?id=' +data[i].id + '\'');
 				var rId = $("<td>" +data[i].id +"</td>");
 				if(data[i].isPassed == null){
 					var rIsPassed = $("<td>尚未審核</td>");
 					var rFinishTime = $("<td>尚未審核</td>");
-				}else{
-					var rIsPassed = $("<td>" +data[i].isPassed +"</td>");
+				}else if(data[i].isPassed == "TRUE"){
+					var rIsPassed = $("<td style='color: green'>通過</td>");
+					var rFinishTime = $("<td>" +data[i].finishTime.year +"-" 
+							+data[i].finishTime.monthValue +"-"
+							+data[i].finishTime.dayOfMonth +"</td>");
+				}else if(data[i].isPassed == "FALSE"){
+					var rIsPassed = $("<td style='color: red'>不通過</td>");
 					var rFinishTime = $("<td>" +data[i].finishTime.year +"-" 
 							+data[i].finishTime.monthValue +"-"
 							+data[i].finishTime.dayOfMonth +"</td>");
@@ -221,6 +238,7 @@ $(function() {
 			});
 		}
 	});
+	
 });
 
 
