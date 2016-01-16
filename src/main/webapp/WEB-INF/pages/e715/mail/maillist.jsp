@@ -118,8 +118,9 @@ tr.mailrow:hover td{
 			  </div>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal" id="submitmail">送出</button>
-	        <button type="button" class="btn btn-primary" data-dismiss="modal" id="savedraft">儲存為草稿</button>
+     
+	        <button type="button" class="btn btn-default" data-dismiss="modal" id="savedraft">儲存為草稿</button>
+	        <button type="button" class="btn btn-primary" data-dismiss="modal" id="submitbackup">送出</button>
 	      </div>
      </form> <!--  FORM撰寫EMAIL表單END -->
     </div>
@@ -128,7 +129,7 @@ tr.mailrow:hover td{
 <!-- 編輯郵件畫面END -->
 
 <!-- 編輯草稿畫面 -->
-<div class="modal fade" id="draftemail" tabindex="-1" role="dialog" aria-labelledby="editmail" aria-hidden="true">
+<div class="modal fade" id="draftmail" tabindex="-1" role="dialog" aria-labelledby="draftmail" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -164,8 +165,9 @@ tr.mailrow:hover td{
 			  </div>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal" id="submitbackup">送出</button>
-	        <button type="button" class="btn btn-primary" data-dismiss="modal" id="savedraft">儲存為草稿</button>
+	        
+	        <button type="button" class="btn btn-default" data-dismiss="modal" id="savedraft">儲存為草稿</button>
+	        <button type="button" class="btn btn-primary" data-dismiss="modal" id="submitbackup">送出</button>
 	      </div>
      </form> <!--  FORM撰寫EMAIL表單END -->
     </div>
@@ -382,22 +384,35 @@ function showdraft(data){
 	var index = 0;
 	$("#mailtable").html("");
 	$.each(data, function(){
-		var sendTime = this.draftTime.year + "/" + this.draftTime.monthValue + "/" + this.draftTime.dayOfMonth;
+		var draftTime = this.draftTime.year + "/" + this.draftTime.monthValue + "/" + this.draftTime.dayOfMonth;
+		if(this.receiver == null ){
+			var receivername = "";
+			var receiveraccount = "";
+		}else{
+			var receivername = this.receiver.nickname;
+			var receiveraccount = "(" +this.receiver.account+")";
+		}
 		var draftRow = "<tr class='mailrow' id='draft" + index + "'>" +
 			"<td class='mailcheckbox'><input type='checkbox'></td>" + 
-			"<td class='namebox'>" + this.sender.nickname + "(" + this.sender.account + ")</td>" + 
+			"<td class='namebox'>" + receivername +  receiveraccount + "</td>" + 
 			"<td class='titlebox'>" + this.title + "//" + this.article + "</td>" +
-			"<td style='text-align: right;'>" + sendTime + "</td>" +
+			"<td style='text-align: right;'>" + draftTime + "</td>" +
 			"</tr>";
 		$("#mailtable").append(draftRow);
 		index ++;
 	})//end of .each
 
 	$(".mailrow").on("click", function(){
+
+		$("#drafttitle").empty();		
+		$("#draftarticle").empty();
+		$("#draftreceiver").val("");
+		
+		$("#draftmail").modal();
 		var mailIndex = $(this).attr("id").substring(5);
-		$("#drafttitle").text(data[mailIndex].title);
-		$("#draftreceiver").text(data[mailIndex].receiver.account);
+		$("#drafttitle").val(data[mailIndex].title);		
 		$("#draftarticle").text(data[mailIndex].article);
+		$("#draftreceiver").val(data[mailIndex].receiver.account);
 
 	});
 
