@@ -64,7 +64,7 @@
 			url: url,
 			dataFormId: 'listForm',
 			mtype: 'GET',
-			colNames:['id', '帳號', '會員名稱', '學校信箱', '權限', ' 禁用', 'button'],
+			colNames:['id', '帳號', '會員名稱', '學校信箱', '權限', ' 禁用', '管理'],
 		   	colModel:[
 		   		{name:'id', width: 40},
 		   		{name:'account', width: 100},
