@@ -215,21 +215,30 @@ public class memberController {
 	}
 
 	@RequestMapping(value = "/updataPwd", method = RequestMethod.GET)
-	public String updataPwd(@RequestParam("oldPwd") String oldPwd, @RequestParam("newPwd") String newPwd,
+	public String updataPwd(Model model,@RequestParam("oldPwd") String oldPwd, @RequestParam("newPwd") String newPwd,
 			@RequestParam("newPwdCheck") String newPwdCheck, HttpSession session) {
 		User user = (User) session.getAttribute("user");
-
-		if (user == null || !oldPwd.equals(user.getPassword()) || newPwd == null || newPwd.length() == 0) {
+		if(user == null){
 			return "/e715/user/login";
+		}else{if(!oldPwd.equals(user.getPassword())){
+			model.addAttribute("oldPasswodFalse", "舊密碼輸入錯誤");
+			return "/e715/user/changePassWord";
+		}else{
+		if (newPwd == null || newPwd.length() == 0) {
+			model.addAttribute("nullNewPwd", "密碼不可為空值");
+			return "/e715/user/changePassWord";
 		} else {
 			if (newPwdCheck.equals(newPwd)) {
 				userService.updataPwd(user.getAccount(), oldPwd, newPwd);
 				return "/e715/user/modifyFileAsk";
 			}
-			log.error("密碼輸入不同");
+			model.addAttribute("newPwdCheck", "密碼輸入不同");
 			return "/e715/user/changePassWord";
 		}
-
+		
+		}
+		
+		}
 	}
 
 	@RequestMapping(value = "/editProfile", method = RequestMethod.GET)
@@ -255,9 +264,11 @@ public class memberController {
 			// @RequestParam("interested") List<Integer> interested,
 			@RequestParam("aboutMe") String aboutMe, HttpSession session) {
 		User user = (User) session.getAttribute("user");
-
+		if(user == null ){
+			return "/e715/user/login";
+		}else{
 		// 必填欄位不能為空值
-		if (user == null || name == null || nickname == null || phone == null || year == null || month == null
+		if (name == null || nickname == null || phone == null || year == null || month == null
 				|| day == null) {
 			return "/e715/user/editProfile";
 		} else {
@@ -267,7 +278,6 @@ public class memberController {
 				//使用者有圖片的話就砍黨
 				if (!user.getPicture().isEmpty()) {
 					userService.deleteImage(user.getId(), servletContext);
-
 				}
 				String path = userService.upLoadImage(user.getId(), servletContext, file);
 				user.setPicture(path);
@@ -313,6 +323,7 @@ public class memberController {
 			// userLikeService.insert(u);
 			// }
 			return "/e715/user/modifyFileAsk";
+			}
 		}
 	}
 

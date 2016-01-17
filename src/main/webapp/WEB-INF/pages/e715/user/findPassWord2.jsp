@@ -8,7 +8,7 @@
 <script>
 	$(function() {
 		$("#idbuthref").on('click', function() {
-			
+			if($('#newPassword').val()==$('#newPasswordCheck').val()){
 			swal({
 				type : "success",
 				title: "修改成功",  
@@ -19,6 +19,12 @@
 
 			setTimeout(function(){
 				$('.upUserPasswordForm').submit(); }, 1000);
+			
+			}else{
+				$('#newPasswordCheckErrorMsg').html('');
+				$('#newPasswordCheckErrorMsg').append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>確認密碼與新密碼不符合</span>");;
+				
+			}
 		});
 	});
 </script>
@@ -32,14 +38,17 @@
 					<label for="inputPassword3" class="col-sm-2 control-label">輸入新密碼:</label><span style="color:red">${checkPasswordError.checkFault}</span>
 					<div class="col-sm-10">
 						<input type="password" class="form-control textSize"
-							id="inputPassword" name="newPassword" placeholder="Password" maxlength="15">
+							id="newPassword" name="newPassword" placeholder="Password" maxlength="15"
+							required pattern="(?=^[A-Za-z0-9]{6,12}$)((?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]))^.*$" title="密碼：6~12英數字組合，至少有一個大寫、小寫英文字母及數字，如 A12Rd6"
+							>
 					</div>
 				</div>
 				<div class="form-group" id="divBorder">
 					<label for="inputPassword3" class="col-sm-2 control-label">請再輸入一次:</label>
 					<div class="col-sm-10">
 						<input type="password" class="form-control textSize"
-							id="inputPassword" name="newPasswordCheck" placeholder="Name"><span style="color:red">${checkPasswordError.checkFault}</span>
+							id="newPasswordCheck" name="newPasswordCheck" placeholder="Name" required><span style="color:red">${checkPasswordError.checkFault}</span>
+					<span id="newPasswordCheckErrorMsg"></span>
 					</div>
 				</div>
 

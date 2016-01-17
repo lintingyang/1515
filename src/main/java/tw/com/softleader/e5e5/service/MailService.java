@@ -42,7 +42,7 @@ public class MailService {
 	}
 	
 	@Transactional
-	public void sendNewMail(int senderId,String receiverAccount,String title,String article,String saveAsLog){
+	public void sendNewMail(int senderId,String receiverAccount,String title,String article,String saveAsLog,int logMailId){
 		Mail mail = new Mail();
 		mail.setSender(userDao.getOne(senderId));
 		mail.setReceiver(userDao.findByAccount(receiverAccount));
@@ -65,9 +65,11 @@ public class MailService {
 			logMail.setIsDraft(TrueFalse.FALSE);
 			logMailDao.save(logMail);
 		}
-//		if(logMailId != null){
-//			logMailDao.delete(logMailId);
-//		}
+		
+//		log.error(logMailId);
+		if(logMailId != 0){
+			logMailDao.delete(logMailId);
+		}
 		
 		
 	}
