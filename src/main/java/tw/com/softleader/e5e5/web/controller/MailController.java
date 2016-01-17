@@ -73,5 +73,13 @@ public class MailController {
 		return "redirect:/mail/list";
 	}
 	
+	@RequestMapping("/updatedraft")
+	public String updatedraft(@RequestParam("senderId")int senderId,@RequestParam("receiverAccount")String receiverAccount,
+			@RequestParam("title")String title,@RequestParam("article")String article,
+			@RequestParam("logmailid")int logMailId){
+		logMailService.updatedraft(senderId, receiverAccount, title, article, logMailId);
+		return "redirect:/mail/list";
+	}
+	
 	
 }

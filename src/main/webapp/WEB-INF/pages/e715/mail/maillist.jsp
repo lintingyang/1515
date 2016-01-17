@@ -166,7 +166,7 @@ tr.mailrow:hover td{
 	      </div>
 	      <div class="modal-footer">
 	        
-	        <button type="button" class="btn btn-default" data-dismiss="modal" id="updatedraft">儲存為草稿</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal" id="updatedraft">更新草稿</button>
 	        <button type="button" class="btn btn-primary" data-dismiss="modal" id="submitdraft">送出</button>
 	      </div>
      </form> <!--  FORM撰寫EMAIL表單END -->
@@ -228,6 +228,7 @@ $(function(){
 
 //按下寄出郵件
 $("#submitmail").click(function(){
+	console.log("click"),
 	swal({
 			type : "success",
 			title: "郵件寄出",  
@@ -244,8 +245,9 @@ $("#submitmail").click(function(){
 					receiverAccount : $("#receiver").val(),
 					title : $("#title").val(),
 					article : $("#article").val(),
-					saveAsLog :$(".saveaslog").prop("checked")},
-					logmailid : 0
+					saveAsLog :$(".saveaslog").prop("checked"),
+					logmailid : 0},
+
 					
 			});
 			location.href="/mail/list";
@@ -444,6 +446,35 @@ function showdraft(data){
 					location.href="/mail/list";
 				})
 
+	})
+	//按下更新草稿按鈕
+	$("#updatedraft").on("click",function(){
+		var mailIndex = $("#drafttitle").attr("name");
+		console.log(mailIndex);
+		swal({
+				type : "success",
+				title: "更新草稿",  
+				text: "成功幫您更新草稿!",  
+				timer: 1000,   
+				showConfirmButton: false
+			},function(){
+				$.ajax({
+					dataType: "json",
+					type: "get",
+					url: "/mail/updatedraft",
+					data: {
+						senderId : ${user.id},
+						receiverAccount : $("#draftreceiver").val(),
+						title : $("#drafttitle").val(),
+						article : $("#draftarticle").val(),
+						saveAsLog :$(".saveaslog").prop("checked"),
+						logmailid :	mailIndex		
+						},
+	
+				});
+				location.href="/mail/list";
+			})
+		
 	})
 
 }

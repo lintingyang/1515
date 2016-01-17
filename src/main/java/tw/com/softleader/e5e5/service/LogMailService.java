@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.com.softleader.e5e5.dao.LogMailDao;
 import tw.com.softleader.e5e5.dao.UserDao;
@@ -35,6 +36,19 @@ public class LogMailService {
 	@Transactional
 	public void saveDraft(int senderId,String receiverAccount,String title,String article){
 		LogMail logMail = new LogMail();
+		logMail.setSender(userDao.getOne(senderId));
+		logMail.setReceiver(userDao.findByAccount(receiverAccount));
+		logMail.setTitle(title);
+		logMail.setArticle(article);
+		logMail.setDraftTime(LocalDateTime.now());
+		logMail.setIsBackup(TrueFalse.FALSE);
+		logMail.setIsTrash(TrueFalse.FALSE);
+		logMail.setIsDraft(TrueFalse.TRUE);
+		logMailDao.save(logMail);
+	}
+	@Transactional
+	public void updatedraft(int senderId,String receiverAccount,String title,String article,int logMailId){
+		LogMail logMail = logMailDao.findOne(logMailId);
 		logMail.setSender(userDao.getOne(senderId));
 		logMail.setReceiver(userDao.findByAccount(receiverAccount));
 		logMail.setTitle(title);
