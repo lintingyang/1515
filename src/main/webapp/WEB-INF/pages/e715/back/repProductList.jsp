@@ -23,14 +23,15 @@
 				<div>
 					<form role="form" class="form-horizontal" id="listForm">
 						<div class="form-group">
+							<div class="col-sm-2"></div>
+							<div class="col-sm-2">
+								<button id="queryBtn" class="btn btn-primary"
+									data-loading-text="loading..." type="button">尚未處理之檢舉列表</button>
+							</div>
 							<label for="code" class="col-sm-2 control-label">物品名稱</label>
 							<div class="col-sm-4">
 								<input type="text" class="form-control" id="product" name="product"
 									placeholder="product's name" />
-							</div>
-							<div class="col-sm-4">
-								<button id="queryBtn" class="btn btn-primary"
-									data-loading-text="loading..." type="button">尚未處理之檢舉列表</button>
 							</div>
 						</div>
 					</form>
@@ -38,7 +39,7 @@
 
 				<div class="row pull-right">
 					<button id="searchBtn" class="btn btn-success"
-						data-loading-text="loading..." type="button">搜尋</button>
+						data-loading-text="loading..." type="button">再次審核（搜尋）</button>
 					<button id="resetBtn" class="btn btn-warning"
 						data-loading-text="loading..." type="button" value="reset">重設</button>
 				</div>
@@ -46,7 +47,7 @@
 			<table class="table table-hover table-condensed table-bordered">
 				<thead>
 					<tr>
-						<th style="width: 150px;">審核</th>
+						<th style="width: 200px;">審核</th>
 						<th>id</th>
 						<th>審核結果</th>
 						<th>商品名稱</th>
@@ -90,14 +91,20 @@ $(function() {
 						.attr('onclick', 'javascript:location.href=\'updateN?id=' +data[i].id + '\'');
 					var rId = $("<td>" +data[i].id +"</td>");
 					if(data[i].isPassed == null){
+						var btnYes = $("<input type='button' value='通過' class='btn btn-success' style='margin-left: 5px;'></input>")
+							.attr('onclick', 'javascript:location.href="updateY?id=' +data[i].id + '"');
+						var btnNo = $("<input type='button' value='不通過' class='btn btn-danger' style='margin-left: 5px;'></input>")
+							.attr('onclick', 'javascript:location.href=\'updateN?id=' +data[i].id + '\'');
 						var rIsPassed = $("<td>尚未審核</td>");
 						var rFinishTime = $("<td>尚未審核</td>");
 					}else if(data[i].isPassed == "TRUE"){
+						btn.text("已審核");
 						var rIsPassed = $("<td style='color: green'>通過</td>");
 						var rFinishTime = $("<td>" +data[i].finishTime.year +"-" 
 								+data[i].finishTime.monthValue +"-"
 								+data[i].finishTime.dayOfMonth +"</td>");
 					}else if(data[i].isPassed == "FALSE"){
+						btn.text("已審核");
 						var rIsPassed = $("<td style='color: red'>不通過</td>");
 						var rFinishTime = $("<td>" +data[i].finishTime.year +"-" 
 								+data[i].finishTime.monthValue +"-"
@@ -146,20 +153,8 @@ $(function() {
 					var btnNo = $("<input type='button' value='不通過' class='btn btn-danger' style='margin-left: 5px;'></input>")
 						.attr('onclick', 'javascript:location.href=\'updateN?id=' +data[i].id + '\'');
 					var rId = $("<td>" +data[i].id +"</td>");
-					if(data[i].isPassed == null){
 						var rIsPassed = $("<td>尚未審核</td>");
 						var rFinishTime = $("<td>尚未審核</td>");
-					}else if(data[i].isPassed == "TRUE"){
-						var rIsPassed = $("<td style='color: green'>通過</td>");
-						var rFinishTime = $("<td>" +data[i].finishTime.year +"-" 
-								+data[i].finishTime.monthValue +"-"
-								+data[i].finishTime.dayOfMonth +"</td>");
-					}else if(data[i].isPassed == "FALSE"){
-						var rIsPassed = $("<td style='color: red'>不通過</td>");
-						var rFinishTime = $("<td>" +data[i].finishTime.year +"-" 
-								+data[i].finishTime.monthValue +"-"
-								+data[i].finishTime.dayOfMonth +"</td>");
-					}
 					var rProductName = $("<td><a href='/product/" + data[i].product.id +"'>" +data[i].product.name +"</a></td>");
 					var rArticle = $("<td>" +data[i].article +"</td>");
 					var rReporterId = $("<td>" +data[i].reporterId.name +"</td>");
@@ -196,20 +191,22 @@ $(function() {
 			$.each(data,function(i) {
 				var tr = $("<tr></tr>");
 				var btn = $("<td></td>");
-				var btnYes = $("<input type='button' value='通過' class='btn btn-success' style='margin-left: 5px;'></input>")
-					.attr('onclick', 'javascript:location.href="updateY?id=' +data[i].id + '"');
-				var btnNo = $("<input type='button' value='不通過' class='btn btn-danger' style='margin-left: 5px;'></input>")
-					.attr('onclick', 'javascript:location.href=\'updateN?id=' +data[i].id + '\'');
 				var rId = $("<td>" +data[i].id +"</td>");
 				if(data[i].isPassed == null){
+					var btnYes = $("<input type='button' value='通過' class='btn btn-success' style='margin-left: 5px;'></input>")
+						.attr('onclick', 'javascript:location.href="updateY?id=' +data[i].id + '"');
+					var btnNo = $("<input type='button' value='不通過' class='btn btn-danger' style='margin-left: 5px;'></input>")
+						.attr('onclick', 'javascript:location.href=\'updateN?id=' +data[i].id + '\'');
 					var rIsPassed = $("<td>尚未審核</td>");
 					var rFinishTime = $("<td>尚未審核</td>");
 				}else if(data[i].isPassed == "TRUE"){
+					btn.text("已審核");
 					var rIsPassed = $("<td style='color: green'>通過</td>");
 					var rFinishTime = $("<td>" +data[i].finishTime.year +"-" 
 							+data[i].finishTime.monthValue +"-"
 							+data[i].finishTime.dayOfMonth +"</td>");
 				}else if(data[i].isPassed == "FALSE"){
+					btn.text("已審核");
 					var rIsPassed = $("<td style='color: red'>不通過</td>");
 					var rFinishTime = $("<td>" +data[i].finishTime.year +"-" 
 							+data[i].finishTime.monthValue +"-"
