@@ -1,6 +1,7 @@
 package tw.com.softleader.e5e5.service;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import tw.com.softleader.e5e5.common.service.OurService;
 import tw.com.softleader.e5e5.dao.ExchangeDao;
 import tw.com.softleader.e5e5.dao.ProductDao;
 import tw.com.softleader.e5e5.dao.ReportDao;
+import tw.com.softleader.e5e5.dao.UserDao;
 import tw.com.softleader.e5e5.entity.Exchange;
 import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.entity.Report;
@@ -23,15 +25,24 @@ public class ReportService extends OurService<Report>{
 
 	@Autowired
 	private ReportDao reportDao;
-
+	@Autowired
+	private ProductDao productDao;
+	@Autowired
+	private UserDao userDao;
+	
 	@Transactional
-	public List<Report> findAllUnread(){
-		return reportDao.findAllUnread();
+	public List<Report> findAll(){
+		return reportDao.findAll();
 	}
 	
 	@Transactional
-	public List<Report> findHistory(){
-		return reportDao.findAllByOrderByReportTimeDesc();
+	public List<Report> findAllByName(String name){
+		return reportDao.findAllByName(name);
+	}
+	
+	@Transactional
+	public List<Report> findAllUnread(){
+		return reportDao.findAllUnread();
 	}
 	
 	@Transactional
@@ -58,33 +69,46 @@ public class ReportService extends OurService<Report>{
 	
 	//修改status pass
 	@Transactional
-	public int updateIsPassedPass(int id){
+	public Report updateIsPassedPass(int id){
 		Report temp = reportDao.findOne(id);
 		if(temp != null){
-//			temp.setIsPassed(TrueFalse.TRUE);
-			reportDao.save(temp);
-			return 1;
+			temp.setIsPassed(TrueFalse.TRUE);
+			temp.setFinishTime(LocalDateTime.now());
+			temp = reportDao.save(temp);
+			return temp;	
 		}
-		return 0;	
+		return reportDao.findOne(id);	
 	}
 	
 	//修改status not pass
 		@Transactional
-		public int updateIsPassedNotPass(int id){
+		public Report updateIsPassedNotPass(int id){
 			Report temp = reportDao.findOne(id);
 			if(temp != null){
-//				temp.setIsPassed(TrueFalse.FALSE);
-				reportDao.save(temp);
-				return 1;
+				temp.setIsPassed(TrueFalse.FALSE);
+				temp.setFinishTime(LocalDateTime.now());
+				temp = reportDao.save(temp);
+				return temp;
 			}
-			return 0;	
+			return reportDao.findOne(id);	
+		}
+	
+	//insert
+	@Transactional
+	public int insert(String article, int productId, int reporterId){
+		Report report = new Report();
+		report.setArticle(article);
+		report.setReportTime(LocalDateTime.now());
+		report.setProduct(productDao.findOne(productId));
+		report.setReporterId(userDao.findOne(reporterId));
+		report = reportDao.save(report);
+		if(report != null){
+			return 1;
+		}else{
+			return 0;
 		}
 		
-	//尚未處理之物品
-	@Transactional
-	public List<Report> findAllProductUnread(){
-		return reportDao.findAllProductUnread();
-	}
+	}	
 
 	@Override
 	public OurDao<Report> getDao() {
