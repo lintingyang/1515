@@ -70,6 +70,7 @@
 		});
 		
 		$("#haveSchoolEmil").on('click', function() {
+			$("#haveSchoolEmil").hide();
 			$('#checkVerificationCodeDiv').html('');
 			var divVerification = $('<div></div>').attr('id','divBorder').addClass("form-group");
 			var labelVerification = $('<label></label>').addClass("col-sm-2 control-label").attr('for','inputPassword3').text('輸入驗證碼');
