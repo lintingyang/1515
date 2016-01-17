@@ -14,6 +14,7 @@ import tw.com.softleader.e5e5.common.service.OurService;
 import tw.com.softleader.e5e5.dao.ExchangeDao;
 import tw.com.softleader.e5e5.dao.ProductDao;
 import tw.com.softleader.e5e5.dao.ReportDao;
+import tw.com.softleader.e5e5.dao.UserDao;
 import tw.com.softleader.e5e5.entity.Exchange;
 import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.entity.Report;
@@ -24,6 +25,10 @@ public class ReportService extends OurService<Report>{
 
 	@Autowired
 	private ReportDao reportDao;
+	@Autowired
+	private ProductDao productDao;
+	@Autowired
+	private UserDao userDao;
 	
 	@Transactional
 	public List<Report> findAll(){
@@ -87,7 +92,23 @@ public class ReportService extends OurService<Report>{
 			}
 			return reportDao.findOne(id);	
 		}
+	
+	//insert
+	@Transactional
+	public int insert(String article, int productId, int reporterId){
+		Report report = new Report();
+		report.setArticle(article);
+		report.setReportTime(LocalDateTime.now());
+		report.setProduct(productDao.findOne(productId));
+		report.setReporterId(userDao.findOne(reporterId));
+		report = reportDao.save(report);
+		if(report != null){
+			return 1;
+		}else{
+			return 0;
+		}
 		
+	}	
 
 	@Override
 	public OurDao<Report> getDao() {

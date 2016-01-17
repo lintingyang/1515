@@ -75,5 +75,17 @@ public class RepProductController {
 		}
 		return "/e715/back/repProductList";
 	}
+	
+	@RequestMapping("/new")
+	public String insert(Model model, @RequestParam("article")String article,
+			@RequestParam("productId")int productId, @RequestParam("reporterId")int reporterId){
+		int i = reportService.insert(article, productId, reporterId);
+		if(i == 1){
+			model.addAttribute("report", "success");
+		}else{
+			model.addAttribute("report", "fail");
+		}
+		return "/e715/product/product";
+	}
 
 }
