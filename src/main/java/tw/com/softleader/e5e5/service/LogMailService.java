@@ -59,5 +59,5 @@ public class LogMailService {
 		logMail.setIsDraft(TrueFalse.TRUE);
 		logMailDao.save(logMail);
 	}
-	
+
 }

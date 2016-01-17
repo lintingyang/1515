@@ -47,7 +47,7 @@ public class MailController {
 	@RequestMapping("/getbackup")
 	@ResponseBody
 	public List<LogMail> getbackup(@RequestParam("id")int senderId){
-		List<LogMail> backup =logMailService.getAllDraftBySender(senderId);
+		List<LogMail> backup =logMailService.getAllBackBySender(senderId);
 		return backup;
 	}
 	

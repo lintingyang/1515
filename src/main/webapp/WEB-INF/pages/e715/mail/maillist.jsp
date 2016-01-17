@@ -183,6 +183,9 @@ $(function(){
 $("#allmailbox").click(function(){
 	mailboxlist();//顯示所有郵件
 })
+$("#backupbox").click(function(){
+	backuplist();
+})
 //好友的下拉選單 
 $(".drop_down_btn").click(function(e){  
     e.stopPropagation();   
@@ -360,11 +363,47 @@ function showmail(data){
 	});
 }// end of showmail
 
-
-
-
-
-
+//==========================顯示寄件備份============================================================
+function backuplist(){
+	
+	var formData={"id":${user.id}};
+    	$.ajax({
+    		dataType: "json",
+       	 	contentType : "application/json",
+       		type: "GET",
+       		url: "/mail/getbackup",
+      		data: formData,
+       		success: function(data){
+       			showbackup(data);	
+    		}
+    
+    });
+   
+}
+function showbackup(data){
+	var index = 0;
+	var star = null;
+	var light = "<span class='glyphicon glyphicon-star' id='starno" + index + "'></span>";
+	var empty = "<span class='glyphicon glyphicon-star-empty' id='starno" + index + "'></span>"
+	$("#mailtable").html("");
+	$.each(data, function(){
+// 		console.log(this.isImportant);
+		if (this.isImportant == "TRUE"){
+			star = light;
+		} else {
+			star = empty;
+		}
+		var sendTime = this.sendTime.year + "/" + this.sendTime.monthValue + "/" + this.sendTime.dayOfMonth;
+		var draftRow = "<tr class='mailrow' id='draft" + index + "'>" +
+			"<td class='mailcheckbox'><input type='checkbox'></td>" + 
+			"<td>" + this.receiver.nickname + "(" + this.receiver.account + ")</td>" + 
+			"<td class='titlebox'>" + this.title + "//" + this.article + "</td>" +	
+			"<td style='text-align: right;'>" + sendTime + "</td>" +
+			"</tr>";
+	$("#mailtable").append(draftRow);
+	index ++;
+	})//寄件備份ＥＮＤ
+}
 //	=======================	草稿區塊===============================
 $("#draftbox").click(
 	function(){
@@ -450,7 +489,6 @@ function showdraft(data){
 	//按下更新草稿按鈕
 	$("#updatedraft").on("click",function(){
 		var mailIndex = $("#drafttitle").attr("name");
-		console.log(mailIndex);
 		swal({
 				type : "success",
 				title: "更新草稿",  
