@@ -14,14 +14,24 @@
   			<strong>恭喜您編輯商品成功！！</strong>    祝您有美好的一天    ^^
 		</div>
 		<ul class="nav nav-tabs " id="tabs">
-			<li style="width: 25%; text-align: center;"><a
-				class="categorylist searchbtn queryBtn" id = "posted" href="#">已刊登<span class="badge" id ="totalCount"></span></a></li>
-			<li style="width: 25%; text-align: center;"><a
+			<li style="width: 20%; text-align: center;"><a
+				class="categorylist searchbtn queryBtn" id = "posted" href="#">收到的交換<span class="badge" id ="totalCount"></span></a></li>
+			<li style="width: 20%; text-align: center;" class = "dropdown" ><a
+				class="categorylist searchbtn dropdown-toggle" data-toggle="dropdown" href="#">問與答<span class="badge" id ="totalCountQandA"></span></a>
+				<ul class="dropdown-menu">
+   			   		<li><a href="#" class = "queryBtn" id = "question">被提出問題<span class="badge" id ="totalCountQ"></span></a></li>
+     				<li><a href="#" class = "queryBtn" id = "answer">收到的回答<span class="badge" id ="totalCountA"></span></a></li>
+    			</ul>	
+			</li>
+			
+<!-- 			<li style="width: 20%; text-align: center;" ><a -->
+<!-- 				class="categorylist searchbtn queryBtn" id = "qAndA" href="#">問與答<span class="badge" id ="totalCountQ"></span></a>	</li>	 -->
+			<li style="width: 20%; text-align: center;"><a
 				class="categorylist searchbtn queryBtn" id = "notPost" href="#">未刊登</a></li>
-			<li style="width: 25%; text-align: center;"><a
-				class="categorylist searchbtn queryBtn" id = "exchanging" href="#">我想跟別人交換</a></li>
-			<li style="width: 25%; text-align: center;" class = "dropdown" ><a
-				class="categorylist searchbtn dropdown-toggle" data-toggle="dropdown" href="#">已交換<span class="caret"></span></a>
+			<li style="width: 20%; text-align: center;"><a
+				class="categorylist searchbtn queryBtn" id = "exchanging" href="#">提出的交換</a></li>
+			<li style="width: 20%; text-align: center;" class = "dropdown" ><a
+				class="categorylist searchbtn dropdown-toggle" data-toggle="dropdown" href="#">已交換</a>
 				<ul class="dropdown-menu">
    			   		<li><a href="#" class = "queryBtn" id = "OthersExchanged">別人刊登的，現在是我的。</a></li>
      				<li><a href="#" class = "queryBtn" id = "myExchanged">我刊登的，現在是別人的。</a></li>
@@ -41,7 +51,7 @@
 </div>
 
 <script type="text/javascript">
-var total = 0;
+var total = 0 , totalQ = 0 , totalA = 0;
 
 //銘新增的
 $(function(){
@@ -50,6 +60,7 @@ $(function(){
 		$('#thx').removeAttr('style');
 	}
 })
+
 $(function() { //進入物品管理先顯示已刊登
 	$.post("/product/query1",{ "query" : "posted" } ,function(data) { //點選排列方式後按照順序排列
 		
@@ -72,9 +83,14 @@ $(function() { //進入物品管理先顯示已刊登
 				$(aclick).append($(productimg)).append($(p));
 				$(productdiv).addClass("proddiv").append($(aclick));
 				
-	
+				getQandACount(data[i].id , "answer" , null);
 				getProductCount(data[i].id , "posted" , badgePost); // 已刊登欲交換數量
-			
+				
+// 				getQandACount(data[i].id , "question" , null);//
+				
+
+				
+				
 				getpicture(data[i], productimg);//productPic
 				
 				$(productdiv).append($(removeBtn));
@@ -133,7 +149,6 @@ $('.queryBtn').click(function() { //點選排列方式後按照順序排列
 			var aclick = $("<a>").attr("href","/product/"+data[i].id);
 			
 			if(type == "OthersExchanged" || type == "myExchanged"){ //已交換
-				console.log("exchangedif")
 // 				aclick = $("<a>").bind("onclick", getExchangedProduct(data[i].id)); //會直接跳轉
 				aclick = $("<a>").attr("onclick", "getExchangedProduct("+data[i].id+")");
 			}
@@ -145,6 +160,12 @@ $('.queryBtn').click(function() { //點選排列方式後按照順序排列
 			$(p).append($(badgePost));
 			$(aclick).append($(productimg)).append($(p));
 			$(productdiv).addClass("proddiv").append($(aclick));
+			
+			if(type == "question" || type == "answer"){
+				totalQ = 0;
+				totalA = 0;
+				getQandACount(data[i].id , type , badgePost); // 已刊登別人提出的問題
+			}
 			
 			if(type == "posted"){
 				getProductCount(data[i].id , type , badgePost); // 已刊登欲交換數量
@@ -181,6 +202,30 @@ function getExchangedProduct(productId){ //傳入productId 跳轉交易完成頁
 		location.href="/product/exchanging?id="+exchangeId;
 	})
 }
+
+function getQandACount(id , type ,badgePost){ // 已刊登別人提出的問題
+	$.post("/product/queryQA", {"id" : id , "query" : type } , function(count){
+		if(count>0){
+			if(count>10){
+				$(badgePost).text('10+');				
+			}else{
+				$(badgePost).text(count);
+			}
+			console.log("type="+ type);
+			if(type == "question"){
+				console.log("totalQ");
+				totalQ += count;
+				$('#totalCountQ').text(totalQ);
+			}
+			if(type == "answer"){
+				console.log("totaA");
+				totalA += count;
+				$('#totalCountA').text(totalA);
+			}
+			$('#totalCountQandA').text(totalQ+totalA);
+		}//count
+	})//post
+}//getQandACount
 
 function getProductCount(id , type ,badgePost){ // 已刊登欲交換數量
 	var data ={

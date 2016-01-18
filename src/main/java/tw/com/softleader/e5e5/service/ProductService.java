@@ -122,20 +122,19 @@ public class ProductService extends OurService<Product> {
 		return productDao.findUserPostedProductsByExchanged(userId);
 	}
 
-	
 	public List<Product> findByUserId(Integer id) {
 		return productDao.findByUserId(id);
 	}
 
 	// 後台
 	// (1)findOne byId
-	
+
 	public Product getOneById(Integer id) {
 		return productDao.findOne(id);
 	}
 
 	// (2)findAll
-	
+
 	public List<Product> getAllProducts() {
 		return productDao.findAll();
 	}
@@ -163,47 +162,47 @@ public class ProductService extends OurService<Product> {
 	}
 
 	// (1)最新商品列：fineAll byPostTime
-	
+
 	public List<Product> getProductsOrderByPostTime() {
 		return productDao.findAllByPostTime();
 	}
 
 	// (2)點擊次數排序商品列：findAll byClickTimes
-	
+
 	public List<Product> getProductsOrderByClickTimes() {
 		return productDao.findAllByClickTimes();
 	}
 
 	// (3)依商品名稱搜尋：findAll byName
-	
+
 	public List<Product> getProductsByName(String productKeywords) {
 		//
 		return productDao.findAllByName(productKeywords);
 	}
 
 	// (4)依商品交換地搜尋：findAll byLocation
-	
+
 	public List<Product> getProductsByLocation(String locationKeywords) {
 		//
 		return productDao.findAllByLocation(locationKeywords);
 	}
 
 	// (5)依會員名稱搜尋：findAll byUserName
-	
+
 	public List<Product> getProductsByUserName(String userName) {
 		//
 		return productDao.findAllByUserName(userName);
 	}
 
 	// (6)依會員學校搜尋：findAll byUserSchoolName
-	
+
 	public List<Product> getProductsByUserSchoolName(String userSchoolName) {
 		//
 		return productDao.findAllByUserSchoolName(userSchoolName);
 	}
 
 	// (7)依商品種類搜尋：findAll byProductCategory
-	
+
 	public List<Product> getProductsByProductCategory(String productCategory) {
 		//
 		return productDao.findAllByProductCategory(productCategory);
@@ -224,7 +223,7 @@ public class ProductService extends OurService<Product> {
 	// }
 
 	// (10) 關鍵字搜尋:產品名稱、交換地、使用者名稱、產品類別
-	
+
 	public List<Product> getAllByKeywords(String keywords) {
 		if (keywords.isEmpty()) {
 			return productDao.findAll();
@@ -270,10 +269,10 @@ public class ProductService extends OurService<Product> {
 		return product;
 
 	}
-	
-	//存primaryPicture(第一張圖) in product 的 primaryPicture column/yao
+
+	// 存primaryPicture(第一張圖) in product 的 primaryPicture column/yao
 	@Transactional
-	public Product insertPrimaryPic (int productId ,String primaryPicture){
+	public Product insertPrimaryPic(int productId, String primaryPicture) {
 		Product product = productDao.findOne(productId);
 		product.setPrimaryPicture(primaryPicture);
 		productDao.save(product);
@@ -308,16 +307,30 @@ public class ProductService extends OurService<Product> {
 		return productDao.findCountByProductBId(id);
 	}
 
+	// 查詢別人向我提出的Q&A/yao
+	public int findCountByProductAQA(Integer id) {
+		return productDao.findCountByProductAQA(id);
+	}
+
+	// 查詢我向別人提出的Q&A回覆數/yao
+	public int findCountByQuestionerQA(Integer productId, Integer userId) {
+		return productDao.findCountByQuestionerQA(productId, userId);
+	}
 	
+	//查詢我向別人提出的Q&A物品/yao
+	public List<Product> findProductByQuestionerQA(Integer userId){
+		return productDao.findProductByQuestionerQA(userId);
+	}
+
 	// 後台修改刊登狀態/ming
 	@Transactional
 	public Product updateBackPostStatus(Integer id, TrueFalse updateResult) {
 		Product product = productDao.findOne(id);
-		if(updateResult.equals(TrueFalse.TRUE)){
+		if (updateResult.equals(TrueFalse.TRUE)) {
 			product.setPostStatus(updateResult);
 			product = productDao.save(product);
 			return product;
-		}else if(updateResult.equals(TrueFalse.FALSE)){
+		} else if (updateResult.equals(TrueFalse.FALSE)) {
 			product.setPostStatus(updateResult);
 			product.setStartTime(null);
 			product.setDeadline(null);
@@ -327,14 +340,14 @@ public class ProductService extends OurService<Product> {
 			product.setWishItem(null);
 			product = productDao.save(product);
 			return product;
-		}else{
+		} else {
 			return product;
 		}
 	}
-	
+
 	// 刪除product的primaryPic的物品圖片/yao
 	@Transactional
-	public boolean deletePrimaryPic(int productId ,ServletContext servletContext){
+	public boolean deletePrimaryPic(int productId, ServletContext servletContext) {
 		Product product = productDao.findOne(productId);
 		String productPath = product.getPrimaryPicture();
 		String realPath = servletContext.getRealPath(productPath).replace('/', '\\');
@@ -348,7 +361,7 @@ public class ProductService extends OurService<Product> {
 			return false;
 		}
 	}
-	
+
 	// 刪除product_picture的物品圖片/yao
 	@Transactional
 	public boolean deleteImage(int id, int index, ServletContext servletContext) {
