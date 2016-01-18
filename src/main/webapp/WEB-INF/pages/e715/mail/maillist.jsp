@@ -51,7 +51,7 @@ tr.mailrow:hover td{
 		<div class="checkbox col-md-1" >
     		<label><input type="checkbox" id="checkAll">&nbsp;全選</label>
 		</div>
-		<div id="deletebtn" class ="col-md-1 deletebtn"><span class="glyphicon glyphicon-trash"></span></div>
+		<div  id="deletebtn" class ="col-md-1 deletebtn"><span style="cursor: pointer;" class="glyphicon glyphicon-trash"></span></div>
 	</div><!-- 全選與刪除欄位END -->
 	
 	
@@ -198,15 +198,33 @@ tr.mailrow:hover td{
 //刪除按鈕
 $("#deletebtn").click(function(){
 	var checkbox = $("[name='check']:checked");
-	console.log(checkbox[1]);
-	for(i =0;i<checkbox.length;i++){
-		$.ajax({
-			dataType: "json",
-			type: "get",
-			url: "/mail/deletemail",
-			data: {deletemail : checkbox[i].id}
-		});
-	}	location.href="/mail/list";
+	console.log(checkbox);
+	if(checkbox.length==0){
+		swal("沒有選擇要刪除的信件", "你沒有選擇任何要刪除的信件", "warning")
+	}else{
+	swal({  
+		title: "你確定要刪除這封信嗎?",   
+		text: "刪除的信件無法再回復!",   
+		type: "warning",   showCancelButton: true,  
+		confirmButtonColor: "#DD6B55",   
+		confirmButtonText: "是的!我要刪除!",   
+		cancelButtonText:"取消",
+		closeOnConfirm: false 
+		}, 
+		function(){   
+				var checkbox = $("[name='check']:checked");
+				console.log(checkbox[1]);
+				for(i =0;i<checkbox.length;i++){
+					$.ajax({
+						dataType: "json",
+						type: "get",
+						url: "/mail/deletemail",
+						data: {deletemail : checkbox[i].id}
+					});
+				}	
+				location.href="/mail/list";
+			});
+	}
 })
 
 //編輯新郵件
