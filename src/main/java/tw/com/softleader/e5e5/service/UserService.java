@@ -93,6 +93,7 @@ public class UserService extends OurService<User> {
 		//發送驗證碼
 		String host = "smtp.gmail.com";  
         int port = 587;  
+        //本網站專用的電子信箱
         final String username = "e715number01@gmail.com";  
         final String password = "EEIT82DB";  
         final Integer newVerificationCode = (int)(Math.random()*9999);

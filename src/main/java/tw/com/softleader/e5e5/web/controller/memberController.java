@@ -116,14 +116,15 @@ public class memberController {
 
 		return "/e715/user/myProfile";
 	}
-
+	
+	//找尋密碼頁面
 	@RequestMapping(value = "/findPassword", method = RequestMethod.GET)
 	public String findPasswordPage(HttpSession session) {
 		session.removeAttribute("schoolEmail");
 		return "/e715/user/findPassWord1";
 	}
 
-
+	//找尋密碼第一步
 	@RequestMapping(value = "/findPasswordStep1")
 	@ResponseBody
 	public boolean findPasswordStep1(@RequestParam("userSchoolEmail") String schoolEmail, HttpSession session) {
@@ -144,7 +145,7 @@ public class memberController {
 		
 	}
 	
-	
+	//找尋密碼第2步
 	@RequestMapping(value = "/findPasswordStep2")
 	public String findPasswordStep2(@RequestParam("schoolEmail") String schoolEmail , 
 		@RequestParam("verificationCode") String stVerificationCode, HttpSession session){
@@ -166,7 +167,7 @@ public class memberController {
 			return "/e715/user/findPassWord1ver";
 		}
 	}
-	
+	//找尋密碼第3步
 	@RequestMapping(value = "/findPasswordStep3")
 	public String findPasswordStep3(
 			@RequestParam("newPassword") String newPassword,
@@ -213,7 +214,8 @@ public class memberController {
 		}
 
 	}
-
+	
+	//更新密碼
 	@RequestMapping(value = "/updataPwd", method = RequestMethod.GET)
 	public String updataPwd(Model model,@RequestParam("oldPwd") String oldPwd, @RequestParam("newPwd") String newPwd,
 			@RequestParam("newPwdCheck") String newPwdCheck, HttpSession session) {
@@ -241,6 +243,18 @@ public class memberController {
 		}
 	}
 
+	@RequestMapping(value = "/checkOldPwd")
+	@ResponseBody
+	public boolean checkOldPwd(HttpSession session,@RequestParam("oldPassword") String oldPassword){
+		boolean result = false;
+		User user = (User)session.getAttribute("user");
+		if(user.getPassword().equals(oldPassword)){
+			result= true;
+		}
+		return result;
+	}
+	
+	
 	@RequestMapping(value = "/editProfile", method = RequestMethod.GET)
 	public String editProfile(Model model, HttpSession session) {
 		User user = (User) session.getAttribute("user");
@@ -261,7 +275,6 @@ public class memberController {
 			@RequestParam("month") String month, @RequestParam("day") String day, @RequestParam("year") String year,
 			@RequestParam("phone") String phone, @RequestParam("email") String email,
 			@RequestParam("subject") String subject, @RequestParam("addr") String addr,
-			// @RequestParam("interested") List<Integer> interested,
 			@RequestParam("aboutMe") String aboutMe, HttpSession session) {
 		User user = (User) session.getAttribute("user");
 		if(user == null ){
@@ -276,7 +289,7 @@ public class memberController {
 			// 讀取新圖跟砍檔(別忘記jsp的enctype
 			if (!file.isEmpty()) {
 				//使用者有圖片的話就砍黨
-				if (!user.getPicture().isEmpty()) {
+				if (user.getPicture() != null) {
 					userService.deleteImage(user.getId(), servletContext);
 				}
 				String path = userService.upLoadImage(user.getId(), servletContext, file);

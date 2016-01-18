@@ -179,7 +179,7 @@ $('.queryBtn').click(function() { //點選排列方式後按照順序排列
 			var productimg = $("<img>").addClass("prodimg");
 			var p = $("<span>").text(data[i].name);
 			var badgePost = $("<span>").addClass("badge pCount");
-			$(p).append($(badgePost));y
+			$(p).append($(badgePost));
 			$(aclick).append($(productimg)).append($(p));
 			$(productdiv).addClass("proddiv").append($(aclick));
 			

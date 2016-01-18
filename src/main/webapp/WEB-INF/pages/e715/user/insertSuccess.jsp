@@ -33,7 +33,7 @@
 		});
 		
 		$("#perfectData").on('click', function() {
-			window.location.href = "/e715/user/completeMaterial";
+			window.location.href = "/head/completeMaterialPage";
 		});
 		
 	});

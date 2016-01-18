@@ -17,7 +17,7 @@
 					<label for="inputPassword3" class="col-sm-2 control-label">輸入舊密碼:</label>
 					<div class="col-sm-10">
 						<input type="password" class="form-control textSize"
-							name="oldPwd" placeholder="Password" maxlength="15" id="oldPassword" required>
+							name="oldPwd" placeholder="Password" maxlength="15" id="oldPassword" name="oldPassword" required>
 							<span id="oldPasswordErrorMsg">${oldPasswodFalse}</span>
 					</div>
 				</div>
@@ -55,15 +55,27 @@
 </div>
 <script>
 //確認舊密碼欄位有無輸入
-// $('#oldPassword').blur(function() {
-// 	var oldPassword = $('#oldPassword').val();
-// // 	if (oldPassword.length <= 6){
-// // 		$('#oldPasswordErrorMsg').html('');
-// // 		$('#oldPasswordErrorMsg').append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>長度不正確</span>");
-// // 	}else{
-// // 		$('#oldPasswordErrorMsg').html('');
-// // 	}
-// })
+$('#oldPassword').blur(function() {
+	var oldPassword = {"oldPassword":$('#oldPassword').val()};
+	$.ajax({
+		contentType : "application/json",
+		url : "/E715Member/checkOldPwd",
+		dataType : "text",
+		type : "get",
+		data : oldPassword,
+		success : function(data) {	
+			console.log(data);
+			if(data=="true"){
+				$('#oldPasswordErrorMsg').empty();	
+			}else{
+				$('#oldPasswordErrorMsg').empty();
+				$('#oldPasswordErrorMsg').append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>舊密碼錯誤</span>");
+			}
+			//success的下括號
+			}
+	//ajax的下括號
+		});
+})
 // //確認新密碼格式
 // $('#newPassword').blur(function() {
 // 	var newPassword = $('#newPassword').val();
