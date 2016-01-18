@@ -195,7 +195,12 @@ public class headerController {
 			user.setBirthday(dateTime);
 		} catch (Exception e) {
 		}
-		user.setPhone(phone);
+		log.error("----------------------"+phone.substring(0, 1));
+		if (phone.substring(0, 1).equals("09")) {
+			user.setCellphone(phone);
+		} else {
+			user.setPhone(phone);
+		}
 		user.setEmail(email);
 		userService.update(user);
 		User login = userService.login(account, password);
@@ -210,11 +215,11 @@ public class headerController {
 	}
 	
 	//完善資料
-	@RequestMapping(value = "/completeMaterial", method = RequestMethod.GET)
+	@RequestMapping(value = "/completeMaterial")
 	public String completeMaterial(
 			@RequestParam("subject") String subject,
 			@RequestParam("addr") String addr,
-			 @RequestParam("file") MultipartFile userFile,
+			@RequestParam("file") MultipartFile userFile,
 			@RequestParam("aboutMe") String aboutMe,
 			HttpSession session){
 			User user = (User)session.getAttribute("user");
@@ -223,7 +228,7 @@ public class headerController {
 		}else{
 			user.setSubject(subject);
 			user.setAddress(addr);
-			if (!userFile.isEmpty()) {
+			if (userFile!=null) {
 				String path = userService.upLoadImage(user.getId(), servletContext, userFile);
 				user.setPicture(path);
 			}
@@ -240,6 +245,11 @@ public class headerController {
 
 		return "/e715/user/insertSuccess";
 
+	}
+	
+	@RequestMapping(value = "/completeMaterialPage", method = RequestMethod.GET)
+	public String completeMaterialPage(){
+		return "/e715/user/completeMaterial";
 	}
 
 }

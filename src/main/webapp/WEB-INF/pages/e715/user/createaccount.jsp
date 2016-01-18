@@ -96,8 +96,8 @@ function Dateblur() {
 					<label class="col-sm-2 control-label" >帳號:</label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control textSize" id="account" name="account"
-							placeholder="請輸入您的帳號" maxlength="15" required> ${errors.account}
-						<button id="checkAccount">確認帳號</button>
+							placeholder="請輸入您的帳號" maxlength="15" required> ${errors.account}<span id="checkAccountSpan"></span>
+<%-- 						<button id="checkAccount">確認帳號</button> --%>
 					</div>
 
 
@@ -181,7 +181,28 @@ function Dateblur() {
 
 </div>
 <script>
-	$('#checkAccount').on('click',function(){
+// 	$('#checkAccount').on('click',function(){
+// 		var sendAccount = {'checkAccount':$('#account').val()}
+// 		$.ajax({
+// 			contentType : "application/json",
+// 			url : "/head/checkAccount",
+// 			dataType : "text",
+// 			type : "get",
+// 			data : sendAccount,
+// 			success : function(data) {	
+// 				console.log(data);
+// 				if(data=="true"){
+// 					swal("此帳號可以使用", "", "success");
+// 				}else{
+// 					swal("帳號已有人使用", "", "warning");
+// 				}
+// 				//success的下括號
+// 				}
+// 		//ajax的下括號
+// 			});
+// 	});
+
+$('#account').on('blur',function(){
 		var sendAccount = {'checkAccount':$('#account').val()}
 		$.ajax({
 			contentType : "application/json",
@@ -190,19 +211,20 @@ function Dateblur() {
 			type : "get",
 			data : sendAccount,
 			success : function(data) {	
-				if(data){
-					swal("此帳號可以使用", "", "success");
+				console.log(data);
+				if(data=="true"){
+					$('#checkAccountSpan').empty();
+					$('#checkAccountSpan').append("<img src='/resources/icon/trueimg1.png' /><span style='color:red;font-size:1px'>帳號可以使用</span>");		
 				}else{
-					swal("帳號已有人使用", "", "warning");
+					$('#checkAccountSpan').empty();
+					$('#checkAccountSpan').append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>帳號已有人使用</span>");
 				}
 				//success的下括號
 				}
 		//ajax的下括號
 			});
-		
-		
-		
 	});
+
 
 
 </script>

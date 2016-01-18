@@ -7,8 +7,8 @@
 <div class="container" style="margin: 50px auto;">
 	<div class="row">
 		<div class="col-md-1 col-md-offset-5">
-			<img class="img-circle" style="width: 150px;"
-				src="/resources/imgs/noname.jpg">
+			<img class="img-circle" id="dropZone" name="headPortrait"
+				style="width: 100px" src="${user.picture}">
 		</div>
 	</div>
 	<hr>
