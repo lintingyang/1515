@@ -24,8 +24,8 @@
 	box-shadow:0px 0px 1px gray;
 	 background: white;
 	}
-.prodText{
-	color:purple;
+h4{
+	color:gray;
 }
 
 </style>
@@ -105,7 +105,7 @@ $(function() { //進入物品管理先顯示已刊登
 				var productdiv = $("<div></div>");
 				var aclick = $("<a>").attr("href","/product/"+data[i].id);
 				var productimg = $("<img>").addClass("prodimg");
-				var p = $("<span></span>").text(data[i].name).addClass("prodText");
+				var p = $("<h4></h4>").text(data[i].name).addClass("prodText");
 				var badgePost = $("<span></span>").addClass("badge pCount");
 				$(p).append($(badgePost));
 				$(aclick).append($(productimg)).append($(p));
@@ -177,7 +177,7 @@ $('.queryBtn').click(function() { //點選排列方式後按照順序排列
 			
 			var productdiv = $("<div></div>");
 			var productimg = $("<img>").addClass("prodimg");
-			var p = $("<span>").text(data[i].name);
+			var p = $("<h4></h4>").text(data[i].name);
 			var badgePost = $("<span>").addClass("badge pCount");
 			$(p).append($(badgePost));
 			$(aclick).append($(productimg)).append($(p));
@@ -245,7 +245,7 @@ function getQandACount(id , type ,badgePost){ // 已刊登別人提出的問題
 				$('#totalCountA').text(totalA);
 			}
 			
-			$('#totalCountQandA').text(totalQ+totalA);
+			$('#totalCountQandA').text(totalQ);
 		}//count
 	})//post
 }//getQandACount

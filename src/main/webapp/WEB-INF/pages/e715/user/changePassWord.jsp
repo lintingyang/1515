@@ -146,7 +146,6 @@ $('#newPasswordCheck').blur(function() {
 // 							$('#formCenter').submit(); }, 1500);
 // 								}
 // 							);
-				
 // 			}else{
 // 				$('#oldPasswordErrorMsg').html('');
 // 				$('#oldPasswordErrorMsg').append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>原密碼輸入錯誤</span>");
