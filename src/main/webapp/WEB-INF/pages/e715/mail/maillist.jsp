@@ -39,7 +39,7 @@ tr.mailrow:hover td{
 		<ul class="nav nav-pills maillist">
 		  <li role="presentation" class="active"><button id="editnewmail" type="button" class="btn btn-danger btn-lg" style="width:100px;"><span >撰寫</span></button></li>
 		  <li role="presentation" id="allmailbox"><a href="#">收件匣</a></li>
-		  <li role="presentation"><a href="#">重要信件</a></li>
+		  <li role="presentation" id="importantbox"><a href="#">重要信件</a></li>
 		  <li role="presentation" id="draftbox"><a href="#" >草稿</a></li>
 		  <li role="presentation" id="backupbox"><a href="#">寄件備份</a></li>
 
@@ -51,7 +51,7 @@ tr.mailrow:hover td{
 		<div class="checkbox col-md-1" >
     		<label><input type="checkbox" id="checkAll">&nbsp;全選</label>
 		</div>
-		<div id="deletebtn" class ="col-md-1 deletebtn"><span class="glyphicon glyphicon-trash"></span></div>
+		<div id="deletebtn" class ="col-md-1 deletebtn"><span class="glyphicon glyphicon-trash" style="cursor:pointer;"></span></div>
 	</div><!-- 全選與刪除欄位END -->
 	
 	
@@ -323,9 +323,13 @@ $("#savedraft").click(function(){
 	
 })//按下儲存草稿END
 
+
+
 //================顯示收件匣====================================
-function mailboxlist(){
 	
+	
+	
+function mailboxlist(){
 	var formData={"id":${user.id}};
     	$.ajax({
        		type: "GET",
@@ -337,7 +341,6 @@ function mailboxlist(){
     	dataType: "json",
    	 	contentType : "application/json"
     });
-   
 }
 function showmail(data){
 	var index = 0;
@@ -367,11 +370,8 @@ function showmail(data){
 		var isImportant = $(this).hasClass("glyphicon-star").toString();
 		var starIndex = $(this).attr("id").substring(6);
 		var starData = {"id":data[starIndex].id, "isImportant": isImportant};
-		console.log(starIndex);
-		console.log(starData);
 		$.ajax({
 	    	dataType: "json",
-//  	   	 	contentType : "application/json",
        		type: "GET",
        		url: "/mail/important",
       		data: starData,
@@ -402,9 +402,13 @@ function showmail(data){
 	});
 }// end of showmail
 
+
+
 //==========================顯示寄件備份============================================================
-function backuplist(){
+
 	
+	
+function backuplist(){
 	var formData={"id":${user.id}};
     	$.ajax({
     		dataType: "json",
@@ -415,28 +419,17 @@ function backuplist(){
        		success: function(data){
        			showbackup(data);	
     		}
-    
     });
-   
 }
 function showbackup(data){
 	var index = 0;
-	var star = null;
-	var light = "<span class='glyphicon glyphicon-star' id='starno" + index + "'></span>";
-	var empty = "<span class='glyphicon glyphicon-star-empty' id='starno" + index + "'></span>"
 	$("#mailtable").html("");
 	$.each(data, function(){
 // 		console.log(this.isImportant);
-		if (this.isImportant == "TRUE"){
-			star = light;
-		} else {
-			star = empty;
-		}
 		var sendTime = this.sendTime.year + "/" + this.sendTime.monthValue + "/" + this.sendTime.dayOfMonth;
 		var mailRow = "<tr class='mailrow'>" +
 			"<td class='mailcheckbox'><input type='checkbox'></td>" + 
-			"<td class='importantbox'>" + star + "</td>" +
-			"<td>" + this.receiver.nickname + "(" + this.receiver.account + ")</td>" + 
+			"<td class='namebox'>" + this.receiver.nickname + "(" + this.receiver.account + ")</td>" + 
 			"<td class='mailBody' id='backno" + index + "' style='cursor:pointer'>" + this.title + "//" + this.article + "</td>" +
 			"<td style='text-align: right;'>" + sendTime + "</td>" +
 			"</tr>";
@@ -462,7 +455,13 @@ function showbackup(data){
 	});
 }//寄件備份END
 
+
+
+
 //	=======================	草稿區塊===============================
+	
+	
+	
 $("#draftbox").click(
 	function(){
 		var formData={"id":${user.id}};
@@ -476,7 +475,6 @@ $("#draftbox").click(
 // 	       			console.log(data);
  	       			showdraft(data);
 	    		},
-
 	    	});
 	}
 )
@@ -576,6 +574,30 @@ function showdraft(data){
 }
 //按下草稿列表END
 
+
+
+//	=======================	重要信件區塊===============================
+	
+	
+	
+$("#importantbox").click(
+	function(){
+		var formData={"id":${user.id}};
+	    	$.ajax({
+		    	dataType: "json",
+		   	 	contentType : "application/json",
+	       		type: "GET",
+	       		url: "/mail/getimportant",
+	      		data: formData,
+	       		success: function(data){
+// 	       			console.log(data);
+					showmail(data);
+	    		},
+	    	});
+	}
+)	
+	
+	
 </script>
 
 

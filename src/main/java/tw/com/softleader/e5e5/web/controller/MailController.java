@@ -42,10 +42,18 @@ public class MailController {
 	
 	@RequestMapping("/getmail")
 	@ResponseBody
-	public List<Mail> getmail(@RequestParam("id")int id){
-		List<Mail> mails = mailService.getAllMailByReceiver(id);
+	public List<Mail> getmail(@RequestParam("id")int receiverId){
+		List<Mail> mails = mailService.getAllMailByReceiver(receiverId);
 		return mails;
 	}
+	
+	@RequestMapping("/getimportant")
+	@ResponseBody
+	public List<Mail> getimportant(@RequestParam("id")int receiverId){
+		List<Mail> mails = mailService.getImportantMails(receiverId);
+		return mails;
+	}
+	
 	@RequestMapping("/getdraft")
 	@ResponseBody
 	public List<LogMail> getdraft(@RequestParam("id")int senderId){
