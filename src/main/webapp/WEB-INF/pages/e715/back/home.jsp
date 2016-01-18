@@ -17,8 +17,8 @@
 
 	<div class="jumbotron">
 		<div class="container" align="center">
-			<h3 style="letter-spacing: 3px; color: blue;">E715 一起易物 後台管理站</h3>
-			<img alt="" src="/resources/imgs/backIndex.jpg" class="img-thumbnail">
+			<img alt="" src="/resources/imgs/logo_c.png" >
+			<h2>E715 一起易物 後台管理站</h2>
 		</div>
 	</div>
 	<c:import url="/WEB-INF/pages/layout/footer.jsp"></c:import>

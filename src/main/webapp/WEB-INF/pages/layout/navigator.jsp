@@ -10,7 +10,7 @@
 		<table width="100%" border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td bgcolor="#FFFFFF" width="65%">
-				<img src='<c:url value="/assets/softleader/images/logo100.png"/>'border='0' />
+<%-- 				<img src='<c:url value="/resources/imgs/logo_c.png"/>' width="100" border='0' /> --%>
 				</td>
 				<td bgcolor="#FFFFFF" valign="bottom" width="35%">
 					<%-- runtime ENV : <b>${env}</b>(請至系統參數設定調整)<br/> --%>

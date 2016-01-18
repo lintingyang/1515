@@ -53,7 +53,7 @@
 						<li>${product.userId.schoolName}
 						<li>
 					</ul></li>
-				<li><span class="glyphicon glyphicon-plus">123</span></li>
+<!-- 				<li><span class="glyphicon glyphicon-plus">123</span></li> -->
 
 			</ul>
 		</div>
