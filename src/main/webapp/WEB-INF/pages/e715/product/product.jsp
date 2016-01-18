@@ -448,7 +448,7 @@ $(function(){
 					 '"></li><li><ul style="list-style: none;"><li><h4>'+
 					 this.productBId.userId.account+'</h4></li><li>'+
 					 this.productBId.userId.name +'</li><li>'+this.productBId.userId.schoolName+
-					 '</li></ul></li><li><span class="glyphicon glyphicon-plus">123</span></li></ul></div></td></tr>');
+					 '</li></ul></li></ul></div></td></tr>');
 //	end of show Exchange (A->B)
 //	交易結束鎖定
 			if(this.tradeStatus=="TRUE"){
