@@ -37,7 +37,7 @@ tr.mailrow:hover td{
 	<div><!-- 	功能列表欄位 -->
 		<br>
 		<ul class="nav nav-pills maillist">
-		  <li role="presentation" class="active"><button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#editemail" style="width:100px;"><span >撰寫</span></button></li>
+		  <li role="presentation" class="active"><button id="editnewmail" type="button" class="btn btn-danger btn-lg" style="width:100px;"><span >撰寫</span></button></li>
 		  <li role="presentation" id="allmailbox"><a href="#">收件匣</a></li>
 		  <li role="presentation"><a href="#">重要信件</a></li>
 		  <li role="presentation" id="draftbox"><a href="#" >草稿</a></li>
@@ -176,6 +176,11 @@ tr.mailrow:hover td{
 <!-- 編輯草稿畫面 END -->
   
 <script>
+$("#editnewmail").click(function(){
+	$("#receiver").val("");
+	$("#editemail").modal();
+})
+
 //onload
 $(function(){
 	mailboxlist();//顯示所有郵件
@@ -200,6 +205,7 @@ $(".drop_down_btn").click(function(e){
 $(".friendli").click(function(e){   
     e.stopPropagation();   
     $("#receiver").val($(this).text());   
+    $("#draftreceiver").val($(this).text());   
     $(".input_select_block ul").hide();   
 }); 
 $(function(){
@@ -219,6 +225,7 @@ $(function(){
 				$(".friendli[name="+data[i].userBId.account+"]").bind("click",function(e){   
 				    e.stopPropagation();   
 				    $("#receiver").val($(this).attr("name"));   
+				    $("#draftreceiver").val($(this).attr("name"));   
 				    $(".input_select_block ul").hide();   
 				}); 
 			})
