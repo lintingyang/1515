@@ -492,17 +492,17 @@ function showdraft(data){
 			var receivername = this.receiver.nickname;
 			var receiveraccount = "(" +this.receiver.account+")";
 		}
-		var draftRow = "<tr class='mailrow' id='draft" + index + "'>" +
+		var draftRow = "<tr class='mailrow'>" +
 			"<td class='mailcheckbox'><input name='check' id='logm"+this.id+"' type='checkbox'></td>" + 
 			"<td class='namebox' >" + receivername +  receiveraccount + "</td>" + 
-			"<td class='titlebox'>" + this.title + "//" + this.article + "</td>" +
+			"<td class='titlebox' id='draft" + index + "'>" + this.title + "//" + this.article + "</td>" +
 			"<td style='text-align: right;'>" + draftTime + "</td>" +
 			"</tr>";
 		$("#mailtable").append(draftRow);
 		index ++;
 	})//end of .each
 
-	$(".mailrow").on("click", function(){
+	$(".titlebox").on("click", function(){
 
 		$("#drafttitle").empty();		
 		$("#draftarticle").empty();
