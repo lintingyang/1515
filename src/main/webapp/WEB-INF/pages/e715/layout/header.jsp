@@ -44,7 +44,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/"><img style="margin-top: -.6em" src="/resources/imgs/logo.png" width="40"></a>
+			<a class="navbar-brand" href="/"><img style="margin-top: -.6em" src="/resources/imgs/logo_c.png" width="40"></a>
 			<a class="navbar-brand" href="/">E715</a>
 		</div>
 		<form class="navbar-form navbar-left" role="search" action="/head/search">

@@ -235,9 +235,6 @@ h4{
 		$('#pCategory').val('${productY.productCategory.id}');//預設的分類
 		$("input[name=status][value='${productY.status}']").attr('checked',true);//預設的物品狀態
 // 		$("input[name=postStatus][value='${productY.postStatus}']").attr('checked',true);//預設刊登與否
-// 		$("input[name=transactionTime][value='${productY.transactionTime}']").attr('checked',true);//預設交易時間
-// 		$('#location').val('${productY.location}');//預設交易地點
-// 		$("input[name=tradeWay][value='${productY.tradeWay}']").attr('checked',true);//預設交易方式
 // 		$("input[name=wishItem][value='${productY.wishItem}']").attr('checked',true);//預設希望物品
 // 		$('#pWishItem').removeAttr('required');//預設希望商品
 // 		var wishItem = "${productY.wishItem}";

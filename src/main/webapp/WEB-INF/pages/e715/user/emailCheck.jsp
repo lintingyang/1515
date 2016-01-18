@@ -132,6 +132,7 @@
 						<option value="@mail.ncku.edu.tw">成功大學</option>
 						<option value="@ccu.edu.tw">中正大學</option>
 						<option value="@mail.yzu.edu.tw">元智大學</option>
+						<option value="@stu.ntue.edu.tw">台北教育大學</option>
 					</select>(*必須)
 					</div>
 				</div>

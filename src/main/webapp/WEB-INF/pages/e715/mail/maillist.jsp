@@ -51,7 +51,7 @@ tr.mailrow:hover td{
 		<div class="checkbox col-md-1" >
     		<label><input type="checkbox" id="checkAll">&nbsp;全選</label>
 		</div>
-		<div id="deletebtn" class ="col-md-1 deletebtn"><span class="glyphicon glyphicon-trash" style="cursor:pointer;"></span></div>
+		<div  id="deletebtn" class ="col-md-1 deletebtn"><span style="cursor: pointer;" class="glyphicon glyphicon-trash"></span></div>
 	</div><!-- 全選與刪除欄位END -->
 	
 	
@@ -198,15 +198,33 @@ tr.mailrow:hover td{
 //刪除按鈕
 $("#deletebtn").click(function(){
 	var checkbox = $("[name='check']:checked");
-	console.log(checkbox[1].id);
-	for(i =0;i<checkbox.length;i++){
-		$.ajax({
-			dataType: "json",
-			type: "get",
-			url: "/mail/deletemail",
-			data: {deletemail : checkbox[i].id}
-		});
-	}	
+	console.log(checkbox);
+	if(checkbox.length==0){
+		swal("沒有選擇要刪除的信件", "你沒有選擇任何要刪除的信件", "warning")
+	}else{
+	swal({  
+		title: "你確定要刪除這封信嗎?",   
+		text: "刪除的信件無法再回復!",   
+		type: "warning",   showCancelButton: true,  
+		confirmButtonColor: "#DD6B55",   
+		confirmButtonText: "是的!我要刪除!",   
+		cancelButtonText:"取消",
+		closeOnConfirm: false 
+		}, 
+		function(){   
+				var checkbox = $("[name='check']:checked");
+				console.log(checkbox[1]);
+				for(i =0;i<checkbox.length;i++){
+					$.ajax({
+						dataType: "json",
+						type: "get",
+						url: "/mail/deletemail",
+						data: {deletemail : checkbox[i].id}
+					});
+				}	
+				location.href="/mail/list";
+			});
+	}
 })
 
 //編輯新郵件
@@ -428,8 +446,9 @@ function showbackup(data){
 // 		console.log(this.isImportant);
 		var sendTime = this.sendTime.year + "/" + this.sendTime.monthValue + "/" + this.sendTime.dayOfMonth;
 		var mailRow = "<tr class='mailrow'>" +
-			"<td class='mailcheckbox'><input type='checkbox'></td>" + 
-			"<td class='namebox'>" + this.receiver.nickname + "(" + this.receiver.account + ")</td>" + 
+			"<td class='mailcheckbox'><input name='check' id='logm"+this.id+"' type='checkbox'></td>" + 
+			"<td class='importantbox'>" + star + "</td>" +
+			"<td>" + this.receiver.nickname + "(" + this.receiver.account + ")</td>" + 
 			"<td class='mailBody' id='backno" + index + "' style='cursor:pointer'>" + this.title + "//" + this.article + "</td>" +
 			"<td style='text-align: right;'>" + sendTime + "</td>" +
 			"</tr>";
@@ -490,17 +509,17 @@ function showdraft(data){
 			var receivername = this.receiver.nickname;
 			var receiveraccount = "(" +this.receiver.account+")";
 		}
-		var draftRow = "<tr class='mailrow' id='draft" + index + "'>" +
-			"<td class='mailcheckbox'><input type='checkbox'></td>" + 
+		var draftRow = "<tr class='mailrow'>" +
+			"<td class='mailcheckbox'><input name='check' id='logm"+this.id+"' type='checkbox'></td>" + 
 			"<td class='namebox' >" + receivername +  receiveraccount + "</td>" + 
-			"<td class='titlebox'>" + this.title + "//" + this.article + "</td>" +
+			"<td class='titlebox' id='draft" + index + "'>" + this.title + "//" + this.article + "</td>" +
 			"<td style='text-align: right;'>" + draftTime + "</td>" +
 			"</tr>";
 		$("#mailtable").append(draftRow);
 		index ++;
 	})//end of .each
 
-	$(".mailrow").on("click", function(){
+	$(".titlebox").on("click", function(){
 
 		$("#drafttitle").empty();		
 		$("#draftarticle").empty();
