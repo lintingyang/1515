@@ -110,7 +110,10 @@ $(function() {
 								+data[i].finishTime.monthValue +"-"
 								+data[i].finishTime.dayOfMonth +"</td>");
 					}
-					var rProductName = $("<td><a href='/product/" + data[i].product.id +"'>" +data[i].product.name +"</a></td>");
+					var rProductName = $("<td></td>");
+					var a = $("<a href>" + data[i].product.name +"<a>")
+						.attr("onclick", "window.open(' /product/" + data[i].product.id +" ', 'e715', config='height=500,width=500,left=400,top=50');");
+// 					var rProductName = $("<td><a href='/product/" + data[i].product.id +"'>" +data[i].product.name +"</a></td>");
 					var rArticle = $("<td>" +data[i].article +"</td>");
 					var rReporterId = $("<td>" +data[i].reporterId.name +"</td>");
 					var rReportTime = $("<td>" +data[i].reportTime.year +"-" 
@@ -118,6 +121,7 @@ $(function() {
 							+data[i].reportTime.dayOfMonth +"</td>");
 					
 					$(btn).append(btnYes).append(btnNo);
+					$(rProductName).append(a);
 					$(tr).append(btn).append(rId).append(rIsPassed).append(rProductName)
 						.append(rArticle).append(rReporterId).append(rReportTime).append(rFinishTime);
 					$('#slGrid').append(tr);
@@ -153,9 +157,12 @@ $(function() {
 					var btnNo = $("<input type='button' value='不通過' class='btn btn-danger' style='margin-left: 5px;'></input>")
 						.attr('onclick', 'javascript:location.href=\'updateN?id=' +data[i].id + '\'');
 					var rId = $("<td>" +data[i].id +"</td>");
-						var rIsPassed = $("<td>尚未審核</td>");
-						var rFinishTime = $("<td>尚未審核</td>");
-					var rProductName = $("<td><a href='/product/" + data[i].product.id +"'>" +data[i].product.name +"</a></td>");
+					var rIsPassed = $("<td>尚未審核</td>");
+					var rFinishTime = $("<td>尚未審核</td>");
+					var rProductName = $("<td></td>");
+					var a = $("<a href>" + data[i].product.name +"<a>")
+						.attr("onclick", "window.open(' /product/" + data[i].product.id +" ', 'e715', config='height=500,width=500,left=400,top=50');");
+// 					var rProductName = $("<td><a href='/product/" + data[i].product.id +"'>" +data[i].product.name +"</a></td>");
 					var rArticle = $("<td>" +data[i].article +"</td>");
 					var rReporterId = $("<td>" +data[i].reporterId.name +"</td>");
 					var rReportTime = $("<td>" +data[i].reportTime.year +"-" 
@@ -163,6 +170,7 @@ $(function() {
 							+data[i].reportTime.dayOfMonth +"</td>");
 					
 					$(btn).append(btnYes).append(btnNo);
+					$(rProductName).append(a);
 					$(tr).append(btn).append(rId).append(rIsPassed).append(rProductName)
 						.append(rArticle).append(rReporterId).append(rReportTime).append(rFinishTime);
 					$('#slGrid').append(tr);
@@ -212,7 +220,10 @@ $(function() {
 							+data[i].finishTime.monthValue +"-"
 							+data[i].finishTime.dayOfMonth +"</td>");
 				}
-				var rProductName = $("<td><a href='/product/" + data[i].product.id +"'>" +data[i].product.name +"</a></td>");
+				var rProductName = $("<td></td>");
+				var a = $("<a href>" + data[i].product.name +"<a>")
+					.attr("onclick", "window.open(' /product/" + data[i].product.id +" ', 'e715', config='height=500,width=500,left=400,top=50');");
+// 				var rProductName = $("<td><a href='/product/" + data[i].product.id +"'>" +data[i].product.name +"</a></td>");
 				var rArticle = $("<td>" +data[i].article +"</td>");
 				var rReporterId = $("<td>" +data[i].reporterId.name +"</td>");
 				var rReportTime = $("<td>" +data[i].reportTime.year +"-" 
@@ -220,6 +231,7 @@ $(function() {
 						+data[i].reportTime.dayOfMonth +"</td>");
 				
 				$(btn).append(btnYes).append(btnNo);
+				$(rProductName).append(a);
 				$(tr).append(btn).append(rId).append(rIsPassed).append(rProductName)
 					.append(rArticle).append(rReporterId).append(rReportTime).append(rFinishTime);
 				$('#slGrid').append(tr);
