@@ -26,6 +26,11 @@ public class MailService {
 	@Autowired 
 	private LogMailDao logMailDao;
 	
+	
+	public void deleteMail(int id){
+		mailDao.delete(id);
+	}
+	
 	public List<Mail> getAllMailByReceiver(int id){
 		List<Mail> mails = mailDao.findByReceiverOrderBySendTimeDesc(userDao.findOne(id));
 		return mails;

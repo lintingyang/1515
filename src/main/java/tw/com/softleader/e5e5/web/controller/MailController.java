@@ -37,7 +37,14 @@ public class MailController {
 	public void deletemail(@RequestParam("deletemail")String deletemail){
 		log.error(deletemail);
 
-		log.error(deletemail.substring(0, 1));
+		if(deletemail.substring(0, 1).equals("m")){
+			int id = Integer.parseInt(deletemail.substring(4));
+			mailService.deleteMail(id);
+			
+		}if(deletemail.substring(0, 1).equals("l")){
+			int id = Integer.parseInt(deletemail.substring(4));
+			logMailService.deleteLogMail(id);
+		}
 	}
 	
 	@RequestMapping("/getmail")
