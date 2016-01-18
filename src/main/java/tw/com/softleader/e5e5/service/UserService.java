@@ -141,10 +141,12 @@ public class UserService extends OurService<User> {
 	public boolean checkVerificationCode(String schoolEmail ,Integer verificationCode){
 		boolean result = false;
 		User userCheck = userDao.findBySchoolEmail(schoolEmail);
+		if(userCheck!=null){
 		Integer check =  userCheck.getVerificationCode();
 		boolean temp = (check.equals(verificationCode));
-		if(temp){
-			result = true;
+			if(temp){
+				result = true;
+			}
 		}
 		return result;
 	}
