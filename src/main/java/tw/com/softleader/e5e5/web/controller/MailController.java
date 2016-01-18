@@ -37,15 +37,30 @@ public class MailController {
 	public void deletemail(@RequestParam("deletemail")String deletemail){
 		log.error(deletemail);
 
-		log.error(deletemail.substring(0, 1));
+		if(deletemail.substring(0, 1).equals("m")){
+			int id = Integer.parseInt(deletemail.substring(4));
+			mailService.deleteMail(id);
+			
+		}if(deletemail.substring(0, 1).equals("l")){
+			int id = Integer.parseInt(deletemail.substring(4));
+			logMailService.deleteLogMail(id);
+		}
 	}
 	
 	@RequestMapping("/getmail")
 	@ResponseBody
-	public List<Mail> getmail(@RequestParam("id")int id){
-		List<Mail> mails = mailService.getAllMailByReceiver(id);
+	public List<Mail> getmail(@RequestParam("id")int receiverId){
+		List<Mail> mails = mailService.getAllMailByReceiver(receiverId);
 		return mails;
 	}
+	
+	@RequestMapping("/getimportant")
+	@ResponseBody
+	public List<Mail> getimportant(@RequestParam("id")int receiverId){
+		List<Mail> mails = mailService.getImportantMails(receiverId);
+		return mails;
+	}
+	
 	@RequestMapping("/getdraft")
 	@ResponseBody
 	public List<LogMail> getdraft(@RequestParam("id")int senderId){

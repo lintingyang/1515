@@ -2,7 +2,6 @@ package tw.com.softleader.e5e5.service;
 
 import java.io.File;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -17,6 +16,7 @@ import tw.com.softleader.e5e5.common.model.Message;
 import tw.com.softleader.e5e5.common.service.OurService;
 import tw.com.softleader.e5e5.dao.ProductCategoryDao;
 import tw.com.softleader.e5e5.dao.ProductDao;
+import tw.com.softleader.e5e5.dao.QuestionAndAnswerDao;
 import tw.com.softleader.e5e5.dao.UserDao;
 import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.entity.ProductCategory;
@@ -41,6 +41,8 @@ public class ProductService extends OurService<Product> {
 	private UserLikeService userLikeService;
 	@Autowired
 	private ProductPictureService productPictureService;
+	@Autowired
+	private QuestionAndAnswerDao questionAndAnswerDao;
 
 	@Transactional
 	public List<Product> indexsearch(String namelike, String category, String orderby, User user) {
@@ -321,11 +323,16 @@ public class ProductService extends OurService<Product> {
 		return productDao.findCountByQuestionerQA(productId, userId);
 	}
 	
-	//查詢我向別人提出的Q&A物品/yao
-	public List<Product> findProductByQuestionerQA(Integer userId){
-		return productDao.findProductByQuestionerQA(userId);
+	//查詢我向別人提出的Q&A物品for A/yao
+	public List<Product> findProductByQuestionerA(Integer userId){
+		return productDao.findProductByQuestionerA(userId);
 	}
 
+	//查詢我向別人提出的Q&A物品for Q/yao
+	public List<Product> findProductByQuestionerQ(Integer userId){
+		return productDao.findProductByQuestionerQ(userId);
+	}
+	
 	// 後台修改刊登狀態/ming
 	@Transactional
 	public Product updateBackPostStatus(Integer id, TrueFalse updateResult) {
@@ -335,6 +342,7 @@ public class ProductService extends OurService<Product> {
 			product = productDao.save(product);
 			return product;
 		} else if (updateResult.equals(TrueFalse.FALSE)) {
+			questionAndAnswerDao.delete(questionAndAnswerDao.findByProductId(id));//yao 刪問與答
 			product.setPostStatus(updateResult);
 			product.setStartTime(null);
 			product.setDeadline(null);

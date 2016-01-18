@@ -13,6 +13,7 @@ import tw.com.softleader.e5e5.dao.MailDao;
 import tw.com.softleader.e5e5.dao.UserDao;
 import tw.com.softleader.e5e5.entity.LogMail;
 import tw.com.softleader.e5e5.entity.Mail;
+import tw.com.softleader.e5e5.entity.User;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 
 @Service
@@ -26,9 +27,23 @@ public class MailService {
 	@Autowired 
 	private LogMailDao logMailDao;
 	
+	
+	public void deleteMail(int id){
+		mailDao.delete(id);
+	}
+	
 	public List<Mail> getAllMailByReceiver(int id){
 		List<Mail> mails = mailDao.findByReceiverOrderBySendTimeDesc(userDao.findOne(id));
 		return mails;
+	}
+	
+	public List<Mail> getImportantMails(int receiverId){
+		User user = userDao.findOne(receiverId);
+		if(user != null){
+		List<Mail> mails = mailDao.findByReceiverAndIsImportantOrderBySendTimeDesc(user, TrueFalse.TRUE);
+		return mails;
+		}
+		return null;
 	}
 	
 	public void updateIsImportant(int id, String isImportant){
@@ -69,7 +84,8 @@ public class MailService {
 		if(logMailId != 0){
 			logMailDao.delete(logMailId);
 		}
-		
-		
 	}
-}
+
+	
+	
+}// end of MailService
