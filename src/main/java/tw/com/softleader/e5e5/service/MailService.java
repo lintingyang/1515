@@ -66,7 +66,6 @@ public class MailService {
 			logMailDao.save(logMail);
 		}
 		
-//		log.error(logMailId);
 		if(logMailId != 0){
 			logMailDao.delete(logMailId);
 		}

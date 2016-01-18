@@ -34,7 +34,7 @@ span{
 	border-left: none;
 	border-top: none;
 }
-#img1, #img2, #img3, #img4, #img5{
+#img1, #img2, #img3{
 	background-color: #cccccc;
 }
 </style>
@@ -184,8 +184,8 @@ $(function(){
 	</div>
 	<div class="row">
 		<div class="col-md-3">
-   		 	<div class="thumbnail">
-     	 		<img data-src="holder.js/300x300" alt="..." 
+   		 	<div class="thumbnail" style="box-shadow:4px 4px 12px 4px rgba(20%,20%,40%,0.5);">
+     	 		<img data-src="holder.js/300x300" alt="..." style="box-shadow:4px 4px 12px 4px rgba(20%,20%,40%,0.5);"
      	 			src="${exchange.productBId.userId.picture}" class="img-thumbnail">
       			<div class="caption" align="center">
 						<h2>${exchange.productBId.userId.account}</h2>
@@ -205,7 +205,7 @@ $(function(){
 					<div align="center" style="margin: 5px auto;">
 						<span class="glyphicon glyphicon-hand-left" aria-hidden="true"></span>
 					</div>
-					<img data-src="holder.js/300x300" alt="..." src="${pb[0].picture}" class="img-thumbnail">
+					<img data-src="holder.js/300x300" alt="..." src="${pb[0].picture}" class="img-thumbnail" style="box-shadow:4px 4px 12px 4px rgba(20%,20%,40%,0.5);">
 					<h4>${exchange.productBId.name}</h4>
 				  	<p id="p1">${exchange.productBId.description}</p>
 				</blockquote>
@@ -215,7 +215,7 @@ $(function(){
 					<div align="center" style="margin: 5px auto;">
 						<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
 					</div>
-					<img data-src="holder.js/300x300" alt="..." src="${pa[0].picture}" class="img-thumbnail">
+					<img data-src="holder.js/300x300" alt="..." src="${pa[0].picture}" class="img-thumbnail" style="box-shadow:4px 4px 12px 4px rgba(20%,20%,40%,0.5);">
 					<h4>${exchange.productAId.name}</h4>
 				  	<p id="p1">${exchange.productAId.description}</p>
 				</blockquote>
@@ -252,9 +252,9 @@ $(function(){
 			</div>
   		</div>
   		<div class="col-md-3">
-  			<div class="thumbnail">
+  			<div class="thumbnail" style="box-shadow:4px 4px 12px 4px rgba(20%,20%,40%,0.5);">
      	 		<img data-src="holder.js/300x300" alt="..." 
-     	 			src="${exchange.productAId.userId.picture}" class="img-thumbnail">
+     	 			src="${exchange.productAId.userId.picture}" class="img-thumbnail" style="box-shadow:4px 4px 12px 4px rgba(20%,20%,40%,0.5);">
       			<div class="caption" align="center">
 						<h2>${exchange.productAId.userId.account}</h2>
 						<p>${exchange.productAId.userId.name}(名字)</p>

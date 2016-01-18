@@ -8,7 +8,7 @@
 	<c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 	<c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 	
-	<title>E715 以物易物網</title>
+	<title>E715 </title>
 </head>
 <body>
 	<div id="wrap">
@@ -69,17 +69,13 @@
 			url: url,
 			dataFormId: 'listForm',
 			mtype: 'GET',
-			colNames:['id', '商品名稱', '商品描述', '擁有者', '刊登狀態', '交易狀態', '新增時間', '刊登時間', '截止時間', 'button'],
+			colNames:['id', '商品名稱', '商品描述', '刊登狀態', '交易狀態', '管理'],
 		   	colModel:[
 		   		{name:'id', width: 40},
 		   		{name:'name', width: 100},
 		   		{name:'description', width: 100},
-		   		{name:'userId.id', width: 50},
 		   		{name:'postStatus', width: 60},
 		   		{name:'tradeStatus', width: 60},
-		   		{name:'postTime.year', width: 100},
-		   		{name:'startTime.year', width: 100},
-		   		{name:'deadline.year', width: 100},
 		   		{name:'btns', width: 90, formatter:btns},
 		   	],
 		   	sortname:"id",

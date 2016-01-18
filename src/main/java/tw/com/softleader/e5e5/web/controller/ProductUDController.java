@@ -76,6 +76,10 @@ public class ProductUDController {
 			products = productService.findUsersProductsByExchange(user.getId(), "TRUE", "FALSE");
 		} else if (query.equals("myExchanged")) { // 原本是我的，現在是別人的。 已交換(待改)
 			products = productService.findUserPostedProductsByExchanged(user.getId());
+		} else if (query.equals("question")) {
+			products = productService.findByUsersProductsIsPosted(user.getId(), "TRUE");
+		} else if (query.equals("answer")) {
+			products = productService.findProductByQuestionerQA(user.getId());
 		}
 
 		return products;
@@ -84,9 +88,23 @@ public class ProductUDController {
 	// 已刊登的物品別人想交換的總數
 	@ResponseBody
 	@RequestMapping(value = "/queryCount")
-	public int productCount(@RequestParam("id") Integer id, @RequestParam("query") String query, Model model) {
+	public int productCount(@RequestParam("id") Integer id, @RequestParam("query") String query) {
 		if (query.equals("posted")) {
 			return productService.findCountByProductBId(id);
+		}
+		return -1;
+	}
+
+	// 已刊登的物品新的問與答
+	@ResponseBody
+	@RequestMapping(value = "/queryQA")
+	public int qACount(@RequestParam("id") Integer id, @RequestParam("query") String query, HttpSession session) {
+		if (query.equals("question")) {
+			return productService.findCountByProductAQA(id);
+		}
+		if (query.equals("answer")) {
+			User user = (User) session.getAttribute("user");
+			return productService.findCountByQuestionerQA(id, user.getId());
 		}
 		return -1;
 	}

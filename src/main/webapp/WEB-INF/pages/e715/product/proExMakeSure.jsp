@@ -32,13 +32,17 @@ h3{
 	font-size: medium;
 	padding-left: 10px;
 }
+#simple3{
+	width:140px;
+	font-size: medium;
+}
 .st1 {
 	width:330px;
 	margin: 15px auto;
 }
 .st2 {
-	width:240px;
-	margin: 15px auto;
+	width:300px;
+	margin: 15px 5px;
 }
 .title {
 	width:100px;
@@ -48,22 +52,25 @@ h3{
 	font-size: medium;
 }
 .title2 {
-	width:70px;
+	width:100px;
 	float:left;
 	text-align:right;
 	padding-right:5px;
 	font-size: medium;
+}
+.col-md-4, .col-md-12{
+	box-shadow:4px 4px 12px 4px rgba(20%,20%,40%,0.5);
 }
 </style>
 <div class="container" style="margin: 50px auto;">
 	<div class="row">
 		<div class="col-md-2">
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-4" >
 			<h3>我 將 得 到</h3>
    		 	<div class="thumbnail">
-     	 		<img data-src="holder.js/300x300" alt="..." 
-     	 			src="${pb[0].picture}" class="img-thumbnail">
+     	 		<img data-src="holder.js/300x300" alt="..." style="box-shadow:4px 4px 12px 4px rgba(20%,20%,40%,0.5);"
+     	 			src="${pb[0].picture}" class="img-thumbnail" \>
       			<div class="caption">
       					<p align="center">< 商品明細 ></p>
       					<div class="st1">
@@ -108,45 +115,52 @@ h3{
   		<div class="col-md-1">
   		</div>
   		<div class="col-md-3">
-  			<h3>我 將 失 去</h3>
-  			<div class="thumbnail">
-     	 		<img data-src="holder.js/300x300" alt="..." 
-     	 			src="${pa[0].picture}" class="img-thumbnail">
-      			<div class="caption" >
-						<p align="center">< 我的商品 ></p>
-      					<div class="st2">
-							<label class="title2">名稱：</label>
-							<label id="pName2">${makeSure.productAId.name}</label>
-						</div>
-						<div class="st2">
-							<label class="title2">描述：</label>
-							<label id="simple2">${makeSure.productAId.description}</label>
-						</div>
-						<hr>
-						<p align="center">< 我的交換資訊 ></p>
-						<div class="st2">
-							<label class="title2">交易地點：</label>
-							<label id="simple">${makeSure.productAId.location}</label>
-						</div>
-						<div class="st2">
-							<label class="title2">交易期限：</label>
-							<label id="simple">${ss}</label>
-						</div>
-						<div class="st2">
-							<label class="title2">交易方式：</label>
-							<label id="simple">${makeSure.productAId.tradeWay}</label>
-						</div>
-      			</div>
+	  		<div class="col-md-12">
+	  			<h3>我 將 失 去</h3>
+	  			<div class="thumbnail">
+	     	 		<img data-src="holder.js/300x300" alt="..." style="box-shadow:4px 4px 12px 4px rgba(20%,20%,40%,0.5);"
+	     	 			src="${pa[0].picture}" class="img-thumbnail" >
+	      			<div class="caption" >
+							<p align="center">< 我的商品 ></p>
+	      					<div class="st2">
+								<label class="title2">名稱：</label>
+								<label id="pName2">${makeSure.productAId.name}</label>
+							</div>
+							<div class="st2">
+								<label class="title2">描述：</label>
+								<label id="simple2">${makeSure.productAId.description}</label>
+							</div>
+							<hr>
+							<p align="center">< 我的交換資訊 ></p>
+							<div class="st2">
+								<label class="title2">交易地點：</label>
+								<label id="simple3">${makeSure.productAId.location}</label>
+							</div>
+							<div class="st2">
+								<label class="title2">交易期限：</label>
+								<label id="simple3">${ss}</label>
+							</div>
+							<div class="st2">
+								<label class="title2">交易方式：</label>
+								<label id="simple3">${makeSure.productAId.tradeWay}</label>
+							</div>
+	      			</div>
+	    		</div>
     		</div>
-    		<div style="text-align: center; margin: 30px auto">
-					<button id="btnExchang" type="button" class="btn btn-success btn-lg"
-						onclick="javascript:location.href='exchanging?id=${makeSure.id}'">
-					<span class="glyphicon glyphicon-send" aria-hidden="true"></span>我確定要換</button>
-			</div>
-			<div style="text-align: center;">
-					<button type="button" class="btn btn-primary btn-lg"
-						onclick="javascript:location.href='${makeSure.productAId.id}'">回上頁，看看其他商品</button>
-			</div>
+    		<div class="col-md-1"></div>
+    		<div class="col-md-10">
+	    		<div style="text-align: center; margin: 30px auto">
+						<button id="btnExchang" type="button" class="btn btn-success btn-lg"
+							onclick="javascript:location.href='exchanging?id=${makeSure.id}'">
+						<span class="glyphicon glyphicon-send" aria-hidden="true"></span>我確定要換</button>
+				</div>
+				<div style="text-align: center;">
+						<button type="button" class="btn btn-primary btn-lg"
+							onclick="javascript:location.href='${makeSure.productAId.id}'">回上頁，看看其他商品</button>
+				</div>
+    			
+    		</div>
+    		<div class="col-md-1"></div>
     		
     		
     		

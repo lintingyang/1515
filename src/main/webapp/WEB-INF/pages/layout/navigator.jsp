@@ -10,7 +10,7 @@
 		<table width="100%" border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td bgcolor="#FFFFFF" width="65%">
-				<img src='<c:url value="/assets/softleader/images/logo100.png"/>'border='0' />
+<%-- 				<img src='<c:url value="/resources/imgs/logo_c.png"/>' width="100" border='0' /> --%>
 				</td>
 				<td bgcolor="#FFFFFF" valign="bottom" width="35%">
 					<%-- runtime ENV : <b>${env}</b>(請至系統參數設定調整)<br/> --%>
@@ -65,7 +65,7 @@
 <!-- 						</ul>	 -->
 <!-- 					</li> -->
 
-					<li><a href="/head/logout"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
+					<li style="margin-left: 400px;"><a href="/head/logout"><span class="glyphicon glyphicon-log-out"></span> 登出</a></li>
 <%-- 					<form class="hide" id="logout" action="<c:url value="/logout" />" method="post"> --%>
 <%-- 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> --%>
 <!-- 					</form> -->

@@ -47,7 +47,7 @@ public class MailController {
 	@RequestMapping("/getbackup")
 	@ResponseBody
 	public List<LogMail> getbackup(@RequestParam("id")int senderId){
-		List<LogMail> backup =logMailService.getAllDraftBySender(senderId);
+		List<LogMail> backup =logMailService.getAllBackBySender(senderId);
 		return backup;
 	}
 	
@@ -70,6 +70,14 @@ public class MailController {
 	public String saveDraft(@RequestParam("senderId")int senderId,@RequestParam("receiverAccount")String receiverAccount,
 			@RequestParam("title")String title,@RequestParam("article")String article){
 		logMailService.saveDraft(senderId, receiverAccount, title, article);
+		return "redirect:/mail/list";
+	}
+	
+	@RequestMapping("/updatedraft")
+	public String updatedraft(@RequestParam("senderId")int senderId,@RequestParam("receiverAccount")String receiverAccount,
+			@RequestParam("title")String title,@RequestParam("article")String article,
+			@RequestParam("logmailid")int logMailId){
+		logMailService.updatedraft(senderId, receiverAccount, title, article, logMailId);
 		return "redirect:/mail/list";
 	}
 	

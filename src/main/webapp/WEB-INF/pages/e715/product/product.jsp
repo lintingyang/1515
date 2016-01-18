@@ -53,7 +53,7 @@
 						<li>${product.userId.schoolName}
 						<li>
 					</ul></li>
-				<li><span class="glyphicon glyphicon-plus">123</span></li>
+<!-- 				<li><span class="glyphicon glyphicon-plus">123</span></li> -->
 
 			</ul>
 		</div>
@@ -96,6 +96,8 @@
 					<input id="excBtn" class="btn btn-primary btn-lg" type="button" value="我要交換" data-toggle="modal" 
 					data-target="#myProductList">
 				</c:if>
+				<input id="repBtn" class="btn btn-warning btn-lg" type="button" value="我要檢舉" data-toggle="modal" 
+					data-target="#report">
 			</c:if>
 		</div>
 
@@ -172,6 +174,37 @@
     </div>
   </div>
 </div>
+<!-- 我要檢舉 -->
+<div class="modal fade" id="report" tabindex="-1" role="dialog" aria-labelledby="report" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"> </span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="report">檢舉</h4>
+      </div>
+      <form role="form">
+	      <div class="modal-body">
+			  <div class="form-group">
+			  	<label>商品名稱：</label><span>${product.name}</span>
+			  </div>
+			  <div class="form-group">
+			  	<label>商品擁有者帳號：</label><span>${product.userId.account}</span>
+			  </div>
+			  <div class="form-group">
+			    <label for="exampleInputFile">請詳述檢舉原因</label>
+			    <textarea  class= "form-control" rows="10" cols="" name="article" id="article"></textarea>
+			  </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+	        <button type="button" class="btn btn-primary" data-dismiss="modal" id="submitReport">送出</button>
+	      </div>
+     </form> 
+    </div>
+  </div>
+</div>
+
+
 <script>
 /**按下我要交換按鈕**/
 $("#excBtn").click(function(){
@@ -212,6 +245,30 @@ $("#excBtn").click(function(){
 		});
 	}
 })
+
+/**按下我要檢舉按鈕**/
+$("#submitReport").click(function(){
+	setTimeout(function(){location.reload(); }, 2000);
+	swal({
+			type : "success",
+			title: "檢舉送出",  
+			text: "成功幫您送出檢舉! 謝謝您寶貴的意見！",  
+			timer: 1000,   
+			showConfirmButton:false
+		},function(){
+			$.ajax({
+				dataType: "json",
+				type: "get",
+				url: "/report/products/new",
+				data: {
+					article : $("#article").val(),
+					productId : ${product.id},
+					reporterId : ${user.id},
+				}
+			});
+		})
+});
+
 $(function(){
 	//地圖是也
 	var mapLoc= "台灣"+"${product.location}";
@@ -391,7 +448,7 @@ $(function(){
 					 '"></li><li><ul style="list-style: none;"><li><h4>'+
 					 this.productBId.userId.account+'</h4></li><li>'+
 					 this.productBId.userId.name +'</li><li>'+this.productBId.userId.schoolName+
-					 '</li></ul></li><li><span class="glyphicon glyphicon-plus">123</span></li></ul></div></td></tr>');
+					 '</li></ul></li></ul></div></td></tr>');
 //	end of show Exchange (A->B)
 //	交易結束鎖定
 			if(this.tradeStatus=="TRUE"){
