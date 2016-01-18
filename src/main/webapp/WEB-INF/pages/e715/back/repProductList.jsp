@@ -112,7 +112,7 @@ $(function() {
 					}
 					var rProductName = $("<td></td>");
 					var a = $("<a href>" + data[i].product.name +"<a>")
-						.attr("onclick", "window.open(' /product/" + data[i].product.id +" ', 'e715', config='height=500,width=500,left=400,top=50');");
+						.attr("onclick", "window.open(' /product/" + data[i].product.id +" ', 'e715', config='height=600,width=1100,left=70,top=20');");
 // 					var rProductName = $("<td><a href='/product/" + data[i].product.id +"'>" +data[i].product.name +"</a></td>");
 					var rArticle = $("<td>" +data[i].article +"</td>");
 					var rReporterId = $("<td>" +data[i].reporterId.name +"</td>");
@@ -161,7 +161,7 @@ $(function() {
 					var rFinishTime = $("<td>尚未審核</td>");
 					var rProductName = $("<td></td>");
 					var a = $("<a href>" + data[i].product.name +"<a>")
-						.attr("onclick", "window.open(' /product/" + data[i].product.id +" ', 'e715', config='height=500,width=500,left=400,top=50');");
+						.attr("onclick", "window.open(' /product/" + data[i].product.id +" ', 'e715', config='height=600,width=1100,left=70,top=20');");
 // 					var rProductName = $("<td><a href='/product/" + data[i].product.id +"'>" +data[i].product.name +"</a></td>");
 					var rArticle = $("<td>" +data[i].article +"</td>");
 					var rReporterId = $("<td>" +data[i].reporterId.name +"</td>");
@@ -222,7 +222,7 @@ $(function() {
 				}
 				var rProductName = $("<td></td>");
 				var a = $("<a href>" + data[i].product.name +"<a>")
-					.attr("onclick", "window.open(' /product/" + data[i].product.id +" ', 'e715', config='height=500,width=500,left=400,top=50');");
+					.attr("onclick", "window.open(' /product/" + data[i].product.id +" ', 'e715', config='height=600,width=1100,left=70,top=20');");
 // 				var rProductName = $("<td><a href='/product/" + data[i].product.id +"'>" +data[i].product.name +"</a></td>");
 				var rArticle = $("<td>" +data[i].article +"</td>");
 				var rReporterId = $("<td>" +data[i].reporterId.name +"</td>");

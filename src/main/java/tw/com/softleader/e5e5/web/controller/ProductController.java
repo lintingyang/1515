@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.Session;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
@@ -199,6 +200,27 @@ public class ProductController {
 
 	@RequestMapping(value = "/add")
 	public String add(Model model) {
+		LocalDateTime now = LocalDateTime.now();
+		int y = now.getYear();
+		int m = now.getMonthValue();
+		int d = now.getDayOfMonth();
+		String mm;
+		String dd;
+		if(m <10){
+			mm = "0" + m;
+		}else{
+			mm = String.valueOf(m);
+		}
+		if(d <10){
+			dd = "0" + d;
+		}else{
+			dd = String.valueOf(d);
+		}
+		String s = mm + "/" + dd + "/" + y;
+		model.addAttribute("nowTime", s);
+		model.addAttribute("d", d);
+		model.addAttribute("m", m);
+		model.addAttribute("y", y);
 		return "/e715/product/proAdd";
 	}
 
@@ -249,6 +271,7 @@ public class ProductController {
 			if (deadline.isBefore(startTime)) {
 				errorMessage.put("timeD", "截止日期一定要比今天晚喔！！");
 				if (errorMessage != null && !errorMessage.isEmpty()) {
+					
 					return "redirect:/product/add";
 				}
 			}

@@ -185,8 +185,10 @@ $(function(){
 	<div class="row">
 		<div class="col-md-3">
    		 	<div class="thumbnail" style="box-shadow:4px 4px 12px 4px rgba(20%,20%,40%,0.5);">
+   		 		<a href="/E715Member/" + ${exchange.productBId.userId.id}>
      	 		<img data-src="holder.js/300x300" alt="..." style="box-shadow:4px 4px 12px 4px rgba(20%,20%,40%,0.5);"
      	 			src="${exchange.productBId.userId.picture}" class="img-thumbnail">
+      			</a>
       			<div class="caption" align="center">
 						<h2>${exchange.productBId.userId.account}</h2>
 						<p>${exchange.productBId.userId.name}(名字)</p>
@@ -205,7 +207,9 @@ $(function(){
 					<div align="center" style="margin: 5px auto;">
 						<span class="glyphicon glyphicon-hand-left" aria-hidden="true"></span>
 					</div>
+					<a href="/product/" + ${exchange.productBId.id}>
 					<img data-src="holder.js/300x300" alt="..." src="${pb[0].picture}" class="img-thumbnail" style="box-shadow:4px 4px 12px 4px rgba(20%,20%,40%,0.5);">
+					</a>
 					<h4>${exchange.productBId.name}</h4>
 				  	<p id="p1">${exchange.productBId.description}</p>
 				</blockquote>
@@ -253,8 +257,10 @@ $(function(){
   		</div>
   		<div class="col-md-3">
   			<div class="thumbnail" style="box-shadow:4px 4px 12px 4px rgba(20%,20%,40%,0.5);">
+     	 		<a href="/E715Member/" + ${exchange.productAId.userId.id}>
      	 		<img data-src="holder.js/300x300" alt="..." 
      	 			src="${exchange.productAId.userId.picture}" class="img-thumbnail" style="box-shadow:4px 4px 12px 4px rgba(20%,20%,40%,0.5);">
+      			</a>
       			<div class="caption" align="center">
 						<h2>${exchange.productAId.userId.account}</h2>
 						<p>${exchange.productAId.userId.name}(名字)</p>
