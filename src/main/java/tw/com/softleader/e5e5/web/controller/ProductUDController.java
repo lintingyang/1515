@@ -44,6 +44,11 @@ public class ProductUDController {
 	@Autowired
 	private ServletContext servletContext;
 
+	@RequestMapping(value = "/list2")
+	public String list2(Model model) {
+		return "/e715/product/test";
+	}
+	
 	@RequestMapping(value = "/list")
 	public String list(Model model) {
 		return "/e715/product/productedit";
@@ -54,13 +59,6 @@ public class ProductUDController {
 	@RequestMapping(value = "/query1")
 	public List<Product> list(@RequestParam("query") String query, HttpSession session) {
 		log.error("orderby = " + query);
-		// if (status == 2) {
-		// query = (String) session.getAttribute("query");
-		// status = 0;
-		// } else if (status == 1) {
-		// query = (String) session.getAttribute("query");
-		// status = 0;
-		// }
 
 		List<Product> products = null;
 		User user = (User) session.getAttribute("user");
@@ -72,14 +70,16 @@ public class ProductUDController {
 			// session.setAttribute("query", query);
 		} else if (query.equals("exchanging")) { // 我想跟別人交換 沒排序 是錯的
 			products = productService.findUsersProductsByExchange(user.getId(), "FALSE", "TRUE");
-		} else if (query.equals("OthersExchanged")) { // 原本是別人的，現在是我的。 已交換(待改)
+		} else if (query.equals("OthersExchanged")) { // 原本是別人的，現在是我的。 已交換
 			products = productService.findUsersProductsByExchange(user.getId(), "TRUE", "FALSE");
-		} else if (query.equals("myExchanged")) { // 原本是我的，現在是別人的。 已交換(待改)
+		} else if (query.equals("myExchanged")) { // 原本是我的，現在是別人的。 已交換
 			products = productService.findUserPostedProductsByExchanged(user.getId());
 		} else if (query.equals("question")) {
-			products = productService.findByUsersProductsIsPosted(user.getId(), "TRUE");
+//			products = productService.findByUsersProductsIsPosted(user.getId(), "TRUE");
+			products = productService.findProductByQuestionerQ(user.getId());
 		} else if (query.equals("answer")) {
-			products = productService.findProductByQuestionerQA(user.getId());
+			log.error("answer");
+			products = productService.findProductByQuestionerA(user.getId());
 		}
 
 		return products;
@@ -103,7 +103,12 @@ public class ProductUDController {
 			return productService.findCountByProductAQA(id);
 		}
 		if (query.equals("answer")) {
+			log.error("queryQA answer");
 			User user = (User) session.getAttribute("user");
+			log.error("productId" + id);
+			log.error("userId"+user.getId());
+			int productL = productService.findCountByQuestionerQA(id, user.getId());
+			log.error("count" + productL);
 			return productService.findCountByQuestionerQA(id, user.getId());
 		}
 		return -1;

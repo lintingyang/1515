@@ -31,6 +31,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
+<!-- 			<a class="navbar-brand" href="/admin/index"><img src="/resources/imgs/logo_c.png" width="40"></a> -->
 			<a class="navbar-brand" href="/admin/index">E715 Admin Home</a>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">

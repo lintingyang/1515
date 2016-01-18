@@ -6,6 +6,16 @@
 <div class="container" style="margin: 20px auto;">
 	<div class="container">
 
+        <!-- Jumbotron Header -->
+<!--         <header class="jumbotron hero-spacer"> -->
+<!--             <h1>Welcome E715 :(</h1> -->
+<!--             <p style="font-size:medium;">E715提供全國大專院校的學生一個以交換為概念的網路平台， -->
+<!-- 				主張以分享和交換物品或服務，取代購買行為，形成分享經濟的社群， -->
+<!-- 				事物的價值本來就取決於個人喜好，利用自身物件換取其他心儀物品，棄如敝屣的東西也能變成另一人眼中的珍寶，達到互惠互利的雙贏局面，並發揮最大價值物盡其用環保愛地球，E715的宗旨是在環保風潮與分享交換的理念推廣下為使用者提供便捷快速，安心信任的平台。	</p> -->
+<!--             <p><a class="btn btn-primary btn-large">立即註冊</a> -->
+<!--             </p> -->
+<!--         </header> -->
+
 
 		<ul class=" nav-tabs" id="tabs" >
 			<li style="width: 50%; text-align: center; "><div class="catrgorybox categorylist searchbtn" id="hot">熱門</div></li>

@@ -37,7 +37,7 @@
 		<div class="col-xs-6 col-md-2"></div>
 
 		<div class="col-xs-6 col-md-8" id="divCenter">
-			<form class="form-horizontal">
+			<form class="form-horizontal" id="materialForm" action="/head/completeMaterial" enctype="multipart/form-data" method="post">
 				<div class="form-group" id="divBorder">
 					<label for="inputEmail3" class="col-sm-2 control-label">系所:</label>
 					<div class="col-sm-10">
@@ -48,7 +48,7 @@
 				<div class="form-group" id="divBorder">
 					<label for="inputPassword3" class="col-sm-2 control-label">地址:</label>
 					<div class="col-sm-10">
-						<input type="password" class="form-control" id="inputAddr" name="addr"
+						<input type="text" class="form-control" id="inputAddr" name="addr"
 							placeholder="輸入地址">
 					</div>
 				</div>
@@ -90,20 +90,20 @@
 
 <script>
 	$(function() {
-		$('#userOwnerFile').on('change',function(){
+// 		$('#userOwnerFile').on('change',function(){
 			
-			var getTheFiles = $('#userOwnerFile').files;
-            for (var i = 0; i < getTheFiles.length ; i++) {
+// 			var getTheFiles = $('#userOwnerFile').files;
+//             for (var i = 0; i < getTheFiles.length ; i++) {
 
-                var reader = new FileReader();
-                reader.readAsDataURL(getTheFiles[i]);
-                reader.onload = function (e) {
-                var temp = e.target.result;
-                $('#headPortrait').attr("src", temp);
-                }
-            }
+//                 var reader = new FileReader();
+//                 reader.readAsDataURL(getTheFiles[i]);
+//                 reader.onload = function (e) {
+//                 var temp = e.target.result;
+//                 $('#headPortrait').attr("src", temp);
+//                 }
+//             }
 			
-		})
+// 		})
 		
 		
 		
@@ -127,7 +127,7 @@
 					showConfirmButton: false
 				});
 
-				setTimeout(function(){$('#missionComplete').submit();}, 1000);
+				setTimeout(function(){$('#materialForm').submit();}, 1000);
 					
 					//function下括弧
 					}

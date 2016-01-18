@@ -65,7 +65,7 @@
 					data-target="#report">
 		</h2>
 		<div>
-			<h5>希望交易商品：</h5>
+			<h5>希望交易物品：</h5>
 			<br> ${product.wishItem}
 		</div>
 		<hr>

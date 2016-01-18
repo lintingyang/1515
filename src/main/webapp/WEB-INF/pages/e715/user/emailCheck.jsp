@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/WEB-INF/pages/e715/layout/header.jsp"/>
 <c:import url="/WEB-INF/pages/layout/meta.jsp"/>
+<link rel="stylesheet" href="/resources/css/site.css" />
 <link rel="stylesheet" href="/resources/css/user.css" />
 
 <style>
@@ -37,11 +38,14 @@
 
 <script>
 	$(function() {
-		$("#sendSchoolEmil").on('click', function() {		
+		$("#sendSchoolEmil").on('click', function() {
+			$('.sendSchoolBtn').append('<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>');
 			var temp = {"userSchoolEmail":$("#schoolEmail").val(),"chooseSchool":$('#chooseSchool').val()}
 			var checkEmailFormat= $('#schoolEmail').val();
 			var reg= /(?=^[A-Za-z0-9]{6,12}$)((?=.*[a-zA-Z0-9]))^.*$/;
 			$("#schoolEmail").attr('readonly','readonly');
+			$("#sendSchoolEmil").hide();
+			$("#haveSchoolEmil").hide();
 			if(reg.test(checkEmailFormat)){
 			$.ajax({
 				contentType : "application/json",
@@ -51,6 +55,7 @@
 				data : temp,
 				success : function(data) {
 					$('#checkVerificationCodeDiv').html('');
+					$('.sendSchoolBtn').html('');
 					var divVerification = $('<div></div>').attr('id','divBorder').addClass("form-group");
 					var labelVerification = $('<label></label>').addClass("col-sm-2 control-label").attr('for','inputPassword3').text('輸入驗證碼');
 					var textDiv = $('<div></div>').addClass('col-sm-10');
@@ -71,6 +76,8 @@
 			//if下括號
 		}else{
 			$('#errorMsg').empty();
+			$("#sendSchoolEmil").removeAttr('hide');
+			$("#haveSchoolEmil").removeAttr('hide');
 			$("#schoolEmail").removeAttr('readonly');
 			$('#errorMsg').text('輸入格式錯誤:請輸入@以前即可');
 		//else下括號	
@@ -80,6 +87,7 @@
 		
 		$("#haveSchoolEmil").on('click', function() {
 			$("#haveSchoolEmil").hide();
+			$("#sendSchoolEmil").hide();
 			$('#checkVerificationCodeDiv').html('');
 			var divVerification = $('<div></div>').attr('id','divBorder').addClass("form-group");
 			var labelVerification = $('<label></label>').addClass("col-sm-2 control-label").attr('for','inputPassword3').text('輸入驗證碼');
@@ -132,6 +140,7 @@
 						<option value="@mail.ncku.edu.tw">成功大學</option>
 						<option value="@ccu.edu.tw">中正大學</option>
 						<option value="@mail.yzu.edu.tw">元智大學</option>
+						<option value="@stu.ntue.edu.tw">台北教育大學</option>
 					</select>(*必須)
 					</div>
 				</div>
@@ -145,7 +154,7 @@
 						<span id="errorMsg"></span>
 					</div>
 				</div>
-				<div id="btnCenter">
+				<div id="btnCenter" class="sendSchoolBtn">
 					<button type="button" class="btn btn-default" id="sendSchoolEmil">
 					送出
 					</button>

@@ -34,6 +34,7 @@ import tw.com.softleader.e5e5.entity.enums.Grade;
 import tw.com.softleader.e5e5.entity.enums.Time;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 import tw.com.softleader.e5e5.service.ExchangeService;
+import tw.com.softleader.e5e5.service.MailService;
 import tw.com.softleader.e5e5.service.ProductPictureService;
 import tw.com.softleader.e5e5.service.ProductService;
 
@@ -43,6 +44,8 @@ import tw.com.softleader.e5e5.service.ProductService;
 public class ProductController {
 
 	private Logger log = Logger.getLogger(this.getClass());
+	@Autowired
+	private MailService mailService;
 	@Autowired
 	public ProductService productService;
 	@Autowired
@@ -345,7 +348,7 @@ public class ProductController {
 		List<ProductPicture> pb = productPictureService.getProductPictures(exchange.getProductBId());
 		model.addAttribute("pa", pa);
 		model.addAttribute("pb", pb);
-
+	
 		// 時間顯示（年月日分秒）
 		// String tradeTime = exchange.getTradeFinishedTime().toString();
 		// String year = tradeTime.substring(0, 4);
@@ -365,8 +368,9 @@ public class ProductController {
 	@RequestMapping(value = "/exchanging")
 	public String exchanging(Model model, @RequestParam("id") int exId, HttpSession session) {
 		Exchange exchange = exchangeService.finishTrade(exId);
+		
 		session.setAttribute("exchange", exchange);
-
+		
 		List<ProductPicture> pa = productPictureService.getProductPictures(exchange.getProductAId());
 		List<ProductPicture> pb = productPictureService.getProductPictures(exchange.getProductBId());
 		model.addAttribute("pa", pa);
@@ -391,7 +395,7 @@ public class ProductController {
 		Long long2 = d2.getTime();
 		session.setAttribute("long1", long1);
 		session.setAttribute("long2", long2);
-
+		mailService.autoSendMail(exchange.getProductBId().getUserId().getId(), exchange.getProductAId().getId(),exchange.getProductBId().getId());
 		return "/e715/product/proExchanging";
 	}
 
@@ -401,6 +405,7 @@ public class ProductController {
 		User loginUser = (User) session.getAttribute("user");
 		Exchange exchange = (Exchange) session.getAttribute("exchange");
 		User ua = exchange.getProductAId().getUserId();
+		
 		Grade point = null;
 		if (g == 1) {
 			point = Grade.BAD;
@@ -456,6 +461,7 @@ public class ProductController {
 	@RequestMapping(value = "/exchange/{Bid}/{Aid}", method = RequestMethod.GET)
 	public String exchangeproduct(@PathVariable("Bid") final int bid, @PathVariable("Aid") final int aid) {
 		exchangeService.addexchange(aid, bid);
+		mailService.autoSendMailWhileExchange(productService.getOne(aid).getUserId().getId(),aid,bid);
 		return "redirect:/product/" + aid;
 	}
 

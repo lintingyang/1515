@@ -23,6 +23,10 @@ public class LogMailService {
 	@Autowired
 	private UserDao userDao;
 	
+	public void deleteLogMail(int id){
+		logMailDao.delete(id);
+	}
+	
 	public List<LogMail> getAllDraftBySender(int sender){
 		List<LogMail> draft = logMailDao.findBySenderAndIsDraftOrderByDraftTimeDesc(userDao.getOne(sender), TrueFalse.TRUE);
 		return draft;
