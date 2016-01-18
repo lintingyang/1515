@@ -32,6 +32,14 @@ public class MailController {
 		return "/e715/mail/maillist";
 	}
 	
+	@RequestMapping("/deletemail")
+	@ResponseStatus(value = HttpStatus.OK)
+	public void deletemail(@RequestParam("deletemail")String deletemail){
+		log.error(deletemail);
+
+		log.error(deletemail.substring(0, 1));
+	}
+	
 	@RequestMapping("/getmail")
 	@ResponseBody
 	public List<Mail> getmail(@RequestParam("id")int id){
