@@ -24,10 +24,11 @@
 	box-shadow:0px 0px 1px gray;
 	 background: white;
 	}
-.prodText{
-	color:purple;
+h4{
+	color:gray;
 }
-
+.dropdown-menu li:hover .sub-menu {visibility: visible;}
+.dropdown:hover .dropdown-menu {display: block;}
 </style>
 <div class="container" style="margin: 50px auto;">
 	<div class="container">
@@ -46,9 +47,6 @@
      				<li><a href="#" class = "queryBtn" id = "answer"><span class="label label-warning label-as-badge" id ="totalCountA"></span>&nbsp;已收到的回覆</a></li>
     			</ul>	
 			</li>
-			
-<!-- 			<li style="width: 20%; text-align: center;" ><a -->
-<!-- 				class="categorylist searchbtn queryBtn" id = "qAndA" href="#">問與答<span class="badge" id ="totalCountQ"></span></a>	</li>	 -->
 			<li style="width: 20%; text-align: center;"><a
 				class="categorylist searchbtn queryBtn" id = "notPost" href="#">未刊登</a></li>
 			<li style="width: 20%; text-align: center;"><a
@@ -105,7 +103,7 @@ $(function() { //進入物品管理先顯示已刊登
 				var productdiv = $("<div></div>");
 				var aclick = $("<a>").attr("href","/product/"+data[i].id);
 				var productimg = $("<img>").addClass("prodimg");
-				var p = $("<span></span>").text(data[i].name).addClass("prodText");
+				var p = $("<h4></h4>").text(data[i].name).addClass("prodText");
 				var badgePost = $("<span></span>").addClass("badge pCount");
 				$(p).append($(badgePost));
 				$(aclick).append($(productimg)).append($(p));
@@ -177,7 +175,7 @@ $('.queryBtn').click(function() { //點選排列方式後按照順序排列
 			
 			var productdiv = $("<div></div>");
 			var productimg = $("<img>").addClass("prodimg");
-			var p = $("<span>").text(data[i].name);
+			var p = $("<h4></h4>").text(data[i].name);
 			var badgePost = $("<span>").addClass("badge pCount");
 			$(p).append($(badgePost));
 			$(aclick).append($(productimg)).append($(p));
@@ -245,7 +243,7 @@ function getQandACount(id , type ,badgePost){ // 已刊登別人提出的問題
 				$('#totalCountA').text(totalA);
 			}
 			
-			$('#totalCountQandA').text(totalQ+totalA);
+			$('#totalCountQandA').text(totalQ);
 		}//count
 	})//post
 }//getQandACount

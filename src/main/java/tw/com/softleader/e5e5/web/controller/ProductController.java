@@ -382,6 +382,7 @@ public class ProductController {
 		User loginUser = (User) session.getAttribute("user");
 		Exchange exchange = (Exchange) session.getAttribute("exchange");
 		User ua = exchange.getProductAId().getUserId();
+		
 		Grade point = null;
 		if (g == 1) {
 			point = Grade.BAD;

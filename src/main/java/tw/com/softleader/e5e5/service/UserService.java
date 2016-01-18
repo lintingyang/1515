@@ -93,6 +93,7 @@ public class UserService extends OurService<User> {
 		//發送驗證碼
 		String host = "smtp.gmail.com";  
         int port = 587;  
+        //本網站專用的電子信箱
         final String username = "e715number01@gmail.com";  
         final String password = "EEIT82DB";  
         final Integer newVerificationCode = (int)(Math.random()*9999);
@@ -140,10 +141,12 @@ public class UserService extends OurService<User> {
 	public boolean checkVerificationCode(String schoolEmail ,Integer verificationCode){
 		boolean result = false;
 		User userCheck = userDao.findBySchoolEmail(schoolEmail);
+		if(userCheck!=null){
 		Integer check =  userCheck.getVerificationCode();
 		boolean temp = (check.equals(verificationCode));
-		if(temp){
-			result = true;
+			if(temp){
+				result = true;
+			}
 		}
 		return result;
 	}

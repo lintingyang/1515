@@ -77,17 +77,6 @@
 			document.getElementById("day").onfocus = Datefocus;
 			document.getElementById("day").onblur = Dateblur();
 		}
-
-// 		$("#submit").click(function() {
-// 			swal({
-// 				title : "修改成功",
-// 				text : "已更新您的會員資料",
-// 				type : "success",
-// 				showCancelButton : false,
-// 				confirmButtonColor : "#F5A056",
-// 				closeOnConfirm : true
-// 			});
-// 		})
 	})
 
 	var tempdate;
@@ -243,39 +232,6 @@
 							value="${user.address}" placeholder="輸入地址">
 					</div>
 				</div>
-				<%--喜好商品功能暫時取消
-				<div class="form-group" id="divBorder">
-					<label for="inputPassword3" class="col-sm-2 control-label">喜好商品類別:</label>
-					<div class="col-sm-10">
-						<c:forEach items="${userLikes}" var="userLikes">
-						${userLikes.productCategoryId.name}  
-						</c:forEach>
-					</div>
-				</div>
-				 --%>
-				<%--喜好商品功能暫時取消
-				<div class="form-group" id="divBorder">
-					<label for="inputPassword3" class="col-sm-2 control-label">喜好商品類別:</label>
-					<div class="col-sm-10">
-					
-						<c:forEach items="${productCategorys}" var="productCategorys">
-						--%>
-				<%-- 						<c:forEach items="${userLikes}" var="userLikes"> --%>
-				<%-- 							<c:if test="${(productCategorys.id eq userLikes.productCategoryId.id)}"> --%>
-				<!-- 						<label class="checkbox-inline"> <input type="checkbox" -->
-				<%-- 							id="inlineCheckbox1" value="${productCategorys.name}" checked="checked"> ${productCategorys.name} --%>
-				<!-- 						</label>  -->
-				<%-- 						</c:if> --%>
-				<%-- 						</c:forEach> --%>
-				<%--喜好商品功能暫時取消 					
-	<label class="checkbox-inline"> <input type="checkbox"
-							id="inlineCheckbox1" value="${productCategorys.id}" name="interested"> ${productCategorys.name}
-						</label> 
-						</c:forEach>
-					
-					</div>
-				</div>
---%>
 				<div class="form-group" id="divBorder">
 					<label for="inputPassword3" class="col-sm-2 control-label">關於我</label>
 					<div class="col-sm-10">
