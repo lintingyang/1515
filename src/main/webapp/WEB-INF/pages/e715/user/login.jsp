@@ -103,13 +103,14 @@ $(function(){
 </style>
 
 	<div class="row">
-	<div class="col-md-6" id="Img1">
-		<img src="/resources/imgs/wallpaper.jpg" id="localImg">
+	<div class="col-md-1"></div>
+	<div class="col-md-4" id="Img1">
+		<img src="/resources/imgs/logo_c.png" id="localImg">
 		<div>
 			<p>歡迎來到E715交流網，祝您有美好的一天</p>
 		</div>
 	</div>
-	<div class="col-md-6" id="loginBlock">
+	<div class="col-md-7" id="loginBlock">
 		<form role="form" class="form-horizontal" action="/head/logincheck" method="post">
 			<div class="form-group" id="divBorder">
 				<label class="col-sm-2 control-label">Account</label>

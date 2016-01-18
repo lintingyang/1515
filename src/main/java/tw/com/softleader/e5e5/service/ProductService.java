@@ -126,6 +126,10 @@ public class ProductService extends OurService<Product> {
 		return productDao.findByUserId(id);
 	}
 
+	public List<Product> findAllByUserId(Integer id) {
+		return productDao.findAllByUserId(id);
+	}
+	
 	// 後台
 	// (1)findOne byId
 

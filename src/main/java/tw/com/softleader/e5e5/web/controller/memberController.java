@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.softleader.e5e5.entity.Exchange;
 import tw.com.softleader.e5e5.entity.FocusUserList;
+import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.entity.ProductCategory;
 import tw.com.softleader.e5e5.entity.User;
 import tw.com.softleader.e5e5.entity.UserBanList;
@@ -73,42 +74,35 @@ public class memberController {
 		}
 
 		User user = userService.getOne(id);
-//		log.error("==============================="+myself.getId());
-//		log.error("==============================="+user.getId());
-		
 
 		boolean relation = focusUserListService.findRelation(myself.getId(), user.getId());
 		int good = 0;
 		int bad = 0;
-		// List<Product> products = productService.findByUserId(id);
-		// if(products!=null){
-		// for (Product product : products) {
-		// List<Exchange> exchanges = exchangeService.findByProduct(product);
-		// if(exchanges!=null){
-		// for (Exchange exchange : exchanges) {
-		// if(exchange.getGrade()!=null ){
-		// if(Grade.GOOD.equals(exchange.getGrade())){
-		// good++;
-		// }else if(Grade.BAD.equals(exchange.getGrade())){
-		// bad++;
-		// }
-		// }
-		// }
-		// }
-		// }
-		// }
-		List<Exchange> exchanges = exchangeService.findAll();
-		for (Exchange exchange : exchanges) {
-			if (id == exchange.getProductAId().getUserId().getId()) {
-				if (exchange.getGrade() != null) {
-					if (Grade.GOOD.equals(exchange.getGrade())) {
+		List<Product> products = productService.findAllByUserId(id);
+		if (products != null) {
+			for (Product product : products) {
+				log.error("sdfsf "+product.getGrade());
+				if (product.getGrade() != null) {
+					if (Grade.GOOD.equals(product.getGrade())) {
 						good++;
-					} else if (Grade.BAD.equals(exchange.getGrade())) {
+					} else if (Grade.BAD.equals(product.getGrade())) {
 						bad++;
 					}
 				}
 			}
 		}
+//		List<Exchange> exchanges = exchangeService.findAll();
+//		for (Exchange exchange : exchanges) {
+//			if (id == exchange.getProductAId().getUserId().getId()) {
+//				if (exchange.getGrade() != null) {
+//					if (Grade.GOOD.equals(exchange.getGrade())) {
+//						good++;
+//					} else if (Grade.BAD.equals(exchange.getGrade())) {
+//						bad++;
+//					}
+//				}
+//			}
+//		}
 		model.addAttribute("relation", relation);
 		model.addAttribute("currUser", user);
 		model.addAttribute("good", good);
@@ -123,7 +117,6 @@ public class memberController {
 		return "/e715/user/findPassWord1";
 	}
 
-
 	@RequestMapping(value = "/findPasswordStep1")
 	@ResponseBody
 	public boolean findPasswordStep1(@RequestParam("userSchoolEmail") String schoolEmail, HttpSession session) {
@@ -131,23 +124,22 @@ public class memberController {
 		session.setAttribute("checkError", errors);
 		session.removeAttribute("schoolEmail");
 		errors.clear();
-		if(schoolEmail!=null){
-		boolean findUser = userService.findBySchoolEmail(schoolEmail);
-		if(findUser){
-			session.setAttribute("schoolEmail", schoolEmail);
-			userService.sendVerificationCode(schoolEmail);
-		}
-		return findUser;
-		}else{
+		if (schoolEmail != null) {
+			boolean findUser = userService.findBySchoolEmail(schoolEmail);
+			if (findUser) {
+				session.setAttribute("schoolEmail", schoolEmail);
+				userService.sendVerificationCode(schoolEmail);
+			}
+			return findUser;
+		} else {
 			return false;
 		}
-		
+
 	}
-	
-	
+
 	@RequestMapping(value = "/findPasswordStep2")
-	public String findPasswordStep2(@RequestParam("schoolEmail") String schoolEmail , 
-		@RequestParam("verificationCode") String stVerificationCode, HttpSession session){
+	public String findPasswordStep2(@RequestParam("schoolEmail") String schoolEmail,
+			@RequestParam("verificationCode") String stVerificationCode, HttpSession session) {
 		Map<String, String> errors = new HashMap<String, String>();
 		session.setAttribute("checkError", errors);
 		errors.clear();
@@ -155,44 +147,38 @@ public class memberController {
 		try {
 			verificationCode = Integer.parseInt(stVerificationCode);
 			boolean check = userService.checkVerificationCode(schoolEmail, verificationCode);
-			if(check){
+			if (check) {
 				return "/e715/user/findPassWord2";
-			}else{
+			} else {
 				errors.put("checkFault", "驗證碼輸入錯誤，請重新輸入");
-			return "/e715/user/findPassWord1ver";
+				return "/e715/user/findPassWord1ver";
 			}
 		} catch (NumberFormatException e) {
 			errors.put("numberFault", "驗證碼請輸入數字");
 			return "/e715/user/findPassWord1ver";
 		}
 	}
-	
+
 	@RequestMapping(value = "/findPasswordStep3")
-	public String findPasswordStep3(
-			@RequestParam("newPassword") String newPassword,
-			@RequestParam("newPasswordCheck") String newPasswordCheck, 
-			HttpSession session
-			){
+	public String findPasswordStep3(@RequestParam("newPassword") String newPassword,
+			@RequestParam("newPasswordCheck") String newPasswordCheck, HttpSession session) {
 		Map<String, String> errors = new HashMap<String, String>();
 		session.setAttribute("checkPasswordError", errors);
-		
-		if(newPassword.equals(newPasswordCheck)){
-			String schoolEmail = (String)session.getAttribute("schoolEmail");
+
+		if (newPassword.equals(newPasswordCheck)) {
+			String schoolEmail = (String) session.getAttribute("schoolEmail");
 			User user = userService.loginBySchoolEmail(schoolEmail);
 			user.setPassword(newPassword);
 			userService.update(user);
 			errors.clear();
 			session.removeAttribute("schoolEmail");
-		return "/e715/user/login";
-		}else{
+			return "/e715/user/login";
+		} else {
 			errors.put("checkFault", "兩者密碼不相符合，請再輸入一次");
-		return "/e715/user/findPassWord2";
+			return "/e715/user/findPassWord2";
 		}
 	}
-	
-	
-	
-	
+
 	@RequestMapping(value = "/modifyFileAsk", method = RequestMethod.GET)
 	public String modifyFileAsk(HttpSession session) {
 		User user = (User) session.getAttribute("user");
@@ -215,29 +201,30 @@ public class memberController {
 	}
 
 	@RequestMapping(value = "/updataPwd", method = RequestMethod.GET)
-	public String updataPwd(Model model,@RequestParam("oldPwd") String oldPwd, @RequestParam("newPwd") String newPwd,
+	public String updataPwd(Model model, @RequestParam("oldPwd") String oldPwd, @RequestParam("newPwd") String newPwd,
 			@RequestParam("newPwdCheck") String newPwdCheck, HttpSession session) {
 		User user = (User) session.getAttribute("user");
-		if(user == null){
+		if (user == null) {
 			return "/e715/user/login";
-		}else{if(!oldPwd.equals(user.getPassword())){
-			model.addAttribute("oldPasswodFalse", "舊密碼輸入錯誤");
-			return "/e715/user/changePassWord";
-		}else{
-		if (newPwd == null || newPwd.length() == 0) {
-			model.addAttribute("nullNewPwd", "密碼不可為空值");
-			return "/e715/user/changePassWord";
 		} else {
-			if (newPwdCheck.equals(newPwd)) {
-				userService.updataPwd(user.getAccount(), oldPwd, newPwd);
-				return "/e715/user/modifyFileAsk";
+			if (!oldPwd.equals(user.getPassword())) {
+				model.addAttribute("oldPasswodFalse", "舊密碼輸入錯誤");
+				return "/e715/user/changePassWord";
+			} else {
+				if (newPwd == null || newPwd.length() == 0) {
+					model.addAttribute("nullNewPwd", "密碼不可為空值");
+					return "/e715/user/changePassWord";
+				} else {
+					if (newPwdCheck.equals(newPwd)) {
+						userService.updataPwd(user.getAccount(), oldPwd, newPwd);
+						return "/e715/user/modifyFileAsk";
+					}
+					model.addAttribute("newPwdCheck", "密碼輸入不同");
+					return "/e715/user/changePassWord";
+				}
+
 			}
-			model.addAttribute("newPwdCheck", "密碼輸入不同");
-			return "/e715/user/changePassWord";
-		}
-		
-		}
-		
+
 		}
 	}
 
@@ -254,7 +241,6 @@ public class memberController {
 		return "/e715/user/login";
 	}
 
-	
 	@RequestMapping(value = "/updataInfo")
 	public String updataInfo(Model model, @RequestParam("file") MultipartFile file, @RequestParam("name") String name,
 			@RequestParam("nickname") String nickname, @RequestParam("sex") Sex sex,
@@ -264,65 +250,65 @@ public class memberController {
 			// @RequestParam("interested") List<Integer> interested,
 			@RequestParam("aboutMe") String aboutMe, HttpSession session) {
 		User user = (User) session.getAttribute("user");
-		if(user == null ){
+		if (user == null) {
 			return "/e715/user/login";
-		}else{
-		// 必填欄位不能為空值
-		if (name == null || nickname == null || phone == null || year == null || month == null
-				|| day == null) {
-			return "/e715/user/editProfile";
 		} else {
-
-			// 讀取新圖跟砍檔(別忘記jsp的enctype
-			if (!file.isEmpty()) {
-				//使用者有圖片的話就砍黨
-				if (!user.getPicture().isEmpty()) {
-					userService.deleteImage(user.getId(), servletContext);
-				}
-				String path = userService.upLoadImage(user.getId(), servletContext, file);
-				user.setPicture(path);
-			}
-
-			user.setName(name);
-			user.setNickname(nickname);
-			// 判斷是手機還是家電(基礎判斷)
-			if (phone.substring(0, 1).equals("09")) {
-				user.setCellphone(phone);
+			// 必填欄位不能為空值
+			if (name == null || nickname == null || phone == null || year == null || month == null || day == null) {
+				return "/e715/user/editProfile";
 			} else {
-				user.setPhone(phone);
-			}
-			if (!month.equals("") && month.length() < 2) {
-				month = "0" + month;
-			}
-			if (!day.equals("") && day.length() < 2) {
-				day = "0" + day;
-			}
-			String str = year + "-" + month + "-" + day + " 00:00"; // "1986-04-08";
-			System.out.println(aboutMe);
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-			try {
-				LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
-				user.setBirthday(dateTime);
-			} catch (Exception e) {
-			}
 
-			user.setSex(sex);
-			user.setSubject(subject);
-			user.setEmail(email);
-			user.setAddress(addr);
-			user.setAboutMe(aboutMe);
-			userService.update(user);
-			// List<UserLike> u3 = userLikeService.findUserLike(user.getId());
-			// for (UserLike u2 : u3) {
-			// userLikeService.delete(u2.getId());
-			// }
-			// for (Integer i : interested) {
-			// UserLike u = new UserLike();
-			// u.setProductCategoryId(new ProductCategory(i));
-			// u.setUserId(new User(user.getId()));
-			// userLikeService.insert(u);
-			// }
-			return "/e715/user/modifyFileAsk";
+				// 讀取新圖跟砍檔(別忘記jsp的enctype
+				if (!file.isEmpty()) {
+					// 使用者有圖片的話就砍黨
+					if (!user.getPicture().isEmpty()) {
+						userService.deleteImage(user.getId(), servletContext);
+					}
+					String path = userService.upLoadImage(user.getId(), servletContext, file);
+					user.setPicture(path);
+				}
+
+				user.setName(name);
+				user.setNickname(nickname);
+				// 判斷是手機還是家電(基礎判斷)
+				if (phone.substring(0, 1).equals("09")) {
+					user.setCellphone(phone);
+				} else {
+					user.setPhone(phone);
+				}
+				if (!month.equals("") && month.length() < 2) {
+					month = "0" + month;
+				}
+				if (!day.equals("") && day.length() < 2) {
+					day = "0" + day;
+				}
+				String str = year + "-" + month + "-" + day + " 00:00"; // "1986-04-08";
+				System.out.println(aboutMe);
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+				try {
+					LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
+					user.setBirthday(dateTime);
+				} catch (Exception e) {
+				}
+
+				user.setSex(sex);
+				user.setSubject(subject);
+				user.setEmail(email);
+				user.setAddress(addr);
+				user.setAboutMe(aboutMe);
+				userService.update(user);
+				// List<UserLike> u3 =
+				// userLikeService.findUserLike(user.getId());
+				// for (UserLike u2 : u3) {
+				// userLikeService.delete(u2.getId());
+				// }
+				// for (Integer i : interested) {
+				// UserLike u = new UserLike();
+				// u.setProductCategoryId(new ProductCategory(i));
+				// u.setUserId(new User(user.getId()));
+				// userLikeService.insert(u);
+				// }
+				return "/e715/user/modifyFileAsk";
 			}
 		}
 	}

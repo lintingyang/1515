@@ -44,7 +44,7 @@
 <div class="container">
 	<div>
 		<div id="successImg">
-			<img src="/resources/imgs/wallpaper.jpg" width="400" id="img1">
+			<img src="/resources/imgs/login_c.png" width="400" id="img1">
 		</div>
 		<p id="successInsert">恭喜您新增帳號成功</p>
 
