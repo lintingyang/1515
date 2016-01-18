@@ -198,7 +198,7 @@ tr.mailrow:hover td{
 //刪除按鈕
 $("#deletebtn").click(function(){
 	var checkbox = $("[name='check']:checked");
-	console.log(checkbox[1].id);
+	console.log(checkbox[1]);
 	for(i =0;i<checkbox.length;i++){
 		$.ajax({
 			dataType: "json",
@@ -206,7 +206,7 @@ $("#deletebtn").click(function(){
 			url: "/mail/deletemail",
 			data: {deletemail : checkbox[i].id}
 		});
-	}	
+	}	location.href="/mail/list";
 })
 
 //編輯新郵件
@@ -434,7 +434,7 @@ function showbackup(data){
 		}
 		var sendTime = this.sendTime.year + "/" + this.sendTime.monthValue + "/" + this.sendTime.dayOfMonth;
 		var mailRow = "<tr class='mailrow'>" +
-			"<td class='mailcheckbox'><input type='checkbox'></td>" + 
+			"<td class='mailcheckbox'><input name='check' id='logm"+this.id+"' type='checkbox'></td>" + 
 			"<td class='importantbox'>" + star + "</td>" +
 			"<td>" + this.receiver.nickname + "(" + this.receiver.account + ")</td>" + 
 			"<td class='mailBody' id='backno" + index + "' style='cursor:pointer'>" + this.title + "//" + this.article + "</td>" +
@@ -493,7 +493,7 @@ function showdraft(data){
 			var receiveraccount = "(" +this.receiver.account+")";
 		}
 		var draftRow = "<tr class='mailrow' id='draft" + index + "'>" +
-			"<td class='mailcheckbox'><input type='checkbox'></td>" + 
+			"<td class='mailcheckbox'><input name='check' id='logm"+this.id+"' type='checkbox'></td>" + 
 			"<td class='namebox' >" + receivername +  receiveraccount + "</td>" + 
 			"<td class='titlebox'>" + this.title + "//" + this.article + "</td>" +
 			"<td style='text-align: right;'>" + draftTime + "</td>" +
