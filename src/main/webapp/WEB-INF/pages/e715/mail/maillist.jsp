@@ -69,17 +69,15 @@ tr.mailrow:hover td{
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"></span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="mail-title"><!-- 信件title --></h4>
       </div>
-      <div class="modal-body" id="mail-body">
-        <!-- 寄件人，時間，內文 -->
-      </div>
+      <div class="modal-body" id="mail-body"></div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
-        <button type="button" class="btn btn-primary">回覆此信件</button>
+        <button type="button" class="btn btn-primary" id="replybtn">回覆此信件</button>
       </div>
     </div>
   </div>
 </div>
-<!-- 險是郵件內文畫面END -->
+<!-- 顯示郵件內文畫面END -->
 
 <!-- 顯示寄件備份內文畫面 -->
 <div class="modal fade" id="backupmail" tabindex="-1" role="dialog" aria-labelledby="readmail" aria-hidden="true">
@@ -147,6 +145,49 @@ tr.mailrow:hover td{
 </div>
 <!-- 編輯郵件畫面END -->
 
+<!-- 回覆郵件畫面 -->
+<div class="modal fade" id="replymail" tabindex="-1" role="dialog" aria-labelledby="editmail" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"> </span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">編輯郵件</h4>
+      </div>
+      <form role="form"><!--  FORM撰寫EMAIL表單 -->
+	      <div class="modal-body">
+			  <div class="form-group">
+			  	<label for="exampleInputEmail1">主旨</label>
+			    <span id="replyTitle"></span>
+			  </div>
+			  
+			  <div class="form-group">
+			    <label for="receiver">收件人</label>
+			    <span id="replyReceiver"></span> 
+			  </div>
+			  
+			  <div class="form-group">
+			    <label for="exampleInputFile">內文</label>
+			    <textarea  class= "form-control" rows="10" cols="" name="article" id="replyArticle"></textarea>
+			    <p class="help-block">請輸入1000字以內的內文</p>
+			  </div>
+			  
+			  <div class="checkbox">
+			    <label>
+			      <input type="checkbox" checked="checked" name="saveaslog" id="replysaveaslog"> 儲存寄件備份
+			    </label>
+			  </div>
+	      </div>
+	      <div class="modal-footer">
+     
+	        <button type="button" class="btn btn-default" data-dismiss="modal" id="replysavedraft">儲存為草稿</button>
+	        <button type="button" class="btn btn-primary" data-dismiss="modal" id="replysubmitmail">送出</button>
+	      </div>
+     </form> <!--  FORM撰寫EMAIL表單END -->
+    </div>
+  </div>
+</div>
+<!-- 回覆郵件畫面END -->
+
 <!-- 編輯草稿畫面 -->
 <div class="modal fade" id="draftmail" tabindex="-1" role="dialog" aria-labelledby="draftmail" aria-hidden="true">
   <div class="modal-dialog">
@@ -203,8 +244,8 @@ $("#deletebtn").click(function(){
 		swal("沒有選擇要刪除的信件", "你沒有選擇任何要刪除的信件", "warning")
 	}else{
 	swal({  
-		title: "你確定要刪除這封信嗎?",   
-		text: "刪除的信件無法再回復!",   
+		title: "你確定要刪除信件嗎?",   
+		text: "刪除的信件將無法回復!",   
 		type: "warning",   showCancelButton: true,  
 		confirmButtonColor: "#DD6B55",   
 		confirmButtonText: "是的!我要刪除!",   
@@ -227,6 +268,12 @@ $("#deletebtn").click(function(){
 	}
 })
 
+
+
+//===寄信功能=================================================================================
+
+	
+	
 //編輯新郵件
 $("#editnewmail").click(function(){
 	$("#receiver").val("");
@@ -237,6 +284,7 @@ $("#editnewmail").click(function(){
 $(function(){
 	mailboxlist();//顯示所有郵件
 })//end of onload
+
 $("#allmailbox").click(function(){
 	mailboxlist();//顯示所有郵件
 })
@@ -285,8 +333,6 @@ $(function(){
 	})
 })
 //好友的下拉選單 END
-
-
 
 //按下寄出郵件
 $("#submitmail").click(function(){
@@ -345,16 +391,14 @@ $("#savedraft").click(function(){
 
 //================顯示收件匣====================================
 	
-	
-	
 function mailboxlist(){
 	var formData={"id":${user.id}};
     	$.ajax({
        		type: "GET",
        		url: "/mail/getmail",
       		data: formData,
-       		success: function(data){
-    			showmail(data);	
+       		success: function(data){		
+    			showmail(data);
     		},
     	dataType: "json",
    	 	contentType : "application/json"
@@ -413,14 +457,83 @@ function showmail(data){
 								"<div style='font-size: 12px;display: inline-block;'>" + mailSender + "</div>" + 
 								"<div style='font-size: 12px; float: right;'>" + mailSendTime + "</div>");
 		$("#mail-body").append("<p>"+mailArticle+"</p>");
+		//回覆鈕
+		$("#replybtn").on("click", function(){
+// 			var replyTitle = mailTitle;
+// 			var replyReceiver = mailSender;
+			var replyHeader = {"title":"Re:&nbsp;" + mailTitle, "receiver":mailSender, "raccount":data[mailIndex].sender.account};
+			showreply(replyHeader);
+		})
 	});
 	//checkbox全選
 	$("#checkAll").change(function(){
 	    $("input:checkbox").prop('checked', $(this).prop("checked"));
 	});
 }// end of showmail
-
-
+	
+	//回覆信件
+	function showreply(replyHeader){
+// 	console.log(replyHeader);	
+	$("#readmail").modal("hide");
+	$("#readmail").on("hidden.bs.modal", function(){
+		$("#replymail").modal();
+		$("#replyTitle").empty();
+		$("#replyTitle").append(replyHeader.title);
+		$("#replyReceiver").empty();
+		$("#replyReceiver").append(replyHeader.receiver);
+		//(回覆信件)按下寄出郵件
+		$("#replysubmitmail").click(function(){
+			console.log("click");
+			swal({
+					type : "success",
+					title: "郵件寄出",  
+					text: "成功幫您寄出郵件!",  
+					timer: 1000,   
+					showConfirmButton: false
+				},function(){
+					var replyData = {
+							senderId : ${user.id},
+							receiverAccount : replyHeader.raccount,
+							title : replyHeader.title,
+							article : $("#replyArticle").val(),
+							saveAsLog :$("#replysaveaslog").prop("checked"),
+							logmailid : 0
+							};
+// 					console.log(replyData);
+					$.ajax({
+						dataType: "json",
+						type: "get",
+						url: "/mail/newmail",
+						data: replyData, 
+					});
+					location.href="/mail/list";
+				})
+		})//(回覆信件)按下寄出郵件END
+ 		//(回覆信件)按下儲存草稿
+		$("#replysavedraft").on("click", function(){
+			swal({
+					type : "success",
+					title: "儲存草稿",  
+					text: "成功幫您儲存為草稿!",  
+					timer: 1000,   
+					showConfirmButton: false
+				},function(){
+					$.ajax({
+						dataType: "json",
+						type: "get",
+						url: "/mail/savedraft",
+						data: {
+							senderId : ${user.id},
+							receiverAccount : replyHeader.raccount,
+							title : replyHeader.title,
+							article : $("#replyArticle").val()},
+					});
+					location.href="/mail/list";
+				})
+			console.log("click save");
+		})//(回覆信件)按下儲存草稿END
+	})
+}
 
 //==========================顯示寄件備份============================================================
 
@@ -447,7 +560,6 @@ function showbackup(data){
 		var sendTime = this.sendTime.year + "/" + this.sendTime.monthValue + "/" + this.sendTime.dayOfMonth;
 		var mailRow = "<tr class='mailrow'>" +
 			"<td class='mailcheckbox'><input name='check' id='logm"+this.id+"' type='checkbox'></td>" + 
-			"<td class='importantbox'>" + star + "</td>" +
 			"<td>" + this.receiver.nickname + "(" + this.receiver.account + ")</td>" + 
 			"<td class='mailBody' id='backno" + index + "' style='cursor:pointer'>" + this.title + "//" + this.article + "</td>" +
 			"<td style='text-align: right;'>" + sendTime + "</td>" +
