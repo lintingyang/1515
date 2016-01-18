@@ -5,9 +5,9 @@
 
 
 <div class="container" style="text-align: center;">
-	
+<p class="text-muted credit">
 E715 以物易物交換網
-
+</p>
 </div>
 
 </body>
