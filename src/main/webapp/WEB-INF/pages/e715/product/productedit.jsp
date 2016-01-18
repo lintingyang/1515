@@ -5,7 +5,30 @@
 <%-- <c:import url="/WEB-INF/pages/layout/meta.jsp"></c:import> --%>
 <%-- <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import> --%>
 <%-- <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import> --%>
+<style>
+.label-pill {
+  padding-right: .6em;
+  padding-left: .6em;
+  border-radius: 10em;
+  color:white;
+  background: lightgray;
+}
+.proddiv{
+	display: inline-block;
+	height: 260px;
+	width: 200px;
+	text-align: center; 
+	color:gray;
+	margin:15px;
+	cursor :pointer;
+	box-shadow:0px 0px 1px gray;
+	 background: white;
+	}
+.prodText{
+	color:purple;
+}
 
+</style>
 <div class="container" style="margin: 50px auto;">
 	<div class="container">
 		<!-- 這個div 銘 -->
@@ -15,12 +38,12 @@
 		</div>
 		<ul class="nav nav-tabs " id="tabs">
 			<li style="width: 20%; text-align: center;"><a
-				class="categorylist searchbtn queryBtn" id = "posted" href="#">收到的交換<span class="badge" id ="totalCount"></span></a></li>
+				class="categorylist searchbtn queryBtn" id = "posted" href="#">收到的交換&nbsp;<span class="label label-pill label-default label-as-badge" id ="totalCount"></span></a></li>
 			<li style="width: 20%; text-align: center;" class = "dropdown" ><a
-				class="categorylist searchbtn dropdown-toggle" data-toggle="dropdown" href="#">問與答<span class="badge" id ="totalCountQandA"></span></a>
+				class="categorylist searchbtn dropdown-toggle" data-toggle="dropdown" href="#">問與答&nbsp;<span class="label label-pill label-default label-as-badge" id ="totalCountQandA"></span></a>
 				<ul class="dropdown-menu">
-   			   		<li><a href="#" class = "queryBtn" id = "question">被提出問題<span class="badge" id ="totalCountQ"></span></a></li>
-     				<li><a href="#" class = "queryBtn" id = "answer">收到的回答<span class="badge" id ="totalCountA"></span></a></li>
+   			   		<li><a href="#" class = "queryBtn" id = "question"><span class="label label-success label-as-badge" id ="totalCountQ"></span>&nbsp;待回覆的問題</span></a></li>
+     				<li><a href="#" class = "queryBtn" id = "answer"><span class="label label-warning label-as-badge" id ="totalCountA"></span>&nbsp;已收到的回覆</a></li>
     			</ul>	
 			</li>
 			
@@ -33,8 +56,8 @@
 			<li style="width: 20%; text-align: center;" class = "dropdown" ><a
 				class="categorylist searchbtn dropdown-toggle" data-toggle="dropdown" href="#">已交換</a>
 				<ul class="dropdown-menu">
-   			   		<li><a href="#" class = "queryBtn" id = "OthersExchanged">別人刊登的，現在是我的。</a></li>
-     				<li><a href="#" class = "queryBtn" id = "myExchanged">我刊登的，現在是別人的。</a></li>
+   			   		<li><a href="#" class = "queryBtn" id = "OthersExchanged">提出的交換</a></li>
+     				<li><a href="#" class = "queryBtn" id = "myExchanged">收到的交換</a></li>
     			</ul>	
 			</li>
 		</ul>
@@ -62,6 +85,11 @@ $(function(){
 })
 
 $(function() { //進入物品管理先顯示已刊登
+	$.post("/product/query1",{ "query" : "answer" } ,function(data) { 
+		$.each(data,function(i){
+		getQandACount(data[i].id , "answer" , null);//收到的回答
+		})//each
+	});
 	$.post("/product/query1",{ "query" : "posted" } ,function(data) { //點選排列方式後按照順序排列
 		
 			$("#itemContainer").html('');
@@ -77,20 +105,14 @@ $(function() { //進入物品管理先顯示已刊登
 				var productdiv = $("<div></div>");
 				var aclick = $("<a>").attr("href","/product/"+data[i].id);
 				var productimg = $("<img>").addClass("prodimg");
-				var p = $("<span>").text(data[i].name);
-				var badgePost = $("<span>").addClass("badge pCount");
+				var p = $("<span></span>").text(data[i].name).addClass("prodText");
+				var badgePost = $("<span></span>").addClass("badge pCount");
 				$(p).append($(badgePost));
 				$(aclick).append($(productimg)).append($(p));
 				$(productdiv).addClass("proddiv").append($(aclick));
 				
-				getQandACount(data[i].id , "answer" , null);
-				getProductCount(data[i].id , "posted" , badgePost); // 已刊登欲交換數量
-				
-// 				getQandACount(data[i].id , "question" , null);//
-				
-
-				
-				
+				getProductCount(data[i].id , "posted" , badgePost); // 已刊登欲交換數量				
+				getQandACount(data[i].id , "question" , null);//被提出的問題
 				getpicture(data[i], productimg);//productPic
 				
 				$(productdiv).append($(removeBtn));
@@ -157,12 +179,15 @@ $('.queryBtn').click(function() { //點選排列方式後按照順序排列
 			var productimg = $("<img>").addClass("prodimg");
 			var p = $("<span>").text(data[i].name);
 			var badgePost = $("<span>").addClass("badge pCount");
-			$(p).append($(badgePost));
+			$(p).append($(badgePost));y
 			$(aclick).append($(productimg)).append($(p));
 			$(productdiv).addClass("proddiv").append($(aclick));
 			
-			if(type == "question" || type == "answer"){
+			if(type == "question"){
 				totalQ = 0;
+				getQandACount(data[i].id , type , badgePost); // 已刊登別人提出的問題
+			}
+			if(type == "answer"){
 				totalA = 0;
 				getQandACount(data[i].id , type , badgePost); // 已刊登別人提出的問題
 			}
@@ -211,17 +236,15 @@ function getQandACount(id , type ,badgePost){ // 已刊登別人提出的問題
 			}else{
 				$(badgePost).text(count);
 			}
-			console.log("type="+ type);
 			if(type == "question"){
-				console.log("totalQ");
 				totalQ += count;
-				$('#totalCountQ').text(totalQ);
+				$('#totalCountQ').text(totalQ);				
 			}
 			if(type == "answer"){
-				console.log("totaA");
 				totalA += count;
 				$('#totalCountA').text(totalA);
 			}
+			
 			$('#totalCountQandA').text(totalQ+totalA);
 		}//count
 	})//post
