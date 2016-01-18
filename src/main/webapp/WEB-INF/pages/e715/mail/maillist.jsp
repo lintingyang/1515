@@ -37,7 +37,7 @@ tr.mailrow:hover td{
 	<div><!-- 	功能列表欄位 -->
 		<br>
 		<ul class="nav nav-pills maillist">
-		  <li role="presentation" class="active"><button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#editemail" style="width:100px;"><span >撰寫</span></button></li>
+		  <li role="presentation" class="active"><button id="editnewmail" type="button" class="btn btn-danger btn-lg" style="width:100px;"><span >撰寫</span></button></li>
 		  <li role="presentation" id="allmailbox"><a href="#">收件匣</a></li>
 		  <li role="presentation"><a href="#">重要信件</a></li>
 		  <li role="presentation" id="draftbox"><a href="#" >草稿</a></li>
@@ -51,7 +51,7 @@ tr.mailrow:hover td{
 		<div class="checkbox col-md-1" >
     		<label><input type="checkbox" id="checkAll">&nbsp;全選</label>
 		</div>
-		<div class ="col-md-1 deletebtn"><span class="glyphicon glyphicon-trash"></span></div>
+		<div id="deletebtn" class ="col-md-1 deletebtn"><span class="glyphicon glyphicon-trash"></span></div>
 	</div><!-- 全選與刪除欄位END -->
 	
 	
@@ -80,6 +80,25 @@ tr.mailrow:hover td{
   </div>
 </div>
 <!-- 險是郵件內文畫面END -->
+
+<!-- 顯示寄件備份內文畫面 -->
+<div class="modal fade" id="backupmail" tabindex="-1" role="dialog" aria-labelledby="readmail" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"></span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="backupmail-title"><!-- 信件title --></h4>
+      </div>
+      <div class="modal-body" id="backupmail-body">
+        <!-- 寄件人，時間，內文 -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 顯示寄件備份內文畫面 END-->
 
 <!-- 編輯郵件畫面 -->
 <div class="modal fade" id="editemail" tabindex="-1" role="dialog" aria-labelledby="editmail" aria-hidden="true">
@@ -176,6 +195,15 @@ tr.mailrow:hover td{
 <!-- 編輯草稿畫面 END -->
   
 <script>
+$("#deletebtn").click(function(){
+
+})
+
+$("#editnewmail").click(function(){
+	$("#receiver").val("");
+	$("#editemail").modal();
+})
+
 //onload
 $(function(){
 	mailboxlist();//顯示所有郵件
@@ -200,6 +228,7 @@ $(".drop_down_btn").click(function(e){
 $(".friendli").click(function(e){   
     e.stopPropagation();   
     $("#receiver").val($(this).text());   
+    $("#draftreceiver").val($(this).text());   
     $(".input_select_block ul").hide();   
 }); 
 $(function(){
@@ -219,6 +248,7 @@ $(function(){
 				$(".friendli[name="+data[i].userBId.account+"]").bind("click",function(e){   
 				    e.stopPropagation();   
 				    $("#receiver").val($(this).attr("name"));   
+				    $("#draftreceiver").val($(this).attr("name"));   
 				    $(".input_select_block ul").hide();   
 				}); 
 			})
@@ -394,16 +424,35 @@ function showbackup(data){
 			star = empty;
 		}
 		var sendTime = this.sendTime.year + "/" + this.sendTime.monthValue + "/" + this.sendTime.dayOfMonth;
-		var draftRow = "<tr class='mailrow' id='draft" + index + "'>" +
+		var mailRow = "<tr class='mailrow'>" +
 			"<td class='mailcheckbox'><input type='checkbox'></td>" + 
+			"<td class='importantbox'>" + star + "</td>" +
 			"<td>" + this.receiver.nickname + "(" + this.receiver.account + ")</td>" + 
-			"<td class='titlebox'>" + this.title + "//" + this.article + "</td>" +	
+			"<td class='mailBody' id='backno" + index + "' style='cursor:pointer'>" + this.title + "//" + this.article + "</td>" +
 			"<td style='text-align: right;'>" + sendTime + "</td>" +
 			"</tr>";
-	$("#mailtable").append(draftRow);
+	$("#mailtable").append(mailRow);
 	index ++;
+	
 	})//寄件備份ＥＮＤ
-}
+	//顯示信件內文
+	$(".mailBody").on("click", function(){
+		var mailIndex = $(this).attr("id").substring(6);
+		var mailTitle = data[mailIndex].title;
+		var mailSender = data[mailIndex].receiver.nickname + "&nbsp;(" + data[mailIndex].receiver.account + ")";
+		var mailSendTime = data[mailIndex].sendTime.year + "年" + data[mailIndex].sendTime.monthValue + "月" + data[mailIndex].sendTime.dayOfMonth + "日" +
+							"&nbsp" + data[mailIndex].sendTime.hour + ":" + data[mailIndex].sendTime.minute;
+		var mailArticle = data[mailIndex].article;
+		$("#backupmail").modal();
+		$("#backupmail-title").empty();
+		$("#backupmail-body").empty();
+		$("#backupmail-title").append("<h4>"+mailTitle+"<h4>" + 
+								"<div style='font-size: 12px;display: inline-block;'>" + mailSender + "</div>" + 
+								"<div style='font-size: 12px; float: right;'>" + mailSendTime + "</div>");
+		$("#backupmail-body").append("<p>"+mailArticle+"</p>");
+	});
+}//寄件備份END
+
 //	=======================	草稿區塊===============================
 $("#draftbox").click(
 	function(){
