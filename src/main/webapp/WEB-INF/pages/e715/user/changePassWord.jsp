@@ -26,7 +26,7 @@
 					<label for="inputPassword3" class="col-sm-2 control-label">輸入新密碼:</label>
 					<div class="col-sm-10">
 						<input type="password" class="form-control textSize"
-							name="newPwd" placeholder="Password" maxlength="15" id="newPassword" required pattern="(?=^[A-Za-z0-9]{6,12}$)((?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]))^.*$" title="密碼：6~12英數字組合，至少有一個大寫、小寫英文字母及數字，如 A12Rd6">
+							name="newPwd" placeholder="Password" maxlength="15" id="newPassword" required pattern="(?=^[A-Za-z0-9]{6,12}$)((?=.*[A-Za-z])(?=.*[0-9]))^.*$" title="密碼：6~12英數字組合，至少有一個大寫或小寫英文字母及數字，如 A1232126">
 					<span id="newPasswordErrorMsg">${nullNewPwd}</span>
 					</div>
 				</div>
@@ -34,7 +34,7 @@
 					<label for="inputPassword3" class="col-sm-2 control-label">請再輸入一次:</label>
 					<div class="col-sm-10">
 						<input type="password" class="form-control textSize"
-							name="newPwdCheck" placeholder="Password" id="newPasswordCheck" required pattern="(?=^[A-Za-z0-9]{6,12}$)((?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]))^.*$" title="密碼：6~12英數字組合，至少有一個大寫、小寫英文字母及數字，如 A12Rd6">
+							name="newPwdCheck" placeholder="Password" id="newPasswordCheck" required pattern="(?=^[A-Za-z0-9]{6,12}$)((?=.*[A-Za-z])(?=.*[0-9]))^.*$" title="密碼：6~12英數字組合，至少有一個大寫或小寫英文字母及數字，如 A1232126">
 					<span id="newPasswordCheckErrorMsg">${newPwdCheck}</span>
 					</div>
 				</div>

@@ -260,7 +260,7 @@ public class memberController {
 			@RequestParam("nickname") String nickname, @RequestParam("sex") Sex sex,
 			@RequestParam("month") String month, @RequestParam("day") String day, @RequestParam("year") String year,
 			@RequestParam("phone") String phone, @RequestParam("email") String email,
-			@RequestParam("subject") String subject, @RequestParam("Addr") String addr,
+			@RequestParam("subject") String subject, @RequestParam("addr") String addr,
 			// @RequestParam("interested") List<Integer> interested,
 			@RequestParam("aboutMe") String aboutMe, HttpSession session) {
 		User user = (User) session.getAttribute("user");

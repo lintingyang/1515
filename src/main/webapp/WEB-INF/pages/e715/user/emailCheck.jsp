@@ -38,8 +38,11 @@
 <script>
 	$(function() {
 		$("#sendSchoolEmil").on('click', function() {		
-			var temp = {"userSchoolEmail":$("#schoolEmail").val()}
-			console.log(temp);
+			var temp = {"userSchoolEmail":$("#schoolEmail").val(),"chooseSchool":$('#chooseSchool').val()}
+			var checkEmailFormat= $('#schoolEmail').val();
+			var reg= /(?=^[A-Za-z0-9]{6,12}$)((?=.*[a-zA-Z0-9]))^.*$/;
+			$("#schoolEmail").attr('readonly','readonly');
+			if(reg.test(checkEmailFormat)){
 			$.ajax({
 				contentType : "application/json",
 				url : "/head/verificationCodeSend",
@@ -47,7 +50,6 @@
 				type : "get",
 				data : temp,
 				success : function(data) {
-					
 					$('#checkVerificationCodeDiv').html('');
 					var divVerification = $('<div></div>').attr('id','divBorder').addClass("form-group");
 					var labelVerification = $('<label></label>').addClass("col-sm-2 control-label").attr('for','inputPassword3').text('輸入驗證碼');
@@ -66,10 +68,18 @@
  				}
 			//ajax的下括號
  			});
+			//if下括號
+		}else{
+			$('#errorMsg').empty();
+			$("#schoolEmail").removeAttr('readonly');
+			$('#errorMsg').text('輸入格式錯誤:請輸入@以前即可');
+		//else下括號	
+		}
 			//on事件下括號
-		});
+	});
 		
 		$("#haveSchoolEmil").on('click', function() {
+			$("#haveSchoolEmil").hide();
 			$('#checkVerificationCodeDiv').html('');
 			var divVerification = $('<div></div>').attr('id','divBorder').addClass("form-group");
 			var labelVerification = $('<label></label>').addClass("col-sm-2 control-label").attr('for','inputPassword3').text('輸入驗證碼');
@@ -115,10 +125,24 @@
 
 			<form class="form-horizontal" action="/head/verificationCodeCheck">
 				<div class="form-group" id="divBorder">
+				<label class="col-sm-2 control-label">選擇學校</label>
+				<div class="col-sm-10" style="padding-top: 7px">
+					<select id="chooseSchool" name="chooseSchool">
+						<option value="@nccu.edu.tw">政治大學</option>
+						<option value="@mail.ncku.edu.tw">成功大學</option>
+						<option value="@ccu.edu.tw">中正大學</option>
+						<option value="@mail.yzu.edu.tw">元智大學</option>
+					</select>(*必須)
+					</div>
+				</div>
+			
+			
+				<div class="form-group" id="divBorder">
 					<label for="inputEmail3" class="col-sm-2 control-label">School_Email</label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="schoolEmail" name="userSchoolEmail"
-							placeholder="Email" required>
+							placeholder="輸入學校信箱(@和其後均不用輸入)" required pattern="(?=^[A-Za-z0-9]{6,12}$)((?=.*[a-zA-Z0-9]))^.*$" title="請勿輸入數字和英文以外的符號">
+						<span id="errorMsg"></span>
 					</div>
 				</div>
 				<div id="btnCenter">

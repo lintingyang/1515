@@ -222,9 +222,9 @@
 					</div>
 				</div>
 				<div class="form-group" id="divBorder">
-					<label class="col-md-2 control-label">備用Email:</label>
+					<label for="email" class="col-md-2 control-label">備用Email:</label>
 					<div class="col-md-10">
-						<input type="text" class="form-control" id="inputReservedEmail"
+						<input type="email" class="form-control" id="inputReservedEmail"
 							name="email" value="${user.email}" placeholder="輸入備用信箱" required>
 					</div>
 				</div>
@@ -239,7 +239,7 @@
 				<div class="form-group" id="divBorder">
 					<label for="inputPassword3" class="col-sm-2 control-label">地址:</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="inputAddr" name="Addr"
+						<input type="text" class="form-control" id="inputAddr" name="addr"
 							value="${user.address}" placeholder="輸入地址">
 					</div>
 				</div>
@@ -288,7 +288,7 @@
 				<div class="form-group">
 					<div class="col-md-offset-2 col-md-10">
 						<input type="button" class="btn btn-default" id="upUserData" value="修改">
-						<button type="button" class="btn btn-warning" id="clear">取消</button>
+<%-- 						<button type="button" class="btn btn-warning" id="clear">取消</button> --%>
 					</div>
 				</div>
 			</form>

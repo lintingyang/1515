@@ -195,10 +195,21 @@ tr.mailrow:hover td{
 <!-- 編輯草稿畫面 END -->
   
 <script>
+//刪除按鈕
 $("#deletebtn").click(function(){
-
+	var checkbox = $("[name='check']:checked");
+	console.log(checkbox[1].id);
+	for(i =0;i<checkbox.length;i++){
+		$.ajax({
+			dataType: "json",
+			type: "get",
+			url: "/mail/deletemail",
+			data: {deletemail : checkbox[i].id}
+		});
+	}	
 })
 
+//編輯新郵件
 $("#editnewmail").click(function(){
 	$("#receiver").val("");
 	$("#editemail").modal();
@@ -312,7 +323,7 @@ $("#savedraft").click(function(){
 	
 })//按下儲存草稿END
 
-//顯示收件匣
+//================顯示收件匣====================================
 function mailboxlist(){
 	
 	var formData={"id":${user.id}};
@@ -321,7 +332,6 @@ function mailboxlist(){
        		url: "/mail/getmail",
       		data: formData,
        		success: function(data){
-       		
     			showmail(data);	
     		},
     	dataType: "json",
@@ -332,19 +342,17 @@ function mailboxlist(){
 function showmail(data){
 	var index = 0;
 	var star = null;
-	var light = "<span class='glyphicon glyphicon-star' id='starno" + index + "'></span>";
-	var empty = "<span class='glyphicon glyphicon-star-empty' id='starno" + index + "'></span>"
 	$("#mailtable").html("");
 	$.each(data, function(){
 // 		console.log(this.isImportant);
 		if (this.isImportant == "TRUE"){
-			star = light;
+			star = "<span class='glyphicon glyphicon-star' id='starno" + index + "'></span>";
 		} else {
-			star = empty;
+			star = "<span class='glyphicon glyphicon-star-empty' id='starno" + index + "'></span>"
 		}
 		var sendTime = this.sendTime.year + "/" + this.sendTime.monthValue + "/" + this.sendTime.dayOfMonth;
 		var mailRow = "<tr class='mailrow'>" +
-						"<td class='mailcheckbox'><input type='checkbox'></td>" + 
+						"<td class='mailcheckbox'><input name='check' id='mail"+this.id+"' type='checkbox'></td>" + 
 						"<td class='importantbox'>" + star + "</td>" +
 						"<td>" + this.sender.nickname + "(" + this.sender.account + ")</td>" + 
 						"<td class='mailBody' id='mailno" + index + "' style='cursor:pointer'>" + this.title + "//" + this.article + "</td>" +
@@ -359,10 +367,11 @@ function showmail(data){
 		var isImportant = $(this).hasClass("glyphicon-star").toString();
 		var starIndex = $(this).attr("id").substring(6);
 		var starData = {"id":data[starIndex].id, "isImportant": isImportant};
-// 		console.log(starData);
+		console.log(starIndex);
+		console.log(starData);
 		$.ajax({
 	    	dataType: "json",
-// 	   	 	contentType : "application/json",
+//  	   	 	contentType : "application/json",
        		type: "GET",
        		url: "/mail/important",
       		data: starData,
@@ -485,7 +494,7 @@ function showdraft(data){
 		}
 		var draftRow = "<tr class='mailrow' id='draft" + index + "'>" +
 			"<td class='mailcheckbox'><input type='checkbox'></td>" + 
-			"<td class='namebox'>" + receivername +  receiveraccount + "</td>" + 
+			"<td class='namebox' >" + receivername +  receiveraccount + "</td>" + 
 			"<td class='titlebox'>" + this.title + "//" + this.article + "</td>" +
 			"<td style='text-align: right;'>" + draftTime + "</td>" +
 			"</tr>";
