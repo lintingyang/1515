@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.softleader.e5e5.entity.User;
 import tw.com.softleader.e5e5.entity.UserBanList;
@@ -29,6 +31,10 @@ public class headerController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private ServletContext servletContext;
+	
+	
 	Logger log = Logger.getLogger(this.getClass());
 
 	@RequestMapping(value = "/categoryhchange")
@@ -91,9 +97,13 @@ public class headerController {
 	// 送驗證碼
 	@RequestMapping(value = "/verificationCodeSend")
 	@ResponseBody
-	public boolean userVerificationCodeSend(@RequestParam("userSchoolEmail") String schoolEmail) {
+	public boolean userVerificationCodeSend(
+			@RequestParam("userSchoolEmail") String schoolEmail,
+			@RequestParam("chooseSchool") String schoolName
+			) {
 		boolean result = false;
-		int temp = userService.sendVerificationCode(schoolEmail);
+		String userSchool = schoolEmail+schoolName;
+		int temp = userService.sendVerificationCode(userSchool);
 		if (temp == 1) {
 			result = true;
 		}
@@ -102,11 +112,11 @@ public class headerController {
 
 	// 確認驗證碼
 	@RequestMapping(value = "/verificationCodeCheck")
-	public String userSchoolEmailCheck(@RequestParam("userSchoolEmail") String schoolEmail,
+	public String userSchoolEmailCheck(@RequestParam("userSchoolEmail") String schoolEmailFormat,@RequestParam("chooseSchool") String schoolName,
 		@RequestParam("userVerificationCode") String userVerificationCode, HttpSession session) {
+		String schoolEmail=schoolEmailFormat+schoolName;
 		Map<String, String> errors = new HashMap<String, String>();
 		session.setAttribute("checkError", errors);
-		
 		errors.clear();
 		Integer verificationCode = null;
 		try {
@@ -126,6 +136,17 @@ public class headerController {
 			return "/e715/user/emailCheck";
 		}
 
+	}
+	//確認帳號是否存在
+	@RequestMapping(value = "/checkAccount")
+	@ResponseBody
+	public boolean checkAccount (@RequestParam("checkAccount") String account){
+		boolean result = false;
+		User user = userService.findByAccount(account);
+		if(user==null){
+			result = true;
+		}
+		return result;
 	}
 
 	// 註冊帳號
@@ -187,7 +208,33 @@ public class headerController {
 		}
 
 	}
-
+	
+	//完善資料
+	@RequestMapping(value = "/completeMaterial", method = RequestMethod.GET)
+	public String completeMaterial(
+			@RequestParam("subject") String subject,
+			@RequestParam("addr") String addr,
+			 @RequestParam("file") MultipartFile userFile,
+			@RequestParam("aboutMe") String aboutMe,
+			HttpSession session){
+			User user = (User)session.getAttribute("user");
+		if(user==null){
+			return "/e715/user/login";
+		}else{
+			user.setSubject(subject);
+			user.setAddress(addr);
+			if (!userFile.isEmpty()) {
+				String path = userService.upLoadImage(user.getId(), servletContext, userFile);
+				user.setPicture(path);
+			}
+			user.setAboutMe(aboutMe);
+			userService.update(user);
+		return "/index";
+		}
+	}
+	
+	
+	
 	@RequestMapping(value = "/success", method = RequestMethod.GET)
 	public String createSuccess(HttpSession session) {
 

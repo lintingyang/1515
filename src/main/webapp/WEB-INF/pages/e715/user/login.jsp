@@ -115,7 +115,7 @@ $(function(){
 				<label class="col-sm-2 control-label">Account</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control textSize" name="account"  id="account"
-					placeholder="Account"> 
+					placeholder="Account" autofocus> 
 				</div>
 			</div>
 			<div class="form-group" id="divBorder">
