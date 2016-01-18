@@ -321,7 +321,6 @@ function mailboxlist(){
        		url: "/mail/getmail",
       		data: formData,
        		success: function(data){
-       		
     			showmail(data);	
     		},
     	dataType: "json",
