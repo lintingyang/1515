@@ -18,7 +18,7 @@
 }
 
 #img1 {
-	width: 720px;
+	width: 250px;
 }
 
 #btnGoTop {
@@ -44,7 +44,7 @@
 <div class="container">
 	<div>
 		<div id="successImg">
-			<img src="/resources/imgs/login_c.png" width="400" id="img1">
+			<img src="/resources/imgs/logo_c.png" width="100px" id="img1">
 		</div>
 		<p id="successInsert">恭喜您新增帳號成功</p>
 
