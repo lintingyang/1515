@@ -342,15 +342,13 @@ function mailboxlist(){
 function showmail(data){
 	var index = 0;
 	var star = null;
-	var light = "<span class='glyphicon glyphicon-star' id='starno" + index + "'></span>";
-	var empty = "<span class='glyphicon glyphicon-star-empty' id='starno" + index + "'></span>"
 	$("#mailtable").html("");
 	$.each(data, function(){
 // 		console.log(this.isImportant);
 		if (this.isImportant == "TRUE"){
-			star = light;
+			star = "<span class='glyphicon glyphicon-star' id='starno" + index + "'></span>";
 		} else {
-			star = empty;
+			star = "<span class='glyphicon glyphicon-star-empty' id='starno" + index + "'></span>"
 		}
 		var sendTime = this.sendTime.year + "/" + this.sendTime.monthValue + "/" + this.sendTime.dayOfMonth;
 		var mailRow = "<tr class='mailrow'>" +
@@ -369,10 +367,11 @@ function showmail(data){
 		var isImportant = $(this).hasClass("glyphicon-star").toString();
 		var starIndex = $(this).attr("id").substring(6);
 		var starData = {"id":data[starIndex].id, "isImportant": isImportant};
-// 		console.log(starData);
+		console.log(starIndex);
+		console.log(starData);
 		$.ajax({
 	    	dataType: "json",
-// 	   	 	contentType : "application/json",
+//  	   	 	contentType : "application/json",
        		type: "GET",
        		url: "/mail/important",
       		data: starData,
