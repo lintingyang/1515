@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import tw.com.softleader.e5e5.dao.LogMailDao;
 import tw.com.softleader.e5e5.dao.MailDao;
+import tw.com.softleader.e5e5.dao.ProductDao;
 import tw.com.softleader.e5e5.dao.UserDao;
 import tw.com.softleader.e5e5.entity.LogMail;
 import tw.com.softleader.e5e5.entity.Mail;
@@ -26,7 +27,8 @@ public class MailService {
 	private UserDao userDao;
 	@Autowired 
 	private LogMailDao logMailDao;
-	
+	@Autowired
+	private ProductDao productDao;
 	
 	public void deleteMail(int id){
 		mailDao.delete(id);
@@ -85,7 +87,38 @@ public class MailService {
 			logMailDao.delete(logMailId);
 		}
 	}
-
 	
+	
+	//物品完成交易自動送信給userB
+	@Transactional
+	public void autoSendMail(int receiverId,int productAId,int productBId){
+		Mail mail = new Mail();
+		mail.setSender(userDao.getOne(36));
+		mail.setReceiver(userDao.getOne(receiverId));
+		mail.setTitle("系統:您的物品已被交易!");
+		mail.setArticle("您好,親愛的用戶"+userDao.getOne(receiverId).getName()+"您好:您的物品"+productDao.getOne(productBId).getName()
+				+"已經與"+productDao.getOne(productAId).getName()+"配對成功,請盡速與交易者取得聯繫完成交易,並給予對方評分唷!=)");
+		mail.setIsRead(TrueFalse.FALSE);
+		mail.setSendTime(LocalDateTime.now());
+		mail.setIsImportant(TrueFalse.FALSE);
+		mail.setIsTrash(TrueFalse.FALSE);
+		mailDao.save(mail);
+	}
+	
+	
+	@Transactional
+	public void autoSendMailWhileExchange(int receiverId,int productAId,int productBId){
+		Mail mail = new Mail();
+		mail.setSender(userDao.getOne(36));
+		mail.setReceiver(userDao.getOne(receiverId));
+		mail.setTitle("系統:您的物品已被交易!");
+		mail.setArticle("您好,親愛的用戶"+userDao.getOne(receiverId).getName()+"有人想要使用"+productDao.getOne(productBId).getName()+
+				"交換您刊登的"+productDao.getOne(productAId).getName()+",請盡速前往物品頁面察看確認是否想要交換喔!=D");
+		mail.setIsRead(TrueFalse.FALSE);
+		mail.setSendTime(LocalDateTime.now());
+		mail.setIsImportant(TrueFalse.FALSE);
+		mail.setIsTrash(TrueFalse.FALSE);
+		mailDao.save(mail);
+	}
 	
 }// end of MailService
