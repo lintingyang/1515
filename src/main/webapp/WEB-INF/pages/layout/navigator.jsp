@@ -65,7 +65,7 @@
 <!-- 						</ul>	 -->
 <!-- 					</li> -->
 
-					<li><a href="/head/logout"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
+					<li style="margin-left: 400px;"><a href="/head/logout"><span class="glyphicon glyphicon-log-out"></span> 登出</a></li>
 <%-- 					<form class="hide" id="logout" action="<c:url value="/logout" />" method="post"> --%>
 <%-- 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> --%>
 <!-- 					</form> -->

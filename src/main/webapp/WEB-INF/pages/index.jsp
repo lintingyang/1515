@@ -3,7 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/WEB-INF/pages/e715/layout/header.jsp"></c:import>
-<div class="container" style="margin: 50px auto;">
+<div class="container" style="margin: 20px auto;">
 	<div class="container">
 
 
@@ -65,12 +65,17 @@ $("#new").click(function(){
 // 				});
 				$.each(data,
 					function(i) {
-					var productdiv = $("<div></div>");
+					var productdiv = $("<div class='panel panel-danger'></div>");
+					var productdiv2 = $("<div class='panel-body'></div>");
+					var productdiv3 = $("<div class='panel-footer'></div>");
 					var aclick = $("<a>").attr("href","/product/" + data[i].id);
-					var productimg = $("<img>").addClass("prodimg").attr("src",data[i].primaryPicture);
-					var p = $("<span>").text(data[i].name);
-					$(aclick).append($(productimg)).append($(p));
-					$(productdiv).addClass("proddiv").append($(aclick));
+					var productimg = $("<img style='max-width:100%;'>").addClass("prodimg").attr("src",data[i].primaryPicture);
+					var p = $("<span></span>").text(data[i].name);
+					$(aclick).append($(productimg));
+					$(productdiv2).append($(aclick));
+					$(productdiv3).append($(p));
+					
+					$(productdiv).addClass("proddiv").append($(productdiv2)).append($(productdiv3));
 
 					$("#itemContainer").append(productdiv);
 // 					getpicture(data[i], productimg)
