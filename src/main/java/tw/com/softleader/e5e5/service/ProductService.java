@@ -51,7 +51,7 @@ public class ProductService extends OurService<Product> {
 		if (orderby.equals("熱門")) {
 			if (category.equals("全部")) {
 				list = productDao.findAllByNameOrderbyByClickTimes(namelike);
-				log.error(list);
+//				log.error(list);
 			} else {
 				list = productDao.findByProdcutOrderByClickTimes(namelike, category);
 			}

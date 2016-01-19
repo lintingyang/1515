@@ -50,7 +50,7 @@ public class UserService extends OurService<User> {
 			log.error("user為null , 請確定帳號是否正確");
 		}else if(user != null){
 			if(user.getPassword().equals(password)){
-				log.error("帳號正確，user = "+user.getAccount());
+//				log.error("帳號正確，user = "+user.getAccount());
 				return user;
 			}
 		}
