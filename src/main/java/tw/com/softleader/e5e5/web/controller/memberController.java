@@ -81,7 +81,7 @@ public class memberController {
 		List<Product> products = productService.findAllByUserId(id);
 		if (products != null) {
 			for (Product product : products) {
-				log.error("sdfsf " + product.getGrade());
+//				log.error("sdfsf " + product.getGrade());
 				if (product.getGrade() != null) {
 					if (Grade.GOOD.equals(product.getGrade())) {
 						good++;
@@ -313,7 +313,7 @@ public class memberController {
 				// 讀取新圖跟砍檔(別忘記jsp的enctype
 				if (!file.isEmpty()) {
 					// 使用者有圖片的話就砍黨
-					if (!user.getPicture().isEmpty()) {
+					if (user.getPicture()!=null) {
 						userService.deleteImage(user.getId(), servletContext);
 					}
 					String path = userService.upLoadImage(user.getId(), servletContext, file);
@@ -323,8 +323,10 @@ public class memberController {
 				user.setName(name);
 				user.setNickname(nickname);
 				// 判斷是手機還是家電(基礎判斷)
-				log.error("----------------------"+phone.substring(0, 1));
-				if (phone.substring(0, 1).equals("09")) {
+				log.error("----------------------01---"+phone.substring(0,1));
+				log.error("----------------------02---"+phone.substring(0,2));
+				log.error("----------------------03---"+phone.substring(0,3));
+				if (phone.substring(0,2).equals("09")) {
 					user.setCellphone(phone);
 				} else {
 					user.setPhone(phone);
@@ -395,7 +397,7 @@ public class memberController {
 		User user = (User) session.getAttribute("user");
 		int i = 0;
 		if (user != null) {
-			log.error("fdsafdf" + user.getId() + " : " + id);
+//			log.error("fdsafdf" + user.getId() + " : " + id);
 			i = focusUserListService.insert(user.getId(), id);
 		}
 		if (i == 1) {
