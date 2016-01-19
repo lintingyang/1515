@@ -141,6 +141,7 @@
 					<div class="col-md-10">
 						<input type="text" class="form-control" id="name" name="name"
 							value="${user.name}" placeholder="輸入姓名" required>
+							<span id="nameErrorMsg"></span>
 					</div>
 				</div>
 				<div class="form-group" id="divBorder">
@@ -205,9 +206,10 @@
 				<div class="form-group" id="divBorder">
 					<label class="col-md-2 control-label">電話:</label>
 					<div class="col-md-10">
-						<input type="text" class="form-control" id="inputPhone"
+						<input type="text" class="form-control" id="phone"
 							value="${user.phone}${cellphone}" name="phone"
 							placeholder="輸入家電或手機" required>
+							<span id="phoneErrorMsg"></span>
 					</div>
 				</div>
 				<div class="form-group" id="divBorder">
@@ -215,6 +217,7 @@
 					<div class="col-md-10">
 						<input type="email" class="form-control" id="inputReservedEmail"
 							name="email" value="${user.email}" placeholder="輸入備用信箱" required>
+						<span id="reservedEmailErrorMsg"></span>
 					</div>
 				</div>
 
@@ -255,14 +258,27 @@
 
 <script>
 
-$("#upUserData").click(
-	function(){
+$("#upUserData").on('click',function(){
+	var re1 = /(?=.*[a-zA-Z])(?=.*[@]).{2,}/
+		$("phoneErrorMsg").html('');
+	$("reservedEmailErrorMsg").html('');
+	if($("#phone").val()==null){
+		$("phoneErrorMsg").append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>電話必填</span>");	
+	}
+	if($('#inputReservedEmail').val()==null){
+		$("reservedEmailErrorMsg").append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>信箱必填</span>");		
+	} else{
+		var emailCheckAns = rel.test($('#inputReservedEmail').val());
+		if(!emailCheckAns){
+			$("reservedEmailErrorMsg").append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>信箱格式錯誤</span>");		
+		}
+	}
+		if($("#name").val()!=null && $('#inputReservedEmail').val()!=null && $('#inputReservedEmail').val()!=null && emailCheckAns){
 		swal({
 			title : "確定要修改資料嗎?",
 			text : "",
 			type : "info",
 			showCancelButton : true,
-			//confirmButtonColor : "#DD6B55",
 			confirmButtonText : "YES",
 			closeOnConfirm : false,
 			showLoaderOnConfirm: true,
@@ -277,11 +293,16 @@ $("#upUserData").click(
 
 				setTimeout(function(){
 					$('#upUserDataForm').submit(); }, 1000);
-					
-					
-					
-					}
+				}
 			);
+		}else{
+			
+			$('#nameErrorMsg').empty();
+			$('#nameErrorMsg').append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>姓名禁止空白</span>");
+		
+		}
+		
+		
 				})
 </script>
 
