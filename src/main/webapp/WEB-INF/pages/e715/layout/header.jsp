@@ -114,52 +114,42 @@
 <!--         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
         
 <!--       </div> -->
-      <div class="modal-body alignCenter">
-      <h5 id="myModalLabel">請選擇類別</h5>
+      <div class="modal-body alignCenter" style="margin:auto;text-align:center;">
+      <h4 id="myModalLabel" style="text-align: center;color:gray">請選擇類別</h4>
+      <br>
       		<table style=" margin:auto;">
       			<tr>
 					
-      				<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/house.png"></div>全部</td>
+      				<td class="productcategory"><div class="demo6" style="background-color:#FFD2D2;"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/house.png"></div>全部</td>
+      					
+      				<td class="productcategory"><div class="demo6" style="background-color:#C1FFE4;"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/books.png"></div>課本書籍</td>
       				
-      				<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/books.png"></div>課本書籍</td>
+      				<td class="productcategory"><div class="demo6"style="background-color:#D2E9FF;"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/videogame.png"></div>遊戲影音</td>
       				
-      				<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/videogame.png"></div>遊戲影音</td>
+      				<td class="productcategory"><div class="demo6"style="background-color:#FFCBB3;"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/play.png"></div>日常用品</td>
       				
-      				<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/play.png"></div>日常用品</td>
-      				
-      				<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/pencil.png"></div>文具用品</td>
-<!--       				<td class="productcategory" ><button class=" btn btn-default btn-lg "data-dismiss="modal">全部</button></td> -->
-<!--       				<td class="productcategory" ><button class=" btn btn-default btn-lg"data-dismiss="modal">課本書籍</button></td> -->
-<!--       				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">遊戲影音</button></td> -->
-<!--       				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">日常用品</button></td> -->
-<!--       				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">文具用品</button></td> -->
+      				<td class="productcategory"><div class="demo6"style="background-color:#FFF4C1;"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/pencil.png"></div>文具用品</td>
+
       			</tr>
       			<tr>
-      			<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/sofa.png"></div>家俱</td>
+      			<td class="productcategory"><div class="demo6" style="background-color:#EBD6D6;"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/sofa.png"></div>家俱</td>
       			
-      			<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/televisions.png"></div>家電</td>
+      			<td class="productcategory"><div class="demo6" style="background-color:	#EBD3E8;"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/televisions.png"></div>家電</td>
       			
-      			<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/clothes.png"></div>服飾</td>
+      			<td class="productcategory"><div class="demo6" style="background-color:#C4E1E1;"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/clothes.png"></div>服飾</td>
       				
-      			<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/snake.png"></div>食品</td>
+      			<td class="productcategory"><div class="demo6" style="background-color:#F1E1FF;"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/snake.png"></div>食品</td>
       				
-      			<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/play.png" name="票券"></div>票券</td>
-<!--       				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">傢俱</button></td> -->
-<!--       				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">家電</button></td> -->
-<!--       				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">服飾</button></td> -->
-<!--       				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">食品</button></td> -->
-<!--       				<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">票券</button></td> -->
-     					      			
+      			<td class="productcategory"><div class="demo6" style="background-color:#EFFFD7;"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/play.png" name="票券"></div>票券</td>
+
+     					     
       			</tr>
       			<tr>
-      			   			<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/pc.png"></div>3C產品</td>
-      			
-      			   			<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/kiss.png"></div>化妝保養用品</td>
-<!--       			<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">3C產品</button></td> -->
-<!--       			<td class="productcategory" ><button class=" btn btn-default btn-lg" data-dismiss="modal">化妝保養用品</button></td> -->
-   							<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/kiss.png"></div>運動用品</td>
-   			   				<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/kiss.png"></div>女生</td>
-   			   			   	<td class="productcategory"><div class="demo6"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/kiss.png"></div>男生</td>
+      			<td class="productcategory"><div class="demo6" style="background-color:#EFFFD7;"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/pc.png"></div>3C產品</td>
+      			<td class="productcategory"><div class="demo6" style="background-color:#FFDCB9;"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/kiss.png"></div>化妝保養用品</td>
+   				<td class="productcategory"><div class="demo6" style="background-color:#ADFEDC;"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/kiss.png"></div>運動用品</td>
+   			   	<td class="productcategory"><div class="demo6" style="background-color:#FF9797;"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/kiss.png"></div>女生</td>
+   			   	<td class="productcategory"><div class="demo6" style="background-color:#ACD6FF;"><img class="img-circle" data-dismiss="modal" style="width: 30px;"src="/resources/icon/kiss.png"></div>男生</td>
       			</tr>
       		</table>
       		<br>
