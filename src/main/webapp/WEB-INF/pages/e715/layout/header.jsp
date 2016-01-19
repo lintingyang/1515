@@ -57,9 +57,7 @@
 		<a class="navbar-brand" href="#" data-toggle="modal" data-target="#myModal">
 			<span id="categoryname">${ categoryname }<c:if test="${empty categoryname }" >全部</c:if></span>
 			<span class="glyphicon glyphicon-menu-down"></span></a>
-		<ul class="nav navbar-nav">
-	      <li><a href="/chatroom">聊天室</a></li>
-	    </ul>
+
 		
 		<ul class="nav navbar-nav navbar-right">
 			<li id="fat-menu" class="dropdown">
@@ -99,6 +97,9 @@
 					</c:choose>
 				</li>
 		</ul>
+		<ul class="nav navbar-nav navbar-right" >
+	      <li><a href="/chatroom">聊天室</a></li>
+	    </ul>
 	</div>
 
 	</nav>
