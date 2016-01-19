@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import tw.com.softleader.e5e5.common.dao.OurDao;
@@ -51,7 +52,7 @@ public class ProductService extends OurService<Product> {
 		if (orderby.equals("熱門")) {
 			if (category.equals("全部")) {
 				list = productDao.findAllByNameOrderbyByClickTimes(namelike);
-				log.error(list);
+//				log.error(list);
 			} else {
 				list = productDao.findByProdcutOrderByClickTimes(namelike, category);
 			}
@@ -122,6 +123,16 @@ public class ProductService extends OurService<Product> {
 	// (13)查詢自己刊登的已交換/String/yao
 	public List<Product> findUserPostedProductsByExchanged(Integer userId) {
 		return productDao.findUserPostedProductsByExchanged(userId);
+	}
+	
+	// 查詢我向別人提出的已交換物品數 /yao
+	public List<Product> findCountByExchangedO(Integer userId){
+		return productDao.findCountByExchangedO(userId);
+	}
+	
+	// 查詢別人向我提出的已交換待評價物品數 /yao
+	public List<Product> findCountByExchangedM(Integer userId){
+		return productDao.findCountByExchangedM(userId);
 	}
 
 	public List<Product> findByUserId(Integer id) {

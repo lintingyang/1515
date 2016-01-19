@@ -96,8 +96,8 @@ public class MailService {
 		mail.setSender(userDao.getOne(36));
 		mail.setReceiver(userDao.getOne(receiverId));
 		mail.setTitle("系統:您的物品已被交易!");
-		mail.setArticle("您好,親愛的用戶"+userDao.getOne(receiverId).getName()+"您好:您的物品"+productDao.getOne(productBId).getName()
-				+"已經與"+productDao.getOne(productAId).getName()+"配對成功,請盡速與交易者取得聯繫完成交易,並給予對方評分唷!=)");
+		mail.setArticle("您好,親愛的用戶"+userDao.getOne(receiverId).getName()+"您好:<br>您的物品"+productDao.getOne(productBId).getName()
+				+"已經與"+productDao.getOne(productAId).getName()+"配對成功,請盡速與交易者取得聯繫完成交易,並給予對方評分唷!=)<br><br><br>E715管理員初號機敬上");
 		mail.setIsRead(TrueFalse.FALSE);
 		mail.setSendTime(LocalDateTime.now());
 		mail.setIsImportant(TrueFalse.FALSE);
@@ -112,8 +112,8 @@ public class MailService {
 		mail.setSender(userDao.getOne(36));
 		mail.setReceiver(userDao.getOne(receiverId));
 		mail.setTitle("系統:您的物品已被交易!");
-		mail.setArticle("您好,親愛的用戶"+userDao.getOne(receiverId).getName()+"有人想要使用"+productDao.getOne(productBId).getName()+
-				"交換您刊登的"+productDao.getOne(productAId).getName()+",請盡速前往物品頁面察看確認是否想要交換喔!=D");
+		mail.setArticle("您好,親愛的用戶"+userDao.getOne(receiverId).getName()+"<br>有人想要使用"+productDao.getOne(productBId).getName()+
+				"交換您刊登的"+productDao.getOne(productAId).getName()+",請盡速前往物品頁面察看確認是否想要交換喔!=D<br><br><br>E715管理員初號機敬上");
 		mail.setIsRead(TrueFalse.FALSE);
 		mail.setSendTime(LocalDateTime.now());
 		mail.setIsImportant(TrueFalse.FALSE);
