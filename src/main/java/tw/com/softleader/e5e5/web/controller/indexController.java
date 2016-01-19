@@ -41,14 +41,14 @@ public class indexController {
 	@ResponseBody
 	public List<Product> query(@RequestParam("orderby") String orderby,@RequestParam("namelike")String namelike,
 				@RequestParam("categoryname")String category,HttpSession session) {
-		log.error("orderby =====================" + orderby);
+//		log.error("orderby =====================" + orderby);
 		
 		User user = (User)session.getAttribute("user");
 		if(session.getAttribute("categoryname") == null ||category.equals("")){
 			session.setAttribute("categoryname", "全部");
 			category = "全部";
 		}
-		log.error("query categoryname==========="+category);
+//		log.error("query categoryname==========="+category);
 		
 		List<Product> list = productService.indexsearch(namelike, category, orderby,user);
 		

@@ -203,6 +203,7 @@ function Dateblur() {
 // 	});
 
 $('#account').on('blur',function(){
+	if($('#account').val()!=null){
 		var sendAccount = {'checkAccount':$('#account').val()}
 		$.ajax({
 			contentType : "application/json",
@@ -223,6 +224,12 @@ $('#account').on('blur',function(){
 				}
 		//ajax的下括號
 			});
+	}else{
+		$('#checkAccountSpan').empty();
+		$('#checkAccountSpan').append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>帳號不能為空</span>");
+		
+	}
+		
 	});
 
 
