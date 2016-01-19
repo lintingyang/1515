@@ -33,7 +33,7 @@ h3{
 	padding-left: 10px;
 }
 #simple3{
-	width:140px;
+	width:120px;
 	font-size: medium;
 }
 .st1 {
@@ -41,8 +41,8 @@ h3{
 	margin: 15px auto;
 }
 .st2 {
-	width:300px;
-	margin: 15px 5px;
+	width:100%;
+	margin: 15px 0;
 }
 .title {
 	width:100px;
@@ -52,10 +52,15 @@ h3{
 	font-size: medium;
 }
 .title2 {
-	width:100px;
+	width:50px;
 	float:left;
 	text-align:right;
-	padding-right:5px;
+	font-size: medium;
+}
+.title3 {
+	width:80px;
+	float:left;
+	text-align:right;
 	font-size: medium;
 }
 .col-md-4, .col-md-12{
@@ -133,15 +138,15 @@ h3{
 							<hr>
 							<p align="center">< 我的交換資訊 ></p>
 							<div class="st2">
-								<label class="title2">交易地點：</label>
+								<label class="title3">交易地點：</label>
 								<label id="simple3">${makeSure.productAId.location}</label>
 							</div>
 							<div class="st2">
-								<label class="title2">交易期限：</label>
+								<label class="title3">交易期限：</label>
 								<label id="simple3">${ss}</label>
 							</div>
 							<div class="st2">
-								<label class="title2">交易方式：</label>
+								<label class="title3">交易方式：</label>
 								<label id="simple3">${makeSure.productAId.tradeWay}</label>
 							</div>
 	      			</div>

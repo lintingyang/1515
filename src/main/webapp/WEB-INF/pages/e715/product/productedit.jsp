@@ -27,7 +27,8 @@
 h4{
 	color:gray;
 }
-
+.dropdown-menu li:hover .sub-menu {visibility: visible;}
+.dropdown:hover .dropdown-menu {display: block;}
 </style>
 <div class="container" style="margin: 50px auto;">
 	<div class="container">
@@ -46,9 +47,6 @@ h4{
      				<li><a href="#" class = "queryBtn" id = "answer"><span class="label label-warning label-as-badge" id ="totalCountA"></span>&nbsp;已收到的回覆</a></li>
     			</ul>	
 			</li>
-			
-<!-- 			<li style="width: 20%; text-align: center;" ><a -->
-<!-- 				class="categorylist searchbtn queryBtn" id = "qAndA" href="#">問與答<span class="badge" id ="totalCountQ"></span></a>	</li>	 -->
 			<li style="width: 20%; text-align: center;"><a
 				class="categorylist searchbtn queryBtn" id = "notPost" href="#">未刊登</a></li>
 			<li style="width: 20%; text-align: center;"><a

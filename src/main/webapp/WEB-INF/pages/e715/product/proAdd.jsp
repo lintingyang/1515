@@ -31,6 +31,73 @@ h4{
 <script type="text/javascript">
 	//picture
 	$(function() {
+		//時間
+		$('#pDeadline').datepicker();
+		
+		var now = "${nowTime}";
+		var y = "${y}";
+		var m = "${m}";
+		var d = "${d}";
+		
+		$('#pDeadline').change(function(){
+			var nowm = $(this).val().substring(0,2);
+			var nowm1 = $(this).val().substring(0,1);
+			var nowm2 = $(this).val().substring(1,2);
+			var nowd = $(this).val().substring(3,5);
+			var nowd1 = $(this).val().substring(3,4);
+			var nowd2 = $(this).val().substring(4,5);
+			var nowy = $(this).val().substring(6,10);
+			if(nowy < y){
+				$('#err').removeAttr('hidden');
+			}else if(nowy == y){
+				if(nowm1 == 0){
+					if(nowm2 < m){
+						$('#err').removeAttr('hidden');
+					}else if(nowm2 == m){
+						if(nowd1 == 0){
+							if(now2 <= d){
+								$('#err').removeAttr('hidden');
+							}else{
+								$('#err').attr('hidden','true');
+							}
+						}else{
+							if(nowd <= d){
+								$('#err').removeAttr('hidden');
+							}else{
+								$('#err').attr('hidden','true');
+							}
+						}
+					}else{
+						$('#err').attr('hidden','true');
+					}
+				}else{
+					if(nowm < m){
+						$('#err').removeAttr('hidden');
+					}else if(nowm == m){
+						if(nowd1 == 0){
+							if(now2 <= d){
+								$('#err').removeAttr('hidden');
+							}else{
+								$('#err').attr('hidden','true');
+							}
+						}else{
+							if(nowd <= d){
+								$('#err').removeAttr('hidden');
+							}else{
+								$('#err').attr('hidden','true');
+							}
+						}
+					}else{
+						$('#err').attr('hidden','true');
+					}
+				}
+			}else{
+				$('#err').attr('hidden','true');
+			}
+
+		});
+		
+		
 		function readURL(input) {
 		    if (input.files && input.files[0]) {
 		        var reader = new FileReader();
@@ -80,8 +147,7 @@ h4{
 		    readURL3(this);
 		});
 		
-		//時間
-		$('#pDeadline').datepicker();
+		
 		
 		//顯示隱藏表格
 		$('input[name *= "status"]').change(function(){
@@ -237,7 +303,8 @@ h4{
 				<div>
 					<p>截止日期：<input type="text" id="pDeadline" name="pDeadline" required="required">
 					</p>
-					<p style="color: red;text-align: center;">${errorMsg.timeD}</p>
+					<span id="err" style="color: red;padding-left: 40px;" hidden="true">時間一定要大於今天喔~~</span>
+<%-- 					<p style="color: red;text-align: center;">${errorMsg.timeD}</p> --%>
 				</div>
 				<br>
 				<div class="form-group row">
@@ -289,9 +356,8 @@ h4{
 				</div>
 			</div>
 			<div style="text-align: center; margin:50px auto;">
-				<button id="btnSend" type="submit" class="btn btn-success btn-lg">
-					<span class="glyphicon glyphicon-send" aria-hidden="true"></span> 送出
-					<span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+				<button id="btnSend" type="submit" class="btn btn-success btn-lg">送出
+				<span class="glyphicon glyphicon-floppy-open" aria-hidden="true"></span>
 				</button>
 			</div>
 		</div>

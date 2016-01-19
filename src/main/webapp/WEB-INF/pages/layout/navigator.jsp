@@ -9,10 +9,10 @@
 	<div>
 		<table width="100%" border="0" cellpadding="0" cellspacing="0">
 			<tr>
-				<td bgcolor="#FFFFFF" width="65%">
+				<td bgcolor="#FFFFFF" width="80%">
 <%-- 				<img src='<c:url value="/resources/imgs/logo_c.png"/>' width="100" border='0' /> --%>
 				</td>
-				<td bgcolor="#FFFFFF" valign="bottom" width="35%">
+				<td bgcolor="#FFFFFF" valign="bottom" width="20%">
 					<%-- runtime ENV : <b>${env}</b>(請至系統參數設定調整)<br/> --%>
 					
 					登入者帳號 : <b>${user.account}(${user.nickname})</b><br/>
@@ -66,7 +66,7 @@
 <!-- 						</ul>	 -->
 <!-- 					</li> -->
 
-					<li style="margin-left: 400px;"><a href="/head/logout"><span class="glyphicon glyphicon-log-out"></span> 登出</a></li>
+					<li style="margin-left: 600px;"><a href="/head/logout"><span class="glyphicon glyphicon-log-out"></span> 登出</a></li>
 <%-- 					<form class="hide" id="logout" action="<c:url value="/logout" />" method="post"> --%>
 <%-- 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> --%>
 <!-- 					</form> -->
