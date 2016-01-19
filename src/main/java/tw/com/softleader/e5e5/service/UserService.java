@@ -115,7 +115,11 @@ public class UserService extends OurService<User> {
         message.setRecipients(Message.RecipientType.TO,   
                         InternetAddress.parse(schoolEmail));  
         message.setSubject("E715學校信箱確認信(請勿回信)");  
-        message.setText("您的驗證碼為 :"+newVerificationCode);  
+        message.setText("親愛的E715用戶您好，\r\n感謝您的註冊，為了您的權益，我們必須確認您的身分，\r\n"
+        		+ "以下為您的驗證碼 :"+newVerificationCode+"\r\n請將此填入驗證碼欄位中並按下送出，便可執行下個步驟，\r\n"
+        				+ "再次感謝您的使用。\r\n\r\nE715製作團隊敬上");  
+        
+        
   
         Transport transport = session.getTransport("smtp");  
         transport.connect(host, port, username, password);  
