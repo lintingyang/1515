@@ -52,7 +52,7 @@
 				<input type="text" class="form-control" placeholder="Search" 
 								name="namelike" id="searchbar">
 			</div>
-			<button type="submit" id="searchbtn"  class="btn btn-default searchbtn" >Submit</button>
+			<button type="submit" id="searchbtn"  class="btn btn-default searchbtn" >送出</button>
 		</form>
 		<a class="navbar-brand" href="#" data-toggle="modal" data-target="#myModal">
 			<span id="categoryname">${ categoryname }<c:if test="${empty categoryname }" >全部</c:if></span>

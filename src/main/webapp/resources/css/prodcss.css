@@ -98,7 +98,9 @@ div.holder{
 
 
 }
-
+#categoryname{
+	font-size: 14px;
+}
 
 .button-rounded {
   -moz-border-radius: 3px;
