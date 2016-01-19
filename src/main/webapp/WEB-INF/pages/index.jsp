@@ -112,6 +112,18 @@ $(function() { //畫面第一次進入時出現的product list
 		data : {"orderby" : "熱門","namelike": "${namelike}" ,"categoryname":"${categoryname}"},
 		success : function(data) {
 			$("#itemContainer").html('');
+// 			<div class="box">
+// 		    	<div class="box-content">
+// 		        	<div class="box-wrapper">
+// 		            	<!-- content put here -->    
+// 		        	</div>
+// 		    	</div>
+// 		    	<div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
+// 		        	<!-- image put here -->
+// 		    	</div>
+// 		    	<a class="link" href="#" target="_blank"></a>                      
+// 			</div>
+
 			$.each(data,function(i) {
 				var productdiv = $("<div class='panel panel-danger'></div>");
 				var productdiv2 = $("<div class='panel-body'></div>");
@@ -126,7 +138,6 @@ $(function() { //畫面第一次進入時出現的product list
 				$(productdiv).addClass("proddiv").append($(productdiv2)).append($(productdiv3));
 
 				$("#itemContainer").append(productdiv);
-// 				getpicture(data[i], productimg);
 				}
 			)
 		
