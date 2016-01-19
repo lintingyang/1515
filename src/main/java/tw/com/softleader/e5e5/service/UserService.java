@@ -297,6 +297,7 @@ public class UserService extends OurService<User> {
 	public boolean deleteImage(int id, ServletContext servletContext) {
 		User user = userDao.findById(id);
 		String userPath = user.getPicture();
+		if(userPath!=null){
 		String path = servletContext.getRealPath(userPath).replace('/' , '\\');
 		File destination = null;
 		destination = new File(path);
@@ -308,7 +309,9 @@ public class UserService extends OurService<User> {
 			e.printStackTrace();
 			return false;
 		}
-		
+		}else{
+			return false;
+		}
 	}
 	
 	

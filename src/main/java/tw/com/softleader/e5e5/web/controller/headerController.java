@@ -195,8 +195,7 @@ public class headerController {
 			user.setBirthday(dateTime);
 		} catch (Exception e) {
 		}
-		log.error("----------------------"+phone.substring(0, 1));
-		if (phone.substring(0, 1).equals("09")) {
+		if (phone.substring(0,2).equals("09")) {
 			user.setCellphone(phone);
 		} else {
 			user.setPhone(phone);

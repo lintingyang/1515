@@ -8,8 +8,9 @@
 <script>
 	$(function() {
 		$("#idbuthref").on('click', function() {
-			if($('#newPassword').val()==$('#newPasswordCheck').val()){
 			var re1 = /(?=^[A-Za-z0-9]{6,12}$)((?=.*[A-Za-z])(?=.*[0-9]))^.*$/;
+			if($('#newPassword').val()==$('#newPasswordCheck').val()){
+			
 //			 	//判斷新密碼長度不能小於6個字(要大於或等於7)
 			if(rel.test($('#newPassword').val())){
 			swal({

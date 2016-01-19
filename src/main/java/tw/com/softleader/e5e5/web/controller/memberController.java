@@ -81,7 +81,7 @@ public class memberController {
 		List<Product> products = productService.findAllByUserId(id);
 		if (products != null) {
 			for (Product product : products) {
-//				log.error("sdfsf " + product.getGrade());
+				log.error("sdfsf " + product.getGrade());
 				if (product.getGrade() != null) {
 					if (Grade.GOOD.equals(product.getGrade())) {
 						good++;
@@ -397,7 +397,7 @@ public class memberController {
 		User user = (User) session.getAttribute("user");
 		int i = 0;
 		if (user != null) {
-//			log.error("fdsafdf" + user.getId() + " : " + id);
+			log.error("fdsafdf" + user.getId() + " : " + id);
 			i = focusUserListService.insert(user.getId(), id);
 		}
 		if (i == 1) {
@@ -419,3 +419,4 @@ public class memberController {
 	}
 
 }
+
