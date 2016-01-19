@@ -3,9 +3,55 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/WEB-INF/pages/e715/layout/header.jsp"></c:import>
+<link rel="stylesheet" href="/resources/css/magic.min.css">
+<style>
+.box {
+    width:200px;
+    height:260px;
+    margin:15px;
+    float:left;
+    position: relative;
+ 	box-shadow:0px 0px 1px gray;
+ 	color:gray;
+/*     display: inline-block;  */
+/* 	text-align: center;  */
+/*  	cursor :pointer; */
+}
+ 
+.box-content {
+    display:block;
+    padding:20px;
+    width: 100%;
+    height: 100%;
+/*     background: #333; */
+    color:black;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+}
+ 
+.box-overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index:10;
+}
+ 
+a.link {
+    display:block;
+    width: 100%;
+    height: 100%;      
+    position: absolute;
+    top:0;
+    left:0;
+    z-index:15;    
+}  
+</style>
 <div class="container" style="margin: 20px auto;">
 	<div class="container">
-
+		<span style="padding-top: 10px;"></span>
         <!-- Jumbotron Header -->
 <!--         <header class="jumbotron hero-spacer"> -->
 <!--             <h1>Welcome E715 :(</h1> -->
@@ -40,11 +86,6 @@
 		</div>
 	</div>
 </div>
-	
-	
-
-
-
 
 <!-- $("#searchbar").text() -->
 <script type="text/javascript">
@@ -73,23 +114,62 @@ $("#new").click(function(){
 // 					threshold : 200,
 // 					failure_limit : 10
 // 				});
-				$.each(data,
-					function(i) {
-					var productdiv = $("<div class='panel panel-danger'></div>");
-					var productdiv2 = $("<div class='panel-body'></div>");
-					var productdiv3 = $("<div class='panel-footer'></div>");
-					var aclick = $("<a>").attr("href","/product/" + data[i].id);
-					var productimg = $("<img style='max-width:100%;'>").addClass("prodimg").attr("src",data[i].primaryPicture);
-					var p = $("<span></span>").text(data[i].name);
-					$(aclick).append($(productimg));
-					$(productdiv2).append($(aclick));
-					$(productdiv3).append($(p));
+				$.each(data,function(i) {
+					//slide
+					var productdivv = $("<div class='box'></div>");
+					var productdiv2 = $("<div class='box-content'></div>");
+						var productdivB = $("<div class='box-wrapper'></div>");
+							var pDes = $("<p style='color: blue;'>物品描述：</p>");
+							var pDescription = $("<p></p>").text(data[i].description);
+							var pWis = $("<p style='color: blue;'>希望清單：</p>");
+							var pWishItem = $("<span></span>").text(data[i].wishItem);
+// 							var pOwn = $("<br><span style='color: blue;'>交換者：</span>");
+// 							var pOwner = $("<span></span>").text(data[i].userId.name);
+					var productdivP = $("<div class='box-overlay magictime' data-hover='perspectiveUp' data-return='perspectiveUpRetourn'></div>");
+						var productimg = $("<img style='max-width:100%;'>").addClass("prodimg").attr("src",data[i].primaryPicture);
+						var divp = $("<div style='padding-top: 15px;'></div>");
+							var p = $("<span></span>").text(data[i].name);
+					var aclick = $("<a class='link' target='_blank'>").attr("href","/product/" + data[i].id);
+// 					var productdivF = $("<div class='panel-footer'></div>");
+				
+	// 				$(productdivF).append(p);
+					$(productdivB).append(pDes).append(pDescription).append(pWis).append(pWishItem);
+					$(divp).append(p);
+					$(productdivP).append(productimg).append(divp);
+	 				$(productdiv2).append(productdivB);
+					$(productdivv).append(productdiv2).append(productdivP).append(aclick);
 					
-					$(productdiv).addClass("proddiv").append($(productdiv2)).append($(productdiv3));
+					$("#itemContainer").append(productdivv);
+					
+					$('.box').hover(
+						function () {
+					    	var overlay = $(this).find('.box-overlay');
+					        overlay.removeClass(overlay.data('return')).addClass(overlay.data('hover'));
+					        $(this).css('box-shadow', '2px 2px 20px gray');
+					    },
+					    function () {
+					        var overlay = $(this).find('.box-overlay');    
+					        overlay.removeClass(overlay.data('hover')).addClass(overlay.data('return'));
+					        $(this).css('box-shadow', '');
+					    }
+					);
+					
+					//old
+// 					var productdiv = $("<div class='panel panel-danger'></div>");
+// 					var productdiv2 = $("<div class='panel-body'></div>");
+// 					var productdiv3 = $("<div class='panel-footer'></div>");
+// 					var aclick = $("<a>").attr("href","/product/" + data[i].id);
+// 					var productimg = $("<img style='max-width:100%;'>").addClass("prodimg").attr("src",data[i].primaryPicture);
+// 					var p = $("<span></span>").text(data[i].name);
+// 					$(aclick).append($(productimg));
+// 					$(productdiv2).append($(aclick));
+// 					$(productdiv3).append($(p));
+					
+// 					$(productdiv).addClass("proddiv").append($(productdiv2)).append($(productdiv3));
 
-					$("#itemContainer").append(productdiv);
-// 					getpicture(data[i], productimg)
-					})
+// 					$("#itemContainer").append(productdiv);
+// // 					getpicture(data[i], productimg)
+				})
 					$("div.holder").jPages({
 							containerID : "itemContainer",
 							perPage : 20,
@@ -112,32 +192,61 @@ $(function() { //畫面第一次進入時出現的product list
 		data : {"orderby" : "熱門","namelike": "${namelike}" ,"categoryname":"${categoryname}"},
 		success : function(data) {
 			$("#itemContainer").html('');
-// 			<div class="box">
-// 		    	<div class="box-content">
-// 		        	<div class="box-wrapper">
-// 		            	<!-- content put here -->    
-// 		        	</div>
-// 		    	</div>
-// 		    	<div class="box-overlay magictime" data-hover="puffOut" data-return="puffIn">
-// 		        	<!-- image put here -->
-// 		    	</div>
-// 		    	<a class="link" href="#" target="_blank"></a>                      
-// 			</div>
 
 			$.each(data,function(i) {
-				var productdiv = $("<div class='panel panel-danger'></div>");
-				var productdiv2 = $("<div class='panel-body'></div>");
-				var productdiv3 = $("<div class='panel-footer'></div>");
-				var aclick = $("<a>").attr("href","/product/" + data[i].id);
-				var productimg = $("<img style='max-width:100%;'>").addClass("prodimg").attr("src",data[i].primaryPicture);
-				var p = $("<span></span>").text(data[i].name);
-				$(aclick).append($(productimg));
-				$(productdiv2).append($(aclick));
-				$(productdiv3).append($(p));
+				//slide
+				var productdivv = $("<div class='box'></div>");
+					var productdiv2 = $("<div class='box-content'></div>");
+						var productdivB = $("<div class='box-wrapper'></div>");
+							var pDes = $("<p style='color: blue;'>物品描述：</p>");
+							var pDescription = $("<p></p>").text(data[i].description);
+							var pWis = $("<p style='color: blue;'>希望清單：</p>");
+							var pWishItem = $("<span></span>").text(data[i].wishItem);
+// 							var pOwn = $("<br><span style='color: blue;'>交換者：</span>");
+// 							var pOwner = $("<span></span>").text(data[i].userId.name);
+					var productdivP = $("<div class='box-overlay magictime' data-hover='slideDown' data-return='slideDownRetourn'></div>");
+						var productimg = $("<img style='max-width:100%;'>").addClass("prodimg").attr("src",data[i].primaryPicture);
+						var divp = $("<div style='padding-top: 15px;'></div>");
+							var p = $("<span></span>").text(data[i].name);
+					var aclick = $("<a class='link' target='_blank'>").attr("href","/product/" + data[i].id);
+// 				var productdivF = $("<div class='panel-footer'></div>");
 				
-				$(productdiv).addClass("proddiv").append($(productdiv2)).append($(productdiv3));
+// 				$(productdivF).append(p);
+				$(productdivB).append(pDes).append(pDescription).append(pWis).append(pWishItem);
+				$(divp).append(p);
+				$(productdivP).append(productimg).append(divp);
+ 				$(productdiv2).append(productdivB);
+				$(productdivv).append(productdiv2).append(productdivP).append(aclick);
+				
+				$("#itemContainer").append(productdivv);
+				
+				$('.box').hover(
+					function () {
+				    	var overlay = $(this).find('.box-overlay');
+				        overlay.removeClass(overlay.data('return')).addClass(overlay.data('hover'));
+				        $(this).css('box-shadow', '2px 2px 20px gray');
+				    },
+				    function () {
+				        var overlay = $(this).find('.box-overlay');    
+				        overlay.removeClass(overlay.data('hover')).addClass(overlay.data('return'));
+				        $(this).css('box-shadow', '');
+				    }
+				);
+				
+				//old
+// 				var productdiv = $("<div class='panel panel-danger'></div>");
+// 				var productdiv2 = $("<div class='panel-body'></div>");
+// 				var productdiv3 = $("<div class='panel-footer'></div>");
+// 				var aclick = $("<a>").attr("href","/product/" + data[i].id);
+// 				var productimg = $("<img style='max-width:100%;'>").addClass("prodimg").attr("src",data[i].primaryPicture);
+// 				var p = $("<span></span>").text(data[i].name);
+// 				$(aclick).append($(productimg));
+// 				$(productdiv2).append($(aclick));
+// 				$(productdiv3).append($(p));
+				
+// 				$(productdiv).addClass("proddiv").append($(productdiv2)).append($(productdiv3));
 
-				$("#itemContainer").append(productdiv);
+// 				$("#itemContainer").append(productdiv);
 				}
 			)
 		
