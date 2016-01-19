@@ -4,7 +4,7 @@
 <c:import url="/WEB-INF/pages/e715/layout/header.jsp"/>
 <c:import url="/WEB-INF/pages/layout/meta.jsp"/>
 <link rel="stylesheet" href="/resources/css/user.css" />
-
+<link rel="stylesheet" href="/resources/css/site.css" />
 <style>
 #formInsertEmail {
 	
@@ -53,8 +53,8 @@
 						<div class="col-xs-6 col-md-3"></div>
 					</div>
 				</div>
-				<div id="btnCenter" class="sendSchoolEmailbutton">
-					<button type="button" class="btn btn-default" id="btnCheck">
+				<div id="btnCenter" class="sendSchoolEmaildiv">
+					<button type="button" class="btn btn-default sendSchoolEmailbutton" id="btnCheck">
 						送出</button>
 				</div>
 
@@ -101,6 +101,7 @@ $(function() {
 		console.log("hahahahahaha")
 		$('.sendSchoolEmailbutton').hide();
 		$("#notFindSchoolEmail").html('');
+		$('.sendSchoolEmaildiv').append('<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>');
 		var schoolemail = {"userSchoolEmail":$("#schoolEmail").val()};
 		console.log(schoolemail);
 		$.ajax({
@@ -110,6 +111,7 @@ $(function() {
 			type : "get",
 			data : schoolemail,
 			success : function(data) {
+				$('.sendSchoolEmaildiv').html('');
 				console.log(data);
 				if(data == "true"){
 		$("#notFindSchoolEmail").empty();

@@ -161,6 +161,30 @@ public class memberController {
 			return "/e715/user/findPassWord1ver";
 		}
 	}
+	
+	// 找尋密碼第2步
+		@RequestMapping(value = "/findPasswordStep2ver")
+		public String findPasswordStep2ver(@RequestParam("verificationCode") String stVerificationCode, HttpSession session) {
+			Map<String, String> errors = new HashMap<String, String>();
+			session.setAttribute("checkError", errors);
+			String schoolEmail =(String)session.getAttribute("schoolEmail");
+			errors.clear();
+			Integer verificationCode = null;
+			try {
+				verificationCode = Integer.parseInt(stVerificationCode);
+				boolean check = userService.checkVerificationCode(schoolEmail, verificationCode);
+				if (check) {
+					return "/e715/user/findPassWord2";
+				} else {
+					errors.put("checkFault", "驗證碼輸入錯誤，請重新輸入");
+					return "/e715/user/findPassWord1ver";
+				}
+			} catch (NumberFormatException e) {
+				errors.put("numberFault", "驗證碼請輸入數字");
+				return "/e715/user/findPassWord1ver";
+			}
+		}
+	
 
 	// 找尋密碼第3步
 	@RequestMapping(value = "/findPasswordStep3")

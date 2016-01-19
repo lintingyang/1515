@@ -9,6 +9,9 @@
 	$(function() {
 		$("#idbuthref").on('click', function() {
 			if($('#newPassword').val()==$('#newPasswordCheck').val()){
+			var re1 = /(?=^[A-Za-z0-9]{6,12}$)((?=.*[A-Za-z])(?=.*[0-9]))^.*$/;
+//			 	//判斷新密碼長度不能小於6個字(要大於或等於7)
+			if(rel.test($('#newPassword').val())){
 			swal({
 				type : "success",
 				title: "修改成功",  
@@ -22,8 +25,12 @@
 			
 			}else{
 				$('#newPasswordCheckErrorMsg').html('');
-				$('#newPasswordCheckErrorMsg').append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>確認密碼與新密碼不符合</span>");;
+				$('#newPasswordCheckErrorMsg').append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>密碼：6~12英數字組合，至少有一個大寫或小寫英文字母及數字，如 A1232126</span>");
 				
+			}
+			}else{
+				$('#newPasswordCheckErrorMsg').html('');
+				$('#newPasswordCheckErrorMsg').append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>確認密碼與新密碼不符合</span>");
 			}
 		});
 	});

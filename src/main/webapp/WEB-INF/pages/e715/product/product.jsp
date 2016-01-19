@@ -59,7 +59,11 @@
 		</div>
 	</div>
 	<div class="col-md-6">
-		<h2>${product.name}</h2>
+		<h2>${product.name}
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input id="repBtn" class="btn btn-warning " type="button" value="檢舉" data-toggle="modal" 
+					data-target="#report">
+		</h2>
 		<div>
 			<h5>希望交易物品：</h5>
 			<br> ${product.wishItem}
@@ -96,8 +100,6 @@
 					<input id="excBtn" class="btn btn-primary btn-lg" type="button" value="我要交換" data-toggle="modal" 
 					data-target="#myProductList">
 				</c:if>
-				<input id="repBtn" class="btn btn-warning btn-lg" type="button" value="我要檢舉" data-toggle="modal" 
-					data-target="#report">
 			</c:if>
 		</div>
 

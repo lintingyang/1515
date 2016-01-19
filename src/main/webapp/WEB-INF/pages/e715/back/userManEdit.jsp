@@ -56,7 +56,7 @@
 			    						<label style="margin-left: 20px ;font-size: x-large; color: blue;"> 
 			    							<input type="radio" name="isolated" value="FALSE" id="f">正常使用</label>
 			    						<label style="margin-left: 20px ;font-size: x-large; color: blue;"> 
-			    							<input type="radio" name="isolated" value="TRUE" id="t">禁制使用</label>
+			    							<input type="radio" name="isolated" value="TRUE" id="t">禁止使用</label>
 			      						<span class="help-block"><div class="text-danger"></div></span>
 			    					</div>
 								</div>

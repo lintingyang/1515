@@ -44,6 +44,11 @@ public class ProductUDController {
 	@Autowired
 	private ServletContext servletContext;
 
+	@RequestMapping(value = "/list2")
+	public String list2(Model model) {
+		return "/e715/product/test";
+	}
+	
 	@RequestMapping(value = "/list")
 	public String list(Model model) {
 		return "/e715/product/productedit";

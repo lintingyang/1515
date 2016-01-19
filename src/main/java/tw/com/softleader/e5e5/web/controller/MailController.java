@@ -50,7 +50,9 @@ public class MailController {
 	@RequestMapping("/getmail")
 	@ResponseBody
 	public List<Mail> getmail(@RequestParam("id")int receiverId){
+//		log.info("**************"+receiverId);
 		List<Mail> mails = mailService.getAllMailByReceiver(receiverId);
+//		log.info("***"+mails);
 		return mails;
 	}
 	
@@ -85,8 +87,6 @@ public class MailController {
 			@RequestParam("title")String title,@RequestParam("article")String article,@RequestParam("saveAsLog")String saveAsLog,
 			@RequestParam("logmailid")int logMailId){
 		mailService.sendNewMail(senderId, receiverAccount, title, article, saveAsLog,logMailId);
-		
-		
 		return "redirect:/mail/list";
 	}
 	@RequestMapping("/savedraft")
