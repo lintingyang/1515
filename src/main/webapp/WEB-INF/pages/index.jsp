@@ -81,10 +81,10 @@ a.link {
 			<div id="itemContainer"  style="padding:auto;text-align: center">
 			</div>
 			
-			<div class="holder"></div>
 
 		</div>
 	</div>
+			<div class="holder"></div>
 </div>
 
 <!-- $("#searchbar").text() -->
