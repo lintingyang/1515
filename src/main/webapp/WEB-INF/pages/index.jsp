@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -13,6 +12,7 @@
     position: relative;
  	box-shadow:0px 0px 1px gray;
  	color:gray;
+ 	background: white;
 /*     display: inline-block;  */
 /* 	text-align: center;  */
 /*  	cursor :pointer; */
@@ -52,7 +52,7 @@ a.link {
 <div class="container" style="margin: 20px auto;">
 	<div class="container">
 		<span style="padding-top: 10px;"></span>
-        <!-- Jumbotron Header -->
+<!--         Jumbotron Header -->
 <!--         <header class="jumbotron hero-spacer"> -->
 <!--             <h1>Welcome E715 :(</h1> -->
 <!--             <p style="font-size:medium;">E715提供全國大專院校的學生一個以交換為概念的網路平台， -->
@@ -119,13 +119,13 @@ $("#new").click(function(){
 					var productdivv = $("<div class='box'></div>");
 					var productdiv2 = $("<div class='box-content'></div>");
 						var productdivB = $("<div class='box-wrapper'></div>");
-							var pDes = $("<p style='color: blue;'>物品描述：</p>");
+							var pDes = $("<p style='color: gray;'>物品描述：</p>");
 							var pDescription = $("<p></p>").text(data[i].description);
-							var pWis = $("<p style='color: blue;'>希望清單：</p>");
+							var pWis = $("<p style='color: gray;'>希望清單：</p>");
 							var pWishItem = $("<span></span>").text(data[i].wishItem);
 // 							var pOwn = $("<br><span style='color: blue;'>交換者：</span>");
 // 							var pOwner = $("<span></span>").text(data[i].userId.name);
-					var productdivP = $("<div class='box-overlay magictime' data-hover='perspectiveUp' data-return='perspectiveUpRetourn'></div>");
+					var productdivP = $("<div class='box-overlay magictime' data-hover='slideDown' data-return='slideDownRetourn'></div>");
 						var productimg = $("<img style='max-width:100%;'>").addClass("prodimg").attr("src",data[i].primaryPicture);
 						var divp = $("<div style='padding-top: 15px;'></div>");
 							var p = $("<span></span>").text(data[i].name);
@@ -198,9 +198,9 @@ $(function() { //畫面第一次進入時出現的product list
 				var productdivv = $("<div class='box'></div>");
 					var productdiv2 = $("<div class='box-content'></div>");
 						var productdivB = $("<div class='box-wrapper'></div>");
-							var pDes = $("<p style='color: blue;'>物品描述：</p>");
+							var pDes = $("<p style='color: gray;'>物品描述：</p>");
 							var pDescription = $("<p></p>").text(data[i].description);
-							var pWis = $("<p style='color: blue;'>希望清單：</p>");
+							var pWis = $("<p style='color: gray;'>希望清單：</p>");
 							var pWishItem = $("<span></span>").text(data[i].wishItem);
 // 							var pOwn = $("<br><span style='color: blue;'>交換者：</span>");
 // 							var pOwner = $("<span></span>").text(data[i].userId.name);
