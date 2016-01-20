@@ -207,7 +207,7 @@
 					<label class="col-md-2 control-label">電話:</label>
 					<div class="col-md-10">
 					<c:choose>
-						<c:when test="${cellphone empty}">
+						<c:when test="${empty cellphone}">
 						<input type="text" class="form-control" id="phone"
 							value="${user.phone}" name="phone"
 							placeholder="輸入家電或手機" required>
