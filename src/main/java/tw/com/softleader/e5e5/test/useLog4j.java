@@ -6,7 +6,7 @@ import org.jboss.logging.Logger;
 public class useLog4j {
 	//call Logger
 	private static Logger log = Logger.getLogger(useLog4j.class);
-	
+	/*
 	public static void main(String[] args){
 		//BasicConfigurator:快速呼叫預設的設定
 		//預設print to console
@@ -20,5 +20,5 @@ public class useLog4j {
 		
 		log.debug("this is an debug message");
 	}
-	
+	*/
 }

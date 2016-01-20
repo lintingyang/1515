@@ -48,7 +48,7 @@
 						<div class="col-xs-6 col-md-3"></div>
 						<div class="col-xs-6 col-md-6">
 							<input type="text" class="form-control" id="schoolEmail" name="schoolEmail"
-								placeholder="學校電子信箱或電話或備用信箱"><span id="notFindSchoolEmail" style="color:red;"></span>
+								placeholder="請輸入學校電子信箱"><span id="notFindSchoolEmail" style="color:red;"></span>
 						</div>
 						<div class="col-xs-6 col-md-3"></div>
 					</div>

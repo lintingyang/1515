@@ -39,7 +39,7 @@ import tw.com.softleader.e5e5.service.UserService;
 
 @Controller
 @RequestMapping(value = "/E715Member")
-public class memberController {
+public class MemberController {
 
 	@Autowired
 	private ServletContext servletContext;
@@ -323,9 +323,6 @@ public class memberController {
 				user.setName(name);
 				user.setNickname(nickname);
 				// 判斷是手機還是家電(基礎判斷)
-				log.error("----------------------01---"+phone.substring(0,1));
-				log.error("----------------------02---"+phone.substring(0,2));
-				log.error("----------------------03---"+phone.substring(0,3));
 				if (phone.substring(0,2).equals("09")) {
 					user.setCellphone(phone);
 				} else {
