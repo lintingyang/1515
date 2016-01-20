@@ -5,7 +5,8 @@
 
 
 <div class="container" style="text-align: center;">
-<a href=""mailto:e715number01@gmail.com><p class="glyphicon glyphicon-send"> e715number01@gmail.com </p></a>
+<hr>
+<p class="glyphicon glyphicon-send"> e715number01@gmail.com </p>
 <p>E715 一起易物交換網 Copyright © E715 2016</p>
 </div>
 

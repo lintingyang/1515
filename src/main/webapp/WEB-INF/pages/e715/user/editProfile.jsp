@@ -202,14 +202,24 @@
 						</select> 日
 					</div>
 				</div>
-
+		
 				<div class="form-group" id="divBorder">
 					<label class="col-md-2 control-label">電話:</label>
 					<div class="col-md-10">
+					<c:choose>
+						<c:when test="${empty cellphone}">
 						<input type="text" class="form-control" id="phone"
-							value="${user.phone}${cellphone}" name="phone"
+							value="${user.phone}" name="phone"
 							placeholder="輸入家電或手機" required>
 							<span id="phoneErrorMsg"></span>
+						</c:when>
+						<c:otherwise>
+						<input type="text" class="form-control" id="phone"
+							value="${user.cellphone}" name="phone"
+							placeholder="輸入家電或手機" required>
+							<span id="phoneErrorMsg"></span>
+						</c:otherwise>
+					</c:choose>
 					</div>
 				</div>
 				<div class="form-group" id="divBorder">

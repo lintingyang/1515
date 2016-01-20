@@ -65,8 +65,8 @@ h4{
 			<li style="width: 20%; text-align: center;" class = "dropdown" ><a
 				class="categorylist searchbtn dropdown-toggle" data-toggle="dropdown" href="#">問與答&nbsp;<span class="label label-pill label-default label-as-badge" id ="totalCountQandA"></span></a>
 				<ul class="dropdown-menu">
-   			   		<li><a href="#" class = "queryBtn" id = "question"><span class="label label-success label-as-badge" id ="totalCountQ"></span>&nbsp;待回覆的問題</a></li>
-     				<li><a href="#" class = "queryBtn" id = "answer"><span class="label label-warning label-as-badge" id ="totalCountA"></span>&nbsp;已收到的回覆</a></li>
+   			   		<li><a href="#" class = "queryBtn" id = "question"><span class="label label-warning label-as-badge" id ="totalCountQ"></span>&nbsp;待回覆的問題</a></li>
+     				<li><a href="#" class = "queryBtn" id = "answer"><span class="label label-success label-as-badge" id ="totalCountA"></span>&nbsp;已收到的回覆</a></li>
     			</ul>	
 			</li>
 			<li style="width: 20%; text-align: center;"><a
@@ -76,8 +76,8 @@ h4{
 			<li style="width: 20%; text-align: center;" class = "dropdown" ><a totalCountEval
 				class="categorylist searchbtn dropdown-toggle" data-toggle="dropdown" href="#">已交換&nbsp;<span class="label label-pill label-default label-as-badge" id ="totalCountEval"></span></a>
 				<ul class="dropdown-menu">
-   			   		<li><a href="#" class = "queryBtn" id = "OthersExchanged"><span class="label label-success label-as-badge" id ="evaluateO"></span>&nbsp;提出的交換</a></li>
-     				<li><a href="#" class = "queryBtn" id = "myExchanged"><span class="label label-warning label-as-badge" id ="evaluateM"></span>&nbsp;收到的交換</a></li>
+   			   		<li><a href="#" class = "queryBtn" id = "OthersExchanged"><span class="label label-warning label-as-badge" id ="evaluateO"></span>&nbsp;提出的交換</a></li>
+     				<li><a href="#" class = "queryBtn" id = "myExchanged"><span class="label label-success label-as-badge" id ="evaluateM"></span>&nbsp;收到的交換</a></li>
     			</ul>	
 			</li>
 		</ul>
@@ -274,13 +274,15 @@ $('.queryBtn').click(function() { //點選排列方式後按照順序排列
 function getEvaluateCount(id , type ,badgePost){ // 已交換待評價
 	$.post("/product/queryExchangeCount", {"id" : id , "query" : type } , function(count){
 		if(count>0){
-				$(badgePost).text("評價");
+				
 			if(type == "OthersExchanged"){
 				totalO += count;
+				$(badgePost).text("請評價");
 				$('#evaluateO').text(totalO);				
 			}
 			if(type == "myExchanged"){
 				totalM += count;
+				$(badgePost).text("尚未收到評價");
 				$('#evaluateM').text(totalM);
 			}
 			
@@ -345,8 +347,8 @@ function removeProduct(id){
 			"id":id
 	}
 	swal({
-		title: "Are you sure?",
-		text: "是否確定下架此物品？",
+		title: "是否確定下架此物品？",
+		text: "下架物品，物品問與答紀錄將會消失。",
 		type: "warning",
 		showCancelButton: true,
 		confirmButtonColor: "#F5A056",
@@ -369,8 +371,8 @@ function deleteProduct(id){
 			"id":id
 	}
 	swal({
-		title: "Are you sure?",
-		text: "是否確定刪除此筆資料？",
+		title: "是否確定捨棄此物品？",
+		text: "此物品將會消失。",
 		type: "warning",
 		showCancelButton: true,
 		confirmButtonColor: "#F5A056",
@@ -410,4 +412,4 @@ function getpicture(prod, prodimg) {
 
 </script>
 
-<c:import url="/WebContent/layout/footer.jsp"></c:import>
+<c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>

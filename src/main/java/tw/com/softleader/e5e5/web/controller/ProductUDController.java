@@ -1,6 +1,7 @@
 package tw.com.softleader.e5e5.web.controller;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.entity.ProductPicture;
 import tw.com.softleader.e5e5.entity.User;
+import tw.com.softleader.e5e5.entity.enums.Grade;
 import tw.com.softleader.e5e5.entity.enums.Time;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 import tw.com.softleader.e5e5.service.ProductPictureService;
@@ -43,11 +45,6 @@ public class ProductUDController {
 	private ProductPictureService productPictureService;
 	@Autowired
 	private ServletContext servletContext;
-
-	@RequestMapping(value = "/list2")
-	public String list2(Model model) {
-		return "/e715/product/test";
-	}
 
 	@RequestMapping(value = "/list")
 	public String list(Model model) {
@@ -89,12 +86,16 @@ public class ProductUDController {
 	public int evaluateCount(@RequestParam("id") Integer id, @RequestParam("query") String query) {
 		Product pd = productService.getOne(id);
 		if (query.equals("OthersExchanged")) {
-			if (pd.getGrade() == null)
+			log.error("OthersExchanged");
+			if (pd.getGradeTime() == null)
 				return 1;
 			return 0;
 		} else if (query.equals("myExchanged")) {
-			if (pd.getGrade() == null)
+			log.error("myExchanged");
+			if (pd.getGrade() == null){
+				log.error("myExchanged" + pd.getGrade());
 				return 1;
+			}
 			return 0;
 		}
 		return -1;
