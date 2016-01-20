@@ -67,7 +67,7 @@ public interface ProductDao extends OurDao<Product> {
 	@Query(value = "SELECT p.* FROM product p WHERE  p.user_id = ?1" , nativeQuery = true)
 	public List<Product> findAllByUserId(Integer id);
 
-	// (12)查詢我想跟別人交換與已跟別人刊登的交換排序未解決/String/yao
+	// (12)查詢我想跟別人交換與已跟別人刊登的交換 排序未解決/String/yao
 	@Query(value = "SELECT distinct p.* FROM product p JOIN exchange e ON e.productA_id = p.id WHERE p.post_status = ?3 AND productA_id IN (SELECT productA_id FROM exchange WHERE productB_id in (SELECT productB_id FROM exchange e Join product p ON e.productB_id = p.id WHERE p.[user_id] = ?1 AND e.trade_status = ?2))", nativeQuery = true)
 	public List<Product> findUsersProductsByExchange(Integer userId, String tradeStatus, String postStatus);
 
@@ -116,5 +116,15 @@ public interface ProductDao extends OurDao<Product> {
 	// 查詢我向別人提出的Q&A物品for Q/yao
 	@Query(value = "SELECT DISTINCT p.* FROM product p JOIN question_and_answer q ON p.id = q.product_id WHERE q.answer is null and p.id IN (SELECT p.id FROM product p WHERE p.[user_id] = ?1) ", nativeQuery = true)
 	public List<Product> findProductByQuestionerQ(Integer userId);
+	
+	// 查詢我向別人提出的已交換待評價物品數 /yao
+	@Query(value = "SELECT  distinct p.* FROM product p JOIN exchange e ON e.producta_id = p.id WHERE p.post_status = 'FALSE' AND p.grade_time is null AND productA_id IN (SELECT productA_id FROM exchange WHERE productB_id in (SELECT productB_id FROM exchange e Join product p ON e.productB_id = p.id WHERE p.[user_id] = 2 AND e.trade_status = 'TRUE' ))) ", nativeQuery = true)
+	public List<Product> findCountByExchangedO(Integer userId);
+	
+	// 查詢別人向我提出的已交換待評價物品數 /yao
+	@Query(value = "SELECT p.* FROM exchange e JOIN product p ON e.productA_id = p .id WHERE e.trade_status = 'TRUE' AND p.post_status = 'FALSE' AND e.grade is null AND p.[user_id] = ?1 ORDER BY e.trade_finished_time DESC", nativeQuery = true)
+	public List<Product> findCountByExchangedM(Integer userId);
+	
+	
 
 }

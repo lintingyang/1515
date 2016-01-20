@@ -1,6 +1,7 @@
 package tw.com.softleader.e5e5.web.controller;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import tw.com.softleader.e5e5.entity.Product;
 import tw.com.softleader.e5e5.entity.ProductPicture;
 import tw.com.softleader.e5e5.entity.User;
+import tw.com.softleader.e5e5.entity.enums.Grade;
 import tw.com.softleader.e5e5.entity.enums.Time;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 import tw.com.softleader.e5e5.service.ProductPictureService;
@@ -44,11 +46,6 @@ public class ProductUDController {
 	@Autowired
 	private ServletContext servletContext;
 
-	@RequestMapping(value = "/list2")
-	public String list2(Model model) {
-		return "/e715/product/test";
-	}
-	
 	@RequestMapping(value = "/list")
 	public String list(Model model) {
 		return "/e715/product/productedit";
@@ -74,15 +71,34 @@ public class ProductUDController {
 			products = productService.findUsersProductsByExchange(user.getId(), "TRUE", "FALSE");
 		} else if (query.equals("myExchanged")) { // 原本是我的，現在是別人的。 已交換
 			products = productService.findUserPostedProductsByExchanged(user.getId());
-		} else if (query.equals("question")) {
-//			products = productService.findByUsersProductsIsPosted(user.getId(), "TRUE");
+		} else if (query.equals("question")) { // 待回覆的問題
 			products = productService.findProductByQuestionerQ(user.getId());
-		} else if (query.equals("answer")) {
-			log.error("answer");
+		} else if (query.equals("answer")) { // 已收到的回覆
 			products = productService.findProductByQuestionerA(user.getId());
 		}
 
 		return products;
+	}
+
+	// 已交換的物品待評價數
+	@ResponseBody
+	@RequestMapping(value = "/queryExchangeCount")
+	public int evaluateCount(@RequestParam("id") Integer id, @RequestParam("query") String query) {
+		Product pd = productService.getOne(id);
+		if (query.equals("OthersExchanged")) {
+			log.error("OthersExchanged");
+			if (pd.getGradeTime() == null)
+				return 1;
+			return 0;
+		} else if (query.equals("myExchanged")) {
+			log.error("myExchanged");
+			if (pd.getGrade() == null){
+				log.error("myExchanged" + pd.getGrade());
+				return 1;
+			}
+			return 0;
+		}
+		return -1;
 	}
 
 	// 已刊登的物品別人想交換的總數
@@ -103,12 +119,7 @@ public class ProductUDController {
 			return productService.findCountByProductAQA(id);
 		}
 		if (query.equals("answer")) {
-			log.error("queryQA answer");
 			User user = (User) session.getAttribute("user");
-			log.error("productId" + id);
-			log.error("userId"+user.getId());
-			int productL = productService.findCountByQuestionerQA(id, user.getId());
-			log.error("count" + productL);
 			return productService.findCountByQuestionerQA(id, user.getId());
 		}
 		return -1;
