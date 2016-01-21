@@ -60,12 +60,12 @@
 	</div>
 	<div class="col-md-6">
 		<h2>${product.name}
-			<c:if test="${product.userId.id != user.id}">
-				<c:if test="${product.tradeStatus== 'FALSE'}">
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input id="repBtn" class="btn btn-warning " type="button" value="檢舉" data-toggle="modal" 
-					data-target="#report" >
-			</c:if></c:if>
+				<c:if test="${not empty user.id && product.userId.id != user.id}">
+					<c:if test="${product.tradeStatus== 'FALSE'}">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input id="repBtn" class="btn btn-warning " type="button" value="檢舉" data-toggle="modal" 
+						data-target="#report" >
+				</c:if></c:if>
 		</h2>
 		<div>
 			<h5>希望交易物品：</h5>
