@@ -19,7 +19,7 @@ import tw.com.softleader.e5e5.service.ProductPictureService;
 import tw.com.softleader.e5e5.service.ProductService;
 
 @Controller
-public class indexController {
+public class IndexController {
 	@Autowired
 	private ProductService productService;
 
