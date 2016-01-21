@@ -105,8 +105,6 @@ h4{
 							<option value="12">運動用品</option>
 							<option value="13">女生</option>
 							<option value="14">男生</option>
-							<option value="15">裝飾品</option>
-							<option value="16">其他</option>
 						</select>
 					</div>
 				</div>
