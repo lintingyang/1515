@@ -129,7 +129,7 @@ $("#new").click(function(){
 						var productimg = $("<img style='max-width:100%;'>").addClass("prodimg").attr("src",data[i].primaryPicture);
 						var divp = $("<div style='padding-top: 15px;'></div>");
 							var p = $("<span></span>").text(data[i].name);
-					var aclick = $("<a class='link'>").attr("href","/product/" + data[i].id);
+					var aclick = $("<a class='link' target='_blank'>").attr("href","/product/" + data[i].id);
 // 					var productdivF = $("<div class='panel-footer'></div>");
 				
 	// 				$(productdivF).append(p);
@@ -208,7 +208,7 @@ $(function() { //畫面第一次進入時出現的product list
 						var productimg = $("<img style='max-width:100%;'>").addClass("prodimg").attr("src",data[i].primaryPicture);
 						var divp = $("<div style='padding-top: 15px;'></div>");
 							var p = $("<span></span>").text(data[i].name);
-					var aclick = $("<a class='link'>").attr("href","/product/" + data[i].id);
+					var aclick = $("<a class='link' target='_blank'>").attr("href","/product/" + data[i].id);
 // 				var productdivF = $("<div class='panel-footer'></div>");
 				
 // 				$(productdivF).append(p);

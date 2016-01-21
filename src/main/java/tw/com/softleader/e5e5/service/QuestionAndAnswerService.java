@@ -1,6 +1,7 @@
 package tw.com.softleader.e5e5.service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ public class QuestionAndAnswerService extends OurService<QuestionAndAnswer> {
 		QuestionAndAnswer theQuestion = questionandanswerDao.findOne(id);
 		if (theQuestion != null){
 		theQuestion.setAnswer(answer);
-		theQuestion.setAnswerTime(LocalDateTime.now());
+		theQuestion.setAnswerTime(LocalDateTime.now(ZoneId.of("UTC+8")));
 		questionandanswerDao.save(theQuestion);
 		return 1;
 		}

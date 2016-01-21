@@ -2,6 +2,7 @@ package tw.com.softleader.e5e5.service;
 
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -45,7 +46,7 @@ public class ExchangeService {
 		exchange.setProductAId(prodcutA);
 		exchange.setProductBId(productB);
 		exchange.setTradeStatus(TrueFalse.FALSE);
-		exchange.setExchangeTime(LocalDateTime.now());
+		exchange.setExchangeTime(LocalDateTime.now(ZoneId.of("UTC+8")));
 		exchangeDao.save(exchange);
 	}
 
@@ -66,7 +67,7 @@ public class ExchangeService {
 	@Transactional
 	public Exchange finishTrade(int id){
 		Exchange ex = exchangeDao.findOne(id);
-		ex.setTradeFinishedTime(LocalDateTime.now());
+		ex.setTradeFinishedTime(LocalDateTime.now(ZoneId.of("UTC+8")));
 		ex.setTradeStatus(TrueFalse.TRUE);
 		ex = exchangeDao.save(ex);
 		
@@ -90,7 +91,7 @@ public class ExchangeService {
 		if(productX != null){
 			productX.setGrade(grade);
 			System.out.println("--------------------------"+grade);
-			productX.setGradeTime(LocalDateTime.now());
+			productX.setGradeTime(LocalDateTime.now(ZoneId.of("UTC+8")));
 			productX = productDao.save(productX);
 			return 1;
 		}else{

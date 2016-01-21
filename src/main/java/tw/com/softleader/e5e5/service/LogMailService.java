@@ -1,6 +1,7 @@
 package tw.com.softleader.e5e5.service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -44,7 +45,7 @@ public class LogMailService {
 		logMail.setReceiver(userDao.findByAccount(receiverAccount));
 		logMail.setTitle(title);
 		logMail.setArticle(article);
-		logMail.setDraftTime(LocalDateTime.now());
+		logMail.setDraftTime(LocalDateTime.now(ZoneId.of("UTC+8")));
 		logMail.setIsBackup(TrueFalse.FALSE);
 		logMail.setIsTrash(TrueFalse.FALSE);
 		logMail.setIsDraft(TrueFalse.TRUE);
@@ -57,7 +58,7 @@ public class LogMailService {
 		logMail.setReceiver(userDao.findByAccount(receiverAccount));
 		logMail.setTitle(title);
 		logMail.setArticle(article);
-		logMail.setDraftTime(LocalDateTime.now());
+		logMail.setDraftTime(LocalDateTime.now(ZoneId.of("UTC+8")));
 		logMail.setIsBackup(TrueFalse.FALSE);
 		logMail.setIsTrash(TrueFalse.FALSE);
 		logMail.setIsDraft(TrueFalse.TRUE);

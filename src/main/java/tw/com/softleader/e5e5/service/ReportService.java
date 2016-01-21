@@ -2,6 +2,7 @@ package tw.com.softleader.e5e5.service;
 
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,7 +74,7 @@ public class ReportService extends OurService<Report>{
 		Report temp = reportDao.findOne(id);
 		if(temp != null){
 			temp.setIsPassed(TrueFalse.TRUE);
-			temp.setFinishTime(LocalDateTime.now());
+			temp.setFinishTime(LocalDateTime.now(ZoneId.of("UTC+8")));
 			temp = reportDao.save(temp);
 			return temp;	
 		}
@@ -86,7 +87,7 @@ public class ReportService extends OurService<Report>{
 			Report temp = reportDao.findOne(id);
 			if(temp != null){
 				temp.setIsPassed(TrueFalse.FALSE);
-				temp.setFinishTime(LocalDateTime.now());
+				temp.setFinishTime(LocalDateTime.now(ZoneId.of("UTC+8")));
 				temp = reportDao.save(temp);
 				return temp;
 			}
@@ -98,7 +99,7 @@ public class ReportService extends OurService<Report>{
 	public int insert(String article, int productId, int reporterId){
 		Report report = new Report();
 		report.setArticle(article);
-		report.setReportTime(LocalDateTime.now());
+		report.setReportTime(LocalDateTime.now(ZoneId.of("UTC+8")));
 		report.setProduct(productDao.findOne(productId));
 		report.setReporterId(userDao.findOne(reporterId));
 		report = reportDao.save(report);
