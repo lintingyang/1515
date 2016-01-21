@@ -2,7 +2,7 @@ package tw.com.softleader.e5e5.service;
 
 
 import java.time.LocalDateTime;
-
+import java.time.ZoneId;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -53,7 +53,7 @@ public class ChatService extends OurService<Chat> {
 
 		chat.setMessages(messages);
 		chat.setUser(user);
-		chat.setSendTime(LocalDateTime.now());
+		chat.setSendTime(LocalDateTime.now(ZoneId.of("UTC+8")));
 		result = chatDao.save(chat);
 
 		return result;
@@ -67,7 +67,7 @@ public class ChatService extends OurService<Chat> {
 		chat.setMessages(messages);
 		chat.setShowUserInfo(showUserInfo);
 		chat.setUser(user);
-		chat.setSendTime(LocalDateTime.now());
+		chat.setSendTime(LocalDateTime.now(ZoneId.of("UTC+8")));
 		result = chatDao.save(chat);
 
 		return result;
@@ -83,7 +83,7 @@ public class ChatService extends OurService<Chat> {
 		chat.setShowUserInfo(showUserInfo);
 		chat.setUser(user);
 		chat.setPicture(picture);
-		chat.setSendTime(LocalDateTime.now());
+		chat.setSendTime(LocalDateTime.now(ZoneId.of("UTC+8")));
 		result = chatDao.save(chat);
 		
 		return result;
@@ -95,7 +95,7 @@ public class ChatService extends OurService<Chat> {
 		User user = (User) userDao.findOne(userId);
 		chat.setUser(user);
 		chat.setPicture(picture);
-		chat.setSendTime(LocalDateTime.now());
+		chat.setSendTime(LocalDateTime.now(ZoneId.of("UTC+8")));
 		result = chatDao.save(chat);
 		
 		return result;

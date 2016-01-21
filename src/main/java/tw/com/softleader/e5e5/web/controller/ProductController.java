@@ -203,7 +203,7 @@ public class ProductController {
 
 	@RequestMapping(value = "/add")
 	public String add(Model model) {
-		LocalDateTime now = LocalDateTime.now();
+		LocalDateTime now = LocalDateTime.now(ZoneId.of("UTC+8"));
 		int y = now.getYear();
 		int m = now.getMonthValue();
 		int d = now.getDayOfMonth();
@@ -262,7 +262,7 @@ public class ProductController {
 		String productWish = null;
 
 		if (product.getPostStatus() == TrueFalse.TRUE) {
-			startTime = LocalDateTime.now();
+			startTime = LocalDateTime.now(ZoneId.of("UTC+8"));
 
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 			String monthD = pDeadline.substring(0, 2);

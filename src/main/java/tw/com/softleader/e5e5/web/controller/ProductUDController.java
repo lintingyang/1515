@@ -2,6 +2,7 @@ package tw.com.softleader.e5e5.web.controller;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
@@ -204,7 +205,7 @@ public class ProductUDController {
 		String productWish = null;
 
 		if (product.getPostStatus() == TrueFalse.TRUE) {
-			startTime = LocalDateTime.now();
+			startTime = LocalDateTime.now(ZoneId.of("UTC+8"));
 
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 			String monthD = pDeadline.substring(0, 2);

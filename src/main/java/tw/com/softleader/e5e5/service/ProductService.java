@@ -2,6 +2,7 @@ package tw.com.softleader.e5e5.service;
 
 import java.io.File;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -272,7 +273,7 @@ public class ProductService extends OurService<Product> {
 		product.setProductCategory(productCategoryDao.findOne(category));
 		product.setStatus(status);
 		product.setDescription(description);
-		product.setPostTime(LocalDateTime.now());
+		product.setPostTime(LocalDateTime.now(ZoneId.of("UTC+8")));
 		product.setStartTime(startTime);
 		product.setDeadline(deadline);
 		product.setTransactionTime(transactionTime);
