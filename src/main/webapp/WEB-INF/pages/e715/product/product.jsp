@@ -213,7 +213,7 @@
 <script>
 /**按下我要交換按鈕**/
 $("#excBtn").click(function(){
-	if( ${empty user} ){
+	if( $(user.Id) ){
 		swal({   
 			title: "尚未登入",   
 			text: "您尚未登入,無法使用交換功能!使否導入登入頁面?",   
@@ -268,7 +268,7 @@ $("#submitReport").click(function(){
 				data: {
 					article : $("#article").val(),
 					productId : ${product.id},
-					reporterId : ${user.id},
+					reporterId : "${user.id}",
 				}
 			});
 		})
