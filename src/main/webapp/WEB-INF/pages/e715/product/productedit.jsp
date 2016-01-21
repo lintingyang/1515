@@ -61,7 +61,7 @@ h4{
 		</div>
 		<ul class="nav nav-tabs " id="tabs">
 			<li style="width: 20%; text-align: center;"><a
-				class="categorylist searchbtn queryBtn" id = "posted" href="#">收到的交換&nbsp;<span class="label label-pill label-default label-as-badge" id ="totalCount"></span></a></li>
+				class="categorylist searchbtn queryBtn" id = "posted" href="#">已刊登&nbsp;<span class="label label-pill label-default label-as-badge" id ="totalCount"></span></a></li>
 			<li style="width: 20%; text-align: center;" class = "dropdown" ><a
 				class="categorylist searchbtn dropdown-toggle" data-toggle="dropdown" href="#">問與答&nbsp;<span class="label label-pill label-default label-as-badge" id ="totalCountQandA"></span></a>
 				<ul class="dropdown-menu">

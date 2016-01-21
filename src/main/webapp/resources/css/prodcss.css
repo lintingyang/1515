@@ -6,6 +6,9 @@ margin: auto;
 .nav-tabs{
 		list-style:none;
 }
+.demo6:hover{
+	box-shadow:1px 1px 10px gray;
+}
 
 .catrgorybox{
 	padding:10px;

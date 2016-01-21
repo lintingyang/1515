@@ -5,7 +5,7 @@
 <c:import url="/WEB-INF/pages/layout/meta.jsp" />
 <style>
 .namebox{
-	width:136px;
+	width:180px;
 }
 .titlebox{
 	width:834px;
@@ -419,8 +419,8 @@ function showmail(data){
 		var mailRow = "<tr class='mailrow'>" +
 						"<td class='mailcheckbox'><input name='check' id='mail"+this.id+"' type='checkbox'></td>" + 
 						"<td class='importantbox'>" + star + "</td>" +
-						"<td>" + this.sender.nickname + "(" + this.sender.account + ")</td>" + 
-						"<td class='mailBody' id='mailno" + index + "' style='cursor:pointer'>" + this.title + "//" + this.article + "</td>" +
+						"<td class='namebox'>" + this.sender.nickname + "(" + this.sender.account + ")</td>" + 
+						"<td class='mailBody' id='mailno" + index + "' style='cursor:pointer'>" + this.title + "</td>" +
 						"<td style='text-align: right;'>" + sendTime + "</td>" +
 						"</tr>";
 		$("#mailtable").append(mailRow);
@@ -560,8 +560,8 @@ function showbackup(data){
 		var sendTime = this.sendTime.year + "/" + this.sendTime.monthValue + "/" + this.sendTime.dayOfMonth;
 		var mailRow = "<tr class='mailrow'>" +
 			"<td class='mailcheckbox'><input name='check' id='logm"+this.id+"' type='checkbox'></td>" + 
-			"<td>" + this.receiver.nickname + "(" + this.receiver.account + ")</td>" + 
-			"<td class='mailBody' id='backno" + index + "' style='cursor:pointer'>" + this.title + "//" + this.article + "</td>" +
+			"<td class='namebox'>" + this.receiver.nickname + "(" + this.receiver.account + ")</td>" + 
+			"<td class='mailBody' id='backno" + index + "' style='cursor:pointer'>" + this.title +  "</td>" +
 			"<td style='text-align: right;'>" + sendTime + "</td>" +
 			"</tr>";
 	$("#mailtable").append(mailRow);
@@ -624,7 +624,7 @@ function showdraft(data){
 		var draftRow = "<tr class='mailrow'>" +
 			"<td class='mailcheckbox'><input name='check' id='logm"+this.id+"' type='checkbox'></td>" + 
 			"<td class='namebox' >" + receivername +  receiveraccount + "</td>" + 
-			"<td class='titlebox' id='draft" + index + "'>" + this.title + "//" + this.article + "</td>" +
+			"<td class='titlebox' id='draft" + index + "'>" + this.title + "</td>" +
 			"<td style='text-align: right;'>" + draftTime + "</td>" +
 			"</tr>";
 		$("#mailtable").append(draftRow);
