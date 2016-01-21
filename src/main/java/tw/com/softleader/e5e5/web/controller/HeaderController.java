@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import tw.com.softleader.e5e5.entity.User;
 import tw.com.softleader.e5e5.entity.UserBanList;
 import tw.com.softleader.e5e5.entity.enums.Sex;
+import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 import tw.com.softleader.e5e5.service.UserService;
 
 @Controller
@@ -68,7 +69,7 @@ public class HeaderController {
 			String loginError = "就叫你用一鍵登入來開發了還硬要打字";
 			return loginError;
 		}else{
-		if (user.getIsolated().equals("TRUE")) {
+		if (user.getIsolated().equals(TrueFalse.TRUE)) {
 			user = null;
 			String isolated = "帳號已被封鎖";
 			return isolated;
@@ -204,6 +205,9 @@ public class HeaderController {
 		} else {
 			user.setPhone(phone);
 		}
+		
+		user.setIsolated(TrueFalse.FALSE);
+		
 		user.setEmail(email);
 		userService.update(user);
 		User login = userService.login(account, password);
