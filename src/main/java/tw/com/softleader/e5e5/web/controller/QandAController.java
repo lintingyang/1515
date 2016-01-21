@@ -2,6 +2,7 @@
 package tw.com.softleader.e5e5.web.controller;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -81,7 +82,7 @@ public class QandAController {
 		newquestion.setProduct(productservice.getOneById(question.getProductid()));
 		newquestion.setQuestion(question.getQuestion());
 		newquestion.setQuestionerId(user);
-		newquestion.setQuestionTime(LocalDateTime.now());
+		newquestion.setQuestionTime(LocalDateTime.now(ZoneId.of("UTC+8")));
 		if (question.notPublic) {
 			newquestion.setIsPublic(TrueFalse.FALSE);
 		} else {

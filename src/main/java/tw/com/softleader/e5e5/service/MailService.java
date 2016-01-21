@@ -1,6 +1,7 @@
 package tw.com.softleader.e5e5.service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -66,7 +67,7 @@ public class MailService {
 		mail.setTitle(title);
 		mail.setArticle(article);
 		mail.setIsRead(TrueFalse.FALSE);
-		mail.setSendTime(LocalDateTime.now());
+		mail.setSendTime(LocalDateTime.now(ZoneId.of("UTC+8")));
 		mail.setIsImportant(TrueFalse.FALSE);
 		mail.setIsTrash(TrueFalse.FALSE);
 		mailDao.save(mail);
@@ -76,7 +77,7 @@ public class MailService {
 			logMail.setReceiver(userDao.findByAccount(receiverAccount));
 			logMail.setTitle(title);
 			logMail.setArticle(article);
-			logMail.setSendTime(LocalDateTime.now());
+			logMail.setSendTime(LocalDateTime.now(ZoneId.of("UTC+8")));
 			logMail.setIsBackup(TrueFalse.TRUE);
 			logMail.setIsTrash(TrueFalse.FALSE);
 			logMail.setIsDraft(TrueFalse.FALSE);
@@ -99,7 +100,7 @@ public class MailService {
 		mail.setArticle("您好,親愛的用戶"+userDao.getOne(receiverId).getName()+"您好:<br>您的物品"+productDao.getOne(productBId).getName()
 				+"已經與"+productDao.getOne(productAId).getName()+"配對成功,請盡速與交易者取得聯繫完成交易,並給予對方評分唷!=)<br><br><br>E715管理員初號機敬上");
 		mail.setIsRead(TrueFalse.FALSE);
-		mail.setSendTime(LocalDateTime.now());
+		mail.setSendTime(LocalDateTime.now(ZoneId.of("UTC+8")));
 		mail.setIsImportant(TrueFalse.FALSE);
 		mail.setIsTrash(TrueFalse.FALSE);
 		mailDao.save(mail);
@@ -115,7 +116,7 @@ public class MailService {
 		mail.setArticle("您好,親愛的用戶"+userDao.getOne(receiverId).getName()+"<br>有人想要使用"+productDao.getOne(productBId).getName()+
 				"交換您刊登的"+productDao.getOne(productAId).getName()+",請盡速前往物品頁面察看確認是否想要交換喔!=D<br><br><br>E715管理員初號機敬上");
 		mail.setIsRead(TrueFalse.FALSE);
-		mail.setSendTime(LocalDateTime.now());
+		mail.setSendTime(LocalDateTime.now(ZoneId.of("UTC+8")));
 		mail.setIsImportant(TrueFalse.FALSE);
 		mail.setIsTrash(TrueFalse.FALSE);
 		mailDao.save(mail);

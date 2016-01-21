@@ -60,12 +60,12 @@
 	</div>
 	<div class="col-md-6">
 		<h2>${product.name}
-			<c:if test="${product.userId.id != user.id}">
-				<c:if test="${product.tradeStatus== 'FALSE'}">
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input id="repBtn" class="btn btn-warning " type="button" value="檢舉" data-toggle="modal" 
-					data-target="#report" >
-			</c:if></c:if>
+				<c:if test="${not empty user.id && product.userId.id != user.id}">
+					<c:if test="${product.tradeStatus== 'FALSE'}">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input id="repBtn" class="btn btn-warning " type="button" value="檢舉" data-toggle="modal" 
+						data-target="#report" >
+				</c:if></c:if>
 		</h2>
 		<div>
 			<h5>希望交易物品：</h5>
@@ -213,7 +213,7 @@
 <script>
 /**按下我要交換按鈕**/
 $("#excBtn").click(function(){
-	if( $(user.Id) ){
+	if( ${empty user} ){
 		swal({   
 			title: "尚未登入",   
 			text: "您尚未登入,無法使用交換功能!使否導入登入頁面?",   
@@ -344,7 +344,7 @@ $(function(){
 			 	$("#submitanswer"+currentindex).on("click", function(){
 			 		var theId = questions[currentindex].id;
 					var theAnswer = $("#answertext"+currentindex).val();
-					var answerData = JSON.stringify({"id":theId, "answer":theAnswer, "productid":${product.id}});
+					var answerData = JSON.stringify({"id":theId, "answer":theAnswer, "productid":"${product.id}"});
 // 					console.log(answerData);    
 					$.ajax({
     					type: "POST",
@@ -478,7 +478,7 @@ $(function(){
 		 }
 	}
  	//確認Exchange (B->A)		
-	var formData={"id":${product.id}}
+	var formData={"id":"${product.id}"}
 	 $.ajax({
 	       type: "GET",
 	       url: "http://localhost:8080/product/findexchanged",
