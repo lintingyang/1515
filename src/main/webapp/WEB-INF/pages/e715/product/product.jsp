@@ -213,7 +213,7 @@
 <script>
 /**按下我要交換按鈕**/
 $("#excBtn").click(function(){
-	if( $(user.Id) ){
+	if( ${empty user} ){
 		swal({   
 			title: "尚未登入",   
 			text: "您尚未登入,無法使用交換功能!使否導入登入頁面?",   
@@ -268,7 +268,7 @@ $("#submitReport").click(function(){
 				data: {
 					article : $("#article").val(),
 					productId : ${product.id},
-					reporterId : ${user.id},
+					reporterId : "${user.id}",
 				}
 			});
 		})
@@ -344,7 +344,7 @@ $(function(){
 			 	$("#submitanswer"+currentindex).on("click", function(){
 			 		var theId = questions[currentindex].id;
 					var theAnswer = $("#answertext"+currentindex).val();
-					var answerData = JSON.stringify({"id":theId, "answer":theAnswer, "productid":${product.id}});
+					var answerData = JSON.stringify({"id":theId, "answer":theAnswer, "productid":"${product.id}"});
 // 					console.log(answerData);    
 					$.ajax({
     					type: "POST",
@@ -478,7 +478,7 @@ $(function(){
 		 }
 	}
  	//確認Exchange (B->A)		
-	var formData={"id":${product.id}}
+	var formData={"id":"${product.id}"}
 	 $.ajax({
 	       type: "GET",
 	       url: "http://localhost:8080/product/findexchanged",
