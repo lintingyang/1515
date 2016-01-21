@@ -21,6 +21,7 @@
 	<properties>
 		<start-class>tw.com.softleader.e5e5.E5e5App</start-class>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
 	</properties>
 
 	<repositories>
@@ -84,7 +85,7 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
-			<scope>provided</scope>
+<!-- 			<scope>provided</scope> -->
 		</dependency>
 
 		<dependency>
