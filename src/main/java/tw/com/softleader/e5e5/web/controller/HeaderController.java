@@ -26,15 +26,14 @@ import tw.com.softleader.e5e5.service.UserService;
 
 @Controller
 @RequestMapping(value = "/head")
-public class headerController {
+public class HeaderController {
 
 	@Autowired
 	private UserService userService;
 
 	@Autowired
 	private ServletContext servletContext;
-	
-	
+
 	Logger log = Logger.getLogger(this.getClass());
 
 	@RequestMapping(value = "/categoryhchange")
@@ -59,21 +58,26 @@ public class headerController {
 	}
 
 	// 輸入完帳號密碼並按下登入鍵 進行登入檢查
+	
 	@RequestMapping(value = "/logincheck", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String loginCheck(Model model, @RequestParam("account") String account,
 			@RequestParam("password") String password, HttpSession session) {
 		User user = userService.login(account, password);
 		if (user == null) {
-			String temp = "就叫你用一鍵登入來開發了還硬要打字";
-			return temp;
-		} else {
-
-			session.setAttribute("user", user);
-
-			return "TRUE";
+			String loginError = "就叫你用一鍵登入來開發了還硬要打字";
+			return loginError;
+		}else{
+		if (user.getIsolated().equals("TRUE")) {
+			user = null;
+			String isolated = "帳號已被封鎖";
+			return isolated;
+		} 
+		 else {
+			 session.setAttribute("user", user);
+				return "TRUE";
+			}
 		}
-
 	}
 
 	@RequestMapping(value = "/search")
@@ -88,21 +92,19 @@ public class headerController {
 		return "/e715/user/emailCheck";
 	}
 
-//	// 進入註冊帳號頁
-//	@RequestMapping(value = "/create", method = RequestMethod.GET)
-//	public String createAccountPage() {
-//		return "/e715/user/createaccount";
-//	}
+	// // 進入註冊帳號頁
+	// @RequestMapping(value = "/create", method = RequestMethod.GET)
+	// public String createAccountPage() {
+	// return "/e715/user/createaccount";
+	// }
 
 	// 送驗證碼
 	@RequestMapping(value = "/verificationCodeSend")
 	@ResponseBody
-	public boolean userVerificationCodeSend(
-			@RequestParam("userSchoolEmail") String schoolEmail,
-			@RequestParam("chooseSchool") String schoolName
-			) {
+	public boolean userVerificationCodeSend(@RequestParam("userSchoolEmail") String schoolEmail,
+			@RequestParam("chooseSchool") String schoolName) {
 		boolean result = false;
-		String userSchool = schoolEmail+schoolName;
+		String userSchool = schoolEmail + schoolName;
 		int temp = userService.sendVerificationCode(userSchool);
 		if (temp == 1) {
 			result = true;
@@ -112,9 +114,10 @@ public class headerController {
 
 	// 確認驗證碼
 	@RequestMapping(value = "/verificationCodeCheck")
-	public String userSchoolEmailCheck(@RequestParam("userSchoolEmail") String schoolEmailFormat,@RequestParam("chooseSchool") String schoolName,
-		@RequestParam("userVerificationCode") String userVerificationCode, HttpSession session) {
-		String schoolEmail=schoolEmailFormat+schoolName;
+	public String userSchoolEmailCheck(@RequestParam("userSchoolEmail") String schoolEmailFormat,
+			@RequestParam("chooseSchool") String schoolName,
+			@RequestParam("userVerificationCode") String userVerificationCode, HttpSession session) {
+		String schoolEmail = schoolEmailFormat + schoolName;
 		Map<String, String> errors = new HashMap<String, String>();
 		session.setAttribute("checkError", errors);
 		errors.clear();
@@ -137,13 +140,14 @@ public class headerController {
 		}
 
 	}
-	//確認帳號是否存在
+
+	// 確認帳號是否存在
 	@RequestMapping(value = "/checkAccount")
 	@ResponseBody
-	public boolean checkAccount (@RequestParam("checkAccount") String account){
+	public boolean checkAccount(@RequestParam("checkAccount") String account) {
 		boolean result = false;
 		User user = userService.findByAccount(account);
-		if(user==null){
+		if (user == null) {
 			result = true;
 		}
 		return result;
@@ -158,9 +162,9 @@ public class headerController {
 			@RequestParam("phone") String phone, @RequestParam("email") String email, HttpSession session) {
 		Map<String, String> errors = new HashMap<String, String>();
 		session.setAttribute("errors", errors);
-		
-		String schoolEmail = (String)session.getAttribute("userSchoolEmail");
-		//用學校信箱完善資料
+
+		String schoolEmail = (String) session.getAttribute("userSchoolEmail");
+		// 用學校信箱完善資料
 		User user = userService.loginBySchoolEmail(schoolEmail);
 		if (account == null || account.length() == 0) {
 			errors.put("account", "請輸入帳號");
@@ -195,7 +199,7 @@ public class headerController {
 			user.setBirthday(dateTime);
 		} catch (Exception e) {
 		}
-		if (phone.substring(0,2).equals("09")) {
+		if (phone.substring(0, 2).equals("09")) {
 			user.setCellphone(phone);
 		} else {
 			user.setPhone(phone);
@@ -212,42 +216,37 @@ public class headerController {
 		}
 
 	}
-	
-	//完善資料
+
+	// 完善資料
 	@RequestMapping(value = "/completeMaterial")
-	public String completeMaterial(
-			@RequestParam("subject") String subject,
-			@RequestParam("addr") String addr,
-			@RequestParam("file") MultipartFile userFile,
-			@RequestParam("aboutMe") String aboutMe,
-			HttpSession session){
-			User user = (User)session.getAttribute("user");
-		if(user==null){
+	public String completeMaterial(@RequestParam("subject") String subject, @RequestParam("addr") String addr,
+			@RequestParam("file") MultipartFile userFile, @RequestParam("aboutMe") String aboutMe,
+			HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		if (user == null) {
 			return "/e715/user/login";
-		}else{
+		} else {
 			user.setSubject(subject);
 			user.setAddress(addr);
-			if (userFile!=null) {
+			if (userFile != null) {
 				String path = userService.upLoadImage(user.getId(), servletContext, userFile);
 				user.setPicture(path);
 			}
 			user.setAboutMe(aboutMe);
 			userService.update(user);
-		return "/index";
+			return "/index";
 		}
 	}
-	
-	
-	
+
 	@RequestMapping(value = "/success", method = RequestMethod.GET)
 	public String createSuccess(HttpSession session) {
 
 		return "/e715/user/insertSuccess";
 
 	}
-	
+
 	@RequestMapping(value = "/completeMaterialPage", method = RequestMethod.GET)
-	public String completeMaterialPage(){
+	public String completeMaterialPage() {
 		return "/e715/user/completeMaterial";
 	}
 
