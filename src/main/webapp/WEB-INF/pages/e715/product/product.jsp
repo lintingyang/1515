@@ -268,7 +268,7 @@ $("#submitReport").click(function(){
 				data: {
 					article : $("#article").val(),
 					productId : ${product.id},
-					reporterId : "${user.id}",
+					reporterId : ${user.id},
 				}
 			});
 		})
