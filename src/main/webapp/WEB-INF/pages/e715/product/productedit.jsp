@@ -106,29 +106,29 @@ $(function(){
 
 $(function() { 
 
-	$.get("/product/query1",{ "query" : "answer" } ,function(data) { //進入物品管理先顯示已刊登 問與答收到回覆數
+	$.get("${pageContext.request.contextPath}/product/query1",{ "query" : "answer" } ,function(data) { //進入物品管理先顯示已刊登 問與答收到回覆數
 		$.each(data,function(i){
 			getQandACount(data[i].id , "answer" , null);//收到的回答
 		})//each
 	});
 	
-	$.get("/product/query1",{ "query" : "question" } ,function(data) { //進入物品管理先顯示已刊登 問與答收到回覆數
+	$.get("${pageContext.request.contextPath}/product/query1",{ "query" : "question" } ,function(data) { //進入物品管理先顯示已刊登 問與答收到回覆數
 		$.each(data,function(i){
 			getQandACount(data[i].id , "question" , null);//被提出的問題
 		})//each
 	});
 	
-	$.get("/product/query1",{ "query" : "OthersExchanged" } ,function(data) { //進入物品管理先顯示已交換 提出的交換待評價數
+	$.get("${pageContext.request.contextPath}/product/query1",{ "query" : "OthersExchanged" } ,function(data) { //進入物品管理先顯示已交換 提出的交換待評價數
 		$.each(data,function(i){
 			getEvaluateCount(data[i].id , "OthersExchanged" , null);//提出的交換
 		})//each
 	});
-	$.get("/product/query1",{ "query" : "myExchanged" } ,function(data) { //進入物品管理先顯示已交換 收到的交換待評價數
+	$.get("${pageContext.request.contextPath}/product/query1",{ "query" : "myExchanged" } ,function(data) { //進入物品管理先顯示已交換 收到的交換待評價數
 		$.each(data,function(i){
 			getEvaluateCount(data[i].id , "myExchanged" , null);//收到的交換
 		})//each
 	});
-	$.post("/product/query1",{ "query" : "posted" } ,function(data) { //進入物品管理先顯示已刊登
+	$.post("${pageContext.request.contextPath}/product/query1",{ "query" : "posted" } ,function(data) { //進入物品管理先顯示已刊登
 		
 			$("#itemContainer").html('');
 	
@@ -181,7 +181,7 @@ $('.queryBtn').click(function() { //點選排列方式後按照順序排列
 
 	$.ajax({
 		contentType:"application/json",
-		url:"/product/query1",
+		url:"${pageContext.request.contextPath}/product/query1",
 		dataType :"json",
 		type:"get",
 		data:{ "query" : type },
@@ -272,7 +272,7 @@ $('.queryBtn').click(function() { //點選排列方式後按照順序排列
 });//click
 
 function getEvaluateCount(id , type ,badgePost){ // 已交換待評價
-	$.post("/product/queryExchangeCount", {"id" : id , "query" : type } , function(count){
+	$.post("${pageContext.request.contextPath}/product/queryExchangeCount", {"id" : id , "query" : type } , function(count){
 		if(count>0){
 				
 			if(type == "OthersExchanged"){
@@ -293,13 +293,13 @@ function getEvaluateCount(id , type ,badgePost){ // 已交換待評價
 
 function getExchangedProduct(productId){ //傳入productId 跳轉交易完成頁面
 	console.log(productId);
-	$.post("/product/exchangedProduct",{ "id" : productId } ,function(exchangeId) {
+	$.post("${pageContext.request.contextPath}/product/exchangedProduct",{ "id" : productId } ,function(exchangeId) {
 		location.href="/product/exchanging?id="+exchangeId;
 	})
 }
 
 function getQandACount(id , type ,badgePost){ // 已刊登別人提出的問題
-	$.post("/product/queryQA", {"id" : id , "query" : type } , function(count){
+	$.post("${pageContext.request.contextPath}/product/queryQA", {"id" : id , "query" : type } , function(count){
 		if(count>0){
 			if(count>10){
 				$(badgePost).text('10+');				
@@ -326,7 +326,7 @@ function getProductCount(id , type ,badgePost){ // 已刊登欲交換數量
 			"query" : type
 	}
 	$.ajax({
-		url : "/product/queryCount",
+		url : "${pageContext.request.contextPath}/product/queryCount",
 		dataType : "json",
 		type : "post",
 		data : data,
@@ -355,7 +355,7 @@ function removeProduct(id){
 		closeOnConfirm: true
 	}, function() {
 		$.ajax({
-			url : "/product/remove",
+			url : "${pageContext.request.contextPath}/product/remove",
 			dataType : "html",
 			type : "post",
 			data : formData,
@@ -379,7 +379,7 @@ function deleteProduct(id){
 		closeOnConfirm: true
 	}, function() {
 		$.ajax({
-			url : "/product/delete",
+			url : "${pageContext.request.contextPath}/product/delete",
 			dataType : "html",
 			type : "post",
 			data : data,
@@ -397,7 +397,7 @@ function getpicture(prod, prodimg) {
 	}
 	$.ajax({
 		contentType : "application/json",
-		url : "/product/queryimg",
+		url : "${pageContext.request.contextPath}/product/queryimg",
 		dataType : "json",
 		type : "get",
 		data : formData,
