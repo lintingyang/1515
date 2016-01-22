@@ -25,7 +25,7 @@ $(function(){
 		$("#messages").val("")
         $.ajax({
            type: "GET",
-           url: "http://localhost:8080/chatroom/insertM",
+           url: "${pageContext.request.contextPath}/chatroom/insertM",
            data: formData,
            success: function(data){
         	   display(data,"prepend");
@@ -38,7 +38,7 @@ $(function(){
 	function getMessages(){
 		$.ajax({
 	           type: "GET",
-	           url: "http://localhost:8080/chatroom/list",
+	           url: "${pageContext.request.contextPath}/chatroom/list",
 	           data: "",
 	           success: function(data){
 	        	   display(data,"appand");
@@ -51,7 +51,7 @@ $(function(){
 	function freshPage(){
 		$.ajax({
 	           type: "GET",
-	           url: "http://localhost:8080/chatroom/list",
+	           url: "${pageContext.request.contextPath}/chatroom/list",
 	           data: "",
 	           success: function(data){
 	        	   display(data,"prepend");
@@ -166,7 +166,7 @@ $(function(){
 			<hr>
 			<img id="blah0" src="${pageContext.request.contextPath}/resources/imgs/noImg.jpg" alt="your image" style="width: 200px; height: 200px;"/>
 <!-- 			<img id="blah0" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 200px; height: 200px;"/> -->
-				<form  action="/chatroom/insert" method="post" enctype="multipart/form-data">
+				<form  action="${pageContext.request.contextPath}/chatroom/insert" method="post" enctype="multipart/form-data">
 
 				    <input type="text" name="id" size="5" placeholder="使用者ID" value="${user.id}" hidden>
 				    <div  style="width:200px;">
