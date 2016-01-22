@@ -155,14 +155,17 @@ $(function(){
 			<button type="button" id="upImgBtn" class="btn btn-info" >
 				<span class="glyphicon glyphicon-picture" aria-hidden="true"> 上傳圖片</span>
 			</button> 
-			<img src="/resources/imgs/symbol_questionmark.jpg" width="15" 
+			<img src="${pageContext.request.contextPath}/resources/imgs/symbol_questionmark.jpg" width="15" 
 			 data-container="body" data-toggle="popover" data-placement="right" data-content="上傳圖片時不能匿名喔">		
+<!-- 			<img src="/resources/imgs/symbol_questionmark.jpg" width="15"  -->
+<!-- 			 data-container="body" data-toggle="popover" data-placement="right" data-content="上傳圖片時不能匿名喔">		 -->
 		</div>
 
 		<div class="row">	
 			<div id="upImg1" class="col-md-12" hidden>
 			<hr>
-			<img id="blah0" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 200px; height: 200px;"/>
+			<img id="blah0" src="${pageContext.request.contextPath}/resources/imgs/noImg.jpg" alt="your image" style="width: 200px; height: 200px;"/>
+<!-- 			<img id="blah0" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 200px; height: 200px;"/> -->
 				<form  action="/chatroom/insert" method="post" enctype="multipart/form-data">
 
 				    <input type="text" name="id" size="5" placeholder="使用者ID" value="${user.id}" hidden>

@@ -273,14 +273,17 @@ $("#upUserData").on('click',function(){
 		$("phoneErrorMsg").html('');
 	$("reservedEmailErrorMsg").html('');
 	if($("#phone").val()==null){
-		$("phoneErrorMsg").append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>電話必填</span>");	
+// 		$("phoneErrorMsg").append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>電話必填</span>");	
+		$("phoneErrorMsg").append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>電話必填</span>");	
 	}
 	if($('#inputReservedEmail').val()==null){
-		$("reservedEmailErrorMsg").append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>信箱必填</span>");		
+		$("reservedEmailErrorMsg").append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>信箱必填</span>");		
+// 		$("reservedEmailErrorMsg").append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>信箱必填</span>");		
 	} else{
 		var emailCheckAns = rel.test($('#inputReservedEmail').val());
 		if(!emailCheckAns){
-			$("reservedEmailErrorMsg").append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>信箱格式錯誤</span>");		
+			$("reservedEmailErrorMsg").append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>信箱格式錯誤</span>");		
+// 			$("reservedEmailErrorMsg").append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>信箱格式錯誤</span>");		
 		}
 	}
 		if($("#name").val()!=null && $('#inputReservedEmail').val()!=null && $('#inputReservedEmail').val()!=null && emailCheckAns){
@@ -308,7 +311,8 @@ $("#upUserData").on('click',function(){
 		}else{
 			
 			$('#nameErrorMsg').empty();
-			$('#nameErrorMsg').append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>姓名禁止空白</span>");
+			$('#nameErrorMsg').append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>姓名禁止空白</span>");
+// 			$('#nameErrorMsg').append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>姓名禁止空白</span>");
 		
 		}
 		

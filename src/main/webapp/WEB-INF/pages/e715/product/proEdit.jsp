@@ -53,7 +53,8 @@ h4{
 				<div class="form-group row">
 					<label class="col-sm-4 form-control-label"><h4>圖片</h4></label>
 					<div class="col-sm-10" align="center">
-   						<img id="blah0" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 200px; height: 200px;"/>
+   						<img id="blah0" src="${pageContext.request.contextPath}/resources/imgs/noImg.jpg" alt="your image" style="width: 200px; height: 200px;"/>
+<!--    						<img id="blah0" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 200px; height: 200px;"/> -->
    						<div>
    							<label class="col-md-offset-2 col-sm-8 choose-file btn btn-sm btn-default glyphicon glyphicon-open" id="upload" for="id_image_large">
 							<input type="file" id="id_image_large" class ="pPicture" name="pPicture" multiple required="required"></label>
@@ -65,13 +66,16 @@ h4{
 					<div class="col-sm-10" align="center">
 						<div class="row">
 							<div class = " col-sm-4">
-   								<img id="blah1" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; "/>
+   								<img id="blah1" src="${pageContext.request.contextPath}/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; "/>
+<!--    								<img id="blah1" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; "/> -->
    							</div>
    							<div class = " col-sm-4">
-   								<img id="blah2" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; "/>
+   								<img id="blah2" src="${pageContext.request.contextPath}/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; "/>
+<!--    								<img id="blah2" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; "/> -->
    							</div>
    							<div class = " col-sm-4">
-   								<img id="blah3" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; "/>
+   								<img id="blah3" src="${pageContext.request.contextPath}/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; "/>
+<!--    								<img id="blah3" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; "/> -->
 							</div>
 							</div>
 							<div class="row">

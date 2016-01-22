@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/WEB-INF/pages/e715/layout/header.jsp"/>
 <c:import url="/WEB-INF/pages/layout/meta.jsp"/>
-<link rel="stylesheet" href="/resources/css/user.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user.css" />
 
 
 <script>
@@ -105,7 +105,7 @@ $(function(){
 	<div class="row">
 	<div class="col-md-1"></div>
 	<div class="col-md-4" id="Img1">
-		<img src="/resources/imgs/logo_c.png" id="localImg">
+		<img src="${pageContext.request.contextPath}/resources/imgs/logo_c.png" id="localImg">
 		<div>
 			<p>歡迎來到E715交流網，祝您有美好的一天</p>
 		</div>

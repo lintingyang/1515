@@ -6,7 +6,7 @@
 	rel="stylesheet">
 <c:import url="/WEB-INF/pages/layout/meta.jsp"/>
 <c:import url="/WEB-INF/pages/e715/layout/header.jsp" />
-<link rel="stylesheet" href="/resources/css/user.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user.css" />
 
 
 <div class="container" style="margin: 50px auto;">

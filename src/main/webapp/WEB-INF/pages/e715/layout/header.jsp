@@ -1,28 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<script src="/resources/js/jquery-1.11.3.js"></script>
-<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="/resources/css/bootstrap-theme.min.css" >
-<script src="/resources/js/bootstrap.min.js" ></script> 
-<script src="/resources/js/jquery.lazyload.js"></script>
-<script src="/resources/js/sweetalert.min.js"></script>
+<!-- <script src="/resources/js/jquery-1.11.3.js"></script> -->
+<!-- <link rel="stylesheet" href="/resources/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet" href="/resources/css/bootstrap-theme.min.css" > -->
+<!-- <script src="/resources/js/bootstrap.min.js" ></script>  -->
+<!-- <script src="/resources/js/jquery.lazyload.js"></script> -->
+<!-- <script src="/resources/js/sweetalert.min.js"></script> -->
+<script src="${pageContext.request.contextPath}/resources/js/jquery-1.11.3.js"></script>
+<link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/bootstrap-theme.min.css" >
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js" ></script> 
+<script src="${pageContext.request.contextPath}/resources/js/jquery.lazyload.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/sweetalert.min.js"></script>
 <%-- <c:import url="/WEB-INF/pages/layout/meta.jsp"></c:import> --%>
 <%-- <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import> --%>
 <%-- <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import> --%>
 
-<link rel="stylesheet" href="/resources/css/jPages.css">
-<link rel="styleshee" href="/resources/css/user.css" />
-<link rel="stylesheet" href="/resources/css/prodcss.css" />
-<link rel="stylesheet" href="/resources/css/jquery-ui.css" />
-<link rel="stylesheet" href="/resources/css/sweetalert.css" />
-<script src="/resources/js/jPages.js"></script>
-<script src="/resources/js/jquery-ui.js"></script>
+<link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/jPages.css">
+<link rel="styleshee" href=" ${pageContext.request.contextPath}/resources/css/user.css" />
+<link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/prodcss.css" />
+<link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/jquery-ui.css" />
+<link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/sweetalert.css" />
+<script src=" ${pageContext.request.contextPath}/resources/js/jPages.js"></script>
+<script src=" ${pageContext.request.contextPath}/resources/js/jquery-ui.js"></script>
+<!-- <link rel="stylesheet" href="/resources/css/jPages.css"> -->
+<!-- <link rel="styleshee" href="/resources/css/user.css" /> -->
+<!-- <link rel="stylesheet" href="/resources/css/prodcss.css" /> -->
+<!-- <link rel="stylesheet" href="/resources/css/jquery-ui.css" /> -->
+<!-- <link rel="stylesheet" href="/resources/css/sweetalert.css" /> -->
+<!-- <script src="/resources/js/jPages.js"></script> -->
+<!-- <script src="/resources/js/jquery-ui.js"></script> -->
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 

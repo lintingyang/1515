@@ -301,9 +301,12 @@ $(function(){
 <!-- 			</div> -->
 
 			<div id="star" style="width: 300px; margin: 0 auto;" align="center">
-				<img id="img1" name="1" src="/resources/imgs/star.png" />
-                <img id="img2" name="2" src="/resources/imgs/star.png" />
-                <img id="img3" name="3" src="/resources/imgs/star.png" />
+				<img id="img1" name="1" src="${pageContext.request.contextPath}/resources/imgs/star.png" />
+                <img id="img2" name="2" src="${pageContext.request.contextPath}/resources/imgs/star.png" />
+                <img id="img3" name="3" src="${pageContext.request.contextPath}/resources/imgs/star.png" />
+<!-- 				<img id="img1" name="1" src="/resources/imgs/star.png" /> -->
+<!--                 <img id="img2" name="2" src="/resources/imgs/star.png" /> -->
+<!--                 <img id="img3" name="3" src="/resources/imgs/star.png" /> -->
                 <p style="font-size: small; ">小提示：若要更改，請直接點選星星來修正</p>
 			</div>
 	      </div>

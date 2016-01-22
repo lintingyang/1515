@@ -8,8 +8,10 @@
 <c:import url="/WEB-INF/pages/layout/meta.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
-<link rel="stylesheet" href="/resources/css/jPages.css">
-<script src="/resources/js/jPages.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jPages.css">
+<!-- <link rel="stylesheet" href="/resources/css/jPages.css"> -->
+<script src="${pageContext.request.contextPath}/resources/js/jPages.js"></script>
+<!-- <script src="/resources/js/jPages.js"></script> -->
 
 <title>E715</title>
 </head>

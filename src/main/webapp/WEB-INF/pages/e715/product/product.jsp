@@ -3,8 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/WEB-INF/pages/e715/layout/header.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/meta.jsp" />
-<script src="/resources/js/jquery.tinyMap.min.js"></script>
-<link rel="stylesheet" href="/resources/css/user.css" />
+<!-- <script src="/resources/js/jquery.tinyMap.min.js"></script> -->
+<script src="${pageContext.request.contextPath}/resources/js/jquery.tinyMap.min.js"></script>
+<!-- <link rel="stylesheet" href="/resources/css/user.css" /> -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user.css" />
 <style>
 .map {
     width: 540px;
