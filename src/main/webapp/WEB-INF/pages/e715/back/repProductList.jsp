@@ -77,7 +77,7 @@ $(function() {
 	$('#searchBtn').click(function(){
 		$.ajax({
 	 		contentType : "application/json",
-			url : "/report/products/query/name",
+			url : "${pageContext.request.contextPath}/report/products/query/name",
 			dataType : "json",
 			type : "get",
 	 		data : {"name" : $('#product').val()},
@@ -88,15 +88,15 @@ $(function() {
 					var tr = $("<tr></tr>");
 					var btn = $("<td></td>");
 					var btnYes = $("<input type='button' value='通過' class='btn btn-success' style='margin-left: 5px;'></input>")
-						.attr('onclick', 'javascript:location.href="updateY?id=' +data[i].id + '"');
+						.attr('onclick', 'javascript:location.href="${pageContext.request.contextPath}/updateY?id=' +data[i].id + '"');
 					var btnNo = $("<input type='button' value='不通過' class='btn btn-danger' style='margin-left: 5px;'></input>")
-						.attr('onclick', 'javascript:location.href=\'updateN?id=' +data[i].id + '\'');
+						.attr('onclick', 'javascript:location.href=\'${pageContext.request.contextPath}/updateN?id=' +data[i].id + '\'');
 					var rId = $("<td>" +data[i].id +"</td>");
 					if(data[i].isPassed == null){
 						var btnYes = $("<input type='button' value='通過' class='btn btn-success' style='margin-left: 5px;'></input>")
-							.attr('onclick', 'javascript:location.href="updateY?id=' +data[i].id + '"');
+							.attr('onclick', 'javascript:location.href="${pageContext.request.contextPath}/updateY?id=' +data[i].id + '"');
 						var btnNo = $("<input type='button' value='不通過' class='btn btn-danger' style='margin-left: 5px;'></input>")
-							.attr('onclick', 'javascript:location.href=\'updateN?id=' +data[i].id + '\'');
+							.attr('onclick', 'javascript:location.href=\'${pageContext.request.contextPath}/updateN?id=' +data[i].id + '\'');
 						var rIsPassed = $("<td>尚未審核</td>");
 						var rFinishTime = $("<td>尚未審核</td>");
 					}else if(data[i].isPassed == "TRUE"){
@@ -155,9 +155,9 @@ $(function() {
 					var tr = $("<tr></tr>");
 					var btn = $("<td></td>");
 					var btnYes = $("<input type='button' value='通過' class='btn btn-success' style='margin-left: 5px;'></input>")
-						.attr('onclick', 'javascript:location.href="updateY?id=' +data[i].id + '"');
+						.attr('onclick', 'javascript:location.href="${pageContext.request.contextPath}/updateY?id=' +data[i].id + '"');
 					var btnNo = $("<input type='button' value='不通過' class='btn btn-danger' style='margin-left: 5px;'></input>")
-						.attr('onclick', 'javascript:location.href=\'updateN?id=' +data[i].id + '\'');
+						.attr('onclick', 'javascript:location.href=\'${pageContext.request.contextPath}/updateN?id=' +data[i].id + '\'');
 					var rId = $("<td>" +data[i].id +"</td>");
 					var rIsPassed = $("<td>尚未審核</td>");
 					var rFinishTime = $("<td>尚未審核</td>");
@@ -204,9 +204,9 @@ $(function() {
 				var rId = $("<td>" +data[i].id +"</td>");
 				if(data[i].isPassed == null){
 					var btnYes = $("<input type='button' value='通過' class='btn btn-success' style='margin-left: 5px;'></input>")
-						.attr('onclick', 'javascript:location.href="updateY?id=' +data[i].id + '"');
+						.attr('onclick', 'javascript:location.href="${pageContext.request.contextPath}/updateY?id=' +data[i].id + '"');
 					var btnNo = $("<input type='button' value='不通過' class='btn btn-danger' style='margin-left: 5px;'></input>")
-						.attr('onclick', 'javascript:location.href=\'updateN?id=' +data[i].id + '\'');
+						.attr('onclick', 'javascript:location.href=\'${pageContext.request.contextPath}/updateN?id=' +data[i].id + '\'');
 					var rIsPassed = $("<td>尚未審核</td>");
 					var rFinishTime = $("<td>尚未審核</td>");
 				}else if(data[i].isPassed == "TRUE"){
