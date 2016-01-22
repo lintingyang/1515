@@ -29,11 +29,11 @@
 <script>	
 	$(function() {
 		$("#goTop").on('click', function() {
-			window.location.href = "/";
+			window.location.href = "${pageContext.request.contextPath}/";
 		});
 		
 		$("#perfectData").on('click', function() {
-			window.location.href = "/head/completeMaterialPage";
+			window.location.href = "${pageContext.request.contextPath}/head/completeMaterialPage";
 		});
 		
 	});
@@ -44,7 +44,7 @@
 <div class="container">
 	<div>
 		<div id="successImg">
-			<img src="/resources/imgs/logo_c.png" width="100px" id="img1">
+			<img src="${pageContext.request.contextPath}/resources/imgs/logo_c.png" width="100px" id="img1">
 		</div>
 		<p id="successInsert">恭喜您新增帳號成功</p>
 

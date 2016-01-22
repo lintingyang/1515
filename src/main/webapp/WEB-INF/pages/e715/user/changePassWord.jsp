@@ -11,7 +11,7 @@
 
 		<div class="col-xs-6 col-md-7" id="divCenter">
 		
-			<form class="form-horizontal" id="formCenter" action="/E715Member/updataPwd">
+			<form class="form-horizontal" id="formCenter" action="${pageContext.request.contextPath}/E715Member/updataPwd">
 			
 			<div class="form-group" id="divBorder">
 					<label for="inputPassword3" class="col-sm-2 control-label">輸入舊密碼:</label>
@@ -59,7 +59,7 @@ $('#oldPassword').blur(function() {
 	var oldPassword = {"oldPassword":$('#oldPassword').val()};
 	$.ajax({
 		contentType : "application/json",
-		url : "/E715Member/checkOldPwd",
+		url : "${pageContext.request.contextPath}/E715Member/checkOldPwd",
 		dataType : "text",
 		type : "get",
 		data : oldPassword,
@@ -69,7 +69,7 @@ $('#oldPassword').blur(function() {
 				$('#oldPasswordErrorMsg').empty();	
 			}else{
 				$('#oldPasswordErrorMsg').empty();
-				$('#oldPasswordErrorMsg').append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>舊密碼錯誤</span>");
+				$('#oldPasswordErrorMsg').append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>舊密碼錯誤</span>");
 			}
 			//success的下括號
 			}
@@ -110,7 +110,7 @@ $('#newPasswordCheck').blur(function() {
 // 		$('#newPasswordCheck').removeAttr('title');
 // 		$('#newPasswordCheck').attr('title',"密碼：確認密碼與新密碼不符合");
 		$('#newPasswordCheckErrorMsg').html('');
-		$('#newPasswordCheckErrorMsg').append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>密碼：確認密碼與新密碼不符合</span>");
+		$('#newPasswordCheckErrorMsg').append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>密碼：確認密碼與新密碼不符合</span>");
 	}else{
 		$('#newPasswordCheckErrorMsg').html('');
 	}

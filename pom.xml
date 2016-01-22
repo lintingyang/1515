@@ -9,9 +9,9 @@
 	</parent>
 
 	<groupId>tw.com.softleader</groupId>
-	<artifactId>e5e5</artifactId>
+	<artifactId>E715</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Archetype - e5e5</name>
+	<name>Archetype - E715</name>
 	<url>http://maven.apache.org</url>
 
 	<packaging>war</packaging>

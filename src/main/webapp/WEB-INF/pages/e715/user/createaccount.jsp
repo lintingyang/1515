@@ -90,7 +90,7 @@ function Dateblur() {
 
 
 
-			<form class="form-horizontal" id="formCenter" action="/head/insert">
+			<form class="form-horizontal" id="formCenter" action="${pageContext.request.contextPath}/head/insert">
 				<div class="form-group" id="divBorder">
 
 					<label class="col-sm-2 control-label" >帳號:</label>
@@ -207,7 +207,7 @@ $('#account').on('blur',function(){
 		var sendAccount = {'checkAccount':$('#account').val()}
 		$.ajax({
 			contentType : "application/json",
-			url : "/head/checkAccount",
+			url : "${pageContext.request.contextPath}/head/checkAccount",
 			dataType : "text",
 			type : "get",
 			data : sendAccount,
@@ -215,10 +215,10 @@ $('#account').on('blur',function(){
 				console.log(data);
 				if(data=="true"){
 					$('#checkAccountSpan').empty();
-					$('#checkAccountSpan').append("<img src='/resources/icon/trueimg1.png' /><span style='color:red;font-size:1px'>帳號可以使用</span>");		
+					$('#checkAccountSpan').append("<img src='${pageContext.request.contextPath}/resources/icon/trueimg1.png' /><span style='color:red;font-size:1px'>帳號可以使用</span>");		
 				}else{
 					$('#checkAccountSpan').empty();
-					$('#checkAccountSpan').append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>帳號已有人使用</span>");
+					$('#checkAccountSpan').append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>帳號已有人使用</span>");
 				}
 				//success的下括號
 				}
@@ -226,7 +226,7 @@ $('#account').on('blur',function(){
 			});
 	}else{
 		$('#checkAccountSpan').empty();
-		$('#checkAccountSpan').append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>帳號不能為空</span>");
+		$('#checkAccountSpan').append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>帳號不能為空</span>");
 		
 	}
 		

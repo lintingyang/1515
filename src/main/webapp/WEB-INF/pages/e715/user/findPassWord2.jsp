@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/WEB-INF/pages/e715/layout/header.jsp"/>
 <c:import url="/WEB-INF/pages/layout/meta.jsp"/>
-<link rel="stylesheet" href="/resources/css/user.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user.css" />
 
 <script>
 	$(function() {
@@ -26,12 +26,12 @@
 			
 			}else{
 				$('#newPasswordCheckErrorMsg').html('');
-				$('#newPasswordCheckErrorMsg').append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>密碼：6~12英數字組合，至少有一個大寫或小寫英文字母及數字，如 A1232126</span>");
+				$('#newPasswordCheckErrorMsg').append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>密碼：6~12英數字組合，至少有一個大寫或小寫英文字母及數字，如 A1232126</span>");
 				
 			}
 			}else{
 				$('#newPasswordCheckErrorMsg').html('');
-				$('#newPasswordCheckErrorMsg').append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>確認密碼與新密碼不符合</span>");
+				$('#newPasswordCheckErrorMsg').append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>確認密碼與新密碼不符合</span>");
 			}
 		});
 	});
@@ -41,7 +41,7 @@
 		<div class="col-xs-6 col-md-3"></div>
 
 		<div class="col-xs-6 col-md-7" id="divCenter">
-			<form class="form-horizontal upUserPasswordForm" id="formCenter" action="/E715Member/findPasswordStep3">
+			<form class="form-horizontal upUserPasswordForm" id="formCenter" action="${pageContext.request.contextPath}/E715Member/findPasswordStep3">
 				<div class="form-group" id="divBorder">
 					<label for="inputPassword3" class="col-sm-2 control-label">輸入新密碼:</label><span style="color:red">${checkPasswordError.checkFault}</span>
 					<div class="col-sm-10">

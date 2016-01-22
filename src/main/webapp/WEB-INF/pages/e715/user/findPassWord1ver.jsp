@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/WEB-INF/pages/e715/layout/header.jsp"/>
 <c:import url="/WEB-INF/pages/layout/meta.jsp"/>
-<link rel="stylesheet" href="/resources/css/user.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user.css" />
 
 <style>
 #formInsertEmail {
@@ -34,7 +34,7 @@
 		<div class="col-xs-6 col-md-2"></div>
 
 		<div class="col-xs-6 col-md-8" id="divCenter">
-			<form class="form-horizontal" action="/E715Member/findPasswordStep2ver">
+			<form class="form-horizontal" action="${pageContext.request.contextPath}/E715Member/findPasswordStep2ver">
 				<div class="row" id="divBorder">
 					<div class="col-xs-6 col-md-4"></div>
 					<div class="col-xs-6 col-md-4" id="checkFont">

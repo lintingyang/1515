@@ -2,8 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/WEB-INF/pages/e715/layout/header.jsp"></c:import>
-<link rel="stylesheet" href="/resources/css/magic.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/magic.min.css">
 <style>
+
 .box {
     width:200px;
     height:260px;
@@ -50,6 +51,7 @@ a.link {
     z-index:15;    
 }  
 </style>
+
 <div class="container" style="margin: 20px auto;">
 	<div class="container">
 		<span style="padding-top: 10px;"></span>
@@ -103,7 +105,7 @@ $("#new").click(function(){
 
 		$.ajax({
 			contentType : "application/json",
-			url : "/query",
+			url : "${pageContext.request.contextPath}/query",
 			dataType : "json",
 			type : "get",
 			data : {"orderby" : $(this).text(),"namelike": "${namelike}","categoryname":"${categoryname}"},
@@ -187,7 +189,7 @@ $(function() { //畫面第一次進入時出現的product list
 	$("#hot").css("border-bottom","3px solid #009FCC");
 	$.ajax({
 		contentType : "application/json",
-		url : "/query",
+		url : "${pageContext.request.contextPath}/query",
 		dataType : "json",
 		type : "get",
 		data : {"orderby" : "熱門","namelike": "${namelike}" ,"categoryname":"${categoryname}"},

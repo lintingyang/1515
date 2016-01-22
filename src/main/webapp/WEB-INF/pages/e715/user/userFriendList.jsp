@@ -6,7 +6,7 @@
 	rel="stylesheet">
 <c:import url="/WEB-INF/pages/layout/meta.jsp"/>
 <c:import url="/WEB-INF/pages/e715/layout/header.jsp" />
-<link rel="stylesheet" href="/resources/css/user.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user.css" />
 
 
 <div class="container" style="margin: 50px auto;">
@@ -78,7 +78,7 @@
 	$(function() {
 		$.ajax({
 			contentType : "application/json",
-			url : "/E715Member/userFriendList",
+			url : "${pageContext.request.contextPath}/E715Member/userFriendList",
 			dataType : "json",
 			type : "post",
 			data : "",
@@ -136,7 +136,7 @@
 								var formData={'userBId' :data[i].userBId.id}
 								$.ajax({
 									contentType : "application/json",
-									url : "/E715Member/userFriendListCancel",
+									url : "${pageContext.request.contextPath}/E715Member/userFriendListCancel",
 									dataType : "text",
 									type : "get",
 									data : formData,

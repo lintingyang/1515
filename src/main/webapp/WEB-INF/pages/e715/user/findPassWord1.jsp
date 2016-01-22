@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/WEB-INF/pages/e715/layout/header.jsp"/>
 <c:import url="/WEB-INF/pages/layout/meta.jsp"/>
-<link rel="stylesheet" href="/resources/css/user.css" />
-<link rel="stylesheet" href="/resources/css/site.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/site.css" />
 <style>
 #formInsertEmail {
 	
@@ -34,7 +34,7 @@
 		<div class="col-xs-6 col-md-2"></div>
 
 		<div class="col-xs-6 col-md-8" id="divCenter">
-			<form class="form-horizontal" action="/E715Member/findPasswordStep2">
+			<form class="form-horizontal" action="${pageContext.request.contextPath}/E715Member/findPasswordStep2">
 				<div class="row">
 					<div class="col-xs-6 col-md-3"></div>
 					<div class="col-xs-6 col-md-6">
@@ -106,7 +106,7 @@ $(function() {
 		console.log(schoolemail);
 		$.ajax({
 			contentType : "application/json",
-			url : "/E715Member/findPasswordStep1",
+			url : "${pageContext.request.contextPath}/E715Member/findPasswordStep1",
 			dataType : "text",
 			type : "get",
 			data : schoolemail,
