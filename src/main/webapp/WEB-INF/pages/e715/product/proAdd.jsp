@@ -187,7 +187,7 @@ h4{
   		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   		<strong>「除了補充圖片以外」</strong>   以下<strong>所有欄位</strong>都是<strong>必填</strong>的喔！      
 	</div>
-	<form action="/product/insert" enctype="multipart/form-data" method="post">
+	<form action="${pageContext.request.contextPath}/product/insert" enctype="multipart/form-data" method="post">
 		<div class="col-md-2"></div>
 		<div class="col-md-4" >
 				<div class="form-group row">
