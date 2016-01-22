@@ -232,7 +232,7 @@ $("#submitmail").click(function(){
 			$.ajax({
 				dataType: "json",
 				type: "get",
-				url: "/mail/newmail",
+				url: "${pageContext.request.contextPath}/mail/newmail",
 				data: {
 					senderId : ${user.id},
 					receiverAccount : $("#receiver").val(),
@@ -250,7 +250,7 @@ $("#savedraft").click(function(){
 			$.ajax({
 				dataType: "json",
 				type: "get",
-				url: "/mail/savedraft",
+				url: "${pageContext.request.contextPath}/mail/savedraft",
 				data: {
 					senderId : ${user.id},
 					receiverAccount : $("#receiver").val(),
@@ -263,7 +263,7 @@ $("#savedraft").click(function(){
 $(function() {
 	$.ajax({
 		contentType : "application/json",
-		url : "/product/query",
+		url : "${pageContext.request.contextPath}/product/query",
 		dataType : "json",
 		type : "get",
 		data : {"id" : "${currUser.id}"},
@@ -301,7 +301,7 @@ function getpicture(prod, prodimg) {
 	}
 	$.ajax({
 		contentType : "application/json",
-		url : "/queryimg",
+		url : "${pageContext.request.contextPath}/queryimg",
 		dataType : "json",
 		type : "get",
 		data : formData,
@@ -326,7 +326,7 @@ function addFriend (e) {
     if("${user.id}"!="${currUser.id}"){
 	    $.ajax({
 			contentType : "application/json",
-			url : "/E715Member/userFriendListAdd",
+			url : "${pageContext.request.contextPath}/E715Member/userFriendListAdd",
 			dataType : "text",
 			type : "get",
 			data : formData,

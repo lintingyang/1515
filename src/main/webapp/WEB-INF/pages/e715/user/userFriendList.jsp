@@ -78,7 +78,7 @@
 	$(function() {
 		$.ajax({
 			contentType : "application/json",
-			url : "/E715Member/userFriendList",
+			url : "${pageContext.request.contextPath}/E715Member/userFriendList",
 			dataType : "json",
 			type : "post",
 			data : "",
@@ -136,7 +136,7 @@
 								var formData={'userBId' :data[i].userBId.id}
 								$.ajax({
 									contentType : "application/json",
-									url : "/E715Member/userFriendListCancel",
+									url : "${pageContext.request.contextPath}/E715Member/userFriendListCancel",
 									dataType : "text",
 									type : "get",
 									data : formData,

@@ -133,16 +133,22 @@
 			<!-- 		</div> -->
 
 
-			<form class="form-horizontal" action="/head/verificationCodeCheck">
+			<form class="form-horizontal" action="${pageContext.request.contextPath}/head/verificationCodeCheck">
 				<div class="form-group" id="divBorder">
 				<label class="col-sm-2 control-label">選擇學校</label>
 				<div class="col-sm-10" style="padding-top: 7px">
 					<select id="chooseSchool" name="chooseSchool">
-						<option value="@nccu.edu.tw">政治大學</option>
+						<option value="@ntu.edu.tw">台灣大學</option>
 						<option value="@mail.ncku.edu.tw">成功大學</option>
+						<option value="@nccu.edu.tw">政治大學</option>
+						<option value="@cc.ncu.edu.tw">中央大學</option>
 						<option value="@ccu.edu.tw">中正大學</option>
+						<option value="@mail.nchu.edu.tw">中興大學</option>
+						<option value="@niu.edu.tw">宜蘭大學</option>
+						<option value="@cc.hwh.edu.tw">華夏科大</option>
 						<option value="@mail.yzu.edu.tw">元智大學</option>
 						<option value="@stu.ntue.edu.tw">台北教育大學</option>
+						
 					</select>(*必須)
 					</div>
 				</div>

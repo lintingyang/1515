@@ -119,7 +119,7 @@
 
 			<h3>修改個人資料</h3>
 
-			<form class="form-horizontal" action="/E715Member/updataInfo" id="upUserDataForm"
+			<form class="form-horizontal" action="${pageContext.request.contextPath}/E715Member/updataInfo" id="upUserDataForm"
 				enctype="multipart/form-data" method="post">
 
 				<div class="form-group" id="divBorder">
@@ -269,7 +269,7 @@
 <script>
 
 $("#upUserData").on('click',function(){
-	var re1 = /(?=.*[a-zA-Z])(?=.*[@]).{2,}/
+	var re1 = /(?=.*[a-zA-Z])(?=.*[@]).{2,}/;
 		$("phoneErrorMsg").html('');
 	$("reservedEmailErrorMsg").html('');
 	if($("#phone").val()==null){

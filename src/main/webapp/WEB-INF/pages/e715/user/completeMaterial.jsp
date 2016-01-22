@@ -37,7 +37,7 @@
 		<div class="col-xs-6 col-md-2"></div>
 
 		<div class="col-xs-6 col-md-8" id="divCenter">
-			<form class="form-horizontal" id="materialForm" action="/head/completeMaterial" enctype="multipart/form-data" method="post">
+			<form class="form-horizontal" id="materialForm" action="${pageContext.request.contextPath}/head/completeMaterial" enctype="multipart/form-data" method="post">
 				<div class="form-group" id="divBorder">
 					<label for="inputEmail3" class="col-sm-2 control-label">系所:</label>
 					<div class="col-sm-10">

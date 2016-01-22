@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+
 <!-- <script src="/resources/js/jquery-1.11.3.js"></script> -->
 <!-- <link rel="stylesheet" href="/resources/css/bootstrap.min.css"> -->
 <!-- <link rel="stylesheet" href="/resources/css/bootstrap-theme.min.css" > -->
@@ -22,6 +23,7 @@
 <%-- <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import> --%>
 <%-- <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import> --%>
 
+<<<<<<< HEAD
 <link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/jPages.css">
 <link rel="styleshee" href=" ${pageContext.request.contextPath}/resources/css/user.css" />
 <link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/prodcss.css" />
@@ -36,8 +38,17 @@
 <!-- <link rel="stylesheet" href="/resources/css/sweetalert.css" /> -->
 <!-- <script src="/resources/js/jPages.js"></script> -->
 <!-- <script src="/resources/js/jquery-ui.js"></script> -->
+=======
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jPages.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/prodcss.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery-ui.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sweetalert.css" />
+<script src="${pageContext.request.contextPath}/resources/js/jPages.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-ui.js"></script>
+>>>>>>> branch 'master' of https://github.com/lintingyang/1515.git
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 
 <title>E715</title>
 
@@ -57,10 +68,10 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/"><img style="margin-top: -.6em" src="/resources/imgs/logo_c.png" width="40"></a>
+			<a class="navbar-brand" href="/"><img style="margin-top: -.6em" src="${pageContext.request.contextPath}/resources/imgs/logo_c.png" width="40"></a>
 			<a class="navbar-brand" href="/">E715</a>
 		</div>
-		<form class="navbar-form navbar-left" role="search" action="/head/search">
+		<form class="navbar-form navbar-left" role="search" action="${pageContext.request.contextPath}/head/search">
 			<div class="form-group">
 				<input type="text" class="form-control" placeholder="Search" 
 								name="namelike" id="searchbar">
@@ -89,19 +100,19 @@
 					<span class="caret"></span></a>
 				<ul class="dropdown-menu" aria-labelledby="drop3">
 					
-					<li><a class="userlist" href="/E715Member/${user.id}">會員資料</a></li>
-					<li><a class="userlist" href="/E715Member/userFriend">關注名單</a></li>
-					<li><a class="userlist" href="/product/list">我的物品</a></li><!-- yao -->
-					<li><a class="userlist" href="/mail/list">站內信</a></li>
-					<li><a class="userlist" href="/product/add">新增物品</a></li>
-					<li><a class="userlist" href="/E715Member/modifyFileAsk">帳號修改</a></li>
-					<li><a class="userlist" href="/admin/index" id="back" style="display: none;">後台管理</a></li>
-					<li><a class="userlist" href="/head/logout">登出</a></li>
+					<li><a class="userlist" href="${pageContext.request.contextPath}/E715Member/${user.id}">會員資料</a></li>
+					<li><a class="userlist" href="${pageContext.request.contextPath}/E715Member/userFriend">關注名單</a></li>
+					<li><a class="userlist" href="${pageContext.request.contextPath}/product/list">我的物品</a></li><!-- yao -->
+					<li><a class="userlist" href="${pageContext.request.contextPath}/mail/list">站內信</a></li>
+					<li><a class="userlist" href="${pageContext.request.contextPath}/product/add">新增物品</a></li>
+					<li><a class="userlist" href="${pageContext.request.contextPath}/E715Member/modifyFileAsk">帳號修改</a></li>
+					<li><a class="userlist" href="${pageContext.request.contextPath}/admin/index" id="back" style="display: none;">後台管理</a></li>
+					<li><a class="userlist" href="${pageContext.request.contextPath}/head/logout">登出</a></li>
 <!-- 				<li><a class="userlist" href="/head/login">登入</a></li> -->
 					</ul>
 					</c:when>
 					<c:otherwise>
-						<a  href="/head/login"> 
+						<a  href="${pageContext.request.contextPath}/head/login"> 
 <!-- 				<img class="img-circle" style="width: 30px;" -->
 <%-- 					src="${user.picture}">  --%>
 				       	登入
@@ -111,7 +122,7 @@
 				</li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right" >
-	      <li><a href="/chatroom">聊天室</a></li>
+	      <li><a href="${pageContext.request.contextPath}/chatroom">聊天室</a></li>
 	    </ul>
 	</div>
 
@@ -133,36 +144,36 @@
       		<table style=" margin:auto;">
       			<tr>
 					
-      				<td class="productcategory"><div class="demo6" style="background-color:#FFD2D2;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="/resources/icon/house.png"></div>全部</td>
+      				<td class="productcategory"><div class="demo6" style="background-color:#FFD2D2;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="${pageContext.request.contextPath}/resources/icon/house.png"></div>全部</td>
       					
-      				<td class="productcategory"><div class="demo6" style="background-color:#C1FFE4;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="/resources/icon/books.png"></div>課本書籍</td>
+      				<td class="productcategory"><div class="demo6" style="background-color:#C1FFE4;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="${pageContext.request.contextPath}/resources/icon/books.png"></div>課本書籍</td>
       				
-      				<td class="productcategory"><div class="demo6"style="background-color:#D2E9FF;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="/resources/icon/videogame.png"></div>遊戲影音</td>
+      				<td class="productcategory"><div class="demo6"style="background-color:#D2E9FF;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="${pageContext.request.contextPath}/resources/icon/videogame.png"></div>遊戲影音</td>
       				
-      				<td class="productcategory"><div class="demo6"style="background-color:#FFCBB3;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="/resources/icon/mother.png"></div>日常用品</td>
+      				<td class="productcategory"><div class="demo6"style="background-color:#FFCBB3;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="${pageContext.request.contextPath}/resources/icon/mother.png"></div>日常用品</td>
       				
-      				<td class="productcategory"><div class="demo6"style="background-color:#FFF4C1;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="/resources/icon/pencil.png"></div>文具用品</td>
+      				<td class="productcategory"><div class="demo6"style="background-color:#FFF4C1;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="${pageContext.request.contextPath}/resources/icon/pencil.png"></div>文具用品</td>
 
       			</tr>
       			<tr>
-      			<td class="productcategory"><div class="demo6" style="background-color:#EBD6D6;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="/resources/icon/sofa.png"></div>家俱</td>
+      			<td class="productcategory"><div class="demo6" style="background-color:#EBD6D6;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="${pageContext.request.contextPath}/resources/icon/sofa.png"></div>家俱</td>
       			
-      			<td class="productcategory"><div class="demo6" style="background-color:	#EBD3E8;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="/resources/icon/televisions.png"></div>家電</td>
+      			<td class="productcategory"><div class="demo6" style="background-color:	#EBD3E8;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="${pageContext.request.contextPath}/resources/icon/televisions.png"></div>家電</td>
       			
-      			<td class="productcategory"><div class="demo6" style="background-color:#C4E1E1;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="/resources/icon/clothes.png"></div>服飾</td>
+      			<td class="productcategory"><div class="demo6" style="background-color:#C4E1E1;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="${pageContext.request.contextPath}/resources/icon/clothes.png"></div>服飾</td>
       				
-      			<td class="productcategory"><div class="demo6" style="background-color:#F1E1FF;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="/resources/icon/snake.png"></div>食品</td>
+      			<td class="productcategory"><div class="demo6" style="background-color:#F1E1FF;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="${pageContext.request.contextPath}/resources/icon/snake.png"></div>食品</td>
       				
-      			<td class="productcategory"><div class="demo6" style="background-color:#EFFFD7;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="/resources/icon/play.png" name="票券"></div>票券</td>
+      			<td class="productcategory"><div class="demo6" style="background-color:#EFFFD7;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="${pageContext.request.contextPath}/resources/icon/play.png" name="票券"></div>票券</td>
 
      					     
       			</tr>
       			<tr>
-      			<td class="productcategory"><div class="demo6" style="background-color:#EFFFD7;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="/resources/icon/pc.png"></div>3C產品</td>
-      			<td class="productcategory"><div class="demo6" style="background-color:#FFDCB9;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="/resources/icon/shoe.png"></div>化妝保養用品</td>
-   				<td class="productcategory"><div class="demo6" style="background-color:#ADFEDC;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="/resources/icon/badminton.png"></div>運動用品</td>
-   			   	<td class="productcategory"><div class="demo6" style="background-color:#FF9797;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="/resources/icon/kiss.png"></div>女生</td>
-   			   	<td class="productcategory"><div class="demo6" style="background-color:#ACD6FF;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="/resources/icon/horseman.png"></div>男生</td>
+      			<td class="productcategory"><div class="demo6" style="background-color:#EFFFD7;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="${pageContext.request.contextPath}/resources/icon/pc.png"></div>3C產品</td>
+      			<td class="productcategory"><div class="demo6" style="background-color:#FFDCB9;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="${pageContext.request.contextPath}/resources/icon/shoe.png"></div>化妝保養用品</td>
+   				<td class="productcategory"><div class="demo6" style="background-color:#ADFEDC;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="${pageContext.request.contextPath}/resources/icon/badminton.png"></div>運動用品</td>
+   			   	<td class="productcategory"><div class="demo6" style="background-color:#FF9797;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="${pageContext.request.contextPath}/resources/icon/kiss.png"></div>女生</td>
+   			   	<td class="productcategory"><div class="demo6" style="background-color:#ACD6FF;"><img class="img-circle" data-dismiss="modal" style="width: 30px;padding-top:5px;"src="${pageContext.request.contextPath}/resources/icon/horseman.png"></div>男生</td>
       			</tr>
       		</table>
       		<br>

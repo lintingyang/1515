@@ -15,7 +15,7 @@ $(function(){
 				console.log(temp);
 				$.ajax({
 					contentType : "application/json",
-					url : "/head/logincheck",
+					url : "${pageContext.request.contextPath}/head/logincheck",
 					dataType : "text",
 					type : "get",
 					data : temp,
@@ -33,7 +33,7 @@ $(function(){
 						      }
 						    });
 
-						}else{window.location.replace("/");}
+						}else{window.location.replace("${pageContext.request.contextPath}/");}
  					        
 					}
 				});
@@ -111,7 +111,7 @@ $(function(){
 		</div>
 	</div>
 	<div class="col-md-7" id="loginBlock">
-		<form role="form" class="form-horizontal" action="/head/logincheck" method="post">
+		<form role="form" class="form-horizontal" action="${pageContext.request.contextPath}/head/logincheck" method="post">
 			<div class="form-group" id="divBorder">
 				<label class="col-sm-2 control-label">Account</label>
 				<div class="col-sm-10">
@@ -129,8 +129,8 @@ $(function(){
 			
 			<div class="form-group" id="divBorder">
 				<div class="col-sm-offset-2 col-sm-10 alignLeft">
-					<a href="/head/emailCheck" id="NewAccount">建立新帳號</a> 
-					<a href="/E715Member/findPassword" id="fpwdLink" >?忘記密碼</a>
+					<a href="${pageContext.request.contextPath}/head/emailCheck" id="NewAccount">建立新帳號</a> 
+					<a href="${pageContext.request.contextPath}/E715Member/findPassword" id="fpwdLink" >?忘記密碼</a>
 					<div class="checkbox">
 						<label> <input type="checkbox"> Remember me</label>
 					</div>

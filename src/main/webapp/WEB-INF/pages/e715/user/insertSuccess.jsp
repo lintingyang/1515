@@ -29,11 +29,11 @@
 <script>	
 	$(function() {
 		$("#goTop").on('click', function() {
-			window.location.href = "/";
+			window.location.href = "${pageContext.request.contextPath}/";
 		});
 		
 		$("#perfectData").on('click', function() {
-			window.location.href = "/head/completeMaterialPage";
+			window.location.href = "${pageContext.request.contextPath}/head/completeMaterialPage";
 		});
 		
 	});

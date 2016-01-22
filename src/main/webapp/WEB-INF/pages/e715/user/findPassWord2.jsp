@@ -41,7 +41,7 @@
 		<div class="col-xs-6 col-md-3"></div>
 
 		<div class="col-xs-6 col-md-7" id="divCenter">
-			<form class="form-horizontal upUserPasswordForm" id="formCenter" action="/E715Member/findPasswordStep3">
+			<form class="form-horizontal upUserPasswordForm" id="formCenter" action="${pageContext.request.contextPath}/E715Member/findPasswordStep3">
 				<div class="form-group" id="divBorder">
 					<label for="inputPassword3" class="col-sm-2 control-label">輸入新密碼:</label><span style="color:red">${checkPasswordError.checkFault}</span>
 					<div class="col-sm-10">

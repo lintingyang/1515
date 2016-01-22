@@ -34,7 +34,7 @@
 		<div class="col-xs-6 col-md-2"></div>
 
 		<div class="col-xs-6 col-md-8" id="divCenter">
-			<form class="form-horizontal" action="/E715Member/findPasswordStep2ver">
+			<form class="form-horizontal" action="${pageContext.request.contextPath}/E715Member/findPasswordStep2ver">
 				<div class="row" id="divBorder">
 					<div class="col-xs-6 col-md-4"></div>
 					<div class="col-xs-6 col-md-4" id="checkFont">

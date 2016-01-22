@@ -17,12 +17,12 @@
 		<div class="col-md-10">
 			<div class="col-md-4 col-md-offset-2">
 			<br><br> 
-				<span class="btn btn-info" onclick="location.href='/E715Member/changePwd'"><span class="glyphicon glyphicon-eye-open"
+				<span class="btn btn-info" onclick="location.href='${pageContext.request.contextPath}/E715Member/changePwd'"><span class="glyphicon glyphicon-eye-open"
 					style="font-size: 2em"></span><h4>&nbsp;&nbsp;&nbsp;更改密碼&nbsp;&nbsp;&nbsp;</h4></span>
 			</div>
 			<div class="col-md-4 col-md-offset-2">
 				<br><br> 
-				<span class="btn btn-info" onclick="location.href='/E715Member/editProfile'"><span class="glyphicon glyphicon-user"
+				<span class="btn btn-info" onclick="location.href='${pageContext.request.contextPath}/E715Member/editProfile'"><span class="glyphicon glyphicon-user"
 					style="font-size: 2em" ></span><h4>&nbsp;基本資料管理</h4></span>
 
 			</div>
