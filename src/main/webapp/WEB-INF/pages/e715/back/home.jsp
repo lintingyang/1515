@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<c:import url="${pageContext.request.contextPath}/WEB-INF/pages/layout/meta.jsp"></c:import>
-	<c:import url="${pageContext.request.contextPath}/WEB-INF/pages/layout/javascript.jsp"></c:import>
-	<c:import url="${pageContext.request.contextPath}/WEB-INF/pages/layout/css.jsp"></c:import>
+	<c:import url="/WEB-INF/pages/layout/meta.jsp"></c:import>
+	<c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import>
+	<c:import url="/WEB-INF/pages/layout/css.jsp"></c:import>
 <%-- 	<c:import url="/WEB-INF/pages/layout/meta.jsp"></c:import> --%>
 <%-- 	<c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import> --%>
 <%-- 	<c:import url="/WEB-INF/pages/layout/css.jsp"></c:import> --%>
@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="wrap">
-	<c:import url="${pageContext.request.contextPath}/WEB-INF/pages/layout/navigator.jsp"></c:import>
+	<c:import url="/WEB-INF/pages/layout/navigator.jsp"></c:import>
 <%-- 	<c:import url="/WEB-INF/pages/layout/navigator.jsp"></c:import> --%>
 	
 
@@ -26,7 +26,7 @@
 			<h2>E715 一起易物 後台管理站</h2>
 		</div>
 	</div>
-	<c:import url="${pageContext.request.contextPath}/WEB-INF/pages/layout/footer.jsp"></c:import>
+	<c:import url="/WEB-INF/pages/layout/footer.jsp"></c:import>
 <%-- 	<c:import url="/WEB-INF/pages/layout/footer.jsp"></c:import> --%>
 </div>
 </body>

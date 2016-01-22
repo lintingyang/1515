@@ -289,7 +289,7 @@ public class UserService extends OurService<User> {
 			ImageIO.write(src, "png", destination);
 			String finalP= destination.getAbsolutePath().replace('\\', '/');
 			int cut=finalP.indexOf("webapp");
-			finalP=finalP.substring(cut+6);
+			finalP=finalP.substring(cut+7);
 			return finalP;
 		} catch (IOException e) {
 			e.printStackTrace();
