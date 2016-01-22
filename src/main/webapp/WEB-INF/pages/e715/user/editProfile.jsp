@@ -269,7 +269,7 @@
 <script>
 
 $("#upUserData").on('click',function(){
-	var re1 = /(?=.*[a-zA-Z])(?=.*[@]).{2,}/
+	var re1 = /(?=.*[a-zA-Z])(?=.*[@]).{2,}/;
 		$("phoneErrorMsg").html('');
 	$("reservedEmailErrorMsg").html('');
 	if($("#phone").val()==null){

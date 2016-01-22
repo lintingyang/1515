@@ -15,7 +15,7 @@ $(function(){
 				console.log(temp);
 				$.ajax({
 					contentType : "application/json",
-					url : "/head/logincheck",
+					url : "${pageContext.request.contextPath}/head/logincheck",
 					dataType : "text",
 					type : "get",
 					data : temp,
@@ -33,7 +33,7 @@ $(function(){
 						      }
 						    });
 
-						}else{window.location.replace("/");}
+						}else{window.location.replace("${pageContext.request.contextPath}/");}
  					        
 					}
 				});
