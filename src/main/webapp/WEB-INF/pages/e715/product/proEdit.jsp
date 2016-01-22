@@ -39,7 +39,7 @@ h4{
   		<strong>「除了補充圖片以外」</strong>   以下<strong>所有欄位</strong>都是<strong>必填</strong>的喔！
 	</div>
 	
-	<form action="/product/update" enctype="multipart/form-data" method="post">
+	<form action="${pageContext.request.contextPath}/product/update" enctype="multipart/form-data" method="post">
 		<div class="col-md-2"></div>
 		<div class="col-md-4">
 			

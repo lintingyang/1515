@@ -23,22 +23,6 @@
 <%-- <c:import url="/WEB-INF/pages/layout/javascript.jsp"></c:import> --%>
 <%-- <c:import url="/WEB-INF/pages/layout/css.jsp"></c:import> --%>
 
-<<<<<<< HEAD
-<link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/jPages.css">
-<link rel="styleshee" href=" ${pageContext.request.contextPath}/resources/css/user.css" />
-<link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/prodcss.css" />
-<link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/jquery-ui.css" />
-<link rel="stylesheet" href=" ${pageContext.request.contextPath}/resources/css/sweetalert.css" />
-<script src=" ${pageContext.request.contextPath}/resources/js/jPages.js"></script>
-<script src=" ${pageContext.request.contextPath}/resources/js/jquery-ui.js"></script>
-<!-- <link rel="stylesheet" href="/resources/css/jPages.css"> -->
-<!-- <link rel="styleshee" href="/resources/css/user.css" /> -->
-<!-- <link rel="stylesheet" href="/resources/css/prodcss.css" /> -->
-<!-- <link rel="stylesheet" href="/resources/css/jquery-ui.css" /> -->
-<!-- <link rel="stylesheet" href="/resources/css/sweetalert.css" /> -->
-<!-- <script src="/resources/js/jPages.js"></script> -->
-<!-- <script src="/resources/js/jquery-ui.js"></script> -->
-=======
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jPages.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/prodcss.css" />
@@ -46,7 +30,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sweetalert.css" />
 <script src="${pageContext.request.contextPath}/resources/js/jPages.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-ui.js"></script>
->>>>>>> branch 'master' of https://github.com/lintingyang/1515.git
+
 
 
 
@@ -68,8 +52,8 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/"><img style="margin-top: -.6em" src="${pageContext.request.contextPath}/resources/imgs/logo_c.png" width="40"></a>
-			<a class="navbar-brand" href="/">E715</a>
+			<a class="navbar-brand" href="${pageContext.request.contextPath}/"><img style="margin-top: -.6em" src="${pageContext.request.contextPath}/resources/imgs/logo_c.png" width="40"></a>
+			<a class="navbar-brand" href="${pageContext.request.contextPath}/">E715</a>
 		</div>
 		<form class="navbar-form navbar-left" role="search" action="${pageContext.request.contextPath}/head/search">
 			<div class="form-group">
@@ -191,7 +175,7 @@
 	$(".productcategory").bind("click",function(){
 		$.ajax({
 			contentType : "application/json",
-			url : "/head/categoryhchange",
+			url : "${pageContext.request.contextPath}/head/categoryhchange",
 			type : "get",
 			async :false,
 			data : { "categoryname" : $(this).text()},

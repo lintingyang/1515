@@ -259,11 +259,11 @@ $("#deletebtn").click(function(){
 					$.ajax({
 						dataType: "json",
 						type: "get",
-						url: "/mail/deletemail",
+						url: "${pageContext.request.contextPath}/mail/deletemail",
 						data: {deletemail : checkbox[i].id}
 					});
 				}	
-				location.href="/mail/list";
+				location.href="${pageContext.request.contextPath}/mail/list";
 			});
 	}
 })
@@ -311,7 +311,7 @@ $(".friendli").click(function(e){
 $(function(){
 	$.ajax({
 		contentType : "application/json",
-		url : "/E715Member/userFriendList",
+		url : "${pageContext.request.contextPath}/E715Member/userFriendList",
 		dataType : "json",
 		type : "post",
 		data : "",
@@ -347,9 +347,9 @@ $("#submitmail").click(function(){
 			$.ajax({
 				dataType: "json",
 				type: "get",
-				url: "/mail/newmail",
+				url: "${pageContext.request.contextPath}/mail/newmail",
 				data: {
-					senderId : ${user.id},
+					senderId : "${user.id}",
 					receiverAccount : $("#receiver").val(),
 					title : $("#title").val(),
 					article : $("#article").val(),
@@ -358,7 +358,7 @@ $("#submitmail").click(function(){
 
 					
 			});
-			location.href="/mail/list";
+			location.href="${pageContext.request.contextPath}/mail/list";
 		})
 
 })//按下寄出郵件END
@@ -375,14 +375,14 @@ $("#savedraft").click(function(){
 			$.ajax({
 				dataType: "json",
 				type: "get",
-				url: "/mail/savedraft",
+				url: "${pageContext.request.contextPath}/mail/savedraft",
 				data: {
 					senderId : ${user.id},
 					receiverAccount : $("#receiver").val(),
 					title : $("#title").val(),
 					article : $("#article").val()},
 			});
-			location.href="/mail/list";
+			location.href="${pageContext.request.contextPath}/mail/list";
 		})
 	
 })//按下儲存草稿END
@@ -395,7 +395,7 @@ function mailboxlist(){
 	var formData={"id":${user.id}};
     	$.ajax({
        		type: "GET",
-       		url: "/mail/getmail",
+       		url: "${pageContext.request.contextPath}/mail/getmail",
       		data: formData,
        		success: function(data){		
     			showmail(data);
@@ -435,7 +435,7 @@ function showmail(data){
 		$.ajax({
 	    	dataType: "json",
        		type: "GET",
-       		url: "/mail/important",
+       		url: "${pageContext.request.contextPath}/mail/important",
       		data: starData,
        		success: function(){
 	       		console.log("success");
@@ -503,10 +503,10 @@ function showmail(data){
 					$.ajax({
 						dataType: "json",
 						type: "get",
-						url: "/mail/newmail",
+						url: "${pageContext.request.contextPath}/mail/newmail",
 						data: replyData, 
 					});
-					location.href="/mail/list";
+					location.href="${pageContext.request.contextPath}/mail/list";
 				})
 		})//(回覆信件)按下寄出郵件END
  		//(回覆信件)按下儲存草稿
@@ -521,14 +521,14 @@ function showmail(data){
 					$.ajax({
 						dataType: "json",
 						type: "get",
-						url: "/mail/savedraft",
+						url: "${pageContext.request.contextPath}/mail/savedraft",
 						data: {
 							senderId : ${user.id},
 							receiverAccount : replyHeader.raccount,
 							title : replyHeader.title,
 							article : $("#replyArticle").val()},
 					});
-					location.href="/mail/list";
+					location.href="${pageContext.request.contextPath}/mail/list";
 				})
 			console.log("click save");
 		})//(回覆信件)按下儲存草稿END
@@ -545,7 +545,7 @@ function backuplist(){
     		dataType: "json",
        	 	contentType : "application/json",
        		type: "GET",
-       		url: "/mail/getbackup",
+       		url: "${pageContext.request.contextPath}/mail/getbackup",
       		data: formData,
        		success: function(data){
        			showbackup(data);	
@@ -600,7 +600,7 @@ $("#draftbox").click(
 		    	dataType: "json",
 		   	 	contentType : "application/json",
 	       		type: "GET",
-	       		url: "/mail/getdraft",
+	       		url: "${pageContext.request.contextPath}/mail/getdraft",
 	      		data: formData,
 	       		success: function(data){
 // 	       			console.log(data);
@@ -658,7 +658,7 @@ function showdraft(data){
 					$.ajax({
 						dataType: "json",
 						type: "get",
-						url: "/mail/newmail",
+						url: "${pageContext.request.contextPath}/mail/newmail",
 						data: {
 							senderId : ${user.id},
 							receiverAccount : $("#draftreceiver").val(),
@@ -669,7 +669,7 @@ function showdraft(data){
 							},
 		
 					});
-					location.href="/mail/list";
+					location.href="${pageContext.request.contextPath}/mail/list";
 				})
 
 	})
@@ -686,7 +686,7 @@ function showdraft(data){
 				$.ajax({
 					dataType: "json",
 					type: "get",
-					url: "/mail/updatedraft",
+					url: "${pageContext.request.contextPath}/mail/updatedraft",
 					data: {
 						senderId : ${user.id},
 						receiverAccount : $("#draftreceiver").val(),
@@ -697,7 +697,7 @@ function showdraft(data){
 						},
 	
 				});
-				location.href="/mail/list";
+				location.href="${pageContext.request.contextPath}/mail/list";
 			})
 		
 	})
@@ -718,7 +718,7 @@ $("#importantbox").click(
 		    	dataType: "json",
 		   	 	contentType : "application/json",
 	       		type: "GET",
-	       		url: "/mail/getimportant",
+	       		url: "${pageContext.request.contextPath}/mail/getimportant",
 	      		data: formData,
 	       		success: function(data){
 // 	       			console.log(data);
