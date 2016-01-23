@@ -301,15 +301,15 @@ function getpicture(prod, prodimg) {
 	}
 	$.ajax({
 		contentType : "application/json",
-		url : "${pageContext.request.contextPath}/queryimg",
+		url : "${pageContext.request.contextPath}/queryproductimg",
 		dataType : "json",
 		type : "get",
 		data : formData,
 		success : function(data) {
 
-			if (data[0] != null) {
-				console.log(data[0].picture);
-				$(prodimg).attr("src", data[0].picture);
+			if (data != null) {
+				console.log(data.primaryPicture);
+				$(prodimg).attr("src", data.primaryPicture);
 			}
 		}
 	});
