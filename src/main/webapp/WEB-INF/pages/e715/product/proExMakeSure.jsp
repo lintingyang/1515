@@ -156,12 +156,12 @@ h3{
     		<div class="col-md-10">
 	    		<div style="text-align: center; margin: 30px auto">
 						<button id="btnExchang" type="button" class="btn btn-success btn-lg"
-							onclick="javascript:location.href='exchanging?id=${makeSure.id}'">
+							onclick="javascript:location.href='${pageContext.request.contextPath}/product/exchanging?id=${makeSure.id}'">
 						<span class="glyphicon glyphicon-send" aria-hidden="true"></span>我確定要換</button>
 				</div>
 				<div style="text-align: center;">
 						<button type="button" class="btn btn-primary btn-lg"
-							onclick="javascript:location.href='${makeSure.productAId.id}'">回上頁，看看其他商品</button>
+							onclick="javascript:location.href='${pageContext.request.contextPath}/product/${makeSure.productAId.id}'">回上頁，看看其他商品</button>
 				</div>
     			
     		</div>
