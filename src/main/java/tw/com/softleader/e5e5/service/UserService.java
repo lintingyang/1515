@@ -270,10 +270,7 @@ public class UserService extends OurService<User> {
 		BufferedImage src = null;
 		int counter=0;
 		String path = "/resources/userimgs/";
-
 		path = servletContext.getRealPath(path);
-		System.out.println("---------------------------"+path);
-		
 		File destination = null;
 		try {
 			src = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
