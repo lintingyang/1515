@@ -17,7 +17,7 @@
 					<label for="inputPassword3" class="col-sm-2 control-label">輸入舊密碼:</label>
 					<div class="col-sm-10">
 						<input type="password" class="form-control textSize"
-							name="oldPwd" placeholder="Password" maxlength="15" id="oldPassword" name="oldPassword" required>
+							name="oldPwd" placeholder="請輸入您的舊密碼" maxlength="15" id="oldPassword" name="oldPassword" required>
 							<span id="oldPasswordErrorMsg">${oldPasswodFalse}</span>
 					</div>
 				</div>
@@ -26,7 +26,7 @@
 					<label for="inputPassword3" class="col-sm-2 control-label">輸入新密碼:</label>
 					<div class="col-sm-10">
 						<input type="password" class="form-control textSize"
-							name="newPwd" placeholder="Password" maxlength="15" id="newPassword" required pattern="(?=^[A-Za-z0-9]{6,12}$)((?=.*[A-Za-z])(?=.*[0-9]))^.*$" title="密碼：6~12英數字組合，至少有一個大寫或小寫英文字母及數字，如 A1232126">
+							name="newPwd" placeholder="密碼：6~12英數字組合，至少有一個大寫或小寫英文字母及數字，如 A1232126" maxlength="15" id="newPassword" required pattern="(?=^[A-Za-z0-9]{6,12}$)((?=.*[A-Za-z])(?=.*[0-9]))^.*$" title="密碼：6~12英數字組合，至少有一個大寫或小寫英文字母及數字，如 A1232126">
 					<span id="newPasswordErrorMsg">${nullNewPwd}</span>
 					</div>
 				</div>
@@ -34,14 +34,14 @@
 					<label for="inputPassword3" class="col-sm-2 control-label">請再輸入一次:</label>
 					<div class="col-sm-10">
 						<input type="password" class="form-control textSize"
-							name="newPwdCheck" placeholder="Password" id="newPasswordCheck" required pattern="(?=^[A-Za-z0-9]{6,12}$)((?=.*[A-Za-z])(?=.*[0-9]))^.*$" title="密碼：6~12英數字組合，至少有一個大寫或小寫英文字母及數字，如 A1232126">
-					<span id="newPasswordCheckErrorMsg">${newPwdCheck}</span>
-					</div>
+							name="newPwdCheck" placeholder="請再次輸入新密碼" id="newPasswordCheck" required pattern="(?=^[A-Za-z0-9]{6,12}$)((?=.*[A-Za-z])(?=.*[0-9]))^.*$" title="密碼：6~12英數字組合，至少有一個大寫或小寫英文字母及數字，如 A1232126">
+					<span id="newPasswordCheckErrorMsg" style='color:red;font-size:1px'>${newPwdCheck}</span>
+                </div>
 				</div>
 
 				<div class="form-group" id="divBorder">
 					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-default" id="idbuthref">確定</button>
+						<button type="button" class="btn btn-default" id="idbuthref">確定</button>
 					</div>
 				</div>
 
@@ -80,16 +80,34 @@ $('#oldPassword').blur(function() {
 		});
 })
 
+$('#newPassword').blur(function() {
+	var reg = /(?=^[A-Za-z0-9]{6,12}$)((?=.*[A-Za-z])(?=.*[0-9]))^.*$/; 
+	var newPassword = $('#newPassword').val();
+	if(reg.test(newPassword)){
+	if(newPassword!=''){
+		$('#newPasswordErrorMsg').html('');
+	} else{
+		$('#newPasswordErrorMsg').html('');
+		$('#newPasswordErrorMsg').append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>密碼：密碼不能為空值</span>");
+	}
+	}else{
+		$('#newPasswordErrorMsg').html('');
+		$('#newPasswordErrorMsg').append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>密碼：密碼格式錯誤</span>");
+	}
+	//blur下括弧
+})
+
 
 $('#newPasswordCheck').blur(function() {
 	var newPassword = $('#newPassword').val();
 	var newPasswordCheck = $('#newPasswordCheck').val();
-	if(newPassword != newPasswordCheck){
-		$('#newPasswordCheckErrorMsg').html('');
-		$('#newPasswordCheckErrorMsg').append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>密碼：確認密碼與新密碼不符合</span>");
-	}else{
-		$('#newPasswordCheckErrorMsg').html('');
-	}
+	console.log("newPassword != newPasswordCheck"+newPassword != newPasswordCheck)
+		if(newPassword != newPasswordCheck){
+			$('#newPasswordCheckErrorMsg').html('');
+			$('#newPasswordCheckErrorMsg').append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>密碼：確認密碼與新密碼不符合</span>");
+		}else{
+			$('#newPasswordCheckErrorMsg').html('');
+		}
 	
 	//blur下括弧
 })
@@ -100,7 +118,8 @@ $(function() {
 		$("#idbuthref").on('click', function() {
 			var newPassword = $('#newPassword').val();
 			var newPasswordCheck = $('#newPasswordCheck').val();
-			if(newPassword == newPasswordCheck && data=="true"){
+			console.log(oldPasswordCheck);
+			if(newPassword == newPasswordCheck && oldPasswordCheck=="true"){
 			swal({
 				type : "success",
 				title: "修改成功",  
@@ -113,7 +132,13 @@ $(function() {
 				$('.changePasswordForm').submit(); }, 1000);
 			
 			}else{
-
+				swal({
+					type : "warning",
+					title: "請再次確認格式是否正確",  
+					text: "",  
+					timer: 2000,   
+					showConfirmButton: false
+				});
 			}
 			
 		});
