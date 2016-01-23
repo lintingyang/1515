@@ -8,11 +8,11 @@
 <script>
 	$(function() {
 		$("#idbuthref").on('click', function() {
-			var re1 = /(?=^[A-Za-z0-9]{6,12}$)((?=.*[A-Za-z])(?=.*[0-9]))^.*$/;
+			var reg = /(?=^[A-Za-z0-9]{6,12}$)((?=.*[A-Za-z])(?=.*[0-9]))^.*$/;
 			if($('#newPassword').val()==$('#newPasswordCheck').val()){
 			
 //			 	//判斷新密碼長度不能小於6個字(要大於或等於7)
-			if(rel.test($('#newPassword').val())){
+			if(reg.test($('#newPassword').val())){
 			swal({
 				type : "success",
 				title: "修改成功",  

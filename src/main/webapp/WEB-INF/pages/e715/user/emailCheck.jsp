@@ -41,7 +41,7 @@
 <script>
 	$(function() {
 		$("#sendSchoolEmil").on('click', function() {
-			$('.sendSchoolBtn').append('<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>');
+			$('#loadingPicture').append('<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>');
 			var temp = {"userSchoolEmail":$("#schoolEmail").val(),"chooseSchool":$('#chooseSchool').val()}
 			var checkEmailFormat= $('#schoolEmail').val();
 			var reg= /(?=^[A-Za-z0-9]{6,12}$)((?=.*[a-zA-Z0-9]))^.*$/;
@@ -51,11 +51,13 @@
 			if(reg.test(checkEmailFormat)){
 			$.ajax({
 				contentType : "application/json",
-				url : "/head/verificationCodeSend",
+				url : "${pageContext.request.contextPath}/head/verificationCodeSend",
 				dataType : "text",
 				type : "get",
 				data : temp,
 				success : function(data) {
+					
+					if(data == "true"){
 					$('#checkVerificationCodeDiv').html('');
 					$('.sendSchoolBtn').html('');
 					var divVerification = $('<div></div>').attr('id','divBorder').addClass("form-group");
@@ -71,6 +73,15 @@
 					var errorSpan = $('<span></span>').text('${checkError.checkFault}${checkError.numberFault}');
 					var temp4 = btnDiv.append(vbtn).append(errorSpan);
 					$('#checkVerificationCodeDiv').append(temp3).append(temp4);
+					}else{
+						$('#errorMsg').empty();
+						$('#loadingPicture').html('');
+						$("#sendSchoolEmil").show();
+						$("#haveSchoolEmil").show();
+						$("#schoolEmail").removeAttr('readonly');
+						$('#errorMsg').text('此信箱已申請過');
+					}
+					
 				//success的下括號
  				}
 			//ajax的下括號
@@ -81,7 +92,7 @@
 			$("#sendSchoolEmil").removeAttr('hide');
 			$("#haveSchoolEmil").removeAttr('hide');
 			$("#schoolEmail").removeAttr('readonly');
-			$('#errorMsg').text('輸入格式錯誤:請輸入@以前即可');
+			$('#errorMsg').text('輸入格式錯誤(請輸入@以前即可)');
 		//else下括號	
 		}
 			//on事件下括號
@@ -148,7 +159,7 @@
 						<option value="@cc.hwh.edu.tw">華夏科大</option>
 						<option value="@mail.yzu.edu.tw">元智大學</option>
 						<option value="@stu.ntue.edu.tw">台北教育大學</option>
-						
+						<option value="@gmail.com">Gmail驗證</option>
 					</select>(*必須)
 					</div>
 				</div>
@@ -166,7 +177,7 @@
 					<button type="button" class="btn btn-default" id="sendSchoolEmil">
 					送出
 					</button>
-					
+					<span id="loadingPicture"></span>
 				</div>
 				<div id="btnCenter">
 				<button type="button" class="btn btn-default" id="haveSchoolEmil">

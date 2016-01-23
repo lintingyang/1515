@@ -100,12 +100,10 @@
 <script>
 $(function() {
 	$('#btnCheck').bind('click','#btnCheck',function(){
-		console.log("hahahahahaha")
 		$('.sendSchoolEmailbutton').hide();
 		$("#notFindSchoolEmail").html('');
 		$('.sendSchoolEmaildiv').append('<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>');
 		var schoolemail = {"userSchoolEmail":$("#schoolEmail").val()};
-		console.log(schoolemail);
 		$.ajax({
 			contentType : "application/json",
 			url : "${pageContext.request.contextPath}/E715Member/findPasswordStep1",
@@ -114,7 +112,6 @@ $(function() {
 			data : schoolemail,
 			success : function(data) {
 				$('.sendSchoolEmaildiv').html('');
-				console.log(data);
 				if(data == "true"){
 		$("#notFindSchoolEmail").empty();
 		$('#checkFont').empty();

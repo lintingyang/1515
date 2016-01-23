@@ -106,9 +106,24 @@ public class HeaderController {
 			@RequestParam("chooseSchool") String schoolName) {
 		boolean result = false;
 		String userSchool = schoolEmail + schoolName;
+		User userSchoolEmail = userService.loginBySchoolEmail(userSchool);
+		if (userSchoolEmail !=null ){
+		String tempUser = userSchoolEmail.getAccount();
+		if(tempUser==null){
 		int temp = userService.sendVerificationCode(userSchool);
 		if (temp == 1) {
 			result = true;
+			}else {
+				return result;
+				}
+			}
+		}else{
+			int temp = userService.sendVerificationCode(userSchool);
+			if (temp == 1) {
+				result = true;
+				}else {
+					return result;
+					}
 		}
 		return result;
 	}
@@ -232,7 +247,8 @@ public class HeaderController {
 		} else {
 			user.setSubject(subject);
 			user.setAddress(addr);
-			if (userFile != null) {
+			if (userFile == null) {
+			}else{
 				String path = userService.upLoadImage(user.getId(), servletContext, userFile);
 				user.setPicture(path);
 			}

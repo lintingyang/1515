@@ -203,7 +203,12 @@ function Dateblur() {
 // 	});
 
 $('#account').on('blur',function(){
-	if($('#account').val()!=null){
+	if($('#account').val()==null || $('#account').val()== ''){
+		
+		$('#checkAccountSpan').empty();
+		$('#checkAccountSpan').append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>帳號不能為空</span>");
+	}else{
+		
 		var sendAccount = {'checkAccount':$('#account').val()}
 		$.ajax({
 			contentType : "application/json",
@@ -226,12 +231,15 @@ $('#account').on('blur',function(){
 				}
 		//ajax的下括號
 			});
-	}else{
-		$('#checkAccountSpan').empty();
-		$('#checkAccountSpan').append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>帳號不能為空</span>");
-// 		$('#checkAccountSpan').append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>帳號不能為空</span>");
+	
+	
+	
 	}
 		
+	
+	
+	
+	
 	});
 
 
