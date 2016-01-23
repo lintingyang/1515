@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import tw.com.softleader.e5e5.common.dao.OurDao;
 import tw.com.softleader.e5e5.common.model.Message;
 import tw.com.softleader.e5e5.common.service.OurService;
+import tw.com.softleader.e5e5.common.service.OurServicePro;
 import tw.com.softleader.e5e5.dao.ProductCategoryDao;
 import tw.com.softleader.e5e5.dao.ProductDao;
 import tw.com.softleader.e5e5.dao.QuestionAndAnswerDao;

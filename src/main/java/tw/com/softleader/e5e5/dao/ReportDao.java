@@ -15,4 +15,7 @@ public interface ReportDao extends OurDao<Report>{
 	
 	@Query(value="SELECT r.* FROM report r JOIN product p ON r.product_id = p.id WHERE p.name like %?1% ORDER BY r.report_time DESC", nativeQuery = true)
 	public List<Report> findAllByName(String name);
+
+	@Query(value="SELECT * FROM report ORDER BY report_time DESC", nativeQuery = true)
+	public List<Report> findAllByTime();
 }
