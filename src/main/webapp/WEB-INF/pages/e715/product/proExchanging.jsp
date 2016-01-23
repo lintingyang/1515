@@ -123,7 +123,7 @@ $(function(){
 	});
 	$('#img1').click(function(){
 		s1();
-		$('#final').attr("onclick", "javascript:location.href='${pageContext.request.contextPath}/grade?g=1'");
+		$('#final').attr("onclick", "javascript:location.href='${pageContext.request.contextPath}/product/grade?g=1'");
 		$('#img1').mouseout(function(){
 			s1();
 		});
@@ -143,7 +143,7 @@ $(function(){
 	});
 	$('#img2').click(function(){
 		s2();
-		$('#final').attr("onclick", "javascript:location.href='${pageContext.request.contextPath}/grade?g=2'");
+		$('#final').attr("onclick", "javascript:location.href='${pageContext.request.contextPath}/product/grade?g=2'");
 		$('#img2').mouseout(function(){
 			s2();
 		});
@@ -163,7 +163,7 @@ $(function(){
 	});
 	$('#img3').click(function(){
 		s3();
-		$('#final').attr("onclick", "javascript:location.href='${pageContext.request.contextPath}/grade?g=3'");
+		$('#final').attr("onclick", "javascript:location.href='${pageContext.request.contextPath}/product/grade?g=3'");
 		$('#img3').mouseout(function(){
 			s3();
 		});

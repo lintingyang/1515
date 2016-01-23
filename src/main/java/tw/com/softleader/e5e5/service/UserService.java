@@ -299,9 +299,12 @@ public class UserService extends OurService<User> {
 		User user = userDao.findById(id);
 		String userPathDB = user.getPicture();
 		int cut=userPathDB.indexOf("E715");
+		log.error("cut" +cut);
 		String userPath = userPathDB.substring(cut+4);
+		log.error("userPath " + userPath);
 		if(userPath!=null){
 		String path = servletContext.getRealPath(userPath).replace('/' , '\\');
+		log.error("path " + path);
 		File destination = null;
 		destination = new File(path);
 		

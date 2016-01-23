@@ -272,7 +272,7 @@ $(function() {
 			$.each(data,
 				function(i) {
 				var productdiv = $("<div></div>");
-				var aclick = $("<a>").attr("href","/product/" + data[i].id);
+				var aclick = $("<a>").attr("href","${pageContext.request.contextPath}/product/" + data[i].id);
 				var productimg = $("<img>").addClass("prodimg");
 				var p = $("<span>").text(data[i].name);
 				$(aclick).append($(productimg)).append($(p));
