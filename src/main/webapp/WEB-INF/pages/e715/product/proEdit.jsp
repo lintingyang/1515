@@ -83,10 +83,10 @@ h4{
 								<input type="file" id="id_image_large1" class ="pPicture1" name="pPicture1" multiple ></label>
 
 								<label class="col-md-offset-2 col-sm-2 choose-file btn btn-sm btn-default glyphicon glyphicon-open" id="upload2" for="id_image_large2">
-								<input type="file" id="id_image_large2" class ="pPicture2" name="pPicture2" multiple "></label>
+								<input type="file" id="id_image_large2" class ="pPicture2" name="pPicture2" multiple ></label>
 		
 								<label class="col-md-offset-2 col-sm-2 choose-file btn btn-sm btn-default glyphicon glyphicon-open" id="upload3" for="id_image_large3">
-								<input type="file" id="id_image_large3" class ="pPicture3" name="pPicture3" multiple "></label>
+								<input type="file" id="id_image_large3" class ="pPicture3" name="pPicture3" multiple ></label>
 							</div>
 					</div>
 				</div>
@@ -204,8 +204,8 @@ h4{
 			</div>
 			<div style="text-align: center; margin:50px auto;">
 				<button id="btnSend" type="submit" class="btn btn-success btn-lg">
-					<span class="glyphicon glyphicon-send" aria-hidden="true"></span> 確認編輯
-					<span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+					確認
+					<span class="glyphicon glyphicon-floppy-open" aria-hidden="true"></span>
 				</button>
 			</div>
 		</div>
