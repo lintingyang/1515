@@ -144,7 +144,7 @@ $(function() {
 	$('#queryBtn').click(function(){
 		$.ajax({
 // 	 		contentType : "application/json",
-			url : "/report/products/query/no",
+			url : "${pageContext.request.contextPath}/report/products/query/no",
 			dataType : "json",
 			type : "get",
 // 	 		data : {"name" : $('#product').val()},
@@ -192,7 +192,7 @@ $(function() {
 	
 	$.ajax({
 // 		contentType : "application/json",
-		url : "/report/products/query",
+		url : "${pageContext.request.contextPath}/report/products/query",
 		dataType : "json",
 		type : "get",
 // 		data : {"orderby" : "id"},
@@ -224,7 +224,7 @@ $(function() {
 				}
 				var rProductName = $("<td></td>");
 				var a = $("<a href>" + data[i].product.name +"<a>")
-					.attr("onclick", "window.open(' /product/" + data[i].product.id +" ', 'e715', config='height=600,width=1100,left=70,top=20');");
+					.attr("onclick", "window.open(' ${pageContext.request.contextPath}/product/" + data[i].product.id +" ', 'e715', config='height=600,width=1100,left=70,top=20');");
 // 				var rProductName = $("<td><a href='/product/" + data[i].product.id +"'>" +data[i].product.name +"</a></td>");
 				var rArticle = $("<td>" +data[i].article +"</td>");
 				var rReporterId = $("<td>" +data[i].reporterId.name +"</td>");
@@ -252,95 +252,5 @@ $(function() {
 	
 });
 
-
-
-
-
-
-
-
-
-
-// 	var url = '<c:url value="/report/products"/>';
-
-// 	$(function() {
-// 		$("#searchBtn").bind("click", function() {
-// 			$("#slGrid").trigger('reloadGrid');
-// 		});
-
-// 		$("#resetBtn").bind("click", function() {
-// 			$("#name").val("");
-// 			$("#giin").val("");
-// 		});
-
-// 		$("#slGrid").slGrid({
-// 			url : url,
-// 			dataFormId : 'listForm',
-// 			mtype : 'GET',
-
-// 			colNames : [ 'id', '是否通過', '狀態', '物品', '檢舉原因', '檢舉時間', '檢舉人', '審核者'],
-// 			colModel : [ {name : 'id', width : 50}, 
-// 			             {name : 'btns', width : 70, formatter : btns}, 
-// 			             {name : 'isPassed', width : 80}, 
-// 			             {name : 'product.name', width : 100}, 
-// 			             {name : 'article', width : 300}, 
-// 			             {name : 'reportTime', width : 100}, 
-// 			             {name : 'reporterId.account',width : 100},
-// 			             {name : 'role.name',width : 100} 
-// 			           ],
-// 			sortname : "id",
-// 			sortorder : "DESC",
-// 			pager : "slPager",
-// 			loadComplete : function() {
-// 				$("#searchBtn").button('reset');
-// 			}
-// 		});
-
-// 		function btns(value, row) {
-
-// 			var $yBtn = $('<a class="btn btn-success btn-xs"></a>');
-// 			$yBtn.append('<span class="glyphicon glyphicon-ok"></span> 是');
-// 			$yBtn.click(function() {
-// 				swal({
-// 					title : "Are you sure?",
-// 					text : "是否確定 通過 此筆檢舉？",
-// 					type : "warning",
-// 					showCancelButton : true,
-// 					confirmButtonColor : "#F5A056",
-// 					closeOnConfirm : true
-// 				}, function() {
-// 					$delBtn.button('loading');
-// 					$.delete_(url + "/" + row.id, function() {
-// 						$delBtn.button('reset');
-// 						$("#slGrid").trigger('reloadGrid');
-// 					});
-// 				});
-// 			});
-
-// 			var $nBtn = $('<a class="btn btn-danger btn-xs"></a>');
-// 			$nBtn.append('<span class="glyphicon glyphicon-remove"></span> 否');
-// 			$nBtn.click(function() {
-// 				swal({
-// 					title : "Are you sure?",
-// 					text : "是否確定「不」通過 此筆檢舉？",
-// 					type : "warning",
-// 					showCancelButton : true,
-// 					confirmButtonColor : "#F5A056",
-// 					closeOnConfirm : true
-// 				}, function() {
-// 					$delBtn.button('loading');
-// 					$.delete_(url + "/" + row.id, function() {
-// 						$delBtn.button('reset');
-// 						$("#slGrid").trigger('reloadGrid');
-// 					});
-// 				});
-// 			});
-
-// 			return $("<div></div>").append($yBtn).append("&nbsp;")
-// 					.append($nBtn);
-
-// 		}
-
-// 	});
 </script>
 </html>
