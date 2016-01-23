@@ -51,7 +51,7 @@
 			if(reg.test(checkEmailFormat)){
 			$.ajax({
 				contentType : "application/json",
-				url : "/head/verificationCodeSend",
+				url : "${pageContext.request.contextPath}/head/verificationCodeSend",
 				dataType : "text",
 				type : "get",
 				data : temp,
