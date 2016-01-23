@@ -3,9 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/WEB-INF/pages/e715/layout/header.jsp"></c:import>
 <c:import url="/WEB-INF/pages/layout/meta.jsp" />
-<!-- <script src="/resources/js/jquery.tinyMap.min.js"></script> -->
+
 <script src="${pageContext.request.contextPath}/resources/js/jquery.tinyMap.min.js"></script>
-<!-- <link rel="stylesheet" href="/resources/css/user.css" /> -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user.css" />
 <style>
 .map {
@@ -48,7 +47,7 @@
 					src="${product.userId.picture}"></li>
 				<li><ul style="list-style: none;">
 						<li><h4>
-								<a href="/E715Member/${product.userId.id}">Account:
+								<a href="${pageContext.request.contextPath}/E715Member/${product.userId.id}">Account:
 									${product.userId.account} </a>
 							</h4></li>
 						<li>${product.userId.name}</li>
@@ -215,22 +214,23 @@
 <script>
 /**按下我要交換按鈕**/
 $("#excBtn").click(function(){
-	if( ${empty user} ){
+	if( "${empty user}"=="true" ){
 		swal({   
 			title: "尚未登入",   
 			text: "您尚未登入,無法使用交換功能!使否導入登入頁面?",   
-			type: "warning",   showCancelButton: true,   
+			type: "warning",   
+			showCancelButton: true,   
 			confirmButtonColor: "#DD6B55",   
 			confirmButtonText: "是的！我要登入",   
 			closeOnConfirm: false }, 
 			function(){   
-				location.href="/head/login";s
+				location.href="${pageContext.request.contextPath}/head/login";
 			});
 		
 	}else {
 		$.ajax({
 			contentType : "application/json",
-			url : "/product/query",
+			url : "${pageContext.request.contextPath}/product/query",
 			dataType : "json",
 			type : "get",
 			data : {"id" : "${user.id}"},
@@ -245,7 +245,7 @@ $("#excBtn").click(function(){
 						confirmButtonText: "好的",   
 						closeOnConfirm: false }, 
 						function(){   
-							location.href="/product/add";
+							location.href="${pageContext.request.contextPath}/product/add";
 						});
 				}	
 			}
@@ -266,10 +266,10 @@ $("#submitReport").click(function(){
 			$.ajax({
 				dataType: "json",
 				type: "get",
-				url: "/report/products/new",
+				url: "${pageContext.request.contextPath}/report/products/new",
 				data: {
 					article : $("#article").val(),
-					productId : ${product.id},
+					productId : "${product.id}",
 					reporterId : "${user.id}",
 				}
 			});
@@ -284,11 +284,11 @@ $(function(){
 	    'zoom'  : 14
 	});
 	// 	顯示Q&A列表
-	var formData={"id":${product.id}}
+	var formData={"id":"${product.id}"}
 	function getqanda(){
     	$.ajax({
        		type: "GET",
-       		url: "/qanda/getqanda",
+       		url: "${pageContext.request.contextPath}/qanda/getqanda",
       		data: formData,
        		success: function(data){
     		showtable(data);
@@ -309,7 +309,7 @@ $(function(){
     		 var qtime = this.questionTime.year + "/" + this.questionTime.monthValue +"/" + this.questionTime.dayOfMonth
 				+ ", " + this.questionTime.hour + ":" + this.questionTime.minute;
     		 var questionPart = "<tr><td>問題" + (index+1) + " / " + 
-				this.questionerId.nickname + "(<a href='/E715Member/"+ this.questionerId.id +"'>"+this.questionerId.account + "</a>)" + 
+				this.questionerId.nickname + "(<a href='${pageContext.request.contextPath}/E715Member/"+ this.questionerId.id +"'>"+this.questionerId.account + "</a>)" + 
 				qtime + " <span id='ansbtn" + index + "'></span><br>" + this.question + "<span id='answer"+index+"'></span></td></tr>"
     		 if(this.questionerId.id == loginId || productOwnerId == loginId){
     				$("#qatable").append(questionPart);
@@ -350,7 +350,7 @@ $(function(){
 // 					console.log(answerData);    
 					$.ajax({
     					type: "POST",
-    					url: "/qanda/answer/",
+    					url: "${pageContext.request.contextPath}/qanda/answer/",
     					data: answerData,
     					contentType : "application/json",
     					dataType: "json",
@@ -390,10 +390,10 @@ $(function(){
 		notPublic = $("#notPublic").prop("checked");
 	})	
 	$("#submitquestion").click(function(){
-		var questionData = JSON.stringify({"productid":${product.id}, "question":$("#questiontext").val(), "notPublic":notPublic});
+		var questionData = JSON.stringify({"productid":"${product.id}", "question":$("#questiontext").val(), "notPublic":notPublic});
 		$.ajax({
 			type: "POST",
-			url: "/qanda/question",
+			url: "${pageContext.request.contextPath}/qanda/question",
 			data: questionData,
 			contentType : "application/json",
 		    dataType: "json",
@@ -425,7 +425,7 @@ $(function(){
 //	show Exchange
     $.ajax({
        type: "GET",
-       url: "http://localhost:8080/product/findexchange",
+       url: "${pageContext.request.contextPath}/product/findexchange",
        data: formData,
        success: function(data){
     	   show(data);
@@ -446,7 +446,7 @@ $(function(){
 				excBtn2 = '<button id="cha" name="cha" type="button" class="btn btn-primary" onclick="javascript:location.href=\'makeSure?id='+ this.id + '\'">交換</button>';
 			}
 			$("#testtable").append('<tr><td><div class="col-md-2">'+
-					'<a href="/product/'
+					'<a href="${pageContext.request.contextPath}/product/'
 					 +this.productBId.id+'"><img id="imgId'+this.productBId.id+'" style="height: 100px;"></a></div><div class="col-md-6"><h4>'+
 					 this.productBId.name+'</h4>物品狀況：'+this.productBId.status +
 					 '<br>產品描述：'+this.productBId.description+
@@ -466,7 +466,7 @@ $(function(){
 			var formData={"id":this.productBId.id}
 		    $.ajax({
 		       type: "GET",
-		       url: "http://localhost:8080/product/findproductimg",
+		       url: "${pageContext.request.contextPath}/product/findproductimg",
 		       data: formData,
 		       success: function(img){
 		    	   getImg(img);
@@ -483,7 +483,7 @@ $(function(){
 	var formData={"id":"${product.id}"}
 	 $.ajax({
 	       type: "GET",
-	       url: "http://localhost:8080/product/findexchanged",
+	       url: "${pageContext.request.contextPath}/product/findexchanged",
 	       data: formData,
 	       success: function(data){
 	    	   checkExchanged(data);
@@ -510,7 +510,7 @@ $(function(){
 //  按下我要交換後出現的物品選單
 	$.ajax({
 		contentType : "application/json",
-		url : "/product/query",
+		url : "${pageContext.request.contextPath}/product/query",
 		dataType : "json",
 		type : "get",
 		data : {"id" : "${user.id}"},
@@ -537,10 +537,10 @@ $(function(){
 function addexchange(event){
 	$.ajax({
 		contentType : "application/json",
-		url : "/product/checkexchanged",
+		url : "${pageContext.request.contextPath}/product/checkexchanged",
 		dataType : "json",
 		type : "get",
-		data : {"bid" : event.data.id,"aid":${product.id}},
+		data : {"bid" : event.data.id,"aid":"${product.id}"},
 		success : function(data){
 			console.log(data);
 			if(data == true){
@@ -565,7 +565,7 @@ function addexchange(event){
 	 				});
 // 		 			swal("提出交換!", "已經幫您提出交換請求", "success");  
 		 			setTimeout(function(){
-		 				location.href="/product/exchange/"+event.data.id+"/"+${product.id}; }, 1500);
+		 				location.href="${pageContext.request.contextPath}/product/exchange/"+event.data.id+"/"+${product.id}; }, 1500);
 		 		 	
 		 		} else { 
 		 			swal("", "取消交換", "error"); 
@@ -587,7 +587,7 @@ function getpicture(prod, prodimg) { //取得每一個商品的物件
 	}
 	$.ajax({
 		contentType : "application/json",
-		url : "/queryimg",
+		url : "${pageContext.request.contextPath}/queryimg",
 		dataType : "json",
 		type : "get",
 		data : formData,
