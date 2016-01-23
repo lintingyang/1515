@@ -10,7 +10,7 @@
 
 	<groupId>tw.com.softleader</groupId>
 	<artifactId>E715</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1</version>
 	<name>Archetype - E715</name>
 	<url>http://maven.apache.org</url>
 
