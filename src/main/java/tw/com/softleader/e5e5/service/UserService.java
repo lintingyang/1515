@@ -300,7 +300,9 @@ public class UserService extends OurService<User> {
 	@Transactional
 	public boolean deleteImage(int id, ServletContext servletContext) {
 		User user = userDao.findById(id);
-		String userPath = user.getPicture();
+		String userPathDB = user.getPicture();
+		int cut=userPathDB.indexOf("E715");
+		String userPath = userPathDB.substring(cut+4);
 		if(userPath!=null){
 		String path = servletContext.getRealPath(userPath).replace('/' , '\\');
 		File destination = null;
