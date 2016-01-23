@@ -48,6 +48,7 @@
 			$("#schoolEmail").attr('readonly','readonly');
 			$("#sendSchoolEmil").hide();
 			$("#haveSchoolEmil").hide();
+			$("#testOnly").hide();
 			if(reg.test(checkEmailFormat)){
 			$.ajax({
 				contentType : "application/json",
@@ -58,6 +59,7 @@
 				success : function(data) {
 					
 					if(data == "true"){
+					$('#errorMsg').empty();
 					$('#checkVerificationCodeDiv').html('');
 					$('.sendSchoolBtn').html('');
 					var divVerification = $('<div></div>').attr('id','divBorder').addClass("form-group");
@@ -79,7 +81,7 @@
 						$("#sendSchoolEmil").show();
 						$("#haveSchoolEmil").show();
 						$("#schoolEmail").removeAttr('readonly');
-						$('#errorMsg').text('此信箱已申請過');
+						$('#errorMsg').append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>信箱已有人使用</span>");
 					}
 					
 				//success的下括號
@@ -89,8 +91,9 @@
 			//if下括號
 		}else{
 			$('#errorMsg').empty();
-			$("#sendSchoolEmil").removeAttr('hide');
-			$("#haveSchoolEmil").removeAttr('hide');
+			$('#loadingPicture').html('');
+			$("#sendSchoolEmil").show();
+			$("#haveSchoolEmil").show();
 			$("#schoolEmail").removeAttr('readonly');
 			$('#errorMsg').text('輸入格式錯誤(請輸入@以前即可)');
 		//else下括號	
@@ -117,6 +120,14 @@
 			$('#checkVerificationCodeDiv').append(temp3).append(temp4);
 			
 		});
+		
+		
+		$('#testOnly').on('click',function(){
+			$("input[name='userSchoolEmail']").val('s110013064');
+		})
+		
+		
+		
 		
 		
 		
@@ -149,6 +160,7 @@
 				<label class="col-sm-2 control-label">選擇學校</label>
 				<div class="col-sm-10" style="padding-top: 7px">
 					<select id="chooseSchool" name="chooseSchool">
+						<option value="@stu.ntue.edu.tw">台北教育大學</option>
 						<option value="@ntu.edu.tw">台灣大學</option>
 						<option value="@mail.ncku.edu.tw">成功大學</option>
 						<option value="@nccu.edu.tw">政治大學</option>
@@ -158,13 +170,11 @@
 						<option value="@niu.edu.tw">宜蘭大學</option>
 						<option value="@cc.hwh.edu.tw">華夏科大</option>
 						<option value="@mail.yzu.edu.tw">元智大學</option>
-						<option value="@stu.ntue.edu.tw">台北教育大學</option>
 						<option value="@gmail.com">Gmail驗證</option>
 					</select>(*必須)
 					</div>
 				</div>
-			
-			
+				
 				<div class="form-group" id="divBorder">
 					<label for="inputEmail3" class="col-sm-2 control-label">School_Email</label>
 					<div class="col-sm-10">
@@ -173,6 +183,16 @@
 						<span id="errorMsg"></span>
 					</div>
 				</div>
+				
+					<%-- 一件測試用按鈕 --%>
+				<div id="btnCenter">
+					<button type="button" class="btn btn-default" id="testOnly">
+					一鍵輸入測試信件信箱
+					</button>
+				</div>
+				
+				
+				
 				<div id="btnCenter" class="sendSchoolBtn">
 					<button type="button" class="btn btn-default" id="sendSchoolEmil">
 					送出

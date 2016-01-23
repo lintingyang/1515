@@ -309,13 +309,15 @@ public class MemberController {
 					user.setPicture(path);
 				}
 				// 判斷是手機還是家電(基礎判斷)
-				if (phone!=null){
-				if (phone.substring(0,2).equals("09")) {
-					user.setCellphone(phone);
-				} else {
-					user.setPhone(phone);
-				}
-				}
+					try {
+						if (phone.substring(0,2).equals("09")) {
+							user.setCellphone(phone);
+						} else {
+							user.setPhone(phone);
+						}
+					} catch (Exception e1) {
+					}
+				
 				if (!month.equals("") && month.length() < 2) {
 					month = "0" + month;
 				}

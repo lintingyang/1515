@@ -59,7 +59,7 @@ public class HeaderController {
 	}
 
 	// 輸入完帳號密碼並按下登入鍵 進行登入檢查
-	
+
 	@RequestMapping(value = "/logincheck", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String loginCheck(Model model, @RequestParam("account") String account,
@@ -68,14 +68,13 @@ public class HeaderController {
 		if (user == null) {
 			String loginError = "就叫你用一鍵登入來開發了還硬要打字";
 			return loginError;
-		}else{
-		if (user.getIsolated().equals(TrueFalse.TRUE)) {
-			user = null;
-			String isolated = "帳號已被封鎖";
-			return isolated;
-		} 
-		 else {
-			 session.setAttribute("user", user);
+		} else {
+			if (user.getIsolated().equals(TrueFalse.TRUE)) {
+				user = null;
+				String isolated = "帳號已被封鎖";
+				return isolated;
+			} else {
+				session.setAttribute("user", user);
 				return "TRUE";
 			}
 		}
@@ -107,23 +106,23 @@ public class HeaderController {
 		boolean result = false;
 		String userSchool = schoolEmail + schoolName;
 		User userSchoolEmail = userService.loginBySchoolEmail(userSchool);
-		if (userSchoolEmail !=null ){
-		String tempUser = userSchoolEmail.getAccount();
-		if(tempUser==null){
-		int temp = userService.sendVerificationCode(userSchool);
-		if (temp == 1) {
-			result = true;
-			}else {
-				return result;
+		if (userSchoolEmail != null) {
+			String tempUser = userSchoolEmail.getAccount();
+			if (tempUser == null) {
+				int temp = userService.sendVerificationCode(userSchool);
+				if (temp == 1) {
+					result = true;
+				} else {
+					return result;
 				}
 			}
-		}else{
+		} else {
 			int temp = userService.sendVerificationCode(userSchool);
 			if (temp == 1) {
 				result = true;
-				}else {
-					return result;
-					}
+			} else {
+				return result;
+			}
 		}
 		return result;
 	}
@@ -197,6 +196,7 @@ public class HeaderController {
 			errors.put("account", "帳號已存在");
 			return "redirect:/head/create";
 		}
+		user.setPicture(userService.upDefaultImg(user.getId(), servletContext));
 		user.setAccount(account);
 		user.setPassword(password);
 		user.setName(name);
@@ -222,7 +222,7 @@ public class HeaderController {
 		}
 		
 		user.setIsolated(TrueFalse.FALSE);
-		
+
 		user.setEmail(email);
 		userService.update(user);
 		User login = userService.login(account, password);
@@ -247,12 +247,16 @@ public class HeaderController {
 		} else {
 			user.setSubject(subject);
 			user.setAddress(addr);
-			if (userFile == null) {
-			}else{
+			user.setAboutMe(aboutMe);
+			System.out.println("userFile--------------------" + userFile);
+			try {
 				String path = userService.upLoadImage(user.getId(), servletContext, userFile);
 				user.setPicture(path);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			user.setAboutMe(aboutMe);
+
 			userService.update(user);
 			return "/index";
 		}

@@ -3,7 +3,10 @@ package tw.com.softleader.e5e5.service;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Properties;
@@ -318,6 +321,37 @@ public class UserService extends OurService<User> {
 		}else{
 			return false;
 		}
+	}
+	
+	
+	
+	@Transactional
+	public String upDefaultImg(int id, ServletContext servletContext) {
+		String path = "/resources/userimgs/defaultUserImg.jpg";
+		String userPath="/resources/userimgs/"+id+"_defaultUserImg.jpg";
+		path = servletContext.getRealPath(path);
+		userPath = servletContext.getRealPath(userPath);
+		try {
+		int bytesum = 0;
+		int byteread = 0;
+		InputStream inStream = new FileInputStream(path);//讀入原檔
+		FileOutputStream fs = new FileOutputStream(userPath);
+		byte[] buffer = new byte[1444];
+//		int length;
+		while ( (byteread = inStream.read(buffer)) != -1) {
+		bytesum += byteread; //位元組數 檔案大小
+		fs.write(buffer, 0, byteread);
+		}
+		inStream.close();
+		}
+		catch(Exception e) {
+		System.out.println("複製單個檔操作出錯");
+		e.printStackTrace();
+		}
+		String finalP=userPath.replace('\\', '/');
+		int cut=finalP.indexOf("webapp");
+		finalP=finalP.substring(cut+7);
+		return finalP;
 	}
 	
 	

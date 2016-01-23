@@ -152,7 +152,7 @@
 					<div class="col-md-1"></div>
 				</div>
 			</div>
-			<div class="col-md-6"><span style="margin-left:40px;color:gray;">${currUser.aboutMe}</span></div>
+			<div class="col-md-6"><span style="margin-left:40px;color:gray;"><c:out value="${currUser.aboutMe}"/></span></div>
 		</div>
 		<div class="col-md-1"></div>
 	</div>

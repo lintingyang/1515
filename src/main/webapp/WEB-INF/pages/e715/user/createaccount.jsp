@@ -140,13 +140,13 @@ function Dateblur() {
 					<label for="inputPassword3" class="col-sm-2 control-label">生日:</label>
 					<div class="col-sm-10" style="padding-top: 7px">
 					<select name="year" id="year" required>  
-					<option class="defaultOption">2000</option>
+					<option class="defaultOption">1987</option>
 					</select>年 
 					<select name="month" id="month" required> 
-						<option  class="defaultOption">1</option> 
+						<option  class="defaultOption">10</option> 
 					</select>月
 					<select name="day" id="day" required> 
-						<option class="defaultOption">1</option>
+						<option class="defaultOption">01</option>
 					</select> 日
 					</div>
 				</div>
@@ -170,6 +170,13 @@ function Dateblur() {
 						<button type="submit" class="btn btn-default" id="idbuthref">完成</button>
 					</div>
 				</div>
+			
+				<%-- DEMO用  用完請刪除 --%>	
+				<div class="form-group" id="divBorder">
+					<div class="col-sm-offset-2 col-sm-10 btnLeft">
+						<button type="button" class="btn btn-default" id="testOnly">一鍵完成修改</button>
+					</div>
+				</div>
 
 			</form>
 		</div>
@@ -181,34 +188,12 @@ function Dateblur() {
 
 </div>
 <script>
-// 	$('#checkAccount').on('click',function(){
-// 		var sendAccount = {'checkAccount':$('#account').val()}
-// 		$.ajax({
-// 			contentType : "application/json",
-// 			url : "/head/checkAccount",
-// 			dataType : "text",
-// 			type : "get",
-// 			data : sendAccount,
-// 			success : function(data) {	
-// 				console.log(data);
-// 				if(data=="true"){
-// 					swal("此帳號可以使用", "", "success");
-// 				}else{
-// 					swal("帳號已有人使用", "", "warning");
-// 				}
-// 				//success的下括號
-// 				}
-// 		//ajax的下括號
-// 			});
-// 	});
-
 $('#account').on('blur',function(){
 	if($('#account').val()==null || $('#account').val()== ''){
 		
 		$('#checkAccountSpan').empty();
 		$('#checkAccountSpan').append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>帳號不能為空</span>");
 	}else{
-		
 		var sendAccount = {'checkAccount':$('#account').val()}
 		$.ajax({
 			contentType : "application/json",
@@ -221,26 +206,27 @@ $('#account').on('blur',function(){
 				if(data=="true"){
 					$('#checkAccountSpan').empty();
 					$('#checkAccountSpan').append("<img src='${pageContext.request.contextPath}/resources/icon/trueimg1.png' /><span style='color:red;font-size:1px'>帳號可以使用</span>");		
-// 					$('#checkAccountSpan').append("<img src='/resources/icon/trueimg1.png' /><span style='color:red;font-size:1px'>帳號可以使用</span>");		
 				}else{
 					$('#checkAccountSpan').empty();
 					$('#checkAccountSpan').append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>帳號已有人使用</span>");
-// 					$('#checkAccountSpan').append("<img src='/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>帳號已有人使用</span>");
 				}
 				//success的下括號
 				}
 		//ajax的下括號
 			});
-	
-	
-	
-	}
-		
-	
-	
-	
-	
+		//else下括號
+		}
+	//onblur下括號
 	});
+
+$('#testOnly').on('click',function(){
+	$("input[name='account']").val('FurukawaNagisa');
+	$("input[name='password']").val('okasaki01');
+	$("input[name='name']").val('古河渚');
+	$("input[name='nickname']").val('小渚');
+	$("input[name='phone']").val('0933256514');
+	$("input[name='email']").val('slaverbread@hotmail.com');
+})
 
 
 

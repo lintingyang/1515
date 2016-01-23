@@ -207,14 +207,14 @@
 					<label class="col-md-2 control-label">電話:</label>
 					<div class="col-md-10">
 					<c:choose>
-						<c:when test="${empty cellphone}">
-						<input type="text" class="form-control" id="phone"
+						<c:when test="${empty user.cellphone}">
+						<input type="text" class="form-control user_phone" id="phone"
 							value="${user.phone}" name="phone"
 							placeholder="輸入家電或手機" required>
 							<span id="phoneErrorMsg"></span>
 						</c:when>
 						<c:otherwise>
-						<input type="text" class="form-control" id="phone"
+						<input type="text" class="form-control user_cellphone" id="phone"
 							value="${user.cellphone}" name="phone"
 							placeholder="輸入家電或手機" required>
 							<span id="phoneErrorMsg"></span>
@@ -269,21 +269,30 @@
 <script>
 
 $("#upUserData").on('click',function(){
-	var rel = new RegExp("^.+@.+\\..{2,3}$");
-		$("phoneErrorMsg").html('');
-	$("reservedEmailErrorMsg").html('');
+	var reg = new RegExp("^.+@.+\\..{2,3}$");
+	$('#nameErrorMsg').empty();
+	$("#phoneErrorMsg").html('');
+	$("#reservedEmailErrorMsg").html('');
 	if($("#phone").val()==null){
-		$("phoneErrorMsg").append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>電話必填</span>");	
+		$("#phoneErrorMsg").append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>電話必填</span>");	
 	}
-	if($('#inputReservedEmail').val()==null){
-		$("reservedEmailErrorMsg").append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>信箱必填</span>");		
+	
+	if($('#inputReservedEmail').val() == null){
+		$("#reservedEmailErrorMsg").append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>信箱必填</span>");		
 	} else{
-		var emailCheckAns = rel.test($('#inputReservedEmail').val());
+		var emailCheckAns = reg.test($('#inputReservedEmail').val());
+		console.log("emailCheckAns"+emailCheckAns)
+		console.log("!emailCheckAns"+!emailCheckAns)
 		if(!emailCheckAns){
-			$("reservedEmailErrorMsg").append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>信箱格式錯誤</span>");		
+			$("#reservedEmailErrorMsg").append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>信箱格式錯誤</span>");		
 		}
 	}
-		if($("#name").val()!=null && $('#inputReservedEmail').val()!=null && $('#inputReservedEmail').val()!=null && emailCheckAns){
+	
+	if($("#name").val()==null){
+		$('#nameErrorMsg').append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>姓名禁止空白</span>");
+	}
+	
+		if($("#name").val()!=null && $("#phone").val()!=null && $('#inputReservedEmail').val()!=null && emailCheckAns){
 		swal({
 			title : "確定要修改資料嗎?",
 			text : "",
@@ -306,11 +315,6 @@ $("#upUserData").on('click',function(){
 				}
 			);
 		}else{
-			
-			$('#nameErrorMsg').empty();
-			$('#nameErrorMsg').append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>姓名禁止空白</span>");
-// 			$('#nameErrorMsg').append("<img src='${pageContext.request.contextPath}/resources/icon/falseimg1.png' /><span style='color:red;font-size:1px'>姓名禁止空白</span>");
-		
 		}
 		
 		

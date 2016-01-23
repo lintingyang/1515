@@ -55,12 +55,7 @@
 				<div class="form-group" id="divBorder">
 					<label class="col-sm-2 control-label">頭像:</label>
 					<div class="col-sm-10 fileImg">
-						<input type="file" id="userOwnerFile" name="file">
-					</div>
-					<div class="col-md-2" id="showUserPhoto">
-					<img class="img-circle" id="dropZone" name="headPortrait"
-				style="width: 100px">
-					
+						<input type="file" id="userOwnerFile" name="file" multiple class="file-loading">
 					</div>
 				</div>
 
@@ -90,24 +85,6 @@
 
 <script>
 	$(function() {
-// 		$('#userOwnerFile').on('change',function(){
-			
-// 			var getTheFiles = $('#userOwnerFile').files;
-//             for (var i = 0; i < getTheFiles.length ; i++) {
-
-//                 var reader = new FileReader();
-//                 reader.readAsDataURL(getTheFiles[i]);
-//                 reader.onload = function (e) {
-//                 var temp = e.target.result;
-//                 $('#headPortrait').attr("src", temp);
-//                 }
-//             }
-			
-// 		})
-		
-		
-		
-		
 		$("#missionComplete").on('click', function() {
 			swal({
 			title : "確定要送出資料嗎?",
@@ -136,6 +113,8 @@
 			});
 		//onload下括弧
 		});
-
+// 	$(document).on('ready', function() {
+// 	    $("#userOwnerFile").fileinput({showCaption: false});
+// 	});
 </script>
 <c:import url="/WEB-INF/pages/e715/layout/footer.jsp"></c:import>

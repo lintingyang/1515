@@ -52,7 +52,7 @@
 					</div>
 				</div>
 				<div class="form-group" id="divBorder">
-					<label for="inputPassword3" class="col-sm-2 control-label">請再輸入一次:</label>
+					<label for="inputPassword3" class="col-sm-2 control-label">請再次輸入:</label>
 					<div class="col-sm-10">
 						<input type="password" class="form-control textSize"
 							id="newPasswordCheck" name="newPasswordCheck" placeholder="Name" required><span style="color:red">${checkPasswordError.checkFault}</span>
