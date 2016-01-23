@@ -38,7 +38,7 @@ public class RepProductController {
 	@RequestMapping(value = "/query")
 	@ResponseBody
 	public List<Report> query(Model model) {
-		return reportService.findAll();
+		return reportService.findAllByTime();
 	}
 	
 	@RequestMapping(value = "/query/name")
