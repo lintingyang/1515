@@ -297,17 +297,6 @@ public class MemberController {
 			if (name == null || nickname == null || phone == null || year == null || month == null || day == null) {
 				return "/e715/user/editProfile";
 			} else {
-
-				// 讀取新圖跟砍檔(別忘記jsp的enctype
-				if (!file.isEmpty()) {
-					// 使用者有圖片的話就砍黨
-					if (user.getPicture() != null) {
-						userService.deleteImage(user.getId(), servletContext);
-					}
-					String path = userService.upLoadImage(user.getId(), servletContext, file);
-					user.setPicture(path);
-				}
-
 				user.setName(name);
 				user.setNickname(nickname);
 				// 讀取新圖跟砍檔(別忘記jsp的enctype
@@ -319,9 +308,6 @@ public class MemberController {
 					String path = userService.upLoadImage(user.getId(), servletContext, file);
 					user.setPicture(path);
 				}
-
-				user.setName(name);
-				user.setNickname(nickname);
 				// 判斷是手機還是家電(基礎判斷)
 				if (phone.substring(0,2).equals("09")) {
 					user.setCellphone(phone);

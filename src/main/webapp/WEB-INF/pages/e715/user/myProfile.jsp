@@ -272,7 +272,7 @@ $(function() {
 			$.each(data,
 				function(i) {
 				var productdiv = $("<div></div>");
-				var aclick = $("<a>").attr("href","/product/" + data[i].id);
+				var aclick = $("<a>").attr("href","${pageContext.request.contextPath}/product/" + data[i].id);
 				var productimg = $("<img>").addClass("prodimg");
 				var p = $("<span>").text(data[i].name);
 				$(aclick).append($(productimg)).append($(p));
@@ -301,15 +301,15 @@ function getpicture(prod, prodimg) {
 	}
 	$.ajax({
 		contentType : "application/json",
-		url : "${pageContext.request.contextPath}/queryimg",
+		url : "${pageContext.request.contextPath}/queryproductimg",
 		dataType : "json",
 		type : "get",
 		data : formData,
 		success : function(data) {
 
-			if (data[0] != null) {
-				console.log(data[0].picture);
-				$(prodimg).attr("src", data[0].picture);
+			if (data != null) {
+				console.log(data.primaryPicture);
+				$(prodimg).attr("src", data.primaryPicture);
 			}
 		}
 	});

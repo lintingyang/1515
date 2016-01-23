@@ -32,7 +32,7 @@
 					class="icon-bar"></span>
 			</button>
 <!-- 			<a class="navbar-brand" href="/admin/index"><img src="/resources/imgs/logo_c.png" width="40"></a> -->
-			<a class="navbar-brand" href="/admin/index">E715 Admin Home</a>
+			<a class="navbar-brand" href="${pageContext.request.contextPath}/admin/index">E715 Admin Home</a>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
@@ -66,7 +66,7 @@
 <!-- 						</ul>	 -->
 <!-- 					</li> -->
 
-					<li style="margin-left: 600px;"><a href="/head/logout"><span class="glyphicon glyphicon-log-out"></span> 登出</a></li>
+					<li style="margin-left: 600px;"><a href="${pageContext.request.contextPath}/head/logout"><span class="glyphicon glyphicon-log-out"></span> 登出</a></li>
 <%-- 					<form class="hide" id="logout" action="<c:url value="/logout" />" method="post"> --%>
 <%-- 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> --%>
 <!-- 					</form> -->

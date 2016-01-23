@@ -270,10 +270,7 @@ public class UserService extends OurService<User> {
 		BufferedImage src = null;
 		int counter=0;
 		String path = "/resources/userimgs/";
-
 		path = servletContext.getRealPath(path);
-		System.out.println("---------------------------"+path);
-		
 		File destination = null;
 		try {
 			src = ImageIO.read(new ByteArrayInputStream(file.getBytes()));
@@ -300,9 +297,14 @@ public class UserService extends OurService<User> {
 	@Transactional
 	public boolean deleteImage(int id, ServletContext servletContext) {
 		User user = userDao.findById(id);
-		String userPath = user.getPicture();
+		String userPathDB = user.getPicture();
+		int cut=userPathDB.indexOf("E715");
+		log.error("cut" +cut);
+		String userPath = userPathDB.substring(cut+4);
+		log.error("userPath " + userPath);
 		if(userPath!=null){
 		String path = servletContext.getRealPath(userPath).replace('/' , '\\');
+		log.error("path " + path);
 		File destination = null;
 		destination = new File(path);
 		

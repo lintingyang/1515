@@ -219,16 +219,16 @@ h4{
 		
 // 		$('#divWish').attr('style', 'display:none');
 
-		if(${not empty productY.primaryPicture}){
+		if("${not empty productY.primaryPicture}"=="true"){
 			console.log("hello"); 
 			$('#blah0').attr('src' , "${productY.primaryPicture}");//預設的商品圖片
 			$(".pPicture").removeAttr('required');
 		}
-		if(${not empty productPicturesY[0].picture})
+		if("${not empty productPicturesY[0].picture}"=="true")
 			$('#blah1').attr('src' , "${productPicturesY[0].picture}");//預設的商品圖片1
-		if(${not empty productPicturesY[1].picture})
+		if("${not empty productPicturesY[1].picture}"=="true")
 			$('#blah2').attr('src' , "${productPicturesY[1].picture}");//預設的商品圖片2
-		if(${not empty productPicturesY[2].picture})
+		if("${not empty productPicturesY[2].picture}"=="true")
 			$('#blah3').attr('src' , "${productPicturesY[2].picture}");//預設的商品圖片3	
 
 			
