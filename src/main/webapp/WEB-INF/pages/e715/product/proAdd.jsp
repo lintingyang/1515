@@ -187,7 +187,7 @@ h4{
   		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   		<strong>「除了補充圖片以外」</strong>   以下<strong>所有欄位</strong>都是<strong>必填</strong>的喔！      
 	</div>
-	<form action="/product/insert" enctype="multipart/form-data" method="post">
+	<form action="${pageContext.request.contextPath}/product/insert" enctype="multipart/form-data" method="post">
 		<div class="col-md-2"></div>
 		<div class="col-md-4" >
 				<div class="form-group row">
@@ -210,13 +210,13 @@ h4{
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-sm-7 form-control-label"><h4>補充圖片  (可免填)</h4></label>
+					<div><label class="col-sm-7 form-control-label"><h4>補充圖片  (可免填)</h4></label></div>
 					<div class="col-sm-10" align="center">
-											<div class="row">
+						<div class="row">
 							<div class = " col-sm-4">
-   							</div>
    								<img id="blah1" src="${pageContext.request.contextPath}/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; "/>
 <!--    								<img id="blah1" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; "/> -->
+   							</div>
    							<div class = " col-sm-4">
    								<img id="blah2" src="${pageContext.request.contextPath}/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; "/>
 <!--    								<img id="blah2" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; "/> -->
@@ -231,10 +231,10 @@ h4{
 								<input type="file" id="id_image_large1" class ="pPicture1" name="pPicture1" multiple ></label>
 
 								<label class="col-md-offset-2 col-sm-2 choose-file btn btn-sm btn-default glyphicon glyphicon-open" id="upload2" for="id_image_large2">
-								<input type="file" id="id_image_large2" class ="pPicture2" name="pPicture2" multiple "></label>
+								<input type="file" id="id_image_large2" class ="pPicture2" name="pPicture2" multiple ></label>
 		
 								<label class="col-md-offset-2 col-sm-2 choose-file btn btn-sm btn-default glyphicon glyphicon-open" id="upload3" for="id_image_large3">
-								<input type="file" id="id_image_large3" class ="pPicture3" name="pPicture3" multiple "></label>
+								<input type="file" id="id_image_large3" class ="pPicture3" name="pPicture3" multiple ></label>
 							</div>
 <!--    						<img id="blah1" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; margin: 0 5px;"/> -->
 <!--    						<img id="blah2" src="/resources/imgs/noImg.jpg" alt="your image" style="width: 50px; height: 50px; margin: 0 5px;"/> -->

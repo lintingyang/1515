@@ -89,7 +89,7 @@
 				$.each(data,function(i) {
 							var friendShipdiv = $("<div></div>");
 							var aclick = $("<a>").attr("href",
-									"/E715Member/" + data[i].userBId.id);
+									"${pageContext.request.contextPath}/E715Member/" + data[i].userBId.id);
 							var MemberImg = $("<img/>").attr("src",
 									data[i].userBId.picture);
 							MemberImg.addClass('img-circle').css('height',

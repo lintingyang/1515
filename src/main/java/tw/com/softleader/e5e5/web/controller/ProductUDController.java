@@ -255,8 +255,9 @@ public class ProductUDController {
 		// pPicture 是 primaryPicture in product
 		if (!pPicture.isEmpty()) {
 			Product productPrimaryPic = productService.getOne(editProduct.getId());
-			if (productPrimaryPic.getPrimaryPicture() != null)
+			if (productPrimaryPic.getPrimaryPicture() != null){
 				productService.deletePrimaryPic(editProduct.getId(), servletContext);
+			}
 			String path = productPictureService.upLoadImage(editProduct.getId(), servletContext, pPicture);
 			productService.insertPrimaryPic(editProduct.getId(), path);
 		}

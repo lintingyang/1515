@@ -143,7 +143,7 @@ $(function() {
 				
 				
 				var productdiv = $("<div></div>");
-				var aclick = $("<a>").attr("href","/product/"+data[i].id);
+				var aclick = $("<a>").attr("href","${pageContext.request.contextPath}/product/"+data[i].id);
 				var productimg = $("<img>").addClass("prodimg");
 				var p = $("<h4></h4>").text(data[i].name).addClass("prodText");
 				var badgePost = $("<span></span>").addClass("badge pCount");
@@ -197,7 +197,7 @@ $('.queryBtn').click(function() { //點選排列方式後按照順序排列
 				var delDiv = $('<div></div>').addClass("delDiv");
 				var editDiv = $('<div></div>').addClass("editDiv");
 				var updateBtn = $("<span></span>").addClass("btn-block btn-default glyphicon glyphicon-pencil ")
-				.attr("onclick","location.href='/product/edit/"+data[i].id+"'");
+				.attr("onclick","location.href='${pageContext.request.contextPath}/product/edit/"+data[i].id+"'");
 				var delBtn = $("<span></span>").addClass("btn-block btn-default glyphicon glyphicon-trash delBtn delete" +data[i].id)
 				.attr("onclick","deleteProduct("+data[i].id+")");	
 			}
@@ -208,7 +208,7 @@ $('.queryBtn').click(function() { //點選排列方式後按照順序排列
 				total = 0;
 			}
 			
-			var aclick = $("<a>").attr("href","/product/"+data[i].id);
+			var aclick = $("<a>").attr("href","${pageContext.request.contextPath}/product/"+data[i].id);
 			var productdiv = $("<div></div>");
 			var productimg = $("<img>").addClass("prodimg");
 			var p = $("<h4></h4>").text(data[i].name);
@@ -294,7 +294,7 @@ function getEvaluateCount(id , type ,badgePost){ // 已交換待評價
 function getExchangedProduct(productId){ //傳入productId 跳轉交易完成頁面
 	console.log(productId);
 	$.post("${pageContext.request.contextPath}/product/exchangedProduct",{ "id" : productId } ,function(exchangeId) {
-		location.href="/product/exchanging?id="+exchangeId;
+		location.href="${pageContext.request.contextPath}/product/exchanging?id="+exchangeId;
 	})
 }
 
