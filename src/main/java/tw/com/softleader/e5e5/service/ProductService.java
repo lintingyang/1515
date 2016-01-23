@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
 
+import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
 import javax.transaction.Transactional;
 
@@ -373,9 +374,22 @@ public class ProductService extends OurService<Product> {
 	// 刪除product的primaryPic的物品圖片/yao
 	@Transactional
 	public boolean deletePrimaryPic(int productId, ServletContext servletContext) {
+		log.error("productdel");
+		
 		Product product = productDao.findOne(productId);
-		String productPath = product.getPrimaryPicture();
+		
+		String productPathDB = product.getPrimaryPicture();
+		
+		log.error("productPathDB "+productPathDB);
+		
+		int cut=productPathDB.indexOf("E715");
+		
+		log.error("cut "+cut);
+		
+		String productPath = productPathDB.substring(cut+4);
+		log.error("productPath "+productPath);
 		String realPath = servletContext.getRealPath(productPath).replace('/', '\\');
+		log.error("realPath "+realPath);
 		File destination = null;
 		destination = new File(realPath);
 		try {
@@ -394,7 +408,9 @@ public class ProductService extends OurService<Product> {
 		List<ProductPicture> productPictures = productPictureService.getProductPictures(product);
 		ProductPicture productPicture = productPictures.get(index);
 		productPictureService.delete(productPicture.getId());
-		String productPath = productPicture.getPicture();
+		String productPathDB = productPicture.getPicture();
+		int cut=productPathDB.indexOf("E715");
+		String productPath = productPathDB.substring(cut+4);
 		String realPath = servletContext.getRealPath(productPath).replace('/', '\\');
 		File destination = null;
 		destination = new File(realPath);
