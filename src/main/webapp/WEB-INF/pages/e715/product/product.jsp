@@ -558,7 +558,7 @@ function addexchange(event){
 		 			if (isConfirm) {    
 		 				swal({
 	 					type : "success",
-	 					title: "修改成功",  
+	 					title: "提出交換成功",  
 	 					text: "兩秒後會自動跳回",  
 	 					timer: 2000,   
 	 					showConfirmButton: false

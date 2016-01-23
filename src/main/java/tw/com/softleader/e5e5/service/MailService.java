@@ -112,7 +112,7 @@ public class MailService {
 		Mail mail = new Mail();
 		mail.setSender(userDao.getOne(36));
 		mail.setReceiver(userDao.getOne(receiverId));
-		mail.setTitle("系統:您的物品已被交易!");
+		mail.setTitle("系統:有人想要交換您的物品!");
 		mail.setArticle("您好,親愛的用戶"+userDao.getOne(receiverId).getName()+"<br>有人想要使用"+productDao.getOne(productBId).getName()+
 				"交換您刊登的"+productDao.getOne(productAId).getName()+",請盡速前往物品頁面察看確認是否想要交換喔!=D<br><br><br>E715管理員初號機敬上");
 		mail.setIsRead(TrueFalse.FALSE);
