@@ -35,6 +35,11 @@ public class ReportService extends OurService<Report>{
 	public List<Report> findAll(){
 		return reportDao.findAll();
 	}
+
+	@Transactional
+	public List<Report> findAllByTime(){
+		return reportDao.findAllByTime();
+	}
 	
 	@Transactional
 	public List<Report> findAllByName(String name){

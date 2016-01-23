@@ -23,6 +23,7 @@ import javax.transaction.Transactional;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import tw.com.softleader.e5e5.common.entity.OurEntity;
+import tw.com.softleader.e5e5.common.entity.OurEntityPro;
 import tw.com.softleader.e5e5.entity.enums.Grade;
 import tw.com.softleader.e5e5.entity.enums.Time;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;

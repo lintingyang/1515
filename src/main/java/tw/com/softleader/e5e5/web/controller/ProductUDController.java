@@ -87,12 +87,10 @@ public class ProductUDController {
 	public int evaluateCount(@RequestParam("id") Integer id, @RequestParam("query") String query) {
 		Product pd = productService.getOne(id);
 		if (query.equals("OthersExchanged")) {
-			log.error("OthersExchanged");
 			if (pd.getGradeTime() == null)
 				return 1;
 			return 0;
 		} else if (query.equals("myExchanged")) {
-			log.error("myExchanged");
 			if (pd.getGrade() == null){
 				log.error("myExchanged" + pd.getGrade());
 				return 1;

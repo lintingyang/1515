@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import tw.com.softleader.e5e5.common.dao.OurDao;
 import tw.com.softleader.e5e5.common.model.Message;
 import tw.com.softleader.e5e5.common.service.OurService;
+import tw.com.softleader.e5e5.common.service.OurServicePro;
 import tw.com.softleader.e5e5.dao.ProductCategoryDao;
 import tw.com.softleader.e5e5.dao.ProductDao;
 import tw.com.softleader.e5e5.dao.QuestionAndAnswerDao;
@@ -54,7 +55,6 @@ public class ProductService extends OurService<Product> {
 		if (orderby.equals("熱門")) {
 			if (category.equals("全部")) {
 				list = productDao.findAllByNameOrderbyByClickTimes(namelike);
-//				log.error(list);
 			} else {
 				list = productDao.findByProdcutOrderByClickTimes(namelike, category);
 			}
@@ -73,7 +73,6 @@ public class ProductService extends OurService<Product> {
 
 					if (category.equals("全部")) {
 						list = productDao.findAllByNameOrderbyByClickTimes(namelike);
-						log.error(list);
 					} else {
 						list = productDao.findByProdcutOrderByClickTimes(namelike, productCategory.getName());
 					}
@@ -374,22 +373,11 @@ public class ProductService extends OurService<Product> {
 	// 刪除product的primaryPic的物品圖片/yao
 	@Transactional
 	public boolean deletePrimaryPic(int productId, ServletContext servletContext) {
-		log.error("productdel");
-		
 		Product product = productDao.findOne(productId);
-		
 		String productPathDB = product.getPrimaryPicture();
-		
-		log.error("productPathDB "+productPathDB);
-		
 		int cut=productPathDB.indexOf("E715");
-		
-		log.error("cut "+cut);
-		
 		String productPath = productPathDB.substring(cut+4);
-		log.error("productPath "+productPath);
 		String realPath = servletContext.getRealPath(productPath).replace('/', '\\');
-		log.error("realPath "+realPath);
 		File destination = null;
 		destination = new File(realPath);
 		try {
