@@ -297,7 +297,7 @@ $("#upUserData").on('click',function(){
 					type : "success",
 					title: "修改成功",  
 					text: "",  
-					timer: 2000,   
+					timer: 5000,   
 					showConfirmButton: false
 				});
 
