@@ -475,7 +475,7 @@ function showmail(data){
 	function showreply(replyHeader){
 // 	console.log(replyHeader);	
 	$("#readmail").modal("hide");
-	$("#readmail").on("hidden.bs.modal", function(){
+	$("#readmail").one("hidden.bs.modal", function(){
 		$("#replymail").modal();
 		$("#replyTitle").empty();
 		$("#replyTitle").append(replyHeader.title);
