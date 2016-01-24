@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import tw.com.softleader.e5e5.entity.User;
 import tw.com.softleader.e5e5.entity.UserBanList;
+import tw.com.softleader.e5e5.entity.enums.Role;
 import tw.com.softleader.e5e5.entity.enums.Sex;
 import tw.com.softleader.e5e5.entity.enums.TrueFalse;
 import tw.com.softleader.e5e5.service.UserService;
@@ -220,7 +221,7 @@ public class HeaderController {
 		} else {
 			user.setPhone(phone);
 		}
-		
+		user.setRole(Role.USER);
 		user.setIsolated(TrueFalse.FALSE);
 
 		user.setEmail(email);
