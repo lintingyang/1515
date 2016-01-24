@@ -69,7 +69,7 @@
 				</c:if></c:if>
 		</h2>
 		<div>
-			<h5>希望交易物品：</h5>
+			<h5>希望交換物品：</h5>
 			<br> ${product.wishItem}
 		</div>
 		<hr>
