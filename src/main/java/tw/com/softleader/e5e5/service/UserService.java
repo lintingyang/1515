@@ -117,10 +117,14 @@ public class UserService extends OurService<User> {
         message.setFrom(new InternetAddress("e715number01@gmail.com"));  
         message.setRecipients(Message.RecipientType.TO,   
                         InternetAddress.parse(schoolEmail));  
-        message.setSubject("E715學校信箱確認信(請勿回信)");  
-        message.setText("親愛的E715用戶您好，\r\n感謝您的註冊，為了您的權益，我們必須確認您的身分，\r\n"
-        		+ "以下為您的驗證碼 :"+newVerificationCode+"\r\n請將此填入驗證碼欄位中並按下送出，便可執行下個步驟，\r\n"
-        				+ "再次感謝您的使用。\r\n\r\nE715製作團隊敬上");  
+        message.setSubject("E715 School Email confirmation (Don't reply)");  
+//        message.setSubject("E715學校信箱確認信(請勿回信)");  
+        message.setText("Dear E715 user，\r\nthanks for your registration, to ensure you benefit, we need to confirm your identity,\r\n"
+        		+ "and you confirmation number is:"+newVerificationCode+"\r\nPlease fill in your number and enter submit button, and you may go to next step.\r\n"
+        				+ "Thanks for you visiting.\r\n\r\nBest regards,r\nTeam E715");  
+//        message.setText("親愛的E715用戶您好，\r\n感謝您的註冊，為了您的權益，我們必須確認您的身分，\r\n"
+//        		+ "以下為您的驗證碼 :"+newVerificationCode+"\r\n請將此填入驗證碼欄位中並按下送出，便可執行下個步驟，\r\n"
+//        		+ "再次感謝您的使用。\r\n\r\nE715製作團隊敬上");  
         
         
   

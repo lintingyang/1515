@@ -169,7 +169,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>e5e5</finalName>
+		<finalName>E715</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>

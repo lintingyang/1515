@@ -75,6 +75,10 @@ $(function(){
 		$("input[name='account']").val('527788');
 		$("input[name='password']").val('527788');
 	});
+	$(".superadmin").on('click', function() {
+		$("input[name='account']").val('supperadmin');
+		$("input[name='password']").val('supper');
+	});
 // 	end
 	});	
 	
@@ -141,30 +145,34 @@ $(function(){
 					<input type="button" class="btn btn-default " value="Sign in"  id="signin" />
 				</div>
 			</div>
-			<button type="button" class="btn btn-default three" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-			  張三
-			</button>
+<!-- 			<button type="button" class="btn btn-default three" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."> -->
+<!-- 			  張三 -->
+<!-- 			</button> -->
 			<button type="button" class="btn btn-default four" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
   			李四
 			</button>
 
-			<button type="button" class="btn btn-default five" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
+			<button type="button" class="btn btn-default superadmin" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
 			sagittis lacus vel augue laoreet rutrum faucibus.">
-  			王五
+  			Superadmin
 			</button>
-			<button type="button" class="btn btn-default six" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-  			老六
-			</button>
+<!-- 			<button type="button" class="btn btn-default five" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus -->
+<!-- 			sagittis lacus vel augue laoreet rutrum faucibus."> -->
+<!--   			王五 -->
+<!-- 			</button> -->
+<!-- 			<button type="button" class="btn btn-default six" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."> -->
+<!--   			老六 -->
+<!-- 			</button> -->
 <!-- 			yao -->
 			<button type="button" class="btn btn-default sen" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
   			黃七
 			</button>
-			<button type="button" class="btn btn-default snoopy" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-  			snoopy
-			</button>
-			<button type="button" class="btn btn-default 527788" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-  			527788
-			</button>
+<!-- 			<button type="button" class="btn btn-default snoopy" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."> -->
+<!--   			snoopy -->
+<!-- 			</button> -->
+<!-- 			<button type="button" class="btn btn-default 527788" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."> -->
+<!--   			527788 -->
+<!-- 			</button> -->
 			
 <!-- 			  end -->
 		</form>
